@@ -1,0 +1,611 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/oimg/RoundCorner.png">
+  <link rel="icon" href="/oimg/RoundCorner.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="宫水三叶">
+  <meta name="keywords" content="算法, 数据结构, 题解">
+  
+    <meta name="description" content="题目描述这是 LeetCode 上的 433. 最小基因变化 ，难度为 中等。 基因序列可以表示为一条由 $8$ 个字符组成的字符串，其中每个字符都是 &#39;A&#39;、&#39;C&#39;、&#39;G&#39; 和 &#39;T&#39; 之一。 假设我们需要调查从基因序列 start 变为 end 所发生的基因变化。一次基因变化就意味着这个基因序列中的一个字符发生了变化。  例如，&amp;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LC 433. 最小基因变化">
+<meta property="og:url" content="http://example.com/2022/05/07/433.%20%E6%9C%80%E5%B0%8F%E5%9F%BA%E5%9B%A0%E5%8F%98%E5%8C%96%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/index.html">
+<meta property="og:site_name" content="宫水三叶的刷题日记">
+<meta property="og:description" content="题目描述这是 LeetCode 上的 433. 最小基因变化 ，难度为 中等。 基因序列可以表示为一条由 $8$ 个字符组成的字符串，其中每个字符都是 &#39;A&#39;、&#39;C&#39;、&#39;G&#39; 和 &#39;T&#39; 之一。 假设我们需要调查从基因序列 start 变为 end 所发生的基因变化。一次基因变化就意味着这个基因序列中的一个字符发生了变化。  例如，&amp;">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://pic.leetcode-cn.com/1623894968-XELIvK-image.png">
+<meta property="article:published_time" content="2022-05-06T16:57:14.000Z">
+<meta property="article:modified_time" content="2022-05-12T04:05:32.027Z">
+<meta property="article:author" content="宫水三叶">
+<meta property="article:tag" content="图论 DFS">
+<meta property="article:tag" content="BFS">
+<meta property="article:tag" content="双向 BFS">
+<meta property="article:tag" content="启发式搜索">
+<meta property="article:tag" content="AStar 算法">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://pic.leetcode-cn.com/1623894968-XELIvK-image.png">
+  
+  
+  <title>LC 433. 最小基因变化 - 宫水三叶的刷题日记</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/hint.css/2.7.0/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.7.2/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"|","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.1.0"></head>
+
+
+<body>
+  <header style="height: 50vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>宫水三叶の刷题日记</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/image_155.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="LC 433. 最小基因变化">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-author" aria-hidden="true"></i>
+      宫水三叶
+    </span>
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2022-05-07 00:57" pubdate>
+        2022年5月7日 凌晨
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      7k 字
+    </span>
+  
+
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">LC 433. 最小基因变化</h1>
+            
+            <div class="markdown-body">
+              <h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>这是 LeetCode 上的 <strong><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/minimum-genetic-mutation/solution/by-ac_oier-74b4/">433. 最小基因变化</a></strong> ，难度为 <strong>中等</strong>。</p>
+<p>基因序列可以表示为一条由 $8$ 个字符组成的字符串，其中每个字符都是 <code>&#39;A&#39;</code>、<code>&#39;C&#39;</code>、<code>&#39;G&#39;</code> 和 <code>&#39;T&#39;</code> 之一。</p>
+<p>假设我们需要调查从基因序列 <code>start</code> 变为 <code>end</code> 所发生的基因变化。一次基因变化就意味着这个基因序列中的一个字符发生了变化。</p>
+<ul>
+<li>例如，<code>&quot;AACCGGTT&quot; --&gt; &quot;AACCGGTA&quot;</code> 就是一次基因变化。</li>
+</ul>
+<p>另有一个基因库 <code>bank</code> 记录了所有有效的基因变化，只有基因库中的基因才是有效的基因序列。</p>
+<p>给你两个基因序列 <code>start</code> 和 <code>end</code> ，以及一个基因库 <code>bank</code> ，请你找出并返回能够使 <code>start</code> 变化为 <code>end</code> 所需的最少变化次数。如果无法完成此基因变化，返回 $-1$ 。</p>
+<p>注意：起始基因序列 <code>start</code> 默认是有效的，但是它并不一定会出现在基因库中。</p>
+<p>示例 1：<br><figure class="highlight pgsql"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs pgsql">输入：start = &quot;AACCGGTT&quot;, end = &quot;AACCGGTA&quot;, bank = [&quot;AACCGGTA&quot;]<br><br>输出：<span class="hljs-number">1</span><br></code></pre></div></td></tr></table></figure><br>示例 2：<br><figure class="highlight pgsql"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs pgsql">输入：start = &quot;AACCGGTT&quot;, end = &quot;AAACGGTA&quot;, bank = [&quot;AACCGGTA&quot;,&quot;AACCGCTA&quot;,&quot;AAACGGTA&quot;]<br><br>输出：<span class="hljs-number">2</span><br></code></pre></div></td></tr></table></figure><br>示例 3：<br><figure class="highlight pgsql"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs pgsql">输入：start = &quot;AAAAACCC&quot;, end = &quot;AACCCCCC&quot;, bank = [&quot;AAAACCCC&quot;,&quot;AAACCCCC&quot;,&quot;AACCCCCC&quot;]<br><br>输出：<span class="hljs-number">3</span><br></code></pre></div></td></tr></table></figure><br>提示：</p>
+<ul>
+<li>$start.length == 8$</li>
+<li>$end.length == 8$</li>
+<li>$0 &lt;= bank.length &lt;= 10$</li>
+<li>$bank[i].length == 8$</li>
+<li><code>start</code>、<code>end</code> 和 <code>bank[i]</code> 仅由字符 <code>[&#39;A&#39;, &#39;C&#39;, &#39;G&#39;, &#39;T&#39;]</code> 组成</li>
+</ul>
+<hr>
+<h3 id="BFS"><a href="#BFS" class="headerlink" title="BFS"></a>BFS</h3><p>为了方便，我们令 $S = start$、 $T = end$，将每个基因序列视为「状态」。</p>
+<p>容易想到使用 <code>BFS</code>  进行求解，并使用「哈希表」记录到达某个状态所消耗的步数（同时为了快速判断某个状态是否合法，我们使用 <code>Set</code> 结构对 $bank[i]$ 进行转存）。</p>
+<p>起始将 <code>S</code> 加入队列，并更新到达 <code>S</code> 所使用的步数为 $0$，然后进行常规的 <code>BFS</code> 过程：每次取出队头元素，尝试替换当前状态的某一位，来得到新的状态（限定新状态必须合法，即必须出现在 <code>Set</code> 中），如果新状态合法并且没有在记录步数的哈希表中出现过，则将新状态入队并更新得到新状态所用步数，否则丢弃新状态。</p>
+<p>重复上述过程直到找到 <code>T</code>（返回具体步数） 或者队列为空（返回 $-1$）。</p>
+<p>代码：<br><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">static</span> <span class="hljs-type">char</span>[] items = <span class="hljs-keyword">new</span> <span class="hljs-title class_">char</span>[]&#123;<span class="hljs-string">&#x27;A&#x27;</span>, <span class="hljs-string">&#x27;C&#x27;</span>, <span class="hljs-string">&#x27;G&#x27;</span>, <span class="hljs-string">&#x27;T&#x27;</span>&#125;;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">minMutation</span><span class="hljs-params">(String S, String T, String[] bank)</span> &#123;<br>        Set&lt;String&gt; set = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashSet</span>&lt;&gt;();<br>        <span class="hljs-keyword">for</span> (String s : bank) set.add(s);<br>        Deque&lt;String&gt; d = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayDeque</span>&lt;&gt;();<br>        Map&lt;String, Integer&gt; map = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();<br>        d.addLast(S);<br>        map.put(S, <span class="hljs-number">0</span>);<br>        <span class="hljs-keyword">while</span> (!d.isEmpty()) &#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">size</span> <span class="hljs-operator">=</span> d.size();<br>            <span class="hljs-keyword">while</span> (size-- &gt; <span class="hljs-number">0</span>) &#123;<br>                <span class="hljs-type">String</span> <span class="hljs-variable">s</span> <span class="hljs-operator">=</span> d.pollFirst();<br>                <span class="hljs-type">char</span>[] cs = s.toCharArray();<br>                <span class="hljs-type">int</span> <span class="hljs-variable">step</span> <span class="hljs-operator">=</span> map.get(s);<br>                <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">8</span>; i++) &#123;<br>                    <span class="hljs-keyword">for</span> (<span class="hljs-type">char</span> c : items) &#123;<br>                        <span class="hljs-keyword">if</span> (cs[i] == c) <span class="hljs-keyword">continue</span>;<br>                        <span class="hljs-type">char</span>[] clone = cs.clone();<br>                        clone[i] = c;<br>                        <span class="hljs-type">String</span> <span class="hljs-variable">sub</span> <span class="hljs-operator">=</span> String.valueOf(clone);<br>                        <span class="hljs-keyword">if</span> (!set.contains(sub)) <span class="hljs-keyword">continue</span>;<br>                        <span class="hljs-keyword">if</span> (map.containsKey(sub)) <span class="hljs-keyword">continue</span>;<br>                        <span class="hljs-keyword">if</span> (sub.equals(T)) <span class="hljs-keyword">return</span> step + <span class="hljs-number">1</span>;<br>                        map.put(sub, step + <span class="hljs-number">1</span>);<br>                        d.addLast(sub);<br>                    &#125;<br>                &#125;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> -<span class="hljs-number">1</span>;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure></p>
+<ul>
+<li>时间复杂度：令 $n$ 为 <code>bank</code> 的数组长度（合法状态数），将 <code>bank</code> 存入 <code>Set</code> 结构复杂度为 $O(n)$，每个状态经过一步操作最多拓展出 $C = 32$ 个新基因（共有 $8$ 个位置，每个位置有 $4$ 个选择），<code>BFS</code>  过程复杂度为 $O(C \times n)$。整体复杂度为  $O(C \times n)$</li>
+<li>空间复杂度：$O(n)$</li>
+</ul>
+<hr>
+<h3 id="双向-BFS"><a href="#双向-BFS" class="headerlink" title="双向 BFS"></a>双向 BFS</h3><p>同理，我们可以使用「双向 <code>BFS</code>」进行求解。</p>
+<p>双向 <code>BFS</code> 与常规 <code>BFS</code>  相比，能够有效解决「搜索空间爆炸」的问题：</p>
+<p><img src="https://pic.leetcode-cn.com/1623894968-XELIvK-image.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p>对双向 <code>BFS</code>  不熟悉的同学可以看前置🧀：<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/word-ladder/solution/gong-shui-san-xie-ru-he-shi-yong-shuang-magjd/">(题解) 127. 单词接龙</a>。</p>
+<p>代码：<br><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">static</span> <span class="hljs-type">char</span>[] items = <span class="hljs-keyword">new</span> <span class="hljs-title class_">char</span>[]&#123;<span class="hljs-string">&#x27;A&#x27;</span>, <span class="hljs-string">&#x27;C&#x27;</span>, <span class="hljs-string">&#x27;G&#x27;</span>, <span class="hljs-string">&#x27;T&#x27;</span>&#125;;<br>    Set&lt;String&gt; set = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashSet</span>&lt;&gt;();<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">minMutation</span><span class="hljs-params">(String S, String T, String[] bank)</span> &#123;<br>        set.add(S);<br>        <span class="hljs-keyword">for</span> (String s : bank) set.add(s);<br>        <span class="hljs-keyword">if</span> (!set.contains(T)) <span class="hljs-keyword">return</span> -<span class="hljs-number">1</span>;<br>        Deque&lt;String&gt; d1 = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayDeque</span>&lt;&gt;(), d2 = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayDeque</span>&lt;&gt;();<br>        d1.addLast(S); d2.addLast(T);<br>        Map&lt;String, Integer&gt; m1 = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;(), m2 = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();<br>        m1.put(S, <span class="hljs-number">0</span>); m2.put(T, <span class="hljs-number">0</span>);<br>        <span class="hljs-keyword">while</span> (!d1.isEmpty() &amp;&amp; !d2.isEmpty()) &#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">t</span> <span class="hljs-operator">=</span> -<span class="hljs-number">1</span>;<br>            <span class="hljs-keyword">if</span> (d1.size() &lt;= d2.size()) t = update(d1, m1, m2);<br>            <span class="hljs-keyword">else</span> t = update(d2, m2, m1);<br>            <span class="hljs-keyword">if</span> (t != -<span class="hljs-number">1</span>) <span class="hljs-keyword">return</span> t;<br>        &#125;<br>        <span class="hljs-keyword">return</span> -<span class="hljs-number">1</span>;<br>    &#125;<br>    <span class="hljs-type">int</span> <span class="hljs-title function_">update</span><span class="hljs-params">(Deque&lt;String&gt; d, Map&lt;String, Integer&gt; cur, Map&lt;String, Integer&gt; other)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">m</span> <span class="hljs-operator">=</span> d.size();<br>        <span class="hljs-keyword">while</span> (m-- &gt; <span class="hljs-number">0</span>) &#123;<br>            <span class="hljs-type">String</span> <span class="hljs-variable">s</span> <span class="hljs-operator">=</span> d.pollFirst();<br>            <span class="hljs-type">char</span>[] cs = s.toCharArray();<br>            <span class="hljs-type">int</span> <span class="hljs-variable">step</span> <span class="hljs-operator">=</span> cur.get(s);<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">8</span>; i++) &#123;<br>                <span class="hljs-keyword">for</span> (<span class="hljs-type">char</span> c : items) &#123;<br>                    <span class="hljs-keyword">if</span> (cs[i] == c) <span class="hljs-keyword">continue</span>;<br>                    <span class="hljs-type">char</span>[] clone = cs.clone();<br>                    clone[i] = c;<br>                    <span class="hljs-type">String</span> <span class="hljs-variable">sub</span> <span class="hljs-operator">=</span> String.valueOf(clone);<br>                    <span class="hljs-keyword">if</span> (!set.contains(sub) || cur.containsKey(sub)) <span class="hljs-keyword">continue</span>;<br>                    <span class="hljs-keyword">if</span> (other.containsKey(sub)) <span class="hljs-keyword">return</span> other.get(sub) + step + <span class="hljs-number">1</span>;<br>                    d.addLast(sub);<br>                    cur.put(sub, step + <span class="hljs-number">1</span>);<br>                &#125;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> -<span class="hljs-number">1</span>;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure></p>
+<ul>
+<li>时间复杂度：令 $n$ 为 <code>bank</code> 的数组长度（合法状态数），将 <code>bank</code> 存入 <code>Set</code> 结构复杂度为 $O(n)$，每个状态经过一步操作最多拓展出 $C = 32$ 个新基因（共有 $8$ 个位置，每个位置有 $4$ 个选择），<code>BFS</code>  过程复杂度为 $O(C \times n)$。整体复杂度为  $O(C \times n)$</li>
+<li>空间复杂度：$O(n)$</li>
+</ul>
+<hr>
+<h3 id="AStar-算法"><a href="#AStar-算法" class="headerlink" title="AStar 算法"></a>AStar 算法</h3><p>若不考虑 <code>bank</code> 的限制，对于一个特定状态而言，我们可以任意选择一位替换为 $4$ 类字符之一，因此对于任意状态 $x$ 而言，其与目标状态 $T$ 的「理论最小转换步数」为两者对应位置不同字符的数量，而由于存在 <code>bank</code> 限制，实际最小步数必然满足「大于等于」该理论最小转换步数。</p>
+<p>基于此，我们可以计算当前状态到目标状态的「理论最小转换步数」作为启发式函数，进行启发式搜索。</p>
+<p>具体的，我们使用优先队列（堆）维护所有的状态，每次优先「启发值 = 理论最小转换步数」的状态进行优先出队拓展。</p>
+<p>对「AStar 算法」不了解的同学可以看前置 🧀：<a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzU4NDE3MTEyMA==&amp;mid=2247489588&amp;idx=1&amp;sn=479e4c0627247ab7e20af7909f2a8b64">发挥 A* 算法最大价值的关键点</a>。</p>
+<p>代码：<br><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">class</span> <span class="hljs-title class_">Node</span> &#123;<br>        String s;<br>        <span class="hljs-type">int</span> val;<br>        Node(String _s) &#123;<br>            s = _s;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">8</span>; i++) &#123;<br>                <span class="hljs-keyword">if</span> (s.charAt(i) != T.charAt(i)) val++;<br>            &#125;<br>        &#125;<br>    &#125;<br>    <span class="hljs-keyword">static</span> <span class="hljs-type">char</span>[] items = <span class="hljs-keyword">new</span> <span class="hljs-title class_">char</span>[]&#123;<span class="hljs-string">&#x27;A&#x27;</span>, <span class="hljs-string">&#x27;C&#x27;</span>, <span class="hljs-string">&#x27;G&#x27;</span>, <span class="hljs-string">&#x27;T&#x27;</span>&#125;;<br>    String S, T;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">minMutation</span><span class="hljs-params">(String start, String end, String[] bank)</span> &#123;<br>        Set&lt;String&gt; set = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashSet</span>&lt;&gt;();<br>        <span class="hljs-keyword">for</span> (String s : bank) set.add(s);<br>        S = start; T = end;<br>        PriorityQueue&lt;Node&gt; q = <span class="hljs-keyword">new</span> <span class="hljs-title class_">PriorityQueue</span>&lt;&gt;((a,b)-&gt;a.val-b.val);<br>        Map&lt;String, Integer&gt; map = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();<br>        q.add(<span class="hljs-keyword">new</span> <span class="hljs-title class_">Node</span>(S));<br>        map.put(S, <span class="hljs-number">0</span>);<br>        <span class="hljs-keyword">while</span> (!q.isEmpty()) &#123;<br>            <span class="hljs-type">Node</span> <span class="hljs-variable">node</span> <span class="hljs-operator">=</span> q.poll();<br>            <span class="hljs-type">char</span>[] cs = node.s.toCharArray();<br>            <span class="hljs-type">int</span> <span class="hljs-variable">step</span> <span class="hljs-operator">=</span> map.get(node.s);<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">8</span>; i++) &#123;<br>                <span class="hljs-keyword">for</span> (<span class="hljs-type">char</span> c : items) &#123;<br>                    <span class="hljs-keyword">if</span> (cs[i] == c) <span class="hljs-keyword">continue</span>;<br>                    <span class="hljs-type">char</span>[] clone = cs.clone();<br>                    clone[i] = c;<br>                    <span class="hljs-type">String</span> <span class="hljs-variable">sub</span> <span class="hljs-operator">=</span> String.valueOf(clone);<br>                    <span class="hljs-keyword">if</span> (!set.contains(sub)) <span class="hljs-keyword">continue</span>;<br>                    <span class="hljs-keyword">if</span> (sub.equals(T)) <span class="hljs-keyword">return</span> step + <span class="hljs-number">1</span>;<br>                    <span class="hljs-keyword">if</span> (!map.containsKey(sub) || map.get(sub) &gt; step + <span class="hljs-number">1</span>) &#123;<br>                        map.put(sub, step + <span class="hljs-number">1</span>);<br>                        q.add(<span class="hljs-keyword">new</span> <span class="hljs-title class_">Node</span>(sub));<br>                    &#125;<br>                &#125;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> -<span class="hljs-number">1</span>;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure></p>
+<ul>
+<li>时间复杂度：启发式搜索分析时空复杂度意义不大</li>
+<li>空间复杂度：启发式搜索分析时空复杂度意义不大</li>
+</ul>
+<hr>
+<h3 id="建图-DFS"><a href="#建图-DFS" class="headerlink" title="建图 + DFS"></a>建图 + DFS</h3><p><strong>由 <code>S</code> 和 $bank[i]$ 组成合法点集，且点集中任意两点之间存在无向边的充要条件是：点 $u$ 和点 $v$ 所代表的字符中，仅有一个位置字符不同。</strong></p>
+<p>因此我们可以将所有的点存入 <code>list</code> 中，假设 <code>list</code> 长度为 $n$。同时为了方便，我们人为确保 <code>S</code> 出现在头部（点编号为 $1$），<code>T</code> 出现在尾部（点编号为 $n$）。</p>
+<p>遍历 <code>list</code> 进行建图（对于两字符串中仅有一位置不同的点进行连边操作），然后跑一遍从 $1$ 到 $n$ 的 <code>DFS</code>。</p>
+<p>由于图中可能有环或无解，因此必须「设定一个最大搜索深度」并增加「最优解剪枝」，确保搜索过程结束。</p>
+<p>最大搜索深度的设定可以利用反证法：如果 <code>S</code> 能够到达 <code>T</code>，那么最优路径中必然不存在环（否则可以把环去掉，得到一条更短的路径），即最优路径所经过的点的数量必然不超过 $n$。</p>
+<p>代码：<br><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-type">int</span> <span class="hljs-variable">N</span> <span class="hljs-operator">=</span> <span class="hljs-number">15</span>, M = <span class="hljs-number">15</span> * <span class="hljs-number">15</span> * <span class="hljs-number">2</span> + <span class="hljs-number">50</span>, idx = <span class="hljs-number">0</span>, loc = <span class="hljs-number">1</span>;<br>    <span class="hljs-type">int</span>[] he = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[N], e = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[M], ne = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[M];<br>    <span class="hljs-type">int</span> n, ans;<br>    <span class="hljs-keyword">void</span> <span class="hljs-title function_">add</span><span class="hljs-params">(<span class="hljs-type">int</span> a, <span class="hljs-type">int</span> b)</span> &#123;<br>        e[idx] = b;<br>        ne[idx] = he[a];<br>        he[a] = idx++;<br>    &#125;<br>    <span class="hljs-keyword">void</span> <span class="hljs-title function_">dfs</span><span class="hljs-params">(<span class="hljs-type">int</span> u, <span class="hljs-type">int</span> fa, <span class="hljs-type">int</span> depth)</span> &#123;<br>        <span class="hljs-keyword">if</span> (depth &gt;= ans) <span class="hljs-keyword">return</span> ; <span class="hljs-comment">// 最优解剪枝</span><br>        <span class="hljs-keyword">if</span> (u == n) &#123;<br>            ans = depth;<br>            <span class="hljs-keyword">return</span> ;<br>        &#125;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> he[u]; i != -<span class="hljs-number">1</span>; i = ne[i]) &#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> e[i];<br>            <span class="hljs-keyword">if</span> (j == fa) <span class="hljs-keyword">continue</span>;<br>            dfs(j, u, depth + <span class="hljs-number">1</span>);<br>        &#125;<br>    &#125;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">minMutation</span><span class="hljs-params">(String S, String T, String[] bank)</span> &#123;<br>        List&lt;String&gt; list = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();<br>        list.add(S);<br>        <span class="hljs-type">boolean</span> <span class="hljs-variable">ok</span> <span class="hljs-operator">=</span> <span class="hljs-literal">false</span>;<br>        <span class="hljs-keyword">for</span> (String s : bank) &#123;<br>            <span class="hljs-keyword">if</span> (s.equals(S)) <span class="hljs-keyword">continue</span>;<br>            <span class="hljs-keyword">if</span> (s.equals(T)) &#123;<br>                ok = <span class="hljs-literal">true</span>;<br>                <span class="hljs-keyword">continue</span>;<br>            &#125;<br>            list.add(s);<br>        &#125;<br>        <span class="hljs-keyword">if</span> (!ok) <span class="hljs-keyword">return</span> -<span class="hljs-number">1</span>;<br>        list.add(T);<br>        n = list.size();<br>        ans = n;<br>        Arrays.fill(he, -<span class="hljs-number">1</span>);<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; n; i++) &#123;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; j &lt; n; j++) &#123;<br>                <span class="hljs-keyword">if</span> (i == j) <span class="hljs-keyword">continue</span>;<br>                <span class="hljs-type">int</span> <span class="hljs-variable">cnt</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>                <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">k</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; k &lt; <span class="hljs-number">8</span> &amp;&amp; cnt &lt;= <span class="hljs-number">1</span>; k++) &#123;<br>                    <span class="hljs-keyword">if</span> (list.get(i).charAt(k) != list.get(j).charAt(k)) cnt++;<br>                &#125;<br>                <span class="hljs-keyword">if</span> (cnt == <span class="hljs-number">1</span>) &#123;<br>                    add(i + <span class="hljs-number">1</span>, j + <span class="hljs-number">1</span>); add(j + <span class="hljs-number">1</span>, i + <span class="hljs-number">1</span>);<br>                &#125;<br>            &#125;<br>        &#125;<br>        dfs(<span class="hljs-number">1</span>, -<span class="hljs-number">1</span>, <span class="hljs-number">0</span>);<br>        <span class="hljs-type">return</span> <span class="hljs-variable">ans</span> <span class="hljs-operator">=</span>= n ? -<span class="hljs-number">1</span> : ans;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure></p>
+<ul>
+<li>时间复杂度：令 <code>bank</code> 的长度为 $n$（即点集的数量级为 $n$），预处理出 <code>list</code> 的复杂度为 $O(n)$；建图操作的复杂度为 $O(C \times n^2)$，其中 $C = 8$ 基因序列长度；<code>DFS</code> 过程由于设定了最大搜索深度，复杂度为 $O(n^2)$。整体复杂度为 $O(C \times n^2)$</li>
+<li>空间复杂度：最坏情况下为完全图，复杂度为 $O(n^2)$</li>
+</ul>
+<hr>
+<h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>这是我们「刷穿 LeetCode」系列文章的第 <code>No.433</code> 篇，系列开始于 2021/01/01，截止于起始日 LeetCode 上共有 1916 道题目，部分是有锁题，我们将先把所有不带锁的题目刷完。</p>
+<p>在这个系列文章里面，除了讲解解题思路以外，还会尽可能给出最为简洁的代码。如果涉及通解还会相应的代码模板。</p>
+<p>为了方便各位同学能够电脑上进行调试和提交代码，我建立了相关的仓库：<a target="_blank" rel="noopener" href="https://github.com/SharingSource/LogicStack-LeetCode">https://github.com/SharingSource/LogicStack-LeetCode</a> 。</p>
+<p>在仓库地址里，你可以看到系列文章的题解链接、系列文章的相应代码、LeetCode 原题链接和其他优选题解。</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%9B%BE%E8%AE%BA-DFS/">图论 DFS</a>
+                    
+                      <a class="hover-with-bg" href="/tags/BFS/">BFS</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%8F%8C%E5%90%91-BFS/">双向 BFS</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%90%AF%E5%8F%91%E5%BC%8F%E6%90%9C%E7%B4%A2/">启发式搜索</a>
+                    
+                      <a class="hover-with-bg" href="/tags/AStar-%E7%AE%97%E6%B3%95/">AStar 算法</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/05/08/442.%20%E6%95%B0%E7%BB%84%E4%B8%AD%E9%87%8D%E5%A4%8D%E7%9A%84%E6%95%B0%E6%8D%AE%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">LC 442. 数组中重复的数据</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/05/06/933.%20%E6%9C%80%E8%BF%91%E7%9A%84%E8%AF%B7%E6%B1%82%E6%AC%A1%E6%95%B0%EF%BC%88%E7%AE%80%E5%8D%95%EF%BC%89/">
+                        <span class="hidden-mobile">LC 933. 最近的请求次数</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+  <div class="col-lg-7 mx-auto nopadding-x-md">
+    <div class="container custom post-custom mx-auto">
+      <img src="https://oscimg.oschina.net/oscnet/up-19688dc1af05cf8bdea43b2a863038ab9e5.png" srcset="/img/loading.gif" lazyload class="rounded mx-auto d-block mt-5" style="width:900px; height:500px;">
+    </div>
+  </div>
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.staticfile.org/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.staticfile.org/tocbot/4.18.2/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.staticfile.org/anchor-js/4.3.1/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.11/clipboard.min.js" ></script>
+  
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.bootcdn.net/ajax/libs/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        loader: {
+          
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.staticfile.org/mathjax/3.2.0/es5/tex-svg.js" ></script>
+
+  
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

@@ -1,0 +1,580 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/oimg/RoundCorner.png">
+  <link rel="icon" href="/oimg/RoundCorner.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="宫水三叶">
+  <meta name="keywords" content="算法, 数据结构, 题解">
+  
+    <meta name="description" content="题目描述这是 LeetCode 上的 629. K个逆序对数组 ，难度为 困难。 给出两个整数 n 和 k，找出所有包含从 1 到 n 的数字，且恰好拥有 k 个逆序对的不同的数组的个数。 逆序对的定义如下：对于数组的第 i 个和第 j 个元素，如果满 i &lt; j 且 a[i] &gt; a[j]，则其为一个逆序对；否则不是。 由于答案可能很大，只需要返回 答案 mod $10^9 + 7$">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LC 629. K个逆序对数组">
+<meta property="og:url" content="http://example.com/2021/11/10/629.%20K%E4%B8%AA%E9%80%86%E5%BA%8F%E5%AF%B9%E6%95%B0%E7%BB%84%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/index.html">
+<meta property="og:site_name" content="宫水三叶的刷题日记">
+<meta property="og:description" content="题目描述这是 LeetCode 上的 629. K个逆序对数组 ，难度为 困难。 给出两个整数 n 和 k，找出所有包含从 1 到 n 的数字，且恰好拥有 k 个逆序对的不同的数组的个数。 逆序对的定义如下：对于数组的第 i 个和第 j 个元素，如果满 i &lt; j 且 a[i] &gt; a[j]，则其为一个逆序对；否则不是。 由于答案可能很大，只需要返回 答案 mod $10^9 + 7$">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-11-10T15:41:46.000Z">
+<meta property="article:modified_time" content="2022-05-12T04:05:32.236Z">
+<meta property="article:author" content="宫水三叶">
+<meta property="article:tag" content="前缀和">
+<meta property="article:tag" content="序列 DP">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  <title>LC 629. K个逆序对数组 - 宫水三叶的刷题日记</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/hint.css/2.7.0/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.7.2/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"|","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.1.0"></head>
+
+
+<body>
+  <header style="height: 50vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>宫水三叶の刷题日记</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/image_71.jpeg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="LC 629. K个逆序对数组">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-author" aria-hidden="true"></i>
+      宫水三叶
+    </span>
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-11-10 23:41" pubdate>
+        2021年11月10日 晚上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2.6k 字
+    </span>
+  
+
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">LC 629. K个逆序对数组</h1>
+            
+            <div class="markdown-body">
+              <h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>这是 LeetCode 上的 <strong><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/k-inverse-pairs-array/solution/gong-shui-san-xie-yi-dao-xu-lie-dp-zhuan-tm01/">629. K个逆序对数组</a></strong> ，难度为 <strong>困难</strong>。</p>
+<p>给出两个整数 <code>n</code> 和 <code>k</code>，找出所有包含从 <code>1</code> 到 <code>n</code> 的数字，且恰好拥有 <code>k</code> 个逆序对的不同的数组的个数。</p>
+<p>逆序对的定义如下：对于数组的第 <code>i</code> 个和第 <code>j</code> 个元素，如果满 <code>i &lt; j</code> 且 <code>a[i] &gt; a[j]</code>，则其为一个逆序对；否则不是。</p>
+<p>由于答案可能很大，只需要返回 答案 mod $10^9 + 7$ 的值。</p>
+<p>示例 1:<br><figure class="highlight makefile"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs makefile"><span class="hljs-section">输入: n = 3, k = 0</span><br><br><span class="hljs-section">输出: 1</span><br><br><span class="hljs-section">解释: </span><br>只有数组 [1,2,3] 包含了从1到3的整数并且正好拥有 0 个逆序对。<br></code></pre></div></td></tr></table></figure><br>示例 2:<br><figure class="highlight makefile"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs makefile"><span class="hljs-section">输入: n = 3, k = 1</span><br><br><span class="hljs-section">输出: 2</span><br><br><span class="hljs-section">解释: </span><br>数组 [1,3,2] 和 [2,1,3] 都有 1 个逆序对。<br></code></pre></div></td></tr></table></figure></p>
+<p>说明:</p>
+<ul>
+<li><code>n</code> 的范围是 <code>[1, 1000]</code> 并且 <code>k</code> 的范围是 <code>[0, 1000]</code>。</li>
+</ul>
+<hr>
+<h3 id="序列-DP"><a href="#序列-DP" class="headerlink" title="序列 DP"></a>序列 DP</h3><p>从 $n$ 和 $k$ 数据范围均为 $10^3$ 可以看出这是一道二维的动态规划题。</p>
+<p><strong>定义 $f[i][j]$ 为考虑使用数值 $[1,i]$，凑成逆序对数量恰好为 $j$ 的数组个数。</strong></p>
+<p>不失一般性的考虑 $f[i][j]$ 该如何计算，对第 $i$ 个数（即数值为 $i$ 的数）所在位置进行讨论，共有 $i$ 种选择。</p>
+<p>假设第 $i$ 个数所在位置为 $k$，由于数值 $i$ 为整个数组的最大值，因此数值 $i$ 与前面所有数均不形成逆序对，与后面的所有数均形成逆序对。因此与数值 $i$ 直接相关的逆向对的数量为 $(i - 1)- k$，由此也得出与 $i$ 不相关的逆序对数量为 $j - (i - 1 - k)$，而与 $i$ 不相关的逆序对数量由 $f[i - 1][x]$ 可得出。</p>
+<p>举个 🌰 帮助大家理解：</p>
+<ul>
+<li><p>当数值 $i$ 放置在下标为 $0$ 的位置上，那么由数值 $i$ 产生的逆序对数量为 $i - 1$，总的逆序对数量为 $j$，因此由数值范围为 $[1, i - 1]$（与数值 $i$ 不相关）构成的逆序对数量为 $j - (i - 1)$，即 $f[i - 1][j - (i - 1)]$；</p>
+</li>
+<li><p>当数值 $i$ 放置在下标为 $1$ 的位置上，那么由数值 $i$ 产生的逆序对数量为 $(i - 1) - 1$，总的逆序对数量为 $j$，因此由数值范围为 $[1, i - 1]$（与数值 $i$ 不相关）构成的逆序对数量为 $j - (i - 1 - 1)$，即 $f[i - 1][j - (i - 1 - 1)]$；</p>
+<p>  …</p>
+</li>
+<li><p>当数值 $i$ 放置在下标为 $k$ 的位置上，那么由数值 $i$ 产生的逆序对数量为 $(i - 1) - k$，总的逆序对数量为 $j$，因此由数值范围为 $[1, i - 1]$（与数值 $i$ 不相关）构成的逆序对数量为 $j - (i - 1 - k)$，即 $f[i - 1][j - (i - 1 - k)]$。</p>
+</li>
+</ul>
+<p>综上，最终 $f[i][j]$ 转移方程为（$k$ 为数值 $i$ 放置的位置）：</p>
+<script type="math/tex; mode=display">
+f[i][j] = \sum_{k = 0}^{i - 1}(f[i - 1][j - (i - 1 - k)])</script><p>共有 $n <em> k$ 个状态，每个 $f[i][j]$ 的计算需要枚举数值 $i$ 所在位置并进行累加，总的复杂度为 $O(n^2 </em>k)$，计算量为 $10^9$，会 TLE。</p>
+<p>状态数量不可减少，考虑如何优化单个状态的转移过程。</p>
+<p>不难发现 $\sum_{k = 0}^{i - 1}(f[i - 1][j - (i - 1 - k)])$ 部分为上一次转移结果 $f[i - 1][x]$ 的某个前缀，可以使用前缀和数组进行优化，从而将计算单个状态的复杂度从 $O(n)$ 降到 $O(1)$。</p>
+<blockquote>
+<p>一些细节：为处理负数问题，我们可以在取模之前先加一次 mod；另外需要对 $j$ 和 $i$ 的大小进行分情况讨论，防止数值 $i$ 放置的位置“过于靠前”导致组成逆序对的数量超过 $j$。</p>
+</blockquote>
+<p>代码（$P1$ $P2$ 分别为使用 <code>long</code> 和不使用 <code>long</code>）：<br><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-type">int</span> <span class="hljs-variable">mod</span> <span class="hljs-operator">=</span> (<span class="hljs-type">int</span>)<span class="hljs-number">1e9</span>+<span class="hljs-number">7</span>;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">kInversePairs</span><span class="hljs-params">(<span class="hljs-type">int</span> n, <span class="hljs-type">int</span> k)</span> &#123;<br>        <span class="hljs-type">long</span>[][] f = <span class="hljs-keyword">new</span> <span class="hljs-title class_">long</span>[n + <span class="hljs-number">1</span>][k + <span class="hljs-number">1</span>];<br>        <span class="hljs-type">long</span>[][] sum = <span class="hljs-keyword">new</span> <span class="hljs-title class_">long</span>[n + <span class="hljs-number">1</span>][k + <span class="hljs-number">1</span>];<br>        f[<span class="hljs-number">1</span>][<span class="hljs-number">0</span>] = <span class="hljs-number">1</span>;<br>        Arrays.fill(sum[<span class="hljs-number">1</span>], <span class="hljs-number">1</span>);<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">2</span>; i &lt;= n; i++) &#123;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; j &lt;= k; j++) &#123;<br>                f[i][j] = j &lt; i ? sum[i - <span class="hljs-number">1</span>][j] : sum[i - <span class="hljs-number">1</span>][j] - sum[i - <span class="hljs-number">1</span>][j - (i - <span class="hljs-number">1</span>) - <span class="hljs-number">1</span>];<br>                f[i][j] = (f[i][j] + mod) % mod;<br>                sum[i][j] = j == <span class="hljs-number">0</span> ? f[i][j] : sum[i][j - <span class="hljs-number">1</span>] + f[i][j];<br>                sum[i][j] = (sum[i][j] + mod) % mod;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> (<span class="hljs-type">int</span>)f[n][k];<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure></p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-type">int</span> <span class="hljs-variable">mod</span> <span class="hljs-operator">=</span> (<span class="hljs-type">int</span>)<span class="hljs-number">1e9</span>+<span class="hljs-number">7</span>;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">kInversePairs</span><span class="hljs-params">(<span class="hljs-type">int</span> n, <span class="hljs-type">int</span> k)</span> &#123;<br>        <span class="hljs-type">int</span>[][] f = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[n + <span class="hljs-number">1</span>][k + <span class="hljs-number">1</span>];<br>        <span class="hljs-type">int</span>[][] sum = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[n + <span class="hljs-number">1</span>][k + <span class="hljs-number">1</span>];<br>        f[<span class="hljs-number">1</span>][<span class="hljs-number">0</span>] = <span class="hljs-number">1</span>;<br>        Arrays.fill(sum[<span class="hljs-number">1</span>], <span class="hljs-number">1</span>);<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">2</span>; i &lt;= n; i++) &#123;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; j &lt;= k; j++) &#123;<br>                f[i][j] = j &lt; i ? sum[i - <span class="hljs-number">1</span>][j] : (sum[i - <span class="hljs-number">1</span>][j] - sum[i - <span class="hljs-number">1</span>][j - (i - <span class="hljs-number">1</span>) - <span class="hljs-number">1</span>] + mod) % mod;<br>                sum[i][j] = j == <span class="hljs-number">0</span> ? f[i][j] : (sum[i][j - <span class="hljs-number">1</span>] + f[i][j]) % mod;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> f[n][k];<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<ul>
+<li>时间复杂度：$O(n * k)$</li>
+<li>空间复杂度：$O(n * k)$</li>
+</ul>
+<hr>
+<h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>这是我们「刷穿 LeetCode」系列文章的第 <code>No.629</code> 篇，系列开始于 2021/01/01，截止于起始日 LeetCode 上共有 1916 道题目，部分是有锁题，我们将先把所有不带锁的题目刷完。</p>
+<p>在这个系列文章里面，除了讲解解题思路以外，还会尽可能给出最为简洁的代码。如果涉及通解还会相应的代码模板。</p>
+<p>为了方便各位同学能够电脑上进行调试和提交代码，我建立了相关的仓库：<a target="_blank" rel="noopener" href="https://github.com/SharingSource/LogicStack-LeetCode">https://github.com/SharingSource/LogicStack-LeetCode</a> 。</p>
+<p>在仓库地址里，你可以看到系列文章的题解链接、系列文章的相应代码、LeetCode 原题链接和其他优选题解。</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%89%8D%E7%BC%80%E5%92%8C/">前缀和</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%BA%8F%E5%88%97-DP/">序列 DP</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/11/11/375.%20%E7%8C%9C%E6%95%B0%E5%AD%97%E5%A4%A7%E5%B0%8F%20II%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">LC 375. 猜数字大小 II</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/11/09/495.%20%E6%8F%90%E8%8E%AB%E6%94%BB%E5%87%BB%EF%BC%88%E7%AE%80%E5%8D%95%EF%BC%89/">
+                        <span class="hidden-mobile">LC 495. 提莫攻击</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+  <div class="col-lg-7 mx-auto nopadding-x-md">
+    <div class="container custom post-custom mx-auto">
+      <img src="https://oscimg.oschina.net/oscnet/up-19688dc1af05cf8bdea43b2a863038ab9e5.png" srcset="/img/loading.gif" lazyload class="rounded mx-auto d-block mt-5" style="width:900px; height:500px;">
+    </div>
+  </div>
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.staticfile.org/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.staticfile.org/tocbot/4.18.2/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.staticfile.org/anchor-js/4.3.1/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.11/clipboard.min.js" ></script>
+  
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.bootcdn.net/ajax/libs/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        loader: {
+          
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.staticfile.org/mathjax/3.2.0/es5/tex-svg.js" ></script>
+
+  
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

@@ -1,0 +1,597 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/oimg/RoundCorner.png">
+  <link rel="icon" href="/oimg/RoundCorner.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="宫水三叶">
+  <meta name="keywords" content="算法, 数据结构, 题解">
+  
+    <meta name="description" content="题目描述这是 LeetCode 上的 1728. 猫和老鼠 II ，难度为 困难。 一只猫和一只老鼠在玩一个叫做猫和老鼠的游戏。 它们所处的环境设定是一个 rows x cols 的方格 grid ，其中每个格子可能是一堵墙、一块地板、一位玩家（猫或者老鼠）或者食物。  玩家由字符 &#39;C&#39; （代表猫）和 &#39;M&#39; （代表老鼠）表示。 地板由字符 &#39;.&#39;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LC 1728. 猫和老鼠 II">
+<meta property="og:url" content="http://example.com/2022/05/10/1728.%20%E7%8C%AB%E5%92%8C%E8%80%81%E9%BC%A0%20II%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/index.html">
+<meta property="og:site_name" content="宫水三叶的刷题日记">
+<meta property="og:description" content="题目描述这是 LeetCode 上的 1728. 猫和老鼠 II ，难度为 困难。 一只猫和一只老鼠在玩一个叫做猫和老鼠的游戏。 它们所处的环境设定是一个 rows x cols 的方格 grid ，其中每个格子可能是一堵墙、一块地板、一位玩家（猫或者老鼠）或者食物。  玩家由字符 &#39;C&#39; （代表猫）和 &#39;M&#39; （代表老鼠）表示。 地板由字符 &#39;.&#39;">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2021/01/17/sample_111_1955.png">
+<meta property="og:image" content="https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2021/01/17/sample_2_1955.png">
+<meta property="og:image" content="https://pic.leetcode-cn.com/1652145352-GynEJi-image.png">
+<meta property="article:published_time" content="2022-05-09T16:56:54.000Z">
+<meta property="article:modified_time" content="2022-05-12T04:05:31.919Z">
+<meta property="article:author" content="宫水三叶">
+<meta property="article:tag" content="动态规划">
+<meta property="article:tag" content="博弈论">
+<meta property="article:tag" content="记忆化搜索">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2021/01/17/sample_111_1955.png">
+  
+  
+  <title>LC 1728. 猫和老鼠 II - 宫水三叶的刷题日记</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/hint.css/2.7.0/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.7.2/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"|","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.1.0"></head>
+
+
+<body>
+  <header style="height: 50vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>宫水三叶の刷题日记</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/image_170.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="LC 1728. 猫和老鼠 II">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-author" aria-hidden="true"></i>
+      宫水三叶
+    </span>
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2022-05-10 00:56" pubdate>
+        2022年5月10日 凌晨
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      3.9k 字
+    </span>
+  
+
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">LC 1728. 猫和老鼠 II</h1>
+            
+            <div class="markdown-body">
+              <h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>这是 LeetCode 上的 <strong><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/cat-and-mouse-ii/solution/by-ac_oier-gse8/">1728. 猫和老鼠 II</a></strong> ，难度为 <strong>困难</strong>。</p>
+<p>一只猫和一只老鼠在玩一个叫做猫和老鼠的游戏。</p>
+<p>它们所处的环境设定是一个 <code>rows x cols</code> 的方格 <code>grid</code> ，其中每个格子可能是一堵墙、一块地板、一位玩家（猫或者老鼠）或者食物。</p>
+<ul>
+<li>玩家由字符 <code>&#39;C&#39;</code> （代表猫）和 <code>&#39;M&#39;</code> （代表老鼠）表示。</li>
+<li>地板由字符 <code>&#39;.&#39;</code> 表示，玩家可以通过这个格子。</li>
+<li>墙用字符 <code>&#39;#&#39;</code> 表示，玩家不能通过这个格子。</li>
+<li>食物用字符 <code>&#39;F&#39;</code> 表示，玩家可以通过这个格子。</li>
+<li>字符 <code>&#39;C&#39;</code> ， <code>&#39;M&#39;</code> 和 <code>&#39;F&#39;</code> 在 <code>grid</code> 中都只会出现一次。</li>
+</ul>
+<p>猫和老鼠按照如下规则移动：</p>
+<ul>
+<li>老鼠 先移动 ，然后两名玩家轮流移动。</li>
+<li>每一次操作时，猫和老鼠可以跳到上下左右四个方向之一的格子，他们不能跳过墙也不能跳出 grid 。</li>
+<li><code>catJump</code> 和 <code>mouseJump</code> 是猫和老鼠分别跳一次能到达的最远距离，它们也可以跳小于最大距离的长度。</li>
+<li>它们可以停留在原地。</li>
+<li>老鼠可以跳跃过猫的位置。</li>
+</ul>
+<p>游戏有 $4$ 种方式会结束：</p>
+<ul>
+<li>如果猫跟老鼠处在相同的位置，那么猫获胜。</li>
+<li>如果猫先到达食物，那么猫获胜。</li>
+<li>如果老鼠先到达食物，那么老鼠获胜。</li>
+<li>如果老鼠不能在 $1000$ 次操作以内到达食物，那么猫获胜。</li>
+</ul>
+<p>给你 <code>rows x cols</code> 的矩阵 <code>grid</code> 和两个整数 <code>catJump</code> 和 <code>mouseJump</code>，双方都采取最优策略，如果老鼠获胜，那么请你返回 <code>true</code>，否则返回 <code>false</code>。</p>
+<p>示例 1：<br><img src="https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2021/01/17/sample_111_1955.png" srcset="/img/loading.gif" lazyload alt=""><br><figure class="highlight livescript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs livescript">输入：grid = [<span class="hljs-string">&quot;###<span class="hljs-subst">#F</span>&quot;</span>,<span class="hljs-string">&quot;<span class="hljs-subst">#C</span>...&quot;</span>,<span class="hljs-string">&quot;M....&quot;</span>], catJump = <span class="hljs-number">1</span>, mouseJump = <span class="hljs-number">2</span><br><br>输出：<span class="hljs-literal">true</span><br><br>解释：猫无法抓到老鼠，也没法比老鼠先到达食物。<br></code></pre></div></td></tr></table></figure><br>示例 2：<br><img src="https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2021/01/17/sample_2_1955.png" srcset="/img/loading.gif" lazyload alt=""><br><figure class="highlight maxima"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs maxima">输入：<span class="hljs-built_in">grid</span> = [<span class="hljs-string">&quot;M.C...F&quot;</span>], catJump = <span class="hljs-number">1</span>, mouseJump = <span class="hljs-number">4</span><br><br>输出：<span class="hljs-literal">true</span><br></code></pre></div></td></tr></table></figure><br>示例 3：<br><figure class="highlight maxima"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs maxima">输入：<span class="hljs-built_in">grid</span> = [<span class="hljs-string">&quot;M.C...F&quot;</span>], catJump = <span class="hljs-number">1</span>, mouseJump = <span class="hljs-number">3</span><br><br>输出：<span class="hljs-literal">false</span><br></code></pre></div></td></tr></table></figure><br>示例 4：<br><figure class="highlight livescript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs livescript">输入：grid = [<span class="hljs-string">&quot;C...#&quot;</span>,<span class="hljs-string">&quot;...<span class="hljs-subst">#F</span>&quot;</span>,<span class="hljs-string">&quot;....#&quot;</span>,<span class="hljs-string">&quot;M....&quot;</span>], catJump = <span class="hljs-number">2</span>, mouseJump = <span class="hljs-number">5</span><br><br>输出：<span class="hljs-literal">false</span><br></code></pre></div></td></tr></table></figure><br>示例 5：<br><figure class="highlight livescript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs livescript">输入：grid = [<span class="hljs-string">&quot;.M...&quot;</span>,<span class="hljs-string">&quot;..#..&quot;</span>,<span class="hljs-string">&quot;#..#.&quot;</span>,<span class="hljs-string">&quot;C#.#.&quot;</span>,<span class="hljs-string">&quot;...<span class="hljs-subst">#F</span>&quot;</span>], catJump = <span class="hljs-number">3</span>, mouseJump = <span class="hljs-number">1</span><br><br>输出：<span class="hljs-literal">true</span><br></code></pre></div></td></tr></table></figure></p>
+<p>提示：</p>
+<ul>
+<li>$rows == grid.length$</li>
+<li>$cols = grid[i].length$</li>
+<li>$1 &lt;= rows, cols &lt;= 8$</li>
+<li>$grid[i][j]$ 只包含字符 <code>&#39;C&#39;</code> ，<code>&#39;M&#39;</code> ，<code>&#39;F&#39;</code> ，<code>&#39;.&#39;</code> 和 <code>&#39;#&#39;</code> 。</li>
+<li><code>grid</code> 中只包含一个 <code>&#39;C&#39;</code> ，<code>&#39;M&#39;</code> 和 <code>&#39;F&#39;</code> 。</li>
+<li>$1 &lt;= catJump, mouseJump &lt;= 8$</li>
+</ul>
+<hr>
+<h3 id="博弈论-DP"><a href="#博弈论-DP" class="headerlink" title="博弈论 DP"></a>博弈论 DP</h3><p>当时在 <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/cat-and-mouse/solution/gong-shui-san-xie-dong-tai-gui-hua-yun-y-0bx1/">(题解) 913. 猫和老鼠</a> 没能证出来更小 $K$ 值（回合数）的正确性，用的 $2n^2$ 做的 ，其余题解说 $2 n$ 合法，后来也被证实是错误的。</p>
+<p>对于本题如果用相同的分析思路，状态数多达 $8 \times 8 \times 8 \times 8 \times 2 = 8192$ 种，题目很贴心调整了规则为 $1000$ 步以内为猫获胜，但证明 $K$ 的理论上界仍是困难（上次分析不出来，这次压根不想分析</p>
+<p>如果忽略 $K$ 值分析，代码还是很好写的：定义函数 <code>int dfs(int x, int y, int p, int q, int k)</code> 并配合记忆化搜索，其中鼠位于 $(x, y)$，猫位于 $(p, q)$，当前轮数为 $k$（由 $k$ 的奇偶性可知是谁的回合）。</p>
+<p>对边界情况进行讨论，移动过程中按照规则进行（四联通，移动最大距离为 <code>mouseJump</code> 和 <code>catJump</code>），注意一旦遇到边界或者墙就要截断。</p>
+<p>Java 使用静态数组，用一个 <code>int</code> 代表双方所在位置，最大回合数 $K = 1000$，<code>2022-05-10</code> 可以过。这道题给的时间上限很高，我调整为 $K = 1500$ 跑成 $2.5s$ 也可以过。本来想要加个卡常，每 $200$ 轮检查一下运行总时长，尽量将时间压在 $850ms$ 以内，现在看来好像用不到。</p>
+<p><img src="https://pic.leetcode-cn.com/1652145352-GynEJi-image.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<p>代码：<br><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">import</span> java.time.Clock;<br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">static</span> <span class="hljs-type">int</span> <span class="hljs-variable">S</span> <span class="hljs-operator">=</span> <span class="hljs-number">8</span> * <span class="hljs-number">8</span> * <span class="hljs-number">8</span> * <span class="hljs-number">8</span>, K = <span class="hljs-number">1000</span>;<br>    <span class="hljs-keyword">static</span> <span class="hljs-type">int</span>[][] f = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[S][K]; <span class="hljs-comment">// mouse : 0 / cat : 1</span><br>    String[] g;<br>    <span class="hljs-type">int</span> n, m, a, b, tx, ty;<br>    <span class="hljs-type">int</span>[][] dirs = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[][]&#123;&#123;<span class="hljs-number">1</span>,<span class="hljs-number">0</span>&#125;, &#123;-<span class="hljs-number">1</span>,<span class="hljs-number">0</span>&#125;, &#123;<span class="hljs-number">0</span>,<span class="hljs-number">1</span>&#125;, &#123;<span class="hljs-number">0</span>,-<span class="hljs-number">1</span>&#125;&#125;;<br>    <span class="hljs-comment">// mouse : (x, y) / cat : (p, q)</span><br>    <span class="hljs-type">int</span> <span class="hljs-title function_">dfs</span><span class="hljs-params">(<span class="hljs-type">int</span> x, <span class="hljs-type">int</span> y, <span class="hljs-type">int</span> p, <span class="hljs-type">int</span> q, <span class="hljs-type">int</span> k)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">state</span> <span class="hljs-operator">=</span> (x &lt;&lt; <span class="hljs-number">9</span>) | (y &lt;&lt; <span class="hljs-number">6</span>) | (p &lt;&lt; <span class="hljs-number">3</span>) | q;<br>        <span class="hljs-keyword">if</span> (k == K - <span class="hljs-number">1</span>) <span class="hljs-keyword">return</span> f[state][k] = <span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">if</span> (x == p &amp;&amp; y == q) <span class="hljs-keyword">return</span> f[state][k] = <span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">if</span> (x == tx &amp;&amp; y == ty) <span class="hljs-keyword">return</span> f[state][k] = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">if</span> (p == tx &amp;&amp; q == ty) <span class="hljs-keyword">return</span> f[state][k] = <span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">if</span> (f[state][k] != -<span class="hljs-number">1</span>) <span class="hljs-keyword">return</span> f[state][k];<br>        <span class="hljs-keyword">if</span> (k % <span class="hljs-number">2</span> == <span class="hljs-number">0</span>) &#123; <span class="hljs-comment">// mouse</span><br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span>[] di : dirs) &#123;<br>                <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt;= b; i++) &#123;<br>                    <span class="hljs-type">int</span> <span class="hljs-variable">nx</span> <span class="hljs-operator">=</span> x + di[<span class="hljs-number">0</span>] * i, ny = y + di[<span class="hljs-number">1</span>] * i;<br>                    <span class="hljs-keyword">if</span> (nx &lt; <span class="hljs-number">0</span> || nx &gt;= n || ny &lt; <span class="hljs-number">0</span> || ny &gt;= m) <span class="hljs-keyword">break</span>;<br>                    <span class="hljs-keyword">if</span> (g[nx].charAt(ny) == <span class="hljs-string">&#x27;#&#x27;</span>) <span class="hljs-keyword">break</span>;<br>                    <span class="hljs-keyword">if</span> (dfs(nx, ny, p, q, k + <span class="hljs-number">1</span>) == <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> f[state][k] = <span class="hljs-number">0</span>;<br>                &#125;<br>            &#125;<br>            <span class="hljs-keyword">return</span> f[state][k] = <span class="hljs-number">1</span>;<br>        &#125; <span class="hljs-keyword">else</span> &#123; <span class="hljs-comment">// cat</span><br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span>[] di : dirs) &#123;<br>                <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt;= a; i++) &#123;<br>                    <span class="hljs-type">int</span> <span class="hljs-variable">np</span> <span class="hljs-operator">=</span> p + di[<span class="hljs-number">0</span>] * i, nq = q + di[<span class="hljs-number">1</span>] * i;<br>                    <span class="hljs-keyword">if</span> (np &lt; <span class="hljs-number">0</span> || np &gt;= n || nq &lt; <span class="hljs-number">0</span> || nq &gt;= m) <span class="hljs-keyword">break</span>;<br>                    <span class="hljs-keyword">if</span> (g[np].charAt(nq) == <span class="hljs-string">&#x27;#&#x27;</span>) <span class="hljs-keyword">break</span>;<br>                    <span class="hljs-keyword">if</span> (dfs(x, y, np, nq, k + <span class="hljs-number">1</span>) == <span class="hljs-number">1</span>) <span class="hljs-keyword">return</span> f[state][k] = <span class="hljs-number">1</span>;<br>                &#125;<br>            &#125;<br>            <span class="hljs-keyword">return</span> f[state][k] = <span class="hljs-number">0</span>;<br>        &#125;<br>    &#125;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">canMouseWin</span><span class="hljs-params">(String[] grid, <span class="hljs-type">int</span> catJump, <span class="hljs-type">int</span> mouseJump)</span> &#123;<br>        g = grid;<br>        n = g.length; m = g[<span class="hljs-number">0</span>].length(); a = catJump; b = mouseJump;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; S; i++) Arrays.fill(f[i], -<span class="hljs-number">1</span>);<br>        <span class="hljs-type">int</span> <span class="hljs-variable">x</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>, y = <span class="hljs-number">0</span>, p = <span class="hljs-number">0</span>, q = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; n; i++) &#123;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; j &lt; m; j++) &#123;<br>                <span class="hljs-keyword">if</span> (g[i].charAt(j) == <span class="hljs-string">&#x27;M&#x27;</span>) &#123;<br>                    x = i; y = j;<br>                &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (g[i].charAt(j) == <span class="hljs-string">&#x27;C&#x27;</span>) &#123;<br>                    p = i; q = j;<br>                &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (g[i].charAt(j) == <span class="hljs-string">&#x27;F&#x27;</span>) &#123;<br>                    tx = i; ty = j;<br>                &#125;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> dfs(x, y, p, q, <span class="hljs-number">0</span>) == <span class="hljs-number">0</span>;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure></p>
+<ul>
+<li>时间复杂度：令 $n$ 和 $m$ 分别为矩阵的长宽，最长移动距离为 $L$，复杂度为 $O(n^2 \times m^2 \times 1000 \times 4 \times L)$</li>
+<li>空间复杂度：$O(n^2 \times m^2 \times 1000)$</li>
+</ul>
+<hr>
+<h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>这是我们「刷穿 LeetCode」系列文章的第 <code>No.1728</code> 篇，系列开始于 2021/01/01，截止于起始日 LeetCode 上共有 1916 道题目，部分是有锁题，我们将先把所有不带锁的题目刷完。</p>
+<p>在这个系列文章里面，除了讲解解题思路以外，还会尽可能给出最为简洁的代码。如果涉及通解还会相应的代码模板。</p>
+<p>为了方便各位同学能够电脑上进行调试和提交代码，我建立了相关的仓库：<a target="_blank" rel="noopener" href="https://github.com/SharingSource/LogicStack-LeetCode">https://github.com/SharingSource/LogicStack-LeetCode</a> 。</p>
+<p>在仓库地址里，你可以看到系列文章的题解链接、系列文章的相应代码、LeetCode 原题链接和其他优选题解。</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/">动态规划</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%8D%9A%E5%BC%88%E8%AE%BA/">博弈论</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E8%AE%B0%E5%BF%86%E5%8C%96%E6%90%9C%E7%B4%A2/">记忆化搜索</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/05/11/449.%20%E5%BA%8F%E5%88%97%E5%8C%96%E5%92%8C%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">LC 449. 序列化和反序列化二叉搜索树</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/05/09/942.%20%E5%A2%9E%E5%87%8F%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%8C%B9%E9%85%8D%EF%BC%88%E7%AE%80%E5%8D%95%EF%BC%89/">
+                        <span class="hidden-mobile">LC 942. 增减字符串匹配</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+  <div class="col-lg-7 mx-auto nopadding-x-md">
+    <div class="container custom post-custom mx-auto">
+      <img src="https://oscimg.oschina.net/oscnet/up-19688dc1af05cf8bdea43b2a863038ab9e5.png" srcset="/img/loading.gif" lazyload class="rounded mx-auto d-block mt-5" style="width:900px; height:500px;">
+    </div>
+  </div>
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.staticfile.org/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.staticfile.org/tocbot/4.18.2/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.staticfile.org/anchor-js/4.3.1/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.11/clipboard.min.js" ></script>
+  
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.bootcdn.net/ajax/libs/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        loader: {
+          
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.staticfile.org/mathjax/3.2.0/es5/tex-svg.js" ></script>
+
+  
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

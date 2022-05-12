@@ -1,0 +1,580 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/oimg/RoundCorner.png">
+  <link rel="icon" href="/oimg/RoundCorner.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="宫水三叶">
+  <meta name="keywords" content="算法, 数据结构, 题解">
+  
+    <meta name="description" content="题目描述这是 LeetCode 上的 1337. 矩阵中战斗力最弱的 K 行 ，难度为 简单。 给你一个大小为 $m * n$ 的矩阵 $mat$，矩阵由若干军人和平民组成，分别用 $1$ 和 $0$ 表示。 请你返回矩阵中战斗力最弱的 $k$ 行的索引，按从最弱到最强排序。 如果第 $i$ 行的军人数量少于第 $j$ 行，或者两行军人数量相同但 $i$ 小于 $j$，那么我们认为第 $i$ 行的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LC 1337. 矩阵中战斗力最弱的 K 行">
+<meta property="og:url" content="http://example.com/2021/08/01/1337.%20%E7%9F%A9%E9%98%B5%E4%B8%AD%E6%88%98%E6%96%97%E5%8A%9B%E6%9C%80%E5%BC%B1%E7%9A%84%20K%20%E8%A1%8C%EF%BC%88%E7%AE%80%E5%8D%95%EF%BC%89/index.html">
+<meta property="og:site_name" content="宫水三叶的刷题日记">
+<meta property="og:description" content="题目描述这是 LeetCode 上的 1337. 矩阵中战斗力最弱的 K 行 ，难度为 简单。 给你一个大小为 $m * n$ 的矩阵 $mat$，矩阵由若干军人和平民组成，分别用 $1$ 和 $0$ 表示。 请你返回矩阵中战斗力最弱的 $k$ 行的索引，按从最弱到最强排序。 如果第 $i$ 行的军人数量少于第 $j$ 行，或者两行军人数量相同但 $i$ 小于 $j$，那么我们认为第 $i$ 行的">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-07-31T17:48:41.000Z">
+<meta property="article:modified_time" content="2022-05-12T04:05:32.089Z">
+<meta property="article:author" content="宫水三叶">
+<meta property="article:tag" content="二分">
+<meta property="article:tag" content="优先队列">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  <title>LC 1337. 矩阵中战斗力最弱的 K 行 - 宫水三叶的刷题日记</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/hint.css/2.7.0/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.7.2/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"|","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.1.0"></head>
+
+
+<body>
+  <header style="height: 50vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>宫水三叶の刷题日记</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/image_99.jpeg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="LC 1337. 矩阵中战斗力最弱的 K 行">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-author" aria-hidden="true"></i>
+      宫水三叶
+    </span>
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-08-01 01:48" pubdate>
+        2021年8月1日 凌晨
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2.8k 字
+    </span>
+  
+
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">LC 1337. 矩阵中战斗力最弱的 K 行</h1>
+            
+            <div class="markdown-body">
+              <h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>这是 LeetCode 上的 <strong><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/the-k-weakest-rows-in-a-matrix/solution/gong-shui-san-xie-yi-ti-shuang-jie-po-su-7okx/">1337. 矩阵中战斗力最弱的 K 行</a></strong> ，难度为 <strong>简单</strong>。</p>
+<p>给你一个大小为 $m * n$ 的矩阵 $mat$，矩阵由若干军人和平民组成，分别用 $1$ 和 $0$ 表示。</p>
+<p>请你返回矩阵中战斗力最弱的 $k$ 行的索引，按从最弱到最强排序。</p>
+<p>如果第 $i$ 行的军人数量少于第 $j$ 行，或者两行军人数量相同但 $i$ 小于 $j$，那么我们认为第 $i$ 行的战斗力比第 $j$ 行弱。</p>
+<p>军人 总是 排在一行中的靠前位置，也就是说 $1$ 总是出现在 $0$ 之前。</p>
+<p>示例 1：<br><figure class="highlight tap"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs tap">输入：mat = <br>[[1,1,0,0,0],<br> [1,1,1,1,0],<br> [1,0,0,0,0],<br> [1,1,0,0,0],<br> [1,1,1,1,1]], <br>k = 3<br><br>输出：[2,0,3]<br><br>解释：<br>每行中的军人数目：<br>行<span class="hljs-number"> 0 </span>-&gt;<span class="hljs-number"> 2 </span><br>行<span class="hljs-number"> 1 </span>-&gt;<span class="hljs-number"> 4 </span><br>行<span class="hljs-number"> 2 </span>-&gt;<span class="hljs-number"> 1 </span><br>行<span class="hljs-number"> 3 </span>-&gt;<span class="hljs-number"> 2 </span><br>行<span class="hljs-number"> 4 </span>-&gt;<span class="hljs-number"> 5 </span><br>从最弱到最强对这些行排序后得到 [2,0,3,1,4]<br></code></pre></div></td></tr></table></figure><br>示例 2：<br><figure class="highlight tap"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs tap">输入：mat = <br>[[1,0,0,0],<br> [1,1,1,1],<br> [1,0,0,0],<br> [1,0,0,0]], <br>k = 2<br><br>输出：[0,2]<br><br>解释： <br>每行中的军人数目：<br>行<span class="hljs-number"> 0 </span>-&gt;<span class="hljs-number"> 1 </span><br>行<span class="hljs-number"> 1 </span>-&gt;<span class="hljs-number"> 4 </span><br>行<span class="hljs-number"> 2 </span>-&gt;<span class="hljs-number"> 1 </span><br>行<span class="hljs-number"> 3 </span>-&gt;<span class="hljs-number"> 1 </span><br>从最弱到最强对这些行排序后得到 [0,2,3,1]<br></code></pre></div></td></tr></table></figure></p>
+<p>提示：</p>
+<ul>
+<li>m == mat.length</li>
+<li>n == mat[i].length</li>
+<li>2 &lt;= n, m &lt;= 100</li>
+<li>1 &lt;= k &lt;= m</li>
+<li>matrix[i][j] 不是 0 就是 1</li>
+</ul>
+<hr>
+<h3 id="朴素解法"><a href="#朴素解法" class="headerlink" title="朴素解法"></a>朴素解法</h3><p>一个朴素的做法是对矩阵进行遍历，统计每一行的军人数量，并以二元组 $(cnt_i, idx_i)$ 的形式进行存储。</p>
+<p>然后对所有行的战力进行排序，选出战力最小的 $k$ 个下标即是答案。</p>
+<p>代码：<br><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span>[] kWeakestRows(<span class="hljs-type">int</span>[][] mat, <span class="hljs-type">int</span> k) &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">m</span> <span class="hljs-operator">=</span> mat.length, n = mat[<span class="hljs-number">0</span>].length;<br>        <span class="hljs-type">int</span>[][] all = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[m][<span class="hljs-number">1</span>];<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; m; i++) &#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">cur</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; j &lt; n; j++) cur += mat[i][j];<br>            all[i] = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[]&#123;cur, i&#125;;<br>        &#125;<br>        Arrays.sort(all, (a, b)-&gt;&#123;<br>            <span class="hljs-keyword">if</span> (a[<span class="hljs-number">0</span>] != b[<span class="hljs-number">0</span>]) <span class="hljs-keyword">return</span> a[<span class="hljs-number">0</span>] - b[<span class="hljs-number">0</span>];<br>            <span class="hljs-keyword">return</span> a[<span class="hljs-number">1</span>] - b[<span class="hljs-number">1</span>];<br>        &#125;);<br>        <span class="hljs-type">int</span>[] ans = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[k];<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; k; i++) ans[i] = all[i][<span class="hljs-number">1</span>];<br>        <span class="hljs-keyword">return</span> ans;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure></p>
+<ul>
+<li>时间复杂度：遍历矩阵的复杂度为 $O(m <em> n)$；排序复杂度为 $O(m\log{m})$；构造答案复杂度为 $O(k)$。整体复杂度为 $O(\max(m </em> n, m\log{m}))$</li>
+<li>空间复杂度：$O(m)$ 空间用于存储所有的行战力；$O(\log{m})$ 空间用于排序。整体复杂度为 $O(m + \log{m})$</li>
+</ul>
+<hr>
+<h3 id="二分-优先队列（堆）"><a href="#二分-优先队列（堆）" class="headerlink" title="二分 + 优先队列（堆）"></a>二分 + 优先队列（堆）</h3><p>根据「军人总是排在靠前位置」的特性，我们可以通过「二分」找到每一行最后一个军人的位置，从而在 $O(\log{n})$ 的复杂度内统计出每行的军人数量（战力情况）。</p>
+<p>同时由于我们只需要「战力最弱」的 $k$ 行数据，这引导我们可以建立一个「战力大根堆」来做，「战力大根堆」存放着数量最多为 $k$ 的战力二元组 $(cnt_i, idx_i)$，堆顶元素为战力最大的数对。</p>
+<p>每次通过「二分」得到当前行的战力值后，判断当前战力值与堆顶元素的战力大小关系：</p>
+<ul>
+<li>如果当前战力值比堆顶的元素要大：直接丢弃当前战力值（不可能属于在第 $k$ 小的集合中）；</li>
+<li>如果当前战力值比堆顶的元素要小：将堆顶元素弹出，将当前行放入堆中。</li>
+</ul>
+<blockquote>
+<p>一些细节：每次写二分都有同学会问，<code>check</code> 函数怎么写，可以重点看看 <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/find-first-and-last-position-of-element-in-sorted-array/solution/gong-shui-san-xie-kao-cha-dui-er-fen-de-86bk0/">34 题题解</a>。由于考虑某行没有军人的情况，我们需要二分完检查一下分割点是否符合 <code>check</code> 来决定军人数量。<br>另外，从堆弹出和往堆存入，需要与当前堆元素的数量有所关联。</p>
+</blockquote>
+<p>代码：<br><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span>[] kWeakestRows(<span class="hljs-type">int</span>[][] mat, <span class="hljs-type">int</span> k) &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">m</span> <span class="hljs-operator">=</span> mat.length, n = mat[<span class="hljs-number">0</span>].length;<br>        PriorityQueue&lt;<span class="hljs-type">int</span>[]&gt; q = <span class="hljs-keyword">new</span> <span class="hljs-title class_">PriorityQueue</span>&lt;&gt;((a,b)-&gt;&#123;<br>            <span class="hljs-keyword">if</span> (a[<span class="hljs-number">0</span>] != b[<span class="hljs-number">0</span>]) <span class="hljs-keyword">return</span> b[<span class="hljs-number">0</span>] - a[<span class="hljs-number">0</span>];<br>            <span class="hljs-keyword">return</span> b[<span class="hljs-number">1</span>] - a[<span class="hljs-number">1</span>];<br>        &#125;);<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; m; i++) &#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">l</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>, r = n - <span class="hljs-number">1</span>;<br>            <span class="hljs-keyword">while</span> (l &lt; r) &#123;<br>                <span class="hljs-type">int</span> <span class="hljs-variable">mid</span> <span class="hljs-operator">=</span> l + r + <span class="hljs-number">1</span> &gt;&gt; <span class="hljs-number">1</span>;<br>                <span class="hljs-keyword">if</span> (mat[i][mid] &gt;= <span class="hljs-number">1</span>) l = mid;<br>                <span class="hljs-keyword">else</span> r = mid - <span class="hljs-number">1</span>;<br>            &#125;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">cur</span> <span class="hljs-operator">=</span> mat[i][r] &gt;= <span class="hljs-number">1</span> ? r + <span class="hljs-number">1</span> : r;<br>            <span class="hljs-keyword">if</span> (q.size() == k &amp;&amp; q.peek()[<span class="hljs-number">0</span>] &gt; cur) q.poll();<br>            <span class="hljs-keyword">if</span> (q.size() &lt; k) q.add(<span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[]&#123;cur, i&#125;);<br>        &#125;<br>        <span class="hljs-type">int</span>[] ans = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[k];<br>        <span class="hljs-type">int</span> <span class="hljs-variable">idx</span> <span class="hljs-operator">=</span> k - <span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">while</span> (!q.isEmpty()) ans[idx--] = q.poll()[<span class="hljs-number">1</span>];<br>        <span class="hljs-keyword">return</span> ans;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure></p>
+<ul>
+<li>时间复杂度：二分得到每行的战力情况，复杂度为 $O(m\log{n})$；堆中最多有 $k$ 个元素，将行信息存入堆中复杂度为 $O(m\log{k})；$构造答案复杂度为 $O(k\log{k})$。整体复杂度为 $O(m * (\log{n} + \log{k}))$</li>
+<li>空间复杂度：$O(k)$</li>
+</ul>
+<hr>
+<h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>这是我们「刷穿 LeetCode」系列文章的第 <code>No.1337</code> 篇，系列开始于 2021/01/01，截止于起始日 LeetCode 上共有 1916 道题目，部分是有锁题，我们将先把所有不带锁的题目刷完。</p>
+<p>在这个系列文章里面，除了讲解解题思路以外，还会尽可能给出最为简洁的代码。如果涉及通解还会相应的代码模板。</p>
+<p>为了方便各位同学能够电脑上进行调试和提交代码，我建立了相关的仓库：<a target="_blank" rel="noopener" href="https://github.com/SharingSource/LogicStack-LeetCode">https://github.com/SharingSource/LogicStack-LeetCode</a> 。</p>
+<p>在仓库地址里，你可以看到系列文章的题解链接、系列文章的相应代码、LeetCode 原题链接和其他优选题解。</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E4%BA%8C%E5%88%86/">二分</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E4%BC%98%E5%85%88%E9%98%9F%E5%88%97/">优先队列</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/08/02/743.%20%E7%BD%91%E7%BB%9C%E5%BB%B6%E8%BF%9F%E6%97%B6%E9%97%B4%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">LC 743. 网络延迟时间</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/07/31/987.%20%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%9E%82%E5%BA%8F%E9%81%8D%E5%8E%86%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/">
+                        <span class="hidden-mobile">LC 987. 二叉树的垂序遍历</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+  <div class="col-lg-7 mx-auto nopadding-x-md">
+    <div class="container custom post-custom mx-auto">
+      <img src="https://oscimg.oschina.net/oscnet/up-19688dc1af05cf8bdea43b2a863038ab9e5.png" srcset="/img/loading.gif" lazyload class="rounded mx-auto d-block mt-5" style="width:900px; height:500px;">
+    </div>
+  </div>
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.staticfile.org/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.staticfile.org/tocbot/4.18.2/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.staticfile.org/anchor-js/4.3.1/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.11/clipboard.min.js" ></script>
+  
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.bootcdn.net/ajax/libs/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        loader: {
+          
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.staticfile.org/mathjax/3.2.0/es5/tex-svg.js" ></script>
+
+  
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

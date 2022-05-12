@@ -1,0 +1,589 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/oimg/RoundCorner.png">
+  <link rel="icon" href="/oimg/RoundCorner.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="宫水三叶">
+  <meta name="keywords" content="算法, 数据结构, 题解">
+  
+    <meta name="description" content="题目描述这是 LeetCode 上的 902. 最大为 N 的数字组合 ，难度为 困难。 给定一个按 非递减顺序 排列的数字数组 digits。你可以用任意次数 $digits[i]$ 来写的数字。例如，如果 $digits &#x3D; [1,3,5]$，我们可以写数字，如 &#39;13&#39;, &#39;551&#39;, 和 &#39;1351315&#39;。 返回 可以生成的小于或等于给定整">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LC 902. 最大为 N 的数字组合">
+<meta property="og:url" content="http://example.com/2022/04/13/902.%20%E6%9C%80%E5%A4%A7%E4%B8%BA%20N%20%E7%9A%84%E6%95%B0%E5%AD%97%E7%BB%84%E5%90%88%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/index.html">
+<meta property="og:site_name" content="宫水三叶的刷题日记">
+<meta property="og:description" content="题目描述这是 LeetCode 上的 902. 最大为 N 的数字组合 ，难度为 困难。 给定一个按 非递减顺序 排列的数字数组 digits。你可以用任意次数 $digits[i]$ 来写的数字。例如，如果 $digits &#x3D; [1,3,5]$，我们可以写数字，如 &#39;13&#39;, &#39;551&#39;, 和 &#39;1351315&#39;。 返回 可以生成的小于或等于给定整">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-04-12T17:31:14.000Z">
+<meta property="article:modified_time" content="2022-05-12T04:05:32.350Z">
+<meta property="article:author" content="宫水三叶">
+<meta property="article:tag" content="动态规划">
+<meta property="article:tag" content="二分">
+<meta property="article:tag" content="数位 DP">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  <title>LC 902. 最大为 N 的数字组合 - 宫水三叶的刷题日记</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/hint.css/2.7.0/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.7.2/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"|","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.1.0"></head>
+
+
+<body>
+  <header style="height: 50vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>宫水三叶の刷题日记</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/image_18.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="LC 902. 最大为 N 的数字组合">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-author" aria-hidden="true"></i>
+      宫水三叶
+    </span>
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2022-04-13 01:31" pubdate>
+        2022年4月13日 凌晨
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      3.4k 字
+    </span>
+  
+
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">LC 902. 最大为 N 的数字组合</h1>
+            
+            <div class="markdown-body">
+              <h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>这是 LeetCode 上的 <strong><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/numbers-at-most-n-given-digit-set/solution/by-ac_oier-8k27/">902. 最大为 N 的数字组合</a></strong> ，难度为 <strong>困难</strong>。</p>
+<p>给定一个按 非递减顺序 排列的数字数组 <code>digits</code>。你可以用任意次数 $digits[i]$ 来写的数字。例如，如果 $digits = [1,3,5]$，我们可以写数字，如 <code>&#39;13&#39;</code>, <code>&#39;551&#39;</code>, 和 <code>&#39;1351315&#39;</code>。</p>
+<p>返回 <strong>可以生成的小于或等于给定整数</strong> $n$ 的正整数的个数 。</p>
+<p>示例 1：<br><figure class="highlight ada"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs ada">输入：<span class="hljs-keyword">digits</span> = [<span class="hljs-string">&quot;1&quot;</span>,<span class="hljs-string">&quot;3&quot;</span>,<span class="hljs-string">&quot;5&quot;</span>,<span class="hljs-string">&quot;7&quot;</span>], n = <span class="hljs-number">100</span><br><br>输出：<span class="hljs-number">20</span><br><br>解释：<br>可写出的 <span class="hljs-number">20</span> 个数字是：<br><span class="hljs-number">1</span>, <span class="hljs-number">3</span>, <span class="hljs-number">5</span>, <span class="hljs-number">7</span>, <span class="hljs-number">11</span>, <span class="hljs-number">13</span>, <span class="hljs-number">15</span>, <span class="hljs-number">17</span>, <span class="hljs-number">31</span>, <span class="hljs-number">33</span>, <span class="hljs-number">35</span>, <span class="hljs-number">37</span>, <span class="hljs-number">51</span>, <span class="hljs-number">53</span>, <span class="hljs-number">55</span>, <span class="hljs-number">57</span>, <span class="hljs-number">71</span>, <span class="hljs-number">73</span>, <span class="hljs-number">75</span>, <span class="hljs-number">77</span>.<br></code></pre></div></td></tr></table></figure><br>示例 2：<br><figure class="highlight ada"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs ada">输入：<span class="hljs-keyword">digits</span> = [<span class="hljs-string">&quot;1&quot;</span>,<span class="hljs-string">&quot;4&quot;</span>,<span class="hljs-string">&quot;9&quot;</span>], n = <span class="hljs-number">1000000000</span><br><br>输出：<span class="hljs-number">29523</span><br><br>解释：<br>我们可以写 <span class="hljs-number">3</span> 个一位数字，<span class="hljs-number">9</span> 个两位数字，<span class="hljs-number">27</span> 个三位数字，<br><span class="hljs-number">81</span> 个四位数字，<span class="hljs-number">243</span> 个五位数字，<span class="hljs-number">729</span> 个六位数字，<br><span class="hljs-number">2187</span> 个七位数字，<span class="hljs-number">6561</span> 个八位数字和 <span class="hljs-number">19683</span> 个九位数字。<br>总共，可以使用D中的数字写出 <span class="hljs-number">29523</span> 个整数。<br></code></pre></div></td></tr></table></figure><br>示例 3:<br><figure class="highlight ada"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs ada">输入：<span class="hljs-keyword">digits</span> = [<span class="hljs-string">&quot;7&quot;</span>], n = <span class="hljs-number">8</span><br><br>输出：<span class="hljs-number">1</span><br></code></pre></div></td></tr></table></figure></p>
+<p>提示：</p>
+<ul>
+<li>$1 &lt;= digits.length &lt;= 9$</li>
+<li>$digits[i].length == 1$</li>
+<li>$digits[i]$ 是从 <code>&#39;1&#39;</code> 到 <code>&#39;9&#39;</code> 的数</li>
+<li><code>digits</code> 中的所有值都 不同 </li>
+<li><code>digits</code> 按 非递减顺序 排列</li>
+<li>$1 &lt;= n &lt;= 10^9$</li>
+</ul>
+<hr>
+<h3 id="数位-DP-二分"><a href="#数位-DP-二分" class="headerlink" title="数位 DP + 二分"></a>数位 DP + 二分</h3><p>这是一道「数位 DP」的经典运用题。</p>
+<p>由于题目给定的 <code>digits</code> 不包含 $0$，因此相当于只需要回答使用 <code>digits</code> 的数值能够覆盖 $[1, x]$ 范围内的多少个数字。</p>
+<p>起始先将字符串数组 <code>digits</code> 转为数字数组 <code>nums</code>，假定 <code>nums</code> 的长度为 $m$，然后考虑如何求得 $[1, x]$ 范围内合法数字的个数。</p>
+<p>假定我们存在函数 <code>int dp(int x)</code> 函数，能够返回区间 $[1, x]$ 内合法数的个数，那么配合「容斥原理」我们便能够回答任意区间合法数的查询：</p>
+<script type="math/tex; mode=display">
+ans_{(l, r)} = dp(r) - dp(l - 1)</script><p>对于本题，查询区间的左端点固定为 $1$，同时 $dp(0) = 0$，因此答案为 $dp(x)$。</p>
+<p>然后考虑如何实现 <code>int dp(int x)</code> 函数，我们将组成 $[1, x]$ 的合法数分成三类：</p>
+<ul>
+<li>位数和 $x$ 相同，且最高位比 $x$ 最高位要小的，这部分统计为 <code>res1</code>；</li>
+<li>位数和 $x$ 相同，且最高位与 $x$ 最高位相同的，这部分统计为 <code>res2</code>；</li>
+<li>位数比 $x$ 少，这部分统计为 <code>res3</code>。</li>
+</ul>
+<p>其中 <code>res1</code> 和 <code>res3</code> 求解相对简单，重点落在如何求解 <code>res2</code> 上。</p>
+<p><strong>对 $x$ 进行「从高到低」的处理（假定 $x$ 数位为 $n$），对于第 $k$ 位而言（$k$ 不为最高位），假设在 $x$ 中第 $k$ 位为 $cur$，那么为了满足「大小限制」关系，我们只能在 $[1, cur - 1]$ 范围内取数，同时为了满足「数字只能取自 <code>nums</code>」的限制，因此我们可以利用 <code>nums</code> 本身有序，对其进行二分，找到满足 <code>nums[mid] &lt;= cur</code> 的最大下标 $r$，根据 $nums[r]$ 与 $cur$ 的关系进行分情况讨论：</strong></p>
+<ul>
+<li>$nums[r] = cur$: 此时位置 $k$ 共有 $r$ 种选择，而后面的每个位置由于 $nums[i]$ 可以使用多次，每个位置都有 $m$ 种选择，共有 $n - p$ 个位置，因此该分支往后共有 $r * m^{n - p}$ 种合法方案。且由于 $nums[r] = cur$，往后还有分支可决策（需要统计），因此需要继续处理；</li>
+<li>$nums[r] &lt; cur$：此时算上 $nums[r]$，位置 $k$ 共有 $r + 1$ 种选择，而后面的每个位置由于 $nums[i]$ 可以使用多次，每个位置都有 $m$ 种选择，共有 $n - p$ 个位置，因此该分支共有 $(r + 1) * m^{n - p}$ 种合法方案，由于 $nums[r] &lt; cur$，往后的方案数（均满足小于关系）已经在这次被统计完成，累加后进行 <code>break</code>；</li>
+<li>$nums[r] &gt; cur$：该分支往后不再满足「大小限制」要求，合法方案数为 $0$，直接 <code>break</code>。</li>
+</ul>
+<p>其他细节：实际上，我们可以将 <code>res1</code> 和 <code>res2</code> 两种情况进行合并处理。</p>
+<p>代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-type">int</span>[] nums;<br>    <span class="hljs-type">int</span> <span class="hljs-title function_">dp</span><span class="hljs-params">(<span class="hljs-type">int</span> x)</span> &#123;<br>        List&lt;Integer&gt; list = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();<br>        <span class="hljs-keyword">while</span> (x != <span class="hljs-number">0</span>) &#123;<br>            list.add(x % <span class="hljs-number">10</span>);<br>            x /= <span class="hljs-number">10</span>;<br>        &#125;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> list.size(), m = nums.length, ans = <span class="hljs-number">0</span>;<br>        <span class="hljs-comment">// 位数和 x 相同</span><br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> n - <span class="hljs-number">1</span>, p = <span class="hljs-number">1</span>; i &gt;= <span class="hljs-number">0</span>; i--, p++) &#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">cur</span> <span class="hljs-operator">=</span> list.get(i);<br>            <span class="hljs-type">int</span> <span class="hljs-variable">l</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>, r = m - <span class="hljs-number">1</span>;<br>            <span class="hljs-keyword">while</span> (l &lt; r) &#123;<br>                <span class="hljs-type">int</span> <span class="hljs-variable">mid</span> <span class="hljs-operator">=</span> l + r + <span class="hljs-number">1</span> &gt;&gt; <span class="hljs-number">1</span>;<br>                <span class="hljs-keyword">if</span> (nums[mid] &lt;= cur) l = mid;<br>                <span class="hljs-keyword">else</span> r = mid - <span class="hljs-number">1</span>;<br>            &#125;<br>            <span class="hljs-keyword">if</span> (nums[r] &gt; cur) &#123;<br>                <span class="hljs-keyword">break</span>;<br>            &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (nums[r] == cur) &#123;<br>                ans += r * (<span class="hljs-type">int</span>) Math.pow(m, (n - p));<br>                <span class="hljs-keyword">if</span> (i == <span class="hljs-number">0</span>) ans++;<br>            &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (nums[r] &lt; cur) &#123;<br>                ans += (r + <span class="hljs-number">1</span>) * (<span class="hljs-type">int</span>) Math.pow(m, (n - p));<br>                <span class="hljs-keyword">break</span>;<br>            &#125;<br>        &#125;<br>        <span class="hljs-comment">// 位数比 x 少的</span><br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>, last = <span class="hljs-number">1</span>; i &lt; n; i++) &#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">cur</span> <span class="hljs-operator">=</span> last * m;<br>            ans += cur; last = cur;<br>        &#125;<br>        <span class="hljs-keyword">return</span> ans;<br>    &#125;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">atMostNGivenDigitSet</span><span class="hljs-params">(String[] digits, <span class="hljs-type">int</span> max)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> digits.length;<br>        nums = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[n];<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; n; i++) nums[i] = Integer.parseInt(digits[i]);<br>        <span class="hljs-keyword">return</span> dp(max);<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<ul>
+<li>时间复杂度：由于 <code>digits</code> 最多存在 $9$ 个元素，因此二分的复杂度可以忽略，整体复杂度为 $O(\log{n})$</li>
+<li>空间复杂度：$O(C)$</li>
+</ul>
+<hr>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>数位 DP 的难度取决于「限制条件」的多少，而 LC 上仅有的几道数位 DP 题目限制条件都很少，且不需要引入额外的数据结构来记录状态，因此都属于数位 DP 的入门难度（LC 难度均为 Hard）。</p>
+<p>几乎所有的数位 DP 问题都可以归纳到上述的解法 :「将问题抽象为求解一个 $[0, x]$ / $[1, x]$ 范围方案数的方法」-&gt;「对方案数统计根据 位数 来分情况讨论：数位相等的情况 + 数位不等情况」-&gt;「统计数位相等的方案数时，需要按位处理，并根据限制条件做逻辑；统计数位不等的方案数时，通常要做一些预处理，然后配合乘法原理直接算得」。</p>
+<p>在还没卷到数位 DP 烂大街的现在，掌握此类求解方式单一，普遍定位为「困难」的数位 DP 类型，还是极具性价比的。</p>
+<hr>
+<h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>这是我们「刷穿 LeetCode」系列文章的第 <code>No.902</code> 篇，系列开始于 2021/01/01，截止于起始日 LeetCode 上共有 1916 道题目，部分是有锁题，我们将先把所有不带锁的题目刷完。</p>
+<p>在这个系列文章里面，除了讲解解题思路以外，还会尽可能给出最为简洁的代码。如果涉及通解还会相应的代码模板。</p>
+<p>为了方便各位同学能够电脑上进行调试和提交代码，我建立了相关的仓库：<a target="_blank" rel="noopener" href="https://github.com/SharingSource/LogicStack-LeetCode">https://github.com/SharingSource/LogicStack-LeetCode</a> 。</p>
+<p>在仓库地址里，你可以看到系列文章的题解链接、系列文章的相应代码、LeetCode 原题链接和其他优选题解。</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/">动态规划</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E4%BA%8C%E5%88%86/">二分</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E6%95%B0%E4%BD%8D-DP/">数位 DP</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/04/13/%E9%9D%A2%E8%AF%95%E9%A2%98%2002.05.%20%E9%93%BE%E8%A1%A8%E6%B1%82%E5%92%8C%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">LC 面试题 02.05. 链表求和</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/04/12/380.%20O(1)%20%E6%97%B6%E9%97%B4%E6%8F%92%E5%85%A5%E3%80%81%E5%88%A0%E9%99%A4%E5%92%8C%E8%8E%B7%E5%8F%96%E9%9A%8F%E6%9C%BA%E5%85%83%E7%B4%A0%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/">
+                        <span class="hidden-mobile">LC 380. O(1) 时间插入、删除和获取随机元素</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+  <div class="col-lg-7 mx-auto nopadding-x-md">
+    <div class="container custom post-custom mx-auto">
+      <img src="https://oscimg.oschina.net/oscnet/up-19688dc1af05cf8bdea43b2a863038ab9e5.png" srcset="/img/loading.gif" lazyload class="rounded mx-auto d-block mt-5" style="width:900px; height:500px;">
+    </div>
+  </div>
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.staticfile.org/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.staticfile.org/tocbot/4.18.2/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.staticfile.org/anchor-js/4.3.1/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.11/clipboard.min.js" ></script>
+  
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.bootcdn.net/ajax/libs/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        loader: {
+          
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.staticfile.org/mathjax/3.2.0/es5/tex-svg.js" ></script>
+
+  
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

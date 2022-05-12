@@ -1,0 +1,615 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/oimg/RoundCorner.png">
+  <link rel="icon" href="/oimg/RoundCorner.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="宫水三叶">
+  <meta name="keywords" content="算法, 数据结构, 题解">
+  
+    <meta name="description" content="题目描述这是 LeetCode 上的 218. 天际线问题 ，难度为 困难。 城市的天际线是从远处观看该城市中所有建筑物形成的轮廓的外部轮廓。给你所有建筑物的位置和高度，请返回由这些建筑物形成的 天际线 。 每个建筑物的几何信息由数组 buildings 表示，其中三元组 buildings[i] &#x3D; [lefti, righti, heighti] 表示：  left[i] 是第 i 座建筑物左">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LC 218. 天际线问题">
+<meta property="og:url" content="http://example.com/2021/07/13/218.%20%E5%A4%A9%E9%99%85%E7%BA%BF%E9%97%AE%E9%A2%98%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/index.html">
+<meta property="og:site_name" content="宫水三叶的刷题日记">
+<meta property="og:description" content="题目描述这是 LeetCode 上的 218. 天际线问题 ，难度为 困难。 城市的天际线是从远处观看该城市中所有建筑物形成的轮廓的外部轮廓。给你所有建筑物的位置和高度，请返回由这些建筑物形成的 天际线 。 每个建筑物的几何信息由数组 buildings 表示，其中三元组 buildings[i] &#x3D; [lefti, righti, heighti] 表示：  left[i] 是第 i 座建筑物左">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://assets.leetcode.com/uploads/2020/12/01/merged.jpg">
+<meta property="og:image" content="https://pic.leetcode-cn.com/1626143638-AbMTRj-image.png">
+<meta property="og:image" content="https://pic.leetcode-cn.com/1626177990-hmndOf-image.png">
+<meta property="article:published_time" content="2021-07-12T19:42:08.000Z">
+<meta property="article:modified_time" content="2022-05-12T04:05:32.139Z">
+<meta property="article:author" content="宫水三叶">
+<meta property="article:tag" content="优先队列">
+<meta property="article:tag" content="扫描线问题">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://assets.leetcode.com/uploads/2020/12/01/merged.jpg">
+  
+  
+  <title>LC 218. 天际线问题 - 宫水三叶的刷题日记</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/hint.css/2.7.0/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.7.2/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"|","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.1.0"></head>
+
+
+<body>
+  <header style="height: 50vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>宫水三叶の刷题日记</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/image_181.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="LC 218. 天际线问题">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-author" aria-hidden="true"></i>
+      宫水三叶
+    </span>
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-07-13 03:42" pubdate>
+        2021年7月13日 凌晨
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      6k 字
+    </span>
+  
+
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">LC 218. 天际线问题</h1>
+            
+            <div class="markdown-body">
+              <h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>这是 LeetCode 上的 <strong><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/the-skyline-problem/solution/gong-shui-san-xie-sao-miao-xian-suan-fa-0z6xc/">218. 天际线问题</a></strong> ，难度为 <strong>困难</strong>。</p>
+<p>城市的天际线是从远处观看该城市中所有建筑物形成的轮廓的外部轮廓。给你所有建筑物的位置和高度，请返回由这些建筑物形成的 天际线 。</p>
+<p>每个建筑物的几何信息由数组 <code>buildings</code> 表示，其中三元组 <code>buildings[i] = [lefti, righti, heighti]</code> 表示：</p>
+<ul>
+<li><code>left[i]</code> 是第 i 座建筑物左边缘的 x 坐标。</li>
+<li><code>right[i]</code> 是第 i 座建筑物右边缘的 x 坐标。</li>
+<li><code>height[i]</code> 是第 i 座建筑物的高度。</li>
+</ul>
+<p>天际线 应该表示为由 “关键点” 组成的列表，格式 <code>[[x1,y1],[x2,y2],...]</code>，并按 x 坐标 进行 排序 。关键点是水平线段的左端点。列表中最后一个点是最右侧建筑物的终点，y 坐标始终为 0 ，仅用于标记天际线的终点。此外，任何两个相邻建筑物之间的地面都应被视为天际线轮廓的一部分。</p>
+<p>注意：输出天际线中不得有连续的相同高度的水平线。例如  <code>[...[2 3], [4 5], [7 5], [11 5], [12 7]...]</code> 是不正确的答案；三条高度为 5 的线应该在最终输出中合并为一个：<code>[...[2 3], [4 5], [12 7], ...]</code></p>
+<p>示例 1：<br><img src="https://assets.leetcode.com/uploads/2020/12/01/merged.jpg" srcset="/img/loading.gif" lazyload alt=""><br><figure class="highlight inform7"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs inform7">输入：buildings = <span class="hljs-comment">[<span class="hljs-comment">[2,9,10]</span>,<span class="hljs-comment">[3,7,15]</span>,<span class="hljs-comment">[5,12,12]</span>,<span class="hljs-comment">[15,20,10]</span>,<span class="hljs-comment">[19,24,8]</span>]</span><br><br>输出：<span class="hljs-comment">[<span class="hljs-comment">[2,10]</span>,<span class="hljs-comment">[3,15]</span>,<span class="hljs-comment">[7,12]</span>,<span class="hljs-comment">[12,0]</span>,<span class="hljs-comment">[15,10]</span>,<span class="hljs-comment">[20,8]</span>,<span class="hljs-comment">[24,0]</span>]</span><br><br>解释：<br>图 A 显示输入的所有建筑物的位置和高度，<br>图 B 显示由这些建筑物形成的天际线。图 B 中的红点表示输出列表中的关键点。<br></code></pre></div></td></tr></table></figure><br>示例 2：<br><figure class="highlight lua"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs lua">输入：buildings = <span class="hljs-string">[[0,2,3],[2,5,3]]</span><br><br>输出：<span class="hljs-string">[[0,3],[5,0]]</span><br></code></pre></div></td></tr></table></figure></p>
+<p>提示：</p>
+<ul>
+<li>1 &lt;= buildings.length &lt;= $10^4$</li>
+<li>0 &lt;= lefti &lt; righti &lt;= $2^{31}$ - 1</li>
+<li>1 &lt;= heighti &lt;= $2^{31}$ - 1</li>
+<li>buildings 按 lefti 非递减排序</li>
+</ul>
+<hr>
+<h3 id="基本分析"><a href="#基本分析" class="headerlink" title="基本分析"></a>基本分析</h3><p>这是一题特别的扫描线问题 🤣🤣🤣</p>
+<p>既不是求周长，也不是求面积，是求轮廓中的所有的水平线的左端点 🤣🤣🤣</p>
+<p>所以这不是一道必须用「线段树」来解决的扫描线问题（因为不需要考虑区间查询问题）。</p>
+<p>扫描线的核心在于 <strong>将不规则的形状按照水平或者垂直的方式，划分成若干个规则的矩形。</strong></p>
+<hr>
+<h3 id="扫描线"><a href="#扫描线" class="headerlink" title="扫描线"></a>扫描线</h3><p>对于本题，对应的扫描线分割形状如图：</p>
+<p><img src="https://pic.leetcode-cn.com/1626143638-AbMTRj-image.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<p>不难发现，由相邻两个横坐标以及最大高度，可以确定一个矩形。</p>
+<p>题目要我们 <strong>输出每个矩形的“上边”的左端点，同时跳过可由前一矩形“上边”延展而来的那些边。</strong></p>
+<p>因此我们需要实时维护一个最大高度，可以使用优先队列（堆）。</p>
+<p>实现时，我们可以先记录下 $buildings$ 中所有的左右端点横坐标及高度，并根据端点横坐标进行从小到大排序。</p>
+<p>在从前往后遍历处理时（遍历每个矩形），根据当前遍历到的点进行分情况讨论：</p>
+<ul>
+<li><p>左端点：因为是左端点，必然存在一条从右延展的边，但不一定是需要被记录的边，因为在同一矩形中，我们只需要记录最上边的边。这时候可以将高度进行入队；</p>
+</li>
+<li><p>右端点：此时意味着之前某一条往右延展的线结束了，这时候需要将高度出队（代表这结束的线不被考虑）。</p>
+</li>
+</ul>
+<p>然后从优先队列中取出当前的最大高度，为了防止当前的线与前一矩形“上边”延展而来的线重合，我们需要使用一个变量 <code>prev</code> 记录上一个记录的高度。</p>
+<p>代码：<br><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> List&lt;List&lt;Integer&gt;&gt; <span class="hljs-title function_">getSkyline</span><span class="hljs-params">(<span class="hljs-type">int</span>[][] bs)</span> &#123;<br>        List&lt;List&lt;Integer&gt;&gt; ans = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();<br>        <br>        <span class="hljs-comment">// 预处理所有的点，为了方便排序，对于左端点，令高度为负；对于右端点令高度为正</span><br>        List&lt;<span class="hljs-type">int</span>[]&gt; ps = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span>[] b : bs) &#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">l</span> <span class="hljs-operator">=</span> b[<span class="hljs-number">0</span>], r = b[<span class="hljs-number">1</span>], h = b[<span class="hljs-number">2</span>];<br>            ps.add(<span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[]&#123;l, -h&#125;);<br>            ps.add(<span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[]&#123;r, h&#125;);<br>        &#125;<br><br>        <span class="hljs-comment">// 先按照横坐标进行排序</span><br>        <span class="hljs-comment">// 如果横坐标相同，则按照左端点排序</span><br>        <span class="hljs-comment">// 如果相同的左/右端点，则按照高度进行排序</span><br>        Collections.sort(ps, (a, b)-&gt;&#123;<br>            <span class="hljs-keyword">if</span> (a[<span class="hljs-number">0</span>] != b[<span class="hljs-number">0</span>]) <span class="hljs-keyword">return</span> a[<span class="hljs-number">0</span>] - b[<span class="hljs-number">0</span>];<br>            <span class="hljs-keyword">return</span> a[<span class="hljs-number">1</span>] - b[<span class="hljs-number">1</span>];<br>        &#125;);<br>        <br>        <span class="hljs-comment">// 大根堆</span><br>        PriorityQueue&lt;Integer&gt; q = <span class="hljs-keyword">new</span> <span class="hljs-title class_">PriorityQueue</span>&lt;&gt;((a,b)-&gt;b-a);<br>        <span class="hljs-type">int</span> <span class="hljs-variable">prev</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        q.add(prev);<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span>[] p : ps) &#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">point</span> <span class="hljs-operator">=</span> p[<span class="hljs-number">0</span>], height = p[<span class="hljs-number">1</span>];<br>            <span class="hljs-keyword">if</span> (height &lt; <span class="hljs-number">0</span>) &#123;<br>                <span class="hljs-comment">// 如果是左端点，说明存在一条往右延伸的可记录的边，将高度存入优先队列</span><br>                q.add(-height);<br>            &#125; <span class="hljs-keyword">else</span> &#123;<br>                <span class="hljs-comment">// 如果是右端点，说明这条边结束了，将当前高度从队列中移除</span><br>                q.remove(height);<br>            &#125;<br><br>            <span class="hljs-comment">// 取出最高高度，如果当前不与前一矩形“上边”延展而来的那些边重合，则可以被记录</span><br>            <span class="hljs-type">int</span> <span class="hljs-variable">cur</span> <span class="hljs-operator">=</span> q.peek();<br>            <span class="hljs-keyword">if</span> (cur != prev) &#123;<br>                List&lt;Integer&gt; list = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();<br>                list.add(point);<br>                list.add(cur);<br>                ans.add(list);<br>                prev = cur;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> ans;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure></p>
+<ul>
+<li>时间复杂度：需要处理的矩阵数量与 $n$ 正比，每个矩阵需要使用优先队列维护高度，其中 <code>remove</code> 操作需要先花费 $O(n)$ 复杂度进行查找，然后通过 $O(\log{n})$ 复杂度进行移除，复杂度为 $O(n)$。整体复杂度为 $O(n^2)$</li>
+<li>空间复杂度：$O(n)$</li>
+</ul>
+<hr>
+<h3 id="答疑"><a href="#答疑" class="headerlink" title="答疑"></a>答疑</h3><p><strong>1. 将左端点的高度存成负数再进行排序是什么意思？</strong></p>
+<p>这里只是为了方便，所以采取了这样的做法，当然也能够多使用一位来代指「左右」。</p>
+<p>只要最终可以达到如下的排序规则即可：</p>
+<ol>
+<li>先严格按照横坐标进行「从小到大」排序</li>
+<li>对于某个横坐标而言，可能会同时出现多个点，应当按照如下规则进行处理：<ol>
+<li>优先处理左端点，再处理右端点</li>
+<li>如果同样都是左端点，则按照高度「从大到小」进行处理（将高度增加到优先队列中）</li>
+<li>如果同样都是右端点，则按照高度「从小到大」进行处理（将高度从优先队列中删掉）</li>
+</ol>
+</li>
+</ol>
+<p>代码：<br><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> List&lt;List&lt;Integer&gt;&gt; <span class="hljs-title function_">getSkyline</span><span class="hljs-params">(<span class="hljs-type">int</span>[][] bs)</span> &#123;<br>        List&lt;List&lt;Integer&gt;&gt; ans = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();<br>        List&lt;<span class="hljs-type">int</span>[]&gt; ps = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span>[] b : bs) &#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">l</span> <span class="hljs-operator">=</span> b[<span class="hljs-number">0</span>], r = b[<span class="hljs-number">1</span>], h = b[<span class="hljs-number">2</span>];<br>            ps.add(<span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[]&#123;l, h, -<span class="hljs-number">1</span>&#125;);<br>            ps.add(<span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[]&#123;r, h, <span class="hljs-number">1</span>&#125;);<br>        &#125;<br>        <span class="hljs-comment">/**</span><br><span class="hljs-comment">         * 先严格按照横坐标进行「从小到大」排序</span><br><span class="hljs-comment">         * 对于某个横坐标而言，可能会同时出现多个点，应当按照如下规则进行处理：</span><br><span class="hljs-comment">         * 1. 优先处理左端点，再处理右端点</span><br><span class="hljs-comment">         * 2. 如果同样都是左端点，则按照高度「从大到小」进行处理（将高度增加到优先队列中）</span><br><span class="hljs-comment">         * 3. 如果同样都是右端点，则按照高度「从小到大」进行处理（将高度从优先队列中删掉）</span><br><span class="hljs-comment">         */</span><br>        Collections.sort(ps, (a, b)-&gt;&#123;<br>            <span class="hljs-keyword">if</span> (a[<span class="hljs-number">0</span>] != b[<span class="hljs-number">0</span>]) <span class="hljs-keyword">return</span> a[<span class="hljs-number">0</span>] - b[<span class="hljs-number">0</span>];<br>            <span class="hljs-keyword">if</span> (a[<span class="hljs-number">2</span>] != b[<span class="hljs-number">2</span>]) <span class="hljs-keyword">return</span> a[<span class="hljs-number">2</span>] - b[<span class="hljs-number">2</span>];<br>            <span class="hljs-keyword">if</span> (a[<span class="hljs-number">2</span>] == -<span class="hljs-number">1</span>) &#123;<br>                <span class="hljs-keyword">return</span> b[<span class="hljs-number">1</span>] - a[<span class="hljs-number">1</span>];<br>            &#125; <span class="hljs-keyword">else</span> &#123;<br>                <span class="hljs-keyword">return</span> a[<span class="hljs-number">1</span>] - b[<span class="hljs-number">1</span>];<br>            &#125;<br>        &#125;);<br>        PriorityQueue&lt;Integer&gt; q = <span class="hljs-keyword">new</span> <span class="hljs-title class_">PriorityQueue</span>&lt;&gt;((a,b)-&gt;b-a);<br>        <span class="hljs-type">int</span> <span class="hljs-variable">prev</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        q.add(prev);<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span>[] p : ps) &#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">point</span> <span class="hljs-operator">=</span> p[<span class="hljs-number">0</span>], height = p[<span class="hljs-number">1</span>], flag = p[<span class="hljs-number">2</span>];<br>            <span class="hljs-keyword">if</span> (flag == -<span class="hljs-number">1</span>) &#123;<br>                q.add(height);<br>            &#125; <span class="hljs-keyword">else</span> &#123;<br>                q.remove(height);<br>            &#125;<br><br>            <span class="hljs-type">int</span> <span class="hljs-variable">cur</span> <span class="hljs-operator">=</span> q.peek();<br>            <span class="hljs-keyword">if</span> (cur != prev) &#123;<br>                List&lt;Integer&gt; list = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();<br>                list.add(point);<br>                list.add(cur);<br>                ans.add(list);<br>                prev = cur;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> ans;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure></p>
+<p><strong>2. 为什么在处理前，先往「优先队列」添加一个 $0$ ？</strong></p>
+<p>因为题目本身要求我们把一个完整轮廓的「右下角」那个点也取到，所以需要先添加一个 $0$。</p>
+<p>也就是下图被圈出来的那些点：</p>
+<p><img src="https://pic.leetcode-cn.com/1626177990-hmndOf-image.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<p><strong>3. 优先队列的 <code>remove</code> 操作成为了瓶颈，如何优化？</strong></p>
+<p>由于优先队列的 <code>remove</code> 操作需要先经过 $O(n)$ 的复杂度进行查找，再通过 $O(\log{n})$ 的复杂度进行删除。因此整个 <code>remove</code> 操作的复杂度是 $O(n)$ 的，这导致了我们算法整体复杂度为 $O(n^2)$。</p>
+<p>优化方式包括：使用基于红黑树的 <code>TreeMap</code> 代替优先队列；或是使用「哈希表」记录「执行了删除操作的高度」及「删除次数」，在每次使用前先检查堆顶高度是否已经被标记删除，如果是则进行 <code>poll</code> 操作，并更新删除次数，直到遇到一个没被删除的堆顶高度。</p>
+<p>代码：<br><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> List&lt;List&lt;Integer&gt;&gt; <span class="hljs-title function_">getSkyline</span><span class="hljs-params">(<span class="hljs-type">int</span>[][] bs)</span> &#123;<br>        List&lt;List&lt;Integer&gt;&gt; ans = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();<br>        List&lt;<span class="hljs-type">int</span>[]&gt; ps = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span>[] b : bs) &#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">l</span> <span class="hljs-operator">=</span> b[<span class="hljs-number">0</span>], r = b[<span class="hljs-number">1</span>], h = b[<span class="hljs-number">2</span>];<br>            ps.add(<span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[]&#123;l, h, -<span class="hljs-number">1</span>&#125;);<br>            ps.add(<span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[]&#123;r, h, <span class="hljs-number">1</span>&#125;);<br>        &#125;<br>        <span class="hljs-comment">/**</span><br><span class="hljs-comment">         * 先严格按照横坐标进行「从小到大」排序</span><br><span class="hljs-comment">         * 对于某个横坐标而言，可能会同时出现多个点，应当按照如下规则进行处理：</span><br><span class="hljs-comment">         * 1. 优先处理左端点，再处理右端点</span><br><span class="hljs-comment">         * 2. 如果同样都是左端点，则按照高度「从大到小」进行处理（将高度增加到优先队列中）</span><br><span class="hljs-comment">         * 3. 如果同样都是右端点，则按照高度「从小到大」进行处理（将高度从优先队列中删掉）</span><br><span class="hljs-comment">         */</span><br>        Collections.sort(ps, (a, b)-&gt;&#123;<br>            <span class="hljs-keyword">if</span> (a[<span class="hljs-number">0</span>] != b[<span class="hljs-number">0</span>]) <span class="hljs-keyword">return</span> a[<span class="hljs-number">0</span>] - b[<span class="hljs-number">0</span>];<br>            <span class="hljs-keyword">if</span> (a[<span class="hljs-number">2</span>] != b[<span class="hljs-number">2</span>]) <span class="hljs-keyword">return</span> a[<span class="hljs-number">2</span>] - b[<span class="hljs-number">2</span>];<br>            <span class="hljs-keyword">if</span> (a[<span class="hljs-number">2</span>] == -<span class="hljs-number">1</span>) &#123;<br>                <span class="hljs-keyword">return</span> b[<span class="hljs-number">1</span>] - a[<span class="hljs-number">1</span>];<br>            &#125; <span class="hljs-keyword">else</span> &#123;<br>                <span class="hljs-keyword">return</span> a[<span class="hljs-number">1</span>] - b[<span class="hljs-number">1</span>];<br>            &#125;<br>        &#125;);<br>        <span class="hljs-comment">// 记录进行了删除操作的高度，以及删除次数</span><br>        Map&lt;Integer, Integer&gt; map = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();<br>        PriorityQueue&lt;Integer&gt; q = <span class="hljs-keyword">new</span> <span class="hljs-title class_">PriorityQueue</span>&lt;&gt;((a,b)-&gt;b-a);<br>        <span class="hljs-type">int</span> <span class="hljs-variable">prev</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        q.add(prev);<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span>[] p : ps) &#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">point</span> <span class="hljs-operator">=</span> p[<span class="hljs-number">0</span>], height = p[<span class="hljs-number">1</span>], flag = p[<span class="hljs-number">2</span>];<br>            <span class="hljs-keyword">if</span> (flag == -<span class="hljs-number">1</span>) &#123;<br>                q.add(height);<br>            &#125; <span class="hljs-keyword">else</span> &#123;<br>                map.put(height, map.getOrDefault(height, <span class="hljs-number">0</span>) + <span class="hljs-number">1</span>);<br>            &#125;<br><br>            <span class="hljs-keyword">while</span> (!q.isEmpty()) &#123;<br>                <span class="hljs-type">int</span> <span class="hljs-variable">peek</span> <span class="hljs-operator">=</span> q.peek();<br>                <span class="hljs-keyword">if</span> (map.containsKey(peek)) &#123;<br>                    <span class="hljs-keyword">if</span> (map.get(peek) == <span class="hljs-number">1</span>) map.remove(peek);<br>                    <span class="hljs-keyword">else</span> map.put(peek, map.get(peek) - <span class="hljs-number">1</span>);<br>                    q.poll();<br>                &#125; <span class="hljs-keyword">else</span> &#123;<br>                    <span class="hljs-keyword">break</span>;<br>                &#125;<br>            &#125;<br><br>            <span class="hljs-type">int</span> <span class="hljs-variable">cur</span> <span class="hljs-operator">=</span> q.peek();<br>            <span class="hljs-keyword">if</span> (cur != prev) &#123;<br>                List&lt;Integer&gt; list = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();<br>                list.add(point);<br>                list.add(cur);<br>                ans.add(list);<br>                prev = cur;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> ans;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure></p>
+<ul>
+<li>时间复杂度：$O(n\log{n})$</li>
+<li>空间复杂度：$O(n)$</li>
+</ul>
+<hr>
+<h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>这是我们「刷穿 LeetCode」系列文章的第 <code>No.218</code> 篇，系列开始于 2021/01/01，截止于起始日 LeetCode 上共有 1916 道题目，部分是有锁题，我们将先把所有不带锁的题目刷完。</p>
+<p>在这个系列文章里面，除了讲解解题思路以外，还会尽可能给出最为简洁的代码。如果涉及通解还会相应的代码模板。</p>
+<p>为了方便各位同学能够电脑上进行调试和提交代码，我建立了相关的仓库：<a target="_blank" rel="noopener" href="https://github.com/SharingSource/LogicStack-LeetCode">https://github.com/SharingSource/LogicStack-LeetCode</a> 。</p>
+<p>在仓库地址里，你可以看到系列文章的题解链接、系列文章的相应代码、LeetCode 原题链接和其他优选题解。</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E4%BC%98%E5%85%88%E9%98%9F%E5%88%97/">优先队列</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E6%89%AB%E6%8F%8F%E7%BA%BF%E9%97%AE%E9%A2%98/">扫描线问题</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/07/13/1155.%20%E6%8E%B7%E9%AA%B0%E5%AD%90%E7%9A%84N%E7%A7%8D%E6%96%B9%E6%B3%95%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">LC 1155. 掷骰子的N种方法</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/07/12/275.%20H%20%E6%8C%87%E6%95%B0%20II%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/">
+                        <span class="hidden-mobile">LC 275. H 指数 II</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+  <div class="col-lg-7 mx-auto nopadding-x-md">
+    <div class="container custom post-custom mx-auto">
+      <img src="https://oscimg.oschina.net/oscnet/up-19688dc1af05cf8bdea43b2a863038ab9e5.png" srcset="/img/loading.gif" lazyload class="rounded mx-auto d-block mt-5" style="width:900px; height:500px;">
+    </div>
+  </div>
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.staticfile.org/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.staticfile.org/tocbot/4.18.2/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.staticfile.org/anchor-js/4.3.1/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.11/clipboard.min.js" ></script>
+  
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.bootcdn.net/ajax/libs/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        loader: {
+          
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.staticfile.org/mathjax/3.2.0/es5/tex-svg.js" ></script>
+
+  
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

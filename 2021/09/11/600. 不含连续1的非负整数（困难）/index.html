@@ -1,0 +1,578 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/oimg/RoundCorner.png">
+  <link rel="icon" href="/oimg/RoundCorner.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="宫水三叶">
+  <meta name="keywords" content="算法, 数据结构, 题解">
+  
+    <meta name="description" content="题目描述这是 LeetCode 上的 600. 不含连续1的非负整数 ，难度为 困难。 给定一个正整数 n，找出小于或等于 n 的非负整数中，其二进制表示不包含连续的1的个数。 示例 1:12345678910111213输入: 5输出: 5解释: 下面是带有相应二进制表示的非负整数&lt;&#x3D; 5：0 : 01 : 12 : 103 : 114 : 1005 : 101其中，只有整数3违反规则（有">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LC 600. 不含连续1的非负整数">
+<meta property="og:url" content="http://example.com/2021/09/11/600.%20%E4%B8%8D%E5%90%AB%E8%BF%9E%E7%BB%AD1%E7%9A%84%E9%9D%9E%E8%B4%9F%E6%95%B4%E6%95%B0%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/index.html">
+<meta property="og:site_name" content="宫水三叶的刷题日记">
+<meta property="og:description" content="题目描述这是 LeetCode 上的 600. 不含连续1的非负整数 ，难度为 困难。 给定一个正整数 n，找出小于或等于 n 的非负整数中，其二进制表示不包含连续的1的个数。 示例 1:12345678910111213输入: 5输出: 5解释: 下面是带有相应二进制表示的非负整数&lt;&#x3D; 5：0 : 01 : 12 : 103 : 114 : 1005 : 101其中，只有整数3违反规则（有">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://pic.leetcode-cn.com/1631326412-OuwzCt-image.png">
+<meta property="article:published_time" content="2021-09-10T17:53:42.000Z">
+<meta property="article:modified_time" content="2022-05-12T04:05:32.135Z">
+<meta property="article:author" content="宫水三叶">
+<meta property="article:tag" content="数位 DP">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://pic.leetcode-cn.com/1631326412-OuwzCt-image.png">
+  
+  
+  <title>LC 600. 不含连续1的非负整数 - 宫水三叶的刷题日记</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/hint.css/2.7.0/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.7.2/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"|","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.1.0"></head>
+
+
+<body>
+  <header style="height: 50vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>宫水三叶の刷题日记</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/image_60.jpeg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="LC 600. 不含连续1的非负整数">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-author" aria-hidden="true"></i>
+      宫水三叶
+    </span>
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-09-11 01:53" pubdate>
+        2021年9月11日 凌晨
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2.5k 字
+    </span>
+  
+
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">LC 600. 不含连续1的非负整数</h1>
+            
+            <div class="markdown-body">
+              <h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>这是 LeetCode 上的 <strong><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/non-negative-integers-without-consecutive-ones/solution/gong-shui-san-xie-jing-dian-shu-wei-dp-y-mh92/">600. 不含连续1的非负整数</a></strong> ，难度为 <strong>困难</strong>。</p>
+<p>给定一个正整数 n，找出小于或等于 n 的非负整数中，其二进制表示不包含<strong>连续的1</strong>的个数。</p>
+<p>示例 1:<br><figure class="highlight nestedtext"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs nestedtext"><span class="hljs-attribute">输入</span><span class="hljs-punctuation">:</span> <span class="hljs-string">5</span><br><br><span class="hljs-attribute">输出</span><span class="hljs-punctuation">:</span> <span class="hljs-string">5</span><br><br><span class="hljs-attribute">解释</span><span class="hljs-punctuation">: </span><br><span class="hljs-attribute">下面是带有相应二进制表示的非负整数&lt;= 5：</span><br><span class="hljs-attribute">0</span><span class="hljs-punctuation"> :</span> <span class="hljs-string">0</span><br><span class="hljs-attribute">1</span><span class="hljs-punctuation"> :</span> <span class="hljs-string">1</span><br><span class="hljs-attribute">2</span><span class="hljs-punctuation"> :</span> <span class="hljs-string">10</span><br><span class="hljs-attribute">3</span><span class="hljs-punctuation"> :</span> <span class="hljs-string">11</span><br><span class="hljs-attribute">4</span><span class="hljs-punctuation"> :</span> <span class="hljs-string">100</span><br><span class="hljs-attribute">5</span><span class="hljs-punctuation"> :</span> <span class="hljs-string">101</span><br>其中，只有整数3违反规则（有两个连续的1），其他5个满足规则。<br></code></pre></div></td></tr></table></figure></p>
+<p>说明: 1 &lt;= n &lt;= 109</p>
+<hr>
+<h3 id="数位-DP"><a href="#数位-DP" class="headerlink" title="数位 DP"></a>数位 DP</h3><p>这是一道典型的「数位 DP」题。</p>
+<p><strong>对于「数位 DP」题，都存在「询问 $[a, b]$（$a$ 和 $b$ 均为正整数，且 $a &lt; b$）区间内符合条件的数值个数为多少」的一般形式，通常我们需要实现一个查询 $[0, x]$ 有多少合法数值的函数 <code>int dp(int x)</code>，然后应用「容斥原理」求解出 $[a, b]$ 的个数：$dp(b) - dp(a - 1)$。</strong></p>
+<p>对于本题，虽然只需要求解 $[0, n]$ 范围内数的个数，但其实拓展到求 $[a, b]$ 区间个数的也不会增加难度。</p>
+<p>具体的，对于「数位 DP」问题通常是「从高位到低位」的分情况讨论。</p>
+<p>不失一般性的考虑数值 $n$ 的某一位 $cur$ 是如何被处理的：</p>
+<ol>
+<li>如果当前位 $cur = 1$ 的话，由于我们需要满足「小于等于 $n$」的要求，因此如果该位填 $0$ 的话，后面的低位填什么都是满足要求的，因此我们期望能够查表得出「长度为 $i + 1$，且二进制位置 $i$ 数值为 $0$ 时」有多少合法数值，将其累加到答案中；<br> 与此同时，我们需要确保当前位选 $1$ 是合法的，即我们需要记录上一位 $prev$ 是什么，确保 $cur$ 和 $prev$ 不同时为 $1$。</li>
+<li>如果当前位 $cur = 0$ 的话，我们只能选 $0$，并决策下一位。</li>
+</ol>
+<p>当出现「当前位无法填入 $cur$」或者「决策到最低位」时，则完成了所有合法答案的统计。</p>
+<p>至于流程 $1$ 中的查表操作，我们可以使用 <code>static</code> 预处理出 <code>f</code> 数组，定义 $f[i][j]$ 为考虑二进制长度为 $i$，且最高位为 $j$（$0$ or $1$）时的合法数个数（值不超过）。</p>
+<p>PS. 值不超过的含义代表了不仅仅统计高位为 $j$ 的情况。例如 $f[4][1]$ 代表长度为 $4$，最高为 $1$，其包含了 1xxx 和 0xxx 的合法数的个数。</p>
+<blockquote>
+<p>注意：为了防止重复计数问题，我们在不失一般性的计算 $f[i][0]$ 和 $f[i][1]$ 时，既能采用诸如 $f[i][cur] += f[i - 1][prev]$ 的 “后向查找依赖” 的方式进行转移，也能采用 $f[i + 1][cur] += f[i][prev]$ “前向主动更新” 的方式进行转移。</p>
+</blockquote>
+<p>不失一般性的考虑 $f[i][0]$ 和 $f[i][1]$ 能够更新哪些状态：</p>
+<ul>
+<li><p>如果期望当前位填 $0$ 的话，需要统计所有满足 $(0…)_2$ 形式的合法数值，当前位的低一位只能填 $1$（填 $0$ 会出现重复计数，即需要忽略前导零的数值），此时有：$f[i + 1][0] = f[i][1]$；</p>
+</li>
+<li><p>如果期望当前位填 $1$ 的话，需要统计所有满足 $(1…)_2$ 和 $(0…)_2$ 形式的合法数值：</p>
+<ul>
+<li>$(1…)_2$ 时，当前位的低一位只能填 $0$；此时有：$f[i + 1][1] += f[i][0]$；</li>
+<li>$(0…)_2$ 时，当前位的低一位只能填 $1$；此时有：$f[i + 1][1] += f[i][1]$。</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://pic.leetcode-cn.com/1631326412-OuwzCt-image.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<p>代码：<br><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">static</span> <span class="hljs-type">int</span> <span class="hljs-variable">N</span> <span class="hljs-operator">=</span> <span class="hljs-number">50</span>;<br>    <span class="hljs-comment">// f[i][j] 为考虑二进制长度为 i，而且最高位为 j（0 or 1）时的合法数个数（值不超过）</span><br>    <span class="hljs-comment">// 如 f[2][1] 代表二进制长度为 2，且（值不超过）最高位为 1 的合法数的个数：10、01、00</span><br>    <span class="hljs-keyword">static</span> <span class="hljs-type">int</span>[][] f = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[N][<span class="hljs-number">2</span>];<br>    <span class="hljs-keyword">static</span> &#123;<br>        f[<span class="hljs-number">1</span>][<span class="hljs-number">0</span>] = <span class="hljs-number">1</span>; f[<span class="hljs-number">1</span>][<span class="hljs-number">1</span>] = <span class="hljs-number">2</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>; i &lt; N - <span class="hljs-number">1</span>; i++) &#123;<br>            f[i + <span class="hljs-number">1</span>][<span class="hljs-number">0</span>] = f[i][<span class="hljs-number">1</span>];<br>            f[i + <span class="hljs-number">1</span>][<span class="hljs-number">1</span>] = f[i][<span class="hljs-number">0</span>] + f[i][<span class="hljs-number">1</span>];<br>        &#125;<br>    &#125;<br>    <span class="hljs-type">int</span> <span class="hljs-title function_">getLen</span><span class="hljs-params">(<span class="hljs-type">int</span> n)</span> &#123;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">31</span>; i &gt;= <span class="hljs-number">0</span>; i--) &#123;<br>            <span class="hljs-keyword">if</span> (((n &gt;&gt; i) &amp; <span class="hljs-number">1</span>) == <span class="hljs-number">1</span>) <span class="hljs-keyword">return</span> i;<br>        &#125;<br>        <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>    &#125;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">findIntegers</span><span class="hljs-params">(<span class="hljs-type">int</span> n)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">len</span> <span class="hljs-operator">=</span> getLen(n);<br>        <span class="hljs-type">int</span> <span class="hljs-variable">ans</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>, prev = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> len; i &gt;= <span class="hljs-number">0</span>; i--) &#123;<br>            <span class="hljs-comment">// 当前位是 0 还是 1</span><br>            <span class="hljs-type">int</span> <span class="hljs-variable">cur</span> <span class="hljs-operator">=</span> ((n &gt;&gt; i) &amp; <span class="hljs-number">1</span>); <br>            <span class="hljs-comment">// 如果当前位是 1，那么填 0 的话，后面随便填都符合，将方案数累加</span><br>            <span class="hljs-keyword">if</span> (cur == <span class="hljs-number">1</span>) ans += f[i + <span class="hljs-number">1</span>][<span class="hljs-number">0</span>]; <br>            <span class="hljs-comment">// 出现连续位为 1，分支结束，方案数被计算完</span><br>            <span class="hljs-keyword">if</span> (prev == <span class="hljs-number">1</span> &amp;&amp; cur == <span class="hljs-number">1</span>) <span class="hljs-keyword">break</span>; <br>            prev = cur;<br>            <span class="hljs-keyword">if</span> (i == <span class="hljs-number">0</span>) ans++;<br>        &#125;<br>        <span class="hljs-keyword">return</span> ans;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure></p>
+<ul>
+<li>时间复杂度：由于我们预处理 <code>f</code> 数组的操作使用了 <code>static</code> 修饰（在跑样例数据前已经预处理完，且预处理结果被所有样例数据所共享），因此访问 <code>f</code> 数组是 $O(1)$ 的查表操作；统计答案的复杂度与二进制长度相关，复杂度为 $O(\log{n})$。整体复杂度为 $O(\log{n})$</li>
+<li>空间复杂度：令 $C$ 为预处理数值的大小，固定为 $50 * 2$，复杂度为 $O(C)$</li>
+</ul>
+<hr>
+<h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>这是我们「刷穿 LeetCode」系列文章的第 <code>No.600</code> 篇，系列开始于 2021/01/01，截止于起始日 LeetCode 上共有 1916 道题目，部分是有锁题，我们将先把所有不带锁的题目刷完。</p>
+<p>在这个系列文章里面，除了讲解解题思路以外，还会尽可能给出最为简洁的代码。如果涉及通解还会相应的代码模板。</p>
+<p>为了方便各位同学能够电脑上进行调试和提交代码，我建立了相关的仓库：<a target="_blank" rel="noopener" href="https://github.com/SharingSource/LogicStack-LeetCode">https://github.com/SharingSource/LogicStack-LeetCode</a> 。</p>
+<p>在仓库地址里，你可以看到系列文章的题解链接、系列文章的相应代码、LeetCode 原题链接和其他优选题解。</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E6%95%B0%E4%BD%8D-DP/">数位 DP</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/09/12/678.%20%E6%9C%89%E6%95%88%E7%9A%84%E6%8B%AC%E5%8F%B7%E5%AD%97%E7%AC%A6%E4%B8%B2%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">LC 678. 有效的括号字符串</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/09/10/1894.%20%E6%89%BE%E5%88%B0%E9%9C%80%E8%A6%81%E8%A1%A5%E5%85%85%E7%B2%89%E7%AC%94%E7%9A%84%E5%AD%A6%E7%94%9F%E7%BC%96%E5%8F%B7%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/">
+                        <span class="hidden-mobile">LC 1894. 找到需要补充粉笔的学生编号</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+  <div class="col-lg-7 mx-auto nopadding-x-md">
+    <div class="container custom post-custom mx-auto">
+      <img src="https://oscimg.oschina.net/oscnet/up-19688dc1af05cf8bdea43b2a863038ab9e5.png" srcset="/img/loading.gif" lazyload class="rounded mx-auto d-block mt-5" style="width:900px; height:500px;">
+    </div>
+  </div>
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.staticfile.org/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.staticfile.org/tocbot/4.18.2/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.staticfile.org/anchor-js/4.3.1/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.11/clipboard.min.js" ></script>
+  
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.bootcdn.net/ajax/libs/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        loader: {
+          
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.staticfile.org/mathjax/3.2.0/es5/tex-svg.js" ></script>
+
+  
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

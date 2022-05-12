@@ -1,0 +1,584 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/oimg/RoundCorner.png">
+  <link rel="icon" href="/oimg/RoundCorner.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="宫水三叶">
+  <meta name="keywords" content="算法, 数据结构, 题解">
+  
+    <meta name="description" content="题目描述这是 LeetCode 上的 357. 统计各位数字都不同的数字个数 ，难度为 中等。 给你一个整数 $n$ ，统计并返回各位数字都不同的数字 $x$ 的个数，其中 $0 &lt;&#x3D; x &lt; 10^n$ 。 示例 1：12345输入：n &#x3D; 2输出：91解释：答案应为除去 11、22、33、44、55、66、77、88、99 外，在 0 ≤ x &lt; 100 范围内的所有数字。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LC 357. 统计各位数字都不同的数字个数">
+<meta property="og:url" content="http://example.com/2022/04/10/357.%20%E7%BB%9F%E8%AE%A1%E5%90%84%E4%BD%8D%E6%95%B0%E5%AD%97%E9%83%BD%E4%B8%8D%E5%90%8C%E7%9A%84%E6%95%B0%E5%AD%97%E4%B8%AA%E6%95%B0%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/index.html">
+<meta property="og:site_name" content="宫水三叶的刷题日记">
+<meta property="og:description" content="题目描述这是 LeetCode 上的 357. 统计各位数字都不同的数字个数 ，难度为 中等。 给你一个整数 $n$ ，统计并返回各位数字都不同的数字 $x$ 的个数，其中 $0 &lt;&#x3D; x &lt; 10^n$ 。 示例 1：12345输入：n &#x3D; 2输出：91解释：答案应为除去 11、22、33、44、55、66、77、88、99 外，在 0 ≤ x &lt; 100 范围内的所有数字。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-04-10T14:50:07.000Z">
+<meta property="article:modified_time" content="2022-05-12T04:05:32.362Z">
+<meta property="article:author" content="宫水三叶">
+<meta property="article:tag" content="数学">
+<meta property="article:tag" content="数位 DP">
+<meta property="article:tag" content="容斥原理">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  <title>LC 357. 统计各位数字都不同的数字个数 - 宫水三叶的刷题日记</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/hint.css/2.7.0/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.7.2/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"|","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.1.0"></head>
+
+
+<body>
+  <header style="height: 50vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>宫水三叶の刷题日记</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/image_165.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="LC 357. 统计各位数字都不同的数字个数">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-author" aria-hidden="true"></i>
+      宫水三叶
+    </span>
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2022-04-10 22:50" pubdate>
+        2022年4月10日 晚上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      3.1k 字
+    </span>
+  
+
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">LC 357. 统计各位数字都不同的数字个数</h1>
+            
+            <div class="markdown-body">
+              <h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>这是 LeetCode 上的 <strong><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/count-numbers-with-unique-digits/solution/by-ac_oier-6tfl/">357. 统计各位数字都不同的数字个数</a></strong> ，难度为 <strong>中等</strong>。</p>
+<p>给你一个整数 $n$ ，统计并返回各位数字都不同的数字 $x$ 的个数，其中 $0 &lt;= x &lt; 10^n$ 。</p>
+<p>示例 1：<br><figure class="highlight dns"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs dns">输入：n = <span class="hljs-number">2</span><br><br>输出：<span class="hljs-number">91</span><br><br>解释：答案应为除去 <span class="hljs-number">11、22、33、44</span>、<span class="hljs-number">55、66、77、88</span>、<span class="hljs-number">99</span> 外，在 <span class="hljs-number">0</span> ≤ x &lt; <span class="hljs-number">100</span> 范围内的所有数字。 <br></code></pre></div></td></tr></table></figure><br>示例 2：<br><figure class="highlight abnf"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs abnf">输入：n <span class="hljs-operator">=</span> <span class="hljs-number">0</span><br><br>输出：<span class="hljs-number">1</span><br></code></pre></div></td></tr></table></figure></p>
+<p>提示：</p>
+<ul>
+<li>$0 &lt;= n &lt;= 8$</li>
+</ul>
+<hr>
+<h3 id="乘法原理"><a href="#乘法原理" class="headerlink" title="乘法原理"></a>乘法原理</h3><p>对于 $n = 0$ 的情况较为特殊，特判一下，返回 $1$。</p>
+<p>对于其他情况，由于不能含有前导 $0$，最高位可选择的数值个数为 $9$，而从次高位开始到最低位，可选的个数从 $9$ 开始逐一递减。</p>
+<p>利用乘法原理，每位数可选的数值个数相乘即是长度为 $n$ 的数的可能方案数 $cur$，而所有长度 $[1, n]$ 的方案数累加即是答案。</p>
+<p>代码：<br><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">countNumbersWithUniqueDigits</span><span class="hljs-params">(<span class="hljs-type">int</span> n)</span> &#123;<br>        <span class="hljs-keyword">if</span> (n == <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">ans</span> <span class="hljs-operator">=</span> <span class="hljs-number">10</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">2</span>, last = <span class="hljs-number">9</span>; i &lt;= n; i++) &#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">cur</span> <span class="hljs-operator">=</span> last * (<span class="hljs-number">10</span> - i + <span class="hljs-number">1</span>);<br>            ans += cur; last = cur;<br>        &#125;<br>        <span class="hljs-keyword">return</span> ans;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure></p>
+<ul>
+<li>时间复杂度：$O(n)$</li>
+<li>空间复杂度：$O(1)$</li>
+</ul>
+<hr>
+<h3 id="数位-DP"><a href="#数位-DP" class="headerlink" title="数位 DP"></a>数位 DP</h3><p>一种更为进阶的做法，应当是可以回答任意区间 $[l, r]$ 内合法数的个数。</p>
+<p>这需要运用「数位 DP」进行求解，假定我们存在函数 <code>int dp(int x)</code> 函数，能够返回区间 $[0, x]$ 内合法数的个数，那么配合「容斥原理」我们便能够回答任意区间合法数的查询：</p>
+<script type="math/tex; mode=display">
+ans_{(l, r)} = dp(r) - dp(l - 1)</script><p>然后考虑如何实现 <code>int dp(int x)</code> 函数，我们将组成 $[0, x]$ 的合法数分成三类：</p>
+<ul>
+<li>位数和 $x$ 相同，且最高位比 $x$ 最高位要小的，这部分统计为 <code>res1</code>；</li>
+<li>位数和 $x$ 相同，且最高位与 $x$ 最高位相同的，这部分统计为 <code>res2</code>；</li>
+<li>位数比 $x$ 少，这部分统计为 <code>res3</code>。</li>
+</ul>
+<p>其中 <code>res1</code> 和 <code>res3</code> 求解相对简单，重点落在如何求解 <code>res2</code> 上。</p>
+<p><strong>对 $x$ 进行「从高到低」的处理（假定 $x$ 数位为 $n$），对于第 $k$ 位而言（$k$ 不为最高位），假设在 $x$ 中第 $k$ 位为 $cur$，那么为了满足「大小限制」关系，我们只能在 $[0, cur - 1]$ 范围内取数，同时为了满足「相同数字只能使用一次」的限制，我们需要使用一个 <code>int</code> 变量 $s$ 来记录使用情况（用 $s$ 的低十位来代指数字 $[0, 9]$ 是否被使用），统计 $[0, cur - 1]$ 范围内同时符合两个限制条件的数的个数，记为 $cnt$。</strong></p>
+<p><strong>当第 $k$ 位有 $cnt$ 种合法选择之后，后面的位数可以在满足「相同数字只能使用一次」的限制条件下任意选择（因为大小关系已经由第 $k$ 位保证），为了快速知道剩下的 $n - k$ 位有多少种方案，我们还需要预处理乘积数组，其中 $f[l][r]$ 代表 $l <em> (l + 1) </em> … <em> (j - 1) </em> j$ 的乘积之和。</strong></p>
+<blockquote>
+<p>上述讲解若是觉得抽象，我们可以举个 🌰，假设 $x = 678$，我们该如何求解 <code>res2</code>：由于限定了 <code>res2</code> 为「位数和 $x$ 相同，且最高位与 $x$ 最高位相同的」的合法数个数，因此最高位没有选，只能是 $6$，然后考虑处理次高位，次高位在 $x$ 中为 $7$，为了满足大小关系，我们只能在 $[0, 6]$ 范围内做限制，同时由于 $6$ 已用过，因此次高位实际只有 $[0, 5]$，共 $6$ 种选择，当确定次高位后，后面的位数任意取，由于前面已经填充了 $p = 2$ 位（即消耗了 $p$ 个不同数字），因此从后面的位数开始应该是 $a = 10 - p$ 开始往后自减累乘到 $b = (10 - p) - (n - p) + 1$ 为止，即此时方案数为 $cnt * f[b][a]$（当前位不是最低位）或者 $cnt$（当前位是最低位）。按照此逻辑循环处理所有位数即可，直到遇到重复数值或正常结束。</p>
+</blockquote>
+<p>需要说明的是，上述的举例部分只是为方便大家理解过程，看懂了举例部分不代表理解了数位 DP 做法成立的内在条件，阅读的重点还是要放在前面加粗字体部分，只会使用样例理解算法永远不是科学的做法。</p>
+<p>其他细节：乘积数组的预处理与样例无关，我们可以使用 <code>static</code> 进行打表优化，同时可以将 <code>res1</code> 和 <code>res2</code> 两种情况进行合并。</p>
+<p>代码：<br><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-comment">// f[l][r] 代表 i * (i + 1) * ... * (j - 1) * j</span><br>    <span class="hljs-keyword">static</span> <span class="hljs-type">int</span>[][] f = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[<span class="hljs-number">10</span>][<span class="hljs-number">10</span>];<br>    <span class="hljs-keyword">static</span> &#123;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>; i &lt; <span class="hljs-number">10</span>; i++) &#123;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> i; j &lt; <span class="hljs-number">10</span>; j++) &#123;<br>                <span class="hljs-type">int</span> <span class="hljs-variable">cur</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>;<br>                <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">k</span> <span class="hljs-operator">=</span> i; k &lt;= j; k++) cur *= k;<br>                f[i][j] = cur;<br>            &#125;<br>        &#125;<br>    &#125;<br>    <span class="hljs-type">int</span> <span class="hljs-title function_">dp</span><span class="hljs-params">(<span class="hljs-type">int</span> x)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">t</span> <span class="hljs-operator">=</span> x;<br>        List&lt;Integer&gt; nums = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();<br>        <span class="hljs-keyword">while</span> (t != <span class="hljs-number">0</span>) &#123;<br>            nums.add(t % <span class="hljs-number">10</span>);<br>            t /= <span class="hljs-number">10</span>;<br>        &#125;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> nums.size();<br>        <span class="hljs-keyword">if</span> (n &lt;= <span class="hljs-number">1</span>) <span class="hljs-keyword">return</span> x + <span class="hljs-number">1</span>; <span class="hljs-comment">// [0, 9]</span><br>        <span class="hljs-comment">// 位数和 x 相同（res1 + res2）</span><br>        <span class="hljs-type">int</span> <span class="hljs-variable">ans</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> n - <span class="hljs-number">1</span>, p = <span class="hljs-number">1</span>, s = <span class="hljs-number">0</span>; i &gt;= <span class="hljs-number">0</span>; i--, p++) &#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">cur</span> <span class="hljs-operator">=</span> nums.get(i), cnt = <span class="hljs-number">0</span>;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> cur - <span class="hljs-number">1</span>; j &gt;= <span class="hljs-number">0</span>; j--) &#123;<br>                <span class="hljs-keyword">if</span> (i == n - <span class="hljs-number">1</span> &amp;&amp; j == <span class="hljs-number">0</span>) <span class="hljs-keyword">continue</span>;<br>                <span class="hljs-keyword">if</span> (((s &gt;&gt; j) &amp; <span class="hljs-number">1</span>) == <span class="hljs-number">0</span>) cnt++;<br>            &#125;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">a</span> <span class="hljs-operator">=</span> <span class="hljs-number">10</span> - p, b = a - (n - p) + <span class="hljs-number">1</span>;<br>            ans += b &lt;= a ? cnt * f[b][a] : cnt;<br>            <span class="hljs-keyword">if</span> (((s &gt;&gt; cur) &amp; <span class="hljs-number">1</span>) == <span class="hljs-number">1</span>) <span class="hljs-keyword">break</span>;<br>            s |= (<span class="hljs-number">1</span> &lt;&lt; cur);<br>            <span class="hljs-keyword">if</span> (i == <span class="hljs-number">0</span>) ans++;<br>        &#125;<br>        <span class="hljs-comment">// 位数比 x 少（res3）</span><br>        ans += <span class="hljs-number">10</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">2</span>, last = <span class="hljs-number">9</span>; i &lt; n; i++) &#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">cur</span> <span class="hljs-operator">=</span> last * (<span class="hljs-number">10</span> - i + <span class="hljs-number">1</span>);<br>            ans += cur; last = cur;<br>        &#125;<br>        <span class="hljs-keyword">return</span> ans;<br>    &#125;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">countNumbersWithUniqueDigits</span><span class="hljs-params">(<span class="hljs-type">int</span> n)</span> &#123;<br>        <span class="hljs-keyword">return</span> dp((<span class="hljs-type">int</span>)Math.pow(<span class="hljs-number">10</span>, n) - <span class="hljs-number">1</span>);<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure></p>
+<ul>
+<li>时间复杂度：$O(n)$</li>
+<li>空间复杂度：$O(n)$</li>
+</ul>
+<hr>
+<h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>这是我们「刷穿 LeetCode」系列文章的第 <code>No.357</code> 篇，系列开始于 2021/01/01，截止于起始日 LeetCode 上共有 1916 道题目，部分是有锁题，我们将先把所有不带锁的题目刷完。</p>
+<p>在这个系列文章里面，除了讲解解题思路以外，还会尽可能给出最为简洁的代码。如果涉及通解还会相应的代码模板。</p>
+<p>为了方便各位同学能够电脑上进行调试和提交代码，我建立了相关的仓库：<a target="_blank" rel="noopener" href="https://github.com/SharingSource/LogicStack-LeetCode">https://github.com/SharingSource/LogicStack-LeetCode</a> 。</p>
+<p>在仓库地址里，你可以看到系列文章的题解链接、系列文章的相应代码、LeetCode 原题链接和其他优选题解。</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E6%95%B0%E5%AD%A6/">数学</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E6%95%B0%E4%BD%8D-DP/">数位 DP</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%AE%B9%E6%96%A5%E5%8E%9F%E7%90%86/">容斥原理</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/04/11/806.%20%E5%86%99%E5%AD%97%E7%AC%A6%E4%B8%B2%E9%9C%80%E8%A6%81%E7%9A%84%E8%A1%8C%E6%95%B0%EF%BC%88%E7%AE%80%E5%8D%95%EF%BC%89/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">LC 806. 写字符串需要的行数</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/04/10/2213.%20%E7%94%B1%E5%8D%95%E4%B8%AA%E5%AD%97%E7%AC%A6%E9%87%8D%E5%A4%8D%E7%9A%84%E6%9C%80%E9%95%BF%E5%AD%90%E5%AD%97%E7%AC%A6%E4%B8%B2%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/">
+                        <span class="hidden-mobile">LC 2213. 由单个字符重复的最长子字符串</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+  <div class="col-lg-7 mx-auto nopadding-x-md">
+    <div class="container custom post-custom mx-auto">
+      <img src="https://oscimg.oschina.net/oscnet/up-19688dc1af05cf8bdea43b2a863038ab9e5.png" srcset="/img/loading.gif" lazyload class="rounded mx-auto d-block mt-5" style="width:900px; height:500px;">
+    </div>
+  </div>
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.staticfile.org/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.staticfile.org/tocbot/4.18.2/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.staticfile.org/anchor-js/4.3.1/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.11/clipboard.min.js" ></script>
+  
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.bootcdn.net/ajax/libs/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        loader: {
+          
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.staticfile.org/mathjax/3.2.0/es5/tex-svg.js" ></script>
+
+  
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

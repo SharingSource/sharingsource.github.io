@@ -1,0 +1,1007 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/oimg/RoundCorner.png">
+  <link rel="icon" href="/oimg/RoundCorner.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="宫水三叶">
+  <meta name="keywords" content="算法, 数据结构, 题解">
+  
+    <meta property="og:type" content="website">
+<meta property="og:title" content="宫水三叶的刷题日记">
+<meta property="og:url" content="http://example.com/page/19/index.html">
+<meta property="og:site_name" content="宫水三叶的刷题日记">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:author" content="宫水三叶">
+<meta property="article:tag" content="算法, 数据结构, 题解">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  <title>宫水三叶的刷题日记</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"|","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.1.0"></head>
+
+
+<body>
+  <header style="height: 100vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>宫水三叶の刷题日记</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/image_216.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="宫水三叶の刷题日记">
+              
+            </span>
+
+            
+          </div>
+
+          
+            <div class="scroll-down-bar">
+              <i class="iconfont icon-arrowdown"></i>
+            </div>
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      <div class="container nopadding-x-md">
+        <div class="py-5" id="board"
+          style=margin-top:0>
+          
+          <div class="container">
+            <div class="row">
+              <div class="col-12 col-md-10 m-auto">
+                
+
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/08/20/2031.%201%20%E6%AF%94%200%20%E5%A4%9A%E7%9A%84%E5%AD%90%E6%95%B0%E7%BB%84%E4%B8%AA%E6%95%B0%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/" target="_self">
+          LC 2031. 1 比 0 多的子数组个数
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/08/20/2031.%201%20%E6%AF%94%200%20%E5%A4%9A%E7%9A%84%E5%AD%90%E6%95%B0%E7%BB%84%E4%B8%AA%E6%95%B0%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/" target="_self">
+          
+          题目描述这是 LeetCode 上的 2031. 1 比 0 多的子数组个数 ，难度为 中等。 给你一个只包含 $0$ 和 $1$ 的数组 $nums$，请返回 $1$ 的数量 大于 $04 的数量的子数组的个数。 由于答案可能很大，请返回答案对 $10^9 + 7$ 取余 的结果。 一个 子数组 指的是原数组中连续的一个子序列。 示例 1:12345678910输入: nums &#x3D; [0,1,1
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-08-20 00:00" pubdate>
+              2021-08-20
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E5%89%8D%E7%BC%80%E5%92%8C/">前缀和</a>
+            
+              <a href="/tags/%E6%A0%91%E7%8A%B6%E6%95%B0%E7%BB%84/">树状数组</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/08/20/297.%20%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%BA%8F%E5%88%97%E5%8C%96%E4%B8%8E%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/" target="_self">
+          LC 297. 二叉树的序列化与反序列化
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/08/20/297.%20%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%BA%8F%E5%88%97%E5%8C%96%E4%B8%8E%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/" target="_self">
+          
+          题目描述这是 LeetCode 上的 297. 二叉树的序列化与反序列化 ，难度为 困难。 序列化是将一个数据结构或者对象转换为连续的比特位的操作，进而可以将转换后的数据存储在一个文件或者内存中，同时也可以通过网络传输到另一个计算机环境，采取相反方式重构得到原数据。 请设计一个算法来实现二叉树的序列化与反序列化。这里不限定你的序列 &#x2F; 反序列化算法执行逻辑，你只需要保证一个二叉树可以被序列化为一个
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-08-20 00:00" pubdate>
+              2021-08-20
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/">二叉树</a>
+            
+              <a href="/tags/%E5%B1%82%E5%BA%8F%E9%81%8D%E5%8E%86/">层序遍历</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/08/19/345.%20%E5%8F%8D%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%AD%E7%9A%84%E5%85%83%E9%9F%B3%E5%AD%97%E6%AF%8D%EF%BC%88%E7%AE%80%E5%8D%95%EF%BC%89/" target="_self">
+          LC 345. 反转字符串中的元音字母
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/08/19/345.%20%E5%8F%8D%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%AD%E7%9A%84%E5%85%83%E9%9F%B3%E5%AD%97%E6%AF%8D%EF%BC%88%E7%AE%80%E5%8D%95%EF%BC%89/" target="_self">
+          
+          题目描述这是 LeetCode 上的 345. 反转字符串中的元音字母 ，难度为 简单。 编写一个函数，以字符串作为输入，反转该字符串中的元音字母。 示例 1：123输入：&quot;hello&quot;输出：&quot;holle&quot;示例 2：123输入：&quot;leetcode&quot;输出：&quot;leotcede&quot; 提示：  元音字母不包含字母 “y” 。
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-08-19 01:39" pubdate>
+              2021-08-19
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E6%A8%A1%E6%8B%9F/">模拟</a>
+            
+              <a href="/tags/%E5%8F%8C%E6%8C%87%E9%92%88/">双指针</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/08/18/552.%20%E5%AD%A6%E7%94%9F%E5%87%BA%E5%8B%A4%E8%AE%B0%E5%BD%95%20II%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/" target="_self">
+          LC 552. 学生出勤记录 II
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/08/18/552.%20%E5%AD%A6%E7%94%9F%E5%87%BA%E5%8B%A4%E8%AE%B0%E5%BD%95%20II%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/" target="_self">
+          
+          题目描述这是 LeetCode 上的 552. 学生出勤记录 II ，难度为 困难。 可以用字符串表示一个学生的出勤记录，其中的每个字符用来标记当天的出勤情况（缺勤、迟到、到场）。 记录中只含下面三种字符：  ‘A’：Absent，缺勤 ‘L’：Late，迟到 ‘P’：Present，到场  如果学生能够同时满足下面两个条件，则可以获得出勤奖励：  按总出勤计，学生缺勤（’A’）严格 少于两天。
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-08-18 03:50" pubdate>
+              2021-08-18
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/">动态规划</a>
+            
+              <a href="/tags/%E6%95%B0%E5%AD%A6/">数学</a>
+            
+              <a href="/tags/%E7%9F%A9%E9%98%B5%E5%BF%AB%E9%80%9F%E5%B9%82/">矩阵快速幂</a>
+            
+              <a href="/tags/%E8%AE%B0%E5%BF%86%E5%8C%96%E6%90%9C%E7%B4%A2/">记忆化搜索</a>
+            
+              <a href="/tags/%E7%8A%B6%E6%80%81%E6%9C%BA/">状态机</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/08/17/551.%20%E5%AD%A6%E7%94%9F%E5%87%BA%E5%8B%A4%E8%AE%B0%E5%BD%95%20I%EF%BC%88%E7%AE%80%E5%8D%95%EF%BC%89/" target="_self">
+          LC 551. 学生出勤记录 I
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/08/17/551.%20%E5%AD%A6%E7%94%9F%E5%87%BA%E5%8B%A4%E8%AE%B0%E5%BD%95%20I%EF%BC%88%E7%AE%80%E5%8D%95%EF%BC%89/" target="_self">
+          
+          题目描述这是 LeetCode 上的 551. 学生出勤记录 I ，难度为 简单。 给你一个字符串 s 表示一个学生的出勤记录，其中的每个字符用来标记当天的出勤情况（缺勤、迟到、到场）。记录中只含下面三种字符：  ‘A’：Absent，缺勤 ‘L’：Late，迟到 ‘P’：Present，到场  如果学生能够 同时 满足下面两个条件，则可以获得出勤奖励： 按 总出勤 计，学生缺勤（’A’）严格 少
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-08-17 01:19" pubdate>
+              2021-08-17
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E6%A8%A1%E6%8B%9F/">模拟</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/08/16/526.%20%E4%BC%98%E7%BE%8E%E7%9A%84%E6%8E%92%E5%88%97%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/" target="_self">
+          LC 526. 优美的排列
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/08/16/526.%20%E4%BC%98%E7%BE%8E%E7%9A%84%E6%8E%92%E5%88%97%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/" target="_self">
+          
+          题目描述这是 LeetCode 上的 526. 优美的排列 ，难度为 中等。 假设有从 $1$ 到 $N$ 的 $N$ 个整数，如果从这 $N$ 个数字中成功构造出一个数组，使得数组的第 $i$ 位 ($1 &lt;&#x3D; i &lt;&#x3D; N$) 满足如下两个条件中的一个，我们就称这个数组为一个优美的排列。 条件：  第 $i$ 位的数字能被 $i$ 整除 $i$ 能被第 $i$ 位上的数字整除  现
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-08-16 02:18" pubdate>
+              2021-08-16
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/">动态规划</a>
+            
+              <a href="/tags/%E4%BD%8D%E8%BF%90%E7%AE%97/">位运算</a>
+            
+              <a href="/tags/%E7%8A%B6%E5%8E%8B-DP/">状压 DP</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/08/14/1583.%20%E7%BB%9F%E8%AE%A1%E4%B8%8D%E5%BC%80%E5%BF%83%E7%9A%84%E6%9C%8B%E5%8F%8B%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/" target="_self">
+          LC 1583. 统计不开心的朋友
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/08/14/1583.%20%E7%BB%9F%E8%AE%A1%E4%B8%8D%E5%BC%80%E5%BF%83%E7%9A%84%E6%9C%8B%E5%8F%8B%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/" target="_self">
+          
+          题目描述这是 LeetCode 上的 1583. 统计不开心的朋友 ，难度为 中等。 给你一份 n 位朋友的亲近程度列表，其中 n 总是偶数 。 对每位朋友 i，preferences[i] 包含一份 按亲近程度从高到低排列 的朋友列表。 换句话说，排在列表前面的朋友与 i 的亲近程度比排在列表后面的朋友更高。每个列表中的朋友均以 0 到 n-1 之间的整数表示。 所有的朋友被分成几对，配对情况以
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-08-14 01:24" pubdate>
+              2021-08-14
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E5%93%88%E5%B8%8C%E8%A1%A8/">哈希表</a>
+            
+              <a href="/tags/%E6%A8%A1%E6%8B%9F/">模拟</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/08/13/233.%20%E6%95%B0%E5%AD%97%201%20%E7%9A%84%E4%B8%AA%E6%95%B0%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/" target="_self">
+          LC 233. 数字 1 的个数
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/08/13/233.%20%E6%95%B0%E5%AD%97%201%20%E7%9A%84%E4%B8%AA%E6%95%B0%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/" target="_self">
+          
+          题目描述这是 LeetCode 上的 233. 数字 1 的个数 ，难度为 困难。 给定一个整数 $n$，计算所有小于等于 $n$ 的非负整数中数字 $1$ 出现的个数。 示例 1：123输入：n &#x3D; 13输出：6示例 2：123输入：n &#x3D; 0输出：0 提示：  0 &lt;&#x3D; n &lt;&#x3D; $2 * 10^9$   基本分析这是一道经典的「数位 DP」模板题的简化版，原题在 这里 。 这几天
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-08-13 03:04" pubdate>
+              2021-08-13
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E6%A8%A1%E6%8B%9F/">模拟</a>
+            
+              <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/">动态规划</a>
+            
+              <a href="/tags/%E6%95%B0%E4%BD%8D-DP/">数位 DP</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/08/12/516.%20%E6%9C%80%E9%95%BF%E5%9B%9E%E6%96%87%E5%AD%90%E5%BA%8F%E5%88%97%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/" target="_self">
+          LC 516. 最长回文子序列
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/08/12/516.%20%E6%9C%80%E9%95%BF%E5%9B%9E%E6%96%87%E5%AD%90%E5%BA%8F%E5%88%97%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/" target="_self">
+          
+          题目描述这是 LeetCode 上的 516. 最长回文子序列 ，难度为 中等。 给你一个字符串 s ，找出其中最长的回文子序列，并返回该序列的长度。 子序列定义为：不改变剩余字符顺序的情况下，删除某些字符或者不删除任何字符形成的一个序列。 示例 1：12345输入：s &#x3D; &quot;bbbab&quot;输出：4解释：一个可能的最长回文子序列为 &quot;bbbb&quot; 。示例 2：1
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-08-12 02:02" pubdate>
+              2021-08-12
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/">动态规划</a>
+            
+              <a href="/tags/%E5%8C%BA%E9%97%B4-DP/">区间 DP</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/08/11/446.%20%E7%AD%89%E5%B7%AE%E6%95%B0%E5%88%97%E5%88%92%E5%88%86%20II%20-%20%E5%AD%90%E5%BA%8F%E5%88%97%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/" target="_self">
+          LC 446. 等差数列划分 II - 子序列
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/08/11/446.%20%E7%AD%89%E5%B7%AE%E6%95%B0%E5%88%97%E5%88%92%E5%88%86%20II%20-%20%E5%AD%90%E5%BA%8F%E5%88%97%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/" target="_self">
+          
+          题目描述这是 LeetCode 上的 446. 等差数列划分 II - 子序列 ，难度为 困难。 给你一个整数数组 nums ，返回 nums 中所有 等差子序列 的数目。 如果一个序列中 至少有三个元素 ，并且任意两个相邻元素之差相同，则称该序列为等差序列。  例如，[1, 3, 5, 7, 9]、[7, 7, 7, 7] 和 [3, -1, -5, -9] 都是等差序列。 再例如，[1, 1,
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-08-11 02:49" pubdate>
+              2021-08-11
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/">动态规划</a>
+            
+              <a href="/tags/%E6%95%B0%E5%AD%A6/">数学</a>
+            
+              <a href="/tags/%E5%AE%B9%E6%96%A5%E5%8E%9F%E7%90%86/">容斥原理</a>
+            
+              <a href="/tags/%E5%BA%8F%E5%88%97-DP/">序列 DP</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/08/10/413.%20%E7%AD%89%E5%B7%AE%E6%95%B0%E5%88%97%E5%88%92%E5%88%86%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/" target="_self">
+          LC 413. 等差数列划分
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/08/10/413.%20%E7%AD%89%E5%B7%AE%E6%95%B0%E5%88%97%E5%88%92%E5%88%86%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/" target="_self">
+          
+          题目描述这是 LeetCode 上的 413. 等差数列划分 ，难度为 中等。 如果一个数列 至少有三个元素 ，并且任意两个相邻元素之差相同，则称该数列为等差数列。 例如，[1,3,5,7,9]、[7,7,7,7] 和 [3,-1,-5,-9] 都是等差数列。 给你一个整数数组 nums ，返回数组 nums 中所有为等差数组的 子数组 个数。 子数组 是数组中的一个连续序列。 示例 1：1234
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-08-10 01:34" pubdate>
+              2021-08-10
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E6%A8%A1%E6%8B%9F/">模拟</a>
+            
+              <a href="/tags/%E5%8F%8C%E6%8C%87%E9%92%88/">双指针</a>
+            
+              <a href="/tags/%E6%95%B0%E5%AD%A6/">数学</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/08/09/313.%20%E8%B6%85%E7%BA%A7%E4%B8%91%E6%95%B0%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/" target="_self">
+          LC 313. 超级丑数
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/08/09/313.%20%E8%B6%85%E7%BA%A7%E4%B8%91%E6%95%B0%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/" target="_self">
+          
+          题目描述这是 LeetCode 上的 313. 超级丑数 ，难度为 中等。 超级丑数 是一个正整数，并满足其所有质因数都出现在质数数组 primes 中。 给你一个整数 n 和一个整数数组 primes ，返回第 n 个 超级丑数 。 题目数据保证第 n 个 超级丑数 在 32-bit 带符号整数范围内。 示例 1：12345输入：n &#x3D; 12, primes &#x3D; [2,7,13,19]输出：32
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-08-09 03:03" pubdate>
+              2021-08-09
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E4%BC%98%E5%85%88%E9%98%9F%E5%88%97/">优先队列</a>
+            
+              <a href="/tags/%E5%A4%9A%E8%B7%AF%E5%BD%92%E5%B9%B6/">多路归并</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/08/08/1137.%20%E7%AC%AC%20N%20%E4%B8%AA%E6%B3%B0%E6%B3%A2%E9%82%A3%E5%A5%91%E6%95%B0%EF%BC%88%E7%AE%80%E5%8D%95%EF%BC%89/" target="_self">
+          LC 1137. 第 N 个泰波那契数
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/08/08/1137.%20%E7%AC%AC%20N%20%E4%B8%AA%E6%B3%B0%E6%B3%A2%E9%82%A3%E5%A5%91%E6%95%B0%EF%BC%88%E7%AE%80%E5%8D%95%EF%BC%89/" target="_self">
+          
+          题目描述这是 LeetCode 上的 1137. 第 N 个泰波那契数 ，难度为 简单。 泰波那契序列 Tn 定义如下：  T0 &#x3D; 0, T1 &#x3D; 1, T2 &#x3D; 1, 且在 n &gt;&#x3D; 0 的条件下 Tn+3 &#x3D; Tn + Tn+1 + Tn+2 给你整数 $n$，请返回第 $n$ 个泰波那契数 $T_n$ 的值。 示例 1：1234567输入：n &#x3D; 4输出：4解释：T_3 &#x3D; 0 +
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-08-08 03:39" pubdate>
+              2021-08-08
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/">动态规划</a>
+            
+              <a href="/tags/%E9%80%92%E5%BD%92/">递归</a>
+            
+              <a href="/tags/%E9%80%92%E6%8E%A8/">递推</a>
+            
+              <a href="/tags/%E7%9F%A9%E9%98%B5%E5%BF%AB%E9%80%9F%E5%B9%82/">矩阵快速幂</a>
+            
+              <a href="/tags/%E6%89%93%E8%A1%A8/">打表</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/08/07/457.%20%E7%8E%AF%E5%BD%A2%E6%95%B0%E7%BB%84%E6%98%AF%E5%90%A6%E5%AD%98%E5%9C%A8%E5%BE%AA%E7%8E%AF%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/" target="_self">
+          LC 457. 环形数组是否存在循环
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/08/07/457.%20%E7%8E%AF%E5%BD%A2%E6%95%B0%E7%BB%84%E6%98%AF%E5%90%A6%E5%AD%98%E5%9C%A8%E5%BE%AA%E7%8E%AF%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/" target="_self">
+          
+          题目描述这是 LeetCode 上的 457. 环形数组是否存在循环 ，难度为 中等。 存在一个不含 $0$ 的 环形 数组 $nums$ ，每个 $nums[i]$ 都表示位于下标 $i$ 的角色应该向前或向后移动的下标个数：  如果 $nums[i]$ 是正数，向前 移动 $nums[i]$ 步 如果 $nums[i]$ 是负数，向后 移动 $nums[i]$ 步  因为数组是环形的，所以可以
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-08-07 02:24" pubdate>
+              2021-08-07
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E6%A8%A1%E6%8B%9F/">模拟</a>
+            
+              <a href="/tags/%E5%9B%BE/">图</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/08/06/847.%20%E8%AE%BF%E9%97%AE%E6%89%80%E6%9C%89%E8%8A%82%E7%82%B9%E7%9A%84%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/" target="_self">
+          LC 847. 访问所有节点的最短路径
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/08/06/847.%20%E8%AE%BF%E9%97%AE%E6%89%80%E6%9C%89%E8%8A%82%E7%82%B9%E7%9A%84%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/" target="_self">
+          
+          题目描述这是 LeetCode 上的 847. 访问所有节点的最短路径 ，难度为 困难。 存在一个由 n 个节点组成的无向连通图，图中的节点按从 0 到 n - 1 编号。 给你一个数组 graph 表示这个图。其中，graph[i] 是一个列表，由所有与节点 i 直接相连的节点组成。 返回能够访问所有节点的最短路径的长度。你可以在任一节点开始和停止，也可以多次重访节点，并且可以重用边。 示例 1
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-08-06 03:04" pubdate>
+              2021-08-06
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/">动态规划</a>
+            
+              <a href="/tags/%E5%9B%BE%E8%AE%BA-BFS/">图论 BFS</a>
+            
+              <a href="/tags/%E7%8A%B6%E6%80%81%E5%8E%8B%E7%BC%A9/">状态压缩</a>
+            
+              <a href="/tags/%E5%9B%BE/">图</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+
+
+  <nav aria-label="navigation">
+    <span class="pagination" id="pagination">
+      <a class="extend prev" rel="prev" href="/page/18/#board"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/17/#board">17</a><a class="page-number" href="/page/18/#board">18</a><span class="page-number current">19</span><a class="page-number" href="/page/20/#board">20</a><a class="page-number" href="/page/21/#board">21</a><span class="space">&hellip;</span><a class="page-number" href="/page/36/#board">36</a><a class="extend next" rel="next" href="/page/20/#board"><i class="iconfont icon-arrowright"></i></a>
+    </span>
+  </nav>
+
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.staticfile.org/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.bootcdn.net/ajax/libs/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

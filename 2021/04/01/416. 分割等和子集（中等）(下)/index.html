@@ -1,0 +1,612 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/oimg/RoundCorner.png">
+  <link rel="icon" href="/oimg/RoundCorner.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="宫水三叶">
+  <meta name="keywords" content="算法, 数据结构, 题解">
+  
+    <meta name="description" content="题目描述这是 LeetCode 上的 416. 分割等和子集(下) ，难度为 中等。 给你一个 只包含正整数 的 非空 数组 nums 。 请你判断是否可以将这个数组分割成两个子集，使得两个子集的元素和相等。 示例 1：12345输入：nums &#x3D; [1,5,11,5]输出：true解释：数组可以分割成 [1, 5, 5] 和 [11] 。示例 2：12345输入：nums &#x3D; [1,2,3,5]">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LC 416. 分割等和子集">
+<meta property="og:url" content="http://example.com/2021/04/01/416.%20%E5%88%86%E5%89%B2%E7%AD%89%E5%92%8C%E5%AD%90%E9%9B%86%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89(%E4%B8%8B)/index.html">
+<meta property="og:site_name" content="宫水三叶的刷题日记">
+<meta property="og:description" content="题目描述这是 LeetCode 上的 416. 分割等和子集(下) ，难度为 中等。 给你一个 只包含正整数 的 非空 数组 nums 。 请你判断是否可以将这个数组分割成两个子集，使得两个子集的元素和相等。 示例 1：12345输入：nums &#x3D; [1,5,11,5]输出：true解释：数组可以分割成 [1, 5, 5] 和 [11] 。示例 2：12345输入：nums &#x3D; [1,2,3,5]">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://pic.leetcode-cn.com/1617263310-uqbBif-image.png">
+<meta property="og:image" content="https://pic.leetcode-cn.com/1617263326-TYXkpc-image.png">
+<meta property="article:published_time" content="2021-03-31T23:43:48.000Z">
+<meta property="article:modified_time" content="2022-05-12T04:05:31.933Z">
+<meta property="article:author" content="宫水三叶">
+<meta property="article:tag" content="背包 DP">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://pic.leetcode-cn.com/1617263310-uqbBif-image.png">
+  
+  
+  <title>LC 416. 分割等和子集 - 宫水三叶的刷题日记</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/hint.css/2.7.0/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.7.2/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"|","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.1.0"></head>
+
+
+<body>
+  <header style="height: 50vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>宫水三叶の刷题日记</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/image_171.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="LC 416. 分割等和子集">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-author" aria-hidden="true"></i>
+      宫水三叶
+    </span>
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-04-01 07:43" pubdate>
+        2021年4月1日 早上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      4k 字
+    </span>
+  
+
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">LC 416. 分割等和子集</h1>
+            
+            <div class="markdown-body">
+              <h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>这是 LeetCode 上的 <strong><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/partition-equal-subset-sum/solution/gong-shui-san-xie-bei-bao-wen-ti-xia-con-mr8a/">416. 分割等和子集(下)</a></strong> ，难度为 <strong>中等</strong>。</p>
+<p>给你一个 只包含正整数 的 非空 数组 nums 。</p>
+<p>请你判断是否可以将这个数组分割成两个子集，使得两个子集的元素和相等。</p>
+<p>示例 1：<br><figure class="highlight inform7"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs inform7">输入：nums = <span class="hljs-comment">[1,5,11,5]</span><br><br>输出：true<br><br>解释：数组可以分割成 <span class="hljs-comment">[1, 5, 5]</span> 和 <span class="hljs-comment">[11]</span> 。<br></code></pre></div></td></tr></table></figure><br>示例 2：<br><figure class="highlight nix"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs nix">输入：<span class="hljs-attr">nums</span> = [<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">5</span>]<br><br>输出：<span class="hljs-literal">false</span><br><br>解释：数组不能分割成两个元素和相等的子集。<br></code></pre></div></td></tr></table></figure></p>
+<p>提示：</p>
+<ul>
+<li>1 &lt;= nums.length &lt;= 200</li>
+<li>1 &lt;= nums[i] &lt;= 100</li>
+</ul>
+<hr>
+<h3 id="基本分析"><a href="#基本分析" class="headerlink" title="基本分析"></a>基本分析</h3><p>基本的「将原问题抽象为 01 背包问题」的分析在 <a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/NnVbGs5Chm9BwAQeMOnJfg">上一讲</a> 讲过啦 ~ </p>
+<p>本节要解决的问题是：<strong>如何将「间接求解」的方式转为「直接求解」，并学习为什么能这么做，此类做法是否有共性 …</strong></p>
+<hr>
+<h3 id="直接求解"><a href="#直接求解" class="headerlink" title="直接求解"></a>直接求解</h3><p>我们先来回顾一下 <a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/NnVbGs5Chm9BwAQeMOnJfg">上一节</a> 使用的「状态定义」和「转移方程」。</p>
+<p>状态定义：</p>
+<p>$f[i][j]$ 代表考虑前 $i$ 个数值，其选择数字总和不超过 $j$ 的最大价值。</p>
+<p>转移方程：</p>
+<p><img src="https://pic.leetcode-cn.com/1617263310-uqbBif-image.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<p>但题目并不是问我们「最大价值是多少」，而是问「是否能凑出最大价值」。</p>
+<p>因此我们可以对 01 背包的状态定义进行修改，使其直接与我们答案相关联：</p>
+<p>$f[i][j]$ 代表考虑前 $i$ 个数值，其选择数字总和是否恰好为 $j$。</p>
+<p>此时 $dp$ 数组中存储的是「布尔类型」的动规值。</p>
+<p>相应的状态转移方程调整为：</p>
+<p><img src="https://pic.leetcode-cn.com/1617263326-TYXkpc-image.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<p>$∨$ 代表逻辑「或」的意思。</p>
+<p>新转移方程代表的意思为：<strong>想要 $f[i][j]$ (考虑前 $i$ 个数值，选择的数字总和恰好为 $j$ ) 为真</strong>。需要满足以下两种方案，至少一种为 $true$：</p>
+<p><strong>1. $f[i-1][j]$ (不选第 $i$ 件物品，选择的数字总和恰好为 $j$ ) 为 $true$</strong></p>
+<p><strong>2. $f[i-1][j-nums[i]]$ (选第 $i$ 件物品，选择的数字总和恰好为 $j$ ) 为 $true$</strong></p>
+<p>至此，我们利用 01 背包的基本思想，修改了「状态定义」，使其与答案直接相关联，然后根据新的「状态定义」调整了我们的「转移方程」。</p>
+<p>但还没结束。</p>
+<p><strong>当我们与某个模型的「状态定义」进行了修改之后，除了考虑调整「转移方程」以外，还需要考虑修改「初始化」状态。</strong></p>
+<p>试考虑，我们创建的 $dp$ 数组存储的是布尔类型，初始值都是 $false$，这意味着无论我们怎么转移下去，都不可能产生一个 $true$，最终所有的状态都仍然是 $false$。</p>
+<p>换句话说，我们还需要一个有效值 $true$ 来帮助整个过程能递推下去。</p>
+<p><strong>通常我们使用「首行」来初始化「有效值」。</strong></p>
+<p>对于本题，显然我们可以通过「先处理第一个物品」来得到「有效值」，即令 $f[0][nums[0]] = true$。</p>
+<p>$f[0][nums[0]] = true$ 代表只有容量为 $nums[0]$ 的背包才符合「恰好」的要求。</p>
+<p>但我们无法确保 $nums[0]$ 不会超过我们的「最大背包」容量（也就是第一个物品过大，永远无法装入背包的情况）。</p>
+<p>因此我们要通过处理下一行来得到有效值？或是先给物品排个序？</p>
+<p>事实上，这里有一个技巧，就是我们增加一个「不考虑任何物品」的情况讨论。</p>
+<p>之前我们的状态定义是 $f[i][j]$ 代表考虑下标为 $i$ 之前的所有物品。现在我们可以加入<strong>不考虑任何物品</strong>的情况，也就是<em>将「物品编号」从 0 开始调整为从 1 开始</em>。</p>
+<p>举个🌰，原本我们的 $f[0][x]$ 代表只考虑第一件物品、$f[1][x]$ 代表考虑第一件和第二件物品；调整后我们的 $f[0][x]$ 代表不考虑任何物品、$f[1][x]$ 代表只考虑第一件物品 …</p>
+<p>这种技巧本质上还是利用了「哨兵」的思想。</p>
+<p>有了以上的分析思路，和 <a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzU4NDE3MTEyMA==&amp;mid=2247485658&amp;idx=1&amp;sn=f298abe76d9cc058805b6a18d2523db6&amp;chksm=fd9ca3c5caeb2ad31f6faefd800471b339d21cf54988e123fc507ff07b1447ae31337d826b0e&amp;token=1589043586&amp;lang=zh_CN#rd">上一讲</a> 的代码基础之后，我们可以很容易写出代码。</p>
+<p><strong>虽然更换了状态定义和转移方程，但仍然有「常规解法」、「滚动数组优化」「一维空间优化」几种实现方法。我们快速过一下 ~</strong></p>
+<hr>
+<h3 id="常规解法"><a href="#常规解法" class="headerlink" title="常规解法"></a>常规解法</h3><p>代码：<br><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">canPartition</span><span class="hljs-params">(<span class="hljs-type">int</span>[] nums)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> nums.length;<br><br>        <span class="hljs-comment">//「等和子集」的和必然是总和的一半</span><br>        <span class="hljs-type">int</span> <span class="hljs-variable">sum</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i : nums) sum += i;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">target</span> <span class="hljs-operator">=</span> sum / <span class="hljs-number">2</span>;<br><br>        <span class="hljs-comment">// 对应了总和为奇数的情况，注定不能被分为两个「等和子集」</span><br>        <span class="hljs-keyword">if</span> (target * <span class="hljs-number">2</span> != sum) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br><br>        <span class="hljs-comment">// f[i][j] 代表考虑前 i 件物品，能否凑出价值「恰好」为 j 的方案</span><br>        <span class="hljs-type">boolean</span>[][] f = <span class="hljs-keyword">new</span> <span class="hljs-title class_">boolean</span>[n+<span class="hljs-number">1</span>][target+<span class="hljs-number">1</span>];<br>        f[<span class="hljs-number">0</span>][<span class="hljs-number">0</span>] = <span class="hljs-literal">true</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>; i &lt;= n; i++) &#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">t</span> <span class="hljs-operator">=</span> nums[i-<span class="hljs-number">1</span>];<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; j &lt;= target; j++) &#123;<br>                <span class="hljs-comment">// 不选该物品</span><br>                <span class="hljs-type">boolean</span> <span class="hljs-variable">no</span> <span class="hljs-operator">=</span> f[i-<span class="hljs-number">1</span>][j];<br>                <span class="hljs-comment">// 选该物品</span><br>                <span class="hljs-type">boolean</span> <span class="hljs-variable">yes</span> <span class="hljs-operator">=</span> j &gt;= t ? f[i-<span class="hljs-number">1</span>][j-t] : <span class="hljs-literal">false</span>;<br>                f[i][j] = no | yes;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> f[n][target];<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure></p>
+<ul>
+<li>时间复杂度：$target$ 为数组总和的一半，$n$ 数组元素个数。为共有 $n <em> target$ 个状态需要被转移，复杂度为 $O(n </em> target)$</li>
+<li>空间复杂度：$O(n * target)$</li>
+</ul>
+<hr>
+<h3 id="「滚动数组」解法"><a href="#「滚动数组」解法" class="headerlink" title="「滚动数组」解法"></a>「滚动数组」解法</h3><p>代码：<br><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">canPartition</span><span class="hljs-params">(<span class="hljs-type">int</span>[] nums)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> nums.length;<br><br>        <span class="hljs-comment">//「等和子集」的和必然是总和的一半</span><br>        <span class="hljs-type">int</span> <span class="hljs-variable">sum</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i : nums) sum += i;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">target</span> <span class="hljs-operator">=</span> sum / <span class="hljs-number">2</span>;<br><br>        <span class="hljs-comment">// 对应了总和为奇数的情况，注定不能被分为两个「等和子集」</span><br>        <span class="hljs-keyword">if</span> (target * <span class="hljs-number">2</span> != sum) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br><br>        <span class="hljs-comment">// f[i][j] 代表考虑前 i 件物品，能否凑出价值「恰好」为 j 的方案</span><br>        <span class="hljs-comment">// 修改「物品维度」为 2</span><br>        <span class="hljs-type">boolean</span>[][] f = <span class="hljs-keyword">new</span> <span class="hljs-title class_">boolean</span>[<span class="hljs-number">2</span>][target+<span class="hljs-number">1</span>];<br>        f[<span class="hljs-number">0</span>][<span class="hljs-number">0</span>] = <span class="hljs-literal">true</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>; i &lt;= n; i++) &#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">t</span> <span class="hljs-operator">=</span> nums[i-<span class="hljs-number">1</span>];<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; j &lt;= target; j++) &#123;<br>                <span class="hljs-comment">// 不选该物品</span><br>                <span class="hljs-type">boolean</span> <span class="hljs-variable">no</span> <span class="hljs-operator">=</span> f[(i-<span class="hljs-number">1</span>)&amp;<span class="hljs-number">1</span>][j];<br>                <span class="hljs-comment">// 选该物品</span><br>                <span class="hljs-type">boolean</span> <span class="hljs-variable">yes</span> <span class="hljs-operator">=</span> j &gt;= t ? f[(i-<span class="hljs-number">1</span>)&amp;<span class="hljs-number">1</span>][j-t] : <span class="hljs-literal">false</span>;<br>                f[i&amp;<span class="hljs-number">1</span>][j] = no | yes;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> f[n&amp;<span class="hljs-number">1</span>][target];<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure></p>
+<ul>
+<li>时间复杂度：$target$ 为数组总和的一半，$n$ 数组元素个数。为共有 $n <em> target$ 个状态需要被转移，复杂度为 $O(n </em> target)$</li>
+<li>空间复杂度：$O(target)$</li>
+</ul>
+<hr>
+<h3 id="「一维空间优化」解法"><a href="#「一维空间优化」解法" class="headerlink" title="「一维空间优化」解法"></a>「一维空间优化」解法</h3><p>代码：<br><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">canPartition</span><span class="hljs-params">(<span class="hljs-type">int</span>[] nums)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> nums.length;<br><br>        <span class="hljs-comment">//「等和子集」的和必然是总和的一半</span><br>        <span class="hljs-type">int</span> <span class="hljs-variable">sum</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i : nums) sum += i;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">target</span> <span class="hljs-operator">=</span> sum / <span class="hljs-number">2</span>;<br><br>        <span class="hljs-comment">// 对应了总和为奇数的情况，注定不能被分为两个「等和子集」</span><br>        <span class="hljs-keyword">if</span> (target * <span class="hljs-number">2</span> != sum) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br><br>        <span class="hljs-comment">// 取消「物品维度」</span><br>        <span class="hljs-type">boolean</span>[] f = <span class="hljs-keyword">new</span> <span class="hljs-title class_">boolean</span>[target+<span class="hljs-number">1</span>];<br>        f[<span class="hljs-number">0</span>] = <span class="hljs-literal">true</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>; i &lt;= n; i++) &#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">t</span> <span class="hljs-operator">=</span> nums[i-<span class="hljs-number">1</span>];<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> target; j &gt;= <span class="hljs-number">0</span>; j--) &#123;<br>                <span class="hljs-comment">// 不选该物品</span><br>                <span class="hljs-type">boolean</span> <span class="hljs-variable">no</span> <span class="hljs-operator">=</span> f[j];<br>                <span class="hljs-comment">// 选该物品</span><br>                <span class="hljs-type">boolean</span> <span class="hljs-variable">yes</span> <span class="hljs-operator">=</span> j &gt;= t ? f[j-t] : <span class="hljs-literal">false</span>;<br>                f[j] = no | yes;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> f[target];<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure></p>
+<ul>
+<li>时间复杂度：$target$ 为数组总和的一半，$n$ 数组元素个数。为共有 $n <em> target$ 个状态需要被转移，复杂度为 $O(n </em> target)$</li>
+<li>空间复杂度：$O(target)$</li>
+</ul>
+<hr>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>今天我们又做了一遍「416. 分割等和子集」，但却是以另外一个角度进行求解：</p>
+<p><strong>通过修改 01 背包的「状态定义」和「转移方程」实现「直接求解」。</strong></p>
+<p>但这样的做法属于特题特解吗？</p>
+<p>其实不属于。反而这是「背包问题」中一个可推广的性质：</p>
+<p>我们可以通过将一个背包问题的「状态定义」从<strong>最多不超过 XX 容量</strong>修改为<strong>背包容量恰好为 XX</strong>，同时再把「有效值构造」出来，也即是将<strong>物品下标调整为从 1 开始，设置 $dp[0][0]$ 为初始值</strong>。</p>
+<p>这其实是另外一类「背包问题」，它不对应「价值最大化」，对应的是「能否取得最大/特定价值」。这样的「背包问题」同样具有普遍性。</p>
+<p>需要大家进行掌握 ~ </p>
+<hr>
+<h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>这是我们「刷穿 LeetCode」系列文章的第 <code>No.416</code> 篇，系列开始于 2021/01/01，截止于起始日 LeetCode 上共有 1916 道题目，部分是有锁题，我们将先把所有不带锁的题目刷完。</p>
+<p>在这个系列文章里面，除了讲解解题思路以外，还会尽可能给出最为简洁的代码。如果涉及通解还会相应的代码模板。</p>
+<p>为了方便各位同学能够电脑上进行调试和提交代码，我建立了相关的仓库：<a target="_blank" rel="noopener" href="https://github.com/SharingSource/LogicStack-LeetCode">https://github.com/SharingSource/LogicStack-LeetCode</a> 。</p>
+<p>在仓库地址里，你可以看到系列文章的题解链接、系列文章的相应代码、LeetCode 原题链接和其他优选题解。</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E8%83%8C%E5%8C%85-DP/">背包 DP</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/04/01/416.%20%E5%88%86%E5%89%B2%E7%AD%89%E5%92%8C%E5%AD%90%E9%9B%86%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89(%E4%B8%8A)/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">LC 416. 分割等和子集</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/04/01/1006.%20%E7%AC%A8%E9%98%B6%E4%B9%98%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/">
+                        <span class="hidden-mobile">LC 1006. 笨阶乘</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+  <div class="col-lg-7 mx-auto nopadding-x-md">
+    <div class="container custom post-custom mx-auto">
+      <img src="https://oscimg.oschina.net/oscnet/up-19688dc1af05cf8bdea43b2a863038ab9e5.png" srcset="/img/loading.gif" lazyload class="rounded mx-auto d-block mt-5" style="width:900px; height:500px;">
+    </div>
+  </div>
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.staticfile.org/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.staticfile.org/tocbot/4.18.2/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.staticfile.org/anchor-js/4.3.1/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.11/clipboard.min.js" ></script>
+  
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.bootcdn.net/ajax/libs/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        loader: {
+          
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.staticfile.org/mathjax/3.2.0/es5/tex-svg.js" ></script>
+
+  
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

@@ -1,0 +1,609 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/oimg/RoundCorner.png">
+  <link rel="icon" href="/oimg/RoundCorner.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="宫水三叶">
+  <meta name="keywords" content="算法, 数据结构, 题解">
+  
+    <meta name="description" content="题目描述这是 LeetCode 上的 1713. 得到子序列的最少操作次数 ，难度为 困难。 给你一个数组 target ，包含若干 互不相同 的整数，以及另一个整数数组 arr ，arr 可能 包含重复元素。 每一次操作中，你可以在 arr 的任意位置插入任一整数。比方说，如果 arr &#x3D; [1,4,1,2] ，那么你可以在中间添加 3 得到 [1,4,3,1,2] 。你可以在数组最开始或最后面">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LC 1713. 得到子序列的最少操作次数">
+<meta property="og:url" content="http://example.com/2021/07/26/1713.%20%E5%BE%97%E5%88%B0%E5%AD%90%E5%BA%8F%E5%88%97%E7%9A%84%E6%9C%80%E5%B0%91%E6%93%8D%E4%BD%9C%E6%AC%A1%E6%95%B0%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/index.html">
+<meta property="og:site_name" content="宫水三叶的刷题日记">
+<meta property="og:description" content="题目描述这是 LeetCode 上的 1713. 得到子序列的最少操作次数 ，难度为 困难。 给你一个数组 target ，包含若干 互不相同 的整数，以及另一个整数数组 arr ，arr 可能 包含重复元素。 每一次操作中，你可以在 arr 的任意位置插入任一整数。比方说，如果 arr &#x3D; [1,4,1,2] ，那么你可以在中间添加 3 得到 [1,4,3,1,2] 。你可以在数组最开始或最后面">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://pic.leetcode-cn.com/1627265496-KtDwZl-image.png">
+<meta property="article:published_time" content="2021-07-25T19:01:33.000Z">
+<meta property="article:modified_time" content="2022-05-12T04:05:32.158Z">
+<meta property="article:author" content="宫水三叶">
+<meta property="article:tag" content="二分">
+<meta property="article:tag" content="贪心">
+<meta property="article:tag" content="最长公共子序列">
+<meta property="article:tag" content="最长上升子序列">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://pic.leetcode-cn.com/1627265496-KtDwZl-image.png">
+  
+  
+  <title>LC 1713. 得到子序列的最少操作次数 - 宫水三叶的刷题日记</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/hint.css/2.7.0/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.7.2/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"|","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.1.0"></head>
+
+
+<body>
+  <header style="height: 50vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>宫水三叶の刷题日记</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/image_111.jpeg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="LC 1713. 得到子序列的最少操作次数">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-author" aria-hidden="true"></i>
+      宫水三叶
+    </span>
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-07-26 03:01" pubdate>
+        2021年7月26日 凌晨
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      3.9k 字
+    </span>
+  
+
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">LC 1713. 得到子序列的最少操作次数</h1>
+            
+            <div class="markdown-body">
+              <h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>这是 LeetCode 上的 <strong><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/minimum-operations-to-make-a-subsequence/solution/gong-shui-san-xie-noxiang-xin-ke-xue-xi-oj7yu/">1713. 得到子序列的最少操作次数</a></strong> ，难度为 <strong>困难</strong>。</p>
+<p>给你一个数组 target ，包含若干 互不相同 的整数，以及另一个整数数组 arr ，arr 可能 包含重复元素。</p>
+<p>每一次操作中，你可以在 arr 的任意位置插入任一整数。比方说，如果 arr = [1,4,1,2] ，那么你可以在中间添加 3 得到 [1,4,3,1,2] 。你可以在数组最开始或最后面添加整数。</p>
+<p>请你返回 最少 操作次数，使得 target 成为 arr 的一个子序列。</p>
+<p>一个数组的 子序列 指的是删除原数组的某些元素（可能一个元素都不删除），同时不改变其余元素的相对顺序得到的数组。比方说，[2,7,4] 是 [4,2,3,7,2,1,4] 的子序列（加粗元素），但 [2,4,2] 不是子序列。</p>
+<p>示例 1：<br><figure class="highlight inform7"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs inform7">输入：target = <span class="hljs-comment">[5,1,3]</span>, arr = <span class="hljs-comment">[9,4,2,3,4]</span><br><br>输出：2<br><br>解释：你可以添加 5 和 1 ，使得 arr 变为 <span class="hljs-comment">[5,9,4,1,2,3,4]</span> ，target 为 arr 的子序列。<br></code></pre></div></td></tr></table></figure><br>示例 2：<br><figure class="highlight dns"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs dns">输入：target = [<span class="hljs-number">6,4,8,1</span>,<span class="hljs-number">3</span>,<span class="hljs-number">2</span>], arr = [<span class="hljs-number">4,7,6,2</span>,<span class="hljs-number">3,8,6,1</span>]<br><br>输出：<span class="hljs-number">3</span><br></code></pre></div></td></tr></table></figure></p>
+<p>提示：</p>
+<ul>
+<li>1 &lt;= target.length, arr.length &lt;= $10^5$</li>
+<li>1 &lt;= target[i], arr[i] &lt;= $10^9$</li>
+<li>target 不包含任何重复元素。</li>
+</ul>
+<hr>
+<h3 id="基本分析"><a href="#基本分析" class="headerlink" title="基本分析"></a>基本分析</h3><p>为了方便，我们令 $target$ 长度为 $n$，$arr$ 长度为 $m$，$target$ 和 $arr$ 的最长公共子序列长度为 $max$，不难发现最终答案为 $n - max$。</p>
+<p>因此从题面来说，这是一道最长公共子序列问题（LCS）。</p>
+<p>但朴素求解 LCS 问题复杂度为 $O(n <em> m)$，使用状态定义「<em>*$f[i][j]$ 为考虑 <code>a</code> 数组的前 $i$ 个元素和 <code>b</code> 数组的前 $j$ 个元素的最长公共子序列长度为多少</em></em>」进行求解。</p>
+<p>而本题的数据范围为 $10^5$，使用朴素求解 LCS 的做法必然超时。</p>
+<p>一个很显眼的切入点是 $target$ 数组元素各不相同，当 LCS 问题增加某些条件限制之后，会存在一些很有趣的性质。</p>
+<p>其中一个经典的性质就是：<strong>当其中一个数组元素各不相同时，最长公共子序列问题（LCS）可以转换为最长上升子序列问题（LIS）进行求解。同时最长上升子序列问题（LIS）存在使用「维护单调序列 + 二分」的贪心解法，复杂度为 $O(n\log{n})$。</strong></p>
+<p><strong>因此本题可以通过「抽象成 LCS 问题」-&gt;「利用 $target$ 数组元素各不相同，转换为 LIS 问题」-&gt;「使用 LIS 的贪心解法」，做到 $O(n\log{n})$ 的复杂度。</strong></p>
+<p>基本方向确定后，我们证明一下第 $2$ 步和第 $3$ 步的合理性与正确性。</p>
+<hr>
+<h3 id="证明"><a href="#证明" class="headerlink" title="证明"></a>证明</h3><h4 id="1-为何其中一个数组元素各不相同，LCS-问题可以转换为-LIS-问题？"><a href="#1-为何其中一个数组元素各不相同，LCS-问题可以转换为-LIS-问题？" class="headerlink" title="1. 为何其中一个数组元素各不相同，LCS 问题可以转换为 LIS 问题？"></a>1. 为何其中一个数组元素各不相同，LCS 问题可以转换为 LIS 问题？</h4><p><strong>本质是利用「当其中一个数组元素各不相同时，这时候每一个“公共子序列”都对应一个不重复元素数组的下标数组“上升子序列”，反之亦然」。</strong></p>
+<p>我们可以使用题目给定的两个数组（$target$ 和 $arr$）理解上面的话。</p>
+<p>由于 $target$ 元素各不相同，那么首先 $target$ 元素和其对应下标，具有唯一的映射关系。</p>
+<p>然后我们可以<strong>将重点放在两者的公共元素上（忽略非公共元素），每一个“公共子序列”自然对应了一个下标数组“上升子序列”，反之亦然</strong>。</p>
+<p>注意：下图只画出了两个数组的某个片段，不要错误理解为两数组等长。</p>
+<p><img src="https://pic.leetcode-cn.com/1627265496-KtDwZl-image.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<p>如果存在某个“公共子序列”，根据“子序列”的定义，那么对应下标序列必然递增，也就是对应了一个“上升子序列”。</p>
+<p>反过来，对于下标数组的某个“上升子序列”，首先意味着元素在 $target$ 出现过，并且出现顺序递增，符合“公共子序列”定义，即对应了一个“公共子序列”。</p>
+<p>至此，我们将原问题 LCS 转换为了 LIS 问题。</p>
+<h4 id="2-贪心求解-LIS-问题的正确性证明？"><a href="#2-贪心求解-LIS-问题的正确性证明？" class="headerlink" title="2. 贪心求解 LIS 问题的正确性证明？"></a>2. 贪心求解 LIS 问题的正确性证明？</h4><p>朴素的 LIS 问题求解，我们需要定义一个 $f[i]$ 数组代表以 $nums[i]$ 为结尾的最长上升子序列的长度为多少。</p>
+<p>对于某个 $f[i]$ 而言，我们需要往回检查 $[0, i - 1]$ 区间内，所有可以将 $nums[i]$ 接到后面的位置 $j$，在所有的 $f[j] + 1$ 中取最大值更新 $f[i]$。因此朴素的 LIS 问题复杂度是 $O(n^2)$ 的。</p>
+<p><strong>LIS 的贪心解法则是维护一个额外 $g$ 数组，$g[len] = x$ 代表上升子序列长度为 $len$ 的上升子序列的「最小结尾元素」为 $x$。</strong></p>
+<p>整理一下，我们总共有两个数组：</p>
+<ul>
+<li>$f$ 动规数组：与朴素 LIS 解法的动规数组含义一致。$f[i]$ 代表以 $nums[i]$ 为结尾的上升子序列的最大长度；</li>
+<li>$g$ 贪心数组：$g[len] = x$ 代表上升子序列长度为 $len$ 的上升子序列的「最小结尾元素」为 $x$。</li>
+</ul>
+<p>由于我们计算 $f[i]$ 时，需要找到满足 $nums[j] &lt; nums[i]$，同时取得最大 $f[j]$ 的位置 $j$。</p>
+<p>我们期望通过 $g$ 数组代替线性遍历。</p>
+<p>显然，如果 $g$ 数组具有「单调递增」特性的话，我们可以通过「二分」找到符合 $g[idx] &lt; nums[i]$ 分割点 $idx$（下标最大），即利用 $O(\log{n})$ 复杂度找到最佳转移位置。</p>
+<p>我们可以很容易 <strong>通过反证法结合 $g$ 数组的定义来证明 $g$ 数组具有「单调递增」特性。</strong></p>
+<p>假设存在某个位置 $i$ 和 $j$，且 $i &lt; j$，不满足「单调递增」，即如下两种可能：</p>
+<ul>
+<li><p>$g[i] = g[j] = x$：这意味着某个值 $x$ 既能作为长度 $i$ 的上升子序列的最后一位，也能作为长度为 $j$ 的上升子序列的最后一位。<br>  根据我们对 $g$ 数组的定义，$g[i] = x$ 意味在所有长度为 $i$ 上升子序列中「最小结尾元素」为 $x$，但同时由于 $g[j] = x$，而且「上升子序列」必然是「严格单调」，因此我们可以通过删除长度为 $j$ 的子序列后面的元素（调整出一个长度为 $i$ 的子序列）来找到一个比 $g[i]$ 小的合法值。<br>  也就是我们找到了一个长度为 $i$ 的上升子序列，且最后一位元素必然严格小于 $x$。因此 $g[i] = g[j] = x$ 恒不成立；</p>
+</li>
+<li><p>$g[i] &gt; g[j] = x$：同理，如果存在一个长度为 $j$ 的合法上升子序列的「最小结尾元素」为 $x$ 的话，那么必然能够找到一个比 $x$ 小的值来更新 $g[i]$。即 $g[i] &gt; g[j]$ 恒不成立。</p>
+</li>
+</ul>
+<p>根据全序关系，在证明 $g[i] = g[j]$ 和 $g[i] &gt; g[j]$ 恒不成立后，可得 $g[i] &lt; g[j]$ 恒成立。</p>
+<p>至此，我们证明了 $g$ 数组具有单调性，从而证明了每一个 $f[i]$ 均与朴素 LIS 解法得到的值相同，即贪心解是正确的。</p>
+<hr>
+<h3 id="动态规划-贪心-二分"><a href="#动态规划-贪心-二分" class="headerlink" title="动态规划 + 贪心 + 二分"></a>动态规划 + 贪心 + 二分</h3><p>根据「基本分析 &amp; 证明」，通过维护一个贪心数组 $g$，来更新动规数组 $f$，在求得「最长上升子序列」长度之后，利用「“公共子序列”和“上升子序列”」的一一对应关系，可以得出“最长公共子序列”长度，从而求解出答案。</p>
+<p>代码：<br><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">minOperations</span><span class="hljs-params">(<span class="hljs-type">int</span>[] t, <span class="hljs-type">int</span>[] arr)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> t.length, m = arr.length;<br>        Map&lt;Integer, Integer&gt; map = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; n; i++) &#123;<br>            map.put(t[i], i);<br>        &#125;<br>        List&lt;Integer&gt; list = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; m; i++) &#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">x</span> <span class="hljs-operator">=</span> arr[i];<br>            <span class="hljs-keyword">if</span> (map.containsKey(x)) list.add(map.get(x));<br>        &#125;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">len</span> <span class="hljs-operator">=</span> list.size();<br>        <span class="hljs-type">int</span>[] f = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[len], g = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[len + <span class="hljs-number">1</span>];<br>        Arrays.fill(g, Integer.MAX_VALUE);<br>        <span class="hljs-type">int</span> <span class="hljs-variable">max</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; len; i++) &#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">l</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>, r = len;<br>            <span class="hljs-keyword">while</span> (l &lt; r) &#123;<br>                <span class="hljs-type">int</span> <span class="hljs-variable">mid</span> <span class="hljs-operator">=</span> l + r + <span class="hljs-number">1</span> &gt;&gt; <span class="hljs-number">1</span>;<br>                <span class="hljs-keyword">if</span> (g[mid] &lt; list.get(i)) l = mid;<br>                <span class="hljs-keyword">else</span> r = mid - <span class="hljs-number">1</span>;<br>            &#125;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">clen</span> <span class="hljs-operator">=</span> r + <span class="hljs-number">1</span>;<br>            f[i] = clen;<br>            g[clen] = Math.min(g[clen], list.get(i));<br>            max = Math.max(max, clen);<br>        &#125;<br>        <span class="hljs-keyword">return</span> n - max;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure></p>
+<ul>
+<li>时间复杂度：通过 $O(n)$ 复杂度得到 $target$ 的下标映射关系；通过 $O(m)$ 复杂度得到映射数组 $list$；贪心求解 LIS 的复杂度为 $O(m\log{m})$。整体复杂度为 $O(n + m\log{m})$</li>
+<li>空间复杂度：$O(n + m)$</li>
+</ul>
+<hr>
+<h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>这是我们「刷穿 LeetCode」系列文章的第 <code>No.1713</code> 篇，系列开始于 2021/01/01，截止于起始日 LeetCode 上共有 1916 道题目，部分是有锁题，我们将先把所有不带锁的题目刷完。</p>
+<p>在这个系列文章里面，除了讲解解题思路以外，还会尽可能给出最为简洁的代码。如果涉及通解还会相应的代码模板。</p>
+<p>为了方便各位同学能够电脑上进行调试和提交代码，我建立了相关的仓库：<a target="_blank" rel="noopener" href="https://github.com/SharingSource/LogicStack-LeetCode">https://github.com/SharingSource/LogicStack-LeetCode</a> 。</p>
+<p>在仓库地址里，你可以看到系列文章的题解链接、系列文章的相应代码、LeetCode 原题链接和其他优选题解。</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E4%BA%8C%E5%88%86/">二分</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E8%B4%AA%E5%BF%83/">贪心</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E6%9C%80%E9%95%BF%E5%85%AC%E5%85%B1%E5%AD%90%E5%BA%8F%E5%88%97/">最长公共子序列</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E6%9C%80%E9%95%BF%E4%B8%8A%E5%8D%87%E5%AD%90%E5%BA%8F%E5%88%97/">最长上升子序列</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/07/27/671.%20%E4%BA%8C%E5%8F%89%E6%A0%91%E4%B8%AD%E7%AC%AC%E4%BA%8C%E5%B0%8F%E7%9A%84%E8%8A%82%E7%82%B9%EF%BC%88%E7%AE%80%E5%8D%95%EF%BC%89/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">LC 671. 二叉树中第二小的节点</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/07/25/1743.%20%E4%BB%8E%E7%9B%B8%E9%82%BB%E5%85%83%E7%B4%A0%E5%AF%B9%E8%BF%98%E5%8E%9F%E6%95%B0%E7%BB%84%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/">
+                        <span class="hidden-mobile">LC 1743. 从相邻元素对还原数组</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+  <div class="col-lg-7 mx-auto nopadding-x-md">
+    <div class="container custom post-custom mx-auto">
+      <img src="https://oscimg.oschina.net/oscnet/up-19688dc1af05cf8bdea43b2a863038ab9e5.png" srcset="/img/loading.gif" lazyload class="rounded mx-auto d-block mt-5" style="width:900px; height:500px;">
+    </div>
+  </div>
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.staticfile.org/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.staticfile.org/tocbot/4.18.2/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.staticfile.org/anchor-js/4.3.1/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.11/clipboard.min.js" ></script>
+  
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.bootcdn.net/ajax/libs/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        loader: {
+          
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.staticfile.org/mathjax/3.2.0/es5/tex-svg.js" ></script>
+
+  
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

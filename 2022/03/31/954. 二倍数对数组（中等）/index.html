@@ -1,0 +1,605 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/oimg/RoundCorner.png">
+  <link rel="icon" href="/oimg/RoundCorner.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="宫水三叶">
+  <meta name="keywords" content="算法, 数据结构, 题解">
+  
+    <meta name="description" content="题目描述这是 LeetCode 上的 954. 二倍数对数组 ，难度为 中等。 给定一个长度为偶数的整数数组 arr，只有对 arr 进行重组后可以满足 “对于每个$ 0 &lt;&#x3D; i &lt; len(arr) &#x2F; 2$，都有 $arr[2  i + 1] &#x3D; 2  arr[2 * i]$” 时，返回 true；否则，返回 false。 示例 1：123输入：arr &#x3D; [3,1,3,6]输出">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LC 954. 二倍数对数组">
+<meta property="og:url" content="http://example.com/2022/03/31/954.%20%E4%BA%8C%E5%80%8D%E6%95%B0%E5%AF%B9%E6%95%B0%E7%BB%84%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/index.html">
+<meta property="og:site_name" content="宫水三叶的刷题日记">
+<meta property="og:description" content="题目描述这是 LeetCode 上的 954. 二倍数对数组 ，难度为 中等。 给定一个长度为偶数的整数数组 arr，只有对 arr 进行重组后可以满足 “对于每个$ 0 &lt;&#x3D; i &lt; len(arr) &#x2F; 2$，都有 $arr[2  i + 1] &#x3D; 2  arr[2 * i]$” 时，返回 true；否则，返回 false。 示例 1：123输入：arr &#x3D; [3,1,3,6]输出">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-03-31T15:33:23.000Z">
+<meta property="article:modified_time" content="2022-05-12T04:05:31.882Z">
+<meta property="article:author" content="宫水三叶">
+<meta property="article:tag" content="哈希表">
+<meta property="article:tag" content="优先队列">
+<meta property="article:tag" content="堆">
+<meta property="article:tag" content="构造">
+<meta property="article:tag" content="拓扑排序">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  <title>LC 954. 二倍数对数组 - 宫水三叶的刷题日记</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/hint.css/2.7.0/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.7.2/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"|","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.1.0"></head>
+
+
+<body>
+  <header style="height: 50vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>宫水三叶の刷题日记</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/image_28.jpeg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="LC 954. 二倍数对数组">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-author" aria-hidden="true"></i>
+      宫水三叶
+    </span>
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2022-03-31 23:33" pubdate>
+        2022年3月31日 晚上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      4.4k 字
+    </span>
+  
+
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">LC 954. 二倍数对数组</h1>
+            
+            <div class="markdown-body">
+              <h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>这是 LeetCode 上的 <strong><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/array-of-doubled-pairs/solution/by-ac_oier-d1z7/">954. 二倍数对数组</a></strong> ，难度为 <strong>中等</strong>。</p>
+<p>给定一个长度为偶数的整数数组 <code>arr</code>，只有对 <code>arr</code> 进行重组后可以满足 “对于每个$ 0 &lt;= i &lt; len(arr) / 2$，都有 $arr[2 <em> i + 1] = 2 </em> arr[2 * i]$” 时，返回 <code>true</code>；否则，返回 <code>false</code>。</p>
+<p>示例 1：<br><figure class="highlight nix"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs nix">输入：<span class="hljs-attr">arr</span> = [<span class="hljs-number">3</span>,<span class="hljs-number">1</span>,<span class="hljs-number">3</span>,<span class="hljs-number">6</span>]<br><br>输出：<span class="hljs-literal">false</span><br></code></pre></div></td></tr></table></figure><br>示例 2：<br><figure class="highlight nix"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs nix">输入：<span class="hljs-attr">arr</span> = [<span class="hljs-number">2</span>,<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">6</span>]<br><br>输出：<span class="hljs-literal">false</span><br></code></pre></div></td></tr></table></figure><br>示例 3：<br><figure class="highlight subunit"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs subunit">输入：arr = [4,<span class="hljs-string">-2</span>,2,<span class="hljs-string">-4</span>]<br><br>输出：true<br><br>解释：可以用 [<span class="hljs-string">-2</span>,<span class="hljs-string">-4</span>] 和 [2,4] 这两组组成 [<span class="hljs-string">-2</span>,<span class="hljs-string">-4</span>,2,4] 或是 [2,4,<span class="hljs-string">-2</span>,<span class="hljs-string">-4</span>]<br></code></pre></div></td></tr></table></figure></p>
+<p>提示：</p>
+<ul>
+<li>$0 &lt;= arr.length &lt;= 3 * 10^4$</li>
+<li>arr.length 是偶数</li>
+<li>$-10^5 &lt;= arr[i] &lt;= 10^5$</li>
+</ul>
+<hr>
+<h3 id="逐个构造-优先队列"><a href="#逐个构造-优先队列" class="headerlink" title="逐个构造 + 优先队列"></a>逐个构造 + 优先队列</h3><p>整理一下题意：是否能对 <code>arr</code> 进行重组，使得每一个奇数位置的值均是前一个位置的值的两倍，即凑成 $\frac{n}{2}$ 组形如 $(x, 2 * x)$ 的数对。</p>
+<p>对于一个任意的有理数而言，对其乘 $2$ 仅会改变数值的大小，而不会改变其方向（正负性质）。</p>
+<p>因此如果我们每次都拿最接近 $0$ 的值作为起点，整个构造过程就是唯一确定的。</p>
+<p>具体的，我们可以借助优先队列（堆）来实现，构造一个以与 $0$ 值距离作为基准的小根堆。每次从堆中取出元素 $x$，根据当前元素 $x$ 是否被「预定」过进行分情况讨论：</p>
+<ul>
+<li>当前值 $x$ 没有被预定过，说明 $x$ 必然是数对中的「绝对值」的较小值，此时给 $x$ 并预定一个 $x <em> 2$，即对 $x </em> 2$ 的预定次数加一；</li>
+<li>当前值 $x$ 已经被预定过，说明 $x$ 和此前的某个数 $\frac{x}{2}$ 组成过数对，对 $x$ 的预定次数减一。</li>
+</ul>
+<p>当且仅当构成过程结束后，所有数的「预定」次数为 $0$ 时，<code>arr</code> 可以凑成 $\frac{n}{2}$ 组形如 $(x, 2 * x)$ 的数对。</p>
+<blockquote>
+<p>一些细节：由于 $arr[i]$ 的数值范围为 $[-10^5, 10^5]$，同时存在乘 $2$ 操作，因此我们需要对计算结果进行 $2 * 10^5$ 的偏移操作，确保其为正数。</p>
+</blockquote>
+<p>代码：<br><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">static</span> <span class="hljs-type">int</span> <span class="hljs-variable">N</span> <span class="hljs-operator">=</span> <span class="hljs-number">100010</span>, M = N * <span class="hljs-number">2</span>;<br>    <span class="hljs-keyword">static</span> <span class="hljs-type">int</span>[] cnts = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[M * <span class="hljs-number">2</span>];<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">canReorderDoubled</span><span class="hljs-params">(<span class="hljs-type">int</span>[] arr)</span> &#123;<br>        Arrays.fill(cnts, <span class="hljs-number">0</span>);<br>        PriorityQueue&lt;Integer&gt; q = <span class="hljs-keyword">new</span> <span class="hljs-title class_">PriorityQueue</span>&lt;&gt;((a,b)-&gt;Math.abs(a)-Math.abs(b));<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i : arr) q.add(i);<br>        <span class="hljs-keyword">while</span> (!q.isEmpty()) &#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">x</span> <span class="hljs-operator">=</span> q.poll(), t = x * <span class="hljs-number">2</span>;<br>            <span class="hljs-keyword">if</span> (cnts[x + M] != <span class="hljs-number">0</span> &amp;&amp; --cnts[x + M] &gt;= <span class="hljs-number">0</span>) <span class="hljs-keyword">continue</span>;<br>            cnts[t + M]++;<br>        &#125;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; M * <span class="hljs-number">2</span>; i++) &#123;<br>            <span class="hljs-keyword">if</span> (cnts[i] != <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>        &#125;<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure></p>
+<ul>
+<li>时间复杂度：令 $n$ 为 <code>arr</code> 长度，$m$ 为 $arr[i]$ 的值域范围，起始将所有数值放入优先队列（堆）的复杂度为 $O(n\log{n})$，从优先队列（堆）中取出并构造复杂度为 $O(n\log{n})$，检查构造是否成功复杂度为 $O(m)$，整体复杂度为 $O(n\log{n} + m)$</li>
+<li>空间复杂度：$O(n + m)$</li>
+</ul>
+<hr>
+<h3 id="成组构造-排序-预处理剪枝"><a href="#成组构造-排序-预处理剪枝" class="headerlink" title="成组构造 + 排序 + 预处理剪枝"></a>成组构造 + 排序 + 预处理剪枝</h3><p>上述解法中，我们不可避免的对 <code>arr</code> 进行一遍完成的尝试构造，并且在尝试构造结束后再进行一次性的合法性检查。</p>
+<p>事实上，如果 <code>arr</code> 能够凑成 $\frac{n}{2}$ 组形如 $(x, 2 <em> x)$ 的数对，并且对于某个 $x$ 可能会出现多次，我们可以统计 $arr[i]$ 的数量，并根据绝对值大小进行排序，进行成组构造：$cnts[x]$ 个 $x$ 消耗 $cnts[x]$ 个 $2 </em> x$。</p>
+<p>同时由于我们提前预处理了每个 $arr[i]$ 的出现次数，我们可以提前知道是否有 $cnts[x]$ 个 $2 * x$ 和 $x$ 成组，从而可以边构造边检查合法性。</p>
+<p> 代码：<br><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">static</span> <span class="hljs-type">int</span> <span class="hljs-variable">N</span> <span class="hljs-operator">=</span> <span class="hljs-number">100010</span>, M = N * <span class="hljs-number">2</span>;<br>    <span class="hljs-keyword">static</span> <span class="hljs-type">int</span>[] cnts = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[M * <span class="hljs-number">2</span>];<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">canReorderDoubled</span><span class="hljs-params">(<span class="hljs-type">int</span>[] arr)</span> &#123;<br>        Arrays.fill(cnts, <span class="hljs-number">0</span>);<br>        List&lt;Integer&gt; list = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i : arr) &#123;<br>            <span class="hljs-keyword">if</span> (++cnts[i + M] == <span class="hljs-number">1</span>) list.add(i);<br>        &#125;<br>        Collections.sort(list, (a,b)-&gt;Math.abs(a)-Math.abs(b));<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i : list) &#123;<br>            <span class="hljs-keyword">if</span> (cnts[i * <span class="hljs-number">2</span> + M] &lt; cnts[i + M]) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>            cnts[i * <span class="hljs-number">2</span> + M] -= cnts[i + M];<br>        &#125;<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure></p>
+<ul>
+<li>时间复杂度：统计 $arr[i]$ 的出现次数以及对 $arr[i]$ 去重的复杂度为 $O(n)$，对去重数组进行排序的复杂度为 $O(n\log{n})$，验证是否合法复杂度为 $O(n)$。整体复杂度为 $O(n\log{n})$</li>
+<li>空间复杂度：$O(n + m)$</li>
+</ul>
+<hr>
+<h3 id="成组构造-拓扑排序"><a href="#成组构造-拓扑排序" class="headerlink" title="成组构造 + 拓扑排序"></a>成组构造 + 拓扑排序</h3><p>对于上述两种解法，要么利用「优先队列」要么利用「排序」，目的都是为了找到数对中的「绝对值较小」的那一位，然后开始往后构造。</p>
+<p><strong>事实上，我们可以利用任意 $x$ 只可能与 $\frac{x}{2}$ 或者 $2 <em> x$ 组成数对来进行建图，通过对图跑拓扑序来验证是否能够凑成 $\frac{n}{2}$ 组形如 $(x, 2 </em> x)$ 的数对。</strong></p>
+<blockquote>
+<p>不了解「拓扑排序」的同学可以看前置 🧀：<a href="https%3A//mp.weixin.qq.com/s?__biz%3DMzU4NDE3MTEyMA%3D%3D%26mid%3D2247489706%26idx%3D1%26sn%3D771cd807f39d1ca545640c0ef7e5baec">图论拓扑排序入门</a>，里面通过图解演示了何为拓扑序，以及通过「反证法」证明了为何有向无环图能够能够进行拓扑排序。</p>
+</blockquote>
+<p>特别的，我们需要特殊处理 $arr[i] = 0$ 的情况，由于 $0$ 只能与本身组成数对，为了避免自环，我们需要跳过 $arr[i] = 0$ 的点，同时特判 $arr[i] = 0$ 的出现数量为奇数时，返回无解。</p>
+<p>和解法二一样，先对 $arr[i]$ 进行数量统计以及去重预处理（跳过 $0$），然后对去重数组 <code>list</code> 中出现的数值 $x$ 进行分情况讨论：</p>
+<ul>
+<li>$x$ 为奇数，由于 $\frac{x}{2}$ 不为整数，因此 $x$ 只能作为数对中绝对值较小的那个（即 $x$ 入度为 $0$），加入队列；</li>
+<li>$x$ 为偶数，首先令 $x$ 的入度 $in[x] = cnts[\frac{x}{2}]$，代表有 $cnts[\frac{x}{2}]$ 个 $\frac{x}{2}$ 与其对应。当 $in[x] = 0$ 时，说明没有 $\frac{x}{2}$ 与其成对，此时 $x$ 只能作为数对中绝对值较小的那个（即 $x$ 入度为 $0$），加入队列。</li>
+</ul>
+<p>跑一遍拓扑排序，假设当前出队值为 $t$，此时需要消耗掉 $cnts[t]$ 个 $t <em> 2$ 与其形成数对（即 $cnts[t </em> 2] -= cnts[t]$ ），同时 $t <em> 2$ 的入度也要更新（即 $in[t </em> 2] -= cnts[t]$ ），若 $in[t <em> 2] = 0$ 且此时 $cnts[t </em> 2] &gt; 0$，将 $t <em> 2$ 进行入队。同时由于我们明确减少了 $t </em> 2$ 的数量，因此需要同步更新 $t <em> 4$ 的入度，同理，当 $t </em> 4$ 的入度 $in[t <em> 4] = 0$，同时 $cnts[t </em> 4] &gt; 0$ 时，需要将 $t * 4$ 进行入队。</p>
+<p>代码：<br><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">static</span> <span class="hljs-type">int</span> <span class="hljs-variable">N</span> <span class="hljs-operator">=</span> <span class="hljs-number">100010</span>, M = <span class="hljs-number">2</span> * N;<br>    <span class="hljs-keyword">static</span> <span class="hljs-type">int</span>[] cnts = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[M * <span class="hljs-number">2</span>], in = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[M * <span class="hljs-number">2</span>];<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">canReorderDoubled</span><span class="hljs-params">(<span class="hljs-type">int</span>[] arr)</span> &#123;<br>        Arrays.fill(cnts, <span class="hljs-number">0</span>);<br>        Arrays.fill(in, <span class="hljs-number">0</span>);<br>        List&lt;Integer&gt; list = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i : arr) &#123;<br>            <span class="hljs-keyword">if</span> (++cnts[i + M] == <span class="hljs-number">1</span> &amp;&amp; i != <span class="hljs-number">0</span>) list.add(i);<br>        &#125;<br>        <span class="hljs-keyword">if</span> (cnts[M] % <span class="hljs-number">2</span> != <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>        Deque&lt;Integer&gt; d = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayDeque</span>&lt;&gt;();<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i : list) &#123;<br>            <span class="hljs-keyword">if</span> (i % <span class="hljs-number">2</span> == <span class="hljs-number">0</span>) &#123;<br>                in[i + M] = cnts[i / <span class="hljs-number">2</span> + M];<br>                <span class="hljs-keyword">if</span> (in[i + M] == <span class="hljs-number">0</span>) d.addLast(i);<br>            &#125; <span class="hljs-keyword">else</span> &#123; <br>                d.addLast(i);<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">while</span> (!d.isEmpty()) &#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">t</span> <span class="hljs-operator">=</span> d.pollFirst();<br>            <span class="hljs-keyword">if</span> (cnts[t * <span class="hljs-number">2</span> + M] &lt; cnts[t + M]) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>            cnts[t * <span class="hljs-number">2</span> + M] -= cnts[t + M];<br>            in[t * <span class="hljs-number">2</span> + M] -= cnts[t + M];<br>            <span class="hljs-keyword">if</span> (in[t * <span class="hljs-number">2</span> + M] == <span class="hljs-number">0</span> &amp;&amp; cnts[t * <span class="hljs-number">2</span> + M] != <span class="hljs-number">0</span>) d.addLast(t * <span class="hljs-number">2</span>);<br>            in[t * <span class="hljs-number">4</span> + M] -= cnts[t + M];<br>            <span class="hljs-keyword">if</span> (in[t * <span class="hljs-number">4</span> + M] == <span class="hljs-number">0</span> &amp;&amp; cnts[t * <span class="hljs-number">4</span> + M] != <span class="hljs-number">0</span>) d.addLast(t * <span class="hljs-number">4</span>);<br>        &#125;<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure></p>
+<ul>
+<li>时间复杂度：统计数量和入度的复杂度为 $O(n)$；跑拓扑序验证的复杂度为 $O(n)$。整体复杂度为 $O(n)$</li>
+<li>空间复杂度：$O(n + m)$</li>
+</ul>
+<hr>
+<h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>这是我们「刷穿 LeetCode」系列文章的第 <code>No.954</code> 篇，系列开始于 2021/01/01，截止于起始日 LeetCode 上共有 1916 道题目，部分是有锁题，我们将先把所有不带锁的题目刷完。</p>
+<p>在这个系列文章里面，除了讲解解题思路以外，还会尽可能给出最为简洁的代码。如果涉及通解还会相应的代码模板。</p>
+<p>为了方便各位同学能够电脑上进行调试和提交代码，我建立了相关的仓库：<a target="_blank" rel="noopener" href="https://github.com/SharingSource/LogicStack-LeetCode">https://github.com/SharingSource/LogicStack-LeetCode</a> 。</p>
+<p>在仓库地址里，你可以看到系列文章的题解链接、系列文章的相应代码、LeetCode 原题链接和其他优选题解。</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%93%88%E5%B8%8C%E8%A1%A8/">哈希表</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E4%BC%98%E5%85%88%E9%98%9F%E5%88%97/">优先队列</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%A0%86/">堆</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E6%9E%84%E9%80%A0/">构造</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E6%8B%93%E6%89%91%E6%8E%92%E5%BA%8F/">拓扑排序</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/04/01/1801.%20%E7%A7%AF%E5%8E%8B%E8%AE%A2%E5%8D%95%E4%B8%AD%E7%9A%84%E8%AE%A2%E5%8D%95%E6%80%BB%E6%95%B0%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">LC 1801. 积压订单中的订单总数</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/03/30/728.%20%E8%87%AA%E9%99%A4%E6%95%B0%EF%BC%88%E7%AE%80%E5%8D%95%EF%BC%89/">
+                        <span class="hidden-mobile">LC 728. 自除数</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+  <div class="col-lg-7 mx-auto nopadding-x-md">
+    <div class="container custom post-custom mx-auto">
+      <img src="https://oscimg.oschina.net/oscnet/up-19688dc1af05cf8bdea43b2a863038ab9e5.png" srcset="/img/loading.gif" lazyload class="rounded mx-auto d-block mt-5" style="width:900px; height:500px;">
+    </div>
+  </div>
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.staticfile.org/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.staticfile.org/tocbot/4.18.2/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.staticfile.org/anchor-js/4.3.1/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.11/clipboard.min.js" ></script>
+  
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.bootcdn.net/ajax/libs/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        loader: {
+          
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.staticfile.org/mathjax/3.2.0/es5/tex-svg.js" ></script>
+
+  
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

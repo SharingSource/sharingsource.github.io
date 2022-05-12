@@ -1,0 +1,637 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/oimg/RoundCorner.png">
+  <link rel="icon" href="/oimg/RoundCorner.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="宫水三叶">
+  <meta name="keywords" content="算法, 数据结构, 题解">
+  
+    <meta name="description" content="题目描述这是 LeetCode 上的 403. 青蛙过河 ，难度为 困难。 一只青蛙想要过河。 假定河流被等分为若干个单元格，并且在每一个单元格内都有可能放有一块石子（也有可能没有）。 青蛙可以跳上石子，但是不可以跳入水中。 给你石子的位置列表 stones（用单元格序号 升序 表示）， 请判定青蛙能否成功过河（即能否在最后一步跳至最后一块石子上）。 开始时， 青蛙默认已站在第一块石子上，并可以假">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LC 403. 青蛙过河">
+<meta property="og:url" content="http://example.com/2021/04/29/403.%20%E9%9D%92%E8%9B%99%E8%BF%87%E6%B2%B3%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/index.html">
+<meta property="og:site_name" content="宫水三叶的刷题日记">
+<meta property="og:description" content="题目描述这是 LeetCode 上的 403. 青蛙过河 ，难度为 困难。 一只青蛙想要过河。 假定河流被等分为若干个单元格，并且在每一个单元格内都有可能放有一块石子（也有可能没有）。 青蛙可以跳上石子，但是不可以跳入水中。 给你石子的位置列表 stones（用单元格序号 升序 表示）， 请判定青蛙能否成功过河（即能否在最后一步跳至最后一块石子上）。 开始时， 青蛙默认已站在第一块石子上，并可以假">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-04-28T16:56:55.000Z">
+<meta property="article:modified_time" content="2022-05-12T04:05:31.809Z">
+<meta property="article:author" content="宫水三叶">
+<meta property="article:tag" content="DFS">
+<meta property="article:tag" content="BFS">
+<meta property="article:tag" content="线性 DP">
+<meta property="article:tag" content="记忆化搜索">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  <title>LC 403. 青蛙过河 - 宫水三叶的刷题日记</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/hint.css/2.7.0/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.7.2/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"|","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.1.0"></head>
+
+
+<body>
+  <header style="height: 50vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>宫水三叶の刷题日记</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/image_213.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="LC 403. 青蛙过河">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-author" aria-hidden="true"></i>
+      宫水三叶
+    </span>
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-04-29 00:56" pubdate>
+        2021年4月29日 凌晨
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      6.2k 字
+    </span>
+  
+
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">LC 403. 青蛙过河</h1>
+            
+            <div class="markdown-body">
+              <h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>这是 LeetCode 上的 <strong><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/frog-jump/solution/gong-shui-san-xie-yi-ti-duo-jie-jiang-di-74fw/">403. 青蛙过河</a></strong> ，难度为 <strong>困难</strong>。</p>
+<p>一只青蛙想要过河。 假定河流被等分为若干个单元格，并且在每一个单元格内都有可能放有一块石子（也有可能没有）。 青蛙可以跳上石子，但是不可以跳入水中。</p>
+<p>给你石子的位置列表 stones（用单元格序号 升序 表示）， 请判定青蛙能否成功过河（即能否在最后一步跳至最后一块石子上）。</p>
+<p>开始时， 青蛙默认已站在第一块石子上，并可以假定它第一步只能跳跃一个单位（即只能从单元格 1 跳至单元格 2 ）。</p>
+<p>如果青蛙上一步跳跃了 k 个单位，那么它接下来的跳跃距离只能选择为 k - 1、k 或 k + 1 个单位。 另请注意，青蛙只能向前方（终点的方向）跳跃。</p>
+<p>示例 1：<br><figure class="highlight tap"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs tap">输入：stones = [0,1,3,5,6,8,12,17]<br><br>输出：true<br><br>解释：青蛙可以成功过河，按照如下方案跳跃：跳<span class="hljs-number"> 1 </span>个单位到第<span class="hljs-number"> 2 </span>块石子, 然后跳<span class="hljs-number"> 2 </span>个单位到第<span class="hljs-number"> 3 </span>块石子, 接着 跳<span class="hljs-number"> 2 </span>个单位到第<span class="hljs-number"> 4 </span>块石子, 然后跳<span class="hljs-number"> 3 </span>个单位到第<span class="hljs-number"> 6 </span>块石子, 跳<span class="hljs-number"> 4 </span>个单位到第<span class="hljs-number"> 7 </span>块石子, 最后，跳<span class="hljs-number"> 5 </span>个单位到第<span class="hljs-number"> 8 </span>个石子（即最后一块石子）。<br></code></pre></div></td></tr></table></figure><br>示例 2：<br><figure class="highlight dns"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs dns">输入：stones = [<span class="hljs-number">0,1,2,3</span>,<span class="hljs-number">4,8,9,11</span>]<br><br>输出：false<br><br>解释：这是因为第 <span class="hljs-number">5</span> 和第 <span class="hljs-number">6</span> 个石子之间的间距太大，没有可选的方案供青蛙跳跃过去。<br></code></pre></div></td></tr></table></figure></p>
+<p>提示：</p>
+<ul>
+<li>2 &lt;= stones.length &lt;= 2000</li>
+<li>0 &lt;= stones[i] &lt;= $2^{31}$ - 1</li>
+<li>stones[0] == 0</li>
+</ul>
+<hr>
+<h3 id="DFS（TLE）"><a href="#DFS（TLE）" class="headerlink" title="DFS（TLE）"></a>DFS（TLE）</h3><p>根据题意，我们可以使用 <code>DFS</code> 来模拟/爆搜一遍，检查所有的可能性中是否有能到达最后一块石子的。</p>
+<p>通常设计 <code>DFS</code> 函数时，我们只需要不失一般性的考虑完成第 $i$ 块石子的跳跃需要些什么信息即可：</p>
+<ul>
+<li>需要知道当前所在位置在哪，也就是需要知道当前石子所在列表中的下标 $u$。</li>
+<li>需要知道当前所在位置是经过多少步而来的，也就是需要知道上一步的跳跃步长 $k$。</li>
+</ul>
+<p>代码：<br><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    Map&lt;Integer, Integer&gt; map = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">canCross</span><span class="hljs-params">(<span class="hljs-type">int</span>[] ss)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> ss.length;<br>        <span class="hljs-comment">// 将石子信息存入哈希表</span><br>        <span class="hljs-comment">// 为了快速判断是否存在某块石子，以及快速查找某块石子所在下标</span><br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; n; i++) &#123;<br>            map.put(ss[i], i);<br>        &#125;<br>        <span class="hljs-comment">// check first step</span><br>        <span class="hljs-comment">// 根据题意，第一步是固定经过步长 1 到达第一块石子（下标为 1）</span><br>        <span class="hljs-keyword">if</span> (!map.containsKey(<span class="hljs-number">1</span>)) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>        <span class="hljs-keyword">return</span> dfs(ss, ss.length, <span class="hljs-number">1</span>, <span class="hljs-number">1</span>);<br>    &#125;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 判定是否能够跳到最后一块石子</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> ss 石子列表【不变】</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> n  石子列表长度【不变】</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> u  当前所在的石子的下标</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> k  上一次是经过多少步跳到当前位置的</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@return</span> 是否能跳到最后一块石子</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-type">boolean</span> <span class="hljs-title function_">dfs</span><span class="hljs-params">(<span class="hljs-type">int</span>[] ss, <span class="hljs-type">int</span> n, <span class="hljs-type">int</span> u, <span class="hljs-type">int</span> k)</span> &#123;<br>        <span class="hljs-keyword">if</span> (u == n - <span class="hljs-number">1</span>) <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> -<span class="hljs-number">1</span>; i &lt;= <span class="hljs-number">1</span>; i++) &#123;<br>            <span class="hljs-comment">// 如果是原地踏步的话，直接跳过</span><br>            <span class="hljs-keyword">if</span> (k + i == <span class="hljs-number">0</span>) <span class="hljs-keyword">continue</span>;<br>            <span class="hljs-comment">// 下一步的石子理论编号</span><br>            <span class="hljs-type">int</span> <span class="hljs-variable">next</span> <span class="hljs-operator">=</span> ss[u] + k + i;<br>            <span class="hljs-comment">// 如果存在下一步的石子，则跳转到下一步石子，并 DFS 下去</span><br>            <span class="hljs-keyword">if</span> (map.containsKey(next)) &#123;<br>                <span class="hljs-type">boolean</span> <span class="hljs-variable">cur</span> <span class="hljs-operator">=</span> dfs(ss, n, map.get(next), k + i);<br>                <span class="hljs-keyword">if</span> (cur) <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure></p>
+<ul>
+<li>时间复杂度：$O(3^n)$</li>
+<li>空间复杂度：$O(3^n)$</li>
+</ul>
+<p>但数据范围为 $10^3$，直接使用 DFS 肯定会超时。</p>
+<p><strong>我们需要考虑加入「记忆化」功能，或者改为使用带标记的 <code>BFS</code>。</strong></p>
+<hr>
+<h3 id="记忆化搜索"><a href="#记忆化搜索" class="headerlink" title="记忆化搜索"></a>记忆化搜索</h3><p><strong>在考虑加入「记忆化」时，我们只需要将 <code>DFS</code> 方法签名中的【可变】参数作为维度，<code>DFS</code> 方法中的返回值作为存储值即可。</strong></p>
+<p>通常我们会使用「数组」来作为我们缓存中间结果的容器，</p>
+<p>对应到本题，就是需要一个 <code>boolean[石子列表下标][跳跃步数]</code> 这样的数组，但使用布尔数组作为记忆化容器往往无法区分「状态尚未计算」和「状态已经计算，并且结果为 <code>false</code>」两种情况。</p>
+<p>因此我们需要转为使用 <code>int[石子列表下标][跳跃步数]</code>，默认值 $0$ 代表状态尚未计算，$-1$ 代表计算状态为 <code>false</code>，$1$ 代表计算状态为 <code>true</code>。</p>
+<p>接下来需要估算数组的容量，可以从「数据范围」入手分析。</p>
+<p>根据 <code>2 &lt;= stones.length &lt;= 2000</code>，我们可以确定第一维（数组下标）的长度为 $2009$，而另外一维（跳跃步数）是与跳转过程相关的，无法直接确定一个精确边界，但是一个显而易见的事实是，跳到最后一块石子之后的位置是没有意义的，因此我们不会有「跳跃步长」大于「石子列表长度」的情况，因此也可以定为 $2009$（这里是利用了由下标为 $i$ 的位置发起的跳跃不会超过 $i + 1$ 的性质）。</p>
+<p>至此，我们定下来了记忆化容器为 <code>int[][] cache = new int[2009][2009]</code>。</p>
+<p>但是可以看出，上述确定容器大小的过程还是需要一点点分析 &amp; 经验的。</p>
+<p>那么是否有思维难度再低点的方法呢？</p>
+<p>答案是有的，直接使用「哈希表」作为记忆化容器。「哈希表」本身属于非定长容器集合，我们不需要分析两个维度的上限到底是多少。</p>
+<p><strong>另外，当容器维度较多且上界较大时（例如上述的 <code>int[2009][2009]</code>），直接使用「哈希表」可以有效降低「爆空间/时间」的风险（不需要每跑一个样例都创建一个百万级的数组）。</strong></p>
+<p>代码：<br><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    Map&lt;Integer, Integer&gt; map = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();<br>    <span class="hljs-comment">// int[][] cache = new int[2009][2009];</span><br>    Map&lt;String, Boolean&gt; cache = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">canCross</span><span class="hljs-params">(<span class="hljs-type">int</span>[] ss)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> ss.length;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; n; i++) &#123;<br>            map.put(ss[i], i);<br>        &#125;<br>        <span class="hljs-comment">// check first step</span><br>        <span class="hljs-keyword">if</span> (!map.containsKey(<span class="hljs-number">1</span>)) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>        <span class="hljs-keyword">return</span> dfs(ss, ss.length, <span class="hljs-number">1</span>, <span class="hljs-number">1</span>);<br>    &#125;<br>    <span class="hljs-type">boolean</span> <span class="hljs-title function_">dfs</span><span class="hljs-params">(<span class="hljs-type">int</span>[] ss, <span class="hljs-type">int</span> n, <span class="hljs-type">int</span> u, <span class="hljs-type">int</span> k)</span> &#123;<br>        <span class="hljs-type">String</span> <span class="hljs-variable">key</span> <span class="hljs-operator">=</span> u + <span class="hljs-string">&quot;_&quot;</span> + k;<br>        <span class="hljs-comment">// if (cache[u][k] != 0) return cache[u][k] == 1;</span><br>        <span class="hljs-keyword">if</span> (cache.containsKey(key)) <span class="hljs-keyword">return</span> cache.get(key);<br>        <span class="hljs-keyword">if</span> (u == n - <span class="hljs-number">1</span>) <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> -<span class="hljs-number">1</span>; i &lt;= <span class="hljs-number">1</span>; i++) &#123;<br>            <span class="hljs-keyword">if</span> (k + i == <span class="hljs-number">0</span>) <span class="hljs-keyword">continue</span>;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">next</span> <span class="hljs-operator">=</span> ss[u] + k + i;<br>            <span class="hljs-keyword">if</span> (map.containsKey(next)) &#123;<br>                <span class="hljs-type">boolean</span> <span class="hljs-variable">cur</span> <span class="hljs-operator">=</span> dfs(ss, n, map.get(next), k + i);<br>                <span class="hljs-comment">// cache[u][k] = cur ? 1 : -1;</span><br>                cache.put(key, cur);<br>                <span class="hljs-keyword">if</span> (cur) <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>            &#125;<br>        &#125;<br>        <span class="hljs-comment">// cache[u][k] = -1;</span><br>        cache.put(key, <span class="hljs-literal">false</span>);<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure></p>
+<ul>
+<li>时间复杂度：$O(n^2)$</li>
+<li>空间复杂度：$O(n^2)$</li>
+</ul>
+<hr>
+<h3 id="动态规划"><a href="#动态规划" class="headerlink" title="动态规划"></a>动态规划</h3><p>有了「记忆化搜索」的基础，要写写出来动态规划就变得相对简单了。</p>
+<p><strong>我们可以从 <code>DFS</code> 函数出发，写出「动态规划」解法。</strong></p>
+<p>我们的 <code>DFS</code> 函数签名为：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java"><span class="hljs-type">boolean</span> <span class="hljs-title function_">dfs</span><span class="hljs-params">(<span class="hljs-type">int</span>[] ss, <span class="hljs-type">int</span> n, <span class="hljs-type">int</span> u, <span class="hljs-type">int</span> k)</span>;<br></code></pre></div></td></tr></table></figure>
+<p>其中前两个参数为不变参数，后两个为可变参数，返回值是我们的答案。</p>
+<p>因此可以设定为 $f[][]$ 作为动规数组：</p>
+<ol>
+<li>第一维为可变参数 $u$，代表石子列表的下标，范围为数组 <code>stones</code> 长度；</li>
+<li>第二维为可变参数 $k$，代表上一步的的跳跃步长，前面也分析过了，最多不超过数组 <code>stones</code> 长度。</li>
+</ol>
+<p><strong>这样的「状态定义」所代表的含义：当前在第 $i$ 个位置，并且是以步长 $k$ 跳到位置 $i$ 时，是否到达最后一块石子。</strong></p>
+<p>那么对于 $f[i][k]$ 是否为真，则取决于上一位置 $j$ 的状态值，结合每次步长的变化为 <code>[-1,0,1]</code> 可知：</p>
+<ul>
+<li>可从 $f[j][k - 1]$ 状态而来：先是经过 $k - 1$ 的跳跃到达位置 $j$，再在原步长的基础上 <code>+1</code>，跳到了位置 $i$。</li>
+<li>可从 $f[j][k]$ 状态而来：先是经过 $k$ 的跳跃到达位置 $j$，维持原步长不变，跳到了位置 $i$。</li>
+<li>可从 $f[j][k + 1]$ 状态而来：先是经过 $k + 1$ 的跳跃到达位置 $j$，再在原步长的基础上 <code>-1</code>，跳到了位置 $i$。</li>
+</ul>
+<p>只要上述三种情况其中一种为真，则 $f[i][j]$ 为真。</p>
+<p>至此，我们解决了动态规划的「状态定义」&amp;「状态转移方程」部分。</p>
+<p>但这就结束了吗？还没有。</p>
+<p>我们还缺少可让状态递推下去的「有效值」，或者说缺少初始化环节。</p>
+<p>因为我们的 $f[i][k]$ 依赖于之前的状态进行“或运算”而来，转移方程本身不会产生 $true$ 值。因此为了让整个「递推」过程可滚动，我们需要先有一个为 $true$ 的状态值。</p>
+<p>这时候再回看我们的状态定义：<strong>当前在第 $i$ 个位置，并且是以步长 $k$ 跳到位置 $i$ 时，是否到达最后一块石子。</strong></p>
+<p>显然，我们事先是不可能知道经过「多大的步长」跳到「哪些位置」，最终可以到达最后一块石子。</p>
+<p><strong>这时候需要利用「对偶性」将跳跃过程「翻转」过来分析：</strong></p>
+<p><strong>我们知道起始状态是「经过步长为 1」的跳跃到达「位置 1」，如果从起始状态出发，存在一种方案到达最后一块石子的话，那么必然存在一条反向路径，它是以从「最后一块石子」开始，并以「某个步长 $k$」开始跳跃，最终以回到位置 1。</strong></p>
+<p>因此我们可以设 $f[1][1] = true$，作为我们的起始值。</p>
+<p><strong>这里本质是利用「路径可逆」的性质，将问题进行了「等效对偶」。表面上我们是进行「正向递推」，但事实上我们是在验证是否存在某条「反向路径」到达位置 $1$。</strong></p>
+<p>建议大家加强理解 ~ </p>
+<p>代码：<br><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">canCross</span><span class="hljs-params">(<span class="hljs-type">int</span>[] ss)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> ss.length;<br>        <span class="hljs-comment">// check first step</span><br>        <span class="hljs-keyword">if</span> (ss[<span class="hljs-number">1</span>] != <span class="hljs-number">1</span>) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>        <span class="hljs-type">boolean</span>[][] f = <span class="hljs-keyword">new</span> <span class="hljs-title class_">boolean</span>[n + <span class="hljs-number">1</span>][n + <span class="hljs-number">1</span>];<br>        f[<span class="hljs-number">1</span>][<span class="hljs-number">1</span>] = <span class="hljs-literal">true</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">2</span>; i &lt; n; i++) &#123;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>; j &lt; i; j++) &#123;<br>                <span class="hljs-type">int</span> <span class="hljs-variable">k</span> <span class="hljs-operator">=</span> ss[i] - ss[j];<br>                <span class="hljs-comment">// 我们知道从位置 j 到位置 i 是需要步长为 k 的跳跃</span><br><br>                <span class="hljs-comment">// 而从位置 j 发起的跳跃最多不超过 j + 1</span><br>                <span class="hljs-comment">// 因为每次跳跃，下标至少增加 1，而步长最多增加 1 </span><br>                <span class="hljs-keyword">if</span> (k &lt;= j + <span class="hljs-number">1</span>) &#123;<br>                    f[i][k] = f[j][k - <span class="hljs-number">1</span>] || f[j][k] || f[j][k + <span class="hljs-number">1</span>];<br>                &#125;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>; i &lt; n; i++) &#123;<br>            <span class="hljs-keyword">if</span> (f[n - <span class="hljs-number">1</span>][i]) <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>        &#125;<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure></p>
+<ul>
+<li>时间复杂度：$O(n^2)$</li>
+<li>空间复杂度：$O(n^2)$</li>
+</ul>
+<hr>
+<h3 id="BFS"><a href="#BFS" class="headerlink" title="BFS"></a>BFS</h3><p>事实上，前面我们也说到，解决超时 <code>DFS</code> 问题，除了增加「记忆化」功能以外，还能使用带标记的 <code>BFS</code>。</p>
+<p><strong>因为两者都能解决 <code>DFS</code> 的超时原因：大量的重复计算。</strong></p>
+<p>但为了「记忆化搜索」&amp;「动态规划」能够更好的衔接，所以我把 <code>BFS</code> 放到最后。</p>
+<p>如果你能够看到这里，那么这里的 <code>BFS</code> 应该看起来会相对轻松。</p>
+<p>它更多是作为「记忆化搜索」的另外一种实现形式。</p>
+<p>代码：<br><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    Map&lt;Integer, Integer&gt; map = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">canCross</span><span class="hljs-params">(<span class="hljs-type">int</span>[] ss)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> ss.length;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; n; i++) &#123;<br>            map.put(ss[i], i);<br>        &#125;<br>        <span class="hljs-comment">// check first step</span><br>        <span class="hljs-keyword">if</span> (!map.containsKey(<span class="hljs-number">1</span>)) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br><br>        <span class="hljs-type">boolean</span>[][] vis = <span class="hljs-keyword">new</span> <span class="hljs-title class_">boolean</span>[n][n];<br>        Deque&lt;<span class="hljs-type">int</span>[]&gt; d = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayDeque</span>&lt;&gt;();<br>        vis[<span class="hljs-number">1</span>][<span class="hljs-number">1</span>] = <span class="hljs-literal">true</span>;<br>        d.addLast(<span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[]&#123;<span class="hljs-number">1</span>, <span class="hljs-number">1</span>&#125;);<br><br>        <span class="hljs-keyword">while</span> (!d.isEmpty()) &#123;<br>            <span class="hljs-type">int</span>[] poll = d.pollFirst();<br>            <span class="hljs-type">int</span> <span class="hljs-variable">idx</span> <span class="hljs-operator">=</span> poll[<span class="hljs-number">0</span>], k = poll[<span class="hljs-number">1</span>];<br>            <span class="hljs-keyword">if</span> (idx == n - <span class="hljs-number">1</span>) <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> -<span class="hljs-number">1</span>; i &lt;= <span class="hljs-number">1</span>; i++) &#123;<br>                <span class="hljs-keyword">if</span> (k + i == <span class="hljs-number">0</span>) <span class="hljs-keyword">continue</span>;<br>                <span class="hljs-type">int</span> <span class="hljs-variable">next</span> <span class="hljs-operator">=</span> ss[idx] + k + i;<br>                <span class="hljs-keyword">if</span> (map.containsKey(next)) &#123;<br>                    <span class="hljs-type">int</span> <span class="hljs-variable">nIdx</span> <span class="hljs-operator">=</span> map.get(next), nK = k + i;<br>                    <span class="hljs-keyword">if</span> (nIdx == n - <span class="hljs-number">1</span>) <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>                    <span class="hljs-keyword">if</span> (!vis[nIdx][nK]) &#123;<br>                        vis[nIdx][nK] = <span class="hljs-literal">true</span>;<br>                        d.addLast(<span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[]&#123;nIdx, nK&#125;);<br>                    &#125;<br>                &#125;<br>            &#125;<br>        &#125;<br><br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure></p>
+<ul>
+<li>时间复杂度：$O(n^2)$</li>
+<li>空间复杂度：$O(n^2)$</li>
+</ul>
+<hr>
+<h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>这是我们「刷穿 LeetCode」系列文章的第 <code>No.403</code> 篇，系列开始于 2021/01/01，截止于起始日 LeetCode 上共有 1916 道题目，部分是有锁题，我们将先把所有不带锁的题目刷完。</p>
+<p>在这个系列文章里面，除了讲解解题思路以外，还会尽可能给出最为简洁的代码。如果涉及通解还会相应的代码模板。</p>
+<p>为了方便各位同学能够电脑上进行调试和提交代码，我建立了相关的仓库：<a target="_blank" rel="noopener" href="https://github.com/SharingSource/LogicStack-LeetCode">https://github.com/SharingSource/LogicStack-LeetCode</a> 。</p>
+<p>在仓库地址里，你可以看到系列文章的题解链接、系列文章的相应代码、LeetCode 原题链接和其他优选题解。</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/DFS/">DFS</a>
+                    
+                      <a class="hover-with-bg" href="/tags/BFS/">BFS</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E7%BA%BF%E6%80%A7-DP/">线性 DP</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E8%AE%B0%E5%BF%86%E5%8C%96%E6%90%9C%E7%B4%A2/">记忆化搜索</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/04/30/137.%20%E5%8F%AA%E5%87%BA%E7%8E%B0%E4%B8%80%E6%AC%A1%E7%9A%84%E6%95%B0%E5%AD%97%20II%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">LC 137. 只出现一次的数字 II</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/04/28/633.%20%E5%B9%B3%E6%96%B9%E6%95%B0%E4%B9%8B%E5%92%8C%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/">
+                        <span class="hidden-mobile">LC 633. 平方数之和</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+  <div class="col-lg-7 mx-auto nopadding-x-md">
+    <div class="container custom post-custom mx-auto">
+      <img src="https://oscimg.oschina.net/oscnet/up-19688dc1af05cf8bdea43b2a863038ab9e5.png" srcset="/img/loading.gif" lazyload class="rounded mx-auto d-block mt-5" style="width:900px; height:500px;">
+    </div>
+  </div>
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.staticfile.org/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.staticfile.org/tocbot/4.18.2/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.staticfile.org/anchor-js/4.3.1/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.11/clipboard.min.js" ></script>
+  
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.bootcdn.net/ajax/libs/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        loader: {
+          
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.staticfile.org/mathjax/3.2.0/es5/tex-svg.js" ></script>
+
+  
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

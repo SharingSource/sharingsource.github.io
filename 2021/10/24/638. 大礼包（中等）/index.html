@@ -1,0 +1,594 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/oimg/RoundCorner.png">
+  <link rel="icon" href="/oimg/RoundCorner.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="宫水三叶">
+  <meta name="keywords" content="算法, 数据结构, 题解">
+  
+    <meta name="description" content="题目描述这是 LeetCode 上的 638. 大礼包 ，难度为 中等。 在 LeetCode 商店中， 有 n 件在售的物品。每件物品都有对应的价格。然而，也有一些大礼包，每个大礼包以优惠的价格捆绑销售一组物品。 给你一个整数数组 price 表示物品价格，其中 price[i] 是第 i 件物品的价格。另有一个整数数组 needs 表示购物清单，其中 needs[i] 是需要购买第 i 件物品">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LC 638. 大礼包">
+<meta property="og:url" content="http://example.com/2021/10/24/638.%20%E5%A4%A7%E7%A4%BC%E5%8C%85%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/index.html">
+<meta property="og:site_name" content="宫水三叶的刷题日记">
+<meta property="og:description" content="题目描述这是 LeetCode 上的 638. 大礼包 ，难度为 中等。 在 LeetCode 商店中， 有 n 件在售的物品。每件物品都有对应的价格。然而，也有一些大礼包，每个大礼包以优惠的价格捆绑销售一组物品。 给你一个整数数组 price 表示物品价格，其中 price[i] 是第 i 件物品的价格。另有一个整数数组 needs 表示购物清单，其中 needs[i] 是需要购买第 i 件物品">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-10-23T16:47:39.000Z">
+<meta property="article:modified_time" content="2022-05-12T04:05:32.353Z">
+<meta property="article:author" content="宫水三叶">
+<meta property="article:tag" content="DFS">
+<meta property="article:tag" content="背包问题">
+<meta property="article:tag" content="完全背包">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  <title>LC 638. 大礼包 - 宫水三叶的刷题日记</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/hint.css/2.7.0/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.7.2/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"|","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.1.0"></head>
+
+
+<body>
+  <header style="height: 50vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>宫水三叶の刷题日记</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/image_95.jpeg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="LC 638. 大礼包">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-author" aria-hidden="true"></i>
+      宫水三叶
+    </span>
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-10-24 00:47" pubdate>
+        2021年10月24日 凌晨
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      4.9k 字
+    </span>
+  
+
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">LC 638. 大礼包</h1>
+            
+            <div class="markdown-body">
+              <h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>这是 LeetCode 上的 <strong><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/shopping-offers/solution/gong-shui-san-xie-yi-ti-shuang-jie-zhuan-qgk1/">638. 大礼包</a></strong> ，难度为 <strong>中等</strong>。</p>
+<p>在 LeetCode 商店中， 有 <code>n</code> 件在售的物品。每件物品都有对应的价格。然而，也有一些大礼包，每个大礼包以优惠的价格捆绑销售一组物品。</p>
+<p>给你一个整数数组 <code>price</code> 表示物品价格，其中 <code>price[i]</code> 是第 <code>i</code> 件物品的价格。另有一个整数数组 <code>needs</code> 表示购物清单，其中 <code>needs[i]</code> 是需要购买第 <code>i</code> 件物品的数量。</p>
+<p>还有一个数组 special 表示大礼包，<code>special[i]</code> 的长度为 <code>n + 1</code> ，其中 <code>special[i][j]</code> 表示第 <code>i</code> 个大礼包中内含第 <code>j</code> 件物品的数量，且 <code>special[i][n]</code> （也就是数组中的最后一个整数）为第 <code>i</code> 个大礼包的价格。</p>
+<p>返回 确切 满足购物清单所需花费的最低价格，你可以充分利用大礼包的优惠活动。你不能购买超出购物清单指定数量的物品，即使那样会降低整体价格。任意大礼包可无限次购买。</p>
+<p>示例 1：<br><figure class="highlight dns"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs dns">输入：price = [<span class="hljs-number">2</span>,<span class="hljs-number">5</span>], special = [[<span class="hljs-number">3</span>,<span class="hljs-number">0</span>,<span class="hljs-number">5</span>],[<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">10</span>]], needs = [<span class="hljs-number">3</span>,<span class="hljs-number">2</span>]<br><br>输出：<span class="hljs-number">14</span><br><br>解释：有 <span class="hljs-keyword">A</span> 和 B 两种物品，价格分别为 ¥<span class="hljs-number">2</span> 和 ¥<span class="hljs-number">5</span> 。 <br>大礼包 <span class="hljs-number">1</span> ，你可以以 ¥<span class="hljs-number">5</span> 的价格购买 <span class="hljs-number">3</span><span class="hljs-keyword">A</span> 和 <span class="hljs-number">0</span>B 。 <br>大礼包 <span class="hljs-number">2</span> ，你可以以 ¥<span class="hljs-number">10</span> 的价格购买 <span class="hljs-number">1</span><span class="hljs-keyword">A</span> 和 <span class="hljs-number">2</span>B 。 <br>需要购买 <span class="hljs-number">3</span> 个 <span class="hljs-keyword">A</span> 和 <span class="hljs-number">2</span> 个 B ， 所以付 ¥<span class="hljs-number">10</span> 购买 <span class="hljs-number">1</span><span class="hljs-keyword">A</span> 和 <span class="hljs-number">2</span>B（大礼包 <span class="hljs-number">2</span>），以及 ¥<span class="hljs-number">4</span> 购买 <span class="hljs-number">2</span><span class="hljs-keyword">A</span> 。<br></code></pre></div></td></tr></table></figure><br>示例 2：<br><figure class="highlight dns"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs dns">输入：price = [<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">4</span>], special = [[<span class="hljs-number">1,1,0,4</span>],[<span class="hljs-number">2,2,1,9</span>]], needs = [<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">1</span>]<br><br>输出：<span class="hljs-number">11</span><br><br>解释：<span class="hljs-keyword">A</span> ，B ，C 的价格分别为 ¥<span class="hljs-number">2</span> ，¥<span class="hljs-number">3</span> ，¥<span class="hljs-number">4</span> 。<br>可以用 ¥<span class="hljs-number">4</span> 购买 <span class="hljs-number">1</span><span class="hljs-keyword">A</span> 和 <span class="hljs-number">1</span>B ，也可以用 ¥<span class="hljs-number">9</span> 购买 <span class="hljs-number">2</span><span class="hljs-keyword">A</span> ，<span class="hljs-number">2</span>B 和 <span class="hljs-number">1</span>C 。 <br>需要买 <span class="hljs-number">1</span><span class="hljs-keyword">A</span> ，<span class="hljs-number">2</span>B 和 <span class="hljs-number">1</span>C ，所以付 ¥<span class="hljs-number">4</span> 买 <span class="hljs-number">1</span><span class="hljs-keyword">A</span> 和 <span class="hljs-number">1</span>B（大礼包 <span class="hljs-number">1</span>），以及 ¥<span class="hljs-number">3</span> 购买 <span class="hljs-number">1</span>B ， ¥<span class="hljs-number">4</span> 购买 <span class="hljs-number">1</span>C 。 <br>不可以购买超出待购清单的物品，尽管购买大礼包 <span class="hljs-number">2</span> 更加便宜。<br></code></pre></div></td></tr></table></figure></p>
+<p>提示：</p>
+<ul>
+<li>n == price.length</li>
+<li>n == needs.length</li>
+<li>1 &lt;= n &lt;= 6</li>
+<li>0 &lt;= price[i] &lt;= 10</li>
+<li>0 &lt;= needs[i] &lt;= 10</li>
+<li>1 &lt;= special.length &lt;= 100</li>
+<li>special[i].length == n + 1</li>
+<li>0 &lt;= special[i][j] &lt;= 50</li>
+</ul>
+<hr>
+<h3 id="转换-DFS（转换为礼包处理）"><a href="#转换-DFS（转换为礼包处理）" class="headerlink" title="转换 DFS（转换为礼包处理）"></a>转换 DFS（转换为礼包处理）</h3><p>对于某个 $need[i]$ 而言，既可以「单买」也可以使用「礼包形式购买」，同时两种购买方式都存在对「份数」的决策（单买多少份/买多少个相应的礼包）。</p>
+<p>利用物品数量和礼包数量数据范围都较少，我们可以先对「单买」情况进行预处理，将其转换为「礼包」形式。若 $price[0] = 100$，则使用礼包 $[1, 0, 0, …,0, 100]$ 来代指。</p>
+<p>然后再预处理每个礼包最多选多少个，并使用哈希表进行存储。</p>
+<p>最后使用 <code>DFS</code> 对每个「礼包」如何选择进行爆搜即可。</p>
+<p>代码：<br><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-type">int</span> <span class="hljs-variable">ans</span> <span class="hljs-operator">=</span> <span class="hljs-number">0x3f3f3f3f</span>;<br>    List&lt;Integer&gt; price, needs;<br>    List&lt;List&lt;Integer&gt;&gt; special;<br>    Map&lt;Integer, Integer&gt; map = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();<br>    <span class="hljs-type">int</span> n, m;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">shoppingOffers</span><span class="hljs-params">(List&lt;Integer&gt; _price, List&lt;List&lt;Integer&gt;&gt; _special, List&lt;Integer&gt; _needs)</span> &#123;<br>        price = _price; special = _special; needs = _needs;<br>        n = price.size();<br>        List&lt;Integer&gt; temp = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; n; i++) temp.add(<span class="hljs-number">0</span>);<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; n; i++) &#123;<br>            List&lt;Integer&gt; clone = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;(temp);<br>            clone.set(i, <span class="hljs-number">1</span>);<br>            clone.add(price.get(i));<br>            special.add(clone);<br>        &#125;<br>        m = special.size();<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; m; i++) &#123;<br>            List&lt;Integer&gt; x = special.get(i);<br>            <span class="hljs-type">int</span> <span class="hljs-variable">max</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; j &lt; n; j++) &#123;<br>                <span class="hljs-type">int</span> <span class="hljs-variable">a</span> <span class="hljs-operator">=</span> x.get(j), b = needs.get(j);<br>                <span class="hljs-keyword">if</span> (a == <span class="hljs-number">0</span> || b == <span class="hljs-number">0</span>) <span class="hljs-keyword">continue</span>;<br>                max = Math.max(max, (<span class="hljs-type">int</span>)Math.ceil(b / a));<br>            &#125;<br>            map.put(i, max);<br>        &#125;<br>        dfs(<span class="hljs-number">0</span>, needs, <span class="hljs-number">0</span>);<br>        <span class="hljs-keyword">return</span> ans;<br>    &#125;<br>    <span class="hljs-keyword">void</span> <span class="hljs-title function_">dfs</span><span class="hljs-params">(<span class="hljs-type">int</span> u, List&lt;Integer&gt; list, <span class="hljs-type">int</span> cur)</span> &#123;<br>        <span class="hljs-keyword">if</span> (cur &gt;= ans) <span class="hljs-keyword">return</span> ;<br>        <span class="hljs-keyword">if</span> (u == m) &#123;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; n; i++) &#123;<br>                <span class="hljs-keyword">if</span> (list.get(i) != <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> ;<br>            &#125;<br>            ans = Math.min(ans, cur);<br>            <span class="hljs-keyword">return</span> ;<br>        &#125;<br>        List&lt;Integer&gt; x = special.get(u);<br>        out:<span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">k</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; k &lt;= map.get(u); k++) &#123;<br>            List&lt;Integer&gt; clist = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;(list);<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; n; i++) &#123;<br>                <span class="hljs-type">int</span> <span class="hljs-variable">a</span> <span class="hljs-operator">=</span> x.get(i), b = clist.get(i);<br>                <span class="hljs-keyword">if</span> (a * k &gt; b) <span class="hljs-keyword">break</span> out;<br>                clist.set(i, b - a * k);<br>            &#125;<br>            dfs(u + <span class="hljs-number">1</span>, clist, cur + k * x.get(n));<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure></p>
+<ul>
+<li>时间复杂度：令物品数量为 $n$，原礼包数量为 $m$。将「单买」预处理成「礼包」，共有 $n$ 中「单买」情况需要转换，同时每个转换需要对数组进行复制，复杂度为 $O(n^2)$，预处理完后，共有 $n + m$ 个礼包；预处理每个礼包所能选的最大数量，复杂度为 $O((n <em> m) </em> n)$；对礼包的选择方案进行决策，一个礼包最多选择 $k = \max(needs[i]) = 10$ 个，复杂度为 $O(k ^ {n + m})$</li>
+<li>空间复杂度：$O(k ^ {n + m})$</li>
+</ul>
+<hr>
+<h3 id="完全背包"><a href="#完全背包" class="headerlink" title="完全背包"></a>完全背包</h3><p>这还是一道很有意思的「完全背包」问题。</p>
+<p>不了解「完全背包」的同学，可以先看前置🧀：<a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzU4NDE3MTEyMA==&amp;mid=2247486107&amp;idx=1&amp;sn=e5fa523008fc5588737b7ed801caf4c3&amp;chksm=fd9ca184caeb28926959c0987208a3932ed9c965267ed366b5b82a6fc16d42f1ff40c29db5f1&amp;scene=178&amp;cur_album_id=1751702161341628417#rd">完全背包</a>。目前<a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/mp/appmsgalbum?__biz=MzU4NDE3MTEyMA==&amp;action=getalbum&amp;album_id=1751702161341628417&amp;scene=173&amp;from_msgid=2247486107&amp;from_itemidx=1&amp;count=3&amp;nolastread=1#wechat_redirect">「背包问题」专题</a> 已经讲了 $21$ 篇，大概还有 $2$ - $4$ 篇彻底讲完，完全覆盖了所有的「背包问题」。</p>
+<p>背包问题难点在于对「成本」和「价值」的抽象。</p>
+<p>对于本题，我们可以定义 <strong>$f[i, j<em>0, j_1, j_2, … , j</em>{n - 1}]$ 为考虑前 $i$ 个大礼包，购买 $j<em>0$ 件物品 $0$，购买 $j_1$ 件物品 $1$，….，购买 $j</em>{n - 1}$ 件物品 $n - 1$ 时的最小花费。</strong></p>
+<p>同时，我们有初始化条件 $f[0, 0, 0, … , 0] = 0$（其余 $f[0, x_0, x_1, x_2, …, x_n]$ 为正无穷）的初始化条件，最终答案为 $f[m - 1, need[0], need[1], …, need[n - 1]]$。</p>
+<p>这样的朴素完全背包做法复杂度过高，根据我们的前置🧀 <a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzU4NDE3MTEyMA==&amp;mid=2247486107&amp;idx=1&amp;sn=e5fa523008fc5588737b7ed801caf4c3&amp;chksm=fd9ca184caeb28926959c0987208a3932ed9c965267ed366b5b82a6fc16d42f1ff40c29db5f1&amp;scene=178&amp;cur_album_id=1751702161341628417#rd">完全背包</a> 中的数学推导分析，我们发现完全背包的一维空间优化，是具有优化复杂度的意义。</p>
+<p>因此，我们可以对礼包维度进行优化，使用 $f[need[0], need[1], … , need[n - 1]]$ 来作为状态表示。</p>
+<p>不失一般性的考虑 $f[j<em>0, j_1, … , j</em>{n - 1}]$ 该如何转移（以物品 $0$ 为例进行分析，其他同理）：</p>
+<ol>
+<li>不选择任何大礼包，只进行单买：$f[j<em>0, j_1, … , j</em>{n - 1}] = min(f[j<em>0, j_1, … , j</em>{n - 1}], f[j<em>0 - 1, j_1, …, j</em>{n - 1}] + price[0]$；</li>
+<li>购买大礼包：$f[j<em>0, j_1, … , j</em>{n - 1}] = min(f[j<em>0, j_1, … , j</em>{n - 1}], f[j<em>0 - special[i][0], j_1 - special[i][1],, …, j</em>{n - 1} - special[i][n - 1]] + special[i][n]$</li>
+</ol>
+<p>最终的 $f[j<em>0, j_1, … , j</em>{n - 1}]$ 为上述所有方案中的最小值。</p>
+<blockquote>
+<p>一些细节：实现时，为了防止过多的维度，以及可能存在的 MLE 风险，我们可以对维度进行压缩处理，而最简单的方式可以通过与排列数建立映射关系。</p>
+</blockquote>
+<p>代码：<br><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">shoppingOffers</span><span class="hljs-params">(List&lt;Integer&gt; price, List&lt;List&lt;Integer&gt;&gt; special, List&lt;Integer&gt; needs)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> price.size();<br>        <span class="hljs-type">int</span>[] g = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[n + <span class="hljs-number">1</span>];<br>        g[<span class="hljs-number">0</span>] = <span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>; i &lt;= n; i++) &#123;<br>            g[i] = g[i - <span class="hljs-number">1</span>] * (needs.get(i - <span class="hljs-number">1</span>) + <span class="hljs-number">1</span>);<br>        &#125;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">mask</span> <span class="hljs-operator">=</span> g[n];<br>        <span class="hljs-type">int</span>[] f = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[mask];<br>        <span class="hljs-type">int</span>[] cnt = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[n];<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">state</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>; state &lt; mask; state++) &#123;<br>            f[state] = <span class="hljs-number">0x3f3f3f3f</span>;<br>            Arrays.fill(cnt, <span class="hljs-number">0</span>);<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; n; i++) &#123;<br>                cnt[i] = state % g[i + <span class="hljs-number">1</span>] / g[i];<br>            &#125;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; n; i++) &#123;<br>                <span class="hljs-keyword">if</span> (cnt[i] &gt; <span class="hljs-number">0</span>) f[state] = Math.min(f[state], f[state - g[i]] + price.get(i));<br>            &#125;<br>            out:<span class="hljs-keyword">for</span> (List&lt;Integer&gt; x : special) &#123;<br>                <span class="hljs-type">int</span> <span class="hljs-variable">cur</span> <span class="hljs-operator">=</span> state;<br>                <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; n; i++) &#123;<br>                    <span class="hljs-keyword">if</span> (cnt[i] &lt; x.get(i)) <span class="hljs-keyword">continue</span> out;<br>                    cur -= x.get(i) * g[i];<br>                &#125;<br>                f[state] = Math.min(f[state], f[cur] + x.get(n));<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> f[mask - <span class="hljs-number">1</span>];<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure></p>
+<ul>
+<li>时间复杂度：令物品数量为 $n$，原礼包数量为 $m$。每个物品最多需要 $k = \max(needs[i]) = 10$ 个，共有 $k^n$ 个状态需要转移，转移时需要考虑「单买」和「礼包」决策，复杂度分别为 $O(n)$ 和 $O(m <em> n)$。整体复杂度为 $O(k^n </em> (m * n))$</li>
+<li>空间复杂度：$O(k^n <em> (m </em> n))$</li>
+</ul>
+<hr>
+<h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>这是我们「刷穿 LeetCode」系列文章的第 <code>No.638</code> 篇，系列开始于 2021/01/01，截止于起始日 LeetCode 上共有 1916 道题目，部分是有锁题，我们将先把所有不带锁的题目刷完。</p>
+<p>在这个系列文章里面，除了讲解解题思路以外，还会尽可能给出最为简洁的代码。如果涉及通解还会相应的代码模板。</p>
+<p>为了方便各位同学能够电脑上进行调试和提交代码，我建立了相关的仓库：<a target="_blank" rel="noopener" href="https://github.com/SharingSource/LogicStack-LeetCode">https://github.com/SharingSource/LogicStack-LeetCode</a> 。</p>
+<p>在仓库地址里，你可以看到系列文章的题解链接、系列文章的相应代码、LeetCode 原题链接和其他优选题解。</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/DFS/">DFS</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98/">背包问题</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%AE%8C%E5%85%A8%E8%83%8C%E5%8C%85/">完全背包</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/10/24/240.%20%E6%90%9C%E7%B4%A2%E4%BA%8C%E7%BB%B4%E7%9F%A9%E9%98%B5%20II%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">LC 240. 搜索二维矩阵 II</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/10/22/492.%20%E6%9E%84%E9%80%A0%E7%9F%A9%E5%BD%A2%EF%BC%88%E7%AE%80%E5%8D%95%EF%BC%89/">
+                        <span class="hidden-mobile">LC 492. 构造矩形</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+  <div class="col-lg-7 mx-auto nopadding-x-md">
+    <div class="container custom post-custom mx-auto">
+      <img src="https://oscimg.oschina.net/oscnet/up-19688dc1af05cf8bdea43b2a863038ab9e5.png" srcset="/img/loading.gif" lazyload class="rounded mx-auto d-block mt-5" style="width:900px; height:500px;">
+    </div>
+  </div>
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.staticfile.org/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.staticfile.org/tocbot/4.18.2/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.staticfile.org/anchor-js/4.3.1/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.11/clipboard.min.js" ></script>
+  
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.bootcdn.net/ajax/libs/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        loader: {
+          
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.staticfile.org/mathjax/3.2.0/es5/tex-svg.js" ></script>
+
+  
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

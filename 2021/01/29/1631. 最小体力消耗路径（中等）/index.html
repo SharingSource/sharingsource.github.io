@@ -1,0 +1,606 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/oimg/RoundCorner.png">
+  <link rel="icon" href="/oimg/RoundCorner.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="宫水三叶">
+  <meta name="keywords" content="算法, 数据结构, 题解">
+  
+    <meta name="description" content="题目描述这是 LeetCode 上的 1631. 最小体力消耗路径 ，难度为 中等。 你准备参加一场远足活动。 给你一个二维 rows x columns 的地图 heights ，其中 heights[row][col] 表示格子 (row, col) 的高度。 一开始你在最左上角的格子 (0, 0) ，且你希望去最右下角的格子 (rows-1, columns-1) （注意下标从 0 开始编号">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LC 1631. 最小体力消耗路径">
+<meta property="og:url" content="http://example.com/2021/01/29/1631.%20%E6%9C%80%E5%B0%8F%E4%BD%93%E5%8A%9B%E6%B6%88%E8%80%97%E8%B7%AF%E5%BE%84%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/index.html">
+<meta property="og:site_name" content="宫水三叶的刷题日记">
+<meta property="og:description" content="题目描述这是 LeetCode 上的 1631. 最小体力消耗路径 ，难度为 中等。 你准备参加一场远足活动。 给你一个二维 rows x columns 的地图 heights ，其中 heights[row][col] 表示格子 (row, col) 的高度。 一开始你在最左上角的格子 (0, 0) ，且你希望去最右下角的格子 (rows-1, columns-1) （注意下标从 0 开始编号">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2020/10/25/ex1.png">
+<meta property="article:published_time" content="2021-01-28T18:54:41.000Z">
+<meta property="article:modified_time" content="2022-05-12T04:05:32.013Z">
+<meta property="article:author" content="宫水三叶">
+<meta property="article:tag" content="并查集">
+<meta property="article:tag" content="最小生成树">
+<meta property="article:tag" content="Kruskal">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2020/10/25/ex1.png">
+  
+  
+  <title>LC 1631. 最小体力消耗路径 - 宫水三叶的刷题日记</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/hint.css/2.7.0/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.7.2/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"|","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.1.0"></head>
+
+
+<body>
+  <header style="height: 50vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>宫水三叶の刷题日记</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/image_109.jpeg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="LC 1631. 最小体力消耗路径">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-author" aria-hidden="true"></i>
+      宫水三叶
+    </span>
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-01-29 02:54" pubdate>
+        2021年1月29日 凌晨
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      3.6k 字
+    </span>
+  
+
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">LC 1631. 最小体力消耗路径</h1>
+            
+            <div class="markdown-body">
+              <h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>这是 LeetCode 上的 <strong><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/path-with-minimum-effort/solution/fan-zheng-fa-zheng-ming-si-lu-de-he-fa-x-ohby/">1631. 最小体力消耗路径</a></strong> ，难度为 <strong>中等</strong>。</p>
+<p>你准备参加一场远足活动。</p>
+<p>给你一个二维 <code>rows x columns</code> 的地图 heights ，其中 <code>heights[row][col]</code> 表示格子 <code>(row, col)</code> 的高度。</p>
+<p>一开始你在最左上角的格子 <code>(0, 0</code>) ，且你希望去最右下角的格子 <code>(rows-1, columns-1)</code> （注意下标从 0 开始编号）。</p>
+<p>你每次可以往 上，下，左，右 四个方向之一移动，你想要找到耗费 体力 最小的一条路径。</p>
+<p>一条路径耗费的「体力值」是路径上相邻格子之间「高度差绝对值」的「最大值」决定的。</p>
+<p>请你返回从左上角走到右下角的最小 体力消耗值 。</p>
+<p>示例 1：</p>
+<p><img src="https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2020/10/25/ex1.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<figure class="highlight inform7"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs inform7">输入：heights = <span class="hljs-comment">[<span class="hljs-comment">[1,2,2]</span>,<span class="hljs-comment">[3,8,2]</span>,<span class="hljs-comment">[5,3,5]</span>]</span><br><br>输出：2<br><br>解释：路径 <span class="hljs-comment">[1,3,5,3,5]</span> 连续格子的差值绝对值最大为 2 。<br>这条路径比路径 <span class="hljs-comment">[1,2,2,2,5]</span> 更优，因为另一条路径差值最大值为 3 。<br></code></pre></div></td></tr></table></figure>
+<p>示例 2：<br><figure class="highlight inform7"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs inform7">输入：heights = <span class="hljs-comment">[<span class="hljs-comment">[1,2,3]</span>,<span class="hljs-comment">[3,8,4]</span>,<span class="hljs-comment">[5,3,5]</span>]</span><br><br>输出：1<br><br>解释：路径 <span class="hljs-comment">[1,2,3,4,5]</span> 的相邻格子差值绝对值最大为 1 ，比路径 <span class="hljs-comment">[1,3,5,3,5]</span> 更优。<br></code></pre></div></td></tr></table></figure><br>示例 3：<br><figure class="highlight inform7"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs inform7">输入：heights = <span class="hljs-comment">[<span class="hljs-comment">[1,2,1,1,1]</span>,<span class="hljs-comment">[1,2,1,2,1]</span>,<span class="hljs-comment">[1,2,1,2,1]</span>,<span class="hljs-comment">[1,2,1,2,1]</span>,<span class="hljs-comment">[1,1,1,2,1]</span>]</span><br><br>输出：0<br><br>解释：上图所示路径不需要消耗任何体力。<br></code></pre></div></td></tr></table></figure></p>
+<p>提示：</p>
+<ul>
+<li>rows == heights.length</li>
+<li>columns == heights[i].length</li>
+<li>1 &lt;= rows, columns &lt;= 100</li>
+<li>1 &lt;= heights[i][j] &lt;= $10^6$</li>
+</ul>
+<hr>
+<h3 id="基本分析"><a href="#基本分析" class="headerlink" title="基本分析"></a>基本分析</h3><p>对于这道题，可能会有同学想这是不是应该用 DP 呀？</p>
+<p>特别是接触过<a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/mp/appmsgalbum?__biz=MzU4NDE3MTEyMA==&amp;action=getalbum&amp;album_id=1773144264147812354&amp;scene=173&amp;from_msgid=2247485319&amp;from_itemidx=1&amp;count=3#wechat_redirect">「路径问题」</a>但又还没系统学完的同学。</p>
+<p><strong>事实上，当题目允许往任意方向移动时，考察的往往就不是 DP 了，而是图论。</strong></p>
+<p><strong>从本质上说，DP 问题是一类特殊的图论问题。</strong></p>
+<p><strong>那为什么有一些 DP 题目简单修改条件后，就只能彻底转化为图论问题来解决了呢？</strong></p>
+<p><strong>这是因为修改条件后，导致我们 DP 状态展开不再是一个拓扑序列，也就是我们的图不再是一个拓扑图。</strong></p>
+<p><strong>换句话说，DP 题虽然都属于图论范畴。</strong></p>
+<p><strong>但对于不是拓扑图的图论问题，我们无法使用 DP 求解。</strong></p>
+<p><strong>而此类看似 DP，实则图论的问题，通常是最小生成树或者最短路问题。</strong></p>
+<hr>
+<h3 id="Kruskal"><a href="#Kruskal" class="headerlink" title="Kruskal"></a>Kruskal</h3><p><strong>当一道题我们决定往「图论」方向思考时，我们的重点应该放在「如何建图」上。</strong></p>
+<p>因为解决某个特定的图论问题（最短路/最小生成树/二分图匹配），我们都是使用特定的算法。</p>
+<p>由于使用到的算法都有固定模板，因此编码难度很低，而「如何建图」的思维难度则很高。</p>
+<p>对于本题，我们可以按照如下分析进行建图：</p>
+<p>因为在任意格子可以往「任意方向」移动，所以相邻的格子之间存在一条无向边。</p>
+<p>题目要我们求的就是<strong>从起点到终点的最短路径中，边权最大的值</strong>。</p>
+<p>我们可以先遍历所有的格子，将所有的边加入集合。</p>
+<p>存储的格式为数组 $[a, b, w]$ ，代表编号为 $a$ 的点和编号为 $b$ 的点之间的权重为 $w$。</p>
+<p>按照题意，$w$ 为两者的高度差的绝对值。</p>
+<p>对集合进行排序，按照 $w$ 进行从小到大排序（Kruskal 部分）。</p>
+<p>当我们有了所有排好序的候选边集合之后，我们可以对边进行从前往后处理，每次加入一条边之后，使用并查集来查询「起点」和「终点」是否连通（并查集部分）。</p>
+<p><strong>当第一次判断「起点」和「终点」联通时，说明我们「最短路径」的所有边都已经应用到并查集上了，而且由于我们的边是按照「从小到大」进行排序，因此最后一条添加的边就是「最短路径」上权重最大的边。</strong></p>
+<p>代码：<br><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-type">int</span> <span class="hljs-variable">N</span> <span class="hljs-operator">=</span> <span class="hljs-number">10009</span>;<br>    <span class="hljs-type">int</span>[] p = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[N];<br>    <span class="hljs-type">int</span> row, col;<br>    <span class="hljs-keyword">void</span> <span class="hljs-title function_">union</span><span class="hljs-params">(<span class="hljs-type">int</span> a, <span class="hljs-type">int</span> b)</span> &#123;<br>        p[find(a)] = p[find(b)];<br>    &#125;<br>    <span class="hljs-type">boolean</span> <span class="hljs-title function_">query</span><span class="hljs-params">(<span class="hljs-type">int</span> a, <span class="hljs-type">int</span> b)</span> &#123;<br>        <span class="hljs-keyword">return</span> p[find(a)] == p[find(b)];<br>    &#125;<br>    <span class="hljs-type">int</span> <span class="hljs-title function_">find</span><span class="hljs-params">(<span class="hljs-type">int</span> x)</span> &#123;<br>        <span class="hljs-keyword">if</span> (p[x] != x) p[x] = find(p[x]);<br>        <span class="hljs-keyword">return</span> p[x];<br>    &#125;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">minimumEffortPath</span><span class="hljs-params">(<span class="hljs-type">int</span>[][] heights)</span> &#123;<br>        row = heights.length;<br>        col = heights[<span class="hljs-number">0</span>].length;<br><br>        <span class="hljs-comment">// 初始化并查集</span><br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; row * col; i++) p[i] = i;<br><br>        <span class="hljs-comment">// 预处理出所有的边</span><br>        <span class="hljs-comment">// edge 存的是 [a, b, w]：代表从 a 到 b 的体力值为 w</span><br>        <span class="hljs-comment">// 虽然我们可以往四个方向移动，但是只要对于每个点都添加「向右」和「向下」两条边的话，其实就已经覆盖了所有边了</span><br>        List&lt;<span class="hljs-type">int</span>[]&gt; edges = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; row; i++) &#123;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; j &lt; col; j++) &#123;<br>                <span class="hljs-type">int</span> <span class="hljs-variable">idx</span> <span class="hljs-operator">=</span> getIndex(i, j);<br>                <span class="hljs-keyword">if</span> (i + <span class="hljs-number">1</span> &lt; row) &#123;<br>                    <span class="hljs-type">int</span> <span class="hljs-variable">a</span> <span class="hljs-operator">=</span> idx, b = getIndex(i + <span class="hljs-number">1</span>, j);<br>                    <span class="hljs-type">int</span> <span class="hljs-variable">w</span> <span class="hljs-operator">=</span> Math.abs(heights[i][j] - heights[i + <span class="hljs-number">1</span>][j]);<br>                    edges.add(<span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[]&#123;a, b, w&#125;);<br>                &#125;<br>                <span class="hljs-keyword">if</span> (j + <span class="hljs-number">1</span> &lt; col) &#123;<br>                    <span class="hljs-type">int</span> <span class="hljs-variable">a</span> <span class="hljs-operator">=</span> idx, b = getIndex(i, j + <span class="hljs-number">1</span>);<br>                    <span class="hljs-type">int</span> <span class="hljs-variable">w</span> <span class="hljs-operator">=</span> Math.abs(heights[i][j] - heights[i][j + <span class="hljs-number">1</span>]);<br>                    edges.add(<span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[]&#123;a, b, w&#125;);<br>                &#125;<br>            &#125;<br>        &#125;<br><br>        <span class="hljs-comment">// 根据权值 w 降序</span><br>        Collections.sort(edges, (a,b)-&gt;a[<span class="hljs-number">2</span>]-b[<span class="hljs-number">2</span>]);<br><br>        <span class="hljs-comment">// 从「小边」开始添加，当某一条边别应用之后，恰好使用得「起点」和「结点」联通</span><br>        <span class="hljs-comment">// 那么代表找到了「最短路径」中的「权重最大的边」</span><br>        <span class="hljs-type">int</span> <span class="hljs-variable">start</span> <span class="hljs-operator">=</span> getIndex(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>), end = getIndex(row - <span class="hljs-number">1</span>, col - <span class="hljs-number">1</span>);<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span>[] edge : edges) &#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">a</span> <span class="hljs-operator">=</span> edge[<span class="hljs-number">0</span>], b = edge[<span class="hljs-number">1</span>], w = edge[<span class="hljs-number">2</span>];<br>            union(a, b);<br>            <span class="hljs-keyword">if</span> (query(start, end)) &#123;<br>                <span class="hljs-keyword">return</span> w;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>; <br>    &#125;<br>    <span class="hljs-type">int</span> <span class="hljs-title function_">getIndex</span><span class="hljs-params">(<span class="hljs-type">int</span> x, <span class="hljs-type">int</span> y)</span> &#123;<br>        <span class="hljs-keyword">return</span> x * col  + y;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure></p>
+<p>令行数为 $r$，列数为 $c$，那么节点的数量为 $r <em> c$，无向边的数量严格为 $r </em> (c - 1) + c <em> (r - 1)$，数量级上为 $r </em> c$。</p>
+<ul>
+<li>时间复杂度：获取所有的边复杂度为 $O(r <em> c)$，排序复杂度为 $O((r </em> c)\log{(r <em> c)})$，遍历得到最终解复杂度为 $O(r </em> c)$。整体复杂度为 $O((r <em> c)\log{(r </em> c)})$。</li>
+<li>空间复杂度：使用了并查集数组。复杂度为 $O(r * c)$。</li>
+</ul>
+<hr>
+<h3 id="证明"><a href="#证明" class="headerlink" title="证明"></a>证明</h3><p><strong>我们之所以能够这么做，是因为「跳出循环前所遍历的最后一条边必然是最优路径上的边，而且是 $w$ 最大的边」。</strong></p>
+<p>我们可以用「反证法」来证明这个结论为什么是正确的。</p>
+<p>我们先假设「跳出循环前所遍历的最后一条边必然是最优路径上的边，而且是 $w$ 最大的边」不成立：</p>
+<p>我们令循环终止前的最后一条边为 <code>a</code></p>
+<ol>
+<li><p><em>假设 a 不在最优路径内</em>：如果 $a$ 并不在最优路径内，即最优路径是由 $a$ 边之前的边构成，那么 $a$ 边不会对左上角和右下角节点的连通性产生影响。也就是在遍历到该边之前，左上角和右下角应该是联通的，逻辑上循环会在遍历到该边前终止。与我们循环的决策逻辑冲突。</p>
+</li>
+<li><p><em>$a$ 在最优路径内，但不是 $w$ 最大的边</em>：我们在遍历之前就已经排好序。与排序逻辑冲突。</p>
+</li>
+</ol>
+<p>因此，我们的结论是正确的。<code>a</code> 边必然属于「最短路径」并且是权重最大的边。</p>
+<hr>
+<h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>这是我们「刷穿 LeetCode」系列文章的第 <code>No.1631</code> 篇，系列开始于 2021/01/01，截止于起始日 LeetCode 上共有 1916 道题目，部分是有锁题，我们将先把所有不带锁的题目刷完。</p>
+<p>在这个系列文章里面，除了讲解解题思路以外，还会尽可能给出最为简洁的代码。如果涉及通解还会相应的代码模板。</p>
+<p>为了方便各位同学能够电脑上进行调试和提交代码，我建立了相关的仓库：<a target="_blank" rel="noopener" href="https://github.com/SharingSource/LogicStack-LeetCode">https://github.com/SharingSource/LogicStack-LeetCode</a> 。</p>
+<p>在仓库地址里，你可以看到系列文章的题解链接、系列文章的相应代码、LeetCode 原题链接和其他优选题解。</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%B9%B6%E6%9F%A5%E9%9B%86/">并查集</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E6%9C%80%E5%B0%8F%E7%94%9F%E6%88%90%E6%A0%91/">最小生成树</a>
+                    
+                      <a class="hover-with-bg" href="/tags/Kruskal/">Kruskal</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/01/29/35.%20%E6%90%9C%E7%B4%A2%E6%8F%92%E5%85%A5%E4%BD%8D%E7%BD%AE%EF%BC%88%E7%AE%80%E5%8D%95%EF%BC%89/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">LC 35. 搜索插入位置</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/01/27/724.%20%E5%AF%BB%E6%89%BE%E6%95%B0%E7%BB%84%E7%9A%84%E4%B8%AD%E5%BF%83%E4%B8%8B%E6%A0%87%EF%BC%88%E7%AE%80%E5%8D%95%EF%BC%89/">
+                        <span class="hidden-mobile">LC 724. 寻找数组的中心下标</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+  <div class="col-lg-7 mx-auto nopadding-x-md">
+    <div class="container custom post-custom mx-auto">
+      <img src="https://oscimg.oschina.net/oscnet/up-19688dc1af05cf8bdea43b2a863038ab9e5.png" srcset="/img/loading.gif" lazyload class="rounded mx-auto d-block mt-5" style="width:900px; height:500px;">
+    </div>
+  </div>
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.staticfile.org/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.staticfile.org/tocbot/4.18.2/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.staticfile.org/anchor-js/4.3.1/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.11/clipboard.min.js" ></script>
+  
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.bootcdn.net/ajax/libs/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        loader: {
+          
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.staticfile.org/mathjax/3.2.0/es5/tex-svg.js" ></script>
+
+  
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

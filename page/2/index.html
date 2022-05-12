@@ -1,0 +1,987 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/oimg/RoundCorner.png">
+  <link rel="icon" href="/oimg/RoundCorner.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="宫水三叶">
+  <meta name="keywords" content="算法, 数据结构, 题解">
+  
+    <meta property="og:type" content="website">
+<meta property="og:title" content="宫水三叶的刷题日记">
+<meta property="og:url" content="http://example.com/page/2/index.html">
+<meta property="og:site_name" content="宫水三叶的刷题日记">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:author" content="宫水三叶">
+<meta property="article:tag" content="算法, 数据结构, 题解">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  <title>宫水三叶的刷题日记</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"|","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.1.0"></head>
+
+
+<body>
+  <header style="height: 100vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>宫水三叶の刷题日记</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/image_216.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="宫水三叶の刷题日记">
+              
+            </span>
+
+            
+          </div>
+
+          
+            <div class="scroll-down-bar">
+              <i class="iconfont icon-arrowdown"></i>
+            </div>
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      <div class="container nopadding-x-md">
+        <div class="py-5" id="board"
+          style=margin-top:0>
+          
+          <div class="container">
+            <div class="row">
+              <div class="col-12 col-md-10 m-auto">
+                
+
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2022/04/30/908.%20%E6%9C%80%E5%B0%8F%E5%B7%AE%E5%80%BC%20I%EF%BC%88%E7%AE%80%E5%8D%95%EF%BC%89/" target="_self">
+          LC 908. 最小差值 I
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2022/04/30/908.%20%E6%9C%80%E5%B0%8F%E5%B7%AE%E5%80%BC%20I%EF%BC%88%E7%AE%80%E5%8D%95%EF%BC%89/" target="_self">
+          
+          题目描述这是 LeetCode 上的 908. 最小差值 I ，难度为 简单。 给你一个整数数组 nums，和一个整数 k 。 在一个操作中，您可以选择 $0 &lt;&#x3D; i &lt; nums.length$ 的任何索引 i 。将 $nums[i]$ 改为 $nums[i] + x$ ，其中 $x$ 是一个范围为 $[-k, k]$ 的整数。对于每个索引 i ，最多 只能 应用 一次 此操作。
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-04-30 01:53" pubdate>
+              2022-04-30
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E6%A8%A1%E6%8B%9F/">模拟</a>
+            
+              <a href="/tags/%E8%84%91%E7%AD%8B%E6%80%A5%E8%BD%AC%E5%BC%AF/">脑筋急转弯</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2022/04/29/427.%20%E5%BB%BA%E7%AB%8B%E5%9B%9B%E5%8F%89%E6%A0%91%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/" target="_self">
+          LC 427. 建立四叉树
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2022/04/29/427.%20%E5%BB%BA%E7%AB%8B%E5%9B%9B%E5%8F%89%E6%A0%91%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/" target="_self">
+          
+          题目描述这是 LeetCode 上的 427. 建立四叉树 ，难度为 中等。 给你一个 $n * n$ 矩阵 grid ，矩阵由若干 $0$ 和 $1$ 组成。请你用四叉树表示该矩阵 grid 。 你需要返回能表示矩阵的 四叉树 的根结点。 注意，当 isLeaf 为 False 时，你可以把 True 或者 False 赋值给节点，两种值都会被判题机制 接受 。 四叉树数据结构中，每个内部节点只
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-04-29 00:49" pubdate>
+              2022-04-29
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E5%89%8D%E7%BC%80%E5%92%8C/">前缀和</a>
+            
+              <a href="/tags/%E9%80%92%E5%BD%92/">递归</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2022/04/28/905.%20%E6%8C%89%E5%A5%87%E5%81%B6%E6%8E%92%E5%BA%8F%E6%95%B0%E7%BB%84%EF%BC%88%E7%AE%80%E5%8D%95%EF%BC%89/" target="_self">
+          LC 905. 按奇偶排序数组
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2022/04/28/905.%20%E6%8C%89%E5%A5%87%E5%81%B6%E6%8E%92%E5%BA%8F%E6%95%B0%E7%BB%84%EF%BC%88%E7%AE%80%E5%8D%95%EF%BC%89/" target="_self">
+          
+          题目描述这是 LeetCode 上的 905. 按奇偶排序数组 ，难度为 简单。 给你一个整数数组 nums，将 nums 中的的所有偶数元素移动到数组的前面，后跟所有奇数元素。 返回满足此条件的 任一数组 作为答案。 示例 1：12345输入：nums &#x3D; [3,1,2,4]输出：[2,4,3,1]解释：[4,2,3,1]、[2,4,1,3] 和 [4,2,1,3] 也会被视作正确答案。示例 2
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-04-28 00:45" pubdate>
+              2022-04-28
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E6%A8%A1%E6%8B%9F/">模拟</a>
+            
+              <a href="/tags/%E5%8F%8C%E6%8C%87%E9%92%88/">双指针</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2022/04/27/417.%20%E5%A4%AA%E5%B9%B3%E6%B4%8B%E5%A4%A7%E8%A5%BF%E6%B4%8B%E6%B0%B4%E6%B5%81%E9%97%AE%E9%A2%98%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/" target="_self">
+          LC 417. 太平洋大西洋水流问题
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2022/04/27/417.%20%E5%A4%AA%E5%B9%B3%E6%B4%8B%E5%A4%A7%E8%A5%BF%E6%B4%8B%E6%B0%B4%E6%B5%81%E9%97%AE%E9%A2%98%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/" target="_self">
+          
+          题目描述这是 LeetCode 上的 417. 太平洋大西洋水流问题 ，难度为 中等。 有一个 m × n 的矩形岛屿，与 太平洋 和 大西洋 相邻。 “太平洋” 处于大陆的左边界和上边界，而 “大西洋” 处于大陆的右边界和下边界。 这个岛被分割成一个由若干方形单元格组成的网格。给定一个 m x n 的整数矩阵 heights ， $heights[r][c]$ 表示坐标 $(r, c)$ 上单元
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-04-27 01:15" pubdate>
+              2022-04-27
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/DFS/">DFS</a>
+            
+              <a href="/tags/%E5%B9%B6%E6%9F%A5%E9%9B%86/">并查集</a>
+            
+              <a href="/tags/BFS/">BFS</a>
+            
+              <a href="/tags/%E5%A4%9A%E6%BA%90-BFS/">多源 BFS</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2022/04/26/883.%20%E4%B8%89%E7%BB%B4%E5%BD%A2%E4%BD%93%E6%8A%95%E5%BD%B1%E9%9D%A2%E7%A7%AF%EF%BC%88%E7%AE%80%E5%8D%95%EF%BC%89/" target="_self">
+          LC 883. 三维形体投影面积
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2022/04/26/883.%20%E4%B8%89%E7%BB%B4%E5%BD%A2%E4%BD%93%E6%8A%95%E5%BD%B1%E9%9D%A2%E7%A7%AF%EF%BC%88%E7%AE%80%E5%8D%95%EF%BC%89/" target="_self">
+          
+          题目描述这是 LeetCode 上的 883. 三维形体投影面积 ，难度为 简单。 在 $n  n$ 的网格 grid 中，我们放置了一些与 x，y，z 三轴对齐的 $1  1 * 1$ 立方体。 每个值 $v &#x3D; grid[i][j]$ 表示 $v$ 个正方体叠放在单元格 $(i, j)$ 上。 现在，我们查看这些立方体在 xy、yz 和 zx 平面上的投影。 投影 就像影子，将 三维 形体映射
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-04-26 00:52" pubdate>
+              2022-04-26
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E6%A8%A1%E6%8B%9F/">模拟</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2022/04/25/398.%20%E9%9A%8F%E6%9C%BA%E6%95%B0%E7%B4%A2%E5%BC%95%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/" target="_self">
+          LC 398. 随机数索引
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2022/04/25/398.%20%E9%9A%8F%E6%9C%BA%E6%95%B0%E7%B4%A2%E5%BC%95%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/" target="_self">
+          
+          题目描述这是 LeetCode 上的 398. 随机数索引 ，难度为 中等。 给定一个可能含有重复元素的整数数组，要求随机输出给定的数字的索引。 您可以假设给定的数字一定存在于数组中。 注意： 数组大小可能非常大。 使用太多额外空间的解决方案将不会通过测试。 示例:12345678int[] nums &#x3D; new int[] &amp;#123;1,2,3,3,3&amp;#125;;Solution solut
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-04-25 01:25" pubdate>
+              2022-04-25
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E5%93%88%E5%B8%8C%E8%A1%A8/">哈希表</a>
+            
+              <a href="/tags/%E6%A8%A1%E6%8B%9F/">模拟</a>
+            
+              <a href="/tags/%E9%9A%8F%E6%9C%BA%E5%8C%96/">随机化</a>
+            
+              <a href="/tags/%E8%93%84%E6%B0%B4%E6%B1%A0%E6%8A%BD%E6%A0%B7/">蓄水池抽样</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2022/04/24/868.%20%E4%BA%8C%E8%BF%9B%E5%88%B6%E9%97%B4%E8%B7%9D%EF%BC%88%E7%AE%80%E5%8D%95%EF%BC%89/" target="_self">
+          LC 868. 二进制间距
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2022/04/24/868.%20%E4%BA%8C%E8%BF%9B%E5%88%B6%E9%97%B4%E8%B7%9D%EF%BC%88%E7%AE%80%E5%8D%95%EF%BC%89/" target="_self">
+          
+          题目描述这是 LeetCode 上的 868. 二进制间距 ，难度为 简单。 给定一个正整数 $n$，找到并返回 $n$ 的二进制表示中两个 相邻 $1$ 之间的 最长距离 。如果不存在两个相邻的 $1$，返回 $0$ 。 如果只有 $0$ 将两个 $1$ 分隔开（可能不存在 $0$ ），则认为这两个 $1$ 彼此 相邻 。两个 $1$ 之间的距离是它们的二进制表示中位置的绝对差。例如，&amp;quot
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-04-24 00:45" pubdate>
+              2022-04-24
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E6%A8%A1%E6%8B%9F/">模拟</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2022/04/23/587.%20%E5%AE%89%E8%A3%85%E6%A0%85%E6%A0%8F%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/" target="_self">
+          LC 587. 安装栅栏
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2022/04/23/587.%20%E5%AE%89%E8%A3%85%E6%A0%85%E6%A0%8F%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/" target="_self">
+          
+          题目描述这是 LeetCode 上的 587. 安装栅栏 ，难度为 困难。 在一个二维的花园中，有一些用 $(x, y)$ 坐标表示的树。由于安装费用十分昂贵，你的任务是先用最短的绳子围起所有的树。只有当所有的树都被绳子包围时，花园才能围好栅栏。 你需要找到正好位于栅栏边界上的树的坐标。 示例 1:1234输入: [[1,1],[2,2],[2,0],[2,4],[3,3],[4,2]]输出: [
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-04-23 00:47" pubdate>
+              2022-04-23
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E8%AE%A1%E7%AE%97%E5%87%A0%E4%BD%95/">计算几何</a>
+            
+              <a href="/tags/%E5%87%B8%E5%8C%85/">凸包</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2022/04/22/396.%20%E6%97%8B%E8%BD%AC%E5%87%BD%E6%95%B0%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/" target="_self">
+          LC 396. 旋转函数
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2022/04/22/396.%20%E6%97%8B%E8%BD%AC%E5%87%BD%E6%95%B0%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/" target="_self">
+          
+          题目描述这是 LeetCode 上的 396. 旋转函数 ，难度为 中等。 给定一个长度为 $n$ 的整数数组 $nums$ 。 假设 $arr_k$ 是数组 $nums$ 顺时针旋转 $k$ 个位置后的数组，我们定义 $nums$ 的 旋转函数  F 为：  F(k) &#x3D; 0 * arrk[0] + 1 * arrk[1] + ... + (n - 1) * arrk[n - 1]  返回 F(
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-04-22 00:59" pubdate>
+              2022-04-22
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3/">滑动窗口</a>
+            
+              <a href="/tags/%E5%89%8D%E7%BC%80%E5%92%8C/">前缀和</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2022/04/21/824.%20%E5%B1%B1%E7%BE%8A%E6%8B%89%E4%B8%81%E6%96%87%EF%BC%88%E7%AE%80%E5%8D%95%EF%BC%89/" target="_self">
+          LC 824. 山羊拉丁文
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2022/04/21/824.%20%E5%B1%B1%E7%BE%8A%E6%8B%89%E4%B8%81%E6%96%87%EF%BC%88%E7%AE%80%E5%8D%95%EF%BC%89/" target="_self">
+          
+          题目描述这是 LeetCode 上的 824. 山羊拉丁文 ，难度为 简单。 给你一个由若干单词组成的句子 sentence，单词间由空格分隔。每个单词仅由大写和小写英文字母组成。 请你将句子转换为 “山羊拉丁文（Goat Latin）”（一种类似于 猪拉丁文 - Pig Latin 的虚构语言）。山羊拉丁文的规则如下：  如果单词以元音开头（&#39;a&#39;, &#39;e&#39;, &amp;
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-04-21 00:48" pubdate>
+              2022-04-21
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E6%A8%A1%E6%8B%9F/">模拟</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2022/04/20/388.%20%E6%96%87%E4%BB%B6%E7%9A%84%E6%9C%80%E9%95%BF%E7%BB%9D%E5%AF%B9%E8%B7%AF%E5%BE%84%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/" target="_self">
+          LC 388. 文件的最长绝对路径
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2022/04/20/388.%20%E6%96%87%E4%BB%B6%E7%9A%84%E6%9C%80%E9%95%BF%E7%BB%9D%E5%AF%B9%E8%B7%AF%E5%BE%84%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/" target="_self">
+          
+          题目描述这是 LeetCode 上的 388. 文件的最长绝对路径 ，难度为 中等。 假设有一个同时存储文件和目录的文件系统。下图展示了文件系统的一个示例：  这里将 dir 作为根目录中的唯一目录。dir 包含两个子目录 subdir1 和 subdir2 。 subdir1 包含文件 file1.ext 和子目录 subsubdir1；subdir2 包含子目录 subsubdir2，该子目录
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-04-20 00:42" pubdate>
+              2022-04-20
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E5%93%88%E5%B8%8C%E8%A1%A8/">哈希表</a>
+            
+              <a href="/tags/%E6%A8%A1%E6%8B%9F/">模拟</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2022/04/19/821.%20%E5%AD%97%E7%AC%A6%E7%9A%84%E6%9C%80%E7%9F%AD%E8%B7%9D%E7%A6%BB%EF%BC%88%E7%AE%80%E5%8D%95%EF%BC%89/" target="_self">
+          LC 821. 字符的最短距离
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2022/04/19/821.%20%E5%AD%97%E7%AC%A6%E7%9A%84%E6%9C%80%E7%9F%AD%E8%B7%9D%E7%A6%BB%EF%BC%88%E7%AE%80%E5%8D%95%EF%BC%89/" target="_self">
+          
+          题目描述这是 LeetCode 上的 821. 字符的最短距离 ，难度为 简单。 给你一个字符串 s 和一个字符 c ，且 c 是 s 中出现过的字符。 返回一个整数数组 answer，其中 $answer.length &#x3D;&#x3D; s.length$ 且 $answer[i]$ 是 s 中从下标 $i$ 到离它 最近 的字符 c 的 距离 。 两个下标 $i$ 和 $j$ 之间的 距离 为 abs(i
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-04-19 01:03" pubdate>
+              2022-04-19
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E6%A8%A1%E6%8B%9F/">模拟</a>
+            
+              <a href="/tags/BFS/">BFS</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2022/04/18/386.%20%E5%AD%97%E5%85%B8%E5%BA%8F%E6%8E%92%E6%95%B0%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/" target="_self">
+          LC 386. 字典序排数
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2022/04/18/386.%20%E5%AD%97%E5%85%B8%E5%BA%8F%E6%8E%92%E6%95%B0%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/" target="_self">
+          
+          题目描述这是 LeetCode 上的 386. 字典序排数 ，难度为 中等。 给你一个整数 n ，按字典序返回范围 $[1, n]$ 内所有整数。 你必须设计一个时间复杂度为 $O(n)$ 且使用 $O(1)$ 额外空间的算法。 示例 1：123输入：n &#x3D; 13输出：[1,10,11,12,13,2,3,4,5,6,7,8,9]示例 2：123输入：n &#x3D; 2输出：[1,2] 提示：  $1 &amp;
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-04-18 01:19" pubdate>
+              2022-04-18
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/DFS/">DFS</a>
+            
+              <a href="/tags/%E9%80%92%E5%BD%92/">递归</a>
+            
+              <a href="/tags/%E8%BF%AD%E4%BB%A3/">迭代</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2022/04/17/819.%20%E6%9C%80%E5%B8%B8%E8%A7%81%E7%9A%84%E5%8D%95%E8%AF%8D%EF%BC%88%E7%AE%80%E5%8D%95%EF%BC%89/" target="_self">
+          LC 819. 最常见的单词
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2022/04/17/819.%20%E6%9C%80%E5%B8%B8%E8%A7%81%E7%9A%84%E5%8D%95%E8%AF%8D%EF%BC%88%E7%AE%80%E5%8D%95%EF%BC%89/" target="_self">
+          
+          题目描述这是 LeetCode 上的 819. 最常见的单词 ，难度为 简单。 给定一个段落 (paragraph) 和一个禁用单词列表 (banned)。返回出现次数最多，同时不在禁用列表中的单词。 题目保证至少有一个词不在禁用列表中，而且答案唯一。 禁用列表中的单词用小写字母表示，不含标点符号。段落中的单词不区分大小写。答案都是小写字母。 示例：1234567891011输入: paragra
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-04-17 00:55" pubdate>
+              2022-04-17
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E5%93%88%E5%B8%8C%E8%A1%A8/">哈希表</a>
+            
+              <a href="/tags/%E6%A8%A1%E6%8B%9F/">模拟</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2022/04/16/479.%20%E6%9C%80%E5%A4%A7%E5%9B%9E%E6%96%87%E6%95%B0%E4%B9%98%E7%A7%AF%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/" target="_self">
+          LC 479. 最大回文数乘积
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2022/04/16/479.%20%E6%9C%80%E5%A4%A7%E5%9B%9E%E6%96%87%E6%95%B0%E4%B9%98%E7%A7%AF%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/" target="_self">
+          
+          题目描述这是 LeetCode 上的 479. 最大回文数乘积 ，难度为 困难。 给定一个整数 $n$ ，返回 可表示为两个 $n$ 位整数乘积的 最大回文整数 。 因为答案可能非常大，所以返回它对 $1337$ 取余 。 示例 1:12345输入：n &#x3D; 2输出：987解释：99 x 91 &#x3D; 9009, 9009 % 1337 &#x3D; 987示例 2:123输入： n &#x3D; 1输出： 9 提示:
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-04-16 01:10" pubdate>
+              2022-04-16
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E6%95%B0%E5%AD%A6/">数学</a>
+            
+              <a href="/tags/%E6%9E%9A%E4%B8%BE/">枚举</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+
+
+  <nav aria-label="navigation">
+    <span class="pagination" id="pagination">
+      <a class="extend prev" rel="prev" href="/"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/#board">3</a><a class="page-number" href="/page/4/#board">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/36/#board">36</a><a class="extend next" rel="next" href="/page/3/#board"><i class="iconfont icon-arrowright"></i></a>
+    </span>
+  </nav>
+
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.staticfile.org/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.bootcdn.net/ajax/libs/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

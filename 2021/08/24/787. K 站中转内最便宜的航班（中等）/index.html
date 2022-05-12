@@ -1,0 +1,600 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/oimg/RoundCorner.png">
+  <link rel="icon" href="/oimg/RoundCorner.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="宫水三叶">
+  <meta name="keywords" content="算法, 数据结构, 题解">
+  
+    <meta name="description" content="题目描述这是 LeetCode 上的 787. K 站中转内最便宜的航班 ，难度为 中等。 有 n 个城市通过一些航班连接。给你一个数组 flights，其中 $flights[i] &#x3D; [from_i, to_i, price_i]$ ，表示该航班都从城市 $from_i$ 开始，以价格 $price_i$ 抵达 $to_i$。 现在给定所有的城市和航班，以及出发城市 src 和目的地 dst，">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LC 787. K 站中转内最便宜的航班">
+<meta property="og:url" content="http://example.com/2021/08/24/787.%20K%20%E7%AB%99%E4%B8%AD%E8%BD%AC%E5%86%85%E6%9C%80%E4%BE%BF%E5%AE%9C%E7%9A%84%E8%88%AA%E7%8F%AD%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/index.html">
+<meta property="og:site_name" content="宫水三叶的刷题日记">
+<meta property="og:description" content="题目描述这是 LeetCode 上的 787. K 站中转内最便宜的航班 ，难度为 中等。 有 n 个城市通过一些航班连接。给你一个数组 flights，其中 $flights[i] &#x3D; [from_i, to_i, price_i]$ ，表示该航班都从城市 $from_i$ 开始，以价格 $price_i$ 抵达 $to_i$。 现在给定所有的城市和航班，以及出发城市 src 和目的地 dst，">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://s3-lc-upload.s3.amazonaws.com/uploads/2018/02/16/995.png">
+<meta property="og:image" content="https://s3-lc-upload.s3.amazonaws.com/uploads/2018/02/16/995.png">
+<meta property="og:image" content="https://pic.leetcode-cn.com/1629775402-BKrDNg-image.png">
+<meta property="og:image" content="https://pic.leetcode-cn.com/1629775378-YcJJzg-image.png">
+<meta property="og:image" content="https://pic.leetcode-cn.com/1629775353-jTgEoB-image.png">
+<meta property="article:published_time" content="2021-08-23T18:14:14.000Z">
+<meta property="article:modified_time" content="2022-05-12T04:05:32.081Z">
+<meta property="article:author" content="宫水三叶">
+<meta property="article:tag" content="最短路">
+<meta property="article:tag" content="Bellman Ford">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://s3-lc-upload.s3.amazonaws.com/uploads/2018/02/16/995.png">
+  
+  
+  <title>LC 787. K 站中转内最便宜的航班 - 宫水三叶的刷题日记</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/hint.css/2.7.0/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.7.2/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"|","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.1.0"></head>
+
+
+<body>
+  <header style="height: 50vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>宫水三叶の刷题日记</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/image_67.jpeg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="LC 787. K 站中转内最便宜的航班">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-author" aria-hidden="true"></i>
+      宫水三叶
+    </span>
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-08-24 02:14" pubdate>
+        2021年8月24日 凌晨
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      4k 字
+    </span>
+  
+
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">LC 787. K 站中转内最便宜的航班</h1>
+            
+            <div class="markdown-body">
+              <h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>这是 LeetCode 上的 <strong><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/cheapest-flights-within-k-stops/solution/gong-shui-san-xie-xiang-jie-bellman-ford-dc94/">787. K 站中转内最便宜的航班</a></strong> ，难度为 <strong>中等</strong>。</p>
+<p>有 <code>n</code> 个城市通过一些航班连接。给你一个数组 <code>flights</code>，其中 $flights[i] = [from_i, to_i, price_i]$ ，表示该航班都从城市 $from_i$ 开始，以价格 $price_i$ 抵达 $to_i$。</p>
+<p>现在给定所有的城市和航班，以及出发城市 <code>src</code> 和目的地 <code>dst</code>，你的任务是找到出一条最多经过 <code>k</code> 站中转的路线，使得从 <code>src</code> 到 <code>dst</code> 的 价格最便宜 ，并返回该价格。 如果不存在这样的路线，则输出 <code>-1</code>。</p>
+<p>示例 1：<br><figure class="highlight lua"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs lua">输入: <br>n = <span class="hljs-number">3</span>, edges = <span class="hljs-string">[[0,1,100],[1,2,100],[0,2,500]]</span><br>src = <span class="hljs-number">0</span>, dst = <span class="hljs-number">2</span>, k = <span class="hljs-number">1</span><br><br>输出: <span class="hljs-number">200</span><br><br>解释: <br>城市航班图如下<br>从城市 <span class="hljs-number">0</span> 到城市 <span class="hljs-number">2</span> 在 <span class="hljs-number">1</span> 站中转以内的最便宜价格是 <span class="hljs-number">200</span>，如图中红色所示。<br></code></pre></div></td></tr></table></figure><br><img src="https://s3-lc-upload.s3.amazonaws.com/uploads/2018/02/16/995.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p>示例 2：<br><figure class="highlight lua"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs lua">输入: <br>n = <span class="hljs-number">3</span>, edges = <span class="hljs-string">[[0,1,100],[1,2,100],[0,2,500]]</span><br>src = <span class="hljs-number">0</span>, dst = <span class="hljs-number">2</span>, k = <span class="hljs-number">0</span><br><br>输出: <span class="hljs-number">500</span><br><br>解释: <br>城市航班图如下<br>从城市 <span class="hljs-number">0</span> 到城市 <span class="hljs-number">2</span> 在 <span class="hljs-number">0</span> 站中转以内的最便宜价格是 <span class="hljs-number">500</span>，如图中蓝色所示。<br></code></pre></div></td></tr></table></figure><br><img src="https://s3-lc-upload.s3.amazonaws.com/uploads/2018/02/16/995.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p>提示：</p>
+<ul>
+<li>1 &lt;= n &lt;= 100</li>
+<li>0 &lt;= flights.length &lt;= (n * (n - 1) / 2)</li>
+<li>flights[i].length == 3</li>
+<li>0 &lt;= fromi, toi &lt; n</li>
+<li>fromi != toi</li>
+<li>1 &lt;= pricei &lt;= $10^4$</li>
+<li>航班没有重复，且不存在自环</li>
+<li>0 &lt;= src, dst, k &lt; n</li>
+<li>src != dst</li>
+</ul>
+<hr>
+<h3 id="基本分析"><a href="#基本分析" class="headerlink" title="基本分析"></a>基本分析</h3><p>从题面看就能知道，这是一类「有限制」的最短路问题。</p>
+<p>「限制最多经过不超过 $k$ 个点」等价于「限制最多不超过 $k + 1$ 条边」，而解决「有边数限制的最短路问题」是 SPFA 所不能取代 Bellman Ford 算法的经典应用之一（SPFA 能做，但不能直接做）。</p>
+<p><strong>Bellman Ford/SPFA 都是基于动态规划，其原始的状态定义为 $f[i][k]$ 代表从起点到 $i$ 点，且经过最多 $k$ 条边的最短路径。这样的状态定义引导我们能够使用 Bellman Ford 来解决有边数限制的最短路问题。</strong></p>
+<p><strong>同样多源汇最短路算法 Floyd 也是基于动态规划，其原始的三维状态定义为 $f[i][j][k]$ 代表从点 $i$ 到点 $j$，且经过的所有点编号不会超过 $k$（即可使用点编号范围为 $[1, k]$）的最短路径。这样的状态定义引导我们能够使用 Floyd 求最小环或者求“重心点”（即删除该点后，最短路值会变大）。</strong></p>
+<p>如果你对几类最短算法不熟悉，可以看 <a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzU4NDE3MTEyMA==&amp;mid=2247488007&amp;idx=1&amp;sn=9d0dcfdf475168d26a5a4bd6fcd3505d&amp;chksm=fd9cb918caeb300e1c8844583db5c5318a89e60d8d552747ff8c2256910d32acd9013c93058f&amp;token=754098973&amp;lang=zh_CN#rd">这里</a>，里面涵盖所有的「最短路算法」和「存图方式」。</p>
+<hr>
+<h3 id="Bellman-Ford-邻接矩阵"><a href="#Bellman-Ford-邻接矩阵" class="headerlink" title="Bellman Ford + 邻接矩阵"></a>Bellman Ford + 邻接矩阵</h3><p>回到本题，「限制最多经过不超过 $k$ 个点」等价于「限制最多不超过 $k + 1$ 条边」，因此可以使用 Bellman Ford 来求解。</p>
+<p>点的数量只有 $100$，可以直接使用「邻接矩阵」的方式进行存图。</p>
+<blockquote>
+<p>需要注意的是，在遍历所有的“点对/边”进行松弛操作前，需要先对 $dist$ 进行备份，否则会出现「本次松弛操作所使用到的边，也是在同一次迭代所更新的」，从而不满足边数限制的要求。<br>举个 🌰，例如本次松弛操作使用了从 $a$ 到 $b$ 的当前最短距离来更新 $dist[b]$，直接使用 $dist[a]$ 的话，不能确保 $dist[a]$ 不是在同一次迭代中所更新，如果 $dist[a]$ 是同一次迭代所更新的话，那么使用的边数将会大于 $k$ 条。<br>因此在每次迭代开始前，我们都应该对 $dist$ 进行备份，在迭代时使用备份来进行松弛操作。</p>
+</blockquote>
+<p><img src="https://pic.leetcode-cn.com/1629775402-BKrDNg-image.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<p>代码：<br><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-type">int</span> <span class="hljs-variable">N</span> <span class="hljs-operator">=</span> <span class="hljs-number">110</span>, INF = <span class="hljs-number">0x3f3f3f3f</span>;<br>    <span class="hljs-type">int</span>[][] g = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[N][N];<br>    <span class="hljs-type">int</span>[] dist = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[N];<br>    <span class="hljs-type">int</span> n, m, s, t, k;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">findCheapestPrice</span><span class="hljs-params">(<span class="hljs-type">int</span> _n, <span class="hljs-type">int</span>[][] flights, <span class="hljs-type">int</span> _src, <span class="hljs-type">int</span> _dst, <span class="hljs-type">int</span> _k)</span> &#123;<br>        n = _n; s = _src; t = _dst; k = _k + <span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; N; i++) &#123;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; j &lt; N; j++) &#123;<br>                g[i][j] = i == j ? <span class="hljs-number">0</span> : INF;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span>[] f : flights) &#123;<br>            g[f[<span class="hljs-number">0</span>]][f[<span class="hljs-number">1</span>]] = f[<span class="hljs-number">2</span>];<br>        &#125;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">ans</span> <span class="hljs-operator">=</span> bf();<br>        <span class="hljs-keyword">return</span> ans &gt; INF / <span class="hljs-number">2</span> ? -<span class="hljs-number">1</span> : ans;<br>    &#125;<br>    <span class="hljs-type">int</span> <span class="hljs-title function_">bf</span><span class="hljs-params">()</span> &#123;<br>        Arrays.fill(dist, INF);<br>        dist[s] = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">limit</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; limit &lt; k; limit++) &#123;<br>            <span class="hljs-type">int</span>[] clone = dist.clone();<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; n; i++) &#123;<br>                <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; j &lt; n; j++) &#123;<br>                    dist[j] = Math.min(dist[j], clone[i] + g[i][j]);<br>                &#125;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> dist[t];<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure></p>
+<ul>
+<li>时间复杂度：$O(k * n^2)$</li>
+<li>空间复杂度：$O(n^2)$</li>
+</ul>
+<hr>
+<h3 id="Bellman-Ford-类"><a href="#Bellman-Ford-类" class="headerlink" title="Bellman Ford + 类"></a>Bellman Ford + 类</h3><p>我们知道 Bellman Ford 需要遍历所有的边，而使用「邻接矩阵」的存图方式让我们不得不遍历所有的点对，复杂度为 $O(n^2)$。</p>
+<p>而边的数量 $m$ 的数据范围为 $0 &lt;= flights.length &lt;= (n * (n - 1) / 2)$，因此我们可以使用「类」的方式进行存图，从而确保在遍历所有边的时候，复杂度严格为 $O(m)$，而不是 $O(n^2)$。</p>
+<p><img src="https://pic.leetcode-cn.com/1629775378-YcJJzg-image.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<p>代码：<br><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">class</span> <span class="hljs-title class_">Edge</span> &#123;<br>        <span class="hljs-type">int</span> x, y, w;<br>        Edge(<span class="hljs-type">int</span> _x, <span class="hljs-type">int</span> _y, <span class="hljs-type">int</span> _w) &#123;<br>            x = _x; y = _y; w = _w;<br>        &#125;<br>    &#125;<br>    <span class="hljs-type">int</span> <span class="hljs-variable">N</span> <span class="hljs-operator">=</span> <span class="hljs-number">110</span>, INF = <span class="hljs-number">0x3f3f3f3f</span>;<br>    <span class="hljs-type">int</span>[] dist = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[N];<br>    List&lt;Edge&gt; list = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();<br>    <span class="hljs-type">int</span> n, m, s, t, k;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">findCheapestPrice</span><span class="hljs-params">(<span class="hljs-type">int</span> _n, <span class="hljs-type">int</span>[][] flights, <span class="hljs-type">int</span> _src, <span class="hljs-type">int</span> _dst, <span class="hljs-type">int</span> _k)</span> &#123;<br>        n = _n; s = _src; t = _dst; k = _k + <span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span>[] f : flights) &#123;<br>            list.add(<span class="hljs-keyword">new</span> <span class="hljs-title class_">Edge</span>(f[<span class="hljs-number">0</span>], f[<span class="hljs-number">1</span>], f[<span class="hljs-number">2</span>]));<br>        &#125;<br>        m = list.size();<br>        <span class="hljs-type">int</span> <span class="hljs-variable">ans</span> <span class="hljs-operator">=</span> bf();<br>        <span class="hljs-keyword">return</span> ans &gt; INF / <span class="hljs-number">2</span> ? -<span class="hljs-number">1</span> : ans;<br>    &#125;<br>    <span class="hljs-type">int</span> <span class="hljs-title function_">bf</span><span class="hljs-params">()</span> &#123;<br>        Arrays.fill(dist, INF);<br>        dist[s] = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; k; i++) &#123;<br>            <span class="hljs-type">int</span>[] clone = dist.clone();<br>            <span class="hljs-keyword">for</span> (Edge e : list) &#123;<br>                <span class="hljs-type">int</span> <span class="hljs-variable">x</span> <span class="hljs-operator">=</span> e.x, y = e.y, w = e.w;<br>                dist[y] = Math.min(dist[y], clone[x] + w);<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> dist[t];<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure></p>
+<ul>
+<li>时间复杂度：共进行 $k + 1$ 次迭代，每次迭代备份数组复杂度为 $O(n)$，然后遍历所有的边进行松弛操作，复杂度为 $O(m)$。整体复杂度为 $O(k * (n + m))$</li>
+<li>空间复杂度：$O(n + m)$</li>
+</ul>
+<hr>
+<h3 id="Bellman-Ford"><a href="#Bellman-Ford" class="headerlink" title="Bellman Ford"></a>Bellman Ford</h3><p>更进一步，由于 Bellman Ford 核心操作需要遍历所有的边，因此也可以直接使用 $flights$ 数组作为存图信息，而无须额外存图。</p>
+<p><img src="https://pic.leetcode-cn.com/1629775353-jTgEoB-image.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<p>代码：<br><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-type">int</span> <span class="hljs-variable">N</span> <span class="hljs-operator">=</span> <span class="hljs-number">110</span>, INF = <span class="hljs-number">0x3f3f3f3f</span>;<br>    <span class="hljs-type">int</span>[] dist = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[N];<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">findCheapestPrice</span><span class="hljs-params">(<span class="hljs-type">int</span> n, <span class="hljs-type">int</span>[][] flights, <span class="hljs-type">int</span> src, <span class="hljs-type">int</span> dst, <span class="hljs-type">int</span> k)</span> &#123;<br>        Arrays.fill(dist, INF);<br>        dist[src] = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">limit</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; limit &lt; k + <span class="hljs-number">1</span>; limit++) &#123;<br>            <span class="hljs-type">int</span>[] clone = dist.clone();<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span>[] f : flights) &#123;<br>                <span class="hljs-type">int</span> <span class="hljs-variable">x</span> <span class="hljs-operator">=</span> f[<span class="hljs-number">0</span>], y = f[<span class="hljs-number">1</span>], w = f[<span class="hljs-number">2</span>];<br>                dist[y] = Math.min(dist[y], clone[x] + w);<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> dist[dst] &gt; INF / <span class="hljs-number">2</span> ? -<span class="hljs-number">1</span> : dist[dst];<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure></p>
+<ul>
+<li>时间复杂度：共进行 $k + 1$ 次迭代，每次迭代备份数组复杂度为 $O(n)$，然后遍历所有的边进行松弛操作，复杂度为 $O(m)$。整体复杂度为 $O(k * (n + m))$</li>
+<li>空间复杂度：$O(n)$</li>
+</ul>
+<hr>
+<h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>这是我们「刷穿 LeetCode」系列文章的第 <code>No.787</code> 篇，系列开始于 2021/01/01，截止于起始日 LeetCode 上共有 1916 道题目，部分是有锁题，我们将先把所有不带锁的题目刷完。</p>
+<p>在这个系列文章里面，除了讲解解题思路以外，还会尽可能给出最为简洁的代码。如果涉及通解还会相应的代码模板。</p>
+<p>为了方便各位同学能够电脑上进行调试和提交代码，我建立了相关的仓库：<a target="_blank" rel="noopener" href="https://github.com/SharingSource/LogicStack-LeetCode">https://github.com/SharingSource/LogicStack-LeetCode</a> 。</p>
+<p>在仓库地址里，你可以看到系列文章的题解链接、系列文章的相应代码、LeetCode 原题链接和其他优选题解。</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E6%9C%80%E7%9F%AD%E8%B7%AF/">最短路</a>
+                    
+                      <a class="hover-with-bg" href="/tags/Bellman-Ford/">Bellman Ford</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/08/25/797.%20%E6%89%80%E6%9C%89%E5%8F%AF%E8%83%BD%E7%9A%84%E8%B7%AF%E5%BE%84%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">LC 797. 所有可能的路径</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/08/23/1646.%20%E8%8E%B7%E5%8F%96%E7%94%9F%E6%88%90%E6%95%B0%E7%BB%84%E4%B8%AD%E7%9A%84%E6%9C%80%E5%A4%A7%E5%80%BC%EF%BC%88%E7%AE%80%E5%8D%95%EF%BC%89/">
+                        <span class="hidden-mobile">LC 1646. 获取生成数组中的最大值</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+  <div class="col-lg-7 mx-auto nopadding-x-md">
+    <div class="container custom post-custom mx-auto">
+      <img src="https://oscimg.oschina.net/oscnet/up-19688dc1af05cf8bdea43b2a863038ab9e5.png" srcset="/img/loading.gif" lazyload class="rounded mx-auto d-block mt-5" style="width:900px; height:500px;">
+    </div>
+  </div>
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.staticfile.org/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.staticfile.org/tocbot/4.18.2/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.staticfile.org/anchor-js/4.3.1/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.11/clipboard.min.js" ></script>
+  
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.bootcdn.net/ajax/libs/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        loader: {
+          
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.staticfile.org/mathjax/3.2.0/es5/tex-svg.js" ></script>
+
+  
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

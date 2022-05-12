@@ -1,0 +1,981 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/oimg/RoundCorner.png">
+  <link rel="icon" href="/oimg/RoundCorner.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="宫水三叶">
+  <meta name="keywords" content="算法, 数据结构, 题解">
+  
+    <meta property="og:type" content="website">
+<meta property="og:title" content="宫水三叶的刷题日记">
+<meta property="og:url" content="http://example.com/page/32/index.html">
+<meta property="og:site_name" content="宫水三叶的刷题日记">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:author" content="宫水三叶">
+<meta property="article:tag" content="算法, 数据结构, 题解">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  <title>宫水三叶的刷题日记</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"|","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.1.0"></head>
+
+
+<body>
+  <header style="height: 100vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>宫水三叶の刷题日记</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/image_216.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="宫水三叶の刷题日记">
+              
+            </span>
+
+            
+          </div>
+
+          
+            <div class="scroll-down-bar">
+              <i class="iconfont icon-arrowdown"></i>
+            </div>
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      <div class="container nopadding-x-md">
+        <div class="py-5" id="board"
+          style=margin-top:0>
+          
+          <div class="container">
+            <div class="row">
+              <div class="col-12 col-md-10 m-auto">
+                
+
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/02/21/1438.%20%E7%BB%9D%E5%AF%B9%E5%B7%AE%E4%B8%8D%E8%B6%85%E8%BF%87%E9%99%90%E5%88%B6%E7%9A%84%E6%9C%80%E9%95%BF%E8%BF%9E%E7%BB%AD%E5%AD%90%E6%95%B0%E7%BB%84%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/" target="_self">
+          LC 1438. 绝对差不超过限制的最长连续子数组
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/02/21/1438.%20%E7%BB%9D%E5%AF%B9%E5%B7%AE%E4%B8%8D%E8%B6%85%E8%BF%87%E9%99%90%E5%88%B6%E7%9A%84%E6%9C%80%E9%95%BF%E8%BF%9E%E7%BB%AD%E5%AD%90%E6%95%B0%E7%BB%84%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/" target="_self">
+          
+          题目描述这是 LeetCode 上的 1438. 绝对差不超过限制的最长连续子数组 ，难度为 中等。 给你一个整数数组 nums ，和一个表示限制的整数 limit，请你返回最长连续子数组的长度，该子数组中的任意两个元素之间的绝对差必须小于或者等于 limit 。 如果不存在满足条件的子数组，则返回 0 。 示例 1：1234567891011121314输入：nums &#x3D; [8,2,4,7],
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-02-21 03:18" pubdate>
+              2021-02-21
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3/">滑动窗口</a>
+            
+              <a href="/tags/%E4%BA%8C%E5%88%86/">二分</a>
+            
+              <a href="/tags/%E5%8D%95%E8%B0%83%E9%98%9F%E5%88%97/">单调队列</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/02/20/697.%20%E6%95%B0%E7%BB%84%E7%9A%84%E5%BA%A6%EF%BC%88%E7%AE%80%E5%8D%95%EF%BC%89/" target="_self">
+          LC 697. 数组的度
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/02/20/697.%20%E6%95%B0%E7%BB%84%E7%9A%84%E5%BA%A6%EF%BC%88%E7%AE%80%E5%8D%95%EF%BC%89/" target="_self">
+          
+          题目描述这是 LeetCode 上的 697. 数组的度 ，难度为 简单。 给定一个非空且只包含非负数的整数数组 nums，数组的度的定义是指数组里任一元素出现频数的最大值。 你的任务是在 nums 中找到与 nums 拥有相同大小的度的最短连续子数组，返回其长度。 示例 1：1234567输入：[1, 2, 2, 3, 1]输出：2解释：输入数组的度是2，因为元素1和2的出现频数最大，均为2.连
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-02-20 01:48" pubdate>
+              2021-02-20
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E5%93%88%E5%B8%8C%E8%A1%A8/">哈希表</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/02/19/1004.%20%E6%9C%80%E5%A4%A7%E8%BF%9E%E7%BB%AD1%E7%9A%84%E4%B8%AA%E6%95%B0%20III%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/" target="_self">
+          LC 1004. 最大连续1的个数 III
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/02/19/1004.%20%E6%9C%80%E5%A4%A7%E8%BF%9E%E7%BB%AD1%E7%9A%84%E4%B8%AA%E6%95%B0%20III%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/" target="_self">
+          
+          题目描述这是 LeetCode 上的 1004. 最大连续1的个数 III ，难度为 中等。 给定一个由若干 $0$ 和 $1$ 组成的数组 A，我们最多可以将 $K$ 个值从 $0$ 变成 $1$ 。 返回仅包含 $1$ 的最长（连续）子数组的长度。 示例 1：12345输入：A &#x3D; [1,1,1,0,0,0,1,1,1,1,0], K &#x3D; 2输出：6解释： [1,1,1,0,0,1,1,1,1
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-02-19 02:17" pubdate>
+              2021-02-19
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E5%8F%8C%E6%8C%87%E9%92%88/">双指针</a>
+            
+              <a href="/tags/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3/">滑动窗口</a>
+            
+              <a href="/tags/%E4%BA%8C%E5%88%86/">二分</a>
+            
+              <a href="/tags/%E5%89%8D%E7%BC%80%E5%92%8C/">前缀和</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/02/18/995.%20K%20%E8%BF%9E%E7%BB%AD%E4%BD%8D%E7%9A%84%E6%9C%80%E5%B0%8F%E7%BF%BB%E8%BD%AC%E6%AC%A1%E6%95%B0%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/" target="_self">
+          LC 995. K 连续位的最小翻转次数
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/02/18/995.%20K%20%E8%BF%9E%E7%BB%AD%E4%BD%8D%E7%9A%84%E6%9C%80%E5%B0%8F%E7%BF%BB%E8%BD%AC%E6%AC%A1%E6%95%B0%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/" target="_self">
+          
+          题目描述这是 LeetCode 上的 995. K 连续位的最小翻转次数 ，难度为 困难。 在仅包含 0 和 1 的数组 A 中，一次 K 位翻转包括选择一个长度为 K 的（连续）子数组，同时将子数组中的每个 0 更改为 1，而每个 1 更改为 0。 返回所需的 K 位翻转的最小次数，以便数组没有值为 0 的元素。如果不可能，返回 -1。 示例 1：123输入：A &#x3D; [0,1,0], K &#x3D; 1
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-02-18 02:43" pubdate>
+              2021-02-18
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E8%B4%AA%E5%BF%83/">贪心</a>
+            
+              <a href="/tags/%E5%B7%AE%E5%88%86/">差分</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/02/17/566.%20%E9%87%8D%E5%A1%91%E7%9F%A9%E9%98%B5%EF%BC%88%E7%AE%80%E5%8D%95%EF%BC%89/" target="_self">
+          LC 566. 重塑矩阵
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/02/17/566.%20%E9%87%8D%E5%A1%91%E7%9F%A9%E9%98%B5%EF%BC%88%E7%AE%80%E5%8D%95%EF%BC%89/" target="_self">
+          
+          题目描述这是 LeetCode 上的 566. 重塑矩阵 ，难度为 简单。 在 MATLAB 中，有一个非常有用的函数 reshape，它可以将一个矩阵重塑为另一个大小不同的新矩阵，但保留其原始数据。 给出一个由二维数组表示的矩阵，以及两个正整数 r 和 c，分别表示想要的重构的矩阵的行数和列数。 重构后的矩阵需要将原始矩阵的所有元素以相同的行遍历顺序填充。 如果具有给定参数的 reshape 操
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-02-17 01:55" pubdate>
+              2021-02-17
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E6%A8%A1%E6%8B%9F/">模拟</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/02/16/561.%20%E6%95%B0%E7%BB%84%E6%8B%86%E5%88%86%20I%EF%BC%88%E7%AE%80%E5%8D%95%EF%BC%89/" target="_self">
+          LC 561. 数组拆分 I
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/02/16/561.%20%E6%95%B0%E7%BB%84%E6%8B%86%E5%88%86%20I%EF%BC%88%E7%AE%80%E5%8D%95%EF%BC%89/" target="_self">
+          
+          题目描述这是 LeetCode 上的 561. 数组拆分 I ，难度为 简单。 给定长度为 2n 的整数数组 nums ，你的任务是将这些数分成 n 对, 例如 (a1, b1), (a2, b2), …, (an, bn) ，使得从 1 到 n 的 min(ai, bi) 总和最大。 返回该 最大总和 。 示例 1：1234567输入：nums &#x3D; [1,4,3,2]输出：4解释：所有可能的分法
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-02-16 02:18" pubdate>
+              2021-02-16
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95/">贪心算法</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/02/15/485.%20%E6%9C%80%E5%A4%A7%E8%BF%9E%E7%BB%AD%201%20%E7%9A%84%E4%B8%AA%E6%95%B0%EF%BC%88%E7%AE%80%E5%8D%95%EF%BC%89/" target="_self">
+          LC 485. 最大连续 1 的个数
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/02/15/485.%20%E6%9C%80%E5%A4%A7%E8%BF%9E%E7%BB%AD%201%20%E7%9A%84%E4%B8%AA%E6%95%B0%EF%BC%88%E7%AE%80%E5%8D%95%EF%BC%89/" target="_self">
+          
+          题目描述这是 LeetCode 上的 485. 最大连续 1 的个数 ，难度为 简单。 给定一个二进制数组， 计算其中最大连续 1 的个数。 示例：123输入：[1,1,0,1,1,1]输出：3解释：开头的两位和最后的三位都是连续 1 ，所以最大连续 1 的个数是 3. 提示：  输入的数组只包含 0 和 1 。 输入数组的长度是正整数，且不超过 10,000。   双指针解法 使用 i 和 j
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-02-15 02:23" pubdate>
+              2021-02-15
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E5%8F%8C%E6%8C%87%E9%92%88/">双指针</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/02/14/765.%20%E6%83%85%E4%BE%A3%E7%89%B5%E6%89%8B%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/" target="_self">
+          LC 765. 情侣牵手
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/02/14/765.%20%E6%83%85%E4%BE%A3%E7%89%B5%E6%89%8B%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/" target="_self">
+          
+          题目描述这是 LeetCode 上的 765. 情侣牵手 ，难度为 困难。 N 对情侣坐在连续排列的 2N 个座位上，想要牵到对方的手。 计算最少交换座位的次数，以便每对情侣可以并肩坐在一起。 一次交换可选择任意两人，让他们站起来交换座位。 人和座位用 0 到 2N-1 的整数表示，情侣们按顺序编号，第一对是 (0, 1)，第二对是 (2, 3)，以此类推，最后一对是 (2N-2, 2N-1)。
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-02-14 08:31" pubdate>
+              2021-02-14
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E8%B4%AA%E5%BF%83/">贪心</a>
+            
+              <a href="/tags/%E5%B9%B6%E6%9F%A5%E9%9B%86/">并查集</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/02/13/448.%20%E6%89%BE%E5%88%B0%E6%89%80%E6%9C%89%E6%95%B0%E7%BB%84%E4%B8%AD%E6%B6%88%E5%A4%B1%E7%9A%84%E6%95%B0%E5%AD%97%EF%BC%88%E7%AE%80%E5%8D%95%EF%BC%89/" target="_self">
+          LC 448. 找到所有数组中消失的数字
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/02/13/448.%20%E6%89%BE%E5%88%B0%E6%89%80%E6%9C%89%E6%95%B0%E7%BB%84%E4%B8%AD%E6%B6%88%E5%A4%B1%E7%9A%84%E6%95%B0%E5%AD%97%EF%BC%88%E7%AE%80%E5%8D%95%EF%BC%89/" target="_self">
+          
+          题目描述这是 LeetCode 上的 448. 找到所有数组中消失的数字 ，难度为 简单。 给定一个范围在  $1 ≤ a[i] ≤ n$ ( $n$ &#x3D; 数组大小 ) 的 整型数组，数组中的元素一些出现了两次，另一些只出现一次。 找到所有在 $[1, n]$ 范围之间没有出现在数组中的数字。 您能在不使用额外空间且时间复杂度为 $O(n)$ 的情况下完成这个任务吗? 你可以假定返回的数组不算在额
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-02-13 04:33" pubdate>
+              2021-02-13
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E6%8E%92%E5%BA%8F/">排序</a>
+            
+              <a href="/tags/%E5%8E%9F%E5%9C%B0%E5%93%88%E5%B8%8C/">原地哈希</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/02/12/119.%20%E6%9D%A8%E8%BE%89%E4%B8%89%E8%A7%92%20II%EF%BC%88%E7%AE%80%E5%8D%95%EF%BC%89/" target="_self">
+          LC 119. 杨辉三角 II
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/02/12/119.%20%E6%9D%A8%E8%BE%89%E4%B8%89%E8%A7%92%20II%EF%BC%88%E7%AE%80%E5%8D%95%EF%BC%89/" target="_self">
+          
+          题目描述这是 LeetCode 上的 119. 杨辉三角 II ，难度为 简单。 给定一个非负索引 k，其中 k ≤ 33，返回杨辉三角的第 k 行。 在杨辉三角中，每个数是它左上方和右上方的数的和。 示例:12输入: 3输出: [1,3,3,1]进阶：  你可以优化你的算法到 O(k) 空间复杂度吗？   动态规划12345678910111213141516class Solution &amp;#1
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-02-12 02:40" pubdate>
+              2021-02-12
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E6%95%B0%E5%AD%A6/">数学</a>
+            
+              <a href="/tags/%E7%BA%BF%E6%80%A7-DP/">线性 DP</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/02/11/703.%20%E6%95%B0%E6%8D%AE%E6%B5%81%E4%B8%AD%E7%9A%84%E7%AC%AC%20K%20%E5%A4%A7%E5%85%83%E7%B4%A0%EF%BC%88%E7%AE%80%E5%8D%95%EF%BC%89/" target="_self">
+          LC 703. 数据流中的第 K 大元素
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/02/11/703.%20%E6%95%B0%E6%8D%AE%E6%B5%81%E4%B8%AD%E7%9A%84%E7%AC%AC%20K%20%E5%A4%A7%E5%85%83%E7%B4%A0%EF%BC%88%E7%AE%80%E5%8D%95%EF%BC%89/" target="_self">
+          
+          题目描述这是 LeetCode 上的 703. 数据流中的第 K 大元素 ，难度为 简单。 设计一个找到数据流中第 k 大元素的类（class）。注意是排序后的第 k 大元素，不是第 k 个不同的元素。 请实现 KthLargest 类：  KthLargest(int k, int[] nums) 使用整数 k 和整数流 nums 初始化对象。 int add(int val) 将 val 插入
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-02-11 06:34" pubdate>
+              2021-02-11
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E4%BC%98%E5%85%88%E9%98%9F%E5%88%97/">优先队列</a>
+            
+              <a href="/tags/%E6%8E%92%E5%BA%8F/">排序</a>
+            
+              <a href="/tags/%E5%A0%86/">堆</a>
+            
+              <a href="/tags/Top-K/">Top K</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/02/09/567.%20%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E6%8E%92%E5%88%97%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/" target="_self">
+          LC 567. 字符串的排列
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/02/09/567.%20%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E6%8E%92%E5%88%97%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/" target="_self">
+          
+          题目描述这是 LeetCode 上的 567. 字符串的排列 ，难度为 中等。 给定两个字符串 s1 和 s2，写一个函数来判断 s2 是否包含 s1 的排列。 换句话说，第一个字符串的排列之一是第二个字符串的 子串 。 示例 1：123输入: s1 &#x3D; &quot;ab&quot; s2 &#x3D; &quot;eidbaooo&quot;输出: True解释: s2 包含 s1 的排列之一 (&amp;quo
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-02-09 16:24" pubdate>
+              2021-02-09
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3/">滑动窗口</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/02/09/992.%20K%20%E4%B8%AA%E4%B8%8D%E5%90%8C%E6%95%B4%E6%95%B0%E7%9A%84%E5%AD%90%E6%95%B0%E7%BB%84%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/" target="_self">
+          LC 992. K 个不同整数的子数组
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/02/09/992.%20K%20%E4%B8%AA%E4%B8%8D%E5%90%8C%E6%95%B4%E6%95%B0%E7%9A%84%E5%AD%90%E6%95%B0%E7%BB%84%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/" target="_self">
+          
+          题目描述这是 LeetCode 上的 992. K 个不同整数的子数组 ，难度为 困难。 给定一个正整数数组 $A$，如果 $A$ 的某个子数组中不同整数的个数恰好为 $K$，则称 $A$ 的这个连续、不一定不同的子数组为好子数组。 例如，$[1,2,3,1,2]$ 中有 $3$ 个不同的整数：$1$，$2$，以及 $3$。 返回 $A$ 中好子数组的数目。 示例 1：12345输入：A &#x3D; [1
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-02-09 02:59" pubdate>
+              2021-02-09
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E5%8F%8C%E6%8C%87%E9%92%88/">双指针</a>
+            
+              <a href="/tags/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3/">滑动窗口</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/02/08/978.%20%E6%9C%80%E9%95%BF%E6%B9%8D%E6%B5%81%E5%AD%90%E6%95%B0%E7%BB%84%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/" target="_self">
+          LC 978. 最长湍流子数组
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/02/08/978.%20%E6%9C%80%E9%95%BF%E6%B9%8D%E6%B5%81%E5%AD%90%E6%95%B0%E7%BB%84%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/" target="_self">
+          
+          题目描述这是 LeetCode 上的 978. 最长湍流子数组 ，难度为 中等。 当 A 的子数组 $A[i], A[i+1], …, A[j]$ 满足下列条件时，我们称其为湍流子数组：  若 $i &lt;&#x3D; k &lt; j$，当 $k$ 为奇数时，$A[k] &gt; A[k+1]$，且当 $k$ 为偶数时，$A[k] &lt; A[k+1]$； 若 $i &lt;&#x3D; k &lt; j$，当
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-02-08 03:07" pubdate>
+              2021-02-08
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E5%BA%8F%E5%88%97-DP/">序列 DP</a>
+            
+              <a href="/tags/%E7%BA%BF%E6%80%A7-DP/">线性 DP</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/02/07/1749.%20%E4%BB%BB%E6%84%8F%E5%AD%90%E6%95%B0%E7%BB%84%E5%92%8C%E7%9A%84%E7%BB%9D%E5%AF%B9%E5%80%BC%E7%9A%84%E6%9C%80%E5%A4%A7%E5%80%BC%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/" target="_self">
+          LC 1749. 任意子数组和的绝对值的最大值
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/02/07/1749.%20%E4%BB%BB%E6%84%8F%E5%AD%90%E6%95%B0%E7%BB%84%E5%92%8C%E7%9A%84%E7%BB%9D%E5%AF%B9%E5%80%BC%E7%9A%84%E6%9C%80%E5%A4%A7%E5%80%BC%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/" target="_self">
+          
+          题目描述这是 LeetCode 上的 1749. 任意子数组和的绝对值的最大值 ，难度为 中等。 给你一个整数数组 nums 。 一个子数组 [numsl, numsl+1, ..., numsr-1, numsr] 的「和的绝对值」为 abs(numsl + numsl+1 + ... + numsr-1 + numsr)。 请你找出 nums 中 和的绝对值 最大的任意子数组（可能为空），并返
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-02-07 15:34" pubdate>
+              2021-02-07
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E5%89%8D%E7%BC%80%E5%92%8C/">前缀和</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+
+
+  <nav aria-label="navigation">
+    <span class="pagination" id="pagination">
+      <a class="extend prev" rel="prev" href="/page/31/#board"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/30/#board">30</a><a class="page-number" href="/page/31/#board">31</a><span class="page-number current">32</span><a class="page-number" href="/page/33/#board">33</a><a class="page-number" href="/page/34/#board">34</a><span class="space">&hellip;</span><a class="page-number" href="/page/36/#board">36</a><a class="extend next" rel="next" href="/page/33/#board"><i class="iconfont icon-arrowright"></i></a>
+    </span>
+  </nav>
+
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.staticfile.org/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.bootcdn.net/ajax/libs/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

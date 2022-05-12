@@ -1,0 +1,619 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/oimg/RoundCorner.png">
+  <link rel="icon" href="/oimg/RoundCorner.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="宫水三叶">
+  <meta name="keywords" content="算法, 数据结构, 题解">
+  
+    <meta name="description" content="题目描述这是 LeetCode 上的 639. 解码方法 II ，难度为 困难。 一条包含字母 A-Z 的消息通过以下的方式进行了编码：1234&amp;#x27;A&amp;#x27; -&gt; 1&amp;#x27;B&amp;#x27; -&gt; 2...&amp;#x27;Z&amp;#x27; -&gt; 26要 解码 一条已编码的消息，所有的数字都必须分组，然后按原来的编码方案反向映射回字母（可能存在多种方式）。例如，”1110">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LC 639. 解码方法 II">
+<meta property="og:url" content="http://example.com/2021/09/26/639.%20%E8%A7%A3%E7%A0%81%E6%96%B9%E6%B3%95%20II%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/index.html">
+<meta property="og:site_name" content="宫水三叶的刷题日记">
+<meta property="og:description" content="题目描述这是 LeetCode 上的 639. 解码方法 II ，难度为 困难。 一条包含字母 A-Z 的消息通过以下的方式进行了编码：1234&amp;#x27;A&amp;#x27; -&gt; 1&amp;#x27;B&amp;#x27; -&gt; 2...&amp;#x27;Z&amp;#x27; -&gt; 26要 解码 一条已编码的消息，所有的数字都必须分组，然后按原来的编码方案反向映射回字母（可能存在多种方式）。例如，”1110">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-09-26T15:31:25.000Z">
+<meta property="article:modified_time" content="2022-05-12T04:05:32.356Z">
+<meta property="article:author" content="宫水三叶">
+<meta property="article:tag" content="线性 DP">
+<meta property="article:tag" content="枚举">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  <title>LC 639. 解码方法 II - 宫水三叶的刷题日记</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/hint.css/2.7.0/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.7.2/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"|","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.1.0"></head>
+
+
+<body>
+  <header style="height: 50vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>宫水三叶の刷题日记</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/image_10.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="LC 639. 解码方法 II">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-author" aria-hidden="true"></i>
+      宫水三叶
+    </span>
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-09-26 23:31" pubdate>
+        2021年9月26日 晚上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      6.8k 字
+    </span>
+  
+
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">LC 639. 解码方法 II</h1>
+            
+            <div class="markdown-body">
+              <h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>这是 LeetCode 上的 <strong><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/decode-ways-ii/solution/gong-shui-san-xie-fen-qing-kuang-tao-lun-902h/">639. 解码方法 II</a></strong> ，难度为 <strong>困难</strong>。</p>
+<p>一条包含字母 A-Z 的消息通过以下的方式进行了编码：<br><figure class="highlight clean"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs clean"><span class="hljs-string">&#x27;A&#x27;</span> -&gt; <span class="hljs-number">1</span><br><span class="hljs-string">&#x27;B&#x27;</span> -&gt; <span class="hljs-number">2</span><br>...<br><span class="hljs-string">&#x27;Z&#x27;</span> -&gt; <span class="hljs-number">26</span><br></code></pre></div></td></tr></table></figure><br>要 解码 一条已编码的消息，所有的数字都必须分组，然后按原来的编码方案反向映射回字母（可能存在多种方式）。例如，”11106” 可以映射为：</p>
+<ul>
+<li>“AAJF” 对应分组 (1 1 10 6)</li>
+<li>“KJF” 对应分组 (11 10 6)</li>
+</ul>
+<p>注意，像 (1 11 06) 这样的分组是无效的，因为 “06” 不可以映射为 ‘F’ ，因为 “6” 与 “06” 不同。</p>
+<p>除了 上面描述的数字字母映射方案，编码消息中可能包含 <code>&#39;*&#39;</code> 字符，可以表示从 ‘1’ 到 ‘9’ 的任一数字（不包括 ‘0’）。例如，编码字符串 <code>&quot;1*&quot;</code> 可以表示 “11”、”12”、”13”、”14”、”15”、”16”、”17”、”18” 或 “19” 中的任意一条消息。对 “1*” 进行解码，相当于解码该字符串可以表示的任何编码消息。</p>
+<p>给你一个字符串 s ，由数字和 ‘*’ 字符组成，返回 解码 该字符串的方法 数目 。</p>
+<p>由于答案数目可能非常大，返回对 $10^9 + 7$ 取余 的结果。</p>
+<p>示例 1：<br><figure class="highlight abnf"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs abnf">输入：s <span class="hljs-operator">=</span> <span class="hljs-string">&quot;*&quot;</span><br><br>输出：<span class="hljs-number">9</span><br><br>解释：这一条编码消息可以表示 <span class="hljs-string">&quot;1&quot;</span>、<span class="hljs-string">&quot;2&quot;</span>、<span class="hljs-string">&quot;3&quot;</span>、<span class="hljs-string">&quot;4&quot;</span>、<span class="hljs-string">&quot;5&quot;</span>、<span class="hljs-string">&quot;6&quot;</span>、<span class="hljs-string">&quot;7&quot;</span>、<span class="hljs-string">&quot;8&quot;</span> 或 <span class="hljs-string">&quot;9&quot;</span> 中的任意一条。<br>可以分别解码成字符串 <span class="hljs-string">&quot;A&quot;</span>、<span class="hljs-string">&quot;B&quot;</span>、<span class="hljs-string">&quot;C&quot;</span>、<span class="hljs-string">&quot;D&quot;</span>、<span class="hljs-string">&quot;E&quot;</span>、<span class="hljs-string">&quot;F&quot;</span>、<span class="hljs-string">&quot;G&quot;</span>、<span class="hljs-string">&quot;H&quot;</span> 和 <span class="hljs-string">&quot;I&quot;</span> 。<br>因此，<span class="hljs-string">&quot;*&quot;</span> 总共有 <span class="hljs-number">9</span> 种解码方法。<br></code></pre></div></td></tr></table></figure><br>示例 2：<br><figure class="highlight abnf"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs abnf">输入：s <span class="hljs-operator">=</span> <span class="hljs-string">&quot;1*&quot;</span><br><br>输出：<span class="hljs-number">18</span><br><br>解释：这一条编码消息可以表示 <span class="hljs-string">&quot;11&quot;</span>、<span class="hljs-string">&quot;12&quot;</span>、<span class="hljs-string">&quot;13&quot;</span>、<span class="hljs-string">&quot;14&quot;</span>、<span class="hljs-string">&quot;15&quot;</span>、<span class="hljs-string">&quot;16&quot;</span>、<span class="hljs-string">&quot;17&quot;</span>、<span class="hljs-string">&quot;18&quot;</span> 或 <span class="hljs-string">&quot;19&quot;</span> 中的任意一条。<br>每种消息都可以由 <span class="hljs-number">2</span> 种方法解码（例如，<span class="hljs-string">&quot;11&quot;</span> 可以解码成 <span class="hljs-string">&quot;AA&quot;</span> 或 <span class="hljs-string">&quot;K&quot;</span>）。<br>因此，<span class="hljs-string">&quot;1*&quot;</span> 共有 <span class="hljs-number">9</span> * <span class="hljs-number">2</span> <span class="hljs-operator">=</span> <span class="hljs-number">18</span> 种解码方法。<br></code></pre></div></td></tr></table></figure><br>示例 3：<br><figure class="highlight gcode"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs gcode">输入：s = <span class="hljs-string">&quot;2*&quot;</span><br><br>输出：<span class="hljs-number">15</span><br><br>解释：这一条编码消息可以表示 <span class="hljs-string">&quot;21&quot;</span>、<span class="hljs-string">&quot;22&quot;</span>、<span class="hljs-string">&quot;23&quot;</span>、<span class="hljs-string">&quot;24&quot;</span>、<span class="hljs-string">&quot;25&quot;</span>、<span class="hljs-string">&quot;26&quot;</span>、<span class="hljs-string">&quot;27&quot;</span>、<span class="hljs-string">&quot;28&quot;</span> 或 <span class="hljs-string">&quot;29&quot;</span> 中的任意一条。<br><span class="hljs-string">&quot;21&quot;</span>、<span class="hljs-string">&quot;22&quot;</span>、<span class="hljs-string">&quot;23&quot;</span>、<span class="hljs-string">&quot;24&quot;</span>、<span class="hljs-string">&quot;25&quot;</span> 和 <span class="hljs-string">&quot;26&quot;</span> 由 <span class="hljs-number">2</span> 种解码方法，但 <span class="hljs-string">&quot;27&quot;</span>、<span class="hljs-string">&quot;28&quot;</span> 和 <span class="hljs-string">&quot;29&quot;</span> 仅有 <span class="hljs-number">1</span> 种解码方法。<br>因此，<span class="hljs-string">&quot;2*&quot;</span> 共有 <span class="hljs-comment">(6 * 2)</span> + <span class="hljs-comment">(3 * 1)</span> = <span class="hljs-number">12</span> + <span class="hljs-number">3</span> = <span class="hljs-number">15</span> 种解码方法。<br></code></pre></div></td></tr></table></figure></p>
+<p>提示：</p>
+<ul>
+<li>$1$ &lt;= s.length &lt;= $10^5$</li>
+<li>s[i] 是 <code>0-9</code> 中的一位数字或字符 ‘*’</li>
+</ul>
+<hr>
+<h3 id="分情况讨论-DP"><a href="#分情况讨论-DP" class="headerlink" title="分情况讨论 DP"></a>分情况讨论 DP</h3><p>这是一道普通的线性 DP 题（之所以说普通，是因为状态定义比较容易想到），也是 <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/decode-ways/solution/gong-shui-san-xie-gen-ju-shu-ju-fan-wei-ug3dd/">（题解）91. 解码方法</a> 的进阶题。</p>
+<p>我们称一个解码内容为一个 <code>item</code>。</p>
+<p><strong>定义 $f[i]$ 为考虑以 $s[i]$ 为结尾的字符串，共有多少种解码方案。</strong></p>
+<p>那么最终答案为 $f[n - 1]$，同时我们有显而易见的起始状态 <code>f[0] = s[0] == &#39;*&#39; ? 9 : (s[0] != &#39;0&#39; ? 1 : 0)</code>.</p>
+<p>不失一般性考虑 $f[i]$ 该如何转移，$s[i]$ 要么是 <code>*</code>，要么是数字，对应一个分情况讨论过程：</p>
+<ul>
+<li><p>当 $s[i]$ 为 <code>*</code>：此时考虑 $s[i]$ 是单独作为一个 <code>item</code>，还是与上一个字符共同作为一个 <code>item</code>:</p>
+<ul>
+<li>$s[i]$ 单独作为一个 <code>item</code>：由于 <code>*</code> 可以代指数字 <code>1-9</code>，因此有 $f[i] = f[i - 1] * 9$；</li>
+<li>$s[i]$ 与上一个字符共同作为一个 <code>item</code>：此时需要对上一个字符 $s[j]$ 进行讨论：<ul>
+<li>$s[j]$ 为数字 <code>1</code>：此时 $s[i]$ 可以代指 <code>1-9</code>，对应了 <code>item</code> 为 <code>11-19</code> 这 $9$ 种情况，此时有 $f[i] = f[i - 2] <em> 9$（<em>*如果 $f[i - 2]$ 取不到，则使用 $1$ 代指，下面同理</em></em>）；</li>
+<li>$s[j]$ 为数字 <code>2</code>：此时 $s[i]$ 可以代指 <code>1-6</code>，对应了 <code>item</code> 为 <code>21-26</code> 这 $6$ 种情况，此时有 $f[i] = f[i - 2] * 6$；</li>
+<li>$s[j]$ 为字符 <code>*</code>：此时两个 <code>*</code> 对应了合法方案为 $11-19$ 和 $21-26$ 共 $15$ 种方案，此时有 $f[i] = f[i - 2] * 15$；</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>当 $s[i]$ 为数字：此时可以从「前一字符 $s[j]$ 为何种字符」和「当前 $s[i]$ 是否为 $0$」出发进行讨论:</p>
+<ul>
+<li>$s[j]$ 为字符 <code>*</code>，根据当前 $s[i]$ 是否为 $0$ 讨论：<ul>
+<li>$s[i]$ 为数字 $0$：此时 $s[i]$ 无法独自作为一个 <code>item</code>，只能与 $s[j]$ 组合，对应了 $10$ 和 $20$ 两种情况，此时有 $f[i] = f[i - 2] * 2$；</li>
+<li>$s[i]$ 为数字 <code>1-9</code>，此时首先有 $s[i]$ 可以作为一个独立 <code>item</code> 的情况，即有 $f[i] = f[i - 1]$，然后对 $s[i]$ 的数值大小进一步分情况讨论：<ul>
+<li>$s[i]$ 为数字 <code>1-6</code>，此时 $s[j]$ 可以代指 $1$ 和 $2$，对应了方案 $1x$ 和 $2x$，此时有 $f[i] = f[i - 2] * 2$；</li>
+<li>$s[i]$ 为数字 <code>7-9</code>，此时 $s[j]$ 可以代指 $1$，对应方案 $1x$，此时有 $f[i] = f[i - 2]$；</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>$s[j]$ 为数字类型，此时从「当前 $s[i]$ 是否为 $0$」出发进行讨论：<ul>
+<li>$s[i]$ 为数字 $0$：此时 $s[j]$ 只有为 $1$ 和 $2$ 时，才是合法方案，则有 $f[i] = f[i - 2]$；</li>
+<li>$s[i]$ 为数字 <code>1-9</code>：此时首先有 $s[i]$ 可以作为一个独立 <code>item</code> 的情况，即有 $f[i] = f[i - 1]$，然后再考虑能够与 $s[j]$ 组成合法 <code>item</code> 的情况：<ul>
+<li>$s[j]$ 为数值 $1$：此时有 $f[i] = f[i - 2]$；</li>
+<li>$s[j]$ 为数值 $2$，且 $s[i]$ 为数值 <code>1-6</code>：此时有 $f[i] = f[i - 2]$。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>由于是求方案数，因此最终的 $f[i]$ 为上述所有的合法的分情况讨论的累加值，并对 $1e9+ 7$ 取模。</p>
+<blockquote>
+<p>一些细节：实现上了避免大量对 $f[i - 2]$ 是否可以取得的讨论，我们可以对 <code>s</code> 前追加一个空格作为哨兵（无须真正插入），以简化代码，同时由于 $f[i]$ 只依赖于 $f[i - 1]$ 和 $f[i - 1]$，可以使用「滚动数组」的形式进行空间空间优化（见 $P2$）。</p>
+<p>另外，对于「滚动数组」的空间优化方式，还需要说明两点：转移前先使用变量保存 <code>(i-1)%3</code> 和 <code>(i-2)%3</code> 的计算结果，防止大量的重复计算；不能再偷懒使用 <code>toCharArray</code>，只能使用 <code>charAt</code>，因为 Java 为了遵循字符串不变的原则，会在调用 <code>toCharArray</code> 时返回新数组，这样复杂度就还是 $O(n)$ 的。<br>诸如此类的「滚动数组」优化方式，最早在 <a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzU4NDE3MTEyMA==&amp;mid=2247485638&amp;idx=1&amp;sn=d7468955c5b121664031fd5c1b5a6f10&amp;chksm=fd9ca3d9caeb2acf2dd4e9f512b2d4dc820107489a094749ffe7cae646f0cc60de06f2d18898&amp;scene=178&amp;cur_album_id=1751702161341628417#rd">这里</a> 讲过。</p>
+</blockquote>
+<p>代码：<br><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-type">int</span> <span class="hljs-variable">mod</span> <span class="hljs-operator">=</span> (<span class="hljs-type">int</span>)<span class="hljs-number">1e9</span>+<span class="hljs-number">7</span>;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">numDecodings</span><span class="hljs-params">(String s)</span> &#123;<br>        <span class="hljs-type">char</span>[] cs = s.toCharArray();<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> cs.length;<br>        <span class="hljs-type">long</span>[] f = <span class="hljs-keyword">new</span> <span class="hljs-title class_">long</span>[n];<br>        f[<span class="hljs-number">0</span>] = cs[<span class="hljs-number">0</span>] == <span class="hljs-string">&#x27;*&#x27;</span> ? <span class="hljs-number">9</span> : (cs[<span class="hljs-number">0</span>] != <span class="hljs-string">&#x27;0&#x27;</span> ? <span class="hljs-number">1</span> : <span class="hljs-number">0</span>);<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>; i &lt; n; i++) &#123;<br>            <span class="hljs-type">char</span> <span class="hljs-variable">c</span> <span class="hljs-operator">=</span> cs[i], prev = cs[i - <span class="hljs-number">1</span>];<br>            <span class="hljs-keyword">if</span> (c == <span class="hljs-string">&#x27;*&#x27;</span>) &#123;<br>                <span class="hljs-comment">// cs[i] 单独作为一个 item</span><br>                f[i] += f[i - <span class="hljs-number">1</span>] * <span class="hljs-number">9</span>;<br>                <span class="hljs-comment">// cs[i] 与前一个字符共同作为一个 item</span><br>                <span class="hljs-keyword">if</span> (prev == <span class="hljs-string">&#x27;*&#x27;</span>) &#123;<br>                    <span class="hljs-comment">// 11 - 19 &amp; 21 - 26</span><br>                    f[i] += (i - <span class="hljs-number">2</span> &gt;= <span class="hljs-number">0</span> ? f[i - <span class="hljs-number">2</span>] : <span class="hljs-number">1</span>) * <span class="hljs-number">15</span>;<br>                &#125; <span class="hljs-keyword">else</span> &#123;<br>                    <span class="hljs-type">int</span> <span class="hljs-variable">u</span> <span class="hljs-operator">=</span> (<span class="hljs-type">int</span>)(prev - <span class="hljs-string">&#x27;0&#x27;</span>);<br>                    <span class="hljs-keyword">if</span> (u == <span class="hljs-number">1</span>) &#123;<br>                        f[i] += (i - <span class="hljs-number">2</span> &gt;= <span class="hljs-number">0</span> ? f[i - <span class="hljs-number">2</span>] : <span class="hljs-number">1</span>) * <span class="hljs-number">9</span>;<br>                    &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (u == <span class="hljs-number">2</span>) &#123;<br>                        f[i] += (i - <span class="hljs-number">2</span> &gt;= <span class="hljs-number">0</span> ? f[i - <span class="hljs-number">2</span>] : <span class="hljs-number">1</span>) * <span class="hljs-number">6</span>;<br>                    &#125;<br>                &#125;<br>            &#125; <span class="hljs-keyword">else</span> &#123;<br>                <span class="hljs-type">int</span> <span class="hljs-variable">t</span> <span class="hljs-operator">=</span> (<span class="hljs-type">int</span>)(c - <span class="hljs-string">&#x27;0&#x27;</span>);<br>                <span class="hljs-keyword">if</span> (prev == <span class="hljs-string">&#x27;*&#x27;</span>) &#123;<br>                    <span class="hljs-keyword">if</span> (t == <span class="hljs-number">0</span>) &#123;<br>                        f[i] += (i - <span class="hljs-number">2</span> &gt;= <span class="hljs-number">0</span> ? f[i - <span class="hljs-number">2</span>] : <span class="hljs-number">1</span>) * <span class="hljs-number">2</span>;<br>                    &#125; <span class="hljs-keyword">else</span> &#123;<br>                        <span class="hljs-comment">// cs[i] 单独作为一个 item</span><br>                        f[i] += f[i - <span class="hljs-number">1</span>];<br>                        <span class="hljs-comment">// cs[i] 与前一个字符共同作为一个 item</span><br>                        <span class="hljs-keyword">if</span> (t &lt;= <span class="hljs-number">6</span>) &#123;<br>                            f[i] += (i - <span class="hljs-number">2</span> &gt;= <span class="hljs-number">0</span> ? f[i - <span class="hljs-number">2</span>] : <span class="hljs-number">1</span>) * <span class="hljs-number">2</span>;<br>                        &#125; <span class="hljs-keyword">else</span> &#123;<br>                            f[i] += i - <span class="hljs-number">2</span> &gt;= <span class="hljs-number">0</span> ? f[i - <span class="hljs-number">2</span>] : <span class="hljs-number">1</span>;<br>                        &#125;<br>                    &#125;<br>                &#125; <span class="hljs-keyword">else</span> &#123;<br>                    <span class="hljs-type">int</span> <span class="hljs-variable">u</span> <span class="hljs-operator">=</span> (<span class="hljs-type">int</span>)(prev - <span class="hljs-string">&#x27;0&#x27;</span>);<br>                    <span class="hljs-keyword">if</span> (t == <span class="hljs-number">0</span>) &#123;<br>                        <span class="hljs-keyword">if</span> (u == <span class="hljs-number">1</span> || u == <span class="hljs-number">2</span>) &#123;<br>                            f[i] += i - <span class="hljs-number">2</span> &gt;= <span class="hljs-number">0</span> ? f[i - <span class="hljs-number">2</span>] : <span class="hljs-number">1</span>;<br>                        &#125;<br>                    &#125; <span class="hljs-keyword">else</span> &#123;<br>                        <span class="hljs-comment">// cs[i] 单独作为一个 item</span><br>                        f[i] += (f[i - <span class="hljs-number">1</span>]);<br>                        <span class="hljs-comment">// cs[i] 与前一个字符共同作为一个 item</span><br>                        <span class="hljs-keyword">if</span> (u == <span class="hljs-number">1</span>) &#123;<br>                            f[i] += i - <span class="hljs-number">2</span> &gt;= <span class="hljs-number">0</span> ? f[i - <span class="hljs-number">2</span>] : <span class="hljs-number">1</span>;<br>                        &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (u == <span class="hljs-number">2</span> &amp;&amp; t &lt;= <span class="hljs-number">6</span>) &#123;<br>                            f[i] += i - <span class="hljs-number">2</span> &gt;= <span class="hljs-number">0</span> ? f[i - <span class="hljs-number">2</span>] : <span class="hljs-number">1</span>;<br>                        &#125;<br>                    &#125;<br>                &#125;<br>            &#125;<br>            f[i] %= mod;<br>        &#125;<br>        <span class="hljs-keyword">return</span> (<span class="hljs-type">int</span>)(f[n - <span class="hljs-number">1</span>]);<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure></p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-type">int</span> <span class="hljs-variable">mod</span> <span class="hljs-operator">=</span> (<span class="hljs-type">int</span>)<span class="hljs-number">1e9</span>+<span class="hljs-number">7</span>;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">numDecodings</span><span class="hljs-params">(String s)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> s.length() + <span class="hljs-number">1</span>;<br>        <span class="hljs-type">long</span>[] f = <span class="hljs-keyword">new</span> <span class="hljs-title class_">long</span>[<span class="hljs-number">3</span>];<br>        f[<span class="hljs-number">0</span>] = <span class="hljs-number">1</span>;<br>        f[<span class="hljs-number">1</span>] = s.charAt(<span class="hljs-number">0</span>) == <span class="hljs-string">&#x27;*&#x27;</span> ? <span class="hljs-number">9</span> : (s.charAt(<span class="hljs-number">0</span>) != <span class="hljs-string">&#x27;0&#x27;</span> ? <span class="hljs-number">1</span> : <span class="hljs-number">0</span>);<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">2</span>; i &lt; n; i++) &#123;<br>            <span class="hljs-type">char</span> <span class="hljs-variable">c</span> <span class="hljs-operator">=</span> s.charAt(i - <span class="hljs-number">1</span>), prev = s.charAt(i - <span class="hljs-number">2</span>);<br>            <span class="hljs-type">int</span> <span class="hljs-variable">p1</span> <span class="hljs-operator">=</span> (i - <span class="hljs-number">1</span>) % <span class="hljs-number">3</span>, p2 = (i - <span class="hljs-number">2</span>) % <span class="hljs-number">3</span>;<br>            <span class="hljs-type">long</span> <span class="hljs-variable">cnt</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>            <span class="hljs-keyword">if</span> (c == <span class="hljs-string">&#x27;*&#x27;</span>) &#123;<br>                <span class="hljs-comment">// cs[i] 单独作为一个 item</span><br>                cnt += f[p1] * <span class="hljs-number">9</span>;<br>                <span class="hljs-comment">// cs[i] 与前一个字符共同作为一个 item</span><br>                <span class="hljs-keyword">if</span> (prev == <span class="hljs-string">&#x27;*&#x27;</span>) &#123;<br>                    cnt += f[p2] * <span class="hljs-number">15</span>;<br>                &#125; <span class="hljs-keyword">else</span> &#123;<br>                    <span class="hljs-type">int</span> <span class="hljs-variable">u</span> <span class="hljs-operator">=</span> (<span class="hljs-type">int</span>)(prev - <span class="hljs-string">&#x27;0&#x27;</span>);<br>                    <span class="hljs-keyword">if</span> (u == <span class="hljs-number">1</span>) cnt += f[p2] * <span class="hljs-number">9</span>;<br>                    <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (u == <span class="hljs-number">2</span>) cnt += f[p2] * <span class="hljs-number">6</span>;<br>                &#125;<br>            &#125; <span class="hljs-keyword">else</span> &#123;<br>                <span class="hljs-type">int</span> <span class="hljs-variable">t</span> <span class="hljs-operator">=</span> (<span class="hljs-type">int</span>)(c - <span class="hljs-string">&#x27;0&#x27;</span>);<br>                <span class="hljs-keyword">if</span> (prev == <span class="hljs-string">&#x27;*&#x27;</span>) &#123;<br>                    <span class="hljs-keyword">if</span> (t == <span class="hljs-number">0</span>) &#123;<br>                        cnt += f[p2]* <span class="hljs-number">2</span>;<br>                    &#125; <span class="hljs-keyword">else</span> &#123;<br>                        <span class="hljs-comment">// cs[i] 单独作为一个 item</span><br>                        cnt += f[p1];<br>                        <span class="hljs-comment">// cs[i] 与前一个字符共同作为一个 item</span><br>                        <span class="hljs-keyword">if</span> (t &lt;= <span class="hljs-number">6</span>) cnt += f[p2] * <span class="hljs-number">2</span>;<br>                        <span class="hljs-keyword">else</span> cnt += f[p2];<br>                    &#125;<br>                &#125; <span class="hljs-keyword">else</span> &#123;<br>                    <span class="hljs-type">int</span> <span class="hljs-variable">u</span> <span class="hljs-operator">=</span> (<span class="hljs-type">int</span>)(prev - <span class="hljs-string">&#x27;0&#x27;</span>);<br>                    <span class="hljs-keyword">if</span> (t == <span class="hljs-number">0</span>) &#123;<br>                        <span class="hljs-keyword">if</span> (u == <span class="hljs-number">1</span> || u == <span class="hljs-number">2</span>) cnt += f[p2];<br>                    &#125; <span class="hljs-keyword">else</span> &#123;<br>                        <span class="hljs-comment">// cs[i] 单独作为一个 item</span><br>                        cnt += f[p1];<br>                        <span class="hljs-comment">// cs[i] 与前一个字符共同作为一个 item</span><br>                        <span class="hljs-keyword">if</span> (u == <span class="hljs-number">1</span>) cnt += f[p2];<br>                        <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (u == <span class="hljs-number">2</span> &amp;&amp; t &lt;= <span class="hljs-number">6</span>) cnt += f[p2];<br>                    &#125;<br>                &#125;<br>            &#125;<br>            f[i % <span class="hljs-number">3</span>] = cnt % mod;<br>        &#125;<br>        <span class="hljs-keyword">return</span> (<span class="hljs-type">int</span>)(f[(n - <span class="hljs-number">1</span>) % <span class="hljs-number">3</span>]);<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<ul>
+<li>时间复杂度：$O(n)$</li>
+<li>空间复杂度：使用「滚动数组」进行优化，复杂度为 $O(1)$，否则为 $O(n)$</li>
+</ul>
+<hr>
+<h3 id="枚举-DP"><a href="#枚举-DP" class="headerlink" title="枚举 DP"></a>枚举 DP</h3><p>上述解法之所以复杂，是因为不仅仅要对当前字符 $s[i]$ 分情况讨论，还需要对上一个字符 $s[j]$ 分情况讨论。</p>
+<p>事实上，我们可以利用解码对象只有 <code>A-Z</code> 来进行枚举。</p>
+<p>在从前往后处理字符串 <code>s</code> 时，枚举 $s[i]$ 参与构成的解码内容 <code>item</code> 是字母 <code>A-Z</code> 中哪一个，从而将分情况讨论转变成对应位的字符对比。</p>
+<p>代码：<br><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-type">int</span> <span class="hljs-variable">mod</span> <span class="hljs-operator">=</span> (<span class="hljs-type">int</span>)<span class="hljs-number">1e9</span>+<span class="hljs-number">7</span>;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">numDecodings</span><span class="hljs-params">(String s)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> s.length();<br>        <span class="hljs-type">long</span>[] f = <span class="hljs-keyword">new</span> <span class="hljs-title class_">long</span>[<span class="hljs-number">3</span>];<br>        f[<span class="hljs-number">0</span>] = <span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>; i &lt;= n; i++) &#123;<br>            <span class="hljs-type">char</span> <span class="hljs-variable">c</span> <span class="hljs-operator">=</span> s.charAt(i - <span class="hljs-number">1</span>);<br>            <span class="hljs-type">int</span> <span class="hljs-variable">t</span> <span class="hljs-operator">=</span> c - <span class="hljs-string">&#x27;0&#x27;</span>;<br>            <span class="hljs-type">long</span> <span class="hljs-variable">cnt</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">p1</span> <span class="hljs-operator">=</span> (i - <span class="hljs-number">1</span>) % <span class="hljs-number">3</span>, p2 = (i - <span class="hljs-number">2</span>) % <span class="hljs-number">3</span>;<br>            <span class="hljs-comment">// 枚举组成什么 item（A -&gt; 1; B -&gt; 2 ...）</span><br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">item</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>; item &lt;= <span class="hljs-number">26</span>; item++) &#123; <br>                <span class="hljs-keyword">if</span> (item &lt; <span class="hljs-number">10</span>) &#123; <span class="hljs-comment">// 该 item 由一个字符组成</span><br>                    <span class="hljs-keyword">if</span> (c == <span class="hljs-string">&#x27;*&#x27;</span> || t == item) cnt += f[p1];<br>                &#125; <span class="hljs-keyword">else</span> &#123; <span class="hljs-comment">// 该 item 由两个字符组成</span><br>                    <span class="hljs-keyword">if</span> (i - <span class="hljs-number">2</span> &lt; <span class="hljs-number">0</span>) <span class="hljs-keyword">break</span>;<br>                    <span class="hljs-type">char</span> <span class="hljs-variable">prev</span> <span class="hljs-operator">=</span> s.charAt(i - <span class="hljs-number">2</span>);<br>                    <span class="hljs-type">int</span> <span class="hljs-variable">u</span> <span class="hljs-operator">=</span> prev - <span class="hljs-string">&#x27;0&#x27;</span>;<br>                    <span class="hljs-type">int</span> <span class="hljs-variable">a</span> <span class="hljs-operator">=</span> item / <span class="hljs-number">10</span>, b = item % <span class="hljs-number">10</span>;<br>                    <span class="hljs-keyword">if</span> ((prev == <span class="hljs-string">&#x27;*&#x27;</span> || u == a) &amp;&amp; (t == b || (c == <span class="hljs-string">&#x27;*&#x27;</span> &amp;&amp; b != <span class="hljs-number">0</span>))) cnt += f[p2];<br>                &#125;<br>            &#125;<br>            f[i % <span class="hljs-number">3</span>] = cnt % mod;<br>        &#125;<br>        <span class="hljs-keyword">return</span> (<span class="hljs-type">int</span>)(f[n % <span class="hljs-number">3</span>]);<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure></p>
+<ul>
+<li>时间复杂度：$O(n * C)$，其中 $C$ 为解码内容字符集大小，固定为 $26$</li>
+<li>空间复杂度：$O(1)$</li>
+</ul>
+<hr>
+<h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>这是我们「刷穿 LeetCode」系列文章的第 <code>No.639</code> 篇，系列开始于 2021/01/01，截止于起始日 LeetCode 上共有 1916 道题目，部分是有锁题，我们将先把所有不带锁的题目刷完。</p>
+<p>在这个系列文章里面，除了讲解解题思路以外，还会尽可能给出最为简洁的代码。如果涉及通解还会相应的代码模板。</p>
+<p>为了方便各位同学能够电脑上进行调试和提交代码，我建立了相关的仓库：<a target="_blank" rel="noopener" href="https://github.com/SharingSource/LogicStack-LeetCode">https://github.com/SharingSource/LogicStack-LeetCode</a> 。</p>
+<p>在仓库地址里，你可以看到系列文章的题解链接、系列文章的相应代码、LeetCode 原题链接和其他优选题解。</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E7%BA%BF%E6%80%A7-DP/">线性 DP</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E6%9E%9A%E4%B8%BE/">枚举</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/09/27/437.%20%E8%B7%AF%E5%BE%84%E6%80%BB%E5%92%8C%20III%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">LC 437. 路径总和 III</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/09/25/371.%20%E4%B8%A4%E6%95%B4%E6%95%B0%E4%B9%8B%E5%92%8C%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/">
+                        <span class="hidden-mobile">LC 371. 两整数之和</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+  <div class="col-lg-7 mx-auto nopadding-x-md">
+    <div class="container custom post-custom mx-auto">
+      <img src="https://oscimg.oschina.net/oscnet/up-19688dc1af05cf8bdea43b2a863038ab9e5.png" srcset="/img/loading.gif" lazyload class="rounded mx-auto d-block mt-5" style="width:900px; height:500px;">
+    </div>
+  </div>
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.staticfile.org/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.staticfile.org/tocbot/4.18.2/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.staticfile.org/anchor-js/4.3.1/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.11/clipboard.min.js" ></script>
+  
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.bootcdn.net/ajax/libs/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        loader: {
+          
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.staticfile.org/mathjax/3.2.0/es5/tex-svg.js" ></script>
+
+  
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

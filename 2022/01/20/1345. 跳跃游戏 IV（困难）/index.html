@@ -1,0 +1,611 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/oimg/RoundCorner.png">
+  <link rel="icon" href="/oimg/RoundCorner.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="宫水三叶">
+  <meta name="keywords" content="算法, 数据结构, 题解">
+  
+    <meta name="description" content="题目描述这是 LeetCode 上的 1345. 跳跃游戏 IV ，难度为 困难。 给你一个整数数组 arr ，你一开始在数组的第一个元素处（下标为 0）。 每一步，你可以从下标 i 跳到下标：  i + 1 满足：i + 1 &lt; arr.length i - 1 满足：i - 1 &gt;&#x3D; 0 j 满足：arr[i] &#x3D;&#x3D; arr[j] 且 i !&#x3D; j  请你返回到达数组最后一个元素的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LC 1345. 跳跃游戏 IV">
+<meta property="og:url" content="http://example.com/2022/01/20/1345.%20%E8%B7%B3%E8%B7%83%E6%B8%B8%E6%88%8F%20IV%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/index.html">
+<meta property="og:site_name" content="宫水三叶的刷题日记">
+<meta property="og:description" content="题目描述这是 LeetCode 上的 1345. 跳跃游戏 IV ，难度为 困难。 给你一个整数数组 arr ，你一开始在数组的第一个元素处（下标为 0）。 每一步，你可以从下标 i 跳到下标：  i + 1 满足：i + 1 &lt; arr.length i - 1 满足：i - 1 &gt;&#x3D; 0 j 满足：arr[i] &#x3D;&#x3D; arr[j] 且 i !&#x3D; j  请你返回到达数组最后一个元素的">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://pic.leetcode-cn.com/1642719041-FilgSH-image.png">
+<meta property="og:image" content="https://pic.leetcode-cn.com/1642719484-DdDvQl-image.png">
+<meta property="article:published_time" content="2022-01-20T15:09:37.000Z">
+<meta property="article:modified_time" content="2022-05-12T04:05:32.376Z">
+<meta property="article:author" content="宫水三叶">
+<meta property="article:tag" content="图论 BFS">
+<meta property="article:tag" content="双向 BFS">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://pic.leetcode-cn.com/1642719041-FilgSH-image.png">
+  
+  
+  <title>LC 1345. 跳跃游戏 IV - 宫水三叶的刷题日记</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/hint.css/2.7.0/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.7.2/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"|","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.1.0"></head>
+
+
+<body>
+  <header style="height: 50vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>宫水三叶の刷题日记</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/image_161.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="LC 1345. 跳跃游戏 IV">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-author" aria-hidden="true"></i>
+      宫水三叶
+    </span>
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2022-01-20 23:09" pubdate>
+        2022年1月20日 晚上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      6.5k 字
+    </span>
+  
+
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">LC 1345. 跳跃游戏 IV</h1>
+            
+            <div class="markdown-body">
+              <h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>这是 LeetCode 上的 <strong><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/jump-game-iv/solution/gong-shui-san-xie-noxiang-xin-ke-xue-xi-q9tb1/">1345. 跳跃游戏 IV</a></strong> ，难度为 <strong>困难</strong>。</p>
+<p>给你一个整数数组 <code>arr</code> ，你一开始在数组的第一个元素处（下标为 <code>0</code>）。</p>
+<p>每一步，你可以从下标 i 跳到下标：</p>
+<ul>
+<li><code>i + 1</code> 满足：<code>i + 1 &lt; arr.length</code></li>
+<li><code>i - 1</code> 满足：<code>i - 1 &gt;= 0</code></li>
+<li><code>j</code> 满足：<code>arr[i] == arr[j]</code> 且 <code>i != j</code></li>
+</ul>
+<p>请你返回到达数组最后一个元素的下标处所需的 <strong>最少操作次数</strong> 。</p>
+<p>注意：任何时候你都不能跳到数组外面。</p>
+<p>示例 1：<br><figure class="highlight tap"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs tap">输入：arr = [100,-23,-23,404,100,23,23,23,3,404]<br><br>输出：3<br><br>解释：那你需要跳跃<span class="hljs-number"> 3 </span>次，下标依次为<span class="hljs-number"> 0 </span>--&gt;<span class="hljs-number"> 4 </span>--&gt;<span class="hljs-number"> 3 </span>--&gt;<span class="hljs-number"> 9 </span>。下标<span class="hljs-number"> 9 </span>为数组的最后一个元素的下标。<br></code></pre></div></td></tr></table></figure><br>示例 2：<br><figure class="highlight abnf"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs abnf">输入：arr <span class="hljs-operator">=</span> [<span class="hljs-number">7</span>]<br><br>输出：<span class="hljs-number">0</span><br><br>解释：一开始就在最后一个元素处，所以你不需要跳跃。<br></code></pre></div></td></tr></table></figure><br>示例 3：<br><figure class="highlight dns"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs dns">输入：arr = [<span class="hljs-number">7,6,9,6</span>,<span class="hljs-number">9,6,9,7</span>]<br><br>输出：<span class="hljs-number">1</span><br><br>解释：你可以直接从下标 <span class="hljs-number">0</span> 处跳到下标 <span class="hljs-number">7</span> 处，也就是数组的最后一个元素处。<br></code></pre></div></td></tr></table></figure><br>示例 4：<br><figure class="highlight fix"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs fix"><span class="hljs-attr">输入：arr </span>=<span class="hljs-string"> [6,1,9]</span><br><span class="hljs-string"></span><br><span class="hljs-string">输出：2</span><br></code></pre></div></td></tr></table></figure><br>示例 5：<br><figure class="highlight dns"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs dns">输入：arr = [<span class="hljs-number">11,22,7,7</span>,<span class="hljs-number">7,7,7,7</span>,<span class="hljs-number">7</span>,<span class="hljs-number">22</span>,<span class="hljs-number">13</span>]<br><br>输出：<span class="hljs-number">3</span><br></code></pre></div></td></tr></table></figure></p>
+<p>提示：</p>
+<ul>
+<li>$1 &lt;= arr.length &lt;= 5 * 10^4$</li>
+<li>$-10^8 &lt;= arr[i] &lt;= 10^8$</li>
+</ul>
+<hr>
+<h3 id="单向-BFS"><a href="#单向-BFS" class="headerlink" title="单向 BFS"></a>单向 BFS</h3><p>根据跳跃规则，我们能够进行「前后跳」和「等值跳」，问题为到达结尾位置的最少步数，容易想到 <code>BFS</code>。</p>
+<p>为了方便进行「等值跳」，我们可以先使用「哈希表」记录某个值有哪些下标。</p>
+<p>在进行 <code>BFS</code> 时，假如当前走到的位置为 $t$，我们尝试将 $t - 1$、$t + 1$ 和与 $arr[t]$ 等值的位置进行入队，为了防止重复同队，我们可以使用 $dist$ 数组记录到达某个位置的最小步数（初始化为 <code>INF</code>），只有 $dist[ne]$ 为 <code>INF</code> 时，该点没有被遍历过，可以入队并更新最小步数。</p>
+<p>但光使用 $dist$ 还不能确保复杂度为 $O(n)$，因为每次都需要遍历与 $arr[t]$ 等值的下标，为确保等值下标的遍历只会发生一次，我们需要在将等值下标添加到队列后，将 $arr[t]$ 从哈希表中移除。</p>
+<p>容易证明每次将于 $arr[t]$ 的等值元素添加到队列后，将 $arr[t]$ 从哈希表中移除的正确性：</p>
+<p>首次检索到 $arr[t]$ 值时，必然是最小步数，记为 $step$，此时 <code>BFS</code> 做法将其他等值下标距离更新为 $step + 1$：</p>
+<ul>
+<li>若 $arr[t]$ 与结尾元素值相等，且 $t$ 为 $n - 1$，此时 $step$ 即是答案；</li>
+<li><p>若 $arr[t]$ 与结尾元素值相等，但 $t$ 不为 $n - 1$，此时会再跳一步到达结尾位置，即 $step + 1$ 为答案。那么是否可能存在使用比 $step + 1$ 更小的步数，也能到达结尾的位置呢？<br>  答案是：<strong>可能存在，但如果最后是通过「等值跳」到达结尾位置的话，不可能存在比 $step + 1$ 更小的步数。</strong><br>  由于我们每次加入等值时都会进行哈希表的移除，因此到达 $t$ 的方式不可能是「等值跳」，而只能是「前后跳」。</p>
+<ul>
+<li><p>假设是通过前跳到达位置 $t$，即点分布如图，步数满足等于 $step + 1$：</p>
+<p><img src="https://pic.leetcode-cn.com/1642719041-FilgSH-image.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+</li>
+<li><p>假设是通过后跳到达位置 $t$，即点分布如图，步数满足「如果是等值跳到达结尾，步数为 $step + 1$」：</p>
+<p><img src="https://pic.leetcode-cn.com/1642719484-DdDvQl-image.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<p><strong>综上，如果 $n - 1$ 是经过「等值跳」加入队列的话，起所能达到的最小步数必然为发起点 $t$ 的最小步数 $+1$。</strong></p>
+<p><strong>也就是说，即使首次等值跳，加入队列后会将其从哈希表中进行移除，正确性也是可以保证的。</strong></p>
+</li>
+</ul>
+</li>
+</ul>
+<p>基于此，我们可以额外增加一个 trick，就是在构建哈希表的时候，使用「倒序」的形式构建等值下标列表，这样可以确保如果最后位置是通过「等值跳」而来是，能够优先出队。</p>
+<p><strong>代码（感谢 <a href="/u/himymben/">@Benhao</a> 和 <a href="/u/littletime_cc/">@🍭可乐可乐吗</a> 同学提供的其他语言版本）：</strong><br><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-type">int</span> <span class="hljs-variable">INF</span> <span class="hljs-operator">=</span> <span class="hljs-number">0x3f3f3f3f</span>;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">minJumps</span><span class="hljs-params">(<span class="hljs-type">int</span>[] arr)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> arr.length;<br>        Map&lt;Integer, List&lt;Integer&gt;&gt; map = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();<br>        <span class="hljs-comment">// 倒序插入 list，相当于给 deque 增加一个同层「下标越大，优先出队」的作用</span><br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> n - <span class="hljs-number">1</span>; i &gt;= <span class="hljs-number">0</span>; i--) &#123; <br>            List&lt;Integer&gt; list = map.getOrDefault(arr[i], <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;());<br>            list.add(i);<br>            map.put(arr[i], list);<br>        &#125;<br>        <span class="hljs-type">int</span>[] dist = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[n];<br>        Arrays.fill(dist, INF);<br>        Deque&lt;Integer&gt; d = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayDeque</span>&lt;&gt;();<br>        d.addLast(<span class="hljs-number">0</span>);<br>        dist[<span class="hljs-number">0</span>] = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">while</span> (!d.isEmpty()) &#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">t</span> <span class="hljs-operator">=</span> d.pollFirst(), step = dist[t];<br>            <span class="hljs-keyword">if</span> (t == n - <span class="hljs-number">1</span>) <span class="hljs-keyword">return</span> step;<br>            <span class="hljs-keyword">if</span> (t + <span class="hljs-number">1</span> &lt; n &amp;&amp; dist[t + <span class="hljs-number">1</span>] == INF) &#123;<br>                d.addLast(t + <span class="hljs-number">1</span>);<br>                dist[t + <span class="hljs-number">1</span>] = step + <span class="hljs-number">1</span>;<br>            &#125;<br>            <span class="hljs-keyword">if</span> (t - <span class="hljs-number">1</span> &gt;= <span class="hljs-number">0</span> &amp;&amp; dist[t - <span class="hljs-number">1</span>] == INF) &#123;<br>                d.addLast(t - <span class="hljs-number">1</span>);<br>                dist[t - <span class="hljs-number">1</span>] = step + <span class="hljs-number">1</span>;<br>            &#125;<br>            List&lt;Integer&gt; list = map.getOrDefault(arr[t], <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;());<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> ne : list) &#123;<br>                <span class="hljs-keyword">if</span> (dist[ne] == INF) &#123;<br>                    d.addLast(ne);<br>                    dist[ne] = step + <span class="hljs-number">1</span>;<br>                &#125;<br>            &#125;<br>            map.remove(arr[t]);<br>        &#125;<br>        <span class="hljs-keyword">return</span> -<span class="hljs-number">1</span>; <span class="hljs-comment">// never</span><br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure><br>-<br><figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs C++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">minJumps</span><span class="hljs-params">(vector&lt;<span class="hljs-type">int</span>&gt;&amp; arr)</span> </span>&#123;<br>        <span class="hljs-type">const</span> <span class="hljs-type">int</span> inf = <span class="hljs-number">0x3f3f3f3f</span>;<br>        <span class="hljs-type">int</span> n = arr.<span class="hljs-built_in">size</span>();<br>        unordered_map&lt;<span class="hljs-type">int</span>, vector&lt;<span class="hljs-type">int</span>&gt;&gt; map;<br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = n - <span class="hljs-number">1</span>; ~i; i--) &#123;<br>            map[arr[i]].<span class="hljs-built_in">push_back</span>(i);<br>        &#125;<br>        <span class="hljs-function">vector&lt;<span class="hljs-type">int</span>&gt; <span class="hljs-title">dist</span><span class="hljs-params">(n, inf)</span></span>;<br>        queue&lt;<span class="hljs-type">int</span>&gt; q;<br>        q.<span class="hljs-built_in">push</span>(<span class="hljs-number">0</span>);<br>        dist[<span class="hljs-number">0</span>] = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">while</span>(q.<span class="hljs-built_in">size</span>()) &#123;<br>            <span class="hljs-keyword">auto</span> t = q.<span class="hljs-built_in">front</span>(), step = dist[t];<br>            q.<span class="hljs-built_in">pop</span>();<br>            <span class="hljs-keyword">if</span>(t == n - <span class="hljs-number">1</span>) <span class="hljs-keyword">return</span> step;<br>            <span class="hljs-keyword">if</span>(t + <span class="hljs-number">1</span> &lt; n <span class="hljs-keyword">and</span> dist[t + <span class="hljs-number">1</span>] == inf) &#123;<br>                q.<span class="hljs-built_in">push</span>(t + <span class="hljs-number">1</span>);<br>                dist[t + <span class="hljs-number">1</span>] = step + <span class="hljs-number">1</span>;<br>            &#125;<br>            <span class="hljs-keyword">if</span>(t - <span class="hljs-number">1</span> &gt;= <span class="hljs-number">0</span> <span class="hljs-keyword">and</span> dist[t - <span class="hljs-number">1</span>] == inf) &#123;<br>                q.<span class="hljs-built_in">push</span>(t - <span class="hljs-number">1</span>);<br>                dist[t - <span class="hljs-number">1</span>] = step + <span class="hljs-number">1</span>;<br>            &#125;<br>            <span class="hljs-type">const</span> <span class="hljs-keyword">auto</span>&amp; list = map[arr[t]];<br>            <span class="hljs-keyword">for</span>(<span class="hljs-keyword">auto</span> ne :list) &#123;<br>                <span class="hljs-keyword">if</span>(dist[ne] == inf) &#123;<br>                    q.<span class="hljs-built_in">push</span>(ne);<br>                    dist[ne] = step + <span class="hljs-number">1</span>;<br>                &#125;<br>            &#125;<br>            map[arr[t]].<span class="hljs-built_in">clear</span>(); <span class="hljs-comment">//or map.erase(arr[t]);</span><br>        &#125;<br>        <span class="hljs-keyword">return</span> <span class="hljs-number">-1</span>;<br>    &#125;<br>&#125;;<br></code></pre></div></td></tr></table></figure><br>-<br><figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span>:<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">minJumps</span>(<span class="hljs-params">self, arr: <span class="hljs-type">List</span>[<span class="hljs-built_in">int</span>]</span>) -&gt; <span class="hljs-built_in">int</span>:<br>        n = <span class="hljs-built_in">len</span>(arr)<br>        mp = defaultdict(<span class="hljs-built_in">list</span>)<br>        <span class="hljs-keyword">for</span> i, num <span class="hljs-keyword">in</span> <span class="hljs-built_in">enumerate</span>(arr):<br>            mp[num].append(i)<br>        dist = [inf] * n<br>        d = deque([<span class="hljs-number">0</span>])<br>        dist[<span class="hljs-number">0</span>] = <span class="hljs-number">0</span><br>        <span class="hljs-keyword">while</span> <span class="hljs-built_in">len</span>(d) &gt; <span class="hljs-number">0</span>:<br>            t = d.popleft()<br>            step = dist[t]<br>            <span class="hljs-keyword">if</span> t == n - <span class="hljs-number">1</span>:<br>                <span class="hljs-keyword">return</span> step<br>            <span class="hljs-keyword">for</span> ne <span class="hljs-keyword">in</span> mp[arr[t]]:<br>                <span class="hljs-keyword">if</span> dist[ne] == inf:<br>                    d.append(ne)<br>                    dist[ne] = step + <span class="hljs-number">1</span><br>            mp.pop(arr[t])<br>            <span class="hljs-keyword">if</span> dist[t + <span class="hljs-number">1</span>] == inf:<br>                d.append(t + <span class="hljs-number">1</span>)<br>                dist[t + <span class="hljs-number">1</span>] = step + <span class="hljs-number">1</span><br>            <span class="hljs-keyword">if</span> t <span class="hljs-keyword">and</span> dist[t - <span class="hljs-number">1</span>] == inf:<br>                d.append(t - <span class="hljs-number">1</span>)<br>                dist[t - <span class="hljs-number">1</span>] = step + <span class="hljs-number">1</span><br>        <span class="hljs-keyword">return</span> -<span class="hljs-number">1</span><br></code></pre></div></td></tr></table></figure><br>-<br><figure class="highlight go"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Go"><span class="hljs-keyword">const</span> INF <span class="hljs-type">int</span> = <span class="hljs-number">0x3f3f3f3f</span><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">minJumps</span><span class="hljs-params">(arr []<span class="hljs-type">int</span>)</span></span> <span class="hljs-type">int</span> &#123;<br>    n := <span class="hljs-built_in">len</span>(arr)<br>    mp := <span class="hljs-keyword">map</span>[<span class="hljs-type">int</span>][]<span class="hljs-type">int</span>&#123;&#125;<br>    dist := <span class="hljs-built_in">make</span>([]<span class="hljs-type">int</span>, <span class="hljs-built_in">len</span>(arr))<br>    <span class="hljs-keyword">for</span> i := <span class="hljs-number">0</span>; i &lt; n; i++&#123;<br>        list := mp[arr[i]]<br>        list = <span class="hljs-built_in">append</span>(list, i)<br>        mp[arr[i]] = list<br>        dist[i] = INF<br>    &#125;<br>    d := []<span class="hljs-type">int</span>&#123;<span class="hljs-number">0</span>&#125;<br>    dist[<span class="hljs-number">0</span>] = <span class="hljs-number">0</span><br>    <span class="hljs-keyword">for</span> <span class="hljs-built_in">len</span>(d) &gt; <span class="hljs-number">0</span>&#123;<br>        t := d[<span class="hljs-number">0</span>]<br>        step := dist[t]<br>        <span class="hljs-keyword">if</span> t == n - <span class="hljs-number">1</span>&#123;<br>            <span class="hljs-keyword">return</span> step<br>        &#125;<br>        d = d[<span class="hljs-number">1</span>:]<br>        list := mp[arr[t]]<br>        <span class="hljs-built_in">delete</span>(mp, arr[t])<br>        list = <span class="hljs-built_in">append</span>(list, t + <span class="hljs-number">1</span>)<br>        <span class="hljs-keyword">if</span> t &gt; <span class="hljs-number">0</span> &#123;<br>            list = <span class="hljs-built_in">append</span>(list, t - <span class="hljs-number">1</span>)<br>        &#125;<br>        <span class="hljs-keyword">for</span> _, ne := <span class="hljs-keyword">range</span> list &#123;<br>            <span class="hljs-keyword">if</span> dist[ne] == INF &#123;<br>                dist[ne] = step + <span class="hljs-number">1</span><br>                d = <span class="hljs-built_in">append</span>(d, ne)<br>            &#125;<br>        &#125;<br>    &#125;<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">-1</span><br>&#125;<br></code></pre></div></td></tr></table></figure></p>
+<ul>
+<li>时间复杂度：预处理出 <code>map</code> 的复杂度为 $O(n)$；跑一遍 <code>BFS</code> 得到答案复杂度为 $O(n)$。整体复杂度为 $O(n)$</li>
+<li>空间复杂度：$O(n)$</li>
+</ul>
+<hr>
+<h3 id="双向-BFS"><a href="#双向-BFS" class="headerlink" title="双向 BFS"></a>双向 BFS</h3><p>自然也能够使用「双向 <code>BFS</code>」进行求解。</p>
+<p>不了解「双向 <code>BFS</code>」的同学，可以先看前置🧀：<a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzU4NDE3MTEyMA==&amp;mid=2247486981&amp;idx=1&amp;sn=045ea6c880080fea1ce807794ccff69b&amp;chksm=fd9ca51acaeb2c0c83d13e3b2a5196895d1a1b44f8981cc3efad9d6a2af158267010646cc262&amp;token=1446568490&amp;lang=zh_CN#rd">【图论搜索专题】如何使用「双向 BFS」解决搜索空间爆炸问题</a> &amp; <a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzU4NDE3MTEyMA==&amp;mid=2247489502&amp;idx=1&amp;sn=dc863d4bc71c4739a4799b9a4558bd01&amp;chksm=fd9cbcc1caeb35d749d0d72f485485527482c27b608c8f4062c29a997ede97a09ce598b58c7f&amp;token=1446568490&amp;lang=zh_CN#rd">【图论搜索专题】双向 BFS 模板题</a> 。</p>
+<p>双向 <code>BFS</code> 能够有效解决搜索空间爆炸问题，本题使用双向 <code>BFS</code> 的话，可以不进行哈希表的 <code>remove</code> 操作。</p>
+<p>代码：<br><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-type">int</span>[] arr;<br>    <span class="hljs-type">int</span> <span class="hljs-variable">INF</span> <span class="hljs-operator">=</span> <span class="hljs-number">0x3f3f3f3f</span>;<br>    <span class="hljs-type">int</span> n;<br>    Map&lt;Integer, List&lt;Integer&gt;&gt; map = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">minJumps</span><span class="hljs-params">(<span class="hljs-type">int</span>[] _arr)</span> &#123;<br>        arr = _arr;<br>        n = arr.length;<br>        <span class="hljs-keyword">if</span> (n == <span class="hljs-number">1</span>) <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> n - <span class="hljs-number">1</span>; i &gt;= <span class="hljs-number">0</span>; i--) &#123;<br>            List&lt;Integer&gt; list = map.getOrDefault(arr[i], <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;());<br>            list.add(i);<br>            map.put(arr[i], list);<br>        &#125;<br>        Deque&lt;Integer&gt; d1 = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayDeque</span>&lt;&gt;(), d2 = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayDeque</span>&lt;&gt;();<br>        <span class="hljs-type">int</span>[] dist1 = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[n], dist2 = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[n];<br>        Arrays.fill(dist1, INF);<br>        Arrays.fill(dist2, INF);<br>        d1.addLast(<span class="hljs-number">0</span>);<br>        dist1[<span class="hljs-number">0</span>] = <span class="hljs-number">0</span>;<br>        d2.addLast(n - <span class="hljs-number">1</span>);<br>        dist2[n - <span class="hljs-number">1</span>] = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">while</span> (!d1.isEmpty() &amp;&amp; !d2.isEmpty()) &#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">t</span> <span class="hljs-operator">=</span> -<span class="hljs-number">1</span>;<br>            <span class="hljs-keyword">if</span> (d1.size() &lt; d2.size()) t = update(d1, d2, dist1, dist2);<br>            <span class="hljs-keyword">else</span> t = update(d2, d1, dist2, dist1);<br>            <span class="hljs-keyword">if</span> (t != -<span class="hljs-number">1</span>) <span class="hljs-keyword">return</span> t;<br>        &#125;<br>        <span class="hljs-keyword">return</span> -<span class="hljs-number">1</span>; <span class="hljs-comment">// never</span><br>    &#125;<br>    <span class="hljs-type">int</span> <span class="hljs-title function_">update</span><span class="hljs-params">(Deque&lt;Integer&gt; d1, Deque&lt;Integer&gt; d2, <span class="hljs-type">int</span>[] dist1, <span class="hljs-type">int</span>[] dist2)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">m</span> <span class="hljs-operator">=</span> d1.size();<br>        <span class="hljs-keyword">while</span> (m-- &gt; <span class="hljs-number">0</span>) &#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">t</span> <span class="hljs-operator">=</span> d1.pollFirst(), step = dist1[t];<br>            <span class="hljs-keyword">if</span> (t + <span class="hljs-number">1</span> &lt; n) &#123;<br>                <span class="hljs-keyword">if</span> (dist2[t + <span class="hljs-number">1</span>] != INF) <span class="hljs-keyword">return</span> step + <span class="hljs-number">1</span> + dist2[t + <span class="hljs-number">1</span>];<br>                <span class="hljs-keyword">if</span> (dist1[t + <span class="hljs-number">1</span>] == INF) &#123;<br>                    d1.addLast(t + <span class="hljs-number">1</span>);<br>                    dist1[t + <span class="hljs-number">1</span>] = step + <span class="hljs-number">1</span>;<br>                &#125;<br>            &#125;<br>            <span class="hljs-keyword">if</span> (t - <span class="hljs-number">1</span> &gt;= <span class="hljs-number">0</span>) &#123;<br>                <span class="hljs-keyword">if</span> (dist2[t - <span class="hljs-number">1</span>] != INF) <span class="hljs-keyword">return</span> step + <span class="hljs-number">1</span> + dist2[t - <span class="hljs-number">1</span>];<br>                <span class="hljs-keyword">if</span> (dist1[t - <span class="hljs-number">1</span>] == INF) &#123;<br>                    d1.addLast(t - <span class="hljs-number">1</span>);<br>                    dist1[t - <span class="hljs-number">1</span>] = step + <span class="hljs-number">1</span>;<br>                &#125;<br>            &#125;<br>            List&lt;Integer&gt; list = map.getOrDefault(arr[t], <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;());<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> ne : list) &#123;<br>                <span class="hljs-keyword">if</span> (dist2[ne] != INF) <span class="hljs-keyword">return</span> step + <span class="hljs-number">1</span> + dist2[ne];<br>                <span class="hljs-keyword">if</span> (dist1[ne] == INF) &#123;<br>                    d1.addLast(ne);<br>                    dist1[ne] = step + <span class="hljs-number">1</span>;<br>                &#125;<br>            &#125;<br>            map.remove(arr[t]);<br>        &#125;<br>        <span class="hljs-keyword">return</span> -<span class="hljs-number">1</span>;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure></p>
+<ul>
+<li>时间复杂度：$O(n)$</li>
+<li>空间复杂度：$O(n)$</li>
+</ul>
+<hr>
+<h3 id="其他「图论搜索-模拟」内容"><a href="#其他「图论搜索-模拟」内容" class="headerlink" title="其他「图论搜索 / 模拟」内容"></a>其他「图论搜索 / 模拟」内容</h3><p>题太简单？不如来学习热乎的 <a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzU4NDE3MTEyMA==&amp;mid=2247490011&amp;idx=1&amp;sn=4c8cbd5ad858f571291d47fcef75e75b&amp;chksm=fd9cb2c4caeb3bd2ac442b2d4d1417e8eb6d65b1feca8399179951ebfa132e8a97a3935e7498&amp;token=252055586&amp;lang=zh_CN#rd">简单图论搜索题</a> 🍭🍭🍭</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzU4NDE3MTEyMA==&amp;mid=2247489621&amp;idx=1&amp;sn=5d43fb97bc167a50a7aeb4ae2068571c&amp;chksm=fd9cb34acaeb3a5c7e1e2e2a88d460ae2418a3cef615e1abf017b5d58aa1e7f490856d67f800&amp;token=2136593799&amp;lang=zh_CN#rd">常规 BFS（二维转一维）</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzU4NDE3MTEyMA==&amp;mid=2247489746&amp;idx=2&amp;sn=9e80b33c12e96369c7a770382a97adbb&amp;chksm=fd9cb3cdcaeb3adb35c708e548851e419b00e41801c98cae146ba29f5bdc49370a43cddf668d&amp;token=252055586&amp;lang=zh_CN#rd">常规 BFS/迭代加深（结合二叉树）</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzU4NDE3MTEyMA==&amp;mid=2247487179&amp;idx=1&amp;sn=e30a662c03fba3861254dbcf3fb9d6f2&amp;chksm=fd9ca5d4caeb2cc205804fd17a2ce86b25d0408adc3417e73154f59d37e7cb17e02374f5122c&amp;scene=178&amp;cur_album_id=1917113998693449732#rd">多源 BFS</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzU4NDE3MTEyMA==&amp;mid=2247489502&amp;idx=1&amp;sn=dc863d4bc71c4739a4799b9a4558bd01&amp;chksm=fd9cbcc1caeb35d749d0d72f485485527482c27b608c8f4062c29a997ede97a09ce598b58c7f&amp;scene=178&amp;cur_album_id=1917113998693449732#rd">双向 BFS</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzU4NDE3MTEyMA==&amp;mid=2247486981&amp;idx=1&amp;sn=045ea6c880080fea1ce807794ccff69b&amp;chksm=fd9ca51acaeb2c0c83d13e3b2a5196895d1a1b44f8981cc3efad9d6a2af158267010646cc262&amp;scene=178&amp;cur_album_id=1917113998693449732#rd">双向 BFS Ⅱ</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzU4NDE3MTEyMA==&amp;mid=2247489671&amp;idx=1&amp;sn=c0f64de1a5e4613675f73d2ae43d0708&amp;chksm=fd9cb398caeb3a8eae334c89dee17711fca43a00d93cf63a623792f3aac0c8bf586b4be9cc47&amp;token=2074150457&amp;lang=zh_CN#rd">双向 BFS Ⅲ（结合并查集）</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzU4NDE3MTEyMA==&amp;mid=2247489560&amp;idx=2&amp;sn=bb966d868c18d656620a20d31a425b23&amp;chksm=fd9cb307caeb3a11424428f0a88e7f0cb86bb53b3e5a2b9e28683a24bcb3ac151655d2b6419e&amp;scene=178&amp;cur_album_id=1917113998693449732#rd">灵活运用多种搜索方式（启发式）</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzU4NDE3MTEyMA==&amp;mid=2247489588&amp;idx=1&amp;sn=479e4c0627247ab7e20af7909f2a8b64&amp;chksm=fd9cb32bcaeb3a3d4f0bd73f023a92a165edabf212af1db9672a55bed1af7d4e32e8af9964c3&amp;scene=178&amp;cur_album_id=1917113998693449732#rd">灵活运用多种搜索方式 Ⅱ（启发式）</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzU4NDE3MTEyMA==&amp;mid=2247489985&amp;idx=1&amp;sn=e503ce6ece048062f1d9ebee2572838a&amp;chksm=fd9cb2decaeb3bc8c635c4a6cf0e78d5973723bb6c89a64875828435dc5b90ef07874ef7a6ae&amp;token=252055586&amp;lang=zh_CN#rd">灵活运用多种搜索方式 Ⅲ（启发式 结合状态压缩）</a></li>
+</ul>
+<hr>
+<h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>这是我们「刷穿 LeetCode」系列文章的第 <code>No.1345</code> 篇，系列开始于 2021/01/01，截止于起始日 LeetCode 上共有 1916 道题目，部分是有锁题，我们将先把所有不带锁的题目刷完。</p>
+<p>在这个系列文章里面，除了讲解解题思路以外，还会尽可能给出最为简洁的代码。如果涉及通解还会相应的代码模板。</p>
+<p>为了方便各位同学能够电脑上进行调试和提交代码，我建立了相关的仓库：<a target="_blank" rel="noopener" href="https://github.com/SharingSource/LogicStack-LeetCode">https://github.com/SharingSource/LogicStack-LeetCode</a> 。</p>
+<p>在仓库地址里，你可以看到系列文章的题解链接、系列文章的相应代码、LeetCode 原题链接和其他优选题解。</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%9B%BE%E8%AE%BA-BFS/">图论 BFS</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%8F%8C%E5%90%91-BFS/">双向 BFS</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/01/21/1332.%20%E5%88%A0%E9%99%A4%E5%9B%9E%E6%96%87%E5%AD%90%E5%BA%8F%E5%88%97%EF%BC%88%E7%AE%80%E5%8D%95%EF%BC%89/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">LC 1332. 删除回文子序列</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/01/19/2029.%20%E7%9F%B3%E5%AD%90%E6%B8%B8%E6%88%8F%20IX%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/">
+                        <span class="hidden-mobile">LC 2029. 石子游戏 IX</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+  <div class="col-lg-7 mx-auto nopadding-x-md">
+    <div class="container custom post-custom mx-auto">
+      <img src="https://oscimg.oschina.net/oscnet/up-19688dc1af05cf8bdea43b2a863038ab9e5.png" srcset="/img/loading.gif" lazyload class="rounded mx-auto d-block mt-5" style="width:900px; height:500px;">
+    </div>
+  </div>
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.staticfile.org/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.staticfile.org/tocbot/4.18.2/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.staticfile.org/anchor-js/4.3.1/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.11/clipboard.min.js" ></script>
+  
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.bootcdn.net/ajax/libs/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        loader: {
+          
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.staticfile.org/mathjax/3.2.0/es5/tex-svg.js" ></script>
+
+  
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

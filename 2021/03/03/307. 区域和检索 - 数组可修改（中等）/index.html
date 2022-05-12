@@ -1,0 +1,617 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/oimg/RoundCorner.png">
+  <link rel="icon" href="/oimg/RoundCorner.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="宫水三叶">
+  <meta name="keywords" content="算法, 数据结构, 题解">
+  
+    <meta name="description" content="题目描述这是 LeetCode 上的 307. 区域和检索 - 数组可修改 ，难度为 中等。 给你一个数组 nums，请你完成两类查询，其中一类查询要求更新数组下标对应的值，另一类查询要求返回数组中某个范围内元素的总和。 实现 NumArray 类：  NumArray(int[] nums) 用整数数组 nums 初始化对象 void update(int index, int val) 将 n">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LC 307. 区域和检索 - 数组可修改">
+<meta property="og:url" content="http://example.com/2021/03/03/307.%20%E5%8C%BA%E5%9F%9F%E5%92%8C%E6%A3%80%E7%B4%A2%20-%20%E6%95%B0%E7%BB%84%E5%8F%AF%E4%BF%AE%E6%94%B9%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/index.html">
+<meta property="og:site_name" content="宫水三叶的刷题日记">
+<meta property="og:description" content="题目描述这是 LeetCode 上的 307. 区域和检索 - 数组可修改 ，难度为 中等。 给你一个数组 nums，请你完成两类查询，其中一类查询要求更新数组下标对应的值，另一类查询要求返回数组中某个范围内元素的总和。 实现 NumArray 类：  NumArray(int[] nums) 用整数数组 nums 初始化对象 void update(int index, int val) 将 n">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-03-03T00:45:38.000Z">
+<meta property="article:modified_time" content="2022-05-12T04:05:31.909Z">
+<meta property="article:author" content="宫水三叶">
+<meta property="article:tag" content="线段树">
+<meta property="article:tag" content="树状数组">
+<meta property="article:tag" content="区间和">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  <title>LC 307. 区域和检索 - 数组可修改 - 宫水三叶的刷题日记</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/hint.css/2.7.0/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.7.2/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"|","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.1.0"></head>
+
+
+<body>
+  <header style="height: 50vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>宫水三叶の刷题日记</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/image_43.jpeg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="LC 307. 区域和检索 - 数组可修改">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-author" aria-hidden="true"></i>
+      宫水三叶
+    </span>
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-03-03 08:45" pubdate>
+        2021年3月3日 早上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      5.3k 字
+    </span>
+  
+
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">LC 307. 区域和检索 - 数组可修改</h1>
+            
+            <div class="markdown-body">
+              <h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>这是 LeetCode 上的 <strong><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/range-sum-query-mutable/solution/guan-yu-ge-lei-qu-jian-he-wen-ti-ru-he-x-41hv/">307. 区域和检索 - 数组可修改</a></strong> ，难度为 <strong>中等</strong>。</p>
+<p>给你一个数组 <code>nums</code>，请你完成两类查询，其中一类查询要求更新数组下标对应的值，另一类查询要求返回数组中某个范围内元素的总和。</p>
+<p>实现 <code>NumArray</code> 类：</p>
+<ul>
+<li><code>NumArray(int[] nums)</code> 用整数数组 <code>nums</code> 初始化对象</li>
+<li><code>void update(int index, int val)</code> 将 <code>nums[index]</code> 的值更新为 <code>val</code></li>
+<li><code>int sumRange(int left, int right)</code> 返回子数组 <code>nums[left, right]</code> 的总和（即，<code>nums[left] + nums[left + 1], ..., nums[right]</code>）</li>
+</ul>
+<p>示例：<br><figure class="highlight prolog"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs prolog">输入：<br>[<span class="hljs-string">&quot;NumArray&quot;</span>, <span class="hljs-string">&quot;sumRange&quot;</span>, <span class="hljs-string">&quot;update&quot;</span>, <span class="hljs-string">&quot;sumRange&quot;</span>]<br>[[[<span class="hljs-number">1</span>, <span class="hljs-number">3</span>, <span class="hljs-number">5</span>]], [<span class="hljs-number">0</span>, <span class="hljs-number">2</span>], [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>], [<span class="hljs-number">0</span>, <span class="hljs-number">2</span>]]<br><br>输出：<br>[null, <span class="hljs-number">9</span>, null, <span class="hljs-number">8</span>]<br><br>解释：<br><span class="hljs-symbol">NumArray</span> numArray = new <span class="hljs-symbol">NumArray</span>([<span class="hljs-number">1</span>, <span class="hljs-number">3</span>, <span class="hljs-number">5</span>]);<br>numArray.sumRange(<span class="hljs-number">0</span>, <span class="hljs-number">2</span>); // 返回 <span class="hljs-number">9</span> ，sum([<span class="hljs-number">1</span>,<span class="hljs-number">3</span>,<span class="hljs-number">5</span>]) = <span class="hljs-number">9</span><br>numArray.update(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>);   // nums = [<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">5</span>]<br>numArray.sumRange(<span class="hljs-number">0</span>, <span class="hljs-number">2</span>); // 返回 <span class="hljs-number">8</span> ，sum([<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">5</span>]) = <span class="hljs-number">8</span><br></code></pre></div></td></tr></table></figure></p>
+<p>提示：</p>
+<ul>
+<li>$1 &lt;= nums.length &lt;= 3 * 10^4$</li>
+<li>$-100 &lt;= nums[i] &lt;= 100$</li>
+<li>$0 &lt;= index &lt; nums.length$</li>
+<li>$-100 &lt;= val &lt;= 100$</li>
+<li>$0 &lt;= left &lt;= right &lt; nums.length$</li>
+<li>最多调用 $3 * 10^4$ 次 <code>update</code> 和 <code>sumRange</code> 方法</li>
+</ul>
+<hr>
+<h3 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h3><p>这是一道很经典的题目，通常还能拓展出一大类问题。</p>
+<p>针对不同的题目，我们有不同的方案可以选择（假设我们有一个数组）：</p>
+<ol>
+<li>数组不变，求区间和：「前缀和」、「树状数组」、「线段树」</li>
+<li>多次修改某个数（单点），求区间和：「树状数组」、「线段树」</li>
+<li>多次修改某个区间，输出最终结果：「差分」</li>
+<li>多次修改某个区间，求区间和：「线段树」、「树状数组」（看修改区间范围大小）</li>
+<li>多次将某个区间变成同一个数，求区间和：「线段树」、「树状数组」（看修改区间范围大小）</li>
+</ol>
+<p>这样看来，「线段树」能解决的问题是最多的，那我们是不是无论什么情况都写「线段树」呢？</p>
+<p>答案并不是，而且恰好相反，只有在我们遇到第 4/5 类问题，不得不写「线段树」的时候，我们才考虑线段树。</p>
+<p>因为「线段树」代码很长，而且常数很大，实际表现不算很好。我们只有在不得不用的时候才考虑「线段树」。</p>
+<p>总结一下，我们应该按这样的优先级进行考虑：</p>
+<ol>
+<li>简单求区间和，用「前缀和」</li>
+<li>多次将某个区间变成同一个数，用「线段树」</li>
+<li>其他情况，用「树状数组」</li>
+</ol>
+<hr>
+<h3 id="树状数组"><a href="#树状数组" class="headerlink" title="树状数组"></a>树状数组</h3><p>本题只涉及「单点修改」和「区间求和」，属于「树状数组」的经典应用。</p>
+<p>「树状数组」本身是一个很简单的数据结构，但是要搞懂其为什么可以这样「查询」&amp;「更新」还是比较困难的（特别是为什么可以这样更新），往往需要从「二进制分解」进行出发理解。</p>
+<p>树状数组涉及的操作有两个，复杂度均为 $O(\log{n})$：</p>
+<ul>
+<li><code>void add(int x, int u)</code>：含义为在 $x$ 的位置增加 $u$（注意位置下标从 $1$ 开始）；</li>
+<li><code>int query(int x)</code>：含义为查询从 $[1, x]$ 区间的和为多少（配合容斥原理，可实现任意区间查询）。</li>
+</ul>
+<p>代码：<br><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">NumArray</span> &#123;<br>    <span class="hljs-type">int</span>[] tr;<br>    <span class="hljs-type">int</span> <span class="hljs-title function_">lowbit</span><span class="hljs-params">(<span class="hljs-type">int</span> x)</span> &#123;<br>        <span class="hljs-keyword">return</span> x &amp; -x;<br>    &#125;<br>    <span class="hljs-keyword">void</span> <span class="hljs-title function_">add</span><span class="hljs-params">(<span class="hljs-type">int</span> x, <span class="hljs-type">int</span> u)</span> &#123;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> x; i &lt;= n; i += lowbit(i)) tr[i] += u;<br>    &#125;<br>    <span class="hljs-type">int</span> <span class="hljs-title function_">query</span><span class="hljs-params">(<span class="hljs-type">int</span> x)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">ans</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> x; i &gt; <span class="hljs-number">0</span>; i -= lowbit(i)) ans += tr[i];<br>        <span class="hljs-keyword">return</span> ans;<br>    &#125;<br><br>    <span class="hljs-type">int</span>[] nums;<br>    <span class="hljs-type">int</span> n;<br>    <span class="hljs-keyword">public</span> <span class="hljs-title function_">NumArray</span><span class="hljs-params">(<span class="hljs-type">int</span>[] _nums)</span> &#123;<br>        nums = _nums;<br>        n = nums.length;<br>        tr = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[n + <span class="hljs-number">10</span>];<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; n; i++) add(i + <span class="hljs-number">1</span>, nums[i]);<br>    &#125;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">update</span><span class="hljs-params">(<span class="hljs-type">int</span> index, <span class="hljs-type">int</span> val)</span> &#123;<br>        add(index + <span class="hljs-number">1</span>, val - nums[index]);<br>        nums[index] = val;<br>    &#125;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">sumRange</span><span class="hljs-params">(<span class="hljs-type">int</span> left, <span class="hljs-type">int</span> right)</span> &#123;<br>        <span class="hljs-keyword">return</span> query(right + <span class="hljs-number">1</span>) - query(left);<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure></p>
+<ul>
+<li>时间复杂度：插入和查询复杂度均为 $O(\log{n})$</li>
+<li>空间复杂度：$O(n)$</li>
+</ul>
+<hr>
+<h3 id="线段树"><a href="#线段树" class="headerlink" title="线段树"></a>线段树</h3><p>相比「树状数组」，另外一个更为进阶且通用的做法是使用「线段树」。</p>
+<p>线段树的所有操作同样为 $O(\log{n})，$由于本题不涉及「区间修改」操作，因此我们的线段树只需要实现 <code>pushup</code> 操作（子节点往上更新父节点），而不需要实现用于懒标记的 <code>pushdown</code> 操作（父节点往下传递「更新」的操作）。</p>
+<p>关于线段树设计的几种操作：</p>
+<ul>
+<li><code>void build(int u, int l, int r)</code>：含义为从编号为 $u$ 的节点开始，构造范围为 $[l,r]$ 的树节点；</li>
+<li><code>void update(int u, int x, int v)</code>：含义为从编号为 $u$ 的节点开始，在 $x$ 位置增加 $v$；<ul>
+<li>更具一般性（涉及区间修改）的操作应该为 <code>void update(int u, int l, int r, int v)</code>，代表在 $[l, r]$ 范围增加 $v$；</li>
+</ul>
+</li>
+<li><code>int query(int u, int l, int r)</code>：含义为从编号为 $u$ 的节点开始，查询 $[l, r]$ 区间和为多少。</li>
+</ul>
+<blockquote>
+<p>注意：对于编号为 <code>u</code> 的节点而言，其左子节点的编号为 <code>u &lt;&lt; 1</code>，其右节点的编号为 <code>u &lt;&lt; 1 | 1</code>。</p>
+</blockquote>
+<p>代码（考虑为线段树增加 <code>static</code> 优化的代码见 $P2$，样例个数较少，优化不明显）：<br><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">NumArray</span> &#123;<br>    Node[] tr;<br>    <span class="hljs-keyword">class</span> <span class="hljs-title class_">Node</span> &#123;<br>        <span class="hljs-type">int</span> l, r, v;<br>        Node(<span class="hljs-type">int</span> _l, <span class="hljs-type">int</span> _r) &#123;<br>            l = _l; r = _r;<br>        &#125;<br>    &#125;<br>    <span class="hljs-keyword">void</span> <span class="hljs-title function_">build</span><span class="hljs-params">(<span class="hljs-type">int</span> u, <span class="hljs-type">int</span> l, <span class="hljs-type">int</span> r)</span> &#123;<br>        tr[u] = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Node</span>(l, r);<br>        <span class="hljs-keyword">if</span> (l == r) <span class="hljs-keyword">return</span>;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">mid</span> <span class="hljs-operator">=</span> l + r &gt;&gt; <span class="hljs-number">1</span>;<br>        build(u &lt;&lt; <span class="hljs-number">1</span>, l, mid);<br>        build(u &lt;&lt; <span class="hljs-number">1</span> | <span class="hljs-number">1</span>, mid + <span class="hljs-number">1</span>, r);<br>    &#125;<br>    <span class="hljs-keyword">void</span> <span class="hljs-title function_">update</span><span class="hljs-params">(<span class="hljs-type">int</span> u, <span class="hljs-type">int</span> x, <span class="hljs-type">int</span> v)</span> &#123;<br>        <span class="hljs-keyword">if</span> (tr[u].l == x &amp;&amp; tr[u].r == x) &#123;<br>            tr[u].v += v;<br>            <span class="hljs-keyword">return</span> ;<br>        &#125;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">mid</span> <span class="hljs-operator">=</span> tr[u].l + tr[u].r &gt;&gt; <span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">if</span> (x &lt;= mid) update(u &lt;&lt; <span class="hljs-number">1</span>, x, v);<br>        <span class="hljs-keyword">else</span> update(u &lt;&lt; <span class="hljs-number">1</span> | <span class="hljs-number">1</span>, x, v);<br>        pushup(u);<br>    &#125;<br>    <span class="hljs-type">int</span> <span class="hljs-title function_">query</span><span class="hljs-params">(<span class="hljs-type">int</span> u, <span class="hljs-type">int</span> l, <span class="hljs-type">int</span> r)</span> &#123;<br>        <span class="hljs-keyword">if</span> (l &lt;= tr[u].l &amp;&amp; tr[u].r &lt;= r) <span class="hljs-keyword">return</span> tr[u].v;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">mid</span> <span class="hljs-operator">=</span> tr[u].l + tr[u].r &gt;&gt; <span class="hljs-number">1</span>;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">ans</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">if</span> (l &lt;= mid) ans += query(u &lt;&lt; <span class="hljs-number">1</span>, l, r);<br>        <span class="hljs-keyword">if</span> (r &gt; mid) ans += query(u &lt;&lt; <span class="hljs-number">1</span> | <span class="hljs-number">1</span>, l, r);<br>        <span class="hljs-keyword">return</span> ans;<br>    &#125;<br>    <span class="hljs-keyword">void</span> <span class="hljs-title function_">pushup</span><span class="hljs-params">(<span class="hljs-type">int</span> u)</span> &#123;<br>        tr[u].v = tr[u &lt;&lt; <span class="hljs-number">1</span>].v + tr[u &lt;&lt; <span class="hljs-number">1</span> | <span class="hljs-number">1</span>].v;<br>    &#125;<br><br>    <span class="hljs-type">int</span>[] nums;<br>    <span class="hljs-keyword">public</span> <span class="hljs-title function_">NumArray</span><span class="hljs-params">(<span class="hljs-type">int</span>[] _nums)</span> &#123;<br>        nums = _nums;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> nums.length;<br>        tr = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Node</span>[n * <span class="hljs-number">4</span>];<br>        build(<span class="hljs-number">1</span>, <span class="hljs-number">1</span>, n);<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; n; i++) update(<span class="hljs-number">1</span>, i + <span class="hljs-number">1</span>, nums[i]);<br>    &#125;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">update</span><span class="hljs-params">(<span class="hljs-type">int</span> index, <span class="hljs-type">int</span> val)</span> &#123;<br>        update(<span class="hljs-number">1</span>, index + <span class="hljs-number">1</span>, val - nums[index]);<br>        nums[index] = val;<br>    &#125;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">sumRange</span><span class="hljs-params">(<span class="hljs-type">int</span> left, <span class="hljs-type">int</span> right)</span> &#123;<br>        <span class="hljs-keyword">return</span> query(<span class="hljs-number">1</span>, left + <span class="hljs-number">1</span>, right + <span class="hljs-number">1</span>);<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure></p>
+<p>-</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">NumArray</span> &#123;<br>    <span class="hljs-keyword">static</span> <span class="hljs-type">int</span> <span class="hljs-variable">N</span> <span class="hljs-operator">=</span> <span class="hljs-number">30010</span>;<br>    <span class="hljs-keyword">static</span> Node[] tr = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Node</span>[N * <span class="hljs-number">4</span>];<br>    <span class="hljs-keyword">class</span> <span class="hljs-title class_">Node</span> &#123;<br>        <span class="hljs-type">int</span> l, r, v;<br>        Node(<span class="hljs-type">int</span> _l, <span class="hljs-type">int</span> _r) &#123;<br>            l = _l; r = _r;<br>        &#125;<br>    &#125;<br>    <span class="hljs-keyword">void</span> <span class="hljs-title function_">build</span><span class="hljs-params">(<span class="hljs-type">int</span> u, <span class="hljs-type">int</span> l, <span class="hljs-type">int</span> r)</span> &#123;<br>        <span class="hljs-keyword">if</span> (tr[u] == <span class="hljs-literal">null</span>) &#123;<br>            tr[u] = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Node</span>(l, r);<br>        &#125; <span class="hljs-keyword">else</span> &#123;<br>            tr[u].l = l; tr[u].r = r; tr[u].v = <span class="hljs-number">0</span>;<br>        &#125;<br>        <span class="hljs-keyword">if</span> (l == r) <span class="hljs-keyword">return</span> ;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">mid</span> <span class="hljs-operator">=</span> l + r &gt;&gt; <span class="hljs-number">1</span>;<br>        build(u &lt;&lt; <span class="hljs-number">1</span>, l, mid);<br>        build(u &lt;&lt; <span class="hljs-number">1</span> | <span class="hljs-number">1</span>, mid + <span class="hljs-number">1</span>, r);<br>    &#125;<br>    <span class="hljs-keyword">void</span> <span class="hljs-title function_">update</span><span class="hljs-params">(<span class="hljs-type">int</span> u, <span class="hljs-type">int</span> x, <span class="hljs-type">int</span> v)</span> &#123;<br>        <span class="hljs-keyword">if</span> (tr[u].l == x &amp;&amp; tr[u].r == x) &#123;<br>            tr[u].v += v;<br>            <span class="hljs-keyword">return</span> ;<br>        &#125;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">mid</span> <span class="hljs-operator">=</span> tr[u].l + tr[u].r &gt;&gt; <span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">if</span> (x &lt;= mid) update(u &lt;&lt; <span class="hljs-number">1</span>, x, v);<br>        <span class="hljs-keyword">else</span> update(u &lt;&lt; <span class="hljs-number">1</span> | <span class="hljs-number">1</span>, x, v);<br>        pushup(u);<br>    &#125;<br>    <span class="hljs-type">int</span> <span class="hljs-title function_">query</span><span class="hljs-params">(<span class="hljs-type">int</span> u, <span class="hljs-type">int</span> l, <span class="hljs-type">int</span> r)</span> &#123;<br>        <span class="hljs-keyword">if</span> (l &lt;= tr[u].l &amp;&amp; tr[u].r &lt;= r) <span class="hljs-keyword">return</span> tr[u].v;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">mid</span> <span class="hljs-operator">=</span> tr[u].l + tr[u].r &gt;&gt; <span class="hljs-number">1</span>;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">ans</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">if</span> (l &lt;= mid) ans += query(u &lt;&lt; <span class="hljs-number">1</span>, l, r);<br>        <span class="hljs-keyword">if</span> (r &gt; mid) ans += query(u &lt;&lt; <span class="hljs-number">1</span> | <span class="hljs-number">1</span>, l, r);<br>        <span class="hljs-keyword">return</span> ans;<br>    &#125;<br>    <span class="hljs-keyword">void</span> <span class="hljs-title function_">pushup</span><span class="hljs-params">(<span class="hljs-type">int</span> u)</span> &#123;<br>        tr[u].v = tr[u &lt;&lt; <span class="hljs-number">1</span>].v + tr[u &lt;&lt; <span class="hljs-number">1</span> | <span class="hljs-number">1</span>].v;<br>    &#125;<br><br>    <span class="hljs-type">int</span>[] nums;<br>    <span class="hljs-keyword">public</span> <span class="hljs-title function_">NumArray</span><span class="hljs-params">(<span class="hljs-type">int</span>[] _nums)</span> &#123;<br>        nums = _nums;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> nums.length;<br>        build(<span class="hljs-number">1</span>, <span class="hljs-number">1</span>, n);<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; n; i++) update(<span class="hljs-number">1</span>, i + <span class="hljs-number">1</span>, nums[i]);<br>    &#125;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">update</span><span class="hljs-params">(<span class="hljs-type">int</span> index, <span class="hljs-type">int</span> val)</span> &#123;<br>        update(<span class="hljs-number">1</span>, index + <span class="hljs-number">1</span>, val - nums[index]);<br>        nums[index] = val;<br>    &#125;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">sumRange</span><span class="hljs-params">(<span class="hljs-type">int</span> left, <span class="hljs-type">int</span> right)</span> &#123;<br>        <span class="hljs-keyword">return</span> query(<span class="hljs-number">1</span>, left + <span class="hljs-number">1</span>, right + <span class="hljs-number">1</span>);<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<ul>
+<li>时间复杂度：插入和查询复杂度均为 $O(\log{n})$</li>
+<li>空间复杂度：$O(n)$</li>
+</ul>
+<hr>
+<h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>这是我们「刷穿 LeetCode」系列文章的第 <code>No.307</code> 篇，系列开始于 2021/01/01，截止于起始日 LeetCode 上共有 1916 道题目，部分是有锁题，我们将先把所有不带锁的题目刷完。</p>
+<p>在这个系列文章里面，除了讲解解题思路以外，还会尽可能给出最为简洁的代码。如果涉及通解还会相应的代码模板。</p>
+<p>为了方便各位同学能够电脑上进行调试和提交代码，我建立了相关的仓库：<a target="_blank" rel="noopener" href="https://github.com/SharingSource/LogicStack-LeetCode">https://github.com/SharingSource/LogicStack-LeetCode</a> 。</p>
+<p>在仓库地址里，你可以看到系列文章的题解链接、系列文章的相应代码、LeetCode 原题链接和其他优选题解。</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E7%BA%BF%E6%AE%B5%E6%A0%91/">线段树</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E6%A0%91%E7%8A%B6%E6%95%B0%E7%BB%84/">树状数组</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%8C%BA%E9%97%B4%E5%92%8C/">区间和</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/03/04/354.%20%E4%BF%84%E7%BD%97%E6%96%AF%E5%A5%97%E5%A8%83%E4%BF%A1%E5%B0%81%E9%97%AE%E9%A2%98%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">LC 354. 俄罗斯套娃信封问题</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/03/03/338.%20%E6%AF%94%E7%89%B9%E4%BD%8D%E8%AE%A1%E6%95%B0%EF%BC%88%E7%AE%80%E5%8D%95%EF%BC%89/">
+                        <span class="hidden-mobile">LC 338. 比特位计数</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+  <div class="col-lg-7 mx-auto nopadding-x-md">
+    <div class="container custom post-custom mx-auto">
+      <img src="https://oscimg.oschina.net/oscnet/up-19688dc1af05cf8bdea43b2a863038ab9e5.png" srcset="/img/loading.gif" lazyload class="rounded mx-auto d-block mt-5" style="width:900px; height:500px;">
+    </div>
+  </div>
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.staticfile.org/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.staticfile.org/tocbot/4.18.2/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.staticfile.org/anchor-js/4.3.1/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.11/clipboard.min.js" ></script>
+  
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.bootcdn.net/ajax/libs/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        loader: {
+          
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.staticfile.org/mathjax/3.2.0/es5/tex-svg.js" ></script>
+
+  
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

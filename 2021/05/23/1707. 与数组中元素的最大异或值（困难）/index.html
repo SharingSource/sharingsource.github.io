@@ -1,0 +1,597 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/oimg/RoundCorner.png">
+  <link rel="icon" href="/oimg/RoundCorner.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="宫水三叶">
+  <meta name="keywords" content="算法, 数据结构, 题解">
+  
+    <meta name="description" content="题目描述这是 LeetCode 上的 1707. 与数组中元素的最大异或值 ，难度为 困难。 给你一个由非负整数组成的数组 $nums$ 。另有一个查询数组 $queries$，其中 $queries[i] &#x3D; [xi, mi]$ 。 第 $i$ 个查询的答案是 $x_i$ 和任何 $nums$ 数组中不超过 $m_i$ 的元素按位异或（XOR）得到的最大值。 换句话说，答案是 max(nums[">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LC 1707. 与数组中元素的最大异或值">
+<meta property="og:url" content="http://example.com/2021/05/23/1707.%20%E4%B8%8E%E6%95%B0%E7%BB%84%E4%B8%AD%E5%85%83%E7%B4%A0%E7%9A%84%E6%9C%80%E5%A4%A7%E5%BC%82%E6%88%96%E5%80%BC%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/index.html">
+<meta property="og:site_name" content="宫水三叶的刷题日记">
+<meta property="og:description" content="题目描述这是 LeetCode 上的 1707. 与数组中元素的最大异或值 ，难度为 困难。 给你一个由非负整数组成的数组 $nums$ 。另有一个查询数组 $queries$，其中 $queries[i] &#x3D; [xi, mi]$ 。 第 $i$ 个查询的答案是 $x_i$ 和任何 $nums$ 数组中不超过 $m_i$ 的元素按位异或（XOR）得到的最大值。 换句话说，答案是 max(nums[">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-05-22T19:23:27.000Z">
+<meta property="article:modified_time" content="2022-05-12T04:05:32.266Z">
+<meta property="article:author" content="宫水三叶">
+<meta property="article:tag" content="二分">
+<meta property="article:tag" content="Trie">
+<meta property="article:tag" content="字典树">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  <title>LC 1707. 与数组中元素的最大异或值 - 宫水三叶的刷题日记</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/hint.css/2.7.0/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.7.2/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"|","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.1.0"></head>
+
+
+<body>
+  <header style="height: 50vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>宫水三叶の刷题日记</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/image_104.jpeg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="LC 1707. 与数组中元素的最大异或值">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-author" aria-hidden="true"></i>
+      宫水三叶
+    </span>
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-05-23 03:23" pubdate>
+        2021年5月23日 凌晨
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      5.5k 字
+    </span>
+  
+
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">LC 1707. 与数组中元素的最大异或值</h1>
+            
+            <div class="markdown-body">
+              <h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>这是 LeetCode 上的 <strong><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/maximum-xor-with-an-element-from-array/solution/gong-shui-san-xie-jie-zhe-ge-wen-ti-lai-lypqr/">1707. 与数组中元素的最大异或值</a></strong> ，难度为 <strong>困难</strong>。</p>
+<p>给你一个由非负整数组成的数组 $nums$ 。另有一个查询数组 $queries$，其中 $queries[i] = [xi, mi]$ 。</p>
+<p>第 $i$ 个查询的答案是 $x_i$ 和任何 $nums$ 数组中不超过 $m_i$ 的元素按位异或（XOR）得到的最大值。</p>
+<p>换句话说，答案是 <code>max(nums[j] \&#123;XOR&#125; x_i)</code> ，其中所有 $j$ 均满足 $nums[j] &lt;= m_i$ 。如果 $nums$ 中的所有元素都大于 $m_i$，最终答案就是 $-1$ 。</p>
+<p>返回一个整数数组 $answer$ 作为查询的答案，其中 $answer.length == queries.length$ 且 $answer[i]$ 是第 $i$ 个查询的答案。</p>
+<p>示例 1：<br><figure class="highlight tap"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs tap">输入：nums = [0,1,2,3,4], queries = [[3,1],[1,3],[5,6]]<br><br>输出：[3,3,7]<br><br>解释：<br>1)<span class="hljs-number"> 0 </span>和<span class="hljs-number"> 1 </span>是仅有的两个不超过<span class="hljs-number"> 1 </span>的整数。0 XOR<span class="hljs-number"> 3 </span>=<span class="hljs-number"> 3 </span>而<span class="hljs-number"> 1 </span>XOR<span class="hljs-number"> 3 </span>=<span class="hljs-number"> 2 </span>。二者中的更大值是<span class="hljs-number"> 3 </span>。<br>2)<span class="hljs-number"> 1 </span>XOR<span class="hljs-number"> 2 </span>= 3.<br>3)<span class="hljs-number"> 5 </span>XOR<span class="hljs-number"> 2 </span>= 7.<br></code></pre></div></td></tr></table></figure><br>示例 2：<br><figure class="highlight inform7"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs inform7">输入：nums = <span class="hljs-comment">[5,2,4,6,6,3]</span>, queries = <span class="hljs-comment">[<span class="hljs-comment">[12,4]</span>,<span class="hljs-comment">[8,1]</span>,<span class="hljs-comment">[6,3]</span>]</span><br><br>输出：<span class="hljs-comment">[15,-1,5]</span><br></code></pre></div></td></tr></table></figure></p>
+<p>提示：</p>
+<ul>
+<li>1 &lt;= nums.length, queries.length &lt;= $10^5$</li>
+<li>queries[i].length == 2</li>
+<li>0 &lt;= nums[j], xi, mi &lt;= $10^9$</li>
+</ul>
+<hr>
+<h3 id="基本分析"><a href="#基本分析" class="headerlink" title="基本分析"></a>基本分析</h3><p><strong>在做本题之前，请先确保已经完成 <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/maximum-xor-of-two-numbers-in-an-array/solution/gong-shui-san-xie-noxiang-xin-ke-xue-xi-bmjdg/">421. 数组中两个数的最大异或值</a>。</strong></p>
+<p>这种提前给定了所有询问的题目，我们可以运用离线思想（调整询问的回答顺序）进行求解。</p>
+<p>对于本题有两种离线方式可以进行求解。</p>
+<hr>
+<h3 id="普通-Trie"><a href="#普通-Trie" class="headerlink" title="普通 Trie"></a>普通 Trie</h3><p>第一种方法基本思路是：<strong>不一次性地放入所有数，而是每次将需要参与筛选的数字放入 $Trie$，再进行与 <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/maximum-xor-of-two-numbers-in-an-array/solution/gong-shui-san-xie-noxiang-xin-ke-xue-xi-bmjdg/">421. 数组中两个数的最大异或值</a> 类似的贪心查找逻辑。</strong></p>
+<p>具体的，我们可以按照下面的逻辑进行处理：</p>
+<ol>
+<li>对 <code>nums</code> 进行「从小到大」进行排序，对 <code>queries</code> 的第二维进行「从小到大」排序（排序前先将询问原本的下标映射关系存下来）。</li>
+<li>按照排序顺序处理所有的 <code>queries[i]</code>：<ol>
+<li>在回答每个询问前，将小于等于 <code>queries[i][1]</code> 的数值存入 $Trie$。由于我们已经事先对 <code>nums</code> 进行排序，因此这个过程只需要维护一个在 <code>nums</code> 上有往右移动的指针即可。</li>
+<li>然后利用贪心思路，查询每个 <code>queries[i][0]</code> 所能找到的最大值是多少，计算异或和（此过程与 <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/maximum-xor-of-two-numbers-in-an-array/solution/gong-shui-san-xie-noxiang-xin-ke-xue-xi-bmjdg/">421. 数组中两个数的最大异或值</a> 一致）。</li>
+<li>找到当前询问在原询问序列的下标，将答案存入。</li>
+</ol>
+</li>
+</ol>
+<p>代码：<br><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">static</span> <span class="hljs-type">int</span> <span class="hljs-variable">N</span> <span class="hljs-operator">=</span> (<span class="hljs-type">int</span>)<span class="hljs-number">1e5</span> * <span class="hljs-number">32</span>;<br>    <span class="hljs-keyword">static</span> <span class="hljs-type">int</span>[][] trie = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[N][<span class="hljs-number">2</span>];<br>    <span class="hljs-keyword">static</span> <span class="hljs-type">int</span> <span class="hljs-variable">idx</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">public</span> <span class="hljs-title function_">Solution</span><span class="hljs-params">()</span> &#123;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt;= idx; i++) &#123;<br>            Arrays.fill(trie[i], <span class="hljs-number">0</span>);<br>        &#125;<br>        idx = <span class="hljs-number">0</span>;<br>    &#125;<br>    <span class="hljs-keyword">void</span> <span class="hljs-title function_">add</span><span class="hljs-params">(<span class="hljs-type">int</span> x)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">p</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">31</span>; i &gt;= <span class="hljs-number">0</span>; i--) &#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">u</span> <span class="hljs-operator">=</span> (x &gt;&gt; i) &amp; <span class="hljs-number">1</span>;<br>            <span class="hljs-keyword">if</span> (trie[p][u] == <span class="hljs-number">0</span>) trie[p][u] = ++idx;<br>            p = trie[p][u];<br>        &#125;<br>    &#125;<br>    <span class="hljs-type">int</span> <span class="hljs-title function_">getVal</span><span class="hljs-params">(<span class="hljs-type">int</span> x)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">ans</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">p</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">31</span>; i &gt;= <span class="hljs-number">0</span>; i--) &#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">a</span> <span class="hljs-operator">=</span> (x &gt;&gt; i) &amp; <span class="hljs-number">1</span>, b = <span class="hljs-number">1</span> - a;<br>            <span class="hljs-keyword">if</span> (trie[p][b] != <span class="hljs-number">0</span>) &#123;<br>                p = trie[p][b];<br>                ans = ans | (b &lt;&lt; i);<br>            &#125; <span class="hljs-keyword">else</span> &#123;<br>                p = trie[p][a];<br>                ans = ans | (a &lt;&lt; i);<br>            &#125; <br>        &#125;<br>        <span class="hljs-keyword">return</span> ans ^ x;<br>    &#125;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span>[] maximizeXor(<span class="hljs-type">int</span>[] nums, <span class="hljs-type">int</span>[][] qs) &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">m</span> <span class="hljs-operator">=</span> nums.length, n = qs.length;<br><br>        <span class="hljs-comment">// 使用哈希表将原本的顺序保存下来</span><br>        Map&lt;<span class="hljs-type">int</span>[], Integer&gt; map = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; n; i++) map.put(qs[i], i);<br><br>        <span class="hljs-comment">// 将 nums 与 queries[x][1] 进行「从小到大」进行排序</span><br>        Arrays.sort(nums);<br>        Arrays.sort(qs, (a, b)-&gt;a[<span class="hljs-number">1</span>]-b[<span class="hljs-number">1</span>]);<br><br>        <span class="hljs-type">int</span>[] ans = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[n];<br>        <span class="hljs-type">int</span> <span class="hljs-variable">loc</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; <span class="hljs-comment">// 记录 nums 中哪些位置之前的数已经放入 Trie</span><br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span>[] q : qs) &#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">x</span> <span class="hljs-operator">=</span> q[<span class="hljs-number">0</span>], limit = q[<span class="hljs-number">1</span>];<br>            <span class="hljs-comment">// 将小于等于 limit 的数存入 Trie</span><br>            <span class="hljs-keyword">while</span> (loc &lt; m &amp;&amp; nums[loc] &lt;= limit) add(nums[loc++]);<br>            <span class="hljs-keyword">if</span> (loc == <span class="hljs-number">0</span>) &#123;<br>                ans[map.get(q)] = -<span class="hljs-number">1</span>;    <br>            &#125; <span class="hljs-keyword">else</span> &#123;<br>                ans[map.get(q)] = getVal(x);    <br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> ans;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure></p>
+<ul>
+<li>时间复杂度：令 <code>nums</code> 的长度为 <code>m</code>，<code>qs</code> 的长度为 <code>n</code>。两者排序的复杂度为 $O(m\log{m})$ 和 $O(n\log{n})$；将所有数插入 $Trie$ 和从 $Trie$ 中查找的复杂度均为 $O(Len)$，$Len$ 为 $32$。<br>整体复杂度为 $O(m\log{m} + n\log{n} + (m + n) <em> Len)$ = $O(m </em> \max(\log{m}, Len) + n * \max(\log{n}, Len))$。</li>
+<li>空间复杂度：$O(C)$。其中 $C$ 为常数，固定为 $1e5 <em> 32 </em> 2$。</li>
+</ul>
+<hr>
+<h3 id="计数-Trie-amp-二分"><a href="#计数-Trie-amp-二分" class="headerlink" title="计数 Trie &amp; 二分"></a>计数 Trie &amp; 二分</h3><p>另外一个比较「增加难度」的做法是，将整个过程翻转过来：<strong>一次性存入所有的 $Trie$ 中，然后每次将不再参与的数从 $Trie$ 中移除。相比于解法一，这就要求我们为 $Trie$ 增加一个「删除/计数」功能，并且需要实现二分来找到移除元素的上界下标是多少。</strong></p>
+<p>具体的，我们可以按照下面的逻辑进行处理：</p>
+<ol>
+<li>对 <code>nums</code> 进行「从大到小」进行排序，对 <code>queries</code> 的第二维进行「从大到小」排序（排序前先将询问原本的下标映射关系存下来）。</li>
+<li>按照排序顺序处理所有的 <code>queries[i]</code>：<ol>
+<li>在回答每个询问前，通过「二分」找到在 <code>nums</code> 中第一个满足「小于等于 <code>queries[i][1]</code> 的下标在哪」，然后将该下标之前的数从 $Trie$ 中移除。同理，这个过程我们需要使用一个指针来记录上一次删除的下标位置，避免重复删除。</li>
+<li>然后利用贪心思路，查询每个 <code>queries[i][0]</code> 所能找到的最大值是多少。注意这是要判断当前节点是否有被计数，如果没有则返回 $-1$。</li>
+<li>找到当前询问在原询问序列的下标，将答案存入。</li>
+</ol>
+</li>
+</ol>
+<p>代码：<br><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">static</span> <span class="hljs-type">int</span> <span class="hljs-variable">N</span> <span class="hljs-operator">=</span> (<span class="hljs-type">int</span>)<span class="hljs-number">1e5</span> * <span class="hljs-number">32</span>;<br>    <span class="hljs-keyword">static</span> <span class="hljs-type">int</span>[][] trie = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[N][<span class="hljs-number">2</span>];<br>    <span class="hljs-keyword">static</span> <span class="hljs-type">int</span>[] cnt = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[N];<br>    <span class="hljs-keyword">static</span> <span class="hljs-type">int</span> <span class="hljs-variable">idx</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">public</span> <span class="hljs-title function_">Solution</span><span class="hljs-params">()</span> &#123;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt;= idx; i++) &#123;<br>            Arrays.fill(trie[i], <span class="hljs-number">0</span>);<br>            cnt[i] = <span class="hljs-number">0</span>;<br>        &#125;<br>        idx = <span class="hljs-number">0</span>;<br>    &#125;<br>    <span class="hljs-comment">// 往 Trie 存入(v = 1)/删除(v = -1) 某个数 x</span><br>    <span class="hljs-keyword">void</span> <span class="hljs-title function_">add</span><span class="hljs-params">(<span class="hljs-type">int</span> x, <span class="hljs-type">int</span> v)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">p</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">31</span>; i &gt;= <span class="hljs-number">0</span>; i--) &#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">u</span> <span class="hljs-operator">=</span> (x &gt;&gt; i) &amp; <span class="hljs-number">1</span>;<br>            <span class="hljs-keyword">if</span> (trie[p][u] == <span class="hljs-number">0</span>) trie[p][u] = ++idx;<br>            p = trie[p][u];<br>            cnt[p] += v;<br>        &#125;<br>    &#125;<br>    <span class="hljs-type">int</span> <span class="hljs-title function_">getVal</span><span class="hljs-params">(<span class="hljs-type">int</span> x)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">ans</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">p</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">31</span>; i &gt;= <span class="hljs-number">0</span>; i--) &#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">a</span> <span class="hljs-operator">=</span> (x &gt;&gt; i) &amp; <span class="hljs-number">1</span>, b = <span class="hljs-number">1</span> - a;<br>            <span class="hljs-keyword">if</span> (cnt[trie[p][b]] != <span class="hljs-number">0</span>) &#123;<br>                p = trie[p][b];<br>                ans = ans | (b &lt;&lt; i);<br>            &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (cnt[trie[p][a]] != <span class="hljs-number">0</span>) &#123;<br>                p = trie[p][a];<br>                ans = ans | (a &lt;&lt; i);<br>            &#125; <span class="hljs-keyword">else</span> &#123;<br>                <span class="hljs-keyword">return</span> -<span class="hljs-number">1</span>;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> ans ^ x;<br>    &#125;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span>[] maximizeXor(<span class="hljs-type">int</span>[] nums, <span class="hljs-type">int</span>[][] qs) &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> qs.length;<br>        <br>        <span class="hljs-comment">// 使用哈希表将原本的顺序保存下来</span><br>        Map&lt;<span class="hljs-type">int</span>[], Integer&gt; map = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; n; i++) map.put(qs[i], i);<br><br>        <span class="hljs-comment">// 对两者排降序</span><br>        sort(nums);<br>        Arrays.sort(qs, (a, b)-&gt;b[<span class="hljs-number">1</span>]-a[<span class="hljs-number">1</span>]);<br><br>        <span class="hljs-comment">// 将所有数存入 Trie</span><br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i : nums) add(i, <span class="hljs-number">1</span>);<br><br>        <span class="hljs-type">int</span>[] ans = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[n];<br>        <span class="hljs-type">int</span> <span class="hljs-variable">left</span> <span class="hljs-operator">=</span> -<span class="hljs-number">1</span>; <span class="hljs-comment">// 在 nums 中下标「小于等于」left 的值都已经从 Trie 中移除</span><br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span>[] q : qs) &#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">x</span> <span class="hljs-operator">=</span> q[<span class="hljs-number">0</span>], limit = q[<span class="hljs-number">1</span>];<br>            <span class="hljs-comment">// 二分查找到待删除元素的右边界，将其右边界之前的所有值从 Trie 中移除。</span><br>            <span class="hljs-type">int</span> <span class="hljs-variable">right</span> <span class="hljs-operator">=</span> getRight(nums, limit);            <br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> left + <span class="hljs-number">1</span>; i &lt; right; i++) add(nums[i], -<span class="hljs-number">1</span>);<br>            left = right - <span class="hljs-number">1</span>;<br>            ans[map.get(q)] = getVal(x);<br>        &#125;<br>        <span class="hljs-keyword">return</span> ans;<br>    &#125;<br>    <span class="hljs-comment">// 二分找到待删除的右边界</span><br>    <span class="hljs-type">int</span> <span class="hljs-title function_">getRight</span><span class="hljs-params">(<span class="hljs-type">int</span>[] nums, <span class="hljs-type">int</span> limit)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">l</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>, r = nums.length - <span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">while</span> (l &lt; r) &#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">mid</span> <span class="hljs-operator">=</span> l + r &gt;&gt; <span class="hljs-number">1</span>;<br>            <span class="hljs-keyword">if</span> (nums[mid] &lt;= limit) &#123;<br>                r = mid;<br>            &#125; <span class="hljs-keyword">else</span> &#123;<br>                l = mid + <span class="hljs-number">1</span>;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> nums[r] &lt;= limit ? r : r + <span class="hljs-number">1</span>;<br>    &#125;<br>    <span class="hljs-comment">// 对 nums 进行降序排序（Java 没有 Api 直接支持对基本类型 int 排倒序，其他语言可忽略）</span><br>    <span class="hljs-keyword">void</span> <span class="hljs-title function_">sort</span><span class="hljs-params">(<span class="hljs-type">int</span>[] nums)</span> &#123;<br>        Arrays.sort(nums);<br>        <span class="hljs-type">int</span> <span class="hljs-variable">l</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>, r = nums.length - <span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">while</span> (l &lt; r) &#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">c</span> <span class="hljs-operator">=</span> nums[r];<br>            nums[r--] = nums[l];<br>            nums[l++] = c;<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure></p>
+<ul>
+<li>时间复杂度：令 <code>nums</code> 的长度为 <code>m</code>，<code>qs</code> 的长度为 <code>n</code>，常数 $Len = 32$。两者排序的复杂度为 $O(m\log{m})$ 和 $O(n\log{n})$；将所有数插入 $Trie$ 的复杂度为 $O(m <em> Len)$；每个查询都需要经过「二分」找边界，复杂度为 $O(n\log{m})$；最坏情况下所有数都会从 $Trie$ 中被标记删除，复杂度为 $O(m </em> Len)$。<br>整体复杂度为 $O(m\log{m} + n\log{n} + n\log{m} + mLen)$ = $O(m <em> \max(\log{m}, Len) + n </em> \max(\log{m}, \log{n}))$。</li>
+<li>空间复杂度：$O(C)$。其中 $C$ 为常数，固定为 $1e5 <em> 32 </em> 3$。</li>
+</ul>
+<hr>
+<h3 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h3><p>这两种方法我都是采取「数组实现」，而且由于数据范围较大，都使用了 <code>static</code> 来优化大数组创建，具体的「优化原因」与「类实现 Trie 方式」可以在题解 <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/maximum-xor-of-two-numbers-in-an-array/solution/gong-shui-san-xie-noxiang-xin-ke-xue-xi-bmjdg/">421. 数组中两个数的最大异或值</a> 查看，这里不再赘述。</p>
+<hr>
+<h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>这是我们「刷穿 LeetCode」系列文章的第 <code>No.1707</code> 篇，系列开始于 2021/01/01，截止于起始日 LeetCode 上共有 1916 道题目，部分是有锁题，我们将先把所有不带锁的题目刷完。</p>
+<p>在这个系列文章里面，除了讲解解题思路以外，还会尽可能给出最为简洁的代码。如果涉及通解还会相应的代码模板。</p>
+<p>为了方便各位同学能够电脑上进行调试和提交代码，我建立了相关的仓库：<a target="_blank" rel="noopener" href="https://github.com/SharingSource/LogicStack-LeetCode">https://github.com/SharingSource/LogicStack-LeetCode</a> 。</p>
+<p>在仓库地址里，你可以看到系列文章的题解链接、系列文章的相应代码、LeetCode 原题链接和其他优选题解。</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E4%BA%8C%E5%88%86/">二分</a>
+                    
+                      <a class="hover-with-bg" href="/tags/Trie/">Trie</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%AD%97%E5%85%B8%E6%A0%91/">字典树</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/05/24/664.%20%E5%A5%87%E6%80%AA%E7%9A%84%E6%89%93%E5%8D%B0%E6%9C%BA%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">LC 664. 奇怪的打印机</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/05/22/810.%20%E9%BB%91%E6%9D%BF%E5%BC%82%E6%88%96%E6%B8%B8%E6%88%8F%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/">
+                        <span class="hidden-mobile">LC 810. 黑板异或游戏</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+  <div class="col-lg-7 mx-auto nopadding-x-md">
+    <div class="container custom post-custom mx-auto">
+      <img src="https://oscimg.oschina.net/oscnet/up-19688dc1af05cf8bdea43b2a863038ab9e5.png" srcset="/img/loading.gif" lazyload class="rounded mx-auto d-block mt-5" style="width:900px; height:500px;">
+    </div>
+  </div>
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.staticfile.org/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.staticfile.org/tocbot/4.18.2/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.staticfile.org/anchor-js/4.3.1/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.11/clipboard.min.js" ></script>
+  
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.bootcdn.net/ajax/libs/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        loader: {
+          
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.staticfile.org/mathjax/3.2.0/es5/tex-svg.js" ></script>
+
+  
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

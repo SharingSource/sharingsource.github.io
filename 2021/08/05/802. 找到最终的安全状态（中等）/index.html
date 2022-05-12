@@ -1,0 +1,601 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/oimg/RoundCorner.png">
+  <link rel="icon" href="/oimg/RoundCorner.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="宫水三叶">
+  <meta name="keywords" content="算法, 数据结构, 题解">
+  
+    <meta name="description" content="题目描述这是 LeetCode 上的 802. 找到最终的安全状态 ，难度为 中等。 在有向图中，以某个节点为起始节点，从该点出发，每一步沿着图中的一条有向边行走。如果到达的节点是终点（即它没有连出的有向边），则停止。 对于一个起始节点，如果从该节点出发，无论每一步选择沿哪条有向边行走，最后必然在有限步内到达终点，则将该起始节点称作是 安全 的。 返回一个由图中所有安全的起始节点组成的数组作为答案">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LC 802. 找到最终的安全状态">
+<meta property="og:url" content="http://example.com/2021/08/05/802.%20%E6%89%BE%E5%88%B0%E6%9C%80%E7%BB%88%E7%9A%84%E5%AE%89%E5%85%A8%E7%8A%B6%E6%80%81%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/index.html">
+<meta property="og:site_name" content="宫水三叶的刷题日记">
+<meta property="og:description" content="题目描述这是 LeetCode 上的 802. 找到最终的安全状态 ，难度为 中等。 在有向图中，以某个节点为起始节点，从该点出发，每一步沿着图中的一条有向边行走。如果到达的节点是终点（即它没有连出的有向边），则停止。 对于一个起始节点，如果从该节点出发，无论每一步选择沿哪条有向边行走，最后必然在有限步内到达终点，则将该起始节点称作是 安全 的。 返回一个由图中所有安全的起始节点组成的数组作为答案">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://s3-lc-upload.s3.amazonaws.com/uploads/2018/03/17/picture1.png">
+<meta property="og:image" content="https://pic.leetcode-cn.com/1628126750-aqNMCC-image.png">
+<meta property="article:published_time" content="2021-08-04T18:10:46.000Z">
+<meta property="article:modified_time" content="2022-05-12T04:05:32.103Z">
+<meta property="article:author" content="宫水三叶">
+<meta property="article:tag" content="图">
+<meta property="article:tag" content="拓扑排序">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://s3-lc-upload.s3.amazonaws.com/uploads/2018/03/17/picture1.png">
+  
+  
+  <title>LC 802. 找到最终的安全状态 - 宫水三叶的刷题日记</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/hint.css/2.7.0/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.7.2/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"|","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.1.0"></head>
+
+
+<body>
+  <header style="height: 50vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>宫水三叶の刷题日记</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/image_159.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="LC 802. 找到最终的安全状态">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-author" aria-hidden="true"></i>
+      宫水三叶
+    </span>
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-08-05 02:10" pubdate>
+        2021年8月5日 凌晨
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      3.3k 字
+    </span>
+  
+
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">LC 802. 找到最终的安全状态</h1>
+            
+            <div class="markdown-body">
+              <h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>这是 LeetCode 上的 <strong><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/find-eventual-safe-states/solution/gong-shui-san-xie-noxiang-xin-ke-xue-xi-isy6u/">802. 找到最终的安全状态</a></strong> ，难度为 <strong>中等</strong>。</p>
+<p>在有向图中，以某个节点为起始节点，从该点出发，每一步沿着图中的一条有向边行走。如果到达的节点是终点（即它没有连出的有向边），则停止。</p>
+<p>对于一个起始节点，如果从该节点出发，无论每一步选择沿哪条有向边行走，最后必然在有限步内到达终点，则将该起始节点称作是 安全 的。</p>
+<p>返回一个由图中所有安全的起始节点组成的数组作为答案。答案数组中的元素应当按 升序 排列。</p>
+<p>该有向图有 n 个节点，按 0 到 n - 1 编号，其中 n 是 graph 的节点数。图以下述形式给出：graph[i] 是编号 j 节点的一个列表，满足 (i, j) 是图的一条有向边。 </p>
+<p>示例 1：<br><img src="https://s3-lc-upload.s3.amazonaws.com/uploads/2018/03/17/picture1.png" srcset="/img/loading.gif" lazyload alt=""><br><figure class="highlight inform7"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs inform7">输入：graph = <span class="hljs-comment">[<span class="hljs-comment">[1,2]</span>,<span class="hljs-comment">[2,3]</span>,<span class="hljs-comment">[5]</span>,<span class="hljs-comment">[0]</span>,<span class="hljs-comment">[5]</span>,<span class="hljs-comment">[]</span>,<span class="hljs-comment">[]</span>]</span><br><br>输出：<span class="hljs-comment">[2,4,5,6]</span><br><br>解释：示意图如上。<br></code></pre></div></td></tr></table></figure><br>示例 2：<br><figure class="highlight inform7"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs inform7">输入：graph = <span class="hljs-comment">[<span class="hljs-comment">[1,2,3,4]</span>,<span class="hljs-comment">[1,2]</span>,<span class="hljs-comment">[3,4]</span>,<span class="hljs-comment">[0,4]</span>,<span class="hljs-comment">[]</span>]</span><br><br>输出：<span class="hljs-comment">[4]</span><br></code></pre></div></td></tr></table></figure></p>
+<p>提示：</p>
+<ul>
+<li>n == graph.length</li>
+<li>1 &lt;= n &lt;= $10^4$</li>
+<li>0 &lt;= graph[i].length &lt;= n</li>
+<li>graph[i] 按严格递增顺序排列。</li>
+<li>图中可能包含自环。</li>
+<li>图中边的数目在范围 [1, 4 * $10^4$] 内。</li>
+</ul>
+<hr>
+<h3 id="基本分析-amp-拓扑排序"><a href="#基本分析-amp-拓扑排序" class="headerlink" title="基本分析 &amp; 拓扑排序"></a>基本分析 &amp; 拓扑排序</h3><p>为了方便，我们令点数为 $n$，边数为 $m$。</p>
+<p><strong>在图论中，一个有向无环图必然存在至少一个拓扑序与之对应，反之亦然。</strong></p>
+<p>如果对拓扑排序不熟悉的小伙伴，可以看看 <a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E6%8B%93%E6%89%91%E6%8E%92%E5%BA%8F">拓扑排序</a>。</p>
+<p><strong>简单来说，就是将图中的所有节点展开成一维序列，对于序列中任意的节点 $(u, v)$，如果在序列中 $u$ 在 $v$ 的前面，则说明在图中存在从 $u$ 出发达到 $v$ 的通路，即 $u$ 排在 $v$ 的前面。反之亦然。</strong></p>
+<p>同时，我们需要知晓「入度」和「出度」的概念：</p>
+<ul>
+<li>入度：有多少条边直接指向该节点；</li>
+<li>出度：由该节点指出边的有多少条。</li>
+</ul>
+<p>因此，对于有向图的拓扑排序，我们可以使用如下思路输出拓扑序（<code>BFS</code> 方式）：</p>
+<ol>
+<li>起始时，将所有入度为 $0$ 的节点进行入队（入度为 $0$，说明没有边指向这些节点，将它们放到拓扑排序的首部，不会违反拓扑序定义）；</li>
+<li><strong>从队列中进行节点出队操作，出队序列就是对应我们输出的拓扑序</strong>。<br> 对于当前弹出的节点 $x$，遍历 $x$ 的所有出度，即遍历所有由 $x$ 直接指向的节点 $y$，对 $y$ 做入度减一操作（因为 $x$ 节点已经从队列中弹出，被添加到拓扑序中，等价于从 $x$ 节点从有向图中被移除，相应的由 $x$ 发出的边也应当被删除，带来的影响是与 $x$ 相连的节点 $y$ 的入度减一）；</li>
+<li>对 $y$ 进行入度减一之后，检查 $y$ 的入度是否为 $0$，如果为 $0$ 则将 $y$ 入队（当 $y$ 的入度为 $0$，说明有向图中在 $y$ 前面的所有的节点均被添加到拓扑序中，此时 $y$ 可以作为拓扑序的某个片段的首部被添加，而不是违反拓扑序的定义）；</li>
+<li>循环流程 $2$、$3$ 直到队列为空。</li>
+</ol>
+<p><img src="https://pic.leetcode-cn.com/1628126750-aqNMCC-image.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<hr>
+<h3 id="证明"><a href="#证明" class="headerlink" title="证明"></a>证明</h3><p>上述 <code>BFS</code> 方法能够求得「某个有向无环图的拓扑序」的前提是：<strong>我们必然能够找到（至少）一个「入度为 $0$ 的点」，在起始时将其入队。</strong></p>
+<p>这可以使用反证法进行证明：假设有向无环图的拓扑序不存在入度为 $0$ 的点。</p>
+<p><strong>那么从图中的任意节点 $x$ 进行出发，沿着边进行反向检索，由于不存在入度为 $0$ 的节点，因此每个点都能够找到上一个节点。</strong></p>
+<p><strong>当我们找到一条长度为 $n + 1$ 的反向路径时，由于我们图中只有 $n$ 个节点，因此必然有至少一个节点在该路径中重复出现，即该反向路径中存在环，与我们「有向无环图」的起始条件冲突。</strong></p>
+<p>得证「有向无环图的拓扑序」必然存在（至少）一个「入度为 $0$ 的点」。</p>
+<p>即按照上述的 <code>BFS</code> 方法，我们能够按照流程迭代下去，直到将有向无环图的所有节点从队列中弹出。</p>
+<p>反之，如果一个图不是「有向无环图」的话，我们是无法将所有节点入队的，因此能够通过入队节点数量是否为 $n$ 来判断是否为有向无环图。</p>
+<hr>
+<h3 id="反向图-拓扑排序"><a href="#反向图-拓扑排序" class="headerlink" title="反向图 + 拓扑排序"></a>反向图 + 拓扑排序</h3><p>回到本题，根据题目对「安全节点」的定义，我们知道如果一个节点无法进入「环」的话则是安全的，否则是不安全的。</p>
+<p>另外我们发现，<strong>如果想要判断某个节点数 $x$ 是否安全，起始时将 $x$ 进行入队，并跑一遍拓扑排序是不足够的。</strong></p>
+<p>因为我们无法事先确保 $x$ 满足入度为 $0$ 的要求，所以当我们处理到与 $x$ 相连的节点 $y$ 时，可能会存在 $y$ 节点入度无法减到 $0$ 的情况，即我们无法输出真实拓扑序中，从 $x$ 节点开始到结尾的完整部分。</p>
+<p>但是根据我们「证明」部分的启发，我们可以将所有边进行反向，这时候「入度」和「出度」翻转了。</p>
+<p>对于那些反向图中「入度」为 $0$ 的点集 $x$，其实就是原图中「出度」为 $0$ 的节点，它们「出度」为 $0$，根本没指向任何节点，必然无法进入环，是安全的；同时由它们在反向图中指向的节点（在原图中<strong>只指向</strong>它们的节点），必然也是无法进入环的，对应到反向图中，就是那些减去 $x$ 对应的入度之后，入度为 $0$ 的节点。</p>
+<p>因此整个过程就是将图进行反向，再跑一遍拓扑排序，如果某个节点出现在拓扑序列，说明其进入过队列，说明其入度为 $0$，其是安全的，其余节点则是在环内非安全节点。</p>
+<blockquote>
+<p>另外，这里的存图方式还是使用前几天一直使用的「链式前向星」，关于几个数组的定义以及其他的存图方式，如果还是有不熟悉的小伙伴可以在 <a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzU4NDE3MTEyMA==&amp;mid=2247488007&amp;idx=1&amp;sn=9d0dcfdf475168d26a5a4bd6fcd3505d&amp;chksm=fd9cb918caeb300e1c8844583db5c5318a89e60d8d552747ff8c2256910d32acd9013c93058f&amp;token=1711035050&amp;lang=zh_CN#rd">这里</a> 查阅，本次不再赘述。</p>
+</blockquote>
+<p>代码：<br><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-type">int</span> <span class="hljs-variable">N</span> <span class="hljs-operator">=</span> (<span class="hljs-type">int</span>)<span class="hljs-number">1e4</span>+<span class="hljs-number">10</span>, M = <span class="hljs-number">4</span> * N;<br>    <span class="hljs-type">int</span> idx;<br>    <span class="hljs-type">int</span>[] he = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[N], e = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[M], ne = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[M];<br>    <span class="hljs-type">int</span>[] cnts = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[N];<br>    <span class="hljs-keyword">void</span> <span class="hljs-title function_">add</span><span class="hljs-params">(<span class="hljs-type">int</span> a, <span class="hljs-type">int</span> b)</span> &#123;<br>        e[idx] = b;<br>        ne[idx] = he[a];<br>        he[a] = idx++;<br>    &#125;<br>    <span class="hljs-keyword">public</span> List&lt;Integer&gt; <span class="hljs-title function_">eventualSafeNodes</span><span class="hljs-params">(<span class="hljs-type">int</span>[][] g)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> g.length;<br>        <span class="hljs-comment">// 存反向图，并统计入度</span><br>        Arrays.fill(he, -<span class="hljs-number">1</span>);<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; n; i++) &#123;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> j : g[i]) &#123;<br>                add(j, i);<br>                cnts[i]++;<br>            &#125;<br>        &#125;<br>        <span class="hljs-comment">// BFS 求反向图拓扑排序</span><br>        Deque&lt;Integer&gt; d = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayDeque</span>&lt;&gt;();<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; n; i++) &#123;<br>            <span class="hljs-keyword">if</span> (cnts[i] == <span class="hljs-number">0</span>) d.addLast(i);<br>        &#125;<br>        <span class="hljs-keyword">while</span> (!d.isEmpty()) &#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">poll</span> <span class="hljs-operator">=</span> d.pollFirst();<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> he[poll]; i != -<span class="hljs-number">1</span>; i = ne[i]) &#123;<br>                <span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> e[i];<br>                <span class="hljs-keyword">if</span> (--cnts[j] == <span class="hljs-number">0</span>) d.addLast(j);<br>            &#125;<br>        &#125;<br>        <span class="hljs-comment">// 遍历答案：如果某个节点出现在拓扑序列，说明其进入过队列，说明其入度为 0</span><br>        List&lt;Integer&gt; ans = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; n; i++) &#123;<br>            <span class="hljs-keyword">if</span> (cnts[i] == <span class="hljs-number">0</span>) ans.add(i);<br>        &#125;<br>        <span class="hljs-keyword">return</span> ans;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure></p>
+<ul>
+<li>时间复杂度：$O(n + m)$</li>
+<li>空间复杂度：$O(n + m)$</li>
+</ul>
+<hr>
+<h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>这是我们「刷穿 LeetCode」系列文章的第 <code>No.802</code> 篇，系列开始于 2021/01/01，截止于起始日 LeetCode 上共有 1916 道题目，部分是有锁题，我们将先把所有不带锁的题目刷完。</p>
+<p>在这个系列文章里面，除了讲解解题思路以外，还会尽可能给出最为简洁的代码。如果涉及通解还会相应的代码模板。</p>
+<p>为了方便各位同学能够电脑上进行调试和提交代码，我建立了相关的仓库：<a target="_blank" rel="noopener" href="https://github.com/SharingSource/LogicStack-LeetCode">https://github.com/SharingSource/LogicStack-LeetCode</a> 。</p>
+<p>在仓库地址里，你可以看到系列文章的题解链接、系列文章的相应代码、LeetCode 原题链接和其他优选题解。</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%9B%BE/">图</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E6%8B%93%E6%89%91%E6%8E%92%E5%BA%8F/">拓扑排序</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/08/06/847.%20%E8%AE%BF%E9%97%AE%E6%89%80%E6%9C%89%E8%8A%82%E7%82%B9%E7%9A%84%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">LC 847. 访问所有节点的最短路径</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/08/04/611.%20%E6%9C%89%E6%95%88%E4%B8%89%E8%A7%92%E5%BD%A2%E7%9A%84%E4%B8%AA%E6%95%B0%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/">
+                        <span class="hidden-mobile">LC 611. 有效三角形的个数</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+  <div class="col-lg-7 mx-auto nopadding-x-md">
+    <div class="container custom post-custom mx-auto">
+      <img src="https://oscimg.oschina.net/oscnet/up-19688dc1af05cf8bdea43b2a863038ab9e5.png" srcset="/img/loading.gif" lazyload class="rounded mx-auto d-block mt-5" style="width:900px; height:500px;">
+    </div>
+  </div>
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.staticfile.org/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.staticfile.org/tocbot/4.18.2/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.staticfile.org/anchor-js/4.3.1/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.11/clipboard.min.js" ></script>
+  
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.bootcdn.net/ajax/libs/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        loader: {
+          
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.staticfile.org/mathjax/3.2.0/es5/tex-svg.js" ></script>
+
+  
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

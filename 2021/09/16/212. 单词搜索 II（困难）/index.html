@@ -1,0 +1,588 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/oimg/RoundCorner.png">
+  <link rel="icon" href="/oimg/RoundCorner.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="宫水三叶">
+  <meta name="keywords" content="算法, 数据结构, 题解">
+  
+    <meta name="description" content="题目描述这是 LeetCode 上的 212. 单词搜索 II ，难度为 困难。 给定一个 $m x n$ 二维字符网格 $board$ 和一个单词（字符串）列表 $words$，找出所有同时在二维网格和字典中出现的单词。 单词必须按照字母顺序，通过 相邻的单元格 内的字母构成，其中“相邻”单元格是那些水平相邻或垂直相邻的单元格。同一个单元格内的字母在一个单词中不允许被重复使用。 示例 1：123">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LC 212. 单词搜索 II">
+<meta property="og:url" content="http://example.com/2021/09/16/212.%20%E5%8D%95%E8%AF%8D%E6%90%9C%E7%B4%A2%20II%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/index.html">
+<meta property="og:site_name" content="宫水三叶的刷题日记">
+<meta property="og:description" content="题目描述这是 LeetCode 上的 212. 单词搜索 II ，难度为 困难。 给定一个 $m x n$ 二维字符网格 $board$ 和一个单词（字符串）列表 $words$，找出所有同时在二维网格和字典中出现的单词。 单词必须按照字母顺序，通过 相邻的单元格 内的字母构成，其中“相邻”单元格是那些水平相邻或垂直相邻的单元格。同一个单元格内的字母在一个单词中不允许被重复使用。 示例 1：123">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://assets.leetcode.com/uploads/2020/11/07/search1.jpg">
+<meta property="og:image" content="https://assets.leetcode.com/uploads/2020/11/07/search2.jpg">
+<meta property="article:published_time" content="2021-09-15T16:51:45.000Z">
+<meta property="article:modified_time" content="2022-05-12T04:05:32.138Z">
+<meta property="article:author" content="宫水三叶">
+<meta property="article:tag" content="DFS">
+<meta property="article:tag" content="回溯算法">
+<meta property="article:tag" content="字典树">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://assets.leetcode.com/uploads/2020/11/07/search1.jpg">
+  
+  
+  <title>LC 212. 单词搜索 II - 宫水三叶的刷题日记</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/hint.css/2.7.0/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.7.2/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"|","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.1.0"></head>
+
+
+<body>
+  <header style="height: 50vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>宫水三叶の刷题日记</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/image_115.jpeg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="LC 212. 单词搜索 II">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-author" aria-hidden="true"></i>
+      宫水三叶
+    </span>
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-09-16 00:51" pubdate>
+        2021年9月16日 凌晨
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      4.5k 字
+    </span>
+  
+
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">LC 212. 单词搜索 II</h1>
+            
+            <div class="markdown-body">
+              <h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>这是 LeetCode 上的 <strong><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/word-search-ii/solution/gong-shui-san-xie-yi-ti-shuang-jie-hui-s-am8f/">212. 单词搜索 II</a></strong> ，难度为 <strong>困难</strong>。</p>
+<p>给定一个 $m x n$ 二维字符网格 $board$ 和一个单词（字符串）列表 $words$，找出所有同时在二维网格和字典中出现的单词。</p>
+<p>单词必须按照字母顺序，通过 相邻的单元格 内的字母构成，其中“相邻”单元格是那些水平相邻或垂直相邻的单元格。同一个单元格内的字母在一个单词中不允许被重复使用。</p>
+<p>示例 1：<br><img src="https://assets.leetcode.com/uploads/2020/11/07/search1.jpg" srcset="/img/loading.gif" lazyload alt=""><br><figure class="highlight prolog"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs prolog">输入：board = [[<span class="hljs-string">&quot;o&quot;</span>,<span class="hljs-string">&quot;a&quot;</span>,<span class="hljs-string">&quot;a&quot;</span>,<span class="hljs-string">&quot;n&quot;</span>],[<span class="hljs-string">&quot;e&quot;</span>,<span class="hljs-string">&quot;t&quot;</span>,<span class="hljs-string">&quot;a&quot;</span>,<span class="hljs-string">&quot;e&quot;</span>],[<span class="hljs-string">&quot;i&quot;</span>,<span class="hljs-string">&quot;h&quot;</span>,<span class="hljs-string">&quot;k&quot;</span>,<span class="hljs-string">&quot;r&quot;</span>],[<span class="hljs-string">&quot;i&quot;</span>,<span class="hljs-string">&quot;f&quot;</span>,<span class="hljs-string">&quot;l&quot;</span>,<span class="hljs-string">&quot;v&quot;</span>]], words = [<span class="hljs-string">&quot;oath&quot;</span>,<span class="hljs-string">&quot;pea&quot;</span>,<span class="hljs-string">&quot;eat&quot;</span>,<span class="hljs-string">&quot;rain&quot;</span>]<br><br>输出：[<span class="hljs-string">&quot;eat&quot;</span>,<span class="hljs-string">&quot;oath&quot;</span>]<br></code></pre></div></td></tr></table></figure><br>示例 2：<br><img src="https://assets.leetcode.com/uploads/2020/11/07/search2.jpg" srcset="/img/loading.gif" lazyload alt=""><br><figure class="highlight prolog"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs prolog">输入：board = [[<span class="hljs-string">&quot;a&quot;</span>,<span class="hljs-string">&quot;b&quot;</span>],[<span class="hljs-string">&quot;c&quot;</span>,<span class="hljs-string">&quot;d&quot;</span>]], words = [<span class="hljs-string">&quot;abcb&quot;</span>]<br><br>输出：[]<br></code></pre></div></td></tr></table></figure></p>
+<p>提示：</p>
+<ul>
+<li>m == board.length</li>
+<li>n == board[i].length</li>
+<li>1 &lt;= m, n &lt;= 12</li>
+<li>board[i][j] 是一个小写英文字母</li>
+<li>1 &lt;= words.length &lt;= 3 * $10^4$</li>
+<li>1 &lt;= words[i].length &lt;= 10</li>
+<li>words[i] 由小写英文字母组成</li>
+<li>words 中的所有字符串互不相同</li>
+</ul>
+<hr>
+<h3 id="回溯算法"><a href="#回溯算法" class="headerlink" title="回溯算法"></a>回溯算法</h3><p><strong>数据范围只有 $12$，且 <code>words</code> 中出现的单词长度不会超过 $10$，可以考虑使用「回溯算法」。</strong></p>
+<p>起始先将所有 <code>words</code> 出现的单词放到 <code>Set</code> 结构中，然后以 <code>board</code> 中的每个点作为起点进行爆搜（由于题目规定在一个单词中每个格子只能被使用一次，因此还需要一个 <code>vis</code> 数组来记录访问过的位置）：</p>
+<ol>
+<li>如果当前爆搜到的字符串长度超过 $10$，直接剪枝；</li>
+<li>如果当前搜索到的字符串在 <code>Set</code> 中，则添加到答案（同时了防止下一次再搜索到该字符串，需要将该字符串从 <code>Set</code> 中移除）。</li>
+</ol>
+<p>代码：<br><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    Set&lt;String&gt; set = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashSet</span>&lt;&gt;();<br>    List&lt;String&gt; ans = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();<br>    <span class="hljs-type">char</span>[][] board;<br>    <span class="hljs-type">int</span>[][] dirs = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[][]&#123;&#123;<span class="hljs-number">1</span>,<span class="hljs-number">0</span>&#125;,&#123;-<span class="hljs-number">1</span>,<span class="hljs-number">0</span>&#125;,&#123;<span class="hljs-number">0</span>,<span class="hljs-number">1</span>&#125;,&#123;<span class="hljs-number">0</span>,-<span class="hljs-number">1</span>&#125;&#125;;<br>    <span class="hljs-type">int</span> n, m;<br>    <span class="hljs-type">boolean</span>[][] vis = <span class="hljs-keyword">new</span> <span class="hljs-title class_">boolean</span>[<span class="hljs-number">15</span>][<span class="hljs-number">15</span>];<br>    <span class="hljs-keyword">public</span> List&lt;String&gt; <span class="hljs-title function_">findWords</span><span class="hljs-params">(<span class="hljs-type">char</span>[][] _board, String[] words)</span> &#123;<br>        board = _board;<br>        m = board.length; n = board[<span class="hljs-number">0</span>].length;<br>        <span class="hljs-keyword">for</span> (String w : words) set.add(w);<br>        <span class="hljs-type">StringBuilder</span> <span class="hljs-variable">sb</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">StringBuilder</span>();<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; m; i++) &#123;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; j &lt; n; j++) &#123;<br>                vis[i][j] = <span class="hljs-literal">true</span>;<br>                sb.append(board[i][j]);<br>                dfs(i, j, sb);<br>                vis[i][j] = <span class="hljs-literal">false</span>;<br>                sb.deleteCharAt(sb.length() - <span class="hljs-number">1</span>);<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> ans;<br>    &#125;<br>    <span class="hljs-keyword">void</span> <span class="hljs-title function_">dfs</span><span class="hljs-params">(<span class="hljs-type">int</span> i, <span class="hljs-type">int</span> j, StringBuilder sb)</span> &#123;<br>        <span class="hljs-keyword">if</span> (sb.length() &gt; <span class="hljs-number">10</span>) <span class="hljs-keyword">return</span> ;<br>        <span class="hljs-keyword">if</span> (set.contains(sb.toString())) &#123;<br>            ans.add(sb.toString());<br>            set.remove(sb.toString());<br>        &#125;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span>[] d : dirs) &#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">dx</span> <span class="hljs-operator">=</span> i + d[<span class="hljs-number">0</span>], dy = j + d[<span class="hljs-number">1</span>];<br>            <span class="hljs-keyword">if</span> (dx &lt; <span class="hljs-number">0</span> || dx &gt;= m || dy &lt; <span class="hljs-number">0</span> || dy &gt;= n) <span class="hljs-keyword">continue</span>;<br>            <span class="hljs-keyword">if</span> (vis[dx][dy]) <span class="hljs-keyword">continue</span>;<br>            vis[dx][dy] = <span class="hljs-literal">true</span>;<br>            sb.append(board[dx][dy]);<br>            dfs(dx, dy, sb);<br>            vis[dx][dy] = <span class="hljs-literal">false</span>;<br>            sb.deleteCharAt(sb.length() - <span class="hljs-number">1</span>);<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure></p>
+<ul>
+<li>时间复杂度：共有 $m <em> n$ 个起点，每次能往 $4$ 个方向搜索（不考虑重复搜索问题），且搜索的长度不会超过 $10$。整体复杂度为 $O(m </em> n * 4^{10})$</li>
+<li>空间复杂度：$O(\sum_{i=0}^{words.length - 1} words[i].length)$</li>
+</ul>
+<hr>
+<h3 id="Trie"><a href="#Trie" class="headerlink" title="Trie"></a>Trie</h3><p><strong>在「解法一」中，对于任意一个当前位置 $(i, j)$，我们都不可避免的搜索了四联通的全部方向，这导致了那些无效搜索路径最终只有长度达到 $10$ 才会被剪枝。</strong></p>
+<p><strong>要进一步优化我们的搜索过程，需要考虑如何在每一步的搜索中进行剪枝。</strong></p>
+<p>我们可以使用 $Trie$ 结构进行建树，对于任意一个当前位置 $(i, j)$ 而言，只有在 $Trie$ 中存在往从字符 $a$ 到 $b$ 的边时，我们才在棋盘上搜索从 $a$ 到 $b$ 的相邻路径。</p>
+<p>不了解 $Trie$ 的同学，可以看看这篇题解 <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/implement-trie-prefix-tree/solution/gong-shui-san-xie-yi-ti-shuang-jie-er-we-esm9/">(题解) 208. 实现 Trie (前缀树)</a>，里面写了两种实现 $Trie$ 的方式。</p>
+<p>对于本题，我们可以使用「TrieNode」的方式进行建 $Trie$。</p>
+<p>因为 <code>words</code> 里最多有 $10^4$ 个单词，每个单词长度最多为 $10$，如果开成静态数组的话，不考虑共用行的问题，我们需要开一个大小为 $10^5 * 26$ 的大数组，可能会有 TLE 或 MLE 的风险。</p>
+<p>与此同时，我们需要将平时建 $TrieNode$ 中的 <code>isEnd</code> 标记属性直接换成记录当前字符 <code>s</code>，这样我们在 <code>DFS</code> 的过程中则无须额外记录当前搜索字符串。</p>
+<p>代码：<br><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">class</span> <span class="hljs-title class_">TrieNode</span> &#123;<br>        String s;<br>        TrieNode[] tns = <span class="hljs-keyword">new</span> <span class="hljs-title class_">TrieNode</span>[<span class="hljs-number">26</span>];<br>    &#125;<br>    <span class="hljs-keyword">void</span> <span class="hljs-title function_">insert</span><span class="hljs-params">(String s)</span> &#123;<br>        <span class="hljs-type">TrieNode</span> <span class="hljs-variable">p</span> <span class="hljs-operator">=</span> root;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; s.length(); i++) &#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">u</span> <span class="hljs-operator">=</span> s.charAt(i) - <span class="hljs-string">&#x27;a&#x27;</span>;<br>            <span class="hljs-keyword">if</span> (p.tns[u] == <span class="hljs-literal">null</span>) p.tns[u] = <span class="hljs-keyword">new</span> <span class="hljs-title class_">TrieNode</span>();<br>            p = p.tns[u];<br>        &#125;<br>        p.s = s;<br>    &#125;<br>    Set&lt;String&gt; set = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashSet</span>&lt;&gt;();<br>    <span class="hljs-type">char</span>[][] board;<br>    <span class="hljs-type">int</span> n, m;<br>    <span class="hljs-type">TrieNode</span> <span class="hljs-variable">root</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">TrieNode</span>();<br>    <span class="hljs-type">int</span>[][] dirs = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[][]&#123;&#123;<span class="hljs-number">1</span>,<span class="hljs-number">0</span>&#125;,&#123;-<span class="hljs-number">1</span>,<span class="hljs-number">0</span>&#125;,&#123;<span class="hljs-number">0</span>,<span class="hljs-number">1</span>&#125;,&#123;<span class="hljs-number">0</span>,-<span class="hljs-number">1</span>&#125;&#125;;<br>    <span class="hljs-type">boolean</span>[][] vis = <span class="hljs-keyword">new</span> <span class="hljs-title class_">boolean</span>[<span class="hljs-number">15</span>][<span class="hljs-number">15</span>];<br>    <span class="hljs-keyword">public</span> List&lt;String&gt; <span class="hljs-title function_">findWords</span><span class="hljs-params">(<span class="hljs-type">char</span>[][] _board, String[] words)</span> &#123;<br>        board = _board;<br>        m = board.length; n = board[<span class="hljs-number">0</span>].length;<br>        <span class="hljs-keyword">for</span> (String w : words) insert(w);<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; m; i++) &#123;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; j &lt; n; j++) &#123;<br>                <span class="hljs-type">int</span> <span class="hljs-variable">u</span> <span class="hljs-operator">=</span> board[i][j] - <span class="hljs-string">&#x27;a&#x27;</span>;<br>                <span class="hljs-keyword">if</span> (root.tns[u] != <span class="hljs-literal">null</span>) &#123;<br>                    vis[i][j] = <span class="hljs-literal">true</span>;<br>                    dfs(i, j, root.tns[u]);<br>                    vis[i][j] = <span class="hljs-literal">false</span>;<br>                &#125;<br>            &#125;<br>        &#125;<br>        List&lt;String&gt; ans = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();<br>        <span class="hljs-keyword">for</span> (String s : set) ans.add(s);<br>        <span class="hljs-keyword">return</span> ans;<br>    &#125;<br>    <span class="hljs-keyword">void</span> <span class="hljs-title function_">dfs</span><span class="hljs-params">(<span class="hljs-type">int</span> i, <span class="hljs-type">int</span> j, TrieNode node)</span> &#123;<br>        <span class="hljs-keyword">if</span> (node.s != <span class="hljs-literal">null</span>) set.add(node.s);<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span>[] d : dirs) &#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">dx</span> <span class="hljs-operator">=</span> i + d[<span class="hljs-number">0</span>], dy = j + d[<span class="hljs-number">1</span>];<br>            <span class="hljs-keyword">if</span> (dx &lt; <span class="hljs-number">0</span> || dx &gt;= m || dy &lt; <span class="hljs-number">0</span> || dy &gt;= n) <span class="hljs-keyword">continue</span>;<br>            <span class="hljs-keyword">if</span> (vis[dx][dy]) <span class="hljs-keyword">continue</span>;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">u</span> <span class="hljs-operator">=</span> board[dx][dy] - <span class="hljs-string">&#x27;a&#x27;</span>;<br>            <span class="hljs-keyword">if</span> (node.tns[u] != <span class="hljs-literal">null</span>) &#123;<br>                vis[dx][dy] = <span class="hljs-literal">true</span>;<br>                dfs(dx, dy, node.tns[u]);<br>                vis[dx][dy] = <span class="hljs-literal">false</span>;<br>            &#125;<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure></p>
+<ul>
+<li>时间复杂度：共有 $m <em> n$ 个起点，每次能往 $4$ 个方向搜索（不考虑重复搜索问题），且搜索的长度不会超过 $10$。整体复杂度为 $O(m </em> n * 4^{10})$</li>
+<li>空间复杂度：$O(\sum_{i=0}^{words.length - 1} words[i].length * C)$，$C$ 为字符集大小，固定为 $26$</li>
+</ul>
+<hr>
+<h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>这是我们「刷穿 LeetCode」系列文章的第 <code>No.212</code> 篇，系列开始于 2021/01/01，截止于起始日 LeetCode 上共有 1916 道题目，部分是有锁题，我们将先把所有不带锁的题目刷完。</p>
+<p>在这个系列文章里面，除了讲解解题思路以外，还会尽可能给出最为简洁的代码。如果涉及通解还会相应的代码模板。</p>
+<p>为了方便各位同学能够电脑上进行调试和提交代码，我建立了相关的仓库：<a target="_blank" rel="noopener" href="https://github.com/SharingSource/LogicStack-LeetCode">https://github.com/SharingSource/LogicStack-LeetCode</a> 。</p>
+<p>在仓库地址里，你可以看到系列文章的题解链接、系列文章的相应代码、LeetCode 原题链接和其他优选题解。</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/DFS/">DFS</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%9B%9E%E6%BA%AF%E7%AE%97%E6%B3%95/">回溯算法</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%AD%97%E5%85%B8%E6%A0%91/">字典树</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/09/18/292.%20Nim%20%E6%B8%B8%E6%88%8F%EF%BC%88%E7%AE%80%E5%8D%95%EF%BC%89/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">LC 292. Nim 游戏</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/09/15/162.%20%E5%AF%BB%E6%89%BE%E5%B3%B0%E5%80%BC%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/">
+                        <span class="hidden-mobile">LC 162. 寻找峰值</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+  <div class="col-lg-7 mx-auto nopadding-x-md">
+    <div class="container custom post-custom mx-auto">
+      <img src="https://oscimg.oschina.net/oscnet/up-19688dc1af05cf8bdea43b2a863038ab9e5.png" srcset="/img/loading.gif" lazyload class="rounded mx-auto d-block mt-5" style="width:900px; height:500px;">
+    </div>
+  </div>
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.staticfile.org/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.staticfile.org/tocbot/4.18.2/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.staticfile.org/anchor-js/4.3.1/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.11/clipboard.min.js" ></script>
+  
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.bootcdn.net/ajax/libs/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        loader: {
+          
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.staticfile.org/mathjax/3.2.0/es5/tex-svg.js" ></script>
+
+  
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

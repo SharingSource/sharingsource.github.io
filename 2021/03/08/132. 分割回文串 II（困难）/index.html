@@ -1,0 +1,600 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/oimg/RoundCorner.png">
+  <link rel="icon" href="/oimg/RoundCorner.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="宫水三叶">
+  <meta name="keywords" content="算法, 数据结构, 题解">
+  
+    <meta name="description" content="题目描述这是 LeetCode 上的 132. 分割回文串 II ，难度为 困难。 给你一个字符串 s，请你将 s 分割成一些子串，使每个子串都是回文。 返回符合要求的 最少分割次数 。 示例 1：123输入：s &#x3D; &quot;aab&quot;输出：1解释：只需一次分割就可将 s 分割成 [&quot;aa&quot;,&quot;b&quot;] 这样两个回文子串。示例 2：12输入：s &#x3D;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LC 132. 分割回文串 II">
+<meta property="og:url" content="http://example.com/2021/03/08/132.%20%E5%88%86%E5%89%B2%E5%9B%9E%E6%96%87%E4%B8%B2%20II%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/index.html">
+<meta property="og:site_name" content="宫水三叶的刷题日记">
+<meta property="og:description" content="题目描述这是 LeetCode 上的 132. 分割回文串 II ，难度为 困难。 给你一个字符串 s，请你将 s 分割成一些子串，使每个子串都是回文。 返回符合要求的 最少分割次数 。 示例 1：123输入：s &#x3D; &quot;aab&quot;输出：1解释：只需一次分割就可将 s 分割成 [&quot;aa&quot;,&quot;b&quot;] 这样两个回文子串。示例 2：12输入：s &#x3D;">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-03-07T17:15:37.000Z">
+<meta property="article:modified_time" content="2022-05-12T04:05:32.310Z">
+<meta property="article:author" content="宫水三叶">
+<meta property="article:tag" content="线性 DP">
+<meta property="article:tag" content="回文串">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  <title>LC 132. 分割回文串 II - 宫水三叶的刷题日记</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/hint.css/2.7.0/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.7.2/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"|","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.1.0"></head>
+
+
+<body>
+  <header style="height: 50vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>宫水三叶の刷题日记</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/image_47.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="LC 132. 分割回文串 II">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-author" aria-hidden="true"></i>
+      宫水三叶
+    </span>
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-03-08 01:15" pubdate>
+        2021年3月8日 凌晨
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2.8k 字
+    </span>
+  
+
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">LC 132. 分割回文串 II</h1>
+            
+            <div class="markdown-body">
+              <h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>这是 LeetCode 上的 <strong><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/palindrome-partitioning-ii/solution/xiang-jie-liang-bian-dong-tai-gui-hua-ji-s5xr/">132. 分割回文串 II</a></strong> ，难度为 <strong>困难</strong>。</p>
+<p>给你一个字符串 s，请你将 s 分割成一些子串，使每个子串都是回文。</p>
+<p>返回符合要求的 最少分割次数 。</p>
+<p>示例 1：<br><figure class="highlight prolog"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs prolog">输入：s = <span class="hljs-string">&quot;aab&quot;</span><br>输出：<span class="hljs-number">1</span><br>解释：只需一次分割就可将 s 分割成 [<span class="hljs-string">&quot;aa&quot;</span>,<span class="hljs-string">&quot;b&quot;</span>] 这样两个回文子串。<br></code></pre></div></td></tr></table></figure><br>示例 2：<br><figure class="highlight abnf"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs abnf">输入：s <span class="hljs-operator">=</span> <span class="hljs-string">&quot;a&quot;</span><br>输出：<span class="hljs-number">0</span><br></code></pre></div></td></tr></table></figure><br>示例 3：<br><figure class="highlight abnf"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs abnf">输入：s <span class="hljs-operator">=</span> <span class="hljs-string">&quot;ab&quot;</span><br>输出：<span class="hljs-number">1</span><br></code></pre></div></td></tr></table></figure></p>
+<p>提示：</p>
+<ul>
+<li>1 &lt;= s.length &lt;= 2000</li>
+<li>s 仅由小写英文字母组成</li>
+</ul>
+<hr>
+<h3 id="动态规划"><a href="#动态规划" class="headerlink" title="动态规划"></a>动态规划</h3><p>如果在 <a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzU4NDE3MTEyMA==&amp;mid=2247487047&amp;idx=1&amp;sn=117c48f20778868442fce44e100d2ea8&amp;chksm=fd9ca558caeb2c4eb1bff4f0878ff796feabe523657c2aafea0b2d1c7026e1c0572ab1e6d205&amp;token=635532356&amp;lang=zh_CN#rd">131. 分割回文串</a> 你有使用到 DP 进行预处理的话。</p>
+<p>这道题就很简单了，就是一道常规的动态规划题。</p>
+<p>为了方便，我们约定所有下标从 $1$ 开始。</p>
+<p>即对于长度为 $n$ 的字符串，我们使用 $[1,n]$ 进行表示。估计不少看过三叶题解的同学都知道，这样做的目的是为了减少边界情况判断，这本身也是对于「哨兵」思想的运用。</p>
+<ul>
+<li><strong>递推「最小分割次数」思路</strong></li>
+</ul>
+<p>我们定义 $f[r]$ 为将 $[1,r]$ 这一段字符分割为若干回文串的最小分割次数，那么最终答案为 $f[n]$。</p>
+<p>不失一般性的考虑 $f[r]$ 如何转移：</p>
+<ol>
+<li>从「起点字符」到「第 $r$ 个字符」能形成回文串。那么最小分割次数为 0，此时有 $f[r] = 0$</li>
+<li>从「起点字符」到「第 $r$ 个字符」不能形成回文串。此时我们需要枚举左端点 $l$，如果 $[l,r]$ 这一段是回文串的话，那么有 $f[r] = f[l - 1] + 1$</li>
+</ol>
+<p>在 $2$ 中满足回文要求的左端点位置 $l$ 可能有很多个，我们在所有方案中取一个 $\min$ 即可。</p>
+<ul>
+<li><strong>快速判断「任意一段子串是否回文」思路</strong></li>
+</ul>
+<p>剩下的问题是，我们如何快速判断连续一段 $[l, r]$ 是否为回文串，做法和昨天的 <a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzU4NDE3MTEyMA==&amp;mid=2247487047&amp;idx=1&amp;sn=117c48f20778868442fce44e100d2ea8&amp;chksm=fd9ca558caeb2c4eb1bff4f0878ff796feabe523657c2aafea0b2d1c7026e1c0572ab1e6d205&amp;token=635532356&amp;lang=zh_CN#rd">131. 分割回文串</a>  一模一样。</p>
+<p><em>PS. 在 <a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzU4NDE3MTEyMA==&amp;mid=2247487047&amp;idx=1&amp;sn=117c48f20778868442fce44e100d2ea8&amp;chksm=fd9ca558caeb2c4eb1bff4f0878ff796feabe523657c2aafea0b2d1c7026e1c0572ab1e6d205&amp;token=635532356&amp;lang=zh_CN#rd">131. 分割回文串</a>，数据范围只有 $16$，因此我们可以不使用 DP 进行预处理，而是使用双指针来判断是否回文也能过。但是该题数据范围为 $2000$（数量级为 $10^3$），使用朴素做法判断是否回文的话，复杂度会去到 $O(n^3)$（计算量为 $10^9$），必然超时。</em></p>
+<p>因此我们不可能每次都使用双指针去线性扫描一遍 $[l, r]$ 判断是否回文。</p>
+<p>一个合理的做法是，我们先预处理出所有的 $g[l][r]$，$g[l][r]$ 代表 $[l,r]$ 这一段是否为回文串。</p>
+<p>预处理  $g[l][r]$ 的过程可以用递推去做。</p>
+<p>要想  $g[l][r] = true$ ，必须满足以下两个条件：</p>
+<ol>
+<li>$g[l + 1][r - 1] = true$</li>
+<li>$s[i] = s[j]$</li>
+</ol>
+<p>由于状态 $f[l][r]$ 依赖于状态 $f[l + 1][r - 1]$，因此需要我们左端点 $l$ 是「从大到小」进行遍历；而右端点 $r$ 是「从小到大」进行遍历。</p>
+<p>因此最终的遍历过程可以整理为：<strong>右端点 $r$ 一直往右移动（从小到大），在 $r$  固定情况下，左端点 $l$ 在 $r$ 在左边开始，一直往左移动（从大到小）</strong></p>
+<p>代码：<br><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">minCut</span><span class="hljs-params">(String s)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> s.length();<br>        <span class="hljs-type">char</span>[] cs = s.toCharArray();<br><br>        <span class="hljs-comment">// g[l][r] 代表 [l,r] 这一段是否为回文串</span><br>        <span class="hljs-type">boolean</span>[][] g = <span class="hljs-keyword">new</span> <span class="hljs-title class_">boolean</span>[n + <span class="hljs-number">1</span>][n + <span class="hljs-number">1</span>];<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">r</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>; r &lt;= n; r++) &#123;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">l</span> <span class="hljs-operator">=</span> r; l &gt;= <span class="hljs-number">1</span>; l--) &#123;<br>                <span class="hljs-comment">// 如果只有一个字符，则[l,r]属于回文</span><br>                <span class="hljs-keyword">if</span> (l == r) &#123;<br>                    g[l][r] = <span class="hljs-literal">true</span>;<br>                &#125; <span class="hljs-keyword">else</span> &#123;<br>                    <span class="hljs-comment">// 在 l 和 r 字符相同的前提下</span><br>                    <span class="hljs-keyword">if</span> (cs[l - <span class="hljs-number">1</span>] == cs[r - <span class="hljs-number">1</span>]) &#123;<br>                        <span class="hljs-comment">// 如果 l 和 r 长度只有 2；或者 [l+1,r-1] 这一段满足回文，则[l,r]属于回文</span><br>                        <span class="hljs-keyword">if</span> (r - l == <span class="hljs-number">1</span> || g[l + <span class="hljs-number">1</span>][r - <span class="hljs-number">1</span>]) &#123;<br>                            g[l][r] = <span class="hljs-literal">true</span>;<br>                        &#125;<br>                    &#125;<br>                &#125;<br>            &#125;<br>        &#125;<br><br>        <span class="hljs-comment">// f[r] 代表将 [1,r] 这一段分割成若干回文子串所需要的最小分割次数</span><br>        <span class="hljs-type">int</span>[] f = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[n + <span class="hljs-number">1</span>];<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">r</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>; r &lt;= n; r++) &#123;<br>            <span class="hljs-comment">// 如果 [1,r] 满足回文，不需要分割</span><br>            <span class="hljs-keyword">if</span> (g[<span class="hljs-number">1</span>][r]) &#123;<br>                f[r] = <span class="hljs-number">0</span>;<br>            &#125; <span class="hljs-keyword">else</span> &#123;<br>                <span class="hljs-comment">// 先设定一个最大分割次数（r 个字符最多消耗 r - 1 次分割）</span><br>                f[r] = r - <span class="hljs-number">1</span>;<br>                <span class="hljs-comment">// 在所有符合 [l,r] 回文的方案中取最小值</span><br>                <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">l</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>; l &lt;= r; l++) &#123;<br>                    <span class="hljs-keyword">if</span> (g[l][r]) f[r] = Math.min(f[r], f[l - <span class="hljs-number">1</span>] + <span class="hljs-number">1</span>);<br>                &#125;   <br>            &#125;<br>        &#125;<br><br>        <span class="hljs-keyword">return</span> f[n];<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure></p>
+<ul>
+<li>时间复杂度：$O(n^2)$</li>
+<li>空间复杂度：$O(n^2)$</li>
+</ul>
+<hr>
+<h3 id="关于「如何确定-DP-状态定义」的分享"><a href="#关于「如何确定-DP-状态定义」的分享" class="headerlink" title="关于「如何确定 DP 状态定义」的分享"></a>关于「如何确定 DP 状态定义」的分享</h3><p>有同学会对「如何确定 DP 的状态定义」有疑问，觉得自己总是定不下 DP 的状态定义。</p>
+<p>首先，十分正常，不用担心。</p>
+<p>DP 的状态定义，基本上是考经验的（猜的），猜对了 DP 的状态定义，基本上「状态转移方程」就是呼之欲出。</p>
+<p>虽然大多数情况都是猜的，但也不是毫无规律，相当一部分是定义是与「结尾」和「答案」有所关联的。</p>
+<p><strong>例如本题定义 $f[i]$ 为以下标为 $i$ 的字符作为结尾（结尾）的最小分割次数（答案）。</strong></p>
+<p>因此对于那些你没见过的 DP 模型题，可以从这两方面去「猜」。</p>
+<hr>
+<h3 id="Manacher-算法（非重要补充）"><a href="#Manacher-算法（非重要补充）" class="headerlink" title="Manacher 算法（非重要补充）"></a>Manacher 算法（非重要补充）</h3><p>如果你还学有余力的话，可以看看下面这篇题解。</p>
+<p>提供了「回文串」问题的究极答案：Manacher 算法。</p>
+<p>由于 Manacher 算法较为局限，只能解决「回文串」问题，远不如 KMP 算法使用广泛，<strong>不建议大家深究原理，而是直接当做「模板」背过。</strong></p>
+<p>背过这样的算法的意义在于：相当于大脑里有了一个时间复杂度为 $O(n)$ 的 api 可以使用，这个 api 传入一个字符串，返回该字符串的最大回文子串。</p>
+<p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/longest-palindromic-substring/solution/shua-chuan-lc-po-su-jie-fa-manacher-suan-i2px/">回文串问题的究极答案：Manacher 算法</a></p>
+<p><strong>如果觉得自己背不下来，也没有问题。事实上我还没有见过必须使用 Manacher 算法才能过的回文串题。</strong></p>
+<hr>
+<h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>这是我们「刷穿 LeetCode」系列文章的第 <code>No.132</code> 篇，系列开始于 2021/01/01，截止于起始日 LeetCode 上共有 1916 道题目，部分是有锁题，我们将先把所有不带锁的题目刷完。</p>
+<p>在这个系列文章里面，除了讲解解题思路以外，还会尽可能给出最为简洁的代码。如果涉及通解还会相应的代码模板。</p>
+<p>为了方便各位同学能够电脑上进行调试和提交代码，我建立了相关的仓库：<a target="_blank" rel="noopener" href="https://github.com/SharingSource/LogicStack-LeetCode">https://github.com/SharingSource/LogicStack-LeetCode</a> 。</p>
+<p>在仓库地址里，你可以看到系列文章的题解链接、系列文章的相应代码、LeetCode 原题链接和其他优选题解。</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E7%BA%BF%E6%80%A7-DP/">线性 DP</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%9B%9E%E6%96%87%E4%B8%B2/">回文串</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/03/09/1047.%20%E5%88%A0%E9%99%A4%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%AD%E7%9A%84%E6%89%80%E6%9C%89%E7%9B%B8%E9%82%BB%E9%87%8D%E5%A4%8D%E9%A1%B9%EF%BC%88%E7%AE%80%E5%8D%95%EF%BC%89/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">LC 1047. 删除字符串中的所有相邻重复项</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/03/07/131.%20%E5%88%86%E5%89%B2%E5%9B%9E%E6%96%87%E4%B8%B2%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/">
+                        <span class="hidden-mobile">LC 131. 分割回文串</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+  <div class="col-lg-7 mx-auto nopadding-x-md">
+    <div class="container custom post-custom mx-auto">
+      <img src="https://oscimg.oschina.net/oscnet/up-19688dc1af05cf8bdea43b2a863038ab9e5.png" srcset="/img/loading.gif" lazyload class="rounded mx-auto d-block mt-5" style="width:900px; height:500px;">
+    </div>
+  </div>
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.staticfile.org/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.staticfile.org/tocbot/4.18.2/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.staticfile.org/anchor-js/4.3.1/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.11/clipboard.min.js" ></script>
+  
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.bootcdn.net/ajax/libs/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        loader: {
+          
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.staticfile.org/mathjax/3.2.0/es5/tex-svg.js" ></script>
+
+  
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

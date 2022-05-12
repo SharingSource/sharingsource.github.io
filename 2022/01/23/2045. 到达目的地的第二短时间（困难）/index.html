@@ -1,0 +1,610 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/oimg/RoundCorner.png">
+  <link rel="icon" href="/oimg/RoundCorner.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="宫水三叶">
+  <meta name="keywords" content="算法, 数据结构, 题解">
+  
+    <meta name="description" content="题目描述这是 LeetCode 上的 2045. 到达目的地的第二短时间 ，难度为 困难。 城市用一个 双向连通 图表示，图中有 $n$ 个节点，从 $1$ 到 $n$ 编号（包含 $1$ 和 $n$）。图中的边用一个二维整数数组 $edges$ 表示，其中每个 $edges[i] &#x3D; [u_i, v_i]$ 表示一条节点 $u_i$ 和节点 $v_i$ 之间的双向连通边。每组节点对由 最多一条">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LC 2045. 到达目的地的第二短时间">
+<meta property="og:url" content="http://example.com/2022/01/23/2045.%20%E5%88%B0%E8%BE%BE%E7%9B%AE%E7%9A%84%E5%9C%B0%E7%9A%84%E7%AC%AC%E4%BA%8C%E7%9F%AD%E6%97%B6%E9%97%B4%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/index.html">
+<meta property="og:site_name" content="宫水三叶的刷题日记">
+<meta property="og:description" content="题目描述这是 LeetCode 上的 2045. 到达目的地的第二短时间 ，难度为 困难。 城市用一个 双向连通 图表示，图中有 $n$ 个节点，从 $1$ 到 $n$ 编号（包含 $1$ 和 $n$）。图中的边用一个二维整数数组 $edges$ 表示，其中每个 $edges[i] &#x3D; [u_i, v_i]$ 表示一条节点 $u_i$ 和节点 $v_i$ 之间的双向连通边。每组节点对由 最多一条">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://assets.leetcode.com/uploads/2021/09/29/e1.png">
+<meta property="og:image" content="https://assets.leetcode.com/uploads/2021/09/29/eg2.png">
+<meta property="article:published_time" content="2022-01-23T15:12:20.000Z">
+<meta property="article:modified_time" content="2022-05-12T04:05:32.207Z">
+<meta property="article:author" content="宫水三叶">
+<meta property="article:tag" content="BFS">
+<meta property="article:tag" content="AStar 算法">
+<meta property="article:tag" content="最短路">
+<meta property="article:tag" content="堆优化 Dijkstra">
+<meta property="article:tag" content="启发式搜素">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://assets.leetcode.com/uploads/2021/09/29/e1.png">
+  
+  
+  <title>LC 2045. 到达目的地的第二短时间 - 宫水三叶的刷题日记</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/hint.css/2.7.0/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.7.2/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"|","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.1.0"></head>
+
+
+<body>
+  <header style="height: 50vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>宫水三叶の刷题日记</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/image_7.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="LC 2045. 到达目的地的第二短时间">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-author" aria-hidden="true"></i>
+      宫水三叶
+    </span>
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2022-01-23 23:12" pubdate>
+        2022年1月23日 晚上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      6.3k 字
+    </span>
+  
+
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">LC 2045. 到达目的地的第二短时间</h1>
+            
+            <div class="markdown-body">
+              <h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>这是 LeetCode 上的 <strong><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/second-minimum-time-to-reach-destination/solution/gong-shui-san-xie-yi-ti-shuang-jie-dui-y-88np/">2045. 到达目的地的第二短时间</a></strong> ，难度为 <strong>困难</strong>。</p>
+<p>城市用一个 双向连通 图表示，图中有 $n$ 个节点，从 $1$ 到 $n$ 编号（包含 $1$ 和 $n$）。图中的边用一个二维整数数组 $edges$ 表示，其中每个 $edges[i] = [u_i, v_i]$ 表示一条节点 $u_i$ 和节点 $v_i$ 之间的双向连通边。每组节点对由 最多一条 边连通，顶点不存在连接到自身的边。穿过任意一条边的时间是 $time$ 分钟。</p>
+<p>每个节点都有一个交通信号灯，每 $change$ 分钟改变一次，从绿色变成红色，再由红色变成绿色，循环往复。所有信号灯都 同时 改变。你可以在 任何时候 进入某个节点，但是 只能 在节点 信号灯是绿色时 才能离开。如果信号灯是  绿色 ，你 不能 在节点等待，必须离开。</p>
+<p>第二小的值 是 严格大于 最小值的所有值中最小的值。</p>
+<ul>
+<li>例如，<code>[2, 3, 4]</code> 中第二小的值是 $3$ ，而 <code>[2, 2, 4]</code> 中第二小的值是 $4$ 。<br>给你 $n$、$edges$、$time$ 和 $change$ ，返回从节点 $1$ 到节点 $n$ 需要的 第二短时间 。</li>
+</ul>
+<p>注意：</p>
+<p>你可以 任意次 穿过任意顶点，包括 1 和 n 。<br>你可以假设在 启程时 ，所有信号灯刚刚变成 绿色 。</p>
+<p>示例 1：<br><img src="https://assets.leetcode.com/uploads/2021/09/29/e1.png" srcset="/img/loading.gif" lazyload alt=""><br><figure class="highlight tap"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs tap">输入：n = 5, edges = [[1,2],[1,3],[1,4],[3,4],[4,5]], time = 3, change = 5<br><br>输出：13<br><br>解释：<br>上面的左图展现了给出的城市交通图。<br>右图中的蓝色路径是最短时间路径。<br>花费的时间是：<br>- 从节点<span class="hljs-number"> 1 </span>开始，总花费时间=0<br>-<span class="hljs-number"> 1 </span>-&gt; 4：3 分钟，总花费时间=3<br>-<span class="hljs-number"> 4 </span>-&gt; 5：3 分钟，总花费时间=6<br>因此需要的最小时间是<span class="hljs-number"> 6 </span>分钟。<br><br>右图中的红色路径是第二短时间路径。<br>- 从节点<span class="hljs-number"> 1 </span>开始，总花费时间=0<br>-<span class="hljs-number"> 1 </span>-&gt; 3：3 分钟，总花费时间=3<br>-<span class="hljs-number"> 3 </span>-&gt; 4：3 分钟，总花费时间=6<br>- 在节点<span class="hljs-number"> 4 </span>等待<span class="hljs-number"> 4 </span>分钟，总花费时间=10<br>-<span class="hljs-number"> 4 </span>-&gt; 5：3 分钟，总花费时间=13<br>因此第二短时间是<span class="hljs-number"> 13 </span>分钟。    <br></code></pre></div></td></tr></table></figure></p>
+<p>示例 2：<br><img src="https://assets.leetcode.com/uploads/2021/09/29/eg2.png" srcset="/img/loading.gif" lazyload alt=""><br><figure class="highlight tap"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs tap">输入：n = 2, edges = [[1,2]], time = 3, change = 2<br><br>输出：11<br><br>解释：<br>最短时间路径是<span class="hljs-number"> 1 </span>-&gt;<span class="hljs-number"> 2 </span>，总花费时间 =<span class="hljs-number"> 3 </span>分钟<br>最短时间路径是<span class="hljs-number"> 1 </span>-&gt;<span class="hljs-number"> 2 </span>-&gt;<span class="hljs-number"> 1 </span>-&gt;<span class="hljs-number"> 2 </span>，总花费时间 =<span class="hljs-number"> 11 </span>分钟<br></code></pre></div></td></tr></table></figure></p>
+<p>提示：</p>
+<ul>
+<li>$2 &lt;= n &lt;= 10^4$</li>
+<li>$n - 1 &lt;= edges.length &lt;= min(2 <em> 10^4, n </em> (n - 1) / 2)$</li>
+<li>$edges[i].length == 2$</li>
+<li>$1 &lt;= u_i, v_i &lt;= n$</li>
+<li>$u_i != v_i$</li>
+<li>不含重复边</li>
+<li>每个节点都可以从其他节点直接或者间接到达</li>
+<li>$1 &lt;= time, change &lt;= 10^3$</li>
+</ul>
+<hr>
+<h3 id="堆优化-Dijkstra"><a href="#堆优化-Dijkstra" class="headerlink" title="堆优化 Dijkstra"></a>堆优化 Dijkstra</h3><p>整体题意：在一张正权无向图上求严格次短路，该图无重边与自环。</p>
+<p>同时根据提示 $edges.length &lt;= \min(2 <em> 10^4, n </em> (n - 1) / 2)$ 可知，该图为「稀疏图」，容易想到「堆优化 Dijkstra」做法。</p>
+<p>对「堆优化 Dijkstra」或者「其他最短路算法」不熟悉的同学，可以看前置 🧀 ：<a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzU4NDE3MTEyMA==&amp;mid=2247488007&amp;idx=1&amp;sn=9d0dcfdf475168d26a5a4bd6fcd3505d&amp;chksm=fd9cb918caeb300e1c8844583db5c5318a89e60d8d552747ff8c2256910d32acd9013c93058f&amp;token=211780171&amp;lang=zh_CN#rd">【最短路/必背模板】涵盖所有的「存图方式」与「最短路算法（详尽注释）」</a>。内容如题，首次接触的话，建议每个模板先敲十遍。</p>
+<p>回到本题，与常规的「求最短路」不同，本题需要求得「严格次短路」，我们可以在原来的最短路算法基础上（$dist1[]$ 数组用于记录最短路）多引入一个 $dist2[]$ 数组，$dist2[x]$ 用于记录从节点 $1$ 到节点 $x$ 的严格次短路。</p>
+<p>维护次短路是容易的，基本思路为：</p>
+<ul>
+<li>若当前距离 $dist$ 小于 $dist1[x]$，原本的最短路 $dist1[x]$ 沦为次短路 $dist2[x]$，即先用 $dist1[x]$ 更新 $dist2[x]$ 后，再用 $dist$ 更新 $dist1[x]$；</li>
+<li>若当前距离 $dist$ 等于 $dist1[x]$，不符合「严格次短路」，忽略；</li>
+<li>若当前距离 $dist$ 大于 $dist1[x]$，且 $dist$ 小于 $dist2[x]$，则使用 $dist$ 更新 $dist2[x]$。</li>
+</ul>
+<p>同时，由于处理「严格次短路包含重复边」的情况，我们无须使用 $vis[]$ 数组记录处理过的点，而要确保每次「最短路」或者「次短路」被更新时，都进行入堆操作。</p>
+<p>然后考虑「红绿灯」切换问题，这本质是引入动态边权，假设我们当前经过 $step$ 步到达节点 $i$，根据其与 $change$ 的关系分情况讨论即可：</p>
+<ul>
+<li>$\left \lfloor \frac{step}{change} \right \rfloor$ 为偶数：当前处于绿灯，动态边权为 $0$；</li>
+<li>$\left \lfloor \frac{step}{change} \right \rfloor$ 为奇数：当前处于红灯，需要增加动态边权（等待时间），增加的动态边权为 <code>change - (step % change)</code>。</li>
+</ul>
+<p>最后，为了避免每个样例都 <code>new</code> 大数组，我们可以使用 <code>static</code> 修饰需要用到的数组，并在执行逻辑前进行重置工作。</p>
+<p>代码：<br><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">static</span> <span class="hljs-type">int</span> <span class="hljs-variable">N</span> <span class="hljs-operator">=</span> <span class="hljs-number">10010</span>, M = <span class="hljs-number">4</span> * N, INF = <span class="hljs-number">0x3f3f3f3f</span>, idx = <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">static</span> <span class="hljs-type">int</span>[] he = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[N], e = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[M], ne = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[M];<br>    <span class="hljs-keyword">static</span> <span class="hljs-type">int</span>[] dist1 = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[N], dist2 = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[N];<br>    <span class="hljs-keyword">void</span> <span class="hljs-title function_">add</span><span class="hljs-params">(<span class="hljs-type">int</span> a, <span class="hljs-type">int</span> b)</span> &#123;<br>        e[idx] = b;<br>        ne[idx] = he[a];<br>        he[a] = idx;<br>        idx++;<br>    &#125;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">secondMinimum</span><span class="hljs-params">(<span class="hljs-type">int</span> n, <span class="hljs-type">int</span>[][] edges, <span class="hljs-type">int</span> time, <span class="hljs-type">int</span> change)</span> &#123;<br>        Arrays.fill(dist1, INF);<br>        Arrays.fill(dist2, INF);<br>        Arrays.fill(he, -<span class="hljs-number">1</span>);<br>        idx = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span>[] e : edges) &#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">u</span> <span class="hljs-operator">=</span> e[<span class="hljs-number">0</span>], v = e[<span class="hljs-number">1</span>];<br>            add(u, v); add(v, u);<br>        &#125;<br>        PriorityQueue&lt;<span class="hljs-type">int</span>[]&gt; q = <span class="hljs-keyword">new</span> <span class="hljs-title class_">PriorityQueue</span>&lt;&gt;((a,b)-&gt;a[<span class="hljs-number">1</span>]-b[<span class="hljs-number">1</span>]);<br>        q.add(<span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[]&#123;<span class="hljs-number">1</span>, <span class="hljs-number">0</span>&#125;);<br>        dist1[<span class="hljs-number">1</span>] = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">while</span> (!q.isEmpty()) &#123;<br>            <span class="hljs-type">int</span>[] poll = q.poll();<br>            <span class="hljs-type">int</span> <span class="hljs-variable">u</span> <span class="hljs-operator">=</span> poll[<span class="hljs-number">0</span>], step = poll[<span class="hljs-number">1</span>];<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> he[u]; i != -<span class="hljs-number">1</span>; i = ne[i]) &#123;<br>                <span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> e[i];<br>                <span class="hljs-type">int</span> <span class="hljs-variable">a</span> <span class="hljs-operator">=</span> step / change, b = step % change;<br>                <span class="hljs-type">int</span> <span class="hljs-variable">wait</span> <span class="hljs-operator">=</span> a % <span class="hljs-number">2</span> == <span class="hljs-number">0</span> ? <span class="hljs-number">0</span> : change - b;<br>                <span class="hljs-type">int</span> <span class="hljs-variable">dist</span> <span class="hljs-operator">=</span> step + time + wait;<br>                <span class="hljs-keyword">if</span> (dist1[j] &gt; dist) &#123;<br>                    dist2[j] = dist1[j];<br>                    dist1[j] = dist;<br>                    q.add(<span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[]&#123;j, dist1[j]&#125;);<br>                    q.add(<span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[]&#123;j, dist2[j]&#125;);<br>                &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (dist1[j] &lt; dist &amp;&amp; dist &lt; dist2[j]) &#123;<br>                    dist2[j] = dist;<br>                    q.add(<span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[]&#123;j, dist2[j]&#125;);<br>                &#125;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> dist2[n];<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure></p>
+<ul>
+<li>时间复杂度：令 $n$ 为点数，$m$ 为边数，堆优化 Dijkstra 的复杂度为 $O(m\log{n})$</li>
+<li>空间复杂度：$O(n + m)$</li>
+</ul>
+<hr>
+<h3 id="BFS"><a href="#BFS" class="headerlink" title="BFS"></a>BFS</h3><p>更进一步，原图边权虽然由「固定部分 $time$」和「动态部分 $change$ 相关」所组成，但在路径固定的前提下，其实边权之和完全确定。</p>
+<p>因此我们可以先将原图等价为边权为 $1$ 的新图，通过 <code>BFS</code> 求出最短路 $dist1[x]$ 和严格次短路 $dist2[x]$，然后利用此时的 $dist2[n]$ 其实是严格次短路的边数，计算原图上的边权之和。</p>
+<p>代码：<br><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">static</span> <span class="hljs-type">int</span> <span class="hljs-variable">N</span> <span class="hljs-operator">=</span> <span class="hljs-number">10010</span>, M = <span class="hljs-number">4</span> * N, INF = <span class="hljs-number">0x3f3f3f3f</span>, idx = <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">static</span> <span class="hljs-type">int</span>[] he = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[N], e = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[M], ne = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[M];<br>    <span class="hljs-keyword">void</span> <span class="hljs-title function_">add</span><span class="hljs-params">(<span class="hljs-type">int</span> a, <span class="hljs-type">int</span> b)</span> &#123;<br>        e[idx] = b;<br>        ne[idx] = he[a];<br>        he[a] = idx;<br>        idx++;<br>    &#125;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">secondMinimum</span><span class="hljs-params">(<span class="hljs-type">int</span> n, <span class="hljs-type">int</span>[][] edges, <span class="hljs-type">int</span> time, <span class="hljs-type">int</span> change)</span> &#123;<br>        Arrays.fill(he, -<span class="hljs-number">1</span>);<br>        idx = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span>[] e : edges) &#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">u</span> <span class="hljs-operator">=</span> e[<span class="hljs-number">0</span>], v = e[<span class="hljs-number">1</span>];<br>            add(u, v); add(v, u);<br>        &#125;<br>        Deque&lt;<span class="hljs-type">int</span>[]&gt; d = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayDeque</span>&lt;&gt;();<br>        <span class="hljs-type">int</span>[] dist1 = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[n + <span class="hljs-number">10</span>], dist2 = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[n + <span class="hljs-number">10</span>];<br>        Arrays.fill(dist1, INF);<br>        Arrays.fill(dist2, INF);<br>        d.addLast(<span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[]&#123;<span class="hljs-number">1</span>, <span class="hljs-number">0</span>&#125;);<br>        dist1[<span class="hljs-number">1</span>] = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">while</span> (!d.isEmpty()) &#123;<br>            <span class="hljs-type">int</span>[] poll = d.pollFirst();<br>            <span class="hljs-type">int</span> <span class="hljs-variable">u</span> <span class="hljs-operator">=</span> poll[<span class="hljs-number">0</span>], dist = poll[<span class="hljs-number">1</span>];<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> he[u]; i != -<span class="hljs-number">1</span>; i = ne[i]) &#123;<br>                <span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> e[i];<br>                <span class="hljs-keyword">if</span> (dist1[j] &gt; dist + <span class="hljs-number">1</span>) &#123;<br>                    dist2[j] = dist1[j];<br>                    dist1[j] = dist + <span class="hljs-number">1</span>;<br>                    d.addLast(<span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[]&#123;j, dist1[j]&#125;);<br>                    d.addLast(<span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[]&#123;j, dist2[j]&#125;);<br>                &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (dist1[j] &lt; dist + <span class="hljs-number">1</span> &amp;&amp; dist + <span class="hljs-number">1</span> &lt; dist2[j]) &#123;<br>                    dist2[j] = dist + <span class="hljs-number">1</span>;<br>                    d.addLast(<span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[]&#123;j, dist2[j]&#125;);<br>                &#125;<br>            &#125;<br>        &#125;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">ans</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; dist2[n]; i++) &#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">a</span> <span class="hljs-operator">=</span> ans / change, b = ans % change;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">wait</span> <span class="hljs-operator">=</span> a % <span class="hljs-number">2</span> == <span class="hljs-number">0</span> ? <span class="hljs-number">0</span> : change - b;<br>            ans += time + wait;<br>        &#125;<br>        <span class="hljs-keyword">return</span> ans;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure></p>
+<ul>
+<li>时间复杂度：令 $n$ 为点数，$m$ 为边数，BFS 的复杂度为 $O(n + m)$</li>
+<li>空间复杂度：$O(n + m)$</li>
+</ul>
+<hr>
+<h3 id="AStar-算法"><a href="#AStar-算法" class="headerlink" title="AStar 算法"></a>AStar 算法</h3><p>在 <code>BFS</code> 的基础上再进一步，我们可以将问题拓展为「使用 AStar 算法来找第 <code>K</code> 短路」（修改代码的 <code>K</code> 即可），利用终点的第 $k$ 次出队必然是第 $k$ 短路（注意要求的是严格的第 $k$ 短路）。</p>
+<p>代码：<br><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">static</span> <span class="hljs-type">int</span> <span class="hljs-variable">N</span> <span class="hljs-operator">=</span> <span class="hljs-number">10010</span>, M = <span class="hljs-number">4</span> * N, INF = <span class="hljs-number">0x3f3f3f3f</span>, K = <span class="hljs-number">2</span>, idx = <span class="hljs-number">0</span>, n = <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">static</span> <span class="hljs-type">int</span>[] he = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[N], e = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[M], ne = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[M];<br>    <span class="hljs-keyword">static</span> <span class="hljs-type">int</span>[] dist = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[N];<br>    <span class="hljs-keyword">void</span> <span class="hljs-title function_">add</span><span class="hljs-params">(<span class="hljs-type">int</span> a, <span class="hljs-type">int</span> b)</span> &#123;<br>        e[idx] = b;<br>        ne[idx] = he[a];<br>        he[a] = idx;<br>        idx++;<br>    &#125;<br>    <span class="hljs-keyword">void</span> <span class="hljs-title function_">bfs</span><span class="hljs-params">()</span> &#123;<br>        Arrays.fill(dist, INF);<br>        Deque&lt;Integer&gt; d = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayDeque</span>&lt;&gt;();<br>        d.addLast(n);<br>        dist[n] = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">while</span> (!d.isEmpty()) &#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">x</span> <span class="hljs-operator">=</span> d.pollFirst(), step = dist[x];<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> he[x]; i != -<span class="hljs-number">1</span>; i = ne[i]) &#123;<br>                <span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> e[i];<br>                <span class="hljs-keyword">if</span> (dist[j] != INF) <span class="hljs-keyword">continue</span>;<br>                dist[j] = step + <span class="hljs-number">1</span>;<br>                d.addLast(j);<br>            &#125;<br>        &#125;<br>    &#125;<br>    <span class="hljs-type">int</span> <span class="hljs-title function_">astar</span><span class="hljs-params">()</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">k</span> <span class="hljs-operator">=</span> K, min = -<span class="hljs-number">1</span>;<br>        PriorityQueue&lt;<span class="hljs-type">int</span>[]&gt; q = <span class="hljs-keyword">new</span> <span class="hljs-title class_">PriorityQueue</span>&lt;&gt;((a,b)-&gt;a[<span class="hljs-number">2</span>]-b[<span class="hljs-number">2</span>]);<br>        q.add(<span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[]&#123;<span class="hljs-number">1</span>, <span class="hljs-number">0</span>, dist[<span class="hljs-number">1</span>]&#125;);<br>        <span class="hljs-keyword">while</span> (!q.isEmpty()) &#123;<br>            <span class="hljs-type">int</span>[] poll = q.poll();<br>            <span class="hljs-type">int</span> <span class="hljs-variable">x</span> <span class="hljs-operator">=</span> poll[<span class="hljs-number">0</span>], step = poll[<span class="hljs-number">1</span>];<br>            <span class="hljs-keyword">if</span> (x == n &amp;&amp; min != step) &#123;<br>                min = step;<br>                <span class="hljs-keyword">if</span> (--k == <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> min; <br>            &#125;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> he[x]; i != -<span class="hljs-number">1</span>; i = ne[i]) &#123;<br>                <span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> e[i];<br>                q.add(<span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[]&#123;j, step + <span class="hljs-number">1</span>, step + <span class="hljs-number">1</span> + dist[j]&#125;);<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> -<span class="hljs-number">1</span>; <span class="hljs-comment">// never</span><br>    &#125;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">secondMinimum</span><span class="hljs-params">(<span class="hljs-type">int</span> _n, <span class="hljs-type">int</span>[][] edges, <span class="hljs-type">int</span> time, <span class="hljs-type">int</span> change)</span> &#123;<br>        n = _n; idx = <span class="hljs-number">0</span>;<br>        Arrays.fill(he, -<span class="hljs-number">1</span>);<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span>[] e : edges) &#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">u</span> <span class="hljs-operator">=</span> e[<span class="hljs-number">0</span>], v = e[<span class="hljs-number">1</span>];<br>            add(u, v); add(v, u);<br>        &#125;<br>        bfs();<br>        <span class="hljs-type">int</span> <span class="hljs-variable">cnt</span> <span class="hljs-operator">=</span> astar(), ans = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; cnt; i++) &#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">a</span> <span class="hljs-operator">=</span> ans / change, b = ans % change;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">wait</span> <span class="hljs-operator">=</span> a % <span class="hljs-number">2</span> == <span class="hljs-number">0</span> ? <span class="hljs-number">0</span> : change - b;<br>            ans += time + wait;<br>        &#125;<br>        <span class="hljs-keyword">return</span> ans;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure></p>
+<hr>
+<h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>这是我们「刷穿 LeetCode」系列文章的第 <code>No.2045</code> 篇，系列开始于 2021/01/01，截止于起始日 LeetCode 上共有 1916 道题目，部分是有锁题，我们将先把所有不带锁的题目刷完。</p>
+<p>在这个系列文章里面，除了讲解解题思路以外，还会尽可能给出最为简洁的代码。如果涉及通解还会相应的代码模板。</p>
+<p>为了方便各位同学能够电脑上进行调试和提交代码，我建立了相关的仓库：<a target="_blank" rel="noopener" href="https://github.com/SharingSource/LogicStack-LeetCode">https://github.com/SharingSource/LogicStack-LeetCode</a> 。</p>
+<p>在仓库地址里，你可以看到系列文章的题解链接、系列文章的相应代码、LeetCode 原题链接和其他优选题解。</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/BFS/">BFS</a>
+                    
+                      <a class="hover-with-bg" href="/tags/AStar-%E7%AE%97%E6%B3%95/">AStar 算法</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E6%9C%80%E7%9F%AD%E8%B7%AF/">最短路</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%A0%86%E4%BC%98%E5%8C%96-Dijkstra/">堆优化 Dijkstra</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%90%AF%E5%8F%91%E5%BC%8F%E6%90%9C%E7%B4%A0/">启发式搜素</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/01/24/1688.%20%E6%AF%94%E8%B5%9B%E4%B8%AD%E7%9A%84%E9%85%8D%E5%AF%B9%E6%AC%A1%E6%95%B0%EF%BC%88%E7%AE%80%E5%8D%95%EF%BC%89/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">LC 1688. 比赛中的配对次数</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/01/23/2034.%20%E8%82%A1%E7%A5%A8%E4%BB%B7%E6%A0%BC%E6%B3%A2%E5%8A%A8%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/">
+                        <span class="hidden-mobile">LC 2034. 股票价格波动</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+  <div class="col-lg-7 mx-auto nopadding-x-md">
+    <div class="container custom post-custom mx-auto">
+      <img src="https://oscimg.oschina.net/oscnet/up-19688dc1af05cf8bdea43b2a863038ab9e5.png" srcset="/img/loading.gif" lazyload class="rounded mx-auto d-block mt-5" style="width:900px; height:500px;">
+    </div>
+  </div>
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.staticfile.org/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.staticfile.org/tocbot/4.18.2/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.staticfile.org/anchor-js/4.3.1/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.11/clipboard.min.js" ></script>
+  
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.bootcdn.net/ajax/libs/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        loader: {
+          
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.staticfile.org/mathjax/3.2.0/es5/tex-svg.js" ></script>
+
+  
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

@@ -1,0 +1,606 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/oimg/RoundCorner.png">
+  <link rel="icon" href="/oimg/RoundCorner.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="宫水三叶">
+  <meta name="keywords" content="算法, 数据结构, 题解">
+  
+    <meta name="description" content="题目描述这是 LeetCode 上的 778. 水位上升的泳池中游泳 ，难度为 困难。 在一个 N x N 的坐标方格 grid 中，每一个方格的值 $grid[i][j]$ 表示在位置 $(i,j)$ 的平台高度。 现在开始下雨了。当时间为 $t$ 时，此时雨水导致水池中任意位置的水位为 $t$ 。 你可以从一个平台游向四周相邻的任意一个平台，但是前提是此时水位必须同时淹没这两个平台。 假定你可">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LC 778. 水位上升的泳池中游泳">
+<meta property="og:url" content="http://example.com/2021/01/30/778.%20%E6%B0%B4%E4%BD%8D%E4%B8%8A%E5%8D%87%E7%9A%84%E6%B3%B3%E6%B1%A0%E4%B8%AD%E6%B8%B8%E6%B3%B3%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/index.html">
+<meta property="og:site_name" content="宫水三叶的刷题日记">
+<meta property="og:description" content="题目描述这是 LeetCode 上的 778. 水位上升的泳池中游泳 ，难度为 困难。 在一个 N x N 的坐标方格 grid 中，每一个方格的值 $grid[i][j]$ 表示在位置 $(i,j)$ 的平台高度。 现在开始下雨了。当时间为 $t$ 时，此时雨水导致水池中任意位置的水位为 $t$ 。 你可以从一个平台游向四周相邻的任意一个平台，但是前提是此时水位必须同时淹没这两个平台。 假定你可">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-01-29T23:13:19.000Z">
+<meta property="article:modified_time" content="2022-05-12T04:05:32.038Z">
+<meta property="article:author" content="宫水三叶">
+<meta property="article:tag" content="二分">
+<meta property="article:tag" content="并查集">
+<meta property="article:tag" content="BFS">
+<meta property="article:tag" content="最小生成树">
+<meta property="article:tag" content="Kruskal">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  <title>LC 778. 水位上升的泳池中游泳 - 宫水三叶的刷题日记</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/hint.css/2.7.0/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.7.2/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"|","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.1.0"></head>
+
+
+<body>
+  <header style="height: 50vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>宫水三叶の刷题日记</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/image_215.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="LC 778. 水位上升的泳池中游泳">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-author" aria-hidden="true"></i>
+      宫水三叶
+    </span>
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-01-30 07:13" pubdate>
+        2021年1月30日 早上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      4.7k 字
+    </span>
+  
+
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">LC 778. 水位上升的泳池中游泳</h1>
+            
+            <div class="markdown-body">
+              <h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>这是 LeetCode 上的 <strong><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/swim-in-rising-water/solution/gong-shui-san-xie-yi-ti-shuang-jie-krusk-7c6o/">778. 水位上升的泳池中游泳</a></strong> ，难度为 <strong>困难</strong>。</p>
+<p>在一个 <code>N x N</code> 的坐标方格 <code>grid</code> 中，每一个方格的值 $grid[i][j]$ 表示在位置 $(i,j)$ 的平台高度。</p>
+<p>现在开始下雨了。当时间为 $t$ 时，此时雨水导致水池中任意位置的水位为 $t$ 。</p>
+<p>你可以从一个平台游向四周相邻的任意一个平台，但是前提是此时水位必须同时淹没这两个平台。</p>
+<p>假定你可以瞬间移动无限距离，也就是默认在方格内部游动是不耗时的。</p>
+<p>当然，在你游泳的时候你必须待在坐标方格里面。</p>
+<p>你从坐标方格的左上平台 $(0, 0)$ 出发，最少耗时多久你才能到达坐标方格的右下平台 $(N-1,N-1)$？</p>
+<p>示例 1:<br><figure class="highlight lua"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs lua">输入: <span class="hljs-string">[[0,2],[1,3]]</span><br><br>输出: <span class="hljs-number">3</span><br><br>解释:<br>时间为<span class="hljs-number">0</span>时，你位于坐标方格的位置为 (<span class="hljs-number">0</span>, <span class="hljs-number">0</span>)。<br>此时你不能游向任意方向，因为四个相邻方向平台的高度都大于当前时间为 <span class="hljs-number">0</span> 时的水位。<br>等时间到达 <span class="hljs-number">3</span> 时，你才可以游向平台 (<span class="hljs-number">1</span>, <span class="hljs-number">1</span>). 因为此时的水位是 <span class="hljs-number">3</span>，坐标方格中的平台没有比水位 <span class="hljs-number">3</span> 更高的，所以你可以游向坐标方格中的任意位置<br></code></pre></div></td></tr></table></figure><br>示例2:<br><figure class="highlight tap"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs tap">输入: [[0,1,2,3,4],[24,23,22,21,5],[12,13,14,15,16],[11,17,18,19,20],[10,9,8,7,6]]<br>输出: 16<br><br>解释:<br><span class="hljs-number"> 0 </span><span class="hljs-number"> 1 </span><span class="hljs-number"> 2 </span><span class="hljs-number"> 3 </span> 4<br>             5<br>12<span class="hljs-number"> 13 </span>14<span class="hljs-number"> 15 </span>16<br>11  <br>10 <span class="hljs-number"> 9 </span><span class="hljs-number"> 8 </span><span class="hljs-number"> 7 </span> 6<br></code></pre></div></td></tr></table></figure></p>
+<p>提示:</p>
+<ul>
+<li>2 &lt;= N &lt;= 50.</li>
+<li>grid[i][j] 是 <code>[0, ..., N*N - 1]</code> 的排列。</li>
+</ul>
+<hr>
+<h3 id="Kruskal"><a href="#Kruskal" class="headerlink" title="Kruskal"></a>Kruskal</h3><p>由于在任意点可以往任意方向移动，所以相邻的点（四个方向）之间存在一条无向边。</p>
+<p>边的权重 $w$ 是指两点节点中的最大高度。</p>
+<p>按照题意，我们需要找的是从左上角点到右下角点的最优路径，其中最优路径是指<strong>途径的边的最大权重值最小</strong>，然后输入最优路径中的最大权重值。</p>
+<p>我们可以先遍历所有的点，将所有的边加入集合，存储的格式为数组 $[a, b, w]$ ，代表编号为 $a$ 的点和编号为 $b$ 的点之间的权重为 $w$（按照题意，$w$ 为两者的最大高度）。</p>
+<p>对集合进行排序，按照 $w$ 进行从小到达排序。</p>
+<p>当我们有了所有排好序的候选边集合之后，我们可以对边从前往后处理，每次加入一条边之后，使用并查集来查询左上角的点和右下角的点是否连通。</p>
+<p>当我们的合并了某条边之后，判定左上角和右下角的点联通，那么该边的权重即是答案。</p>
+<p>这道题和前天的 <a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzU4NDE3MTEyMA==&amp;mid=2247486139&amp;idx=1&amp;sn=37083315de3c6a7e1b675e0363ee7d98&amp;chksm=fd9ca1a4caeb28b220eba888ebc773b460d41123a1042e3b01cfd2001ddfb487ff2a3959f3b9&amp;token=990510480&amp;lang=zh_CN#rd">1631. 最小体力消耗路径</a> 几乎是完全一样的思路。</p>
+<p>你甚至可以将那题的代码拷贝过来，改一下对于 $w$ 的定义即可。</p>
+<p>代码：<br><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-type">int</span> n;<br>    <span class="hljs-type">int</span>[] p;<br>    <span class="hljs-keyword">void</span> <span class="hljs-title function_">union</span><span class="hljs-params">(<span class="hljs-type">int</span> a, <span class="hljs-type">int</span> b)</span> &#123;<br>        p[find(a)] = p[find(b)];<br>    &#125;<br>    <span class="hljs-type">boolean</span> <span class="hljs-title function_">query</span><span class="hljs-params">(<span class="hljs-type">int</span> a, <span class="hljs-type">int</span> b)</span> &#123;<br>        <span class="hljs-keyword">return</span> find(a) == find(b);<br>    &#125;<br>    <span class="hljs-type">int</span> <span class="hljs-title function_">find</span><span class="hljs-params">(<span class="hljs-type">int</span> x)</span> &#123;<br>        <span class="hljs-keyword">if</span> (p[x] != x) p[x] = find(p[x]);<br>        <span class="hljs-keyword">return</span> p[x];<br>    &#125;<br>    <br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">swimInWater</span><span class="hljs-params">(<span class="hljs-type">int</span>[][] grid)</span> &#123;<br>        n = grid.length;<br>        <br>        <span class="hljs-comment">// 初始化并查集</span><br>        p = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[n * n];<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; n * n; i++) p[i] = i;<br><br>        <span class="hljs-comment">// 预处理出所有的边</span><br>        <span class="hljs-comment">// edge 存的是 [a, b, w]：代表从 a 到 b 所需要的时间为 w</span><br>        <span class="hljs-comment">// 虽然我们可以往四个方向移动，但是只要对于每个点都添加「向右」和「向下」两条边的话，其实就已经覆盖了所有边了</span><br>        List&lt;<span class="hljs-type">int</span>[]&gt; edges =  <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; n ;i++) &#123;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; j &lt; n; j++) &#123;<br>                <span class="hljs-type">int</span> <span class="hljs-variable">idx</span> <span class="hljs-operator">=</span> getIndex(i, j);<br>                p[idx] = idx;<br>                <span class="hljs-keyword">if</span> (i + <span class="hljs-number">1</span> &lt; n) &#123;<br>                    <span class="hljs-type">int</span> <span class="hljs-variable">a</span> <span class="hljs-operator">=</span> idx, b = getIndex(i + <span class="hljs-number">1</span>, j);<br>                    <span class="hljs-type">int</span> <span class="hljs-variable">w</span> <span class="hljs-operator">=</span> Math.max(grid[i][j], grid[i + <span class="hljs-number">1</span>][j]);<br>                    edges.add(<span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[]&#123;a, b, w&#125;);<br>                &#125;<br>                <span class="hljs-keyword">if</span> (j + <span class="hljs-number">1</span> &lt; n) &#123;<br>                    <span class="hljs-type">int</span> <span class="hljs-variable">a</span> <span class="hljs-operator">=</span> idx, b = getIndex(i, j + <span class="hljs-number">1</span>);<br>                    <span class="hljs-type">int</span> <span class="hljs-variable">w</span> <span class="hljs-operator">=</span> Math.max(grid[i][j], grid[i][j + <span class="hljs-number">1</span>]);<br>                    edges.add(<span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[]&#123;a, b, w&#125;);<br>                &#125;<br>            &#125;<br>        &#125;<br><br>        <span class="hljs-comment">// 根据权值 w 升序</span><br>        Collections.sort(edges, (a,b)-&gt;a[<span class="hljs-number">2</span>]-b[<span class="hljs-number">2</span>]);<br><br>        <span class="hljs-comment">// 从「小边」开始添加，当某一条边别应用之后，恰好使用得「起点」和「结点」联通</span><br>        <span class="hljs-comment">// 那么代表找到了「最短路径」中的「权重最大的边」</span><br>        <span class="hljs-type">int</span> <span class="hljs-variable">start</span> <span class="hljs-operator">=</span> getIndex(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>), end = getIndex(n - <span class="hljs-number">1</span>, n - <span class="hljs-number">1</span>);<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span>[] edge : edges) &#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">a</span> <span class="hljs-operator">=</span> edge[<span class="hljs-number">0</span>], b = edge[<span class="hljs-number">1</span>], w = edge[<span class="hljs-number">2</span>];<br>            union(a, b);<br>            <span class="hljs-keyword">if</span> (query(start, end)) &#123;<br>                <span class="hljs-keyword">return</span> w;<br>            &#125;<br>        &#125;   <br>        <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>    &#125;<br>    <span class="hljs-type">int</span> <span class="hljs-title function_">getIndex</span><span class="hljs-params">(<span class="hljs-type">int</span> i, <span class="hljs-type">int</span> j)</span> &#123;<br>        <span class="hljs-keyword">return</span> i * n + j;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure><br>节点的数量为 $n <em> n$，无向边的数量严格为 $2 </em> n * (n - 1)$，数量级上为 $n^2$。</p>
+<ul>
+<li>时间复杂度：获取所有的边复杂度为 $O(n^2)$，排序复杂度为 $O(n^2\log{n})$，遍历得到最终解复杂度为 $O(n^2)$。整体复杂度为 $O(n^2\log{n})$。</li>
+<li>空间复杂度：使用了并查集数组。复杂度为 $O(n^2)$。</li>
+</ul>
+<p>注意：假定 Collections.sort() 使用 Arrays.sort() 中的双轴快排实现。</p>
+<hr>
+<h3 id="二分-BFS-DFS"><a href="#二分-BFS-DFS" class="headerlink" title="二分 + BFS/DFS"></a>二分 + BFS/DFS</h3><p>在与本题类型的 <a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzU4NDE3MTEyMA==&amp;mid=2247486139&amp;idx=1&amp;sn=37083315de3c6a7e1b675e0363ee7d98&amp;chksm=fd9ca1a4caeb28b220eba888ebc773b460d41123a1042e3b01cfd2001ddfb487ff2a3959f3b9&amp;token=990510480&amp;lang=zh_CN#rd">1631. 最小体力消耗路径</a>中，有同学问到是否可以用「二分」。</p>
+<p>答案是可以的。</p>
+<p>题目给定了 $grid[i][j]$ 的范围是 $[0, n^2 - 1]$，所以答案必然落在此范围。</p>
+<p>假设最优解为 $min$ 的话（恰好能到达右下角的时间）。那么小于 $min$ 的时间无法到达右下角，大于 $min$ 的时间能到达右下角。</p>
+<p><em>因此在以最优解 $min$ 为分割点的数轴上具有两段性，可以通过「二分」来找到分割点 $min$。</em></p>
+<blockquote>
+<p>注意：「二分」的本质是两段性，并非单调性。只要一段满足某个性质，另外一段不满足某个性质，就可以用「二分」。其中 <a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzU4NDE3MTEyMA==&amp;mid=2247486020&amp;idx=2&amp;sn=9ada4b6e7eccecddbd8faa18f14c4eeb&amp;chksm=fd9ca15bcaeb284d727905c174624e32b39b196e2337a2bfc791b22fcce35eb543b552031530&amp;token=990510480&amp;lang=zh_CN#rd">33. 搜索旋转排序数组</a> 是一个很好的说明例子。</p>
+</blockquote>
+<p>接着分析，假设最优解为 $min$，我们在 $[l, r]$ 范围内进行二分，当前二分到的时间为 $mid$ 时：</p>
+<ol>
+<li><p>能到达右下角：必然有 $min \leqslant mid$，让 $r = mid$</p>
+</li>
+<li><p>不能到达右下角：必然有 $min &gt; mid$，让 $l = mid + 1$</p>
+</li>
+</ol>
+<p><strong>当确定了「二分」逻辑之后，我们需要考虑如何写 $check$ 函数。</strong></p>
+<p>显然 $check$ 应该是一个判断给定 时间/步数 能否从「起点」到「终点」的函数。</p>
+<p>我们只需要按照规则走特定步数，边走边检查是否到达终点即可。</p>
+<p>实现 $check$ 既可以使用 DFS 也可以使用 BFS。两者思路类似，这里就只以 BFS 为例。</p>
+<p>代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-type">int</span>[][] dirs = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[][]&#123;&#123;<span class="hljs-number">1</span>,<span class="hljs-number">0</span>&#125;, &#123;-<span class="hljs-number">1</span>,<span class="hljs-number">0</span>&#125;, &#123;<span class="hljs-number">0</span>,<span class="hljs-number">1</span>&#125;, &#123;<span class="hljs-number">0</span>,-<span class="hljs-number">1</span>&#125;&#125;;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">swimInWater</span><span class="hljs-params">(<span class="hljs-type">int</span>[][] grid)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> grid.length;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">l</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>, r = n * n;<br>        <span class="hljs-keyword">while</span> (l &lt; r) &#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">mid</span> <span class="hljs-operator">=</span> l + r &gt;&gt; <span class="hljs-number">1</span>;<br>            <span class="hljs-keyword">if</span> (check(grid, mid)) &#123;<br>                r = mid;<br>            &#125; <span class="hljs-keyword">else</span> &#123;<br>                l = mid + <span class="hljs-number">1</span>;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> r;<br>    &#125;<br>    <span class="hljs-type">boolean</span> <span class="hljs-title function_">check</span><span class="hljs-params">(<span class="hljs-type">int</span>[][] grid, <span class="hljs-type">int</span> time)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> grid.length;<br>        <span class="hljs-type">boolean</span>[][] visited = <span class="hljs-keyword">new</span> <span class="hljs-title class_">boolean</span>[n][n];<br>        Deque&lt;<span class="hljs-type">int</span>[]&gt; queue = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayDeque</span>&lt;&gt;();<br>        queue.addLast(<span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[]&#123;<span class="hljs-number">0</span>, <span class="hljs-number">0</span>&#125;);<br>        visited[<span class="hljs-number">0</span>][<span class="hljs-number">0</span>] = <span class="hljs-literal">true</span>;<br>        <span class="hljs-keyword">while</span> (!queue.isEmpty()) &#123;<br>            <span class="hljs-type">int</span>[] pos = queue.pollFirst();<br>            <span class="hljs-type">int</span> <span class="hljs-variable">x</span> <span class="hljs-operator">=</span> pos[<span class="hljs-number">0</span>], y = pos[<span class="hljs-number">1</span>];<br>            <span class="hljs-keyword">if</span> (x == n - <span class="hljs-number">1</span> &amp;&amp; y == n - <span class="hljs-number">1</span>) <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br><br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span>[] dir : dirs) &#123;<br>                <span class="hljs-type">int</span> <span class="hljs-variable">newX</span> <span class="hljs-operator">=</span> x + dir[<span class="hljs-number">0</span>], newY = y + dir[<span class="hljs-number">1</span>];<br>                <span class="hljs-type">int</span>[] to = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[]&#123;newX, newY&#125;;<br>                <span class="hljs-keyword">if</span> (inArea(n, newX, newY) &amp;&amp; !visited[newX][newY] &amp;&amp; canMove(grid, pos, to, time)) &#123;<br>                    visited[newX][newY] = <span class="hljs-literal">true</span>;<br>                    queue.addLast(to);<br>                &#125;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>    &#125;<br>    <span class="hljs-type">boolean</span> <span class="hljs-title function_">inArea</span><span class="hljs-params">(<span class="hljs-type">int</span> n, <span class="hljs-type">int</span> x, <span class="hljs-type">int</span> y)</span> &#123;<br>        <span class="hljs-keyword">return</span> x &gt;= <span class="hljs-number">0</span> &amp;&amp; x &lt; n &amp;&amp; y &gt;= <span class="hljs-number">0</span> &amp;&amp; y &lt; n;<br>    &#125;<br>    <span class="hljs-type">boolean</span> <span class="hljs-title function_">canMove</span><span class="hljs-params">(<span class="hljs-type">int</span>[][] grid, <span class="hljs-type">int</span>[] from, <span class="hljs-type">int</span>[] to, <span class="hljs-type">int</span> time)</span> &#123;<br>        <span class="hljs-keyword">return</span> time &gt;= Math.max(grid[from[<span class="hljs-number">0</span>]][from[<span class="hljs-number">1</span>]], grid[to[<span class="hljs-number">0</span>]][to[<span class="hljs-number">1</span>]]);<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<ul>
+<li>时间复杂度：在 $[0, n^2]$ 范围内进行二分，复杂度为 $O(\log{n})$；每一次 BFS 最多有 $n^2$ 个节点入队，复杂度为 $O(n^2)$。整体复杂度为 $O({n^2}\log{n})$</li>
+<li>空间复杂度：使用了 visited 数组。复杂度为 $O(n^2)$</li>
+</ul>
+<hr>
+<h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>这是我们「刷穿 LeetCode」系列文章的第 <code>No.778</code> 篇，系列开始于 2021/01/01，截止于起始日 LeetCode 上共有 1916 道题目，部分是有锁题，我们将先把所有不带锁的题目刷完。</p>
+<p>在这个系列文章里面，除了讲解解题思路以外，还会尽可能给出最为简洁的代码。如果涉及通解还会相应的代码模板。</p>
+<p>为了方便各位同学能够电脑上进行调试和提交代码，我建立了相关的仓库：<a target="_blank" rel="noopener" href="https://github.com/SharingSource/LogicStack-LeetCode">https://github.com/SharingSource/LogicStack-LeetCode</a> 。</p>
+<p>在仓库地址里，你可以看到系列文章的题解链接、系列文章的相应代码、LeetCode 原题链接和其他优选题解。</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E4%BA%8C%E5%88%86/">二分</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%B9%B6%E6%9F%A5%E9%9B%86/">并查集</a>
+                    
+                      <a class="hover-with-bg" href="/tags/BFS/">BFS</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E6%9C%80%E5%B0%8F%E7%94%9F%E6%88%90%E6%A0%91/">最小生成树</a>
+                    
+                      <a class="hover-with-bg" href="/tags/Kruskal/">Kruskal</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/01/31/38.%20%E5%A4%96%E8%A7%82%E6%95%B0%E5%88%97%EF%BC%88%E7%AE%80%E5%8D%95%EF%BC%89/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">LC 38. 外观数列</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/01/29/37.%20%E8%A7%A3%E6%95%B0%E7%8B%AC%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/">
+                        <span class="hidden-mobile">LC 37. 解数独</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+  <div class="col-lg-7 mx-auto nopadding-x-md">
+    <div class="container custom post-custom mx-auto">
+      <img src="https://oscimg.oschina.net/oscnet/up-19688dc1af05cf8bdea43b2a863038ab9e5.png" srcset="/img/loading.gif" lazyload class="rounded mx-auto d-block mt-5" style="width:900px; height:500px;">
+    </div>
+  </div>
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.staticfile.org/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.staticfile.org/tocbot/4.18.2/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.staticfile.org/anchor-js/4.3.1/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.11/clipboard.min.js" ></script>
+  
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.bootcdn.net/ajax/libs/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        loader: {
+          
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.staticfile.org/mathjax/3.2.0/es5/tex-svg.js" ></script>
+
+  
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

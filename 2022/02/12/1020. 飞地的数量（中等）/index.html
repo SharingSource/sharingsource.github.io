@@ -1,0 +1,585 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/oimg/RoundCorner.png">
+  <link rel="icon" href="/oimg/RoundCorner.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="宫水三叶">
+  <meta name="keywords" content="算法, 数据结构, 题解">
+  
+    <meta name="description" content="题目描述这是 LeetCode 上的 1020. 飞地的数量 ，难度为 中等。 给你一个大小为 $m x n$ 的二进制矩阵 $grid$ ，其中 $0$ 表示一个海洋单元格、$1$ 表示一个陆地单元格。 一次 移动 是指从一个陆地单元格走到另一个相邻（上、下、左、右）的陆地单元格或跨过 $grid$ 的边界。 返回网格中 无法 在任意次数的移动中离开网格边界的陆地单元格的数量。 示例 1：123">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LC 1020. 飞地的数量">
+<meta property="og:url" content="http://example.com/2022/02/12/1020.%20%E9%A3%9E%E5%9C%B0%E7%9A%84%E6%95%B0%E9%87%8F%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/index.html">
+<meta property="og:site_name" content="宫水三叶的刷题日记">
+<meta property="og:description" content="题目描述这是 LeetCode 上的 1020. 飞地的数量 ，难度为 中等。 给你一个大小为 $m x n$ 的二进制矩阵 $grid$ ，其中 $0$ 表示一个海洋单元格、$1$ 表示一个陆地单元格。 一次 移动 是指从一个陆地单元格走到另一个相邻（上、下、左、右）的陆地单元格或跨过 $grid$ 的边界。 返回网格中 无法 在任意次数的移动中离开网格边界的陆地单元格的数量。 示例 1：123">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://assets.leetcode.com/uploads/2021/02/18/enclaves1.jpg">
+<meta property="og:image" content="https://assets.leetcode.com/uploads/2021/02/18/enclaves2.jpg">
+<meta property="article:published_time" content="2022-02-11T17:18:30.000Z">
+<meta property="article:modified_time" content="2022-05-12T04:05:31.841Z">
+<meta property="article:author" content="宫水三叶">
+<meta property="article:tag" content="DFS">
+<meta property="article:tag" content="并查集">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://assets.leetcode.com/uploads/2021/02/18/enclaves1.jpg">
+  
+  
+  <title>LC 1020. 飞地的数量 - 宫水三叶的刷题日记</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/hint.css/2.7.0/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.7.2/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"|","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.1.0"></head>
+
+
+<body>
+  <header style="height: 50vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>宫水三叶の刷题日记</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/image_171.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="LC 1020. 飞地的数量">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-author" aria-hidden="true"></i>
+      宫水三叶
+    </span>
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2022-02-12 01:18" pubdate>
+        2022年2月12日 凌晨
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      3.6k 字
+    </span>
+  
+
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">LC 1020. 飞地的数量</h1>
+            
+            <div class="markdown-body">
+              <h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>这是 LeetCode 上的 <strong><a target="_blank" rel="noopener" href="https://assets.leetcode.com/uploads/2021/02/18/enclaves1.jpg">1020. 飞地的数量</a></strong> ，难度为 <strong>中等</strong>。</p>
+<p>给你一个大小为 $m x n$ 的二进制矩阵 $grid$ ，其中 $0$ 表示一个海洋单元格、$1$ 表示一个陆地单元格。</p>
+<p>一次 移动 是指从一个陆地单元格走到另一个相邻（上、下、左、右）的陆地单元格或跨过 $grid$ 的边界。</p>
+<p>返回网格中 无法 在任意次数的移动中离开网格边界的陆地单元格的数量。</p>
+<p>示例 1：<br><img src="https://assets.leetcode.com/uploads/2021/02/18/enclaves1.jpg" srcset="/img/loading.gif" lazyload alt=""><br><figure class="highlight inform7"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs inform7">输入：grid = <span class="hljs-comment">[<span class="hljs-comment">[0,0,0,0]</span>,<span class="hljs-comment">[1,0,1,0]</span>,<span class="hljs-comment">[0,1,1,0]</span>,<span class="hljs-comment">[0,0,0,0]</span>]</span><br><br>输出：3<br><br>解释：有三个 1 被 0 包围。一个 1 没有被包围，因为它在边界上。<br></code></pre></div></td></tr></table></figure><br>示例 2：<br><img src="https://assets.leetcode.com/uploads/2021/02/18/enclaves2.jpg" srcset="/img/loading.gif" lazyload alt=""><br><figure class="highlight inform7"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs inform7">输入：grid = <span class="hljs-comment">[<span class="hljs-comment">[0,1,1,0]</span>,<span class="hljs-comment">[0,0,1,0]</span>,<span class="hljs-comment">[0,0,1,0]</span>,<span class="hljs-comment">[0,0,0,0]</span>]</span><br><br>输出：0<br><br>解释：所有 1 都在边界上或可以到达边界。<br></code></pre></div></td></tr></table></figure></p>
+<p>提示：</p>
+<ul>
+<li>$m == grid.length$</li>
+<li>$n == grid[i].length$</li>
+<li>$1 &lt;= m, n &lt;= 500$</li>
+<li>$grid[i][j]$ 的值为 $0$ 或 $1$</li>
+</ul>
+<hr>
+<h3 id="并查集-DFS"><a href="#并查集-DFS" class="headerlink" title="并查集 + DFS"></a>并查集 + DFS</h3><p>根据题目定义，我们知道需要统计所有不和「边缘陆地」相连通的「普通陆地」数量。</p>
+<p>我们可以用「并查集」来维护连通块，使用 <code>DFS</code> 对所有「边缘陆地连通块」进行标记（设定编号为 $0$ 的超级源点，对于所有的「边缘陆地连通块」，将其与超级源点联通）。</p>
+<p>具体的，我们按照如下流程进行处理：</p>
+<ul>
+<li>初始化并查集：起始让每个单元格独立作为一个连通块；</li>
+<li>使用 <code>DFS</code>  标记所有「边缘陆地连通块」：从位于边缘的「边缘陆地」进行出发，将其所在连通块与超级源点 $0$ 进行联通标记（同时为了确保复杂度，我们在进行 <code>DFS</code> 前需要先检查当前陆地与超级源点的联通关系，如果已联通，说明当前陆地棣属于之前的某个连通块，已被整体标记过，进行跳过即可）；</li>
+<li>统计答案：遍历整个棋盘，统计所有不与超级源点 $0$ 联通的陆地数量。</li>
+</ul>
+<blockquote>
+<p>一些细节：由于我们人为规定了超级源点编号为 $0$，同时棋盘下标从 $0$ 开始，因此对某个点 $(x, y)$ 的编号，我们需要增加一个偏移量，例如 $idx = x * n + y + 1$。</p>
+</blockquote>
+<p>代码：<br><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-type">int</span> <span class="hljs-variable">N</span> <span class="hljs-operator">=</span> <span class="hljs-number">550</span>;<br>    <span class="hljs-type">int</span>[] p = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[N * N];<br>    <span class="hljs-type">int</span> m, n;<br>    <span class="hljs-type">int</span>[][] g;<br>    <span class="hljs-type">int</span> <span class="hljs-title function_">find</span><span class="hljs-params">(<span class="hljs-type">int</span> x)</span> &#123;<br>        <span class="hljs-keyword">if</span> (p[x] != x) p[x] = find(p[x]);<br>        <span class="hljs-keyword">return</span> p[x];<br>    &#125;<br>    <span class="hljs-type">boolean</span> <span class="hljs-title function_">query</span><span class="hljs-params">(<span class="hljs-type">int</span> a, <span class="hljs-type">int</span> b)</span> &#123;<br>        <span class="hljs-keyword">return</span> find(a) == find(b);<br>    &#125;<br>    <span class="hljs-keyword">void</span> <span class="hljs-title function_">union</span><span class="hljs-params">(<span class="hljs-type">int</span> a, <span class="hljs-type">int</span> b)</span> &#123;<br>        p[find(a)] = find(b);<br>    &#125;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">numEnclaves</span><span class="hljs-params">(<span class="hljs-type">int</span>[][] grid)</span> &#123;<br>        g = grid;<br>        m = g.length; n = g[<span class="hljs-number">0</span>].length;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; m; i++) &#123;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; j &lt; n; j++) &#123;<br>                p[getIdx(i, j)] = getIdx(i, j);<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; m; i++) &#123;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; j &lt; n; j++) &#123;<br>                <span class="hljs-keyword">if</span> (i == <span class="hljs-number">0</span> || j == <span class="hljs-number">0</span> || i == m - <span class="hljs-number">1</span> || j == n - <span class="hljs-number">1</span>) &#123;<br>                    <span class="hljs-keyword">if</span> (g[i][j] != <span class="hljs-number">1</span> || query(getIdx(i, j), <span class="hljs-number">0</span>)) <span class="hljs-keyword">continue</span>;<br>                    dfs(i, j);<br>                &#125;<br>            &#125;<br>        &#125;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">ans</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; m; i++) &#123;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; j &lt; n; j++) &#123;<br>                <span class="hljs-keyword">if</span> (g[i][j] == <span class="hljs-number">1</span> &amp;&amp; !query(getIdx(i, j), <span class="hljs-number">0</span>)) ans++;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> ans;<br>    &#125;<br>    <span class="hljs-type">int</span>[][] dirs = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[][]&#123;&#123;<span class="hljs-number">1</span>,<span class="hljs-number">0</span>&#125;,&#123;-<span class="hljs-number">1</span>,<span class="hljs-number">0</span>&#125;,&#123;<span class="hljs-number">0</span>,<span class="hljs-number">1</span>&#125;,&#123;<span class="hljs-number">0</span>,-<span class="hljs-number">1</span>&#125;&#125;;<br>    <span class="hljs-keyword">void</span> <span class="hljs-title function_">dfs</span><span class="hljs-params">(<span class="hljs-type">int</span> x, <span class="hljs-type">int</span> y)</span> &#123;<br>        union(getIdx(x, y), <span class="hljs-number">0</span>);<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span>[] d : dirs) &#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">nx</span> <span class="hljs-operator">=</span> x + d[<span class="hljs-number">0</span>], ny = y + d[<span class="hljs-number">1</span>];<br>            <span class="hljs-keyword">if</span> (nx &lt; <span class="hljs-number">0</span> || nx &gt;= m || ny &lt; <span class="hljs-number">0</span> || ny &gt;= n) <span class="hljs-keyword">continue</span>;<br>            <span class="hljs-keyword">if</span> (g[nx][ny] != <span class="hljs-number">1</span> || query(getIdx(nx, ny), <span class="hljs-number">0</span>)) <span class="hljs-keyword">continue</span>;<br>            dfs(nx, ny);<br>        &#125;<br>    &#125;<br>    <span class="hljs-type">int</span> <span class="hljs-title function_">getIdx</span><span class="hljs-params">(<span class="hljs-type">int</span> x, <span class="hljs-type">int</span> y)</span> &#123;<br>        <span class="hljs-keyword">return</span> x * n + y + <span class="hljs-number">1</span>;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure></p>
+<ul>
+<li>时间复杂度：初始化并查集复杂度为 $O(m <em> n)$；使用 <code>DFS</code> 对边缘陆地连通块进行标记复杂度为 $O(m </em> n)$；统计答案复杂度为 $O(m <em> n)$。整体复杂度为 $O(m </em> n)$</li>
+<li>空间复杂度：$O(m * n)$</li>
+</ul>
+<hr>
+<h3 id="多源-BFS"><a href="#多源-BFS" class="headerlink" title="多源 BFS"></a>多源 BFS</h3><p>也可以使用「多源 <code>BFS</code>」进行求解。</p>
+<p>将所有「边缘陆地」看做与超级源点相连，起始将所有「边缘陆地」进行入队（等价于只将超级源点入队，然后取出超级源点并进行拓展）。</p>
+<p>然后是常规的 <code>BFS</code> 过程，所有能够出队/入队的陆地格子，都代表与「边缘陆地」联通，都不属于「飞地」，对其进行标记。</p>
+<p>最后遍历整个棋盘，统计所有未被标记的「陆地」格子数量即是答案。</p>
+<p>不熟悉「多源 <code>BFS</code>」的同学可以看前置 🧀 ：<a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzU4NDE3MTEyMA==&amp;mid=2247487179&amp;idx=1&amp;sn=e30a662c03fba3861254dbcf3fb9d6f2&amp;chksm=fd9ca5d4caeb2cc205804fd17a2ce86b25d0408adc3417e73154f59d37e7cb17e02374f5122c&amp;token=1222269277&amp;lang=zh_CN#rd">多源 BFS 入门</a>。</p>
+<p>代码：<br><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">numEnclaves</span><span class="hljs-params">(<span class="hljs-type">int</span>[][] g)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">m</span> <span class="hljs-operator">=</span> g.length, n = g[<span class="hljs-number">0</span>].length;<br>        <span class="hljs-type">boolean</span>[][] vis = <span class="hljs-keyword">new</span> <span class="hljs-title class_">boolean</span>[m][n];<br>        Deque&lt;<span class="hljs-type">int</span>[]&gt; d = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayDeque</span>&lt;&gt;();<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; m; i++) &#123;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; j &lt; n; j++) &#123;<br>                <span class="hljs-keyword">if</span> (i == <span class="hljs-number">0</span> || j == <span class="hljs-number">0</span> || i == m - <span class="hljs-number">1</span> || j == n - <span class="hljs-number">1</span>) &#123;<br>                    <span class="hljs-keyword">if</span> (g[i][j] == <span class="hljs-number">0</span>) <span class="hljs-keyword">continue</span>;<br>                    vis[i][j] = <span class="hljs-literal">true</span>;<br>                    d.addLast(<span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[]&#123;i, j&#125;);<br>                &#125;<br>            &#125;<br>        &#125;<br>        <span class="hljs-type">int</span>[][] dirs = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[][]&#123;&#123;<span class="hljs-number">1</span>,<span class="hljs-number">0</span>&#125;,&#123;-<span class="hljs-number">1</span>,<span class="hljs-number">0</span>&#125;,&#123;<span class="hljs-number">0</span>,<span class="hljs-number">1</span>&#125;,&#123;<span class="hljs-number">0</span>,-<span class="hljs-number">1</span>&#125;&#125;;<br>        <span class="hljs-keyword">while</span> (!d.isEmpty()) &#123;<br>            <span class="hljs-type">int</span>[] poll = d.pollFirst();<br>            <span class="hljs-type">int</span> <span class="hljs-variable">x</span> <span class="hljs-operator">=</span> poll[<span class="hljs-number">0</span>], y = poll[<span class="hljs-number">1</span>];<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span>[] di : dirs) &#123;<br>                <span class="hljs-type">int</span> <span class="hljs-variable">nx</span> <span class="hljs-operator">=</span> x + di[<span class="hljs-number">0</span>], ny = y + di[<span class="hljs-number">1</span>];<br>                <span class="hljs-keyword">if</span> (nx &lt; <span class="hljs-number">0</span> || nx &gt;= m || ny &lt; <span class="hljs-number">0</span> || ny &gt;= n) <span class="hljs-keyword">continue</span>;<br>                <span class="hljs-keyword">if</span> (g[nx][ny] != <span class="hljs-number">1</span>) <span class="hljs-keyword">continue</span>;<br>                <span class="hljs-keyword">if</span> (vis[nx][ny]) <span class="hljs-keyword">continue</span>;<br>                vis[nx][ny] = <span class="hljs-literal">true</span>;<br>                d.addLast(<span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[]&#123;nx, ny&#125;);<br>            &#125;<br>        &#125;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">ans</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; m; i++) &#123;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; j &lt; n; j++) &#123;<br>                <span class="hljs-keyword">if</span> (g[i][j] == <span class="hljs-number">1</span> &amp;&amp; !vis[i][j]) ans++;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> ans;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure></p>
+<ul>
+<li>时间复杂度：$O(m * n)$</li>
+<li>空间复杂度：$O(m * n)$</li>
+</ul>
+<hr>
+<h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>这是我们「刷穿 LeetCode」系列文章的第 <code>No.1011</code> 篇，系列开始于 2021/01/01，截止于起始日 LeetCode 上共有 1916 道题目，部分是有锁题，我们将先把所有不带锁的题目刷完。</p>
+<p>在这个系列文章里面，除了讲解解题思路以外，还会尽可能给出最为简洁的代码。如果涉及通解还会相应的代码模板。</p>
+<p>为了方便各位同学能够电脑上进行调试和提交代码，我建立了相关的仓库：<a target="_blank" rel="noopener" href="https://github.com/SharingSource/LogicStack-LeetCode">https://github.com/SharingSource/LogicStack-LeetCode</a> 。</p>
+<p>在仓库地址里，你可以看到系列文章的题解链接、系列文章的相应代码、LeetCode 原题链接和其他优选题解。</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/DFS/">DFS</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%B9%B6%E6%9F%A5%E9%9B%86/">并查集</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/02/13/1189.%20%E2%80%9C%E6%B0%94%E7%90%83%E2%80%9D%20%E7%9A%84%E6%9C%80%E5%A4%A7%E6%95%B0%E9%87%8F%EF%BC%88%E7%AE%80%E5%8D%95%EF%BC%89/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">LC 1189. “气球” 的最大数量</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/02/10/1984.%20%E5%AD%A6%E7%94%9F%E5%88%86%E6%95%B0%E7%9A%84%E6%9C%80%E5%B0%8F%E5%B7%AE%E5%80%BC%EF%BC%88%E7%AE%80%E5%8D%95%EF%BC%89/">
+                        <span class="hidden-mobile">LC 1984. 学生分数的最小差值</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+  <div class="col-lg-7 mx-auto nopadding-x-md">
+    <div class="container custom post-custom mx-auto">
+      <img src="https://oscimg.oschina.net/oscnet/up-19688dc1af05cf8bdea43b2a863038ab9e5.png" srcset="/img/loading.gif" lazyload class="rounded mx-auto d-block mt-5" style="width:900px; height:500px;">
+    </div>
+  </div>
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.staticfile.org/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.staticfile.org/tocbot/4.18.2/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.staticfile.org/anchor-js/4.3.1/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.11/clipboard.min.js" ></script>
+  
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.bootcdn.net/ajax/libs/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        loader: {
+          
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.staticfile.org/mathjax/3.2.0/es5/tex-svg.js" ></script>
+
+  
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

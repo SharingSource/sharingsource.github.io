@@ -1,0 +1,573 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/oimg/RoundCorner.png">
+  <link rel="icon" href="/oimg/RoundCorner.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="宫水三叶">
+  <meta name="keywords" content="算法, 数据结构, 题解">
+  
+    <meta name="description" content="题目描述这是 LeetCode 上的 420. 强密码检验器 ，难度为 困难。 如果一个密码满足下述所有条件，则认为这个密码是强密码：  由至少 $6$ 个，至多 $20$ 个字符组成。 至少包含一个小写字母，一个大写字母，和一个数字。 同一字符不能连续出现三次 (比如 &quot;...aaa...&quot; 是不允许的, 但是 &quot;...aa...a...&quot; 如果满足其他条">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LC 420. 强密码检验器">
+<meta property="og:url" content="http://example.com/2022/04/01/420.%20%E5%BC%BA%E5%AF%86%E7%A0%81%E6%A3%80%E9%AA%8C%E5%99%A8%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/index.html">
+<meta property="og:site_name" content="宫水三叶的刷题日记">
+<meta property="og:description" content="题目描述这是 LeetCode 上的 420. 强密码检验器 ，难度为 困难。 如果一个密码满足下述所有条件，则认为这个密码是强密码：  由至少 $6$ 个，至多 $20$ 个字符组成。 至少包含一个小写字母，一个大写字母，和一个数字。 同一字符不能连续出现三次 (比如 &quot;...aaa...&quot; 是不允许的, 但是 &quot;...aa...a...&quot; 如果满足其他条">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-04-01T15:38:03.000Z">
+<meta property="article:modified_time" content="2022-05-12T04:05:31.934Z">
+<meta property="article:author" content="宫水三叶">
+<meta property="article:tag" content="模拟">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  <title>LC 420. 强密码检验器 - 宫水三叶的刷题日记</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/hint.css/2.7.0/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.7.2/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"|","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.1.0"></head>
+
+
+<body>
+  <header style="height: 50vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>宫水三叶の刷题日记</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/image_23.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="LC 420. 强密码检验器">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-author" aria-hidden="true"></i>
+      宫水三叶
+    </span>
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2022-04-01 23:38" pubdate>
+        2022年4月1日 晚上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      3.1k 字
+    </span>
+  
+
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">LC 420. 强密码检验器</h1>
+            
+            <div class="markdown-body">
+              <h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>这是 LeetCode 上的 <strong><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/strong-password-checker/solution/by-ac_oier-unp5/">420. 强密码检验器</a></strong> ，难度为 <strong>困难</strong>。</p>
+<p>如果一个密码满足下述所有条件，则认为这个密码是强密码：</p>
+<ul>
+<li>由至少 $6$ 个，至多 $20$ 个字符组成。</li>
+<li>至少包含一个小写字母，一个大写字母，和一个数字。</li>
+<li>同一字符不能连续出现三次 (比如 <code>&quot;...aaa...&quot;</code> 是不允许的, 但是 <code>&quot;...aa...a...&quot;</code> 如果满足其他条件也可以算是强密码)。</li>
+</ul>
+<p>给你一个字符串 <code>password</code>，返回将 <code>password</code> 修改到满足强密码条件需要的最少修改步数。如果 <code>password</code> 已经是强密码，则返回 $0$ 。</p>
+<p>在一步修改操作中，你可以：</p>
+<ul>
+<li>插入一个字符到 <code>password</code>，</li>
+<li>从 <code>password</code> 中删除一个字符，或</li>
+<li>用另一个字符来替换 <code>password</code> 中的某个字符。</li>
+</ul>
+<p>示例 1：<br><figure class="highlight abnf"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs abnf">输入：password <span class="hljs-operator">=</span> <span class="hljs-string">&quot;a&quot;</span><br><br>输出：<span class="hljs-number">5</span><br></code></pre></div></td></tr></table></figure><br>示例 2：<br><figure class="highlight abnf"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs abnf">输入：password <span class="hljs-operator">=</span> <span class="hljs-string">&quot;aA1&quot;</span><br><br>输出：<span class="hljs-number">3</span><br></code></pre></div></td></tr></table></figure><br>示例 3：<br><figure class="highlight abnf"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs abnf">输入：password <span class="hljs-operator">=</span> <span class="hljs-string">&quot;1337C0d3&quot;</span><br><br>输出：<span class="hljs-number">0</span><br></code></pre></div></td></tr></table></figure></p>
+<p>提示：</p>
+<ul>
+<li>$1 &lt;= password.length &lt;= 50$</li>
+<li><code>password</code> 由字母、数字、点 <code>&#39;.&#39;</code> 或者感叹号 <code>&#39;!&#39;</code></li>
+</ul>
+<hr>
+<h3 id="模拟（分情况讨论）"><a href="#模拟（分情况讨论）" class="headerlink" title="模拟（分情况讨论）"></a>模拟（分情况讨论）</h3><p>这是一道麻烦而又没啥意义的题。</p>
+<p>需要满足的条件有三个，根据 <code>password</code> 的长度 $n$，字符种类数量 $m$，以及相同字符连续长度不低于 $3$ 的情况 $g$（数组 $g$ 的长度为相同字符长度不低于 $3$ 的连续段个数，$g[i]$ 代表第 $i$ 个连续段的长度），进行分情况讨论：</p>
+<ul>
+<li>$n &lt; 6$：长度过短，不满足要求，任何一次「删除」操作都需要额外搭配一个「增加」操作，而这两步操作可以使用「替换」来代替，结果不会变差；同时为了满足长度要求，我们必然要使用到「增加」操作。因此<strong>需要用到「增加」和「替换」操作</strong>，枚举所有的情况发现，最少操作次数最终可以归纳到 $\max(6 - n, 3 - m)$；</li>
+<li>$6 \leqslant n \leqslant 20$：任何的有效的「增加」操作目的只能是为了「破坏连续段长度不低于 $3$」或者「增加字符种类数量」，这两个目的都可以使用「替换」来做到；而任何有效的「删除」操作只能是为了「破坏连续段长度不低于 $3$」，这一目的也可以使用「替换」来做到。因此只<strong>需要用到「替换」操作</strong>，结果不会变差。对于某个 $g[i]$ 而言，我们需要使用  $\left \lfloor \frac{g[i]}{3} \right \rfloor$ 次「替换」操作来满足「连续段长度不能不低于 $3$」的要求，在此基础上再考虑字符种类的问题，最少操作次数最终可以归纳到 $\max(\sum_{i = 0}^{g.length - 1}\left \lfloor \frac{g[i]}{3} \right \rfloor, 3 - m)$；</li>
+<li>$n &gt; 20$：长度过长，不满足要求，任何一次「增加」操作都需要额外搭配一个「删除」操作，<strong>只需要用到「删除」和「替换」操作</strong>，为了满足长度要求，必然用到的「删除」操作可能会影响到最终的「替换」操作，直觉上，应当优先删除那些「连续段长度不低于 $3$」的字符。由于连续段长度 $g[i]$ 与其消耗的「替换」次数的关系为 $\lfloor \frac{g[i]}{3} \rfloor$，在不考虑余数的情况下，每删除 $3$ 个字符，能够连带的减少一次「替换」操作。因此我们可以根据 $g[i]$ 对 $3$ 取模进行统计，得到 $cnts$ 数组（$cnts$ 数组长度为 $3$，其中 $cnts[i] = x$ 含义为在所有「连续段长度不低于 $3$」的连续段中，长度余数为 $i$ 的数量有 $x$ 个），按照余数从小到大的优先级进行同步抵消，得到最终的「替换」操作数 $tot$（$tot$ 起始值为 $\sum_{i = 0}^{g.length - 1}\left \lfloor \frac{g[i]}{3} \right \rfloor$）。除了可变的「替换」操作以外，我们不可避免还需要 $base = n - 20$ 的「删除」操作，最少操作次数可以归纳到 $base + \max(tot, 3 - m)$</li>
+</ul>
+<p>实现上，我们并不需要真正处理出来 $g$ 数组，可以边统计「连续段长度不低于 $3$」边累加需要的「替换」次数。</p>
+<p>代码：<br><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">strongPasswordChecker</span><span class="hljs-params">(String password)</span> &#123;<br>        <span class="hljs-type">char</span>[] cs = password.toCharArray();<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> cs.length;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">A</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>, B = <span class="hljs-number">0</span>, C = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">char</span> c : cs) &#123;<br>            <span class="hljs-keyword">if</span> (c &gt;= <span class="hljs-string">&#x27;a&#x27;</span> &amp;&amp; c &lt;= <span class="hljs-string">&#x27;z&#x27;</span>) A = <span class="hljs-number">1</span>;<br>            <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (c &gt;= <span class="hljs-string">&#x27;0&#x27;</span> &amp;&amp; c &lt;= <span class="hljs-string">&#x27;9&#x27;</span>) B = <span class="hljs-number">1</span>;<br>            <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (c &gt;= <span class="hljs-string">&#x27;A&#x27;</span> &amp;&amp; c &lt;= <span class="hljs-string">&#x27;Z&#x27;</span>) C = <span class="hljs-number">1</span>;<br>        &#125;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">m</span> <span class="hljs-operator">=</span> A + B + C;<br>        <span class="hljs-keyword">if</span> (n &lt; <span class="hljs-number">6</span>) &#123;<br>            <span class="hljs-keyword">return</span> Math.max(<span class="hljs-number">6</span> - n, <span class="hljs-number">3</span> - m);<br>        &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (n &lt;= <span class="hljs-number">20</span>) &#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">tot</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; n; ) &#123;<br>                <span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> i;<br>                <span class="hljs-keyword">while</span> (j &lt; n &amp;&amp; cs[j] == cs[i]) j++;<br>                <span class="hljs-type">int</span> <span class="hljs-variable">cnt</span> <span class="hljs-operator">=</span> j - i;<br>                <span class="hljs-keyword">if</span> (cnt &gt;= <span class="hljs-number">3</span>) tot += cnt / <span class="hljs-number">3</span>;<br>                i = j;<br>            &#125;<br>            <span class="hljs-keyword">return</span> Math.max(tot, <span class="hljs-number">3</span> - m);<br>        &#125; <span class="hljs-keyword">else</span> &#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">tot</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>            <span class="hljs-type">int</span>[] cnts = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[<span class="hljs-number">3</span>];<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; n; ) &#123;<br>                <span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> i;<br>                <span class="hljs-keyword">while</span> (j &lt; n &amp;&amp; cs[j] == cs[i]) j++;<br>                <span class="hljs-type">int</span> <span class="hljs-variable">cnt</span> <span class="hljs-operator">=</span> j - i;<br>                <span class="hljs-keyword">if</span> (cnt &gt;= <span class="hljs-number">3</span>) &#123;<br>                    tot += cnt / <span class="hljs-number">3</span>; cnts[cnt % <span class="hljs-number">3</span>]++;<br>                &#125;<br>                i = j;<br>            &#125;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">base</span> <span class="hljs-operator">=</span> n - <span class="hljs-number">20</span>, cur = base;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">3</span>; i++) &#123;<br>                <span class="hljs-keyword">if</span> (i == <span class="hljs-number">2</span>) cnts[i] = tot;<br>                <span class="hljs-keyword">if</span> (cnts[i] != <span class="hljs-number">0</span> &amp;&amp; cur &gt; <span class="hljs-number">0</span>) &#123;<br>                    <span class="hljs-type">int</span> <span class="hljs-variable">t</span> <span class="hljs-operator">=</span> Math.min(cnts[i] * (i + <span class="hljs-number">1</span>), cur);<br>                    cur -= t; tot -= t / (i + <span class="hljs-number">1</span>);<br>                &#125;<br>            &#125;<br>            <span class="hljs-keyword">return</span> base + Math.max(tot, <span class="hljs-number">3</span> - m);<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure></p>
+<ul>
+<li>时间复杂度：$O(n)$</li>
+<li>空间复杂度：$O(1)$</li>
+</ul>
+<hr>
+<h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>这是我们「刷穿 LeetCode」系列文章的第 <code>No.420</code> 篇，系列开始于 2021/01/01，截止于起始日 LeetCode 上共有 1916 道题目，部分是有锁题，我们将先把所有不带锁的题目刷完。</p>
+<p>在这个系列文章里面，除了讲解解题思路以外，还会尽可能给出最为简洁的代码。如果涉及通解还会相应的代码模板。</p>
+<p>为了方便各位同学能够电脑上进行调试和提交代码，我建立了相关的仓库：<a target="_blank" rel="noopener" href="https://github.com/SharingSource/LogicStack-LeetCode">https://github.com/SharingSource/LogicStack-LeetCode</a> 。</p>
+<p>在仓库地址里，你可以看到系列文章的题解链接、系列文章的相应代码、LeetCode 原题链接和其他优选题解。</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E6%A8%A1%E6%8B%9F/">模拟</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/04/03/744.%20%E5%AF%BB%E6%89%BE%E6%AF%94%E7%9B%AE%E6%A0%87%E5%AD%97%E6%AF%8D%E5%A4%A7%E7%9A%84%E6%9C%80%E5%B0%8F%E5%AD%97%E6%AF%8D%EF%BC%88%E7%AE%80%E5%8D%95%EF%BC%89/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">LC 744. 寻找比目标字母大的最小字母</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/04/01/1801.%20%E7%A7%AF%E5%8E%8B%E8%AE%A2%E5%8D%95%E4%B8%AD%E7%9A%84%E8%AE%A2%E5%8D%95%E6%80%BB%E6%95%B0%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/">
+                        <span class="hidden-mobile">LC 1801. 积压订单中的订单总数</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+  <div class="col-lg-7 mx-auto nopadding-x-md">
+    <div class="container custom post-custom mx-auto">
+      <img src="https://oscimg.oschina.net/oscnet/up-19688dc1af05cf8bdea43b2a863038ab9e5.png" srcset="/img/loading.gif" lazyload class="rounded mx-auto d-block mt-5" style="width:900px; height:500px;">
+    </div>
+  </div>
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.staticfile.org/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.staticfile.org/tocbot/4.18.2/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.staticfile.org/anchor-js/4.3.1/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.11/clipboard.min.js" ></script>
+  
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.bootcdn.net/ajax/libs/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        loader: {
+          
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.staticfile.org/mathjax/3.2.0/es5/tex-svg.js" ></script>
+
+  
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

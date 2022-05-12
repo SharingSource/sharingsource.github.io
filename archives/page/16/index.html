@@ -1,0 +1,448 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/oimg/RoundCorner.png">
+  <link rel="icon" href="/oimg/RoundCorner.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="宫水三叶">
+  <meta name="keywords" content="算法, 数据结构, 题解">
+  
+    <meta property="og:type" content="website">
+<meta property="og:title" content="归档">
+<meta property="og:url" content="http://example.com/archives/page/16/index.html">
+<meta property="og:site_name" content="宫水三叶的刷题日记">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:author" content="宫水三叶">
+<meta property="article:tag" content="算法, 数据结构, 题解">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  <title>归档 - 宫水三叶的刷题日记</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"|","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.1.0"></head>
+
+
+<body>
+  <header style="height: 60vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>宫水三叶の刷题日记</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/image_65.jpeg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="文章合集">
+              
+            </span>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      <div class="container nopadding-x-md">
+        <div class="py-5" id="board"
+          >
+          
+          <div class="container">
+            <div class="row">
+              <div class="col-12 col-md-10 m-auto">
+                
+
+<div class="list-group">
+  <p class="h4">共计 535 篇文章</p>
+  <hr>
+  
+  
+    
+      
+      <p class="h5">2021</p>
+    
+    <a href="/2021/10/03/166.%20%E5%88%86%E6%95%B0%E5%88%B0%E5%B0%8F%E6%95%B0%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/" class="list-group-item list-group-item-action">
+      <span class="archive-post-title">LC 166. 分数到小数</span>
+      <time style="float: right;">10-03</time>
+    </a>
+  
+    
+    <a href="/2021/10/01/405.%20%E6%95%B0%E5%AD%97%E8%BD%AC%E6%8D%A2%E4%B8%BA%E5%8D%81%E5%85%AD%E8%BF%9B%E5%88%B6%E6%95%B0%EF%BC%88%E7%AE%80%E5%8D%95%EF%BC%89/" class="list-group-item list-group-item-action">
+      <span class="archive-post-title">LC 405. 数字转换为十六进制数</span>
+      <time style="float: right;">10-01</time>
+    </a>
+  
+    
+    <a href="/2021/09/30/1436.%20%E6%97%85%E8%A1%8C%E7%BB%88%E7%82%B9%E7%AB%99%EF%BC%88%E7%AE%80%E5%8D%95%EF%BC%89/" class="list-group-item list-group-item-action">
+      <span class="archive-post-title">LC 1436. 旅行终点站</span>
+      <time style="float: right;">09-30</time>
+    </a>
+  
+    
+    <a href="/2021/09/29/223.%20%E7%9F%A9%E5%BD%A2%E9%9D%A2%E7%A7%AF%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/" class="list-group-item list-group-item-action">
+      <span class="archive-post-title">LC 223. 矩形面积</span>
+      <time style="float: right;">09-29</time>
+    </a>
+  
+    
+    <a href="/2021/09/29/517.%20%E8%B6%85%E7%BA%A7%E6%B4%97%E8%A1%A3%E6%9C%BA%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/" class="list-group-item list-group-item-action">
+      <span class="archive-post-title">LC 517. 超级洗衣机</span>
+      <time style="float: right;">09-29</time>
+    </a>
+  
+    
+    <a href="/2021/09/27/437.%20%E8%B7%AF%E5%BE%84%E6%80%BB%E5%92%8C%20III%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/" class="list-group-item list-group-item-action">
+      <span class="archive-post-title">LC 437. 路径总和 III</span>
+      <time style="float: right;">09-27</time>
+    </a>
+  
+    
+    <a href="/2021/09/26/639.%20%E8%A7%A3%E7%A0%81%E6%96%B9%E6%B3%95%20II%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/" class="list-group-item list-group-item-action">
+      <span class="archive-post-title">LC 639. 解码方法 II</span>
+      <time style="float: right;">09-26</time>
+    </a>
+  
+    
+    <a href="/2021/09/25/371.%20%E4%B8%A4%E6%95%B4%E6%95%B0%E4%B9%8B%E5%92%8C%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/" class="list-group-item list-group-item-action">
+      <span class="archive-post-title">LC 371. 两整数之和</span>
+      <time style="float: right;">09-25</time>
+    </a>
+  
+    
+    <a href="/2021/09/24/583.%20%E4%B8%A4%E4%B8%AA%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E5%88%A0%E9%99%A4%E6%93%8D%E4%BD%9C%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/" class="list-group-item list-group-item-action">
+      <span class="archive-post-title">LC 583. 两个字符串的删除操作</span>
+      <time style="float: right;">09-24</time>
+    </a>
+  
+    
+    <a href="/2021/09/23/430.%20%E6%89%81%E5%B9%B3%E5%8C%96%E5%A4%9A%E7%BA%A7%E5%8F%8C%E5%90%91%E9%93%BE%E8%A1%A8%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/" class="list-group-item list-group-item-action">
+      <span class="archive-post-title">LC 430. 扁平化多级双向链表</span>
+      <time style="float: right;">09-23</time>
+    </a>
+  
+    
+    <a href="/2021/09/23/326.%203%E7%9A%84%E5%B9%82%EF%BC%88%E7%AE%80%E5%8D%95%EF%BC%89/" class="list-group-item list-group-item-action">
+      <span class="archive-post-title">LC 326. 3的幂</span>
+      <time style="float: right;">09-23</time>
+    </a>
+  
+    
+    <a href="/2021/09/21/725.%20%E5%88%86%E9%9A%94%E9%93%BE%E8%A1%A8%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/" class="list-group-item list-group-item-action">
+      <span class="archive-post-title">LC 725. 分隔链表</span>
+      <time style="float: right;">09-21</time>
+    </a>
+  
+    
+    <a href="/2021/09/20/58.%20%E6%9C%80%E5%90%8E%E4%B8%80%E4%B8%AA%E5%8D%95%E8%AF%8D%E7%9A%84%E9%95%BF%E5%BA%A6%EF%BC%88%E7%AE%80%E5%8D%95%EF%BC%89/" class="list-group-item list-group-item-action">
+      <span class="archive-post-title">LC 58. 最后一个单词的长度</span>
+      <time style="float: right;">09-20</time>
+    </a>
+  
+    
+    <a href="/2021/09/20/673.%20%E6%9C%80%E9%95%BF%E9%80%92%E5%A2%9E%E5%AD%90%E5%BA%8F%E5%88%97%E7%9A%84%E4%B8%AA%E6%95%B0%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/" class="list-group-item list-group-item-action">
+      <span class="archive-post-title">LC 673. 最长递增子序列的个数</span>
+      <time style="float: right;">09-20</time>
+    </a>
+  
+    
+    <a href="/2021/09/19/650.%20%E5%8F%AA%E6%9C%89%E4%B8%A4%E4%B8%AA%E9%94%AE%E7%9A%84%E9%94%AE%E7%9B%98%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/" class="list-group-item list-group-item-action">
+      <span class="archive-post-title">LC 650. 只有两个键的键盘</span>
+      <time style="float: right;">09-19</time>
+    </a>
+  
+</div>
+
+
+  <nav aria-label="navigation">
+    <span class="pagination" id="pagination">
+      <a class="extend prev" rel="prev" href="/archives/page/15/#board"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/archives/">1</a><span class="space">&hellip;</span><a class="page-number" href="/archives/page/14/#board">14</a><a class="page-number" href="/archives/page/15/#board">15</a><span class="page-number current">16</span><a class="page-number" href="/archives/page/17/#board">17</a><a class="page-number" href="/archives/page/18/#board">18</a><span class="space">&hellip;</span><a class="page-number" href="/archives/page/36/#board">36</a><a class="extend next" rel="next" href="/archives/page/17/#board"><i class="iconfont icon-arrowright"></i></a>
+    </span>
+  </nav>
+
+
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.staticfile.org/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.bootcdn.net/ajax/libs/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

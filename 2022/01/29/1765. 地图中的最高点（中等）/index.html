@@ -1,0 +1,582 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/oimg/RoundCorner.png">
+  <link rel="icon" href="/oimg/RoundCorner.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="宫水三叶">
+  <meta name="keywords" content="算法, 数据结构, 题解">
+  
+    <meta name="description" content="题目描述这是 LeetCode 上的 1765. 地图中的最高点 ，难度为 中等。 给你一个大小为 m x n 的整数矩阵 isWater ，它代表了一个由 陆地 和 水域 单元格组成的地图。  如果 isWater[i][j] &#x3D;&#x3D; 0 ，格子 (i, j) 是一个 陆地 格子。 如果 isWater[i][j] &#x3D;&#x3D; 1 ，格子 (i, j) 是一个 水域 格子。  你需要按照如下规则给每个单">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LC 1765. 地图中的最高点">
+<meta property="og:url" content="http://example.com/2022/01/29/1765.%20%E5%9C%B0%E5%9B%BE%E4%B8%AD%E7%9A%84%E6%9C%80%E9%AB%98%E7%82%B9%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/index.html">
+<meta property="og:site_name" content="宫水三叶的刷题日记">
+<meta property="og:description" content="题目描述这是 LeetCode 上的 1765. 地图中的最高点 ，难度为 中等。 给你一个大小为 m x n 的整数矩阵 isWater ，它代表了一个由 陆地 和 水域 单元格组成的地图。  如果 isWater[i][j] &#x3D;&#x3D; 0 ，格子 (i, j) 是一个 陆地 格子。 如果 isWater[i][j] &#x3D;&#x3D; 1 ，格子 (i, j) 是一个 水域 格子。  你需要按照如下规则给每个单">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://assets.leetcode.com/uploads/2021/01/10/screenshot-2021-01-11-at-82045-am.png">
+<meta property="og:image" content="https://assets.leetcode.com/uploads/2021/01/10/screenshot-2021-01-11-at-82050-am.png">
+<meta property="og:image" content="https://pic.leetcode-cn.com/1643414942-ajXGBO-image.png">
+<meta property="article:published_time" content="2022-01-28T16:06:22.000Z">
+<meta property="article:modified_time" content="2022-05-12T04:05:32.091Z">
+<meta property="article:author" content="宫水三叶">
+<meta property="article:tag" content="多源 BFS">
+<meta property="article:tag" content="图论搜索">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://assets.leetcode.com/uploads/2021/01/10/screenshot-2021-01-11-at-82045-am.png">
+  
+  
+  <title>LC 1765. 地图中的最高点 - 宫水三叶的刷题日记</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/hint.css/2.7.0/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.7.2/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"|","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.1.0"></head>
+
+
+<body>
+  <header style="height: 50vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>宫水三叶の刷题日记</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/image_154.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="LC 1765. 地图中的最高点">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-author" aria-hidden="true"></i>
+      宫水三叶
+    </span>
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2022-01-29 00:06" pubdate>
+        2022年1月29日 凌晨
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      4.1k 字
+    </span>
+  
+
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">LC 1765. 地图中的最高点</h1>
+            
+            <div class="markdown-body">
+              <h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>这是 LeetCode 上的 <strong><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/map-of-highest-peak/solution/gong-shui-san-xie-duo-yuan-bfs-yun-yong-8sw0f/">1765. 地图中的最高点</a></strong> ，难度为 <strong>中等</strong>。</p>
+<p>给你一个大小为 <code>m x n</code> 的整数矩阵 <code>isWater</code> ，它代表了一个由 陆地 和 水域 单元格组成的地图。</p>
+<ul>
+<li>如果 <code>isWater[i][j] == 0</code> ，格子 <code>(i, j)</code> 是一个 陆地 格子。</li>
+<li>如果 <code>isWater[i][j] == 1</code> ，格子 <code>(i, j)</code> 是一个 水域 格子。</li>
+</ul>
+<p>你需要按照如下规则给每个单元格安排高度：</p>
+<ul>
+<li>每个格子的高度都必须是非负的。</li>
+<li>如果一个格子是是 <strong>水域</strong> ，那么它的高度必须为 $0$ 。</li>
+<li>任意相邻的格子高度差 至多 为 <code>1</code> 。当两个格子在正东、南、西、北方向上相互紧挨着，就称它们为相邻的格子。（也就是说它们有一条公共边）</li>
+</ul>
+<p>找到一种安排高度的方案，使得矩阵中的最高高度值 最大 。</p>
+<p>请你返回一个大小为 <code>m x n</code> 的整数矩阵 <code>height</code> ，其中 <code>height[i][j]</code> 是格子 <code>(i, j)</code> 的高度。如果有多种解法，请返回 任意一个 。</p>
+<p>示例 1：<br><img src="https://assets.leetcode.com/uploads/2021/01/10/screenshot-2021-01-11-at-82045-am.png" srcset="/img/loading.gif" lazyload alt=""><br><figure class="highlight lua"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs lua">输入：isWater = <span class="hljs-string">[[0,1],[0,0]]</span><br><br>输出：<span class="hljs-string">[[1,0],[2,1]]</span><br><br>解释：上图展示了给各个格子安排的高度。<br>蓝色格子是水域格，绿色格子是陆地格。<br></code></pre></div></td></tr></table></figure><br>示例 2：<br><img src="https://assets.leetcode.com/uploads/2021/01/10/screenshot-2021-01-11-at-82050-am.png" srcset="/img/loading.gif" lazyload alt=""><br><figure class="highlight lua"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs lua">输入：isWater = <span class="hljs-string">[[0,0,1],[1,0,0],[0,0,0]]</span><br><br>输出：<span class="hljs-string">[[1,1,0],[0,1,1],[1,2,2]]</span><br><br>解释：所有安排方案中，最高可行高度为 <span class="hljs-number">2</span> 。<br>任意安排方案中，只要最高高度为 <span class="hljs-number">2</span> 且符合上述规则的，都为可行方案。<br></code></pre></div></td></tr></table></figure></p>
+<p>提示：</p>
+<ul>
+<li>$m == isWater.length$</li>
+<li>$n == isWater[i].length$</li>
+<li>$1 &lt;= m, n &lt;= 1000$</li>
+<li><code>isWater[i][j]</code> 要么是 $0$ ，要么是 $1$ 。</li>
+<li>至少有 $1$ 个水域格子。</li>
+</ul>
+<hr>
+<h3 id="多源-BFS"><a href="#多源-BFS" class="headerlink" title="多源 BFS"></a>多源 BFS</h3><p>这是一道「多源 <code>BFS</code>」板子题，对「多源 <code>BFS</code>」不熟悉的同学，可以看看前置 🧀：<a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzU4NDE3MTEyMA==&amp;mid=2247487179&amp;idx=1&amp;sn=e30a662c03fba3861254dbcf3fb9d6f2&amp;chksm=fd9ca5d4caeb2cc205804fd17a2ce86b25d0408adc3417e73154f59d37e7cb17e02374f5122c&amp;scene=178&amp;cur_album_id=1917113998693449732#rd">多源 BFS 入门</a>。</p>
+<p>里面详解了「多源 <code>BFS</code>」与「单源 <code>BFS</code>」板子上的区别，强调了可以通过建立「虚拟源点」的方式，将「多源 <code>BFS</code>」转换回「单源 <code>BFS</code>」问题。</p>
+<p>回到本题，题目规定了水域区域的高度为 $0$，然后相邻格子之间的高度差至多为 $1$，</p>
+<p>我们可以将所有水域（高度为 $0$）区域进行入队，然后跑一遍 <code>BFS</code> 即可。</p>
+<p>将所有水域（高度为 $0$）区域进行入队的操作可看作是将与「虚拟源点」链接的节点进行入队（也等价于起始只将虚拟源点入队）：</p>
+<p><img src="https://pic.leetcode-cn.com/1643414942-ajXGBO-image.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<p>容易证明这样做法的正确性：<strong>对于一个「陆地」区域（高度可变）而言，其所能填入的高度，取决于其距离其他「水域」区域的距离，而我们最终要让整个答案矩阵合法，因此每个「陆地」区域应该取其所能填入的高度的「下界」，即只由「距离它最近的水域」区域所更新，这符合 <code>BFS</code>  的性质。</strong></p>
+<p><strong>代码（感谢 <a href="/u/himymben/">@Benhao</a> 和 <a href="/u/megurine/">@5cm/s 🌸</a> 同学提供的其他语言版本）：</strong><br><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span>[][] highestPeak(<span class="hljs-type">int</span>[][] g) &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">m</span> <span class="hljs-operator">=</span> g.length, n = g[<span class="hljs-number">0</span>].length;<br>        <span class="hljs-type">int</span>[][] ans = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[m][n];<br>        Deque&lt;<span class="hljs-type">int</span>[]&gt; d = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayDeque</span>&lt;&gt;();<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; m; i++) &#123;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; j &lt; n; j++) &#123;<br>                <span class="hljs-keyword">if</span> (g[i][j] == <span class="hljs-number">1</span>) d.addLast(<span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[]&#123;i, j&#125;);<br>                ans[i][j] = g[i][j] == <span class="hljs-number">1</span> ? <span class="hljs-number">0</span> : -<span class="hljs-number">1</span>;<br>            &#125;<br>        &#125;<br>        <span class="hljs-type">int</span>[][] dirs = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[][]&#123;&#123;<span class="hljs-number">1</span>,<span class="hljs-number">0</span>&#125;,&#123;-<span class="hljs-number">1</span>,<span class="hljs-number">0</span>&#125;,&#123;<span class="hljs-number">0</span>,<span class="hljs-number">1</span>&#125;,&#123;<span class="hljs-number">0</span>,-<span class="hljs-number">1</span>&#125;&#125;;<br>        <span class="hljs-keyword">while</span> (!d.isEmpty()) &#123;<br>            <span class="hljs-type">int</span>[] info = d.pollFirst();<br>            <span class="hljs-type">int</span> <span class="hljs-variable">x</span> <span class="hljs-operator">=</span> info[<span class="hljs-number">0</span>], y = info[<span class="hljs-number">1</span>];<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span>[] di : dirs) &#123;<br>                <span class="hljs-type">int</span> <span class="hljs-variable">nx</span> <span class="hljs-operator">=</span> x + di[<span class="hljs-number">0</span>], ny = y + di[<span class="hljs-number">1</span>];<br>                <span class="hljs-keyword">if</span> (nx &lt; <span class="hljs-number">0</span> || nx &gt;= m || ny &lt; <span class="hljs-number">0</span> || ny &gt;= n) <span class="hljs-keyword">continue</span>;<br>                <span class="hljs-keyword">if</span> (ans[nx][ny] != -<span class="hljs-number">1</span>) <span class="hljs-keyword">continue</span>;<br>                ans[nx][ny] = ans[x][y] + <span class="hljs-number">1</span>;<br>                d.addLast(<span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[]&#123;nx, ny&#125;);<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> ans;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure><br>-<br><figure class="highlight plaintext"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Python3">class Solution:<br>    def highestPeak(self, isWater: List[List[int]]) -&gt; List[List[int]]:<br>        m, n = len(isWater), len(isWater[0])<br>        ans = [[0] * n for _ in range(m)]<br>        d = deque()<br>        for i in range(m):<br>            for j in range(n):<br>                if isWater[i][j]:<br>                    d.append((i, j))<br>                ans[i][j] = 0 if isWater[i][j] else -1<br><br>        dirs = [(1, 0), (-1, 0), (0, 1), (0, -1)]<br>        h = 1<br>        while d:<br>            size = len(d)<br>            for _ in range(size):<br>                x, y = d.popleft()<br>                for di in dirs:<br>                    nx, ny = x + di[0], y + di[1]<br>                    if 0 &lt;= nx &lt; m and 0 &lt;= ny &lt; n and ans[nx][ny] == -1:<br>                        ans[nx][ny] = h<br>                        d.append((nx, ny))<br>            h += 1<br>        return ans<br></code></pre></div></td></tr></table></figure><br>-<br><figure class="highlight go"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Go"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">highestPeak</span><span class="hljs-params">(isWater [][]<span class="hljs-type">int</span>)</span></span> [][]<span class="hljs-type">int</span> &#123;<br>    m, n := <span class="hljs-built_in">len</span>(isWater), <span class="hljs-built_in">len</span>(isWater[<span class="hljs-number">0</span>])<br>    ans, d := <span class="hljs-built_in">make</span>([][]<span class="hljs-type">int</span>, m), [][]<span class="hljs-type">int</span>&#123;&#125;<br>    <span class="hljs-keyword">for</span> i := <span class="hljs-number">0</span>; i &lt; m; i++ &#123;<br>        ans[i] = <span class="hljs-built_in">make</span>([]<span class="hljs-type">int</span>, n)<br>        <span class="hljs-keyword">for</span> j := <span class="hljs-number">0</span>; j &lt; n; j++ &#123;<br>            <span class="hljs-keyword">if</span> isWater[i][j] == <span class="hljs-number">1</span> &#123;<br>                d = <span class="hljs-built_in">append</span>(d, []<span class="hljs-type">int</span>&#123;i, j&#125;)<br>                ans[i][j] = <span class="hljs-number">0</span><br>            &#125; <span class="hljs-keyword">else</span> &#123;<br>                ans[i][j] = <span class="hljs-number">-1</span><br>            &#125;<br>        &#125;<br>    &#125;<br>    dirs := [][]<span class="hljs-type">int</span>&#123;&#123;<span class="hljs-number">1</span>,<span class="hljs-number">0</span>&#125;, &#123;<span class="hljs-number">-1</span>,<span class="hljs-number">0</span>&#125;, &#123;<span class="hljs-number">0</span>,<span class="hljs-number">1</span>&#125;, &#123;<span class="hljs-number">0</span>,<span class="hljs-number">-1</span>&#125;&#125;<br>    <span class="hljs-keyword">for</span> h := <span class="hljs-number">1</span>; <span class="hljs-built_in">len</span>(d) &gt; <span class="hljs-number">0</span>; h++ &#123;<br>        <span class="hljs-keyword">for</span> size := <span class="hljs-built_in">len</span>(d); size &gt; <span class="hljs-number">0</span>; size--&#123;<br>            info := d[<span class="hljs-number">0</span>]<br>            d = d[<span class="hljs-number">1</span>:]<br>            x, y := info[<span class="hljs-number">0</span>], info[<span class="hljs-number">1</span>]<br>            <span class="hljs-keyword">for</span> _, di := <span class="hljs-keyword">range</span> dirs &#123;<br>                nx, ny := x + di[<span class="hljs-number">0</span>], y + di[<span class="hljs-number">1</span>]<br>                <span class="hljs-keyword">if</span> nx &gt;= <span class="hljs-number">0</span> &amp;&amp; nx &lt; m &amp;&amp; ny &gt;= <span class="hljs-number">0</span> &amp;&amp; ny &lt; n &amp;&amp; ans[nx][ny] == <span class="hljs-number">-1</span> &#123;<br>                    ans[nx][ny] = h<br>                    d = <span class="hljs-built_in">append</span>(d, []<span class="hljs-type">int</span>&#123;nx, ny&#125;)<br>                &#125;<br>            &#125;<br>        &#125;<br>    &#125;<br>    <span class="hljs-keyword">return</span> ans<br>&#125;<br></code></pre></div></td></tr></table></figure><br>-<br><figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs C++"><span class="hljs-type">const</span> <span class="hljs-type">int</span> dx[] = &#123;<span class="hljs-number">-1</span>, <span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>&#125;, dy[] = &#123;<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">-1</span>, <span class="hljs-number">1</span>&#125;;<br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br><span class="hljs-keyword">public</span>:<br>    vector&lt;vector&lt;<span class="hljs-type">int</span>&gt;&gt; <span class="hljs-built_in">highestPeak</span>(vector&lt;vector&lt;<span class="hljs-type">int</span>&gt;&gt;&amp; g) &#123;<br>        <span class="hljs-type">int</span> n = g.<span class="hljs-built_in">size</span>(), m = g[<span class="hljs-number">0</span>].<span class="hljs-built_in">size</span>();<br>        queue&lt;pair&lt;<span class="hljs-type">int</span>, <span class="hljs-type">int</span>&gt;&gt; q;<br>        vector&lt;vector&lt;<span class="hljs-type">int</span>&gt;&gt; <span class="hljs-built_in">ans</span>(n, <span class="hljs-built_in">vector</span>&lt;<span class="hljs-type">int</span>&gt;(m, <span class="hljs-number">0</span>));<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; n; ++i) &#123;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> j = <span class="hljs-number">0</span>; j &lt; m; ++j) &#123;<br>                <span class="hljs-keyword">if</span> (g[i][j] == <span class="hljs-number">1</span>) &#123;<br>                    q.<span class="hljs-built_in">emplace</span>(i, j);<br>                &#125; <span class="hljs-keyword">else</span> &#123;<br>                    ans[i][j] = <span class="hljs-number">-1</span>;<br>                &#125;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">while</span> (!q.<span class="hljs-built_in">empty</span>()) &#123;<br>            <span class="hljs-keyword">auto</span> [x, y] = q.<span class="hljs-built_in">front</span>(); q.<span class="hljs-built_in">pop</span>();<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">4</span>; ++i) &#123;<br>                <span class="hljs-type">int</span> a = x + dx[i], b = y + dy[i];<br>                <span class="hljs-keyword">if</span> (a &lt; <span class="hljs-number">0</span> || a == n || b &lt; <span class="hljs-number">0</span> || b == m) <span class="hljs-keyword">continue</span>;<br>                <span class="hljs-keyword">if</span> (ans[a][b] &gt;= <span class="hljs-number">0</span>) <span class="hljs-keyword">continue</span>;<br>                ans[a][b] = ans[x][y] + <span class="hljs-number">1</span>;<br>                q.<span class="hljs-built_in">emplace</span>(a, b);<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> ans;<br>    &#125;<br>&#125;;<br></code></pre></div></td></tr></table></figure></p>
+<ul>
+<li>时间复杂度：$O(m * n)$</li>
+<li>空间复杂度：$O(m * n)$</li>
+</ul>
+<hr>
+<h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>这是我们「刷穿 LeetCode」系列文章的第 <code>No.1765</code> 篇，系列开始于 2021/01/01，截止于起始日 LeetCode 上共有 1916 道题目，部分是有锁题，我们将先把所有不带锁的题目刷完。</p>
+<p>在这个系列文章里面，除了讲解解题思路以外，还会尽可能给出最为简洁的代码。如果涉及通解还会相应的代码模板。</p>
+<p>为了方便各位同学能够电脑上进行调试和提交代码，我建立了相关的仓库：<a target="_blank" rel="noopener" href="https://github.com/SharingSource/LogicStack-LeetCode">https://github.com/SharingSource/LogicStack-LeetCode</a> 。</p>
+<p>在仓库地址里，你可以看到系列文章的题解链接、系列文章的相应代码、LeetCode 原题链接和其他优选题解。</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%A4%9A%E6%BA%90-BFS/">多源 BFS</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%9B%BE%E8%AE%BA%E6%90%9C%E7%B4%A2/">图论搜索</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/01/29/884.%20%E4%B8%A4%E5%8F%A5%E8%AF%9D%E4%B8%AD%E7%9A%84%E4%B8%8D%E5%B8%B8%E8%A7%81%E5%8D%95%E8%AF%8D%EF%BC%88%E7%AE%80%E5%8D%95%EF%BC%89/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">LC 884. 两句话中的不常见单词</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/01/27/1996.%20%E6%B8%B8%E6%88%8F%E4%B8%AD%E5%BC%B1%E8%A7%92%E8%89%B2%E7%9A%84%E6%95%B0%E9%87%8F%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/">
+                        <span class="hidden-mobile">LC 1996. 游戏中弱角色的数量</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+  <div class="col-lg-7 mx-auto nopadding-x-md">
+    <div class="container custom post-custom mx-auto">
+      <img src="https://oscimg.oschina.net/oscnet/up-19688dc1af05cf8bdea43b2a863038ab9e5.png" srcset="/img/loading.gif" lazyload class="rounded mx-auto d-block mt-5" style="width:900px; height:500px;">
+    </div>
+  </div>
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.staticfile.org/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.staticfile.org/tocbot/4.18.2/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.staticfile.org/anchor-js/4.3.1/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.11/clipboard.min.js" ></script>
+  
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.bootcdn.net/ajax/libs/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        loader: {
+          
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.staticfile.org/mathjax/3.2.0/es5/tex-svg.js" ></script>
+
+  
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

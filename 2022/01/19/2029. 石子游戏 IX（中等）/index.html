@@ -1,0 +1,589 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/oimg/RoundCorner.png">
+  <link rel="icon" href="/oimg/RoundCorner.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="宫水三叶">
+  <meta name="keywords" content="算法, 数据结构, 题解">
+  
+    <meta name="description" content="题目描述这是 LeetCode 上的 2029. 石子游戏 IX ，难度为 中等。 Alice 和 Bob 轮流进行自己的回合，Alice 先手。每一回合，玩家需要从 stones 中移除任一石子。 如果玩家移除石子后，导致 所有已移除石子 的价值 总和 可以被 $3$ 整除，那么该玩家就 输掉游戏 。如果不满足上一条，且移除后没有任何剩余的石子，那么 Bob 将会直接获胜（即便是在 Alice">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LC 2029. 石子游戏 IX">
+<meta property="og:url" content="http://example.com/2022/01/19/2029.%20%E7%9F%B3%E5%AD%90%E6%B8%B8%E6%88%8F%20IX%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/index.html">
+<meta property="og:site_name" content="宫水三叶的刷题日记">
+<meta property="og:description" content="题目描述这是 LeetCode 上的 2029. 石子游戏 IX ，难度为 中等。 Alice 和 Bob 轮流进行自己的回合，Alice 先手。每一回合，玩家需要从 stones 中移除任一石子。 如果玩家移除石子后，导致 所有已移除石子 的价值 总和 可以被 $3$ 整除，那么该玩家就 输掉游戏 。如果不满足上一条，且移除后没有任何剩余的石子，那么 Bob 将会直接获胜（即便是在 Alice">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-01-19T15:33:26.000Z">
+<meta property="article:modified_time" content="2022-05-12T04:05:31.819Z">
+<meta property="article:author" content="宫水三叶">
+<meta property="article:tag" content="博弈论">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  <title>LC 2029. 石子游戏 IX - 宫水三叶的刷题日记</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/hint.css/2.7.0/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.7.2/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"|","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.1.0"></head>
+
+
+<body>
+  <header style="height: 50vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>宫水三叶の刷题日记</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/image_121.jpeg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="LC 2029. 石子游戏 IX">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-author" aria-hidden="true"></i>
+      宫水三叶
+    </span>
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2022-01-19 23:33" pubdate>
+        2022年1月19日 晚上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      3.1k 字
+    </span>
+  
+
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">LC 2029. 石子游戏 IX</h1>
+            
+            <div class="markdown-body">
+              <h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>这是 LeetCode 上的 <strong><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/stone-game-ix/solution/gong-shui-san-xie-fen-qing-kuang-tao-lun-h1oa/">2029. 石子游戏 IX</a></strong> ，难度为 <strong>中等</strong>。</p>
+<p><code>Alice</code> 和 <code>Bob</code> 轮流进行自己的回合，<code>Alice</code> 先手。每一回合，玩家需要从 <code>stones</code> 中移除任一石子。</p>
+<p>如果玩家移除石子后，导致 所有已移除石子 的价值 总和 可以被 $3$ 整除，那么该玩家就 输掉游戏 。<br>如果不满足上一条，且移除后没有任何剩余的石子，那么 <code>Bob</code> 将会直接获胜（即便是在 <code>Alice</code> 的回合）。<br>假设两位玩家均采用 最佳 决策。如果 <code>Alice</code> 获胜，返回 <code>true</code> ；如果 <code>Bob</code> 获胜，返回 <code>false</code> 。</p>
+<p>示例 1：<br><figure class="highlight tap"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs tap">输入：stones = [2,1]<br><br>输出：true<br><br>解释：游戏进行如下：<br>- 回合 1：Alice 可以移除任意一个石子。<br>- 回合 2：Bob 移除剩下的石子。 <br>已移除的石子的值总和为<span class="hljs-number"> 1 </span>+<span class="hljs-number"> 2 </span>=<span class="hljs-number"> 3 </span>且可以被<span class="hljs-number"> 3 </span>整除。因此，Bob 输，Alice 获胜。<br></code></pre></div></td></tr></table></figure><br>示例 2：<br><figure class="highlight tap"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs tap">输入：stones = [2]<br><br>输出：false<br><br>解释：Alice 会移除唯一一个石子，已移除石子的值总和为<span class="hljs-number"> 2 </span>。 <br>由于所有石子都已移除，且值总和无法被<span class="hljs-number"> 3 </span>整除，Bob 获胜。<br></code></pre></div></td></tr></table></figure><br>示例 3：<br><figure class="highlight tap"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs tap">输入：stones = [5,1,2,4,3]<br><br>输出：false<br><br>解释：Bob 总会获胜。其中一种可能的游戏进行方式如下：<br>- 回合 1：Alice 可以移除值为<span class="hljs-number"> 1 </span>的第<span class="hljs-number"> 2 </span>个石子。已移除石子值总和为<span class="hljs-number"> 1 </span>。<br>- 回合 2：Bob 可以移除值为<span class="hljs-number"> 3 </span>的第<span class="hljs-number"> 5 </span>个石子。已移除石子值总和为 =<span class="hljs-number"> 1 </span>+<span class="hljs-number"> 3 </span>=<span class="hljs-number"> 4 </span>。<br>- 回合 3：Alices 可以移除值为<span class="hljs-number"> 4 </span>的第<span class="hljs-number"> 4 </span>个石子。已移除石子值总和为 =<span class="hljs-number"> 1 </span>+<span class="hljs-number"> 3 </span>+<span class="hljs-number"> 4 </span>=<span class="hljs-number"> 8 </span>。<br>- 回合 4：Bob 可以移除值为<span class="hljs-number"> 2 </span>的第<span class="hljs-number"> 3 </span>个石子。已移除石子值总和为 =<span class="hljs-number"> 1 </span>+<span class="hljs-number"> 3 </span>+<span class="hljs-number"> 4 </span>+<span class="hljs-number"> 2 </span>= 10.<br>- 回合 5：Alice 可以移除值为<span class="hljs-number"> 5 </span>的第<span class="hljs-number"> 1 </span>个石子。已移除石子值总和为 =<span class="hljs-number"> 1 </span>+<span class="hljs-number"> 3 </span>+<span class="hljs-number"> 4 </span>+<span class="hljs-number"> 2 </span>+<span class="hljs-number"> 5 </span>= 15.<br>Alice 输掉游戏，因为已移除石子值总和（15）可以被<span class="hljs-number"> 3 </span>整除，Bob 获胜。<br></code></pre></div></td></tr></table></figure></p>
+<p>提示：</p>
+<ul>
+<li>$1 &lt;= stones.length &lt;= 10^5$</li>
+<li>$1 &lt;= stones[i] &lt;= 10^4$</li>
+</ul>
+<hr>
+<h3 id="分情况讨论博弈"><a href="#分情况讨论博弈" class="headerlink" title="分情况讨论博弈"></a>分情况讨论博弈</h3><p>为了方便，我们用 <code>A</code> 来代指 <code>Alice</code>，用 <code>B</code> 带代指 <code>Bob</code>。</p>
+<p><code>A</code> 只有一种获胜方式，是使得 <code>B</code> 在选石子时凑成 $3$ 的倍数；而 <code>B</code> 除了能够通过让 <code>A</code> 凑成 $3$ 的倍数以外，还能通过让游戏常规结束来获胜。</p>
+<p>因此整个游戏过程，我们只需要关心「已被移除的石子总和」和「剩余石子个数/价值情况」即可。</p>
+<p>更进一步的，我们只需关心已被移除的石子总和是否为 $3$ 的倍数，以及剩余石子的价值与已移除石子总和相加是否凑成 $3$ 的倍数即可。 </p>
+<p>所以我们可以按照石子价值除以 $3$ 的余数分成三类，并统计相应数量。</p>
+<p>不失一般性考虑，某个回合开始前，已移除的石子总和状态为 $x$（共三种，分别为除以 $3$ 余数为 $0$、$1$ 和 $2$，其中当状态为 $0$，且非首个回合时，说明凑成 $3$ 的倍数，游戏结束），剩余石子价值除以 $3$ 的余数 $s$ 分别为 $0$、$1$ 和 $2$。</p>
+<p><strong>首先如果当前 $x = 1$ 时，不能选择 $s = 2$ 的石子，否则会导致凑成总和为 $3$ 的倍数而失败；同理 $x = 2$ 时，不能选择 $s = 1$ 的石子；而选择 $s = 0$ 的数字，不会改变 $x$ 的状态，可看做换手操作。</strong></p>
+<p><strong>同时成对的 $s = 0$ 的等价于没有 $s = 0$ 的石子（双方只需要轮流选完这些 $s = 0$ 的石子，最终会回到先手最开始的局面）；而选择与 $x$ 相同的 $s$ 会导致 $x$ 改变（即 $x = 1$ 时，选择 $s = 1$ 的石子，会导致 $x = 2$；而 $x = 2$ 时，选 $s = 2$ 的石子，会导致 $x = 1$）。</strong></p>
+<p>明确规则后，是分情况讨论的过程：</p>
+<ul>
+<li><p><strong>$s = 0$ 的石子数量为偶数</strong>：此时等价于没有 $s = 0$ 的石子，我们只需要关心 $s = 1$ 和 $s = 2$ 即可：</p>
+<ul>
+<li><p><strong>$s = 1$ 的石子数量为 $0$</strong>： 这意味着 <code>A</code> 开始选择的只能是 $s = 2$，此时交给 <code>B</code> 的局面为「$x = 2$、剩余石子只有 $s = 2$」，此时 <code>B</code> 只能选 $s = 2$ 的石子，由于 $x = 2$ 且选择的石子 $s = 2$，因此交由回 <code>A</code> 的局面为「$x = 1$，剩余是在只有 $s = 2$」，因此游戏继续的话 <code>A</code> 必败，同时如果在该过程的任何时刻石子被取完，也是 <code>B</code> 直接获胜，即 <strong><code>A</code> 仍为必败</strong>；</p>
+</li>
+<li><p><strong>$s = 2$ 的石子数量为 $0$</strong>：分析同理，<code>A</code> 只能选 $s = 1$，此时交给 <code>B</code> 的局面为「$x = 1$、剩余石子只有 $s = 1$」，此时 <code>B</code> 只能选 $s = 1$ 的石子，由于 $x = 1$ 且选择的石子 $s = 1$，因此交由回 <code>A</code> 的局面为「$x = 2$，剩余是在只有 $s = 1$」，因此游戏继续的话 <code>A</code> 必败，同时如果在该过程的任何时刻石子被取完，也是 <code>B</code> 直接获胜，即 <strong><code>A</code> 仍为必败</strong>；</p>
+</li>
+<li><p><strong>$s = 1$ 和 $s = 2$ 的石子数量均不为 $0$</strong>：<code>A</code> 选数量不是最多的一类石子，<code>B</code> 下一回合只能选择相同类型的石子（或是无从选择导致失败），然后游戏继续，最终 <code>B</code> 会先进入「只能凑成 $3$ 的倍数」的局面导致失败，即 <strong><code>A</code> 必胜。</strong></p>
+</li>
+</ul>
+</li>
+<li><p><strong>$s = 0$ 的石子数量为奇数</strong>：此时等价于有一次换手机会，该换手机会必然应用在「对必败局面进行转移」才有意义，因此只有 $s = 1$ 和 $s = 2$ 的石子数量差大于 $2$，<code>A</code> 的先手优势不会因为存在换手机会而被转移：</p>
+<ul>
+<li><p><strong>两者数量差不超过 $2$</strong>：此时 <code>B</code> 可以利用「对方凑成 $3$ 的倍数必败」规则和「优先使用 $s = 0$ 石子」权利来进入确保自己为必胜态：</p>
+<ul>
+<li><p>举个 🌰，当 $s = 1$ 和 $s = 2$ 的石子数量相等，虽然有 $s = 0$ 的石子，<code>A</code> 先手，但是 <code>A</code> 的首个回合必然不能选 $s = 0$，否则马上失败结束，因此 <code>A</code> 只能选 $s = 1$ 或 $s = 2$，此时 <code>B</code>直接选择 $s = 0$ 的石子，交由给 <code>A</code> 的局面 $x$ 没有发生改变，<code>A</code> 只能选择与首个回合相同的 $s$ 游戏才能继续，因此局面会变为「<code>B</code> 先手、$s = 1$ 和 $s = 2$ 的石子数量差为 $2$」，游戏继续，最终 <code>A</code> 会先遇到「只能凑成 $3$ 的倍数」的局面，即 <strong><code>B</code> 必胜</strong>。</p>
+</li>
+<li><p>两者数量不等，但数量差不超过 $2$：此时无论 <code>A</code> 选择数量较少或较多的 <code>s</code>，<code>B</code> 都在第二回合马上使用 $s = 0$ 的石子进行换手，<code>A</code> 只能继续选与第一回合相同类型的的石子，游戏才能进行，最终 <code>A</code> 会先遇到「只能凑成 $3$ 的倍数」或「石子被取完」的局面，即 <strong><code>B</code> 必胜</strong>。</p>
+</li>
+</ul>
+</li>
+<li><p><strong>两者数量差超过 $2$</strong> ：此时即使 <code>A</code> 只要确保第一次选择数量较多的 $s$，不管 <code>B</code> 是否使用「优先使用 $s = 0$」的石子，<code>A</code> 都有足够次数数量多 $s$ 来抵消换手（或是在 <code>B</code> 放弃使用 $s = 0$ 之后马上使用），最终都是 <code>B</code> 最先遇到「只能凑成 $3$ 的倍数」的局面，即 <strong><code>A</code> 获胜</strong>。</p>
+</li>
+</ul>
+</li>
+</ul>
+<p>代码：<br><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">stoneGameIX</span><span class="hljs-params">(<span class="hljs-type">int</span>[] stones)</span> &#123;<br>        <span class="hljs-type">int</span>[] cnts = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[<span class="hljs-number">3</span>];<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i : stones) cnts[i % <span class="hljs-number">3</span>]++;<br>        <span class="hljs-keyword">return</span> cnts[<span class="hljs-number">0</span>] % <span class="hljs-number">2</span> == <span class="hljs-number">0</span> ? !(cnts[<span class="hljs-number">1</span>] == <span class="hljs-number">0</span> || cnts[<span class="hljs-number">2</span>] == <span class="hljs-number">0</span>) : Math.abs(cnts[<span class="hljs-number">1</span>] - cnts[<span class="hljs-number">2</span>]) &gt; <span class="hljs-number">2</span>;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure></p>
+<ul>
+<li>时间复杂度：$O(n)$</li>
+<li>空间复杂度：$O(1)$</li>
+</ul>
+<hr>
+<h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>这是我们「刷穿 LeetCode」系列文章的第 <code>No.2029</code> 篇，系列开始于 2021/01/01，截止于起始日 LeetCode 上共有 1916 道题目，部分是有锁题，我们将先把所有不带锁的题目刷完。</p>
+<p>在这个系列文章里面，除了讲解解题思路以外，还会尽可能给出最为简洁的代码。如果涉及通解还会相应的代码模板。</p>
+<p>为了方便各位同学能够电脑上进行调试和提交代码，我建立了相关的仓库：<a target="_blank" rel="noopener" href="https://github.com/SharingSource/LogicStack-LeetCode">https://github.com/SharingSource/LogicStack-LeetCode</a> 。</p>
+<p>在仓库地址里，你可以看到系列文章的题解链接、系列文章的相应代码、LeetCode 原题链接和其他优选题解。</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%8D%9A%E5%BC%88%E8%AE%BA/">博弈论</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/01/20/1345.%20%E8%B7%B3%E8%B7%83%E6%B8%B8%E6%88%8F%20IV%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">LC 1345. 跳跃游戏 IV</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/01/18/219.%20%E5%AD%98%E5%9C%A8%E9%87%8D%E5%A4%8D%E5%85%83%E7%B4%A0%20II%EF%BC%88%E7%AE%80%E5%8D%95%EF%BC%89/">
+                        <span class="hidden-mobile">LC 219. 存在重复元素 II</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+  <div class="col-lg-7 mx-auto nopadding-x-md">
+    <div class="container custom post-custom mx-auto">
+      <img src="https://oscimg.oschina.net/oscnet/up-19688dc1af05cf8bdea43b2a863038ab9e5.png" srcset="/img/loading.gif" lazyload class="rounded mx-auto d-block mt-5" style="width:900px; height:500px;">
+    </div>
+  </div>
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.staticfile.org/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.staticfile.org/tocbot/4.18.2/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.staticfile.org/anchor-js/4.3.1/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.11/clipboard.min.js" ></script>
+  
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.bootcdn.net/ajax/libs/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        loader: {
+          
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.staticfile.org/mathjax/3.2.0/es5/tex-svg.js" ></script>
+
+  
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

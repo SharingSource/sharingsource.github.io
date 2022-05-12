@@ -1,0 +1,570 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/oimg/RoundCorner.png">
+  <link rel="icon" href="/oimg/RoundCorner.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="宫水三叶">
+  <meta name="keywords" content="算法, 数据结构, 题解">
+  
+    <meta name="description" content="题目描述这是 LeetCode 上的 539. 最小时间差 ，难度为 中等。 给定一个 $24$ 小时制（小时:分钟 &quot;HH:MM&quot;）的时间列表，找出列表中任意两个时间的最小时间差并以分钟数表示。 示例 1：123输入：timePoints &#x3D; [&quot;23:59&quot;,&quot;00:00&quot;]输出：1示例 2：123输入：timePoints &#x3D; [&amp;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LC 539. 最小时间差">
+<meta property="og:url" content="http://example.com/2022/01/17/539.%20%E6%9C%80%E5%B0%8F%E6%97%B6%E9%97%B4%E5%B7%AE%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/index.html">
+<meta property="og:site_name" content="宫水三叶的刷题日记">
+<meta property="og:description" content="题目描述这是 LeetCode 上的 539. 最小时间差 ，难度为 中等。 给定一个 $24$ 小时制（小时:分钟 &quot;HH:MM&quot;）的时间列表，找出列表中任意两个时间的最小时间差并以分钟数表示。 示例 1：123输入：timePoints &#x3D; [&quot;23:59&quot;,&quot;00:00&quot;]输出：1示例 2：123输入：timePoints &#x3D; [&amp;">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-01-17T15:04:51.000Z">
+<meta property="article:modified_time" content="2022-05-12T04:05:32.358Z">
+<meta property="article:author" content="宫水三叶">
+<meta property="article:tag" content="哈希表">
+<meta property="article:tag" content="模拟">
+<meta property="article:tag" content="排序">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  <title>LC 539. 最小时间差 - 宫水三叶的刷题日记</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/hint.css/2.7.0/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.7.2/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"|","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.1.0"></head>
+
+
+<body>
+  <header style="height: 50vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>宫水三叶の刷题日记</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/image_181.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="LC 539. 最小时间差">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-author" aria-hidden="true"></i>
+      宫水三叶
+    </span>
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2022-01-17 23:04" pubdate>
+        2022年1月17日 晚上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      3.9k 字
+    </span>
+  
+
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">LC 539. 最小时间差</h1>
+            
+            <div class="markdown-body">
+              <h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>这是 LeetCode 上的 <strong><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/minimum-time-difference/solution/gong-shui-san-xie-jian-dan-mo-ni-ti-by-a-eygg/">539. 最小时间差</a></strong> ，难度为 <strong>中等</strong>。</p>
+<p>给定一个 $24$ 小时制（小时:分钟 <code>&quot;HH:MM&quot;</code>）的时间列表，找出列表中任意两个时间的最小时间差并以分钟数表示。</p>
+<p>示例 1：<br><figure class="highlight prolog"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs prolog">输入：timePoints = [<span class="hljs-string">&quot;23:59&quot;</span>,<span class="hljs-string">&quot;00:00&quot;</span>]<br><br>输出：<span class="hljs-number">1</span><br></code></pre></div></td></tr></table></figure><br>示例 2：<br><figure class="highlight prolog"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs prolog">输入：timePoints = [<span class="hljs-string">&quot;00:00&quot;</span>,<span class="hljs-string">&quot;23:59&quot;</span>,<span class="hljs-string">&quot;00:00&quot;</span>]<br><br>输出：<span class="hljs-number">0</span><br></code></pre></div></td></tr></table></figure></p>
+<p>提示：</p>
+<ul>
+<li>$2 &lt;= timePoints &lt;= 2 * 10^4$</li>
+<li><code>timePoints[i]</code> 格式为 <code>&quot;HH:MM&quot;</code></li>
+</ul>
+<hr>
+<h3 id="模拟（排序）"><a href="#模拟（排序）" class="headerlink" title="模拟（排序）"></a>模拟（排序）</h3><p>根据题意，我们需要找出「时钟盘」中的夹角最小的两个时间点，其中包括了分布在 <code>00:00</code> 左右两侧（横跨了一天）的时间点。</p>
+<p>因此，一种简单的方式是对于每个 $timePoints[i]$，我们不仅记录「当天该时间点」对应的的偏移量，还记录「下一天该时间点」对应的偏移量。</p>
+<p>处理所有的 $timePoints[i]$ 后，对偏移量进行排序，遍历找到所有相邻元素之间的最小值。</p>
+<p><strong>代码（感谢 <a href="/u/himymben/">@Benhao</a> 和 <a href="/u/littletime_cc/">@🍭可乐可乐吗</a> 同学提供的其他语言版本）：</strong><br><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">findMinDifference</span><span class="hljs-params">(List&lt;String&gt; timePoints)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> timePoints.size() * <span class="hljs-number">2</span>;<br>        <span class="hljs-type">int</span>[] nums = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[n];<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>, idx = <span class="hljs-number">0</span>; i &lt; n / <span class="hljs-number">2</span>; i++, idx += <span class="hljs-number">2</span>) &#123;<br>            String[] ss = timePoints.get(i).split(<span class="hljs-string">&quot;:&quot;</span>);<br>            <span class="hljs-type">int</span> <span class="hljs-variable">h</span> <span class="hljs-operator">=</span> Integer.parseInt(ss[<span class="hljs-number">0</span>]), m = Integer.parseInt(ss[<span class="hljs-number">1</span>]);<br>            nums[idx] = h * <span class="hljs-number">60</span> + m;<br>            nums[idx + <span class="hljs-number">1</span>] = nums[idx] + <span class="hljs-number">1440</span>;<br>        &#125;<br>        Arrays.sort(nums);<br>        <span class="hljs-type">int</span> <span class="hljs-variable">ans</span> <span class="hljs-operator">=</span> nums[<span class="hljs-number">1</span>] - nums[<span class="hljs-number">0</span>];<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; n - <span class="hljs-number">1</span>; i++) ans = Math.min(ans, nums[i + <span class="hljs-number">1</span>] - nums[i]);<br>        <span class="hljs-keyword">return</span> ans;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure><br>-<br><figure class="highlight plaintext"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Python3">class Solution:<br>    def findMinDifference(self, timePoints: List[str]) -&gt; int:<br>        n = len(timePoints) * 2<br>        nums, idx = [0] * n, 0<br>        for time in timePoints:<br>            h, m = int(time[:2]), int(time[-2:])<br>            nums[idx] = h * 60 + m<br>            nums[idx + 1] = nums[idx] + 1440<br>            idx += 2<br>        nums.sort()<br>        return min(nums[i + 1] - nums[i] for i in range(n - 1))<br></code></pre></div></td></tr></table></figure><br>-<br><figure class="highlight go"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Go"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">findMinDifference</span><span class="hljs-params">(timePoints []<span class="hljs-type">string</span>)</span></span> <span class="hljs-type">int</span> &#123;<br>    n := <span class="hljs-built_in">len</span>(timePoints) * <span class="hljs-number">2</span><br>    nums := <span class="hljs-built_in">make</span>([]<span class="hljs-type">int</span>, n)<br>    <span class="hljs-keyword">for</span> i, idx := <span class="hljs-number">0</span>, <span class="hljs-number">0</span>; i &lt; n / <span class="hljs-number">2</span>; i++ &#123;<br>        ss := strings.Split(timePoints[i], <span class="hljs-string">&quot;:&quot;</span>)<br>        h, _ := strconv.Atoi(ss[<span class="hljs-number">0</span>])<br>        m, _ := strconv.Atoi(ss[<span class="hljs-number">1</span>])<br>        nums[idx] = h * <span class="hljs-number">60</span> + m<br>        nums[idx + <span class="hljs-number">1</span>] = nums[idx] + <span class="hljs-number">1440</span><br>        idx += <span class="hljs-number">2</span><br>    &#125;<br>    sort.Ints(nums)<br>    ans := nums[<span class="hljs-number">1</span>] - nums[<span class="hljs-number">0</span>];<br>    <span class="hljs-keyword">for</span> i := <span class="hljs-number">1</span>; i &lt; n - <span class="hljs-number">1</span>; i++ &#123;<br>        <span class="hljs-keyword">if</span> v := nums[i + <span class="hljs-number">1</span>] - nums[i]; v &lt; ans &#123;<br>            ans = v<br>        &#125;<br>    &#125;<br>    <span class="hljs-keyword">return</span> ans<br>&#125;<br></code></pre></div></td></tr></table></figure><br>-<br><figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs C++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">findMinDifference</span><span class="hljs-params">(vector&lt;string&gt;&amp; timePoints)</span> </span>&#123;<br>        <span class="hljs-type">int</span> n = timePoints.<span class="hljs-built_in">size</span>() * <span class="hljs-number">2</span>;<br>        <span class="hljs-function">vector&lt;<span class="hljs-type">int</span>&gt; <span class="hljs-title">nums</span><span class="hljs-params">(n)</span></span>;<br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>, idx = <span class="hljs-number">0</span>; i &lt; n / <span class="hljs-number">2</span>; i++, idx += <span class="hljs-number">2</span>)&#123;<br>            string ss = timePoints[i];<br>            <span class="hljs-keyword">auto</span> pos = ss.<span class="hljs-built_in">find</span>(<span class="hljs-string">&#x27;:&#x27;</span>);<br>            <span class="hljs-type">int</span> h = <span class="hljs-built_in">stoi</span>(ss.<span class="hljs-built_in">substr</span>(<span class="hljs-number">0</span>, pos)), m = <span class="hljs-built_in">stoi</span>(ss.<span class="hljs-built_in">substr</span>(pos + <span class="hljs-number">1</span>));<br>            nums[idx] = h * <span class="hljs-number">60</span> + m;<br>            nums[idx + <span class="hljs-number">1</span>] = nums[idx] + <span class="hljs-number">1440</span>;<br>        &#125;<br>        <span class="hljs-built_in">sort</span>(nums.<span class="hljs-built_in">begin</span>(), nums.<span class="hljs-built_in">end</span>());<br>        <span class="hljs-type">int</span> ans = nums[<span class="hljs-number">1</span>] - nums[<span class="hljs-number">0</span>];<br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; n - <span class="hljs-number">1</span>; i++)&#123;<br>            ans = <span class="hljs-built_in">min</span>(ans, nums[i + <span class="hljs-number">1</span>] - nums[i]);<br>        &#125;<br>        <span class="hljs-keyword">return</span> ans;<br>    &#125;<br>&#125;;<br></code></pre></div></td></tr></table></figure><br>-<br><figure class="highlight c"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs C"><span class="hljs-type">int</span> <span class="hljs-title function_">min</span><span class="hljs-params">(<span class="hljs-type">int</span> a,<span class="hljs-type">int</span> b)</span>&#123; <span class="hljs-keyword">return</span> a &gt; b ? b : a; &#125;<br><span class="hljs-type">int</span> <span class="hljs-title function_">cmp</span><span class="hljs-params">(<span class="hljs-type">const</span> <span class="hljs-type">void</span>* a , <span class="hljs-type">const</span> <span class="hljs-type">void</span>* b)</span>&#123; <span class="hljs-keyword">return</span>  (*(<span class="hljs-type">int</span>*)a) - (*(<span class="hljs-type">int</span>*)b); &#125;<br><br><span class="hljs-type">int</span> <span class="hljs-title function_">findMinDifference</span><span class="hljs-params">(<span class="hljs-type">char</span> ** timePoints, <span class="hljs-type">int</span> timePointsSize)</span>&#123;<br>    <span class="hljs-type">int</span> n = timePointsSize * <span class="hljs-number">2</span>;<br>    <span class="hljs-type">int</span>* nums = (<span class="hljs-type">int</span>*) <span class="hljs-built_in">malloc</span>(<span class="hljs-keyword">sizeof</span>(<span class="hljs-type">int</span>) * n);<br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>, idx = <span class="hljs-number">0</span>; i &lt; n / <span class="hljs-number">2</span>; i++, idx += <span class="hljs-number">2</span>)&#123;<br>        timePoints[i][<span class="hljs-number">2</span>] = <span class="hljs-string">&#x27;\0&#x27;</span>;<br>        <span class="hljs-type">int</span> h = atoi(timePoints[i]), m = atoi(timePoints[i] + <span class="hljs-number">3</span>);<br>        nums[idx] = h * <span class="hljs-number">60</span> + m;<br>        nums[idx + <span class="hljs-number">1</span>] = nums[idx] + <span class="hljs-number">1440</span>;<br>    &#125;<br>    qsort(nums, n, <span class="hljs-keyword">sizeof</span>(nums[<span class="hljs-number">0</span>]), cmp);<br>    <span class="hljs-type">int</span> ans = nums[<span class="hljs-number">1</span>] - nums[<span class="hljs-number">0</span>];<br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; n - <span class="hljs-number">1</span>; i++)&#123;<br>        ans = min(ans, nums[i + <span class="hljs-number">1</span>] - nums[i]);<br>    &#125;<br>    <span class="hljs-built_in">free</span>(nums);<br>    nums = <span class="hljs-literal">NULL</span>;<br>    <span class="hljs-keyword">return</span> ans;<br>&#125;<br></code></pre></div></td></tr></table></figure></p>
+<ul>
+<li>时间复杂度：$O(n\log{n})$</li>
+<li>空间复杂度：$O(n)$</li>
+</ul>
+<hr>
+<h3 id="模拟（哈希表计数）"><a href="#模拟（哈希表计数）" class="headerlink" title="模拟（哈希表计数）"></a>模拟（哈希表计数）</h3><p>利用当天最多只有 $60 * 24 = 1440$ 个不同的时间点（跨天的话则是双倍），我们可以使用数组充当哈希表进行计数，同时根据「抽屉原理」，若 $timePoints$ 数量大于 $1440$，必然有两个相同时间点，用作剪枝。</p>
+<p>然后找到间隔最小两个时间点，这种利用「桶排序」的思路避免了对 $timePoints$ 所对应的偏移量进行排序，而 $O(C)$ 的复杂度使得所能处理的数据范围没有上限。</p>
+<p>代码：<br><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">findMinDifference</span><span class="hljs-params">(List&lt;String&gt; timePoints)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> timePoints.size();<br>        <span class="hljs-keyword">if</span> (n &gt; <span class="hljs-number">1440</span>) <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-type">int</span>[] cnts = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[<span class="hljs-number">1440</span> * <span class="hljs-number">2</span> + <span class="hljs-number">10</span>];<br>        <span class="hljs-keyword">for</span> (String s : timePoints) &#123;<br>            String[] ss = s.split(<span class="hljs-string">&quot;:&quot;</span>);<br>            <span class="hljs-type">int</span> <span class="hljs-variable">h</span> <span class="hljs-operator">=</span> Integer.parseInt(ss[<span class="hljs-number">0</span>]), m = Integer.parseInt(ss[<span class="hljs-number">1</span>]);<br>            cnts[h * <span class="hljs-number">60</span> + m]++;<br>            cnts[h * <span class="hljs-number">60</span> + m + <span class="hljs-number">1440</span>]++;<br>        &#125;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">ans</span> <span class="hljs-operator">=</span> <span class="hljs-number">1440</span>, last = -<span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt;= <span class="hljs-number">1440</span> * <span class="hljs-number">2</span> &amp;&amp; ans != <span class="hljs-number">0</span>; i++) &#123;<br>            <span class="hljs-keyword">if</span> (cnts[i] == <span class="hljs-number">0</span>) <span class="hljs-keyword">continue</span>;<br>            <span class="hljs-keyword">if</span> (cnts[i] &gt; <span class="hljs-number">1</span>) ans = <span class="hljs-number">0</span>;<br>            <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (last != -<span class="hljs-number">1</span>) ans = Math.min(ans, i - last);<br>            last = i;<br>        &#125;<br>        <span class="hljs-keyword">return</span> ans;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure></p>
+<ul>
+<li>时间复杂度：$O(C)$</li>
+<li>空间复杂度：$O(C)$</li>
+</ul>
+<hr>
+<h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>这是我们「刷穿 LeetCode」系列文章的第 <code>No.539</code> 篇，系列开始于 2021/01/01，截止于起始日 LeetCode 上共有 1916 道题目，部分是有锁题，我们将先把所有不带锁的题目刷完。</p>
+<p>在这个系列文章里面，除了讲解解题思路以外，还会尽可能给出最为简洁的代码。如果涉及通解还会相应的代码模板。</p>
+<p>为了方便各位同学能够电脑上进行调试和提交代码，我建立了相关的仓库：<a target="_blank" rel="noopener" href="https://github.com/SharingSource/LogicStack-LeetCode">https://github.com/SharingSource/LogicStack-LeetCode</a> 。</p>
+<p>在仓库地址里，你可以看到系列文章的题解链接、系列文章的相应代码、LeetCode 原题链接和其他优选题解。</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%93%88%E5%B8%8C%E8%A1%A8/">哈希表</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E6%A8%A1%E6%8B%9F/">模拟</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E6%8E%92%E5%BA%8F/">排序</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/01/18/219.%20%E5%AD%98%E5%9C%A8%E9%87%8D%E5%A4%8D%E5%85%83%E7%B4%A0%20II%EF%BC%88%E7%AE%80%E5%8D%95%EF%BC%89/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">LC 219. 存在重复元素 II</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/01/16/1220.%20%E7%BB%9F%E8%AE%A1%E5%85%83%E9%9F%B3%E5%AD%97%E6%AF%8D%E5%BA%8F%E5%88%97%E7%9A%84%E6%95%B0%E7%9B%AE%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/">
+                        <span class="hidden-mobile">LC 1220. 统计元音字母序列的数目</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+  <div class="col-lg-7 mx-auto nopadding-x-md">
+    <div class="container custom post-custom mx-auto">
+      <img src="https://oscimg.oschina.net/oscnet/up-19688dc1af05cf8bdea43b2a863038ab9e5.png" srcset="/img/loading.gif" lazyload class="rounded mx-auto d-block mt-5" style="width:900px; height:500px;">
+    </div>
+  </div>
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.staticfile.org/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.staticfile.org/tocbot/4.18.2/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.staticfile.org/anchor-js/4.3.1/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.11/clipboard.min.js" ></script>
+  
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.bootcdn.net/ajax/libs/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        loader: {
+          
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.staticfile.org/mathjax/3.2.0/es5/tex-svg.js" ></script>
+
+  
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

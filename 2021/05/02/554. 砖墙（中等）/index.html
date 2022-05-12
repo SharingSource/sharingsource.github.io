@@ -1,0 +1,601 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/oimg/RoundCorner.png">
+  <link rel="icon" href="/oimg/RoundCorner.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="宫水三叶">
+  <meta name="keywords" content="算法, 数据结构, 题解">
+  
+    <meta name="description" content="题目描述这是 LeetCode 上的 554. 砖墙 ，难度为 中等。 你的面前有一堵矩形的、由 n 行砖块组成的砖墙。 这些砖块高度相同（也就是一个单位高）但是宽度不同。每一行砖块的宽度之和相等。 你现在要画一条 自顶向下 的、穿过 最少 砖块的垂线。 如果你画的线只是从砖块的边缘经过，就不算穿过这块砖。 你不能沿着墙的两个垂直边缘之一画线，这样显然是没有穿过一块砖的。 给你一个二维数组 wal">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LC 554. 砖墙">
+<meta property="og:url" content="http://example.com/2021/05/02/554.%20%E7%A0%96%E5%A2%99%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/index.html">
+<meta property="og:site_name" content="宫水三叶的刷题日记">
+<meta property="og:description" content="题目描述这是 LeetCode 上的 554. 砖墙 ，难度为 中等。 你的面前有一堵矩形的、由 n 行砖块组成的砖墙。 这些砖块高度相同（也就是一个单位高）但是宽度不同。每一行砖块的宽度之和相等。 你现在要画一条 自顶向下 的、穿过 最少 砖块的垂线。 如果你画的线只是从砖块的边缘经过，就不算穿过这块砖。 你不能沿着墙的两个垂直边缘之一画线，这样显然是没有穿过一块砖的。 给你一个二维数组 wal">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://assets.leetcode.com/uploads/2021/04/24/cutwall-grid.jpg">
+<meta property="og:image" content="https://pic.leetcode-cn.com/1619762681-rvgTEO-image.png">
+<meta property="article:published_time" content="2021-05-01T17:11:23.000Z">
+<meta property="article:modified_time" content="2022-05-12T04:05:31.955Z">
+<meta property="article:author" content="宫水三叶">
+<meta property="article:tag" content="哈希表">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://assets.leetcode.com/uploads/2021/04/24/cutwall-grid.jpg">
+  
+  
+  <title>LC 554. 砖墙 - 宫水三叶的刷题日记</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/hint.css/2.7.0/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.7.2/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"|","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.1.0"></head>
+
+
+<body>
+  <header style="height: 50vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>宫水三叶の刷题日记</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/image_52.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="LC 554. 砖墙">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-author" aria-hidden="true"></i>
+      宫水三叶
+    </span>
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-05-02 01:11" pubdate>
+        2021年5月2日 凌晨
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2.7k 字
+    </span>
+  
+
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">LC 554. 砖墙</h1>
+            
+            <div class="markdown-body">
+              <h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>这是 LeetCode 上的 <strong><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/brick-wall/solution/gong-shui-san-xie-zheng-nan-ze-fan-shi-y-gsri/">554. 砖墙</a></strong> ，难度为 <strong>中等</strong>。</p>
+<p>你的面前有一堵矩形的、由 n 行砖块组成的砖墙。</p>
+<p>这些砖块高度相同（也就是一个单位高）但是宽度不同。每一行砖块的宽度之和相等。</p>
+<p>你现在要画一条 自顶向下 的、穿过 最少 砖块的垂线。</p>
+<p>如果你画的线只是从砖块的边缘经过，就不算穿过这块砖。</p>
+<p>你不能沿着墙的两个垂直边缘之一画线，这样显然是没有穿过一块砖的。</p>
+<p>给你一个二维数组 wall ，该数组包含这堵墙的相关信息。</p>
+<p>其中，wall[i] 是一个代表从左至右每块砖的宽度的数组。</p>
+<p>你需要找出怎样画才能使这条线 穿过的砖块数量最少 ，并且返回 穿过的砖块数量 。</p>
+<p>示例 1：</p>
+<p><img src="https://assets.leetcode.com/uploads/2021/04/24/cutwall-grid.jpg" srcset="/img/loading.gif" lazyload alt=""></p>
+<figure class="highlight inform7"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs inform7">输入：wall = <span class="hljs-comment">[<span class="hljs-comment">[1,2,2,1]</span>,<span class="hljs-comment">[3,1,2]</span>,<span class="hljs-comment">[1,3,2]</span>,<span class="hljs-comment">[2,4]</span>,<span class="hljs-comment">[3,1,2]</span>,<span class="hljs-comment">[1,3,1,1]</span>]</span><br><br>输出：2<br></code></pre></div></td></tr></table></figure>
+<p>示例 2：<br><figure class="highlight lua"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs lua">输入：wall = <span class="hljs-string">[[1],[1],[1]]</span><br><br>输出：<span class="hljs-number">3</span><br></code></pre></div></td></tr></table></figure><br>提示：</p>
+<ul>
+<li>n == wall.length</li>
+<li>1 &lt;= n &lt;= $10^4$</li>
+<li>1 &lt;= wall[i].length &lt;= $10^4$</li>
+<li>1 &lt;= sum(wall[i].length) &lt;= 2 * $10^4$</li>
+<li>对于每一行 i ，sum(wall[i]) 是相同的</li>
+<li>1 &lt;= <code>wall[i][j]</code> &lt;= $2^{31}$ - 1</li>
+</ul>
+<hr>
+<h3 id="哈希表"><a href="#哈希表" class="headerlink" title="哈希表"></a>哈希表</h3><p>题目要求穿过的砖块数量最少，等效于通过的间隙最多。</p>
+<p><strong>我们可以使用「哈希表」记录每个间隙的出现次数，最终统计所有行中哪些间隙出现得最多，使用「总行数」减去「间隙出现的最多次数」即是答案。</strong></p>
+<p>如何记录间隙呢？直接使用行前缀记录即可。</p>
+<p>就用示例数据来举 🌰 ：</p>
+<p><img src="https://pic.leetcode-cn.com/1619762681-rvgTEO-image.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<ul>
+<li>第 1 行的间隙有 <code>[1,3,5]</code></li>
+<li>第 2 行的间隙有 <code>[3,4]</code></li>
+<li>第 3 行的间隙有 <code>[1,4]</code></li>
+<li>第 4 行的间隙有 <code>[2]</code></li>
+<li>第 5 行的间隙有 <code>[3,4]</code></li>
+<li>第 6 行的间隙有 <code>[1,4,5]</code></li>
+</ul>
+<p>对间隙计数完成后，遍历「哈希表」找出出现次数最多间隙 <code>4</code>，根据同一个间隙编号只会在单行内被统计一次，用总行数减去出现次数，即得到「最少穿过的砖块数」。</p>
+<p>代码：<br><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">leastBricks</span><span class="hljs-params">(List&lt;List&lt;Integer&gt;&gt; wall)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> wall.size();<br>        Map&lt;Integer, Integer&gt; map = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>, sum = <span class="hljs-number">0</span>; i &lt; n; i++, sum = <span class="hljs-number">0</span>) &#123;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> cur : wall.get(i)) &#123;<br>                sum += cur;<br>                map.put(sum, map.getOrDefault(sum, <span class="hljs-number">0</span>) + <span class="hljs-number">1</span>);<br>            &#125;<br>            map.remove(sum); <span class="hljs-comment">// 不能从两边穿过，需要 remove 掉最后一个</span><br>        &#125;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">ans</span> <span class="hljs-operator">=</span> n;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> u : map.keySet()) &#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">cnt</span> <span class="hljs-operator">=</span> map.get(u);<br>            ans = Math.min(ans, n - cnt);<br>        &#125;<br>        <span class="hljs-keyword">return</span> ans;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure></p>
+<ul>
+<li>时间复杂度：记所有砖块数量为 <code>n</code>，所有砖块都会被扫描。复杂度为 $O(n)$</li>
+<li>空间复杂度：$O(n)$</li>
+</ul>
+<hr>
+<h3 id="关于是否需要考虑「溢出」的说明"><a href="#关于是否需要考虑「溢出」的说明" class="headerlink" title="关于是否需要考虑「溢出」的说明"></a>关于是否需要考虑「溢出」的说明</h3><p>类似的问题，在之前 <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/combination-sum-iv/solution/gong-shui-san-xie-yu-wan-quan-bei-bao-we-x0kn/">题解</a> 也说过，这里再提一下 ~ </p>
+<p><strong>当 Java 发生溢出时，会直接转成负数来处理</strong>。因此对于本题不会影响正确性（不重复溢出的话）。</p>
+<p>可以通过以下例子来体会：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java">&#123;<br>    System.out.println(Integer.MIN_VALUE); <span class="hljs-comment">// -2147483648</span><br>    <br>    <span class="hljs-type">int</span> <span class="hljs-variable">a</span> <span class="hljs-operator">=</span> Integer.MAX_VALUE;<br>    System.out.println(a); <span class="hljs-comment">// 2147483647</span><br>    a += <span class="hljs-number">1</span>;<br>    System.out.println(a); <span class="hljs-comment">// -2147483648</span><br>    a -= <span class="hljs-number">1</span>;<br>    System.out.println(a); <span class="hljs-comment">//2147483647</span><br>&#125;<br></code></pre></div></td></tr></table></figure>
+<p>这意味着，如果我们在运算过程中如果只涉及「纯加减运算」，而不涉及「乘除」、「取最大值/最小值」和「数值大小判断」的话，Java 是不需要使用 <code>Long</code> 来确保正确性的，因为最终溢出会被转化回来。</p>
+<p>按道理，CPP 本身对于 <code>int</code> 溢出的转化处理也是一样的。</p>
+<p><strong>但在 LC 上的 CPP 发生溢出时，不会直接转成负数来处理，而是直接抛出异常</strong>。因此同样的代码在 LC 上是无法被正常执行的：</p>
+<figure class="highlight c++"><figcaption><span>[]</span></figcaption><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs C++">&#123;<br>    cout &lt;&lt; INT_MIN &lt;&lt; endl; <span class="hljs-comment">//-2147483648</span><br><br>    <span class="hljs-type">int</span> a = INT_MAX; <br>    cout &lt;&lt; a &lt;&lt; endl; <span class="hljs-comment">// 2147483647</span><br>    a += <span class="hljs-number">1</span>; <span class="hljs-comment">// 溢出报错</span><br>    cout &lt;&lt; a &lt;&lt; endl;<br>    a -= <span class="hljs-number">1</span>;<br>    cout &lt;&lt; a &lt;&lt; endl;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<p><strong>这是一般性的，对于 LC 上的同一道题，Java 不需要处理溢出，CPP 需要处理的原因。</strong></p>
+<hr>
+<p>其实对应到本题，我这里不使用 long long，是因为猜想「题目」中的条件写错了：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java"><span class="hljs-number">1</span> &lt;= sum(wall[i]) &lt;= <span class="hljs-number">2</span> * <span class="hljs-number">10</span>^<span class="hljs-number">4</span><br><br>错写成了<br><br><span class="hljs-number">1</span> &lt;= sum(wall[i].length) &lt;= <span class="hljs-number">2</span> * <span class="hljs-number">10</span>^<span class="hljs-number">4</span><br></code></pre></div></td></tr></table></figure>
+<p>因为在给定下面两个条件的情况下：</p>
+<figure class="highlight basic"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs basic"><span class="hljs-symbol">1 </span>&lt;= n &lt;= <span class="hljs-number">10</span>^<span class="hljs-number">4</span><br><span class="hljs-symbol">1 </span>&lt;= wall[i].length &lt;= <span class="hljs-number">10</span>^<span class="hljs-number">4</span><br></code></pre></div></td></tr></table></figure>
+<p>$1 &lt;= sum(wall[i].length) &lt;= 2 * 10^4$ 十分多余。</p>
+<p>针对反例：<br><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java">[<br>    [<span class="hljs-number">2147483647</span>,<span class="hljs-number">2147483647</span>,<span class="hljs-number">2147483647</span>,<span class="hljs-number">2147483647</span>,<span class="hljs-number">1</span>,<span class="hljs-number">2</span>], <br>    [<span class="hljs-number">2</span>,<span class="hljs-number">2147483647</span>,<span class="hljs-number">2147483647</span>,<span class="hljs-number">2147483647</span>,<span class="hljs-number">2147483647</span>,<span class="hljs-number">1</span>]<br>]<br></code></pre></div></td></tr></table></figure></p>
+<p>我用官方提供的代码，跑的也是 0，所以如果是以官方的代码为评测标准的话，用 long long 反而是 WA 了 🤣</p>
+<hr>
+<h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>这是我们「刷穿 LeetCode」系列文章的第 <code>No.554</code> 篇，系列开始于 2021/01/01，截止于起始日 LeetCode 上共有 1916 道题目，部分是有锁题，我们将先把所有不带锁的题目刷完。</p>
+<p>在这个系列文章里面，除了讲解解题思路以外，还会尽可能给出最为简洁的代码。如果涉及通解还会相应的代码模板。</p>
+<p>为了方便各位同学能够电脑上进行调试和提交代码，我建立了相关的仓库：<a target="_blank" rel="noopener" href="https://github.com/SharingSource/LogicStack-LeetCode">https://github.com/SharingSource/LogicStack-LeetCode</a> 。</p>
+<p>在仓库地址里，你可以看到系列文章的题解链接、系列文章的相应代码、LeetCode 原题链接和其他优选题解。</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%93%88%E5%B8%8C%E8%A1%A8/">哈希表</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/05/04/1473.%20%E7%B2%89%E5%88%B7%E6%88%BF%E5%AD%90%20III%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">LC 1473. 粉刷房子 III</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/05/01/690.%20%E5%91%98%E5%B7%A5%E7%9A%84%E9%87%8D%E8%A6%81%E6%80%A7%EF%BC%88%E7%AE%80%E5%8D%95%EF%BC%89/">
+                        <span class="hidden-mobile">LC 690. 员工的重要性</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+  <div class="col-lg-7 mx-auto nopadding-x-md">
+    <div class="container custom post-custom mx-auto">
+      <img src="https://oscimg.oschina.net/oscnet/up-19688dc1af05cf8bdea43b2a863038ab9e5.png" srcset="/img/loading.gif" lazyload class="rounded mx-auto d-block mt-5" style="width:900px; height:500px;">
+    </div>
+  </div>
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.staticfile.org/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.staticfile.org/tocbot/4.18.2/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.staticfile.org/anchor-js/4.3.1/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.11/clipboard.min.js" ></script>
+  
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.bootcdn.net/ajax/libs/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        loader: {
+          
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.staticfile.org/mathjax/3.2.0/es5/tex-svg.js" ></script>
+
+  
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

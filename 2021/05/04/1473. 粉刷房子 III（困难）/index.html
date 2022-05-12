@@ -1,0 +1,609 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/oimg/RoundCorner.png">
+  <link rel="icon" href="/oimg/RoundCorner.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="宫水三叶">
+  <meta name="keywords" content="算法, 数据结构, 题解">
+  
+    <meta name="description" content="题目描述这是 LeetCode 上的 1473. 粉刷房子 III ，难度为 困难。 在一个小城市里，有 m 个房子排成一排，你需要给每个房子涂上 n 种颜色之一（颜色编号为 1 到 n ）。 有的房子去年夏天已经涂过颜色了，所以这些房子不可以被重新涂色。 我们将连续相同颜色尽可能多的房子称为一个街区。 （比方说 houses &#x3D; [1,2,2,3,3,2,1,1] ，它包含 5 个街区  [{1">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LC 1473. 粉刷房子 III">
+<meta property="og:url" content="http://example.com/2021/05/04/1473.%20%E7%B2%89%E5%88%B7%E6%88%BF%E5%AD%90%20III%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/index.html">
+<meta property="og:site_name" content="宫水三叶的刷题日记">
+<meta property="og:description" content="题目描述这是 LeetCode 上的 1473. 粉刷房子 III ，难度为 困难。 在一个小城市里，有 m 个房子排成一排，你需要给每个房子涂上 n 种颜色之一（颜色编号为 1 到 n ）。 有的房子去年夏天已经涂过颜色了，所以这些房子不可以被重新涂色。 我们将连续相同颜色尽可能多的房子称为一个街区。 （比方说 houses &#x3D; [1,2,2,3,3,2,1,1] ，它包含 5 个街区  [{1">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-05-03T17:20:55.000Z">
+<meta property="article:modified_time" content="2022-05-12T04:05:31.960Z">
+<meta property="article:author" content="宫水三叶">
+<meta property="article:tag" content="动态规划">
+<meta property="article:tag" content="序列 DP">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  <title>LC 1473. 粉刷房子 III - 宫水三叶的刷题日记</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/hint.css/2.7.0/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.7.2/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"|","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.1.0"></head>
+
+
+<body>
+  <header style="height: 50vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>宫水三叶の刷题日记</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/image_164.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="LC 1473. 粉刷房子 III">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-author" aria-hidden="true"></i>
+      宫水三叶
+    </span>
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-05-04 01:20" pubdate>
+        2021年5月4日 凌晨
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      5.9k 字
+    </span>
+  
+
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">LC 1473. 粉刷房子 III</h1>
+            
+            <div class="markdown-body">
+              <h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>这是 LeetCode 上的 <strong><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/paint-house-iii/solution/gong-shui-san-xie-san-wei-dong-tai-gui-h-ud7m/">1473. 粉刷房子 III</a></strong> ，难度为 <strong>困难</strong>。</p>
+<p>在一个小城市里，有 m 个房子排成一排，你需要给每个房子涂上 n 种颜色之一（颜色编号为 1 到 n ）。</p>
+<p>有的房子去年夏天已经涂过颜色了，所以这些房子不可以被重新涂色。</p>
+<p>我们将连续相同颜色尽可能多的房子称为一个街区。</p>
+<p>（比方说 houses = [1,2,2,3,3,2,1,1] ，它包含 5 个街区  [{1}, {2,2}, {3,3}, {2}, {1,1}] 。）</p>
+<p>给你一个数组 houses ，一个 m * n 的矩阵 cost 和一个整数 target ，其中：</p>
+<ul>
+<li><code>houses[i]</code>：是第 i 个房子的颜色，0 表示这个房子还没有被涂色。</li>
+<li><code>cost[i][j]</code>：是将第 i 个房子涂成颜色 j+1 的花费。</li>
+</ul>
+<p>请你返回房子涂色方案的最小总花费，使得每个房子都被涂色后，恰好组成 target 个街区。</p>
+<p>如果没有可用的涂色方案，请返回 -1 。</p>
+<p>示例 1：<br><figure class="highlight inform7"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs inform7">输入：houses = <span class="hljs-comment">[0,0,0,0,0]</span>, cost = <span class="hljs-comment">[<span class="hljs-comment">[1,10]</span>,<span class="hljs-comment">[10,1]</span>,<span class="hljs-comment">[10,1]</span>,<span class="hljs-comment">[1,10]</span>,<span class="hljs-comment">[5,1]</span>]</span>, m = 5, n = 2, target = 3<br><br>输出：9<br><br>解释：房子涂色方案为 <span class="hljs-comment">[1,2,2,1,1]</span><br>此方案包含 target = 3 个街区，分别是 <span class="hljs-comment">[&#123;1&#125;, &#123;2,2&#125;, &#123;1,1&#125;]</span>。<br>涂色的总花费为 (1 + 1 + 1 + 1 + 5) = 9。<br></code></pre></div></td></tr></table></figure><br>示例 2：<br><figure class="highlight inform7"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs inform7">输入：houses = <span class="hljs-comment">[0,2,1,2,0]</span>, cost = <span class="hljs-comment">[<span class="hljs-comment">[1,10]</span>,<span class="hljs-comment">[10,1]</span>,<span class="hljs-comment">[10,1]</span>,<span class="hljs-comment">[1,10]</span>,<span class="hljs-comment">[5,1]</span>]</span>, m = 5, n = 2, target = 3<br><br>输出：11<br><br>解释：有的房子已经被涂色了，在此基础上涂色方案为 <span class="hljs-comment">[2,2,1,2,2]</span><br>此方案包含 target = 3 个街区，分别是 <span class="hljs-comment">[&#123;2,2&#125;, &#123;1&#125;, &#123;2,2&#125;]</span>。<br>给第一个和最后一个房子涂色的花费为 (10 + 1) = 11。<br></code></pre></div></td></tr></table></figure><br>示例 3：<br><figure class="highlight inform7"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs inform7">输入：houses = <span class="hljs-comment">[0,0,0,0,0]</span>, cost = <span class="hljs-comment">[<span class="hljs-comment">[1,10]</span>,<span class="hljs-comment">[10,1]</span>,<span class="hljs-comment">[1,10]</span>,<span class="hljs-comment">[10,1]</span>,<span class="hljs-comment">[1,10]</span>]</span>, m = 5, n = 2, target = 5<br><br>输出：5<br></code></pre></div></td></tr></table></figure><br>示例 4：<br><figure class="highlight inform7"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs inform7">输入：houses = <span class="hljs-comment">[3,1,2,3]</span>, cost = <span class="hljs-comment">[<span class="hljs-comment">[1,1,1]</span>,<span class="hljs-comment">[1,1,1]</span>,<span class="hljs-comment">[1,1,1]</span>,<span class="hljs-comment">[1,1,1]</span>]</span>, m = 4, n = 3, target = 3<br><br>输出：-1<br><br>解释：房子已经被涂色并组成了 4 个街区，分别是 <span class="hljs-comment">[&#123;3&#125;,&#123;1&#125;,&#123;2&#125;,&#123;3&#125;]</span> ，无法形成 target = 3 个街区。<br></code></pre></div></td></tr></table></figure></p>
+<p>提示：</p>
+<ul>
+<li>m == houses.length == cost.length</li>
+<li>n == cost[i].length</li>
+<li>1 &lt;= m &lt;= 100</li>
+<li>1 &lt;= n &lt;= 20</li>
+<li>1 &lt;= target &lt;= m</li>
+<li>0 &lt;= houses[i] &lt;= n</li>
+<li>1 &lt;= cost[i][j] &lt;= $10^4$</li>
+</ul>
+<hr>
+<h3 id="动态规划"><a href="#动态规划" class="headerlink" title="动态规划"></a>动态规划</h3><p><strong>定义 $f[i][j][k]$ 为考虑前 $i$ 间房子，且第 $i$ 间房子的颜色编号为 $j$，前 $i$ 间房子形成的分区数量为 $k$ 的所有方案中的「最小上色成本」。</strong></p>
+<p>我们不失一般性的考虑 $f[i][j][k]$ 该如何转移，由于某些房子本身就已经上色，上色的房子是不允许被粉刷的。</p>
+<p>我们可以根据第 $i$ 间房子是否已经被上色，进行分情况讨论：</p>
+<ul>
+<li><p>第 $i$ 间房子已经被上色，即 $houses[i] != 0$，此时只有满足 $j == houses[i]$ 的状态才是有意义的，其余状态均为 <code>INF</code>。<br>  同时根据「第 $i$ 间房子的颜色 $j$」与「第 $i - 1$ 间房子的颜色 $p$」是否相同，会决定第 $i$ 间房子是否形成一个新的分区。这同样需要进行分情况讨论。<br>  整理后的转移方程为：</p>
+<script type="math/tex; mode=display">f[i][j][k]=\begin{cases}
+  min(f[i - 1][j][k], f[i - 1][p][k - 1]) &j == houses[i], p != j\\
+  INF & j != houses[i]
+  \end{cases}</script></li>
+<li><p>第 $i$ 间房子尚未被上色，即 $houses[i] == 0$，此时房子可以被粉刷成任意颜色。不会有无效状态的情况。<br>同样，根据「第 $i$ 间房子的颜色 $j$」与「第 $i - 1$ 间房子的颜色 $p$」是否相同，会决定第 $i$ 间房子是否形成一个新的分区。<br>  转移方程为：</p>
+<script type="math/tex; mode=display">f[i][j][k] = min(f[i - 1][j][k], f[i - 1][p][k - 1]) + cost[i][j - 1], p != j</script></li>
+</ul>
+<p>一些编码细节：</p>
+<ul>
+<li>下标转换：这是个人习惯，无论做什么题，我都喜欢将下标转换为从 $1$ 开始，目的是为了「节省负值下标的分情况讨论」、「将无效状态限制在 $0$ 下标内」或者「充当哨兵」等等。</li>
+<li>将 <code>0x3f3f3f3f</code> 作为 <code>INF</code>：因为目标是求最小值，我们应当使用一个较大值充当正无穷，来关联无效状态。同时为了确保不会出现「在正无穷基础上累加导致丢失正无穷含义」的歧义情况，我们可以使用一个有「累加空间」的值作为「正无穷」（这个问题刚好最近在 <a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzU4NDE3MTEyMA==&amp;mid=2247486435&amp;idx=1&amp;sn=2464b01e9c0fb8d81fcea6dd4ed0ec92&amp;chksm=fd9ca0fccaeb29ea9947456290099143c5bc9bdea0ccfb2408f5fd63f5e0fc13fcd8060d4251&amp;token=515378286&amp;lang=zh_CN#rd">这里</a> 专门讲过）。</li>
+</ul>
+<p>代码：<br><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-type">int</span> <span class="hljs-variable">INF</span> <span class="hljs-operator">=</span> <span class="hljs-number">0x3f3f3f3f</span>;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">minCost</span><span class="hljs-params">(<span class="hljs-type">int</span>[] hs, <span class="hljs-type">int</span>[][] cost, <span class="hljs-type">int</span> m, <span class="hljs-type">int</span> n, <span class="hljs-type">int</span> t)</span> &#123;<br>        <span class="hljs-type">int</span>[][][] f = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[m + <span class="hljs-number">1</span>][n + <span class="hljs-number">1</span>][t + <span class="hljs-number">1</span>];<br><br>        <span class="hljs-comment">// 不存在分区数量为 0 的状态</span><br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt;= m; i++) &#123;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; j &lt;= n; j++) &#123;<br>                f[i][j][<span class="hljs-number">0</span>] = INF;<br>            &#125;<br>        &#125;<br><br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>; i &lt;= m; i++) &#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">color</span> <span class="hljs-operator">=</span> hs[i - <span class="hljs-number">1</span>];<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>; j &lt;= n; j++) &#123;<br>                <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">k</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>; k &lt;= t; k++) &#123;<br>                    <span class="hljs-comment">// 形成分区数量大于房子数量，状态无效</span><br>                    <span class="hljs-keyword">if</span> (k &gt; i) &#123;<br>                        f[i][j][k] = INF;<br>                        <span class="hljs-keyword">continue</span>;<br>                    &#125;<br><br>                    <span class="hljs-comment">// 第 i 间房间已经上色</span><br>                    <span class="hljs-keyword">if</span> (color != <span class="hljs-number">0</span>) &#123;<br>                        <span class="hljs-keyword">if</span> (j == color) &#123; <span class="hljs-comment">// 只有与「本来的颜色」相同的状态才允许被转移</span><br>                            <span class="hljs-type">int</span> <span class="hljs-variable">tmp</span> <span class="hljs-operator">=</span> INF;<br>                            <span class="hljs-comment">// 先从所有「第 i 间房形成新分区」方案中选最优（即与上一房间颜色不同）</span><br>                            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">p</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>; p &lt;= n; p++) &#123;<br>                                <span class="hljs-keyword">if</span> (p != j) &#123;<br>                                    tmp = Math.min(tmp, f[i - <span class="hljs-number">1</span>][p][k - <span class="hljs-number">1</span>]);<br>                                &#125;<br>                            &#125;<br>                            <span class="hljs-comment">// 再结合「第 i 间房不形成新分区」方案中选最优（即与上一房间颜色相同）</span><br>                            f[i][j][k] = Math.min(f[i - <span class="hljs-number">1</span>][j][k], tmp);<br>                        <br>                        &#125; <span class="hljs-keyword">else</span> &#123; <span class="hljs-comment">// 其余状态无效  </span><br>                            f[i][j][k] = INF;<br>                        &#125;<br><br>                    <span class="hljs-comment">// 第 i 间房间尚未上色</span><br>                    &#125; <span class="hljs-keyword">else</span> &#123;<br>                        <span class="hljs-type">int</span> <span class="hljs-variable">u</span> <span class="hljs-operator">=</span> cost[i - <span class="hljs-number">1</span>][j - <span class="hljs-number">1</span>]; <br>                        <span class="hljs-type">int</span> <span class="hljs-variable">tmp</span> <span class="hljs-operator">=</span> INF;<br>                        <span class="hljs-comment">// 先从所有「第 i 间房形成新分区」方案中选最优（即与上一房间颜色不同）</span><br>                        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">p</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>; p &lt;= n; p++) &#123;<br>                            <span class="hljs-keyword">if</span> (p != j) &#123;<br>                                tmp = Math.min(tmp, f[i - <span class="hljs-number">1</span>][p][k - <span class="hljs-number">1</span>]);<br>                            &#125;<br>                        &#125;<br>                        <span class="hljs-comment">// 再结合「第 i 间房不形成新分区」方案中选最优（即与上一房间颜色相同）</span><br>                        <span class="hljs-comment">// 并将「上色成本」添加进去</span><br>                        f[i][j][k] = Math.min(tmp, f[i - <span class="hljs-number">1</span>][j][k]) + u;<br>                    &#125;<br>                &#125;<br>            &#125;<br>        &#125;<br><br>        <span class="hljs-comment">// 从「考虑所有房间，并且形成分区数量为 t」的所有方案中找答案</span><br>        <span class="hljs-type">int</span> <span class="hljs-variable">ans</span> <span class="hljs-operator">=</span> INF;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>; i &lt;= n; i++) &#123;<br>            ans = Math.min(ans, f[m][i][t]);<br>        &#125;<br>        <span class="hljs-type">return</span> <span class="hljs-variable">ans</span> <span class="hljs-operator">=</span>= INF ? -<span class="hljs-number">1</span> : ans;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure></p>
+<ul>
+<li>时间复杂度：共有 $m <em> n </em> t$ 个状态需要被转移，每次转移需要枚举「所依赖的状态」的颜色，复杂度为 $O(n)$。整体复杂度为 $O(m <em> n^2 </em> t)$</li>
+<li>空间复杂度：$O(m <em> n </em> t)$</li>
+</ul>
+<hr>
+<h3 id="状态定义的由来"><a href="#状态定义的由来" class="headerlink" title="状态定义的由来"></a>状态定义的由来</h3><p>对于有一定 DP 刷题量的同学来说，上述的「状态定义」应该很好理解。</p>
+<p><strong>根据经验，我们可以很容易确定「房间编号维度 $i$」和「分区数量维度 $k$」需要纳入考虑，同时为了在转移过程中，我们能够清楚知道从哪些状态转移过来需要增加「分区数量」，哪些状态转移过来不需要增加，因此需要多引入「最后一间房间颜色 $j$」维度。</strong></p>
+<p>至于对 DP 不熟悉的同学，可以从写「爆搜」开始入手。</p>
+<p><strong>这里的“写”不一定真的要动手去实现一个完整的「爆搜」方案，只需要合理设计出来 <code>DFS</code> 函数签名即可。</strong></p>
+<p>但为了更好理解，我写了一个完整版的供你参考。</p>
+<p>代码：<br><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-type">int</span> <span class="hljs-variable">INF</span> <span class="hljs-operator">=</span> <span class="hljs-number">0x3f3f3f3f</span>;<br>    <span class="hljs-type">int</span> <span class="hljs-variable">ans</span> <span class="hljs-operator">=</span> INF;<br>    <span class="hljs-type">int</span>[] hs;<br>    <span class="hljs-type">int</span>[][] cost;<br>    <span class="hljs-type">int</span> m, n, t;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">minCost</span><span class="hljs-params">(<span class="hljs-type">int</span>[] _hs, <span class="hljs-type">int</span>[][] _cost, <span class="hljs-type">int</span> _m, <span class="hljs-type">int</span> _n, <span class="hljs-type">int</span> _t)</span> &#123;<br>        m = _m; n = _n; t = _t;<br>        hs = _hs;<br>        cost = _cost;<br>        dfs(<span class="hljs-number">0</span>, -<span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>);<br>        <span class="hljs-type">return</span> <span class="hljs-variable">ans</span> <span class="hljs-operator">=</span>= INF ? -<span class="hljs-number">1</span> : ans;<br>    &#125;<br>    <span class="hljs-comment">// u : 当前处理到的房间编号</span><br>    <span class="hljs-comment">// last : 当前处理的房间颜色</span><br>    <span class="hljs-comment">// cnt : 当前形成的分区数量</span><br>    <span class="hljs-comment">// sum : 当前的上色成本</span><br>    <span class="hljs-keyword">void</span> <span class="hljs-title function_">dfs</span><span class="hljs-params">(<span class="hljs-type">int</span> u, <span class="hljs-type">int</span> last, <span class="hljs-type">int</span> cnt, <span class="hljs-type">int</span> sum)</span> &#123;<br>        <span class="hljs-keyword">if</span> (sum &gt;= ans || cnt &gt; t) <span class="hljs-keyword">return</span>;<br>        <span class="hljs-keyword">if</span> (u == m) &#123;<br>            <span class="hljs-keyword">if</span> (cnt == t) &#123;<br>                ans = Math.min(ans, sum);<br>            &#125;<br>            <span class="hljs-keyword">return</span>;<br>        &#125;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">color</span> <span class="hljs-operator">=</span> hs[u];<br>        <span class="hljs-keyword">if</span> (color == <span class="hljs-number">0</span>) &#123;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>; i &lt;= n; i++) &#123;<br>                <span class="hljs-type">int</span> <span class="hljs-variable">nCnt</span> <span class="hljs-operator">=</span> u - <span class="hljs-number">1</span> &lt; <span class="hljs-number">0</span> ? <span class="hljs-number">1</span> : last == i ? cnt : cnt + <span class="hljs-number">1</span>; <br>                dfs(u + <span class="hljs-number">1</span>, i, nCnt, sum + cost[u][i - <span class="hljs-number">1</span>]);<br>            &#125;<br>        &#125; <span class="hljs-keyword">else</span> &#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">nCnt</span> <span class="hljs-operator">=</span> u - <span class="hljs-number">1</span> &lt; <span class="hljs-number">0</span> ? <span class="hljs-number">1</span> : last == color ? cnt : cnt + <span class="hljs-number">1</span>; <br>            dfs(u + <span class="hljs-number">1</span>, color, nCnt, sum);<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure></p>
+<ul>
+<li>时间复杂度：<code>n</code> 为颜色数量，<code>m</code> 为房间数量。不考虑剪枝效果，每个房间都可以粉刷 <code>n</code> 种颜色，复杂度为指数级别的 $O(n^m)$</li>
+<li>空间复杂度：忽略递归带来的额外空间开销。复杂度为 $O(1)$</li>
+</ul>
+<p>可以发现，<code>DFS</code> 的可变参数有四个，其中 <code>sum</code> 是用于更新最终答案 <code>ans</code> 的，其应该作为动规值，其余三个参数，作为动规数组的三个维度。</p>
+<p>至此，我们可以确定动态规划的「状态定义」，关于如何利用这种「技巧」来得到一个可靠的「状态定义」最早在 <a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzU4NDE3MTEyMA==&amp;mid=2247485319&amp;idx=1&amp;sn=95a3dc9c97ca57185de792ca70924afe&amp;chksm=fd9cac98caeb258ebea466f59378670a90af1cb3015ae70922e1d04ac711a5b8d8d853ac5e7d&amp;token=515378286&amp;lang=zh_CN#rd">这里</a> 讲过。</p>
+<hr>
+<h3 id="记忆化搜索"><a href="#记忆化搜索" class="headerlink" title="记忆化搜索"></a>记忆化搜索</h3><p>看到评论区有同学贴了「记忆化搜索」的版本，那么就作为补充增加到题解吧 ~ </p>
+<p>注意记忆化容器应当与我们的「动规数组」结构保存一致。</p>
+<p>代码：<br><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-type">int</span> <span class="hljs-variable">INF</span> <span class="hljs-operator">=</span> <span class="hljs-number">0x3f3f3f3f</span>;<br>    <span class="hljs-type">int</span> m, n, t;<br>    <span class="hljs-type">int</span>[] hs;<br>    <span class="hljs-type">int</span>[][] cost;<br>    <span class="hljs-type">boolean</span>[][][] vis;<br>    <span class="hljs-type">int</span>[][][] cache;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">minCost</span><span class="hljs-params">(<span class="hljs-type">int</span>[] _hs, <span class="hljs-type">int</span>[][] _cost, <span class="hljs-type">int</span> _m, <span class="hljs-type">int</span> _n, <span class="hljs-type">int</span> _t)</span> &#123;<br>        m = _m; n = _n; t = _t;<br>        hs = _hs;<br>        cost = _cost;<br>        vis = <span class="hljs-keyword">new</span> <span class="hljs-title class_">boolean</span>[m + <span class="hljs-number">1</span>][n + <span class="hljs-number">1</span>][t + <span class="hljs-number">1</span>];<br>        cache = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[m + <span class="hljs-number">1</span>][n + <span class="hljs-number">1</span>][t + <span class="hljs-number">1</span>];<br>        <span class="hljs-type">int</span> <span class="hljs-variable">ans</span> <span class="hljs-operator">=</span> dfs(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>);<br>        <span class="hljs-type">return</span> <span class="hljs-variable">ans</span> <span class="hljs-operator">=</span>= INF ? -<span class="hljs-number">1</span> : ans;<br>    &#125;<br>    <span class="hljs-type">int</span> <span class="hljs-title function_">dfs</span><span class="hljs-params">(<span class="hljs-type">int</span> u, <span class="hljs-type">int</span> last, <span class="hljs-type">int</span> cnt, <span class="hljs-type">int</span> sum)</span>&#123;<br>        <span class="hljs-keyword">if</span>(cnt &gt; t) <span class="hljs-keyword">return</span> INF;<br>        <span class="hljs-keyword">if</span>(vis[u][last][cnt]) <span class="hljs-keyword">return</span> cache[u][last][cnt];<br>        <span class="hljs-keyword">if</span> (u == m) <span class="hljs-type">return</span> <span class="hljs-variable">cnt</span> <span class="hljs-operator">=</span>= t ? <span class="hljs-number">0</span> : INF;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">ans</span> <span class="hljs-operator">=</span> INF;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">color</span> <span class="hljs-operator">=</span> hs[u];<br>        <span class="hljs-keyword">if</span>(color == <span class="hljs-number">0</span>)&#123;<br>            <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>; i &lt;= n; i++)&#123;<br>                <span class="hljs-type">int</span> <span class="hljs-variable">nCnt</span> <span class="hljs-operator">=</span> u == <span class="hljs-number">0</span> ? <span class="hljs-number">1</span> : last == i ? cnt : cnt + <span class="hljs-number">1</span>;<br>                <span class="hljs-type">int</span> <span class="hljs-variable">cur</span> <span class="hljs-operator">=</span> dfs(u + <span class="hljs-number">1</span>, i, nCnt, sum + cost[u][i - <span class="hljs-number">1</span>]);<br>                ans = Math.min(ans, cur + cost[u][i - <span class="hljs-number">1</span>]);<br>            &#125;<br>        &#125; <span class="hljs-keyword">else</span>&#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">nCnt</span> <span class="hljs-operator">=</span> u == <span class="hljs-number">0</span> ? <span class="hljs-number">1</span> : last == color ? cnt : cnt + <span class="hljs-number">1</span>;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">cur</span> <span class="hljs-operator">=</span> dfs(u + <span class="hljs-number">1</span>, color, nCnt, sum);<br>            ans = Math.min(ans, cur);<br>        &#125;<br>        vis[u][last][cnt] = <span class="hljs-literal">true</span>;<br>        cache[u][last][cnt] = ans;<br>        <span class="hljs-keyword">return</span> ans;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure></p>
+<ul>
+<li>时间复杂度：共有 $m <em> n </em> t$ 个状态需要被转移，每次转移需要枚举「所依赖的状态」的颜色，复杂度为 $O(n)$。整体复杂度为 $O(m <em> n^2 </em> t)$</li>
+<li>空间复杂度：$O(m <em> n </em> t)$</li>
+</ul>
+<hr>
+<h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>这是我们「刷穿 LeetCode」系列文章的第 <code>No.1473</code> 篇，系列开始于 2021/01/01，截止于起始日 LeetCode 上共有 1916 道题目，部分是有锁题，我们将先把所有不带锁的题目刷完。</p>
+<p>在这个系列文章里面，除了讲解解题思路以外，还会尽可能给出最为简洁的代码。如果涉及通解还会相应的代码模板。</p>
+<p>为了方便各位同学能够电脑上进行调试和提交代码，我建立了相关的仓库：<a target="_blank" rel="noopener" href="https://github.com/SharingSource/LogicStack-LeetCode">https://github.com/SharingSource/LogicStack-LeetCode</a> 。</p>
+<p>在仓库地址里，你可以看到系列文章的题解链接、系列文章的相应代码、LeetCode 原题链接和其他优选题解。</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/">动态规划</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%BA%8F%E5%88%97-DP/">序列 DP</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/05/05/740.%20%E5%88%A0%E9%99%A4%E5%B9%B6%E8%8E%B7%E5%BE%97%E7%82%B9%E6%95%B0%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">LC 740. 删除并获得点数</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/05/02/554.%20%E7%A0%96%E5%A2%99%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/">
+                        <span class="hidden-mobile">LC 554. 砖墙</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+  <div class="col-lg-7 mx-auto nopadding-x-md">
+    <div class="container custom post-custom mx-auto">
+      <img src="https://oscimg.oschina.net/oscnet/up-19688dc1af05cf8bdea43b2a863038ab9e5.png" srcset="/img/loading.gif" lazyload class="rounded mx-auto d-block mt-5" style="width:900px; height:500px;">
+    </div>
+  </div>
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.staticfile.org/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.staticfile.org/tocbot/4.18.2/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.staticfile.org/anchor-js/4.3.1/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.11/clipboard.min.js" ></script>
+  
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.bootcdn.net/ajax/libs/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        loader: {
+          
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.staticfile.org/mathjax/3.2.0/es5/tex-svg.js" ></script>
+
+  
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

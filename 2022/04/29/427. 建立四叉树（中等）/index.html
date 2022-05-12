@@ -1,0 +1,596 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/oimg/RoundCorner.png">
+  <link rel="icon" href="/oimg/RoundCorner.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="宫水三叶">
+  <meta name="keywords" content="算法, 数据结构, 题解">
+  
+    <meta name="description" content="题目描述这是 LeetCode 上的 427. 建立四叉树 ，难度为 中等。 给你一个 $n * n$ 矩阵 grid ，矩阵由若干 $0$ 和 $1$ 组成。请你用四叉树表示该矩阵 grid 。 你需要返回能表示矩阵的 四叉树 的根结点。 注意，当 isLeaf 为 False 时，你可以把 True 或者 False 赋值给节点，两种值都会被判题机制 接受 。 四叉树数据结构中，每个内部节点只">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LC 427. 建立四叉树">
+<meta property="og:url" content="http://example.com/2022/04/29/427.%20%E5%BB%BA%E7%AB%8B%E5%9B%9B%E5%8F%89%E6%A0%91%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/index.html">
+<meta property="og:site_name" content="宫水三叶的刷题日记">
+<meta property="og:description" content="题目描述这是 LeetCode 上的 427. 建立四叉树 ，难度为 中等。 给你一个 $n * n$ 矩阵 grid ，矩阵由若干 $0$ 和 $1$ 组成。请你用四叉树表示该矩阵 grid 。 你需要返回能表示矩阵的 四叉树 的根结点。 注意，当 isLeaf 为 False 时，你可以把 True 或者 False 赋值给节点，两种值都会被判题机制 接受 。 四叉树数据结构中，每个内部节点只">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://assets.leetcode.com/uploads/2020/02/11/new_top.png">
+<meta property="og:image" content="https://assets.leetcode.com/uploads/2020/02/12/e1tree.png">
+<meta property="og:image" content="https://assets.leetcode.com/uploads/2020/02/12/e2tree.png">
+<meta property="article:published_time" content="2022-04-28T16:49:18.000Z">
+<meta property="article:modified_time" content="2022-05-12T04:05:31.925Z">
+<meta property="article:author" content="宫水三叶">
+<meta property="article:tag" content="前缀和">
+<meta property="article:tag" content="递归">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://assets.leetcode.com/uploads/2020/02/11/new_top.png">
+  
+  
+  <title>LC 427. 建立四叉树 - 宫水三叶的刷题日记</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/hint.css/2.7.0/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.7.2/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"|","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.1.0"></head>
+
+
+<body>
+  <header style="height: 50vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>宫水三叶の刷题日记</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/image_112.jpeg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="LC 427. 建立四叉树">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-author" aria-hidden="true"></i>
+      宫水三叶
+    </span>
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2022-04-29 00:49" pubdate>
+        2022年4月29日 凌晨
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      4k 字
+    </span>
+  
+
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">LC 427. 建立四叉树</h1>
+            
+            <div class="markdown-body">
+              <h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>这是 LeetCode 上的 <strong><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/construct-quad-tree/solution/by-ac_oier-maul/">427. 建立四叉树</a></strong> ，难度为 <strong>中等</strong>。</p>
+<p>给你一个 $n * n$ 矩阵 <code>grid</code> ，矩阵由若干 $0$ 和 $1$ 组成。请你用四叉树表示该矩阵 <code>grid</code> 。</p>
+<p>你需要返回能表示矩阵的 四叉树 的根结点。</p>
+<p>注意，当 <code>isLeaf</code> 为 <code>False</code> 时，你可以把 <code>True</code> 或者 <code>False</code> 赋值给节点，两种值都会被判题机制 接受 。</p>
+<p>四叉树数据结构中，每个内部节点只有四个子节点。此外，每个节点都有两个属性：</p>
+<ul>
+<li><code>val</code>：储存叶子结点所代表的区域的值。$1$ 对应 <code>True</code>，$0$ 对应 <code>False</code>；</li>
+<li><code>isLeaf</code>: 当这个节点是一个叶子结点时为 <code>True</code>，如果它有 $4$ 个子节点则为 <code>False</code> 。<figure class="highlight crmsh"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs crmsh">class <span class="hljs-keyword">Node</span> <span class="hljs-title">&#123;</span><br><span class="hljs-title">    public</span> boolean val;<br>    public boolean isLeaf;<br>    public <span class="hljs-keyword">Node</span> <span class="hljs-title">topLeft</span>;<br>    public <span class="hljs-keyword">Node</span> <span class="hljs-title">topRight</span>;<br>    public <span class="hljs-keyword">Node</span> <span class="hljs-title">bottomLeft</span>;<br>    public <span class="hljs-keyword">Node</span> <span class="hljs-title">bottomRight</span>;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+我们可以按以下步骤为二维区域构建四叉树：</li>
+</ul>
+<ol>
+<li>如果当前网格的值相同（即，全为 $0$ 或者全为 $1$），将 <code>isLeaf</code> 设为 <code>True</code> ，将 <code>val</code> 设为网格相应的值，并将四个子节点都设为 <code>Null</code> 然后停止。</li>
+<li>如果当前网格的值不同，将 <code>isLeaf</code> 设为 <code>False</code>， 将 <code>val</code> 设为任意值，然后如下图所示，将当前网格划分为四个子网格。</li>
+<li>使用适当的子网格递归每个子节点。</li>
+</ol>
+<p><img src="https://assets.leetcode.com/uploads/2020/02/11/new_top.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p>四叉树格式：</p>
+<p>输出为使用层序遍历后四叉树的序列化形式，其中 <code>null</code> 表示路径终止符，其下面不存在节点。</p>
+<p>它与二叉树的序列化非常相似。唯一的区别是节点以列表形式表示 $[isLeaf, val]$ 。</p>
+<p>如果 <code>isLeaf</code> 或者 <code>val</code> 的值为 <code>True</code> ，则表示它在列表 $[isLeaf, val]$ 中的值为 $1$ ；如果 <code>isLeaf</code> 或者 <code>val</code> 的值为 <code>False</code> ，则表示值为 $0$ 。</p>
+<p>示例 1：<br><img src="https://assets.leetcode.com/uploads/2020/02/12/e1tree.png" srcset="/img/loading.gif" lazyload alt=""><br><figure class="highlight lua"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs lua">输入：grid = <span class="hljs-string">[[0,1],[1,0]]</span><br><br>输出：<span class="hljs-string">[[0,1],[1,0],[1,1],[1,1],[1,0]]</span><br><br>解释：请注意，在下面四叉树的图示中，<span class="hljs-number">0</span> 表示 <span class="hljs-literal">false</span>，<span class="hljs-number">1</span> 表示 True 。<br></code></pre></div></td></tr></table></figure><br>示例 2：<br><img src="https://assets.leetcode.com/uploads/2020/02/12/e2tree.png" srcset="/img/loading.gif" lazyload alt=""><br><figure class="highlight inform7"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs inform7">输入：grid = <span class="hljs-comment">[<span class="hljs-comment">[1,1,1,1,0,0,0,0]</span>,<span class="hljs-comment">[1,1,1,1,0,0,0,0]</span>,<span class="hljs-comment">[1,1,1,1,1,1,1,1]</span>,<span class="hljs-comment">[1,1,1,1,1,1,1,1]</span>,<span class="hljs-comment">[1,1,1,1,0,0,0,0]</span>,<span class="hljs-comment">[1,1,1,1,0,0,0,0]</span>,<span class="hljs-comment">[1,1,1,1,0,0,0,0]</span>,<span class="hljs-comment">[1,1,1,1,0,0,0,0]</span>]</span><br>输出：<span class="hljs-comment">[<span class="hljs-comment">[0,1]</span>,<span class="hljs-comment">[1,1]</span>,<span class="hljs-comment">[0,1]</span>,<span class="hljs-comment">[1,1]</span>,<span class="hljs-comment">[1,0]</span>,null,null,null,null,<span class="hljs-comment">[1,0]</span>,<span class="hljs-comment">[1,0]</span>,<span class="hljs-comment">[1,1]</span>,<span class="hljs-comment">[1,1]</span>]</span><br>解释：网格中的所有值都不相同。我们将网格划分为四个子网格。<br>topLeft，bottomLeft 和 bottomRight 均具有相同的值。<br>topRight 具有不同的值，因此我们将其再分为 4 个子网格，这样每个子网格都具有相同的值。<br></code></pre></div></td></tr></table></figure></p>
+<p>示例 3：<br><figure class="highlight lua"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs lua">输入：grid = <span class="hljs-string">[[1,1],[1,1]]</span><br><br>输出：<span class="hljs-string">[[1,1]]</span><br></code></pre></div></td></tr></table></figure><br>示例 4：<br><figure class="highlight lua"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs lua">输入：grid = <span class="hljs-string">[[0]]</span><br><br>输出：<span class="hljs-string">[[1,0]]</span><br></code></pre></div></td></tr></table></figure><br>示例 5：<br><figure class="highlight inform7"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs inform7">输入：grid = <span class="hljs-comment">[<span class="hljs-comment">[1,1,0,0]</span>,<span class="hljs-comment">[1,1,0,0]</span>,<span class="hljs-comment">[0,0,1,1]</span>,<span class="hljs-comment">[0,0,1,1]</span>]</span><br><br>输出：<span class="hljs-comment">[<span class="hljs-comment">[0,1]</span>,<span class="hljs-comment">[1,1]</span>,<span class="hljs-comment">[1,0]</span>,<span class="hljs-comment">[1,0]</span>,<span class="hljs-comment">[1,1]</span>]</span><br></code></pre></div></td></tr></table></figure></p>
+<p>提示：</p>
+<ul>
+<li>$n == grid.length == grid[i].length$</li>
+<li>$n == 2^x$ 其中 $0 &lt;= x &lt;= 6$</li>
+</ul>
+<hr>
+<h3 id="递归"><a href="#递归" class="headerlink" title="递归"></a>递归</h3><p>假定我们存在函数 <code>Node dfs(int a, int b, int c, int d)</code>，其能够返回「以 $(a, b)$ 为左上角，$(c, d)$ 为右下角」所代表的矩阵的根节点。</p>
+<p>那么最终答案为 <code>dfs(0, 0, n-1, n-1)</code>，不失一般性考虑「以 $(a, b)$ 为左上角，$(c, d)$ 为右下角」时如何计算：</p>
+<ul>
+<li>判断该矩阵是否为全 $0$ 或全 $1$：<ul>
+<li>如果是则直接创建根节点（该节点四个子节点属性均为空）并进行返回；</li>
+<li>如果不是则创建根节点，递归创建四个子节点并进行赋值，利用左上角 $(a,b)$ 和右下角 $(c, d)$ 可算的横纵坐标的长度为 $c - a + 1$ 和 $d - b + 1$，从而计算出将当前矩阵四等分所得到的子矩阵的左上角和右下角坐标。</li>
+</ul>
+</li>
+</ul>
+<p>由于矩阵大小最多为 $2^6 = 64$ ，因此判断某个子矩阵是否为全 $0$ 或全 $1$ 的操作用「前缀和」或者是「暴力」来做都可以。</p>
+<p>代码：<br><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-type">int</span>[][] g;<br>    <span class="hljs-keyword">public</span> Node <span class="hljs-title function_">construct</span><span class="hljs-params">(<span class="hljs-type">int</span>[][] grid)</span> &#123;<br>        g = grid;<br>        <span class="hljs-keyword">return</span> dfs(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, g.length - <span class="hljs-number">1</span>, g.length - <span class="hljs-number">1</span>);<br>    &#125;<br>    Node <span class="hljs-title function_">dfs</span><span class="hljs-params">(<span class="hljs-type">int</span> a, <span class="hljs-type">int</span> b, <span class="hljs-type">int</span> c, <span class="hljs-type">int</span> d)</span> &#123;<br>        <span class="hljs-type">boolean</span> <span class="hljs-variable">ok</span> <span class="hljs-operator">=</span> <span class="hljs-literal">true</span>;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">t</span> <span class="hljs-operator">=</span> g[a][b];<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> a; i &lt;= c &amp;&amp; ok; i++) &#123;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> b; j &lt;= d &amp;&amp; ok; j++) &#123;<br>                <span class="hljs-keyword">if</span> (g[i][j] != t) ok = <span class="hljs-literal">false</span>;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">if</span> (ok) <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Node</span>(t == <span class="hljs-number">1</span>, <span class="hljs-literal">true</span>);<br>        <span class="hljs-type">Node</span> <span class="hljs-variable">root</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Node</span>(t == <span class="hljs-number">1</span>, <span class="hljs-literal">false</span>);<br>        <span class="hljs-type">int</span> <span class="hljs-variable">dx</span> <span class="hljs-operator">=</span> c - a + <span class="hljs-number">1</span>, dy = d - b + <span class="hljs-number">1</span>;<br>        root.topLeft = dfs(a, b, a + dx / <span class="hljs-number">2</span> - <span class="hljs-number">1</span>, b + dy / <span class="hljs-number">2</span> - <span class="hljs-number">1</span>); <br>        root.topRight = dfs(a, b + dy / <span class="hljs-number">2</span>, a + dx / <span class="hljs-number">2</span> - <span class="hljs-number">1</span>, d);<br>        root.bottomLeft = dfs(a + dx / <span class="hljs-number">2</span>, b, c, b + dy / <span class="hljs-number">2</span> - <span class="hljs-number">1</span>);<br>        root.bottomRight = dfs(a + dx / <span class="hljs-number">2</span>, b + dy / <span class="hljs-number">2</span>, c, d);<br>        <span class="hljs-keyword">return</span> root;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure></p>
+<ul>
+<li>时间复杂度：递归的复杂度分析要根据主定理，假设矩阵大小为 $n <em> n$，根据主定理 $T(n) = aT(\frac{n}{b}) + f(n)$，单次递归最多会产生 $4$ 个子问题（由大矩阵递归 $4$ 个小矩阵），因此问题递归子问题数量 $a = 4$，而子问题规模缩减系数 $b$ 为原本的一半（子矩阵的大小为 $\frac{n}{2} </em> \frac{n}{2}$），剩余的 $f(n)$ 为判断全 $0$ 和 全 $1$ 的时间开销，不考虑标识位 $ok$ 带来的剪枝效果，每次判断全 $0$ 或全 $1$ 的复杂度与当前问题规模相等，即 $f(n) = O(n^2)$，但整个大小为 $n <em> n$ 矩阵每次进行长宽减半的子矩阵拆分，最多会被拆分为 $\log{n}$ 次，因此这部分总的计算量为 $\log{n} </em> n^2$ 。整体复杂度为 $O(n^2 + \log{n} * n^2)$</li>
+<li>空间复杂度：忽略递归带来的额外空间开销，复杂度为 $O(1)$</li>
+</ul>
+<hr>
+<h3 id="递归（前缀和优化）"><a href="#递归（前缀和优化）" class="headerlink" title="递归（前缀和优化）"></a>递归（前缀和优化）</h3><p>使用前缀和优化「判断全 $0$ 和全 $1$」的操作：对矩阵 <code>grid</code> 求前缀和数组 <code>sum</code>，对于一个「以左上角为 $(a, b)$，右下角为 $(c, d)$ 」的子矩阵而言，其所包含的格子总数为 $tot = (c - a + 1) * (d - b + 1)$ 个，当且仅当矩阵和为 $0$ 或 $tot$ 时，矩阵全 $0$ 或 $1$。</p>
+<p>代码：<br><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">static</span> <span class="hljs-type">int</span>[][] sum = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[<span class="hljs-number">70</span>][<span class="hljs-number">70</span>];   <br>    <span class="hljs-type">int</span>[][] g;<br>    <span class="hljs-keyword">public</span> Node <span class="hljs-title function_">construct</span><span class="hljs-params">(<span class="hljs-type">int</span>[][] grid)</span> &#123;<br>        g = grid;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> grid.length;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>; i &lt;= n; i++) &#123;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>; j &lt;= n; j++) &#123;<br>                sum[i][j] = sum[i - <span class="hljs-number">1</span>][j] + sum[i][j - <span class="hljs-number">1</span>] - sum[i - <span class="hljs-number">1</span>][j - <span class="hljs-number">1</span>] + g[i - <span class="hljs-number">1</span>][j - <span class="hljs-number">1</span>];<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> dfs(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, n - <span class="hljs-number">1</span>, n - <span class="hljs-number">1</span>);<br>    &#125;<br>    Node <span class="hljs-title function_">dfs</span><span class="hljs-params">(<span class="hljs-type">int</span> a, <span class="hljs-type">int</span> b, <span class="hljs-type">int</span> c, <span class="hljs-type">int</span> d)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">cur</span> <span class="hljs-operator">=</span> sum[c + <span class="hljs-number">1</span>][d + <span class="hljs-number">1</span>] - sum[a][d + <span class="hljs-number">1</span>] - sum[c + <span class="hljs-number">1</span>][b] + sum[a][b];<br>        <span class="hljs-type">int</span> <span class="hljs-variable">dx</span> <span class="hljs-operator">=</span> c - a + <span class="hljs-number">1</span>, dy = d - b + <span class="hljs-number">1</span>, tot = dx * dy;<br>        <span class="hljs-keyword">if</span> (cur == <span class="hljs-number">0</span> || cur == tot) <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Node</span>(g[a][b] == <span class="hljs-number">1</span>, <span class="hljs-literal">true</span>);<br>        <span class="hljs-type">Node</span> <span class="hljs-variable">root</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Node</span>(g[a][b] == <span class="hljs-number">1</span>, <span class="hljs-literal">false</span>);<br>        root.topLeft = dfs(a, b, a + dx / <span class="hljs-number">2</span> - <span class="hljs-number">1</span>, b + dy / <span class="hljs-number">2</span> - <span class="hljs-number">1</span>);<br>        root.topRight = dfs(a, b + dy / <span class="hljs-number">2</span>, a + dx / <span class="hljs-number">2</span> - <span class="hljs-number">1</span>, d);<br>        root.bottomLeft = dfs(a + dx / <span class="hljs-number">2</span>, b, c, b + dy / <span class="hljs-number">2</span> - <span class="hljs-number">1</span>);<br>        root.bottomRight = dfs(a + dx / <span class="hljs-number">2</span>, b + dy / <span class="hljs-number">2</span>, c, d);<br>        <span class="hljs-keyword">return</span> root;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure></p>
+<ul>
+<li>时间复杂度：分析同理，但判断全 $0$ 和全 $1$ 的复杂度下降为 $O(1)$，整体复杂度为 $O(n^2 + \log{n})$</li>
+<li>空间复杂度：忽略递归带来的额外空间开销，复杂度为 $O(n^2)$</li>
+</ul>
+<hr>
+<h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>这是我们「刷穿 LeetCode」系列文章的第 <code>No.427</code> 篇，系列开始于 2021/01/01，截止于起始日 LeetCode 上共有 1916 道题目，部分是有锁题，我们将先把所有不带锁的题目刷完。</p>
+<p>在这个系列文章里面，除了讲解解题思路以外，还会尽可能给出最为简洁的代码。如果涉及通解还会相应的代码模板。</p>
+<p>为了方便各位同学能够电脑上进行调试和提交代码，我建立了相关的仓库：<a target="_blank" rel="noopener" href="https://github.com/SharingSource/LogicStack-LeetCode">https://github.com/SharingSource/LogicStack-LeetCode</a> 。</p>
+<p>在仓库地址里，你可以看到系列文章的题解链接、系列文章的相应代码、LeetCode 原题链接和其他优选题解。</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%89%8D%E7%BC%80%E5%92%8C/">前缀和</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E9%80%92%E5%BD%92/">递归</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/04/30/908.%20%E6%9C%80%E5%B0%8F%E5%B7%AE%E5%80%BC%20I%EF%BC%88%E7%AE%80%E5%8D%95%EF%BC%89/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">LC 908. 最小差值 I</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/04/28/905.%20%E6%8C%89%E5%A5%87%E5%81%B6%E6%8E%92%E5%BA%8F%E6%95%B0%E7%BB%84%EF%BC%88%E7%AE%80%E5%8D%95%EF%BC%89/">
+                        <span class="hidden-mobile">LC 905. 按奇偶排序数组</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+  <div class="col-lg-7 mx-auto nopadding-x-md">
+    <div class="container custom post-custom mx-auto">
+      <img src="https://oscimg.oschina.net/oscnet/up-19688dc1af05cf8bdea43b2a863038ab9e5.png" srcset="/img/loading.gif" lazyload class="rounded mx-auto d-block mt-5" style="width:900px; height:500px;">
+    </div>
+  </div>
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.staticfile.org/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.staticfile.org/tocbot/4.18.2/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.staticfile.org/anchor-js/4.3.1/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.11/clipboard.min.js" ></script>
+  
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.bootcdn.net/ajax/libs/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        loader: {
+          
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.staticfile.org/mathjax/3.2.0/es5/tex-svg.js" ></script>
+
+  
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

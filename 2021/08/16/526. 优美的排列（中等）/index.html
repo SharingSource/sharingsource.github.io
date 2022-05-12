@@ -1,0 +1,604 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/oimg/RoundCorner.png">
+  <link rel="icon" href="/oimg/RoundCorner.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="宫水三叶">
+  <meta name="keywords" content="算法, 数据结构, 题解">
+  
+    <meta name="description" content="题目描述这是 LeetCode 上的 526. 优美的排列 ，难度为 中等。 假设有从 $1$ 到 $N$ 的 $N$ 个整数，如果从这 $N$ 个数字中成功构造出一个数组，使得数组的第 $i$ 位 ($1 &lt;&#x3D; i &lt;&#x3D; N$) 满足如下两个条件中的一个，我们就称这个数组为一个优美的排列。 条件：  第 $i$ 位的数字能被 $i$ 整除 $i$ 能被第 $i$ 位上的数字整除  现">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LC 526. 优美的排列">
+<meta property="og:url" content="http://example.com/2021/08/16/526.%20%E4%BC%98%E7%BE%8E%E7%9A%84%E6%8E%92%E5%88%97%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/index.html">
+<meta property="og:site_name" content="宫水三叶的刷题日记">
+<meta property="og:description" content="题目描述这是 LeetCode 上的 526. 优美的排列 ，难度为 中等。 假设有从 $1$ 到 $N$ 的 $N$ 个整数，如果从这 $N$ 个数字中成功构造出一个数组，使得数组的第 $i$ 位 ($1 &lt;&#x3D; i &lt;&#x3D; N$) 满足如下两个条件中的一个，我们就称这个数组为一个优美的排列。 条件：  第 $i$ 位的数字能被 $i$ 整除 $i$ 能被第 $i$ 位上的数字整除  现">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-08-15T18:18:33.000Z">
+<meta property="article:modified_time" content="2022-05-12T04:05:32.231Z">
+<meta property="article:author" content="宫水三叶">
+<meta property="article:tag" content="动态规划">
+<meta property="article:tag" content="位运算">
+<meta property="article:tag" content="状压 DP">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  <title>LC 526. 优美的排列 - 宫水三叶的刷题日记</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/hint.css/2.7.0/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.7.2/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"|","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.1.0"></head>
+
+
+<body>
+  <header style="height: 50vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>宫水三叶の刷题日记</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/image_20.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="LC 526. 优美的排列">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-author" aria-hidden="true"></i>
+      宫水三叶
+    </span>
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-08-16 02:18" pubdate>
+        2021年8月16日 凌晨
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.2k 字
+    </span>
+  
+
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">LC 526. 优美的排列</h1>
+            
+            <div class="markdown-body">
+              <h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>这是 LeetCode 上的 <strong><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/beautiful-arrangement/solution/gong-shui-san-xie-xiang-jie-liang-chong-vgsia/">526. 优美的排列</a></strong> ，难度为 <strong>中等</strong>。</p>
+<p>假设有从 $1$ 到 $N$ 的 $N$ 个整数，如果从这 $N$ 个数字中成功构造出一个数组，使得数组的第 $i$ 位 ($1 &lt;= i &lt;= N$) 满足如下两个条件中的一个，我们就称这个数组为一个优美的排列。</p>
+<p>条件：</p>
+<ul>
+<li>第 $i$ 位的数字能被 $i$ 整除</li>
+<li>$i$ 能被第 $i$ 位上的数字整除</li>
+</ul>
+<p>现在给定一个整数 $N$，请问可以构造多少个优美的排列？</p>
+<p>示例1:<br><figure class="highlight routeros"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs routeros">输入: 2<br><br>输出: 2<br><br>解释: <br>第 1 个优美的排列是 [1, 2]:<br>  第 1 个位置（<span class="hljs-attribute">i</span>=1）上的数字是1，1能被 i（<span class="hljs-attribute">i</span>=1）整除<br>  第 2 个位置（<span class="hljs-attribute">i</span>=2）上的数字是2，2能被 i（<span class="hljs-attribute">i</span>=2）整除<br><br>第 2 个优美的排列是 [2, 1]:<br>  第 1 个位置（<span class="hljs-attribute">i</span>=1）上的数字是2，2能被 i（<span class="hljs-attribute">i</span>=1）整除<br>  第 2 个位置（<span class="hljs-attribute">i</span>=2）上的数字是1，i（i=2）能被 1 整除<br></code></pre></div></td></tr></table></figure></p>
+<p>说明:</p>
+<ul>
+<li>N 是一个正整数，并且不会超过15。</li>
+</ul>
+<hr>
+<h3 id="状态压缩-DP"><a href="#状态压缩-DP" class="headerlink" title="状态压缩 DP"></a>状态压缩 DP</h3><p>利用数据范围不超过 $15$，我们可以使用「状态压缩 DP」进行求解。</p>
+<p><strong>使用一个二进制数表示当前哪些数已被选，哪些数未被选，目的是为了可以使用位运算进行加速。</strong></p>
+<p>我们可以通过一个具体的样例，来感受下「状态压缩」是什么意思：</p>
+<p>例如 $(000…0101)_2$ 代表值为 $1$ 和值为 $3$ 的数字已经被使用了，而值为 $2$ 的节点尚未被使用。</p>
+<p>然后再来看看使用「状态压缩」的话，一些基本的操作该如何进行：</p>
+<p>假设变量 $state$ 存放了「当前数的使用情况」，当我们需要检查值为 $k$ 的数是否被使用时，可以使用位运算 <code>a = (state &gt;&gt; k) &amp; 1</code>，来获取 $state$ 中第 $k$ 位的二进制表示，如果 <code>a</code> 为 $1$ 代表值为 $k$ 的数字已被使用，如果为 $0$ 则未被访问。</p>
+<p><strong>定义 $f[i][state]$ 为考虑前 $i$ 个数，且当前选择方案为 $state$ 的所有方案数量。</strong></p>
+<p>一个显然的初始化条件为 $f[0][0] = 1$，代表当我们不考虑任何数（$i = 0$）的情况下，一个数都不被选择（$state = 0$）为一种合法方案。</p>
+<p>不失一般性的考虑 $f[i][state]$ 该如何转移，由于本题是求方案数，我们的转移方程必须做到「不重不漏」。</p>
+<p>我们可以通过枚举当前位置 $i$ 是选哪个数，假设位置 $i$ 所选数值为 $k$，首先 $k$ 值需要同时满足如下两个条件：</p>
+<ul>
+<li>$state$ 中的第 $k$ 位为 $1$；</li>
+<li>要么 $k$ 能被 $i$ 整除，要么 $i$ 能被 $k$ 整除。</li>
+</ul>
+<p>那么根据状态定义，位置 $i$ 选了数值 $k$，通过位运算我们可以直接得出决策位置 $i$ 之前的状态是什么：$state \&amp; (\lnot (1 &lt;&lt; (k - 1)))$，代表将 $state$ 的二进制表示中的第 $k$ 位置 $0$。</p>
+<p>最终的 $f[i][state]$ 为当前位置 $i$ 选择的是所有合法的 $k$ 值的方案数之和：</p>
+<script type="math/tex; mode=display">
+f[i][state] = \sum_{k = 1}^{n} f[i - 1][state \& (\lnot (1 << (k - 1)))]</script><blockquote>
+<p>一些细节：由于给定的数值范围为 $[1,n]$，但实现上为了方便，我们使用 $state$ 从右往左的第 $0$ 位表示数值 $1$ 选择情况，第 $1$ 位表示数值 $2$ 的选择情况 … 即对选择数值 $k$ 做一个 $-1$ 的偏移。</p>
+</blockquote>
+<p>代码：<br><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">countArrangement</span><span class="hljs-params">(<span class="hljs-type">int</span> n)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">mask</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span> &lt;&lt; n;<br>        <span class="hljs-type">int</span>[][] f = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[n + <span class="hljs-number">1</span>][mask];<br>        f[<span class="hljs-number">0</span>][<span class="hljs-number">0</span>] = <span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>; i &lt;= n; i++) &#123;<br>            <span class="hljs-comment">// 枚举所有的状态</span><br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">state</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; state &lt; mask; state++) &#123;<br>                <span class="hljs-comment">// 枚举位置 i（最后一位）选的数值是 k</span><br>                <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">k</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>; k &lt;= n; k++) &#123;<br>                    <span class="hljs-comment">// 首先 k 在 state 中必须是 1</span><br>                    <span class="hljs-keyword">if</span> (((state &gt;&gt; (k - <span class="hljs-number">1</span>)) &amp; <span class="hljs-number">1</span>) == <span class="hljs-number">0</span>) <span class="hljs-keyword">continue</span>;<br>                    <span class="hljs-comment">// 数值 k 和位置 i 之间满足任一整除关系</span><br>                    <span class="hljs-keyword">if</span> (k % i != <span class="hljs-number">0</span> &amp;&amp; i % k != <span class="hljs-number">0</span>) <span class="hljs-keyword">continue</span>;<br>                    <span class="hljs-comment">// state &amp; (~(1 &lt;&lt; (k - 1))) 代表将 state 中数值 k 的位置置零</span><br>                    f[i][state] += f[i - <span class="hljs-number">1</span>][state &amp; (~(<span class="hljs-number">1</span> &lt;&lt; (k - <span class="hljs-number">1</span>)))];<br>                &#125;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> f[n][mask - <span class="hljs-number">1</span>];<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure></p>
+<ul>
+<li>时间复杂度：共有 $n <em> 2^n$ 的状态需要被转移，每次转移复杂度为 $O(n)$，整体复杂度为 $O(n^2 </em> 2^n)$</li>
+<li>空间复杂度：$O(n * 2^n)$</li>
+</ul>
+<hr>
+<h3 id="状态压缩-DP（优化）"><a href="#状态压缩-DP（优化）" class="headerlink" title="状态压缩 DP（优化）"></a>状态压缩 DP（优化）</h3><p>通过对朴素的状压 DP 的分析，我们发现，在决策第 $i$ 位的时候，理论上我们应该使用的数字数量也应该为 $i$ 个。</p>
+<p>但这一点在朴素状压 DP 中并没有体现，这就导致了我们在决策第 $i$ 位的时候，仍然需要对所有的 $state$ 进行计算检查（即使是那些二进制表示中 $1$ 的出现次数不为 $i$ 个的状态）。</p>
+<p>因此我们可以换个思路进行枚举（使用新的状态定义并优化转移方程）。</p>
+<p><strong>定义 $f[state]$ 为当前选择数值情况为 $state$ 时的所有方案的数量。</strong></p>
+<p>这样仍然有 $f[0] = 1$ 的初始化条件，最终答案为 $f[(1 &lt;&lt; n) - 1]$。</p>
+<p>不失一般性考虑 $f[state]$ 如何计算：</p>
+<p><strong>从当前状态 $state$ 进行出发，检查 $state$ 中的每一位 $1$ 作为最后一个被选择的数值，这样仍然可以确保方案数「不重不漏」的被统计，同时由于我们「从小到大」对 $state$ 进行枚举，因此计算 $f[state]$ 所依赖的其他状态值必然都已经被计算完成。</strong></p>
+<p>同样的，我们仍然需要确保 $state$ 中的那一位作为最后一个的 $1$ 需要与所放的位置成整除关系。</p>
+<p>因此我们需要一个计算 $state$ 的 $1$ 的个数的方法，这里使用 $lowbit$ 实现即可。</p>
+<p>最终的 $f[state]$ 为当前位置选择的是所有合法值的方案数之和：</p>
+<script type="math/tex; mode=display">
+f[state] = \sum_{i = 0}^{n}f[state \& ( \lnot (1 << i))]</script><p>代码：<br><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-type">int</span> <span class="hljs-title function_">getCnt</span><span class="hljs-params">(<span class="hljs-type">int</span> x)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">ans</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">while</span> (x != <span class="hljs-number">0</span>) &#123;<br>            x -= (x &amp; -x); <span class="hljs-comment">// lowbit</span><br>            ans++;<br>        &#125;<br>        <span class="hljs-keyword">return</span> ans;<br>    &#125;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">countArrangement</span><span class="hljs-params">(<span class="hljs-type">int</span> n)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">mask</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span> &lt;&lt; n;<br>        <span class="hljs-type">int</span>[] f = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[mask];<br>        f[<span class="hljs-number">0</span>] = <span class="hljs-number">1</span>;<br>        <span class="hljs-comment">// 枚举所有的状态</span><br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">state</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>; state &lt; mask; state++) &#123;<br>            <span class="hljs-comment">// 计算 state 有多少个 1（也就是当前排序长度为多少）</span><br>            <span class="hljs-type">int</span> <span class="hljs-variable">cnt</span> <span class="hljs-operator">=</span> getCnt(state);<br>            <span class="hljs-comment">// 枚举最后一位数值为多少</span><br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; n; i++) &#123;<br>                <span class="hljs-comment">// 数值在 state 中必须是 1</span><br>                <span class="hljs-keyword">if</span> (((state &gt;&gt; i) &amp; <span class="hljs-number">1</span>) == <span class="hljs-number">0</span>) <span class="hljs-keyword">continue</span>;<br>                <span class="hljs-comment">// 数值（i + 1）和位置（cnt）之间满足任一整除关系</span><br>                <span class="hljs-keyword">if</span> ((i + <span class="hljs-number">1</span>) % cnt != <span class="hljs-number">0</span> &amp;&amp; cnt % (i + <span class="hljs-number">1</span>) != <span class="hljs-number">0</span>) <span class="hljs-keyword">continue</span>;<br>                <span class="hljs-comment">// state &amp; (~(1 &lt;&lt; i)) 代表将 state 中所选数值的位置置零</span><br>                f[state] += f[state &amp; (~(<span class="hljs-number">1</span> &lt;&lt; i))];<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> f[mask - <span class="hljs-number">1</span>];<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure></p>
+<ul>
+<li>时间复杂度：共有 $2^n$ 的状态需要被转移，每次转移复杂度为 $O(n)$，整体复杂度为 $O(n * 2^n)$</li>
+<li>空间复杂度：$O(2^n)$</li>
+</ul>
+<hr>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>不难发现，其实两种状态压缩 DP 的思路其实是完全一样的。</p>
+<p>只不过在朴素状压 DP 中我们是显式的枚举了考虑每一种长度的情况（存在维度 $i$），而在状压 DP（优化）中利用则 $state$ 中的 $1$ 的个数中蕴含的长度信息。</p>
+<hr>
+<h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>这是我们「刷穿 LeetCode」系列文章的第 <code>No.525</code> 篇，系列开始于 2021/01/01，截止于起始日 LeetCode 上共有 1916 道题目，部分是有锁题，我们将先把所有不带锁的题目刷完。</p>
+<p>在这个系列文章里面，除了讲解解题思路以外，还会尽可能给出最为简洁的代码。如果涉及通解还会相应的代码模板。</p>
+<p>为了方便各位同学能够电脑上进行调试和提交代码，我建立了相关的仓库：<a target="_blank" rel="noopener" href="https://github.com/SharingSource/LogicStack-LeetCode">https://github.com/SharingSource/LogicStack-LeetCode</a> 。</p>
+<p>在仓库地址里，你可以看到系列文章的题解链接、系列文章的相应代码、LeetCode 原题链接和其他优选题解。</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/">动态规划</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E4%BD%8D%E8%BF%90%E7%AE%97/">位运算</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E7%8A%B6%E5%8E%8B-DP/">状压 DP</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/08/17/551.%20%E5%AD%A6%E7%94%9F%E5%87%BA%E5%8B%A4%E8%AE%B0%E5%BD%95%20I%EF%BC%88%E7%AE%80%E5%8D%95%EF%BC%89/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">LC 551. 学生出勤记录 I</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/08/14/1583.%20%E7%BB%9F%E8%AE%A1%E4%B8%8D%E5%BC%80%E5%BF%83%E7%9A%84%E6%9C%8B%E5%8F%8B%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/">
+                        <span class="hidden-mobile">LC 1583. 统计不开心的朋友</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+  <div class="col-lg-7 mx-auto nopadding-x-md">
+    <div class="container custom post-custom mx-auto">
+      <img src="https://oscimg.oschina.net/oscnet/up-19688dc1af05cf8bdea43b2a863038ab9e5.png" srcset="/img/loading.gif" lazyload class="rounded mx-auto d-block mt-5" style="width:900px; height:500px;">
+    </div>
+  </div>
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.staticfile.org/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.staticfile.org/tocbot/4.18.2/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.staticfile.org/anchor-js/4.3.1/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.11/clipboard.min.js" ></script>
+  
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.bootcdn.net/ajax/libs/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        loader: {
+          
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.staticfile.org/mathjax/3.2.0/es5/tex-svg.js" ></script>
+
+  
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>
