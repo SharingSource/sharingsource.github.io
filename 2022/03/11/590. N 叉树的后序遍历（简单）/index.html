@@ -16,21 +16,23 @@
   <meta name="author" content="宫水三叶">
   <meta name="keywords" content="算法, 数据结构, 题解">
   
-    <meta name="description" content="题目描述这是 LeetCode 上的 507. 完美数 ，难度为 简单。 对于一个 正整数，如果它和除了它自身以外的所有 正因子 之和相等，我们称它为 「完美数」。 给定一个 整数 n， 如果是完美数，返回 true，否则返回 false。 示例 1：123456输入：num &#x3D; 28输出：true解释：28 &#x3D; 1 + 2 + 4 + 7 + 141, 2, 4, 7, 和 14 是 28 的所">
+    <meta name="description" content="题目描述这是 LeetCode 上的 590. N 叉树的后序遍历 ，难度为 简单。 给定一个 $n$ 叉树的根节点 $root$ ，返回 其节点值的 后序遍历 。 $n$ 叉树 在输入中按层序遍历进行序列化表示，每组子节点由空值 null 分隔（请参见示例）。 示例 1：123输入：root &#x3D; [1,null,3,2,4,null,5,6]输出：[5,6,3,2,4,1]示例 2：123输入：">
 <meta property="og:type" content="article">
 <meta property="og:title" content="LC 590. N 叉树的后序遍历">
 <meta property="og:url" content="http://example.com/2022/03/11/590.%20N%20%E5%8F%89%E6%A0%91%E7%9A%84%E5%90%8E%E5%BA%8F%E9%81%8D%E5%8E%86%EF%BC%88%E7%AE%80%E5%8D%95%EF%BC%89/index.html">
 <meta property="og:site_name" content="宫水三叶的刷题日记">
-<meta property="og:description" content="题目描述这是 LeetCode 上的 507. 完美数 ，难度为 简单。 对于一个 正整数，如果它和除了它自身以外的所有 正因子 之和相等，我们称它为 「完美数」。 给定一个 整数 n， 如果是完美数，返回 true，否则返回 false。 示例 1：123456输入：num &#x3D; 28输出：true解释：28 &#x3D; 1 + 2 + 4 + 7 + 141, 2, 4, 7, 和 14 是 28 的所">
+<meta property="og:description" content="题目描述这是 LeetCode 上的 590. N 叉树的后序遍历 ，难度为 简单。 给定一个 $n$ 叉树的根节点 $root$ ，返回 其节点值的 后序遍历 。 $n$ 叉树 在输入中按层序遍历进行序列化表示，每组子节点由空值 null 分隔（请参见示例）。 示例 1：123输入：root &#x3D; [1,null,3,2,4,null,5,6]输出：[5,6,3,2,4,1]示例 2：123输入：">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://assets.leetcode.com/uploads/2018/10/12/narytreeexample.png">
 <meta property="og:image" content="https://assets.leetcode.com/uploads/2019/11/08/sample_4_964.png">
 <meta property="article:published_time" content="2022-03-11T07:48:02.000Z">
-<meta property="article:modified_time" content="2022-05-12T09:58:12.723Z">
+<meta property="article:modified_time" content="2022-05-12T13:12:43.081Z">
 <meta property="article:author" content="宫水三叶">
-<meta property="article:tag" content="模拟">
-<meta property="article:tag" content="数学">
-<meta property="article:tag" content="数论">
+<meta property="article:tag" content="DFS">
+<meta property="article:tag" content="BFS">
+<meta property="article:tag" content="递归">
+<meta property="article:tag" content="迭代">
+<meta property="article:tag" content="非递归">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://assets.leetcode.com/uploads/2018/10/12/narytreeexample.png">
   
@@ -199,7 +201,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      3.6k 字
+      2.5k 字
     </span>
   
 
@@ -241,30 +243,7 @@
             <h1 style="display: none">LC 590. N 叉树的后序遍历</h1>
             
             <div class="markdown-body">
-              <h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>这是 LeetCode 上的 <strong><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/perfect-number/solution/gong-shui-san-xie-jian-dan-mo-ni-tong-ji-e6jk/">507. 完美数</a></strong> ，难度为 <strong>简单</strong>。</p>
-<p>对于一个 正整数，如果它和除了它自身以外的所有 <strong>正因子</strong> 之和相等，我们称它为 「完美数」。</p>
-<p>给定一个 整数 <code>n</code>， 如果是完美数，返回 <code>true</code>，否则返回 <code>false</code>。</p>
-<p>示例 1：<br><figure class="highlight tap"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs tap">输入：num = 28<br><br>输出：true<br><br>解释：28 =<span class="hljs-number"> 1 </span>+<span class="hljs-number"> 2 </span>+<span class="hljs-number"> 4 </span>+<span class="hljs-number"> 7 </span>+ 14<br>1, 2, 4, 7, 和<span class="hljs-number"> 14 </span>是<span class="hljs-number"> 28 </span>的所有正因子。<br></code></pre></div></td></tr></table></figure><br>示例 2：<br><figure class="highlight dart"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs dart">输入：<span class="hljs-built_in">num</span> = <span class="hljs-number">6</span><br><br>输出：<span class="hljs-keyword">true</span><br></code></pre></div></td></tr></table></figure><br>示例 3：<br><figure class="highlight dart"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs dart">输入：<span class="hljs-built_in">num</span> = <span class="hljs-number">496</span><br><br>输出：<span class="hljs-keyword">true</span><br></code></pre></div></td></tr></table></figure><br>示例 4：<br><figure class="highlight dart"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs dart">输入：<span class="hljs-built_in">num</span> = <span class="hljs-number">8128</span><br><br>输出：<span class="hljs-keyword">true</span><br></code></pre></div></td></tr></table></figure><br>示例 5：<br><figure class="highlight dart"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs dart">输入：<span class="hljs-built_in">num</span> = <span class="hljs-number">2</span><br><br>输出：<span class="hljs-keyword">false</span><br></code></pre></div></td></tr></table></figure></p>
-<p>提示：</p>
-<ul>
-<li>$1 &lt;= num &lt;= 10^8$</li>
-</ul>
-<hr>
-<h3 id="数学"><a href="#数学" class="headerlink" title="数学"></a>数学</h3><p>我们知道正因数总是成对的出现，因此我们可以仅枚举每对正因数的较小数，即从 $[1, \sqrt{num}]$ 范围内进行枚举（其中 $nums &gt; 1$）。</p>
-<p>同时为避免使用 <code>sqrt</code> 库函数和溢出，使用 $i &lt;= \frac{num}{i}$ 作为上界判断。</p>
-<p>代码：<br><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">checkPerfectNumber</span><span class="hljs-params">(<span class="hljs-type">int</span> num)</span> &#123;<br>        <span class="hljs-keyword">if</span> (num == <span class="hljs-number">1</span>) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">ans</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">2</span>; i &lt;= num / i; i++) &#123;<br>            <span class="hljs-keyword">if</span> (num % i == <span class="hljs-number">0</span>) &#123;<br>                ans += i;<br>                <span class="hljs-keyword">if</span> (i * i != num) ans += num / i;<br>            &#125;<br>        &#125;<br>        <span class="hljs-type">return</span> <span class="hljs-variable">ans</span> <span class="hljs-operator">=</span>= num;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure></p>
-<ul>
-<li>时间复杂度：$O(\sqrt{num})$</li>
-<li>空间复杂度：$O(1)$</li>
-</ul>
-<hr>
-<h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>这是我们「刷穿 LeetCode」系列文章的第 <code>No.507</code> 篇，系列开始于 2021/01/01，截止于起始日 LeetCode 上共有 1916 道题目，部分是有锁题，我们将先把所有不带锁的题目刷完。</p>
-<p>在这个系列文章里面，除了讲解解题思路以外，还会尽可能给出最为简洁的代码。如果涉及通解还会相应的代码模板。</p>
-<p>为了方便各位同学能够电脑上进行调试和提交代码，我建立了相关的仓库：<a target="_blank" rel="noopener" href="https://github.com/SharingSource/LogicStack-LeetCode">https://github.com/SharingSource/LogicStack-LeetCode</a> 。</p>
-<p>在仓库地址里，你可以看到系列文章的题解链接、系列文章的相应代码、LeetCode 原题链接和其他优选题解。</p>
-<hr>
-<p>title: LC 590. N 叉树的后序遍历<br>tags: [递归, 迭代, 非递归, DFS, BFS]<br>toc: true<br>mathjax: true<br>banner_img: img/image_77.jpeg</p>
-<h2 id="date-2022-03-11-15-48-02"><a href="#date-2022-03-11-15-48-02" class="headerlink" title="date: 2022-03-11 15:48:02"></a>date: 2022-03-11 15:48:02</h2><h3 id="题目描述-1"><a href="#题目描述-1" class="headerlink" title="题目描述"></a>题目描述</h3><p>这是 LeetCode 上的 <strong><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/n-ary-tree-postorder-traversal/solution/by-ac_oier-ul7t/">590. N 叉树的后序遍历</a></strong> ，难度为 <strong>简单</strong>。</p>
+              <h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>这是 LeetCode 上的 <strong><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/n-ary-tree-postorder-traversal/solution/by-ac_oier-ul7t/">590. N 叉树的后序遍历</a></strong> ，难度为 <strong>简单</strong>。</p>
 <p>给定一个 $n$ 叉树的根节点 $root$ ，返回 其节点值的 <strong>后序遍历</strong> 。</p>
 <p>$n$ 叉树 在输入中按层序遍历进行序列化表示，每组子节点由空值 <code>null</code> 分隔（请参见示例）。</p>
 <p>示例 1：<br><img src="https://assets.leetcode.com/uploads/2018/10/12/narytreeexample.png" srcset="/img/loading.gif" lazyload alt=""><br><figure class="highlight nix"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs nix">输入：<span class="hljs-attr">root</span> = [<span class="hljs-number">1</span>,<span class="hljs-literal">null</span>,<span class="hljs-number">3</span>,<span class="hljs-number">2</span>,<span class="hljs-number">4</span>,<span class="hljs-literal">null</span>,<span class="hljs-number">5</span>,<span class="hljs-number">6</span>]<br><br>输出：[<span class="hljs-number">5</span>,<span class="hljs-number">6</span>,<span class="hljs-number">3</span>,<span class="hljs-number">2</span>,<span class="hljs-number">4</span>,<span class="hljs-number">1</span>]<br></code></pre></div></td></tr></table></figure><br>示例 2：<br><img src="https://assets.leetcode.com/uploads/2019/11/08/sample_4_964.png" srcset="/img/loading.gif" lazyload alt=""><br><figure class="highlight angelscript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs angelscript">输入：root = [<span class="hljs-number">1</span>,<span class="hljs-literal">null</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">4</span>,<span class="hljs-number">5</span>,<span class="hljs-literal">null</span>,<span class="hljs-literal">null</span>,<span class="hljs-number">6</span>,<span class="hljs-number">7</span>,<span class="hljs-literal">null</span>,<span class="hljs-number">8</span>,<span class="hljs-literal">null</span>,<span class="hljs-number">9</span>,<span class="hljs-number">10</span>,<span class="hljs-literal">null</span>,<span class="hljs-literal">null</span>,<span class="hljs-number">11</span>,<span class="hljs-literal">null</span>,<span class="hljs-number">12</span>,<span class="hljs-literal">null</span>,<span class="hljs-number">13</span>,<span class="hljs-literal">null</span>,<span class="hljs-literal">null</span>,<span class="hljs-number">14</span>]<br><br>输出：[<span class="hljs-number">2</span>,<span class="hljs-number">6</span>,<span class="hljs-number">14</span>,<span class="hljs-number">11</span>,<span class="hljs-number">7</span>,<span class="hljs-number">3</span>,<span class="hljs-number">12</span>,<span class="hljs-number">8</span>,<span class="hljs-number">4</span>,<span class="hljs-number">13</span>,<span class="hljs-number">9</span>,<span class="hljs-number">10</span>,<span class="hljs-number">5</span>,<span class="hljs-number">1</span>]<br></code></pre></div></td></tr></table></figure></p>
@@ -301,7 +280,7 @@
 <li>空间复杂度：$O(n)$</li>
 </ul>
 <hr>
-<h3 id="最后-1"><a href="#最后-1" class="headerlink" title="最后"></a>最后</h3><p>这是我们「刷穿 LeetCode」系列文章的第 <code>No.590</code> 篇，系列开始于 2021/01/01，截止于起始日 LeetCode 上共有 1916 道题目，部分是有锁题，我们将先把所有不带锁的题目刷完。</p>
+<h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>这是我们「刷穿 LeetCode」系列文章的第 <code>No.590</code> 篇，系列开始于 2021/01/01，截止于起始日 LeetCode 上共有 1916 道题目，部分是有锁题，我们将先把所有不带锁的题目刷完。</p>
 <p>在这个系列文章里面，除了讲解解题思路以外，还会尽可能给出最为简洁的代码。如果涉及通解还会相应的代码模板。</p>
 <p>为了方便各位同学能够电脑上进行调试和提交代码，我建立了相关的仓库：<a target="_blank" rel="noopener" href="https://github.com/SharingSource/LogicStack-LeetCode">https://github.com/SharingSource/LogicStack-LeetCode</a> 。</p>
 <p>在仓库地址里，你可以看到系列文章的题解链接、系列文章的相应代码、LeetCode 原题链接和其他优选题解。</p>
@@ -315,11 +294,15 @@
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/%E6%A8%A1%E6%8B%9F/">模拟</a>
+                      <a class="hover-with-bg" href="/tags/DFS/">DFS</a>
                     
-                      <a class="hover-with-bg" href="/tags/%E6%95%B0%E5%AD%A6/">数学</a>
+                      <a class="hover-with-bg" href="/tags/BFS/">BFS</a>
                     
-                      <a class="hover-with-bg" href="/tags/%E6%95%B0%E8%AE%BA/">数论</a>
+                      <a class="hover-with-bg" href="/tags/%E9%80%92%E5%BD%92/">递归</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E8%BF%AD%E4%BB%A3/">迭代</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E9%9D%9E%E9%80%92%E5%BD%92/">非递归</a>
                     
                   </div>
                 
