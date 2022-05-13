@@ -19,11 +19,11 @@
     <meta name="description" content="题目描述这是 LeetCode 上的 1104. 二叉树寻路 ，难度为中等。 在一棵无限的二叉树上，每个节点都有两个子节点，树中的节点 逐行 依次按 “之” 字形进行标记。 如下图所示，在奇数行（即，第一行、第三行、第五行……）中，按从左到右的顺序进行标记； 而偶数行（即，第二行、第四行、第六行……）中，按从右到左的顺序进行标记。  给你树上某一个节点的标号 label，请你返回从根节点到该标号为">
 <meta property="og:type" content="article">
 <meta property="og:title" content="LC 1104. 二叉树寻路">
-<meta property="og:url" content="http://example.com/2021/07/29/1104.%20%E4%BA%8C%E5%8F%89%E6%A0%91%E5%AF%BB%E8%B7%AF%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/index.html">
+<meta property="og:url" content="https://sharingsource.github.io/2021/07/29/1104.%20%E4%BA%8C%E5%8F%89%E6%A0%91%E5%AF%BB%E8%B7%AF%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/index.html">
 <meta property="og:site_name" content="宫水三叶的刷题日记">
 <meta property="og:description" content="题目描述这是 LeetCode 上的 1104. 二叉树寻路 ，难度为中等。 在一棵无限的二叉树上，每个节点都有两个子节点，树中的节点 逐行 依次按 “之” 字形进行标记。 如下图所示，在奇数行（即，第一行、第三行、第五行……）中，按从左到右的顺序进行标记； 而偶数行（即，第二行、第四行、第六行……）中，按从右到左的顺序进行标记。  给你树上某一个节点的标号 label，请你返回从根节点到该标号为">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://example.com/2021/07/29/1104.%20%E4%BA%8C%E5%8F%89%E6%A0%91%E5%AF%BB%E8%B7%AF%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/image_0.png">
+<meta property="og:image" content="https://sharingsource.github.io/2021/07/29/1104.%20%E4%BA%8C%E5%8F%89%E6%A0%91%E5%AF%BB%E8%B7%AF%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/image_0.png">
 <meta property="article:published_time" content="2021-07-28T18:59:08.000Z">
 <meta property="article:modified_time" content="2022-05-13T04:08:26.198Z">
 <meta property="article:author" content="宫水三叶">
@@ -31,7 +31,7 @@
 <meta property="article:tag" content="数学">
 <meta property="article:tag" content="二叉树">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="http://example.com/2021/07/29/1104.%20%E4%BA%8C%E5%8F%89%E6%A0%91%E5%AF%BB%E8%B7%AF%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/image_0.png">
+<meta name="twitter:image" content="https://sharingsource.github.io/2021/07/29/1104.%20%E4%BA%8C%E5%8F%89%E6%A0%91%E5%AF%BB%E8%B7%AF%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/image_0.png">
   
   
   <title>LC 1104. 二叉树寻路 - 宫水三叶的刷题日记</title>
@@ -71,7 +71,7 @@
 
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
-    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"|","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+    var CONFIG = {"hostname":"sharingsource.github.io","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"|","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
