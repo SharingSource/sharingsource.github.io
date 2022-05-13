@@ -23,16 +23,16 @@
 <meta property="og:site_name" content="宫水三叶的刷题日记">
 <meta property="og:description" content="题目描述这是 LeetCode 上的 127. 单词接龙 ，难度为 困难。 字典 wordList 中从单词 beginWord 和 endWord 的 转换序列 是一个按下述规格形成的序列：  序列中第一个单词是 beginWord 。 序列中最后一个单词是 endWord 。 每次转换只能改变一个字母。 转换过程中的中间单词必须是字典 wordList 中的单词。  给你两个单词 beginW">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://pic.leetcode-cn.com/1623894968-XELIvK-image.png">
-<meta property="og:image" content="https://pic.leetcode-cn.com/1623894976-CCMljJ-image.png">
+<meta property="og:image" content="http://example.com/2021/06/17/127.%20%E5%8D%95%E8%AF%8D%E6%8E%A5%E9%BE%99%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/image_0.png">
+<meta property="og:image" content="http://example.com/2021/06/17/127.%20%E5%8D%95%E8%AF%8D%E6%8E%A5%E9%BE%99%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/image_1.png">
 <meta property="article:published_time" content="2021-06-16T18:00:39.000Z">
-<meta property="article:modified_time" content="2022-05-13T01:31:23.202Z">
+<meta property="article:modified_time" content="2022-05-13T04:10:07.190Z">
 <meta property="article:author" content="宫水三叶">
 <meta property="article:tag" content="双向 BFS">
 <meta property="article:tag" content="启发式搜索">
 <meta property="article:tag" content="AStar 算法">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://pic.leetcode-cn.com/1623894968-XELIvK-image.png">
+<meta name="twitter:image" content="http://example.com/2021/06/17/127.%20%E5%8D%95%E8%AF%8D%E6%8E%A5%E9%BE%99%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/image_0.png">
   
   
   <title>LC 127. 单词接龙 - 宫水三叶的刷题日记</title>
@@ -286,12 +286,12 @@
 <p>朴素的 BFS 可能会带来「搜索空间爆炸」的情况。</p>
 <p>想象一下，如果我们的 <code>wordList</code> 足够丰富（包含了所有单词），对于一个长度为 $10$ 的 <code>beginWord​</code> 替换一次字符可以产生 $10 <em> 25$ 个新单词（每个替换点可以替换另外 $25$ 个小写字母），第一层就会产生 $250$ 个单词；第二层会产生超过 $6 </em> 10^4$ 个新单词 …</p>
 <p><strong>随着层数的加深，这个数字的增速越快，这就是「搜索空间爆炸」问题。</strong></p>
-<p><img src="https://pic.leetcode-cn.com/1623894968-XELIvK-image.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<p><img src="/2021/06/17/127.%20%E5%8D%95%E8%AF%8D%E6%8E%A5%E9%BE%99%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/image_0.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
 <p><strong>在朴素的 BFS 实现中，空间的瓶颈主要取决于搜索空间中的最大宽度。</strong></p>
 <p>那么有没有办法让我们不使用这么宽的搜索空间，同时又能保证搜索到目标结果呢？</p>
 <p>「双向 BFS」 可以很好的解决这个问题：</p>
 <p><strong>同时从两个方向开始搜索，一旦搜索到相同的值，意味着找到了一条联通起点和终点的最短路径。</strong></p>
-<p><img src="https://pic.leetcode-cn.com/1623894976-CCMljJ-image.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<p><img src="/2021/06/17/127.%20%E5%8D%95%E8%AF%8D%E6%8E%A5%E9%BE%99%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/image_1.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
 <p>「双向 BFS」的基本实现思路如下：</p>
 <ol>
 <li>创建「两个队列」分别用于两个方向的搜索；</li>

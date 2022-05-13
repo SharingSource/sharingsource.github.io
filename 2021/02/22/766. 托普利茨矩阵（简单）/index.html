@@ -23,17 +23,17 @@
 <meta property="og:site_name" content="宫水三叶的刷题日记">
 <meta property="og:description" content="题目描述这是 LeetCode 上的 766. 托普利茨矩阵 ，难度为 简单。 给你一个 m x n 的矩阵 matrix 。如果这个矩阵是托普利茨矩阵，返回 true ；否则，返回 false 。 如果矩阵上每一条由左上到右下的对角线上的元素都相同，那么这个矩阵是 托普利茨矩阵 。 示例 1：123456输入：matrix &#x3D; [[1,2,3,4],[5,1,2,3],[9,5,1,2]]输出：">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://assets.leetcode.com/uploads/2020/11/04/ex1.jpg">
-<meta property="og:image" content="https://assets.leetcode.com/uploads/2020/11/04/ex2.jpg">
-<meta property="og:image" content="https://pic.leetcode-cn.com/1613957825-VPQgjG-image.png">
-<meta property="og:image" content="https://pic.leetcode-cn.com/1613957207-jQmjZi-image.png">
-<meta property="og:image" content="https://pic.leetcode-cn.com/1613965997-pGJUMv-image.png">
+<meta property="og:image" content="http://example.com/2021/02/22/766.%20%E6%89%98%E6%99%AE%E5%88%A9%E8%8C%A8%E7%9F%A9%E9%98%B5%EF%BC%88%E7%AE%80%E5%8D%95%EF%BC%89/image_0.png">
+<meta property="og:image" content="http://example.com/2021/02/22/766.%20%E6%89%98%E6%99%AE%E5%88%A9%E8%8C%A8%E7%9F%A9%E9%98%B5%EF%BC%88%E7%AE%80%E5%8D%95%EF%BC%89/image_1.png">
+<meta property="og:image" content="http://example.com/2021/02/22/766.%20%E6%89%98%E6%99%AE%E5%88%A9%E8%8C%A8%E7%9F%A9%E9%98%B5%EF%BC%88%E7%AE%80%E5%8D%95%EF%BC%89/image_2.png">
+<meta property="og:image" content="http://example.com/2021/02/22/766.%20%E6%89%98%E6%99%AE%E5%88%A9%E8%8C%A8%E7%9F%A9%E9%98%B5%EF%BC%88%E7%AE%80%E5%8D%95%EF%BC%89/image_3.png">
+<meta property="og:image" content="http://example.com/2021/02/22/766.%20%E6%89%98%E6%99%AE%E5%88%A9%E8%8C%A8%E7%9F%A9%E9%98%B5%EF%BC%88%E7%AE%80%E5%8D%95%EF%BC%89/image_4.png">
 <meta property="article:published_time" content="2021-02-21T17:44:37.000Z">
-<meta property="article:modified_time" content="2022-05-13T01:31:23.335Z">
+<meta property="article:modified_time" content="2022-05-13T04:10:38.937Z">
 <meta property="article:author" content="宫水三叶">
 <meta property="article:tag" content="模拟">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://assets.leetcode.com/uploads/2020/11/04/ex1.jpg">
+<meta name="twitter:image" content="http://example.com/2021/02/22/766.%20%E6%89%98%E6%99%AE%E5%88%A9%E8%8C%A8%E7%9F%A9%E9%98%B5%EF%BC%88%E7%AE%80%E5%8D%95%EF%BC%89/image_0.png">
   
   
   <title>LC 766. 托普利茨矩阵 - 宫水三叶的刷题日记</title>
@@ -257,7 +257,7 @@
               <h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>这是 LeetCode 上的 <strong><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/toeplitz-matrix/solution/cong-ci-pan-du-qu-cheng-ben-fen-xi-liang-f20w/">766. 托普利茨矩阵</a></strong> ，难度为 <strong>简单</strong>。</p>
 <p>给你一个 m x n 的矩阵 matrix 。如果这个矩阵是托普利茨矩阵，返回 true ；否则，返回 false 。</p>
 <p>如果矩阵上每一条由左上到右下的对角线上的元素都相同，那么这个矩阵是 托普利茨矩阵 。</p>
-<p>示例 1：<br><img src="https://assets.leetcode.com/uploads/2020/11/04/ex1.jpg" srcset="/img/loading.gif" lazyload alt=""><br><figure class="highlight lua"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs lua">输入：matrix = <span class="hljs-string">[[1,2,3,4],[5,1,2,3],[9,5,1,2]]</span><br>输出：<span class="hljs-literal">true</span><br>解释：<br>在上述矩阵中, 其对角线为: <br><span class="hljs-string">&quot;[9]&quot;</span>, <span class="hljs-string">&quot;[5, 5]&quot;</span>, <span class="hljs-string">&quot;[1, 1, 1]&quot;</span>, <span class="hljs-string">&quot;[2, 2, 2]&quot;</span>, <span class="hljs-string">&quot;[3, 3]&quot;</span>, <span class="hljs-string">&quot;[4]&quot;</span>。 <br>各条对角线上的所有元素均相同, 因此答案是 True 。<br></code></pre></div></td></tr></table></figure><br>示例 2：<br><img src="https://assets.leetcode.com/uploads/2020/11/04/ex2.jpg" srcset="/img/loading.gif" lazyload alt=""><br><figure class="highlight lua"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs lua">输入：matrix = <span class="hljs-string">[[1,2],[2,2]]</span><br>输出：<span class="hljs-literal">false</span><br>解释：<br>对角线 <span class="hljs-string">&quot;[1, 2]&quot;</span> 上的元素不同。<br></code></pre></div></td></tr></table></figure></p>
+<p>示例 1：<br><img src="/2021/02/22/766.%20%E6%89%98%E6%99%AE%E5%88%A9%E8%8C%A8%E7%9F%A9%E9%98%B5%EF%BC%88%E7%AE%80%E5%8D%95%EF%BC%89/image_0.png" srcset="/img/loading.gif" lazyload alt><br><figure class="highlight lua"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs lua">输入：matrix = <span class="hljs-string">[[1,2,3,4],[5,1,2,3],[9,5,1,2]]</span><br>输出：<span class="hljs-literal">true</span><br>解释：<br>在上述矩阵中, 其对角线为: <br><span class="hljs-string">&quot;[9]&quot;</span>, <span class="hljs-string">&quot;[5, 5]&quot;</span>, <span class="hljs-string">&quot;[1, 1, 1]&quot;</span>, <span class="hljs-string">&quot;[2, 2, 2]&quot;</span>, <span class="hljs-string">&quot;[3, 3]&quot;</span>, <span class="hljs-string">&quot;[4]&quot;</span>。 <br>各条对角线上的所有元素均相同, 因此答案是 True 。<br></code></pre></div></td></tr></table></figure><br>示例 2：<br><img src="/2021/02/22/766.%20%E6%89%98%E6%99%AE%E5%88%A9%E8%8C%A8%E7%9F%A9%E9%98%B5%EF%BC%88%E7%AE%80%E5%8D%95%EF%BC%89/image_1.png" srcset="/img/loading.gif" lazyload alt><br><figure class="highlight lua"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs lua">输入：matrix = <span class="hljs-string">[[1,2],[2,2]]</span><br>输出：<span class="hljs-literal">false</span><br>解释：<br>对角线 <span class="hljs-string">&quot;[1, 2]&quot;</span> 上的元素不同。<br></code></pre></div></td></tr></table></figure></p>
 <p>提示：</p>
 <ul>
 <li>m == matrix.length</li>
@@ -271,7 +271,7 @@
 <li>如果矩阵太大，以至于一次只能将不完整的一行加载到内存中，该怎么办？</li>
 </ul>
 <hr>
-<h3 id="按「格子」遍历"><a href="#按「格子」遍历" class="headerlink" title="按「格子」遍历"></a>按「格子」遍历</h3><p><img src="https://pic.leetcode-cn.com/1613957825-VPQgjG-image.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<h3 id="按「格子」遍历"><a href="#按「格子」遍历" class="headerlink" title="按「格子」遍历"></a>按「格子」遍历</h3><p><img src="/2021/02/22/766.%20%E6%89%98%E6%99%AE%E5%88%A9%E8%8C%A8%E7%9F%A9%E9%98%B5%EF%BC%88%E7%AE%80%E5%8D%95%EF%BC%89/image_2.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
 <p>对于一个合格的「托普利茨矩阵」而言，每个格子总是与其左上角格子相等（如果有的话）。</p>
 <p>我们以「格子」为单位进行遍历，每次与左上角的格子进行检查即可。</p>
 <p>这样我们每对一个格子进行判断，都要读 <code>matrix</code> 上的两个格子的值（即<strong>非边缘格子其实会被读取两次</strong>）。</p>
@@ -281,7 +281,7 @@
 <li>空间复杂度：$O(1)$</li>
 </ul>
 <hr>
-<h3 id="按「线」遍历"><a href="#按「线」遍历" class="headerlink" title="按「线」遍历"></a>按「线」遍历</h3><p><img src="https://pic.leetcode-cn.com/1613957207-jQmjZi-image.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<h3 id="按「线」遍历"><a href="#按「线」遍历" class="headerlink" title="按「线」遍历"></a>按「线」遍历</h3><p><img src="/2021/02/22/766.%20%E6%89%98%E6%99%AE%E5%88%A9%E8%8C%A8%E7%9F%A9%E9%98%B5%EF%BC%88%E7%AE%80%E5%8D%95%EF%BC%89/image_3.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
 <p>如果稍微增加一点点难度：限制每个格子只能被读取一次呢？</p>
 <p>这时候我们也可以按照「线」为单位进行检查。</p>
 <p>当一条完整的斜线值都相等，我们再对下一条斜线做检查。</p>
@@ -295,7 +295,7 @@
 <h3 id="进阶"><a href="#进阶" class="headerlink" title="进阶"></a>进阶</h3><ol>
 <li>如果矩阵存储在磁盘上，并且内存有限，以至于一次最多只能将矩阵的一行加载到内存中，该怎么办？<br>使用「背包问题」的一维优化思路：假设我们有装载一行数据大小的内存，每次读取新的行时都进行「从右往左」的覆盖，每次覆盖都与前一个位置的进行比较（其实就是和上一行的左上角位置进行比较）。</li>
 </ol>
-<p>如图：<br><img src="https://pic.leetcode-cn.com/1613965997-pGJUMv-image.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<p>如图：<br><img src="/2021/02/22/766.%20%E6%89%98%E6%99%AE%E5%88%A9%E8%8C%A8%E7%9F%A9%E9%98%B5%EF%BC%88%E7%AE%80%E5%8D%95%EF%BC%89/image_4.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
 <p>如果你对更多「背包问题」相关内容感兴趣，可以看我这篇总结：<a target="_blank" rel="noopener" href="https://leetcode-cn.com/circle/discuss/GWpXCM/">深度讲解背包问题</a></p>
 <ol>
 <li>如果矩阵太大，以至于一次只能将不完整的一行加载到内存中，该怎么办？<br>亲，这边建议升级内存，啊呸 …<br>将问题看做子问题进行解决：调整读取矩阵的方式（按照垂直方向进行读取）；或使用额外数据记录当前当前片段的行/列数。<br>更为合理的解决方案是：存储的时候按照「数组」的形式进行存储（行式存储），然后读取的时候计算偏移量直接读取其「左上角」或者「右下角」的值。</li>

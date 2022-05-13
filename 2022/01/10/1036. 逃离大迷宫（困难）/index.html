@@ -23,15 +23,15 @@
 <meta property="og:site_name" content="宫水三叶的刷题日记">
 <meta property="og:description" content="题目描述这是 LeetCode 上的 1036. 逃离大迷宫 ，难度为 困难。 在一个 $10^6$ x $10^6$ 的网格中，每个网格上方格的坐标为 $(x, y)$ 。 现在从源方格 $source &#x3D; [s_x, s_y]$ 开始出发，意图赶往目标方格 $target &#x3D; [t_x, t_y]$ 。 数组 $blocked$ 是封锁的方格列表，其中每个 $blocked[i] &#x3D; [x_i">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://pic.leetcode-cn.com/1641855571-IOaJZJ-image.png">
-<meta property="og:image" content="https://pic.leetcode-cn.com/1641856898-BYFygs-image.png">
+<meta property="og:image" content="http://example.com/2022/01/10/1036.%20%E9%80%83%E7%A6%BB%E5%A4%A7%E8%BF%B7%E5%AE%AB%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/image_0.png">
+<meta property="og:image" content="http://example.com/2022/01/10/1036.%20%E9%80%83%E7%A6%BB%E5%A4%A7%E8%BF%B7%E5%AE%AB%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/image_1.png">
 <meta property="article:published_time" content="2022-01-10T15:34:30.000Z">
-<meta property="article:modified_time" content="2022-05-13T01:31:23.205Z">
+<meta property="article:modified_time" content="2022-05-13T04:10:07.421Z">
 <meta property="article:author" content="宫水三叶">
 <meta property="article:tag" content="几何">
 <meta property="article:tag" content="BFS">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://pic.leetcode-cn.com/1641855571-IOaJZJ-image.png">
+<meta name="twitter:image" content="http://example.com/2022/01/10/1036.%20%E9%80%83%E7%A6%BB%E5%A4%A7%E8%BF%B7%E5%AE%AB%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/image_0.png">
   
   
   <title>LC 1036. 逃离大迷宫 - 宫水三叶的刷题日记</title>
@@ -280,12 +280,12 @@
 <p>但第一反应还是想从单秒计算量上界进行反推，两边 <code>BFS</code>  的复杂度均为 $O(\max)$，因此直接设定 <code>MAX = 1e5</code> 应该是比较合适的。</p>
 <p>更小的 <code>MAX</code> 需要证明：<strong>在给定数量障碍物的前提下，障碍物所能围成的最大面积为多少。</strong></p>
 <p>首先，容易想到：<strong>任何一条封闭图形的直边都可以通过调整为斜边来围成更大的面积：</strong></p>
-<p><img src="https://pic.leetcode-cn.com/1641855571-IOaJZJ-image.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<p><img src="/2022/01/10/1036.%20%E9%80%83%E7%A6%BB%E5%A4%A7%E8%BF%B7%E5%AE%AB%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/image_0.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
 <p><strong>即组成封闭图形的边不可能有直边，同时由于是封闭图形，因此斜边直接必然是单点衔接，而不可能是平行（无法封闭）。</strong></p>
 <p>同时，<strong>想要达到最大面积，应当尽可能利用边界作为围成图形的某些边。</strong></p>
 <p>利用边界所能围成的最大封面图形 <strong>可以是</strong>「由边界提供两边，障碍物提供一边的三角形」。</p>
 <p>如果不是该形状，则可以通过调整障碍物的直边为一条完整的斜边，来组成封闭三角形，围成面积不会变小：</p>
-<p><img src="https://pic.leetcode-cn.com/1641856898-BYFygs-image.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<p><img src="/2022/01/10/1036.%20%E9%80%83%E7%A6%BB%E5%A4%A7%E8%BF%B7%E5%AE%AB%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/image_1.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
 <p>即给定 $n$ 的情况下，根据「等差数列求和」可知，最大所能围成的面积为 $1 + 2 + … + n - 1 = \frac{n * (n - 1)}{2}$。</p>
 <p>因此如果从 $s$ 和 $t$ 出发，能够访问的点数超过 $\frac{n * (n - 1)}{2}$ 个，那么两点并没有被围住，必然联通。</p>
 <p>最后，为了在 <code>BFS</code> 过程中记录某些点被访问过，可以通过计算某个位置哈希值（数值）来实现。</p>

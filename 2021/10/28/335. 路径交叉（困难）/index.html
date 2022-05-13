@@ -23,21 +23,21 @@
 <meta property="og:site_name" content="宫水三叶的刷题日记">
 <meta property="og:description" content="题目描述这是 LeetCode 上的 335. 路径交叉 ，难度为 困难。 给你一个整数数组 distance 。 从 X-Y 平面上的点 $(0,0)$ 开始，先向北移动 distance[0] 米，然后向西移动 distance[1] 米，向南移动 distance[2] 米，向东移动 distance[3] 米，持续移动。也就是说，每次移动后你的方位会发生逆时针变化。 判断你所经过的路径是否">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://assets.leetcode.com/uploads/2021/03/14/selfcross1-plane.jpg">
-<meta property="og:image" content="https://assets.leetcode.com/uploads/2021/03/14/selfcross2-plane.jpg">
-<meta property="og:image" content="https://assets.leetcode.com/uploads/2021/03/14/selfcross3-plane.jpg">
-<meta property="og:image" content="https://pic.leetcode-cn.com/1635468548-KkscIH-image.png">
-<meta property="og:image" content="https://pic.leetcode-cn.com/1635475472-sdNYAm-image.png">
-<meta property="og:image" content="https://pic.leetcode-cn.com/1635468492-UWemtI-image.png">
-<meta property="og:image" content="https://pic.leetcode-cn.com/1635463348-zmNjqd-image.png">
+<meta property="og:image" content="http://example.com/2021/10/28/335.%20%E8%B7%AF%E5%BE%84%E4%BA%A4%E5%8F%89%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/image_0.png">
+<meta property="og:image" content="http://example.com/2021/10/28/335.%20%E8%B7%AF%E5%BE%84%E4%BA%A4%E5%8F%89%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/image_1.png">
+<meta property="og:image" content="http://example.com/2021/10/28/335.%20%E8%B7%AF%E5%BE%84%E4%BA%A4%E5%8F%89%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/image_2.png">
+<meta property="og:image" content="http://example.com/2021/10/28/335.%20%E8%B7%AF%E5%BE%84%E4%BA%A4%E5%8F%89%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/image_3.png">
+<meta property="og:image" content="http://example.com/2021/10/28/335.%20%E8%B7%AF%E5%BE%84%E4%BA%A4%E5%8F%89%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/image_4.png">
+<meta property="og:image" content="http://example.com/2021/10/28/335.%20%E8%B7%AF%E5%BE%84%E4%BA%A4%E5%8F%89%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/image_5.png">
+<meta property="og:image" content="http://example.com/2021/10/28/335.%20%E8%B7%AF%E5%BE%84%E4%BA%A4%E5%8F%89%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/image_6.png">
 <meta property="article:published_time" content="2021-10-28T15:40:38.000Z">
-<meta property="article:modified_time" content="2022-05-13T01:31:23.029Z">
+<meta property="article:modified_time" content="2022-05-13T04:09:24.728Z">
 <meta property="article:author" content="宫水三叶">
 <meta property="article:tag" content="模拟">
 <meta property="article:tag" content="脑筋急转弯">
 <meta property="article:tag" content="找规律">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://assets.leetcode.com/uploads/2021/03/14/selfcross1-plane.jpg">
+<meta name="twitter:image" content="http://example.com/2021/10/28/335.%20%E8%B7%AF%E5%BE%84%E4%BA%A4%E5%8F%89%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/image_0.png">
   
   
   <title>LC 335. 路径交叉 - 宫水三叶的刷题日记</title>
@@ -262,7 +262,7 @@
 <p>给你一个整数数组 <code>distance</code> 。</p>
 <p>从 <code>X-Y</code> 平面上的点 $(0,0)$ 开始，先向北移动 <code>distance[0]</code> 米，然后向西移动 <code>distance[1]</code> 米，向南移动 <code>distance[2]</code> 米，向东移动 <code>distance[3]</code> 米，持续移动。也就是说，每次移动后你的方位会发生逆时针变化。</p>
 <p>判断你所经过的路径是否相交。如果相交，返回 <code>true</code> ；否则，返回 <code>false</code>。</p>
-<p>示例 1：<br><img src="https://assets.leetcode.com/uploads/2021/03/14/selfcross1-plane.jpg" srcset="/img/loading.gif" lazyload alt=""><br><figure class="highlight arcade"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs arcade">输入：<span class="hljs-built_in">distance</span> = [<span class="hljs-number">2</span>,<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,<span class="hljs-number">2</span>]<br><br>输出：<span class="hljs-literal">true</span><br></code></pre></div></td></tr></table></figure><br>示例 2：<br><img src="https://assets.leetcode.com/uploads/2021/03/14/selfcross2-plane.jpg" srcset="/img/loading.gif" lazyload alt=""><br><figure class="highlight arcade"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs arcade">输入：<span class="hljs-built_in">distance</span> = [<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">4</span>]<br><br>输出：<span class="hljs-literal">false</span><br></code></pre></div></td></tr></table></figure><br>示例 3：<br><img src="https://assets.leetcode.com/uploads/2021/03/14/selfcross3-plane.jpg" srcset="/img/loading.gif" lazyload alt=""><br><figure class="highlight arcade"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs arcade">输入：<span class="hljs-built_in">distance</span> = [<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,<span class="hljs-number">1</span>]<br><br>输出：<span class="hljs-literal">true</span><br></code></pre></div></td></tr></table></figure></p>
+<p>示例 1：<br><img src="/2021/10/28/335.%20%E8%B7%AF%E5%BE%84%E4%BA%A4%E5%8F%89%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/image_0.png" srcset="/img/loading.gif" lazyload alt><br><figure class="highlight arcade"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs arcade">输入：<span class="hljs-built_in">distance</span> = [<span class="hljs-number">2</span>,<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,<span class="hljs-number">2</span>]<br><br>输出：<span class="hljs-literal">true</span><br></code></pre></div></td></tr></table></figure><br>示例 2：<br><img src="/2021/10/28/335.%20%E8%B7%AF%E5%BE%84%E4%BA%A4%E5%8F%89%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/image_1.png" srcset="/img/loading.gif" lazyload alt><br><figure class="highlight arcade"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs arcade">输入：<span class="hljs-built_in">distance</span> = [<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">4</span>]<br><br>输出：<span class="hljs-literal">false</span><br></code></pre></div></td></tr></table></figure><br>示例 3：<br><img src="/2021/10/28/335.%20%E8%B7%AF%E5%BE%84%E4%BA%A4%E5%8F%89%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/image_2.png" srcset="/img/loading.gif" lazyload alt><br><figure class="highlight arcade"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs arcade">输入：<span class="hljs-built_in">distance</span> = [<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,<span class="hljs-number">1</span>]<br><br>输出：<span class="hljs-literal">true</span><br></code></pre></div></td></tr></table></figure></p>
 <p>提示：</p>
 <ul>
 <li>$1 &lt;= distance.length &lt;= 10^5$</li>
@@ -272,7 +272,7 @@
 <h3 id="找规律-分情况讨论"><a href="#找规律-分情况讨论" class="headerlink" title="找规律 + 分情况讨论"></a>找规律 + 分情况讨论</h3><p>这是一道画图找规律的题目。</p>
 <p><strong>首先显然的是，至少需要 $4$ 条边才 可能 存在相交路径，如果 $distance$ 的长度小于 $4$，可直接返回 <code>False</code>，同时这引导我们如果某条边 $distance[i]$ 发生相交，不可能是与 $distance[i - 1]$ 或 $distance[i - 2]$ 之间发生的（基于条件 $1 &lt;= distance[i] &lt;= 10^5$）。</strong></p>
 <p>为了方便，我们分别使用 $a$、$b$、$c$ 和 $d$ 来分别代指「往上」、「往左」、「往下」和「往右」的四类方向边。</p>
-<p><img src="https://pic.leetcode-cn.com/1635468548-KkscIH-image.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<p><img src="/2021/10/28/335.%20%E8%B7%AF%E5%BE%84%E4%BA%A4%E5%8F%89%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/image_3.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
 <p>然后对可能相交情况进行分情况讨论，假设当前枚举到的边为 $distance[i]$（下面使用 $d[i]$ 代指 $distance[i]$）：</p>
 <ol>
 <li>$d[i]$ 与 $d[i - 3]$ 发生相交：此时满足 $d[i] &gt;= d[i - 2]$，同时 $d[i - 1] &lt;= d[i - 3]$； </li>
@@ -280,15 +280,15 @@
 <blockquote>
 <p><strong>需要注意的时候 $d[i]$ 不一定是 $d$ 类边，而可以是 $abcd$ 任意类的边，此时只是矩形发生旋转，并不会影响路径相交的事实，其余分情况讨论也是同理。</strong></p>
 </blockquote>
-<p><img src="https://pic.leetcode-cn.com/1635475472-sdNYAm-image.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<p><img src="/2021/10/28/335.%20%E8%B7%AF%E5%BE%84%E4%BA%A4%E5%8F%89%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/image_4.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
 <ol>
 <li>$d[i]$ 与 $d[i - 4]$ 发生相交：此时满足 $d[i - 1] = d[i - 3]$，同时 $d[i] + d[i - 4] &gt;= d[i - 2]$； </li>
 </ol>
-<p><img src="https://pic.leetcode-cn.com/1635468492-UWemtI-image.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<p><img src="/2021/10/28/335.%20%E8%B7%AF%E5%BE%84%E4%BA%A4%E5%8F%89%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/image_5.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
 <ol>
 <li>$d[i]$ 与 $d[i - 5]$ 发生相交：此时满足$d[i - 1] &lt;= d[i - 3]$，同时 $d[i - 2] &gt; d[i - 4]$，同时 $d[i] + d[i - 4] &gt;= d[i - 2]$，同时 $d[i - 1] + d[i - 5] &gt;= d[i - 3]$。</li>
 </ol>
-<p><img src="https://pic.leetcode-cn.com/1635463348-zmNjqd-image.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<p><img src="/2021/10/28/335.%20%E8%B7%AF%E5%BE%84%E4%BA%A4%E5%8F%89%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/image_6.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
 <p><strong>综上，$d[i]$ 不会与 $d[i - 1]$ 和 $d[i - 2]$ 发生相交，而 $d[i]$ 与 $d[i - 3]$、$d[i - 4]$ 和 $d[i - 5]$ 的相交条件如上述讨论。并且 $d[i]$ 不会与 $d[i - x]$ $(x &gt; 5)$ 发生相交的同时，不与 $d[i - y]$ $(3 &lt;= y &lt;= 5)$ 发生相交。即 $d[i]$ 与 $d[i - x]$ $(x &gt; 5)$ 发生相交前，必然与 $d[i - y]$ $(3 &lt;= y &lt;= 5)$ 发生相交。</strong></p>
 <p>代码：<br><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">isSelfCrossing</span><span class="hljs-params">(<span class="hljs-type">int</span>[] d)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> d.length;<br>        <span class="hljs-keyword">if</span> (n &lt; <span class="hljs-number">4</span>) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">3</span>; i &lt; n; i++) &#123;<br>            <span class="hljs-keyword">if</span> (d[i] &gt;= d[i - <span class="hljs-number">2</span>] &amp;&amp; d[i - <span class="hljs-number">1</span>] &lt;= d[i - <span class="hljs-number">3</span>]) <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>            <span class="hljs-keyword">if</span> (i &gt;= <span class="hljs-number">4</span> &amp;&amp; d[i - <span class="hljs-number">1</span>] == d[i - <span class="hljs-number">3</span>] &amp;&amp; d[i] + d[i - <span class="hljs-number">4</span>] &gt;= d[i - <span class="hljs-number">2</span>]) <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>            <span class="hljs-keyword">if</span> (i &gt;= <span class="hljs-number">5</span> &amp;&amp; d[i - <span class="hljs-number">1</span>] &lt;= d[i - <span class="hljs-number">3</span>] &amp;&amp; d[i - <span class="hljs-number">2</span>] &gt; d[i - <span class="hljs-number">4</span>] &amp;&amp; d[i] + d[i - <span class="hljs-number">4</span>] &gt;= d[i - <span class="hljs-number">2</span>] &amp;&amp; d[i - <span class="hljs-number">1</span>] + d[i - <span class="hljs-number">5</span>] &gt;= d[i - <span class="hljs-number">3</span>]) <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>        &#125;<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure></p>
 <ul>

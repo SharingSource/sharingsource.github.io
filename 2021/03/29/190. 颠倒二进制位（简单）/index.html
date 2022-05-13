@@ -23,16 +23,16 @@
 <meta property="og:site_name" content="宫水三叶的刷题日记">
 <meta property="og:description" content="题目描述这是 LeetCode 上的 190. 颠倒二进制位 ，难度为 简单。 颠倒给定的 32 位无符号整数的二进制位。 提示：  请注意，在某些语言（如 Java）中，没有无符号整数类型。在这种情况下，输入和输出都将被指定为有符号整数类型，并且不应影响您的实现，因为无论整数是有符号的还是无符号的，其内部的二进制表示形式都是相同的。 在 Java 中，编译器使用二进制补码记法来表示有符号整数。因">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://pic.leetcode-cn.com/1616992045-iIZbTD-image.png">
-<meta property="og:image" content="https://pic.leetcode-cn.com/1616992076-abbLNX-image.png">
-<meta property="og:image" content="https://pic.leetcode-cn.com/1616992100-QmigBE-image.png">
+<meta property="og:image" content="http://example.com/2021/03/29/190.%20%E9%A2%A0%E5%80%92%E4%BA%8C%E8%BF%9B%E5%88%B6%E4%BD%8D%EF%BC%88%E7%AE%80%E5%8D%95%EF%BC%89/image_0.png">
+<meta property="og:image" content="http://example.com/2021/03/29/190.%20%E9%A2%A0%E5%80%92%E4%BA%8C%E8%BF%9B%E5%88%B6%E4%BD%8D%EF%BC%88%E7%AE%80%E5%8D%95%EF%BC%89/image_1.png">
+<meta property="og:image" content="http://example.com/2021/03/29/190.%20%E9%A2%A0%E5%80%92%E4%BA%8C%E8%BF%9B%E5%88%B6%E4%BD%8D%EF%BC%88%E7%AE%80%E5%8D%95%EF%BC%89/image_2.png">
 <meta property="article:published_time" content="2021-03-28T17:46:32.000Z">
-<meta property="article:modified_time" content="2022-05-13T01:31:23.286Z">
+<meta property="article:modified_time" content="2022-05-13T04:10:26.658Z">
 <meta property="article:author" content="宫水三叶">
 <meta property="article:tag" content="模拟">
 <meta property="article:tag" content="位运算">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://pic.leetcode-cn.com/1616992045-iIZbTD-image.png">
+<meta name="twitter:image" content="http://example.com/2021/03/29/190.%20%E9%A2%A0%E5%80%92%E4%BA%8C%E8%BF%9B%E5%88%B6%E4%BD%8D%EF%BC%88%E7%AE%80%E5%8D%95%EF%BC%89/image_0.png">
   
   
   <title>LC 190. 颠倒二进制位 - 宫水三叶的刷题日记</title>
@@ -270,7 +270,7 @@
 <li>输入是一个长度为 32 的二进制字符串</li>
 </ul>
 <hr>
-<h3 id="「对称位」构造"><a href="#「对称位」构造" class="headerlink" title="「对称位」构造"></a>「对称位」构造</h3><p><img src="https://pic.leetcode-cn.com/1616992045-iIZbTD-image.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<h3 id="「对称位」构造"><a href="#「对称位」构造" class="headerlink" title="「对称位」构造"></a>「对称位」构造</h3><p><img src="/2021/03/29/190.%20%E9%A2%A0%E5%80%92%E4%BA%8C%E8%BF%9B%E5%88%B6%E4%BD%8D%EF%BC%88%E7%AE%80%E5%8D%95%EF%BC%89/image_0.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
 <p>一个简单的做法是对输入的 $n$ 做诸位检查。</p>
 <p><strong>如果某一位是 1 的话，则将答案相应的对称位置修改为 1。</strong></p>
 <p>代码：<br><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">reverseBits</span><span class="hljs-params">(<span class="hljs-type">int</span> n)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">ans</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">32</span>; i++) &#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">t</span> <span class="hljs-operator">=</span> (n &gt;&gt; i) &amp; <span class="hljs-number">1</span>;<br>            <span class="hljs-keyword">if</span> (t == <span class="hljs-number">1</span>) &#123;<br>                ans |= (<span class="hljs-number">1</span> &lt;&lt; (<span class="hljs-number">31</span> - i));<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> ans;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure></p>
@@ -279,7 +279,7 @@
 <li>空间复杂度：$O(1)$</li>
 </ul>
 <hr>
-<h3 id="「逐位分离」构造"><a href="#「逐位分离」构造" class="headerlink" title="「逐位分离」构造"></a>「逐位分离」构造</h3><p><img src="https://pic.leetcode-cn.com/1616992076-abbLNX-image.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<h3 id="「逐位分离」构造"><a href="#「逐位分离」构造" class="headerlink" title="「逐位分离」构造"></a>「逐位分离」构造</h3><p><img src="/2021/03/29/190.%20%E9%A2%A0%E5%80%92%E4%BA%8C%E8%BF%9B%E5%88%B6%E4%BD%8D%EF%BC%88%E7%AE%80%E5%8D%95%EF%BC%89/image_1.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
 <p>另外一种做法是，每次都使用 $n$ 的最低一位，使用 $n$ 的最低一位去更新答案的最低一位，使用完将 $n$ 进行右移一位，将答案左移一位。</p>
 <p><strong>相当于每次都用 $n$ 的最低一位更新成 $ans$ 的最低一位。</strong></p>
 <p>代码：<br><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">reverseBits</span><span class="hljs-params">(<span class="hljs-type">int</span> n)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">ans</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">cnt</span> <span class="hljs-operator">=</span> <span class="hljs-number">32</span>;<br>        <span class="hljs-keyword">while</span> (cnt-- &gt; <span class="hljs-number">0</span>) &#123;<br>            ans &lt;&lt;= <span class="hljs-number">1</span>;<br>            ans += (n &amp; <span class="hljs-number">1</span>);<br>            n &gt;&gt;= <span class="hljs-number">1</span>;<br>        &#125;<br>        <span class="hljs-keyword">return</span> ans;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure></p>
@@ -288,7 +288,7 @@
 <li>空间复杂度：$O(1)$</li>
 </ul>
 <hr>
-<h3 id="「分组互换」"><a href="#「分组互换」" class="headerlink" title="「分组互换」"></a>「分组互换」</h3><p><img src="https://pic.leetcode-cn.com/1616992100-QmigBE-image.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<h3 id="「分组互换」"><a href="#「分组互换」" class="headerlink" title="「分组互换」"></a>「分组互换」</h3><p><img src="/2021/03/29/190.%20%E9%A2%A0%E5%80%92%E4%BA%8C%E8%BF%9B%E5%88%B6%E4%BD%8D%EF%BC%88%E7%AE%80%E5%8D%95%EF%BC%89/image_2.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
 <p>事实上，可以对于长度固定的 $int$ 类型，我们可以使用「分组构造」的方式进行。</p>
 <p><strong>两位互换 -&gt; 四位互换 -&gt; 八位互换 -&gt; 十六位互换。</strong></p>
 <p>代码：<br><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">reverseBits</span><span class="hljs-params">(<span class="hljs-type">int</span> n)</span> &#123;<br>        n = ((n &amp; <span class="hljs-number">0xAAAAAAAA</span>) &gt;&gt;&gt; <span class="hljs-number">1</span>)  | ((n &amp; <span class="hljs-number">0x55555555</span>) &lt;&lt; <span class="hljs-number">1</span>);<br>        n = ((n &amp; <span class="hljs-number">0xCCCCCCCC</span>) &gt;&gt;&gt; <span class="hljs-number">2</span>)  | ((n &amp; <span class="hljs-number">0x33333333</span>) &lt;&lt; <span class="hljs-number">2</span>);<br>        n = ((n &amp; <span class="hljs-number">0xF0F0F0F0</span>) &gt;&gt;&gt; <span class="hljs-number">4</span>)  | ((n &amp; <span class="hljs-number">0x0F0F0F0F</span>) &lt;&lt; <span class="hljs-number">4</span>);<br>        n = ((n &amp; <span class="hljs-number">0xFF00FF00</span>) &gt;&gt;&gt; <span class="hljs-number">8</span>)  | ((n &amp; <span class="hljs-number">0x00FF00FF</span>) &lt;&lt; <span class="hljs-number">8</span>);<br>        n = ((n &amp; <span class="hljs-number">0xFFFF0000</span>) &gt;&gt;&gt; <span class="hljs-number">16</span>) | ((n &amp; <span class="hljs-number">0x0000FFFF</span>) &lt;&lt; <span class="hljs-number">16</span>);<br>        <span class="hljs-keyword">return</span> n;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure></p>

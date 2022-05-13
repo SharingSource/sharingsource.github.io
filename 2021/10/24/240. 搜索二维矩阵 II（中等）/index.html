@@ -23,17 +23,17 @@
 <meta property="og:site_name" content="宫水三叶的刷题日记">
 <meta property="og:description" content="题目描述这是 LeetCode 上的 240. 搜索二维矩阵 II ，难度为 中等。 编写一个高效的算法来搜索 m x n 矩阵 matrix 中的一个目标值 target 。 该矩阵具有以下特性：  每行的元素从左到右升序排列。 每列的元素从上到下升序排列。  示例 1：123输入：matrix &#x3D; [[1,4,7,11,15],[2,5,8,12,19],[3,6,9,16,22],[10,1">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2020/11/25/searchgrid2.jpg">
-<meta property="og:image" content="https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2020/11/25/searchgrid.jpg">
-<meta property="og:image" content="https://pic.leetcode-cn.com/1617066993-AyRIiF-image.png">
+<meta property="og:image" content="http://example.com/2021/10/24/240.%20%E6%90%9C%E7%B4%A2%E4%BA%8C%E7%BB%B4%E7%9F%A9%E9%98%B5%20II%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/image_0.png">
+<meta property="og:image" content="http://example.com/2021/10/24/240.%20%E6%90%9C%E7%B4%A2%E4%BA%8C%E7%BB%B4%E7%9F%A9%E9%98%B5%20II%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/image_1.png">
+<meta property="og:image" content="http://example.com/2021/10/24/240.%20%E6%90%9C%E7%B4%A2%E4%BA%8C%E7%BB%B4%E7%9F%A9%E9%98%B5%20II%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/image_2.png">
 <meta property="article:published_time" content="2021-10-24T15:01:22.000Z">
-<meta property="article:modified_time" content="2022-05-13T01:31:23.350Z">
+<meta property="article:modified_time" content="2022-05-13T04:10:40.979Z">
 <meta property="article:author" content="宫水三叶">
 <meta property="article:tag" content="模拟">
 <meta property="article:tag" content="二分">
 <meta property="article:tag" content="二叉搜索树">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2020/11/25/searchgrid2.jpg">
+<meta name="twitter:image" content="http://example.com/2021/10/24/240.%20%E6%90%9C%E7%B4%A2%E4%BA%8C%E7%BB%B4%E7%9F%A9%E9%98%B5%20II%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/image_0.png">
   
   
   <title>LC 240. 搜索二维矩阵 II - 宫水三叶的刷题日记</title>
@@ -261,7 +261,7 @@
 <li>每行的元素从左到右升序排列。</li>
 <li>每列的元素从上到下升序排列。</li>
 </ul>
-<p>示例 1：<br><img src="https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2020/11/25/searchgrid2.jpg" srcset="/img/loading.gif" lazyload alt=""><br><figure class="highlight inform7"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs inform7">输入：matrix = <span class="hljs-comment">[<span class="hljs-comment">[1,4,7,11,15]</span>,<span class="hljs-comment">[2,5,8,12,19]</span>,<span class="hljs-comment">[3,6,9,16,22]</span>,<span class="hljs-comment">[10,13,14,17,24]</span>,<span class="hljs-comment">[18,21,23,26,30]</span>]</span>, target = 5<br><br>输出：true<br></code></pre></div></td></tr></table></figure><br>示例 2：<br><img src="https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2020/11/25/searchgrid.jpg" srcset="/img/loading.gif" lazyload alt=""><br><figure class="highlight inform7"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs inform7">输入：matrix = <span class="hljs-comment">[<span class="hljs-comment">[1,4,7,11,15]</span>,<span class="hljs-comment">[2,5,8,12,19]</span>,<span class="hljs-comment">[3,6,9,16,22]</span>,<span class="hljs-comment">[10,13,14,17,24]</span>,<span class="hljs-comment">[18,21,23,26,30]</span>]</span>, target = 20<br><br>输出：false<br></code></pre></div></td></tr></table></figure></p>
+<p>示例 1：<br><img src="/2021/10/24/240.%20%E6%90%9C%E7%B4%A2%E4%BA%8C%E7%BB%B4%E7%9F%A9%E9%98%B5%20II%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/image_0.png" srcset="/img/loading.gif" lazyload alt><br><figure class="highlight inform7"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs inform7">输入：matrix = <span class="hljs-comment">[<span class="hljs-comment">[1,4,7,11,15]</span>,<span class="hljs-comment">[2,5,8,12,19]</span>,<span class="hljs-comment">[3,6,9,16,22]</span>,<span class="hljs-comment">[10,13,14,17,24]</span>,<span class="hljs-comment">[18,21,23,26,30]</span>]</span>, target = 5<br><br>输出：true<br></code></pre></div></td></tr></table></figure><br>示例 2：<br><img src="/2021/10/24/240.%20%E6%90%9C%E7%B4%A2%E4%BA%8C%E7%BB%B4%E7%9F%A9%E9%98%B5%20II%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/image_1.png" srcset="/img/loading.gif" lazyload alt><br><figure class="highlight inform7"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs inform7">输入：matrix = <span class="hljs-comment">[<span class="hljs-comment">[1,4,7,11,15]</span>,<span class="hljs-comment">[2,5,8,12,19]</span>,<span class="hljs-comment">[3,6,9,16,22]</span>,<span class="hljs-comment">[10,13,14,17,24]</span>,<span class="hljs-comment">[18,21,23,26,30]</span>]</span>, target = 20<br><br>输出：false<br></code></pre></div></td></tr></table></figure></p>
 <p>提示：</p>
 <ul>
 <li>m == matrix.length</li>
@@ -286,7 +286,7 @@
 <hr>
 <h3 id="抽象-BST"><a href="#抽象-BST" class="headerlink" title="抽象 BST"></a>抽象 BST</h3><p>该做法则与 <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/search-a-2d-matrix/solution/gong-shui-san-xie-yi-ti-shuang-jie-er-fe-l0pq/">（题解）74. 搜索二维矩阵</a> 的「解法二」完全一致。</p>
 <p>我们可以将二维矩阵抽象成「以右上角为根的 BST」：</p>
-<p><img src="https://pic.leetcode-cn.com/1617066993-AyRIiF-image.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<p><img src="/2021/10/24/240.%20%E6%90%9C%E7%B4%A2%E4%BA%8C%E7%BB%B4%E7%9F%A9%E9%98%B5%20II%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/image_2.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
 <p>那么我们可以从根（右上角）开始搜索，如果当前的节点不等于目标值，可以按照树的搜索顺序进行：</p>
 <ol>
 <li>当前节点「大于」目标值，搜索当前节点的「左子树」，也就是当前矩阵位置的「左方格子」，即 $c$—</li>

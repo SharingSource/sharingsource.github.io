@@ -23,13 +23,13 @@
 <meta property="og:site_name" content="宫水三叶的刷题日记">
 <meta property="og:description" content="题目描述这是 LeetCode 上的 688. 骑士在棋盘上的概率 ，难度为 中等。 在一个 $n \times n$ 的国际象棋棋盘上，一个骑士从单元格 $(row, column)$ 开始，并尝试进行 $k$ 次移动。行和列是 从 $0$ 开始 的，所以左上单元格是 $(0,0)$ ，右下单元格是 $(n - 1, n - 1)$ 。 象棋骑士有 $8$ 种可能的走法，如下图所示。每次移动在基">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2018/10/12/knight.png">
+<meta property="og:image" content="http://example.com/2022/02/16/688.%20%E9%AA%91%E5%A3%AB%E5%9C%A8%E6%A3%8B%E7%9B%98%E4%B8%8A%E7%9A%84%E6%A6%82%E7%8E%87%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/image_0.png">
 <meta property="article:published_time" content="2022-02-16T14:52:38.000Z">
-<meta property="article:modified_time" content="2022-05-13T01:31:23.370Z">
+<meta property="article:modified_time" content="2022-05-13T04:10:44.691Z">
 <meta property="article:author" content="宫水三叶">
 <meta property="article:tag" content="线性 DP">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2018/10/12/knight.png">
+<meta name="twitter:image" content="http://example.com/2022/02/16/688.%20%E9%AA%91%E5%A3%AB%E5%9C%A8%E6%A3%8B%E7%9B%98%E4%B8%8A%E7%9A%84%E6%A6%82%E7%8E%87%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/image_0.png">
   
   
   <title>LC 688. 骑士在棋盘上的概率 - 宫水三叶的刷题日记</title>
@@ -253,7 +253,7 @@
               <h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>这是 LeetCode 上的 <strong><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/knight-probability-in-chessboard/solution/gong-shui-san-xie-jian-dan-qu-jian-dp-yu-st8l/">688. 骑士在棋盘上的概率</a></strong> ，难度为 <strong>中等</strong>。</p>
 <p>在一个 $n \times n$ 的国际象棋棋盘上，一个骑士从单元格 $(row, column)$ 开始，并尝试进行 $k$ 次移动。行和列是 从 $0$ 开始 的，所以左上单元格是 $(0,0)$ ，右下单元格是 $(n - 1, n - 1)$ 。</p>
 <p>象棋骑士有 $8$ 种可能的走法，如下图所示。每次移动在基本方向上是两个单元格，然后在正交方向上是一个单元格。</p>
-<p><img src="https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2018/10/12/knight.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p><img src="/2022/02/16/688.%20%E9%AA%91%E5%A3%AB%E5%9C%A8%E6%A3%8B%E7%9B%98%E4%B8%8A%E7%9A%84%E6%A6%82%E7%8E%87%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/image_0.png" srcset="/img/loading.gif" lazyload alt></p>
 <p>每次骑士要移动时，它都会随机从 $8$ 种可能的移动中选择一种(即使棋子会离开棋盘)，然后移动到那里。</p>
 <p>骑士继续移动，直到它走了 $k$ 步或离开了棋盘。</p>
 <p>返回 骑士在棋盘停止移动后仍留在棋盘上的概率 。</p>

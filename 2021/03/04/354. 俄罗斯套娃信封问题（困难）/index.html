@@ -23,16 +23,16 @@
 <meta property="og:site_name" content="宫水三叶的刷题日记">
 <meta property="og:description" content="题目描述这是 LeetCode 上的 354. 俄罗斯套娃信封问题 ，难度为 困难。 给你一个二维整数数组 envelopes ，其中 envelopes[i] &#x3D; [wi, hi] ，表示第 i 个信封的宽度和高度。 当另一个信封的宽度和高度都比这个信封大的时候，这个信封就可以放进另一个信封里，如同俄罗斯套娃一样。 请计算「最多能有多少个」信封能组成一组“俄罗斯套娃”信封（即可以把一个信封放到另">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://pic.leetcode-cn.com/1614822923-BaePjD-image.png">
-<meta property="og:image" content="https://pic.leetcode-cn.com/1614826949-dhqXEs-image.png">
-<meta property="og:image" content="https://pic.leetcode-cn.com/1614860986-mpTgpr-image.png">
+<meta property="og:image" content="http://example.com/2021/03/04/354.%20%E4%BF%84%E7%BD%97%E6%96%AF%E5%A5%97%E5%A8%83%E4%BF%A1%E5%B0%81%E9%97%AE%E9%A2%98%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/image_0.png">
+<meta property="og:image" content="http://example.com/2021/03/04/354.%20%E4%BF%84%E7%BD%97%E6%96%AF%E5%A5%97%E5%A8%83%E4%BF%A1%E5%B0%81%E9%97%AE%E9%A2%98%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/image_1.png">
+<meta property="og:image" content="http://example.com/2021/03/04/354.%20%E4%BF%84%E7%BD%97%E6%96%AF%E5%A5%97%E5%A8%83%E4%BF%A1%E5%B0%81%E9%97%AE%E9%A2%98%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/image_2.png">
 <meta property="article:published_time" content="2021-03-03T19:10:56.000Z">
-<meta property="article:modified_time" content="2022-05-13T01:31:23.395Z">
+<meta property="article:modified_time" content="2022-05-13T04:10:50.939Z">
 <meta property="article:author" content="宫水三叶">
 <meta property="article:tag" content="二分">
 <meta property="article:tag" content="序列 DP">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://pic.leetcode-cn.com/1614822923-BaePjD-image.png">
+<meta name="twitter:image" content="http://example.com/2021/03/04/354.%20%E4%BF%84%E7%BD%97%E6%96%AF%E5%A5%97%E5%A8%83%E4%BF%A1%E5%B0%81%E9%97%AE%E9%A2%98%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/image_0.png">
   
   
   <title>LC 354. 俄罗斯套娃信封问题 - 宫水三叶的刷题日记</title>
@@ -266,7 +266,7 @@
 <li>1 &lt;= wi, hi &lt;= $10^4$</li>
 </ul>
 <hr>
-<h3 id="动态规划"><a href="#动态规划" class="headerlink" title="动态规划"></a>动态规划</h3><p><img src="https://pic.leetcode-cn.com/1614822923-BaePjD-image.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<h3 id="动态规划"><a href="#动态规划" class="headerlink" title="动态规划"></a>动态规划</h3><p><img src="/2021/03/04/354.%20%E4%BF%84%E7%BD%97%E6%96%AF%E5%A5%97%E5%A8%83%E4%BF%A1%E5%B0%81%E9%97%AE%E9%A2%98%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/image_0.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
 <p>这是一道经典的 DP 模型题目：最长上升子序列（LIS）。</p>
 <p>首先我们先对 <code>envelopes</code> 进行排序，确保信封是从小到大进行排序。</p>
 <p>问题就转化为我们从这个序列中选择 <code>k</code> 个信封形成新的序列，使得新序列中的每个信封都能严格覆盖前面的信封（宽高都严格大于）。</p>
@@ -282,7 +282,7 @@
 <li>空间复杂度：$O(n)$</li>
 </ul>
 <hr>
-<h3 id="二分-动态规划"><a href="#二分-动态规划" class="headerlink" title="二分 + 动态规划"></a>二分 + 动态规划</h3><p><img src="https://pic.leetcode-cn.com/1614826949-dhqXEs-image.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<h3 id="二分-动态规划"><a href="#二分-动态规划" class="headerlink" title="二分 + 动态规划"></a>二分 + 动态规划</h3><p><img src="/2021/03/04/354.%20%E4%BF%84%E7%BD%97%E6%96%AF%E5%A5%97%E5%A8%83%E4%BF%A1%E5%B0%81%E9%97%AE%E9%A2%98%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/image_1.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
 <p>上述方案其实算是一个朴素方案，复杂度是 $O(n^2)$ 的，也是我最先想到思路，但是题目没有给出数据范围，也不知道能不能过。</p>
 <p>唯唯诺诺交了一个居然过了。</p>
 <p>下面讲下其他优化解法。</p>
@@ -321,7 +321,7 @@
 <p>综上，$g[i] &gt; g[j]（i &lt; j）$ 与处理逻辑冲突，$g[]$ 数组为严格单调上升数组。</p>
 <p>既然 $g[]$ 具有单调性，我们可以通过「二分」找到恰满足 check 条件的最大下标（最大下标达标表示最长上升序列长度）。</p>
 <hr>
-<h3 id="树状数组-动态规划"><a href="#树状数组-动态规划" class="headerlink" title="树状数组 + 动态规划"></a>树状数组 + 动态规划</h3><p><img src="https://pic.leetcode-cn.com/1614860986-mpTgpr-image.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<h3 id="树状数组-动态规划"><a href="#树状数组-动态规划" class="headerlink" title="树状数组 + 动态规划"></a>树状数组 + 动态规划</h3><p><img src="/2021/03/04/354.%20%E4%BF%84%E7%BD%97%E6%96%AF%E5%A5%97%E5%A8%83%E4%BF%A1%E5%B0%81%E9%97%AE%E9%A2%98%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/image_2.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
 <p>在「二分 + 动态规划」的解法中，我们通过「二分」来优化找第 $i$ 个文件的前一个文件过程。</p>
 <p>这个过程同样能通过「树状数组」来实现。</p>
 <p>首先仍然是对 <code>w</code> 进行排序，然后使用「树状数组」来维护 h 维度的前缀最大值。</p>

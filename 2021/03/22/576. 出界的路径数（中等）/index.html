@@ -23,17 +23,17 @@
 <meta property="og:site_name" content="宫水三叶的刷题日记">
 <meta property="og:description" content="题目描述这是 LeetCode 上的 576. 出界的路径数 ，难度为 中等。 给你一个大小为 m x n 的网格和一个球。球的起始坐标为 [startRow, startColumn] 。 你可以将球移到在四个方向上相邻的单元格内（可以穿过网格边界到达网格之外）。 你最多可以移动 maxMove 次球。 给你五个整数 m、n、maxMove、startRow 以及 startColumn ，找出">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://assets.leetcode.com/uploads/2021/04/28/out_of_boundary_paths_1.png">
-<meta property="og:image" content="https://assets.leetcode.com/uploads/2021/04/28/out_of_boundary_paths_2.png">
-<meta property="og:image" content="https://pic.leetcode-cn.com/1616507893-KjPAvs-image.png">
+<meta property="og:image" content="http://example.com/2021/03/22/576.%20%E5%87%BA%E7%95%8C%E7%9A%84%E8%B7%AF%E5%BE%84%E6%95%B0%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/image_0.png">
+<meta property="og:image" content="http://example.com/2021/03/22/576.%20%E5%87%BA%E7%95%8C%E7%9A%84%E8%B7%AF%E5%BE%84%E6%95%B0%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/image_1.png">
+<meta property="og:image" content="http://example.com/2021/03/22/576.%20%E5%87%BA%E7%95%8C%E7%9A%84%E8%B7%AF%E5%BE%84%E6%95%B0%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/image_2.png">
 <meta property="article:published_time" content="2021-03-22T08:01:05.000Z">
-<meta property="article:modified_time" content="2022-05-13T01:31:23.411Z">
+<meta property="article:modified_time" content="2022-05-13T04:10:56.395Z">
 <meta property="article:author" content="宫水三叶">
 <meta property="article:tag" content="动态规划">
 <meta property="article:tag" content="记忆化搜索">
 <meta property="article:tag" content="路径 DP">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://assets.leetcode.com/uploads/2021/04/28/out_of_boundary_paths_1.png">
+<meta name="twitter:image" content="http://example.com/2021/03/22/576.%20%E5%87%BA%E7%95%8C%E7%9A%84%E8%B7%AF%E5%BE%84%E6%95%B0%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/image_0.png">
   
   
   <title>LC 576. 出界的路径数 - 宫水三叶的刷题日记</title>
@@ -260,7 +260,7 @@
 <p>你<strong>最多</strong>可以移动 maxMove 次球。</p>
 <p>给你五个整数 m、n、maxMove、startRow 以及 startColumn ，找出并返回可以将球移出边界的路径数量。</p>
 <p>因为答案可能非常大，返回对 $10^9 + 7$​ 取余 后的结果。</p>
-<p>示例 1：<br><img src="https://assets.leetcode.com/uploads/2021/04/28/out_of_boundary_paths_1.png" srcset="/img/loading.gif" lazyload alt=""><br><figure class="highlight excel"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs excel">输入：m = <span class="hljs-number">2</span>, <span class="hljs-built_in">n</span> = <span class="hljs-number">2</span>, maxMove = <span class="hljs-number">2</span>, startRow = <span class="hljs-number">0</span>, startColumn = <span class="hljs-number">0</span><br><br>输出：<span class="hljs-number">6</span><br></code></pre></div></td></tr></table></figure><br>示例 2：<br><img src="https://assets.leetcode.com/uploads/2021/04/28/out_of_boundary_paths_2.png" srcset="/img/loading.gif" lazyload alt=""><br><figure class="highlight excel"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs excel">输入：m = <span class="hljs-number">1</span>, <span class="hljs-built_in">n</span> = <span class="hljs-number">3</span>, maxMove = <span class="hljs-number">3</span>, startRow = <span class="hljs-number">0</span>, startColumn = <span class="hljs-number">1</span><br><br>输出：<span class="hljs-number">12</span><br></code></pre></div></td></tr></table></figure></p>
+<p>示例 1：<br><img src="/2021/03/22/576.%20%E5%87%BA%E7%95%8C%E7%9A%84%E8%B7%AF%E5%BE%84%E6%95%B0%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/image_0.png" srcset="/img/loading.gif" lazyload alt><br><figure class="highlight excel"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs excel">输入：m = <span class="hljs-number">2</span>, <span class="hljs-built_in">n</span> = <span class="hljs-number">2</span>, maxMove = <span class="hljs-number">2</span>, startRow = <span class="hljs-number">0</span>, startColumn = <span class="hljs-number">0</span><br><br>输出：<span class="hljs-number">6</span><br></code></pre></div></td></tr></table></figure><br>示例 2：<br><img src="/2021/03/22/576.%20%E5%87%BA%E7%95%8C%E7%9A%84%E8%B7%AF%E5%BE%84%E6%95%B0%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/image_1.png" srcset="/img/loading.gif" lazyload alt><br><figure class="highlight excel"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs excel">输入：m = <span class="hljs-number">1</span>, <span class="hljs-built_in">n</span> = <span class="hljs-number">3</span>, maxMove = <span class="hljs-number">3</span>, startRow = <span class="hljs-number">0</span>, startColumn = <span class="hljs-number">1</span><br><br>输出：<span class="hljs-number">12</span><br></code></pre></div></td></tr></table></figure></p>
 <p>提示：</p>
 <ul>
 <li>1 &lt;= m, n &lt;= 50</li>
@@ -311,7 +311,7 @@ f[(x,y)][step] = f[(x-1,y)][step-1]+f[(x+1,y)][step-1]+f[(x,y-1)][step-1]+f[(x,y
 <p>那么哪些值可以作为成为初始化状态呢？</p>
 <p>显然，当我们已经位于矩阵边缘的时候，我们可以一步跨出矩阵，这算作一条路径。</p>
 <p>同时，由于我们能够往四个方向进行移动，因此不同的边缘格子会有不同数量的路径。</p>
-<p><img src="https://pic.leetcode-cn.com/1616507893-KjPAvs-image.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<p><img src="/2021/03/22/576.%20%E5%87%BA%E7%95%8C%E7%9A%84%E8%B7%AF%E5%BE%84%E6%95%B0%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/image_2.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
 <p>换句话说，我们需要先对边缘格子进行初始化操作，预处理每个边缘格子直接走出矩阵的路径数量。</p>
 <p>目的是为了我们整个 DP 过程可以有效的递推下去。</p>
 <p><strong>可以发现，动态规划的实现，本质是将问题进行反向：原问题是让我们求从棋盘的特定位置出发，出界的路径数量。实现时，我们则是从边缘在状态出发，逐步推导回起点的出界路径数量为多少。</strong></p>

@@ -23,15 +23,15 @@
 <meta property="og:site_name" content="宫水三叶的刷题日记">
 <meta property="og:description" content="题目描述这是 LeetCode 上的 1221. 分割平衡字符串 ，难度为 简单。 在一个 平衡字符串 中，’L’ 和 ‘R’ 字符的数量是相同的。 给你一个平衡字符串 s，请你将它分割成尽可能多的平衡字符串。 注意：分割得到的每个字符串都必须是平衡字符串。 返回可以通过分割得到的平衡字符串的 最大数量 。 示例 1：12345输入：s &#x3D; &quot;RLRRLLRLRL&quot;输出：4解释">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://pic.leetcode-cn.com/1630980197-vpDnIV-image.png">
-<meta property="og:image" content="https://pic.leetcode-cn.com/1630980647-QhYQNU-image.png">
+<meta property="og:image" content="http://example.com/2021/09/07/1221.%20%E5%88%86%E5%89%B2%E5%B9%B3%E8%A1%A1%E5%AD%97%E7%AC%A6%E4%B8%B2%EF%BC%88%E7%AE%80%E5%8D%95%EF%BC%89/image_0.png">
+<meta property="og:image" content="http://example.com/2021/09/07/1221.%20%E5%88%86%E5%89%B2%E5%B9%B3%E8%A1%A1%E5%AD%97%E7%AC%A6%E4%B8%B2%EF%BC%88%E7%AE%80%E5%8D%95%EF%BC%89/image_1.png">
 <meta property="article:published_time" content="2021-09-06T18:17:43.000Z">
-<meta property="article:modified_time" content="2022-05-13T01:31:22.888Z">
+<meta property="article:modified_time" content="2022-05-13T04:08:40.481Z">
 <meta property="article:author" content="宫水三叶">
 <meta property="article:tag" content="双指针">
 <meta property="article:tag" content="贪心">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://pic.leetcode-cn.com/1630980197-vpDnIV-image.png">
+<meta name="twitter:image" content="http://example.com/2021/09/07/1221.%20%E5%88%86%E5%89%B2%E5%B9%B3%E8%A1%A1%E5%AD%97%E7%AC%A6%E4%B8%B2%EF%BC%88%E7%AE%80%E5%8D%95%EF%BC%89/image_0.png">
   
   
   <title>LC 1221. 分割平衡字符串 - 宫水三叶的刷题日记</title>
@@ -273,7 +273,7 @@
 <h3 id="贪心"><a href="#贪心" class="headerlink" title="贪心"></a>贪心</h3><p>回到本题，题目要求分割的 <code>LR</code> 子串尽可能多，直观上应该是尽可能让每个分割串尽可能短。</p>
 <p><strong>我们使用「归纳法」来证明该猜想的正确性。</strong></p>
 <p>首先题目数据保证给定的 <code>s</code> 本身是合法的 <code>LR</code> 子串，假设从 $[0…a]$ 可以从 <code>s</code> 中分割出 <strong>长度最小</strong> 的 <code>LR</code> 子串，而从 $[0…b]$ 能够分割出 <strong>长度更大</strong> 的 <code>LR</code> 子串（即 <code>a &lt;= b</code> )。</p>
-<p><img src="https://pic.leetcode-cn.com/1630980197-vpDnIV-image.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<p><img src="/2021/09/07/1221.%20%E5%88%86%E5%89%B2%E5%B9%B3%E8%A1%A1%E5%AD%97%E7%AC%A6%E4%B8%B2%EF%BC%88%E7%AE%80%E5%8D%95%EF%BC%89/image_0.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
 <p><strong>我们来证明起始时（第一次分割）「将从 <code>b</code> 分割点将 <code>s</code> 断开」调整为「从 <code>a</code> 分割点将 <code>s</code> 断开」结果不会变差：</strong></p>
 <ol>
 <li><p>从 <code>b</code> 点首次分割调整为从 <code>a</code> 点首次分割，两种分割形式分割点两端仍为合法 <code>LR</code> 子串，因此不会从“有解”变成“无解”；</p>
@@ -281,7 +281,7 @@
 <li><p>从 <code>b</code> 分割后的剩余部分长度小于从 <code>a</code> 分割后的剩余部分，同时由 <code>b</code> 分割后的剩余部分会被由 <code>a</code> 分割后的剩余部分所严格覆盖，因此「对 <code>a</code> 分割的剩余部分再分割所得的子串数量」<strong>至少</strong> 与「从 <code>b</code> 点分割的剩余部分再分割所得的子串数量」相等（不会变少）。</p>
 </li>
 </ol>
-<p><img src="https://pic.leetcode-cn.com/1630980647-QhYQNU-image.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<p><img src="/2021/09/07/1221.%20%E5%88%86%E5%89%B2%E5%B9%B3%E8%A1%A1%E5%AD%97%E7%AC%A6%E4%B8%B2%EF%BC%88%E7%AE%80%E5%8D%95%EF%BC%89/image_1.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
 <p><strong>至此，我们证明了对于首次分割，将任意合格分割点调整为最小分割点，结果不会变得更差（当 <code>a &lt; b</code> 时还会更好）。</strong></p>
 <p><strong>同时，由于首次分割后的剩余部分仍为合格的 <code>LR</code> 子串，因此归纳分析所依赖的结构没有发生改变，可以将上述的推理分析推广到每一个决策的回合（新边界）中。</strong></p>
 <p><strong>至此，我们证明了只要每一次都从最小分割点进行分割，就可以得到最优解。</strong></p>

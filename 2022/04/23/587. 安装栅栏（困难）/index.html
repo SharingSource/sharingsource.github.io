@@ -23,17 +23,17 @@
 <meta property="og:site_name" content="宫水三叶的刷题日记">
 <meta property="og:description" content="题目描述这是 LeetCode 上的 587. 安装栅栏 ，难度为 困难。 在一个二维的花园中，有一些用 $(x, y)$ 坐标表示的树。由于安装费用十分昂贵，你的任务是先用最短的绳子围起所有的树。只有当所有的树都被绳子包围时，花园才能围好栅栏。 你需要找到正好位于栅栏边界上的树的坐标。 示例 1:1234输入: [[1,1],[2,2],[2,0],[2,4],[3,3],[4,2]]输出: [">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2018/10/12/erect_the_fence_1.png">
-<meta property="og:image" content="https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2018/10/12/erect_the_fence_2.png">
-<meta property="og:image" content="https://pic.leetcode-cn.com/1650675817-tJTwGT-image.png">
-<meta property="og:image" content="https://pic.leetcode-cn.com/1650678200-VMOiaM-image.png">
+<meta property="og:image" content="http://example.com/2022/04/23/587.%20%E5%AE%89%E8%A3%85%E6%A0%85%E6%A0%8F%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/image_0.png">
+<meta property="og:image" content="http://example.com/2022/04/23/587.%20%E5%AE%89%E8%A3%85%E6%A0%85%E6%A0%8F%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/image_1.png">
+<meta property="og:image" content="http://example.com/2022/04/23/587.%20%E5%AE%89%E8%A3%85%E6%A0%85%E6%A0%8F%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/image_2.png">
+<meta property="og:image" content="http://example.com/2022/04/23/587.%20%E5%AE%89%E8%A3%85%E6%A0%85%E6%A0%8F%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/image_3.png">
 <meta property="article:published_time" content="2022-04-22T16:47:54.000Z">
-<meta property="article:modified_time" content="2022-05-13T01:31:23.376Z">
+<meta property="article:modified_time" content="2022-05-13T04:10:47.145Z">
 <meta property="article:author" content="宫水三叶">
 <meta property="article:tag" content="计算几何">
 <meta property="article:tag" content="凸包">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2018/10/12/erect_the_fence_1.png">
+<meta name="twitter:image" content="http://example.com/2022/04/23/587.%20%E5%AE%89%E8%A3%85%E6%A0%85%E6%A0%8F%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/image_0.png">
   
   
   <title>LC 587. 安装栅栏 - 宫水三叶的刷题日记</title>
@@ -257,7 +257,7 @@
               <h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>这是 LeetCode 上的 <strong><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/erect-the-fence/solution/by-ac_oier-4xuu/">587. 安装栅栏</a></strong> ，难度为 <strong>困难</strong>。</p>
 <p>在一个二维的花园中，有一些用 $(x, y)$ 坐标表示的树。由于安装费用十分昂贵，你的任务是先用最短的绳子围起所有的树。只有当所有的树都被绳子包围时，花园才能围好栅栏。</p>
 <p>你需要找到正好位于栅栏边界上的树的坐标。</p>
-<p>示例 1:<br><img src="https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2018/10/12/erect_the_fence_1.png" srcset="/img/loading.gif" lazyload alt=""><br><figure class="highlight inform7"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs inform7">输入: <span class="hljs-comment">[<span class="hljs-comment">[1,1]</span>,<span class="hljs-comment">[2,2]</span>,<span class="hljs-comment">[2,0]</span>,<span class="hljs-comment">[2,4]</span>,<span class="hljs-comment">[3,3]</span>,<span class="hljs-comment">[4,2]</span>]</span><br><br>输出: <span class="hljs-comment">[<span class="hljs-comment">[1,1]</span>,<span class="hljs-comment">[2,0]</span>,<span class="hljs-comment">[4,2]</span>,<span class="hljs-comment">[3,3]</span>,<span class="hljs-comment">[2,4]</span>]</span><br><br></code></pre></div></td></tr></table></figure><br>示例 2:<br><img src="https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2018/10/12/erect_the_fence_2.png" srcset="/img/loading.gif" lazyload alt=""><br><figure class="highlight lua"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs lua">输入: <span class="hljs-string">[[1,2],[2,2],[4,2]]</span><br><br>输出: <span class="hljs-string">[[1,2],[2,2],[4,2]]</span><br><br>解释:即使树都在一条直线上，你也需要先用绳子包围它们。<br></code></pre></div></td></tr></table></figure></p>
+<p>示例 1:<br><img src="/2022/04/23/587.%20%E5%AE%89%E8%A3%85%E6%A0%85%E6%A0%8F%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/image_0.png" srcset="/img/loading.gif" lazyload alt><br><figure class="highlight inform7"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs inform7">输入: <span class="hljs-comment">[<span class="hljs-comment">[1,1]</span>,<span class="hljs-comment">[2,2]</span>,<span class="hljs-comment">[2,0]</span>,<span class="hljs-comment">[2,4]</span>,<span class="hljs-comment">[3,3]</span>,<span class="hljs-comment">[4,2]</span>]</span><br><br>输出: <span class="hljs-comment">[<span class="hljs-comment">[1,1]</span>,<span class="hljs-comment">[2,0]</span>,<span class="hljs-comment">[4,2]</span>,<span class="hljs-comment">[3,3]</span>,<span class="hljs-comment">[2,4]</span>]</span><br><br></code></pre></div></td></tr></table></figure><br>示例 2:<br><img src="/2022/04/23/587.%20%E5%AE%89%E8%A3%85%E6%A0%85%E6%A0%8F%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/image_1.png" srcset="/img/loading.gif" lazyload alt><br><figure class="highlight lua"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs lua">输入: <span class="hljs-string">[[1,2],[2,2],[4,2]]</span><br><br>输出: <span class="hljs-string">[[1,2],[2,2],[4,2]]</span><br><br>解释:即使树都在一条直线上，你也需要先用绳子包围它们。<br></code></pre></div></td></tr></table></figure></p>
 <p>注意:</p>
 <ul>
 <li>所有的树应当被围在一起。你不能剪断绳子来包围树或者把树分成一组以上。</li>
@@ -269,7 +269,7 @@
 <hr>
 <h3 id="二维凸包（Andrew-算法）"><a href="#二维凸包（Andrew-算法）" class="headerlink" title="二维凸包（Andrew 算法）"></a>二维凸包（Andrew 算法）</h3><p>这是一道「二维凸包」板子题，需要注意的是网上大多数 <code>Andrew</code> 算法的板子都是有问题的（下面会说）。</p>
 <p><code>Andrew</code> 算法正是用于求解凸包上的所有点（围成所有点的最小周长），其算法逻辑将凸包分为「上凸壳」和「下凸壳」，并分别画出（蓝色分割线将凸包分为两部分）：</p>
-<p><img src="https://pic.leetcode-cn.com/1650675817-tJTwGT-image.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<p><img src="/2022/04/23/587.%20%E5%AE%89%E8%A3%85%E6%A0%85%E6%A0%8F%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/image_2.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
 <p>基本流程为：</p>
 <ol>
 <li><p>对所有点进行双关键字排序，先根据 $x$ 坐标排升序，后根据 $y$ 排升序；<br> 根据 $x$ 排升序的目的，是为了我们能够往一个方向画出凸包边缘（从左往后画出一半凸壳，从右往左画出另外一半），而将 $y$ 升序目的是可以确保一旦我们现在从 $a$ 到 $b$ 进行连线，那么 $a$ 到 $b$ 之间的所有点能够确保被围住；</p>
@@ -281,7 +281,7 @@
 <ul>
 <li>若栈内元素少于 $2$ 个，组成一条线至少需要两个点，说明此时第一条边都还没画出，直接将元素添加到栈中；</li>
 <li><p>若栈内元素不少于 $2$ 个，考虑是否要将栈顶的边删掉（由栈顶前两个元素组成的边）假设栈顶元素为 $b$，栈顶元素的下一位为 $a$，即栈顶存在一条 $a$ 到 $b$ 的边，当前处理到的点为 $c$，此时我们根据 $ac$ 边是否在 $ab$ 边的时针方向来决定是否要将 $ab$ 边去掉：</p>
-<p>  <img src="https://pic.leetcode-cn.com/1650678200-VMOiaM-image.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<p>  <img src="/2022/04/23/587.%20%E5%AE%89%E8%A3%85%E6%A0%85%E6%A0%8F%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/image_3.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
 <p>  按照上述逻辑处理完所有点，凸包第一部分的点（边）都存在于栈中。</p>
 <p><strong>b. 画的是凸包的第二部分：逻辑同理，唯一需要注意的是，第一部分的凸包边我们不能删去，假定处理完第一部分凸包，我们栈内有 $m$ 个元素，我们需要将上述「栈顶元素不少于 $2$ 个」的逻辑替换为「栈顶元素大于 $m$ 个」，同时已参与到凸包第一部分的点，不能再考虑，因此需要额外使用一个 $vis$ 数组来记录使用过的点。</strong></p>
 </li>

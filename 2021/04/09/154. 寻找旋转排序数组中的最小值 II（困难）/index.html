@@ -23,13 +23,13 @@
 <meta property="og:site_name" content="宫水三叶的刷题日记">
 <meta property="og:description" content="题目描述这是 LeetCode 上的 154. 寻找旋转排序数组中的最小值 II ，难度为 困难。 已知一个长度为 n 的数组，预先按照升序排列，经由 1 到 n 次 旋转 后，得到输入数组。 例如，原数组 nums &#x3D; [0,1,4,4,5,6,7] 在变化后可能得到：  若旋转 4 次，则可以得到 [4,5,6,7,0,1,4] 若旋转 7 次，则可以得到 [0,1,4,4,5,6,7]  注">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://pic.leetcode-cn.com/1617852745-LoBNPK-image.png">
+<meta property="og:image" content="http://example.com/2021/04/09/154.%20%E5%AF%BB%E6%89%BE%E6%97%8B%E8%BD%AC%E6%8E%92%E5%BA%8F%E6%95%B0%E7%BB%84%E4%B8%AD%E7%9A%84%E6%9C%80%E5%B0%8F%E5%80%BC%20II%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/image_0.png">
 <meta property="article:published_time" content="2021-04-08T17:05:08.000Z">
-<meta property="article:modified_time" content="2022-05-13T01:31:23.107Z">
+<meta property="article:modified_time" content="2022-05-13T04:09:44.650Z">
 <meta property="article:author" content="宫水三叶">
 <meta property="article:tag" content="二分">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://pic.leetcode-cn.com/1617852745-LoBNPK-image.png">
+<meta name="twitter:image" content="http://example.com/2021/04/09/154.%20%E5%AF%BB%E6%89%BE%E6%97%8B%E8%BD%AC%E6%8E%92%E5%BA%8F%E6%95%B0%E7%BB%84%E4%B8%AD%E7%9A%84%E6%9C%80%E5%B0%8F%E5%80%BC%20II%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/image_0.png">
   
   
   <title>LC 154. 寻找旋转排序数组中的最小值 II - 宫水三叶的刷题日记</title>
@@ -280,7 +280,7 @@
 <p><strong>因为「二分」的本质是二段性，并非单调性。只要一段满足某个性质，另外一段不满足某个性质，就可以用「二分」。</strong></p>
 <p>如果你有看过我 <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/search-in-rotated-sorted-array/solution/shua-chuan-lc-yan-ge-ologn100yi-qi-kan-q-xifo/">严格 O(logN)，一起看清二分的本质</a> 这篇题解，你应该很容易就理解上句话的意思。如果没有也没关系，我们可以先解决本题，在理解后你再去做 <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/find-minimum-in-rotated-sorted-array/">153. 寻找旋转排序数组中的最小值</a>，我认为这两题都是一样的，不存在先后关系。</p>
 <p>举个🌰，我们使用数据 [0,1,2,2,2,3,4,5] 来理解为什么不同的旋转点会导致「二段性丢失」：</p>
-<p><img src="https://pic.leetcode-cn.com/1617852745-LoBNPK-image.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<p><img src="/2021/04/09/154.%20%E5%AF%BB%E6%89%BE%E6%97%8B%E8%BD%AC%E6%8E%92%E5%BA%8F%E6%95%B0%E7%BB%84%E4%B8%AD%E7%9A%84%E6%9C%80%E5%B0%8F%E5%80%BC%20II%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/image_0.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
 <p>代码：<br><figure class="highlight java"><figcaption><span>[]</span></figcaption><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">findMin</span><span class="hljs-params">(<span class="hljs-type">int</span>[] nums)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> nums.length;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">l</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>, r = n - <span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">while</span> (l &lt; r &amp;&amp; nums[<span class="hljs-number">0</span>] == nums[r]) r--;<br>        <span class="hljs-keyword">while</span> (l &lt; r) &#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">mid</span> <span class="hljs-operator">=</span> l + r + <span class="hljs-number">1</span> &gt;&gt; <span class="hljs-number">1</span>;<br>            <span class="hljs-keyword">if</span> (nums[mid] &gt;= nums[<span class="hljs-number">0</span>]) &#123;<br>                l = mid;<br>            &#125; <span class="hljs-keyword">else</span> &#123;<br>                r = mid - <span class="hljs-number">1</span>;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> r + <span class="hljs-number">1</span> &lt; n ? nums[r + <span class="hljs-number">1</span>] : nums[<span class="hljs-number">0</span>];<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure></p>
 <ul>
 <li>时间复杂度：恢复二段性处理中，最坏的情况下（考虑整个数组都是同一个数）复杂度是 $O(n)$，而之后的找旋转点是「二分」，复杂度为 $O(log{n})$。整体复杂度为 $O(n)$ 的。</li>

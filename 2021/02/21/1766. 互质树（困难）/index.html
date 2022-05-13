@@ -23,14 +23,14 @@
 <meta property="og:site_name" content="宫水三叶的刷题日记">
 <meta property="og:description" content="题目描述这是 LeetCode 上的 1766. 互质树 ，难度为 困难。 给你一个 n 个节点的树（也就是一个无环连通无向图），节点编号从 0 到 n - 1 ，且恰好有 n - 1 条边，每个节点有一个值。树的 根节点 为 0 号点。 给你一个整数数组 nums 和一个二维数组 edges 来表示这棵树。nums[i] 表示第 i 个点的值，edges[j] &#x3D; [uj, vj] 表示节点 u">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2021/02/20/untitled-diagram.png">
-<meta property="og:image" content="https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2021/02/20/untitled-diagram1.png">
+<meta property="og:image" content="http://example.com/2021/02/21/1766.%20%E4%BA%92%E8%B4%A8%E6%A0%91%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/image_0.png">
+<meta property="og:image" content="http://example.com/2021/02/21/1766.%20%E4%BA%92%E8%B4%A8%E6%A0%91%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/image_1.png">
 <meta property="article:published_time" content="2021-02-21T06:01:53.000Z">
-<meta property="article:modified_time" content="2022-05-13T01:31:23.137Z">
+<meta property="article:modified_time" content="2022-05-13T04:09:51.811Z">
 <meta property="article:author" content="宫水三叶">
 <meta property="article:tag" content="DFS">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2021/02/20/untitled-diagram.png">
+<meta name="twitter:image" content="http://example.com/2021/02/21/1766.%20%E4%BA%92%E8%B4%A8%E6%A0%91%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/image_0.png">
   
   
   <title>LC 1766. 互质树 - 宫水三叶的刷题日记</title>
@@ -257,9 +257,9 @@
 <p>当 gcd(x, y) == 1 ，我们称两个数 x 和 y 是 互质的 ，其中 gcd(x, y) 是 x 和 y 的 最大公约数 。</p>
 <p>从节点 i 到 根 最短路径上的点都是节点 i 的祖先节点。一个节点 不是 它自己的祖先节点。</p>
 <p>请你返回一个大小为 n 的数组 ans ，其中 ans[i]是离节点 i 最近的祖先节点且满足 nums[i] 和 nums[ans[i]] 是 互质的 ，如果不存在这样的祖先节点，ans[i] 为 -1 。</p>
-<p>示例 1：<br><img src="https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2021/02/20/untitled-diagram.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p>示例 1：<br><img src="/2021/02/21/1766.%20%E4%BA%92%E8%B4%A8%E6%A0%91%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/image_0.png" srcset="/img/loading.gif" lazyload alt></p>
 <figure class="highlight tap"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs tap">输入：nums = [2,3,3,2], edges = [[0,1],[1,2],[1,3]]<br>输出：[-1,0,0,1]<br>解释：上图中，每个节点的值在括号中表示。<br>- 节点<span class="hljs-number"> 0 </span>没有互质祖先。<br>- 节点<span class="hljs-number"> 1 </span>只有一个祖先节点<span class="hljs-number"> 0 </span>。它们的值是互质的（gcd(2,3) == 1）。<br>- 节点<span class="hljs-number"> 2 </span>有两个祖先节点，分别是节点<span class="hljs-number"> 1 </span>和节点<span class="hljs-number"> 0 </span>。节点<span class="hljs-number"> 1 </span>的值与它的值不是互质的（gcd(3,3) == 3）但节点<span class="hljs-number"> 0 </span>的值是互质的(gcd(2,3) == 1)，所以节点<span class="hljs-number"> 0 </span>是最近的符合要求的祖先节点。<br>- 节点<span class="hljs-number"> 3 </span>有两个祖先节点，分别是节点<span class="hljs-number"> 1 </span>和节点<span class="hljs-number"> 0 </span>。它与节点<span class="hljs-number"> 1 </span>互质（gcd(3,2) == 1），所以节点<span class="hljs-number"> 1 </span>是离它最近的符合要求的祖先节点。<br></code></pre></div></td></tr></table></figure>
-<p>示例 2：<br><img src="https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2021/02/20/untitled-diagram1.png" srcset="/img/loading.gif" lazyload alt=""><br><figure class="highlight inform7"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs inform7">输入：nums = <span class="hljs-comment">[5,6,10,2,3,6,15]</span>, edges = <span class="hljs-comment">[<span class="hljs-comment">[0,1]</span>,<span class="hljs-comment">[0,2]</span>,<span class="hljs-comment">[1,3]</span>,<span class="hljs-comment">[1,4]</span>,<span class="hljs-comment">[2,5]</span>,<span class="hljs-comment">[2,6]</span>]</span><br>输出：<span class="hljs-comment">[-1,0,-1,0,0,0,-1]</span><br></code></pre></div></td></tr></table></figure></p>
+<p>示例 2：<br><img src="/2021/02/21/1766.%20%E4%BA%92%E8%B4%A8%E6%A0%91%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/image_1.png" srcset="/img/loading.gif" lazyload alt><br><figure class="highlight inform7"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs inform7">输入：nums = <span class="hljs-comment">[5,6,10,2,3,6,15]</span>, edges = <span class="hljs-comment">[<span class="hljs-comment">[0,1]</span>,<span class="hljs-comment">[0,2]</span>,<span class="hljs-comment">[1,3]</span>,<span class="hljs-comment">[1,4]</span>,<span class="hljs-comment">[2,5]</span>,<span class="hljs-comment">[2,6]</span>]</span><br>输出：<span class="hljs-comment">[-1,0,-1,0,0,0,-1]</span><br></code></pre></div></td></tr></table></figure></p>
 <p>提示：</p>
 <ul>
 <li>nums.length == n</li>

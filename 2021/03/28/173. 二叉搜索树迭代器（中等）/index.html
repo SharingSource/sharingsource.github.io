@@ -23,14 +23,14 @@
 <meta property="og:site_name" content="宫水三叶的刷题日记">
 <meta property="og:description" content="题目描述这是 LeetCode 上的 173. 二叉搜索树迭代器 ，难度为 中等。 实现一个二叉搜索树迭代器类BSTIterator ，表示一个按中序遍历二叉搜索树（BST）的迭代器：  BSTIterator(TreeNode root) 初始化 BSTIterator 类的一个对象。BST 的根节点 root 会作为构造函数的一部分给出。指针应初始化为一个不存在于 BST 中的数字，且该数字小">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://assets.leetcode.com/uploads/2018/12/25/bst-tree.png">
+<meta property="og:image" content="http://example.com/2021/03/28/173.%20%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E8%BF%AD%E4%BB%A3%E5%99%A8%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/image_0.png">
 <meta property="article:published_time" content="2021-03-27T17:58:33.000Z">
-<meta property="article:modified_time" content="2022-05-13T01:31:23.328Z">
+<meta property="article:modified_time" content="2022-05-13T04:10:35.985Z">
 <meta property="article:author" content="宫水三叶">
 <meta property="article:tag" content="中序遍历">
 <meta property="article:tag" content="树的搜索">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://assets.leetcode.com/uploads/2018/12/25/bst-tree.png">
+<meta name="twitter:image" content="http://example.com/2021/03/28/173.%20%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E8%BF%AD%E4%BB%A3%E5%99%A8%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/image_0.png">
   
   
   <title>LC 173. 二叉搜索树迭代器 - 宫水三叶的刷题日记</title>
@@ -261,7 +261,7 @@
 <p>注意，指针初始化为一个不存在于 BST 中的数字，所以对 next() 的首次调用将返回 BST 中的最小元素。</p>
 <p>你可以假设 next() 调用总是有效的，也就是说，当调用 next() 时，BST 的中序遍历中至少存在一个下一个数字。</p>
 <p>示例：</p>
-<p><img src="https://assets.leetcode.com/uploads/2018/12/25/bst-tree.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p><img src="/2021/03/28/173.%20%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E8%BF%AD%E4%BB%A3%E5%99%A8%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/image_0.png" srcset="/img/loading.gif" lazyload alt></p>
 <figure class="highlight axapta"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs axapta">输入<br>[<span class="hljs-string">&quot;BSTIterator&quot;</span>, <span class="hljs-string">&quot;next&quot;</span>, <span class="hljs-string">&quot;next&quot;</span>, <span class="hljs-string">&quot;hasNext&quot;</span>, <span class="hljs-string">&quot;next&quot;</span>, <span class="hljs-string">&quot;hasNext&quot;</span>, <span class="hljs-string">&quot;next&quot;</span>, <span class="hljs-string">&quot;hasNext&quot;</span>, <span class="hljs-string">&quot;next&quot;</span>, <span class="hljs-string">&quot;hasNext&quot;</span>]<br>[[[<span class="hljs-number">7</span>, <span class="hljs-number">3</span>, <span class="hljs-number">15</span>, <span class="hljs-literal">null</span>, <span class="hljs-literal">null</span>, <span class="hljs-number">9</span>, <span class="hljs-number">20</span>]], [], [], [], [], [], [], [], [], []]<br>输出<br>[<span class="hljs-literal">null</span>, <span class="hljs-number">3</span>, <span class="hljs-number">7</span>, <span class="hljs-literal">true</span>, <span class="hljs-number">9</span>, <span class="hljs-literal">true</span>, <span class="hljs-number">15</span>, <span class="hljs-literal">true</span>, <span class="hljs-number">20</span>, <span class="hljs-literal">false</span>]<br><br>解释<br>BSTIterator bSTIterator = <span class="hljs-keyword">new</span> BSTIterator([<span class="hljs-number">7</span>, <span class="hljs-number">3</span>, <span class="hljs-number">15</span>, <span class="hljs-literal">null</span>, <span class="hljs-literal">null</span>, <span class="hljs-number">9</span>, <span class="hljs-number">20</span>]);<br>bSTIterator.<span class="hljs-keyword">next</span>();    <span class="hljs-comment">// 返回 3</span><br>bSTIterator.<span class="hljs-keyword">next</span>();    <span class="hljs-comment">// 返回 7</span><br>bSTIterator.hasNext(); <span class="hljs-comment">// 返回 True</span><br>bSTIterator.<span class="hljs-keyword">next</span>();    <span class="hljs-comment">// 返回 9</span><br>bSTIterator.hasNext(); <span class="hljs-comment">// 返回 True</span><br>bSTIterator.<span class="hljs-keyword">next</span>();    <span class="hljs-comment">// 返回 15</span><br>bSTIterator.hasNext(); <span class="hljs-comment">// 返回 True</span><br>bSTIterator.<span class="hljs-keyword">next</span>();    <span class="hljs-comment">// 返回 20</span><br>bSTIterator.hasNext(); <span class="hljs-comment">// 返回 False</span><br></code></pre></div></td></tr></table></figure>
 <p>提示：</p>
 <ul>

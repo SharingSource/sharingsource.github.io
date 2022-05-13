@@ -23,15 +23,15 @@
 <meta property="og:site_name" content="宫水三叶的刷题日记">
 <meta property="og:description" content="题目描述这是 LeetCode 上的 386. 字典序排数 ，难度为 中等。 给你一个整数 n ，按字典序返回范围 $[1, n]$ 内所有整数。 你必须设计一个时间复杂度为 $O(n)$ 且使用 $O(1)$ 额外空间的算法。 示例 1：123输入：n &#x3D; 13输出：[1,10,11,12,13,2,3,4,5,6,7,8,9]示例 2：123输入：n &#x3D; 2输出：[1,2] 提示：  $1 &amp;">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://pic.leetcode-cn.com/1650246458-ahFpqe-image.png">
+<meta property="og:image" content="http://example.com/2022/04/18/386.%20%E5%AD%97%E5%85%B8%E5%BA%8F%E6%8E%92%E6%95%B0%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/image_0.png">
 <meta property="article:published_time" content="2022-04-17T17:19:57.000Z">
-<meta property="article:modified_time" content="2022-05-13T01:31:23.039Z">
+<meta property="article:modified_time" content="2022-05-13T04:09:27.405Z">
 <meta property="article:author" content="宫水三叶">
 <meta property="article:tag" content="DFS">
 <meta property="article:tag" content="递归">
 <meta property="article:tag" content="迭代">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://pic.leetcode-cn.com/1650246458-ahFpqe-image.png">
+<meta name="twitter:image" content="http://example.com/2022/04/18/386.%20%E5%AD%97%E5%85%B8%E5%BA%8F%E6%8E%92%E6%95%B0%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/image_0.png">
   
   
   <title>LC 386. 字典序排数 - 宫水三叶的刷题日记</title>
@@ -264,7 +264,7 @@
 <h3 id="递归"><a href="#递归" class="headerlink" title="递归"></a>递归</h3><p>首先容易想到使用「递归」来实现 <code>DFS</code>。</p>
 <p>将 $[1, n]$ 的数按照字典序添加到答案，本质上是对一颗节点数量为 $n$，形态类似字典树的多阶树进行遍历，根节点为 $0$，需要被跳过，因此我们可以从树的第二层开始搜索。</p>
 <p>树中每个节点的值为其搜索路径所代表的数字，且每个节点有 $[0, 9]$ 共 $10$ 个子节点。</p>
-<p><img src="https://pic.leetcode-cn.com/1650246458-ahFpqe-image.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<p><img src="/2022/04/18/386.%20%E5%AD%97%E5%85%B8%E5%BA%8F%E6%8E%92%E6%95%B0%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/image_0.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
 <p>代码：<br><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    List&lt;Integer&gt; ans = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();<br>    <span class="hljs-keyword">public</span> List&lt;Integer&gt; <span class="hljs-title function_">lexicalOrder</span><span class="hljs-params">(<span class="hljs-type">int</span> n)</span> &#123;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>; i &lt;= <span class="hljs-number">9</span>; i++) dfs(i, n);<br>        <span class="hljs-keyword">return</span> ans;<br>    &#125;<br>    <span class="hljs-keyword">void</span> <span class="hljs-title function_">dfs</span><span class="hljs-params">(<span class="hljs-type">int</span> cur, <span class="hljs-type">int</span> limit)</span> &#123;<br>        <span class="hljs-keyword">if</span> (cur &gt; limit) <span class="hljs-keyword">return</span> ;<br>        ans.add(cur);<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt;= <span class="hljs-number">9</span>; i++) dfs(cur * <span class="hljs-number">10</span> + i, limit);<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure></p>
 <ul>
 <li>时间复杂度：本质上在搜索一棵节点数量为 $n$ 的多阶树（形态类似于字典树），复杂度为 $O(n)$</li>

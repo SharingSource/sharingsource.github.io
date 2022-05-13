@@ -23,15 +23,15 @@
 <meta property="og:site_name" content="宫水三叶的刷题日记">
 <meta property="og:description" content="题目描述这是 LeetCode 上的 279. 完全平方数 ，难度为 中等。 给定正整数 n，找到若干个完全平方数（比如 1, 4, 9, 16, …）使得它们的和等于 n。你需要让组成和的完全平方数的个数最少。 给你一个整数 n ，返回和为 n 的完全平方数的 最少数量 。 完全平方数 是一个整数，其值等于另一个整数的平方；换句话说，其值等于一个整数自乘的积。例如，1、4、9 和 16 都是完全">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://pic.leetcode-cn.com/1618579990-nKBWBw-640.png">
+<meta property="og:image" content="http://example.com/2021/04/16/279.%20%E5%AE%8C%E5%85%A8%E5%B9%B3%E6%96%B9%E6%95%B0%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/image_0.png">
 <meta property="article:published_time" content="2021-04-16T05:34:02.000Z">
-<meta property="article:modified_time" content="2022-05-13T01:31:23.339Z">
+<meta property="article:modified_time" content="2022-05-13T04:10:39.441Z">
 <meta property="article:author" content="宫水三叶">
 <meta property="article:tag" content="动态规划">
 <meta property="article:tag" content="背包问题">
 <meta property="article:tag" content="完全背包">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://pic.leetcode-cn.com/1618579990-nKBWBw-640.png">
+<meta name="twitter:image" content="http://example.com/2021/04/16/279.%20%E5%AE%8C%E5%85%A8%E5%B9%B3%E6%96%B9%E6%95%B0%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/image_0.png">
   
   
   <title>LC 279. 完全平方数 - 宫水三叶的刷题日记</title>
@@ -296,7 +296,7 @@ f[i][j] = min(f[i-1][j-k*t]+k),0 \leqslant k * t \leqslant j</script><p>当然�
 <h3 id="完全背包（进阶）"><a href="#完全背包（进阶）" class="headerlink" title="完全背包（进阶）"></a>完全背包（进阶）</h3><p>显然朴素版的完全背包进行求解复杂度有点高。</p>
 <p>这次我们还是按照同样的思路再进行一次推导，加强对这种「一维空间优化」方式的理解。</p>
 <p>从二维的状态转移方程入手进行分析（假设第 $i$ 个数字为 $t$）：</p>
-<p><img src="https://pic.leetcode-cn.com/1618579990-nKBWBw-640.png" srcset="/img/loading.gif" lazyload alt="640.png"></p>
+<p><img src="/2021/04/16/279.%20%E5%AE%8C%E5%85%A8%E5%B9%B3%E6%96%B9%E6%95%B0%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/image_0.png" srcset="/img/loading.gif" lazyload alt="640.png"></p>
 <p>至此，我们得到了最终的状态转移方程：</p>
 <script type="math/tex; mode=display">
 f[j] = min(f[j], f[j - t] + 1)</script><p>同时，预处理「物品」的逻辑也能直接下放到转移过程去做。</p>

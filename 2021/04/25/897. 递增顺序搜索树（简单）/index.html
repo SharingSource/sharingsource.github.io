@@ -23,16 +23,16 @@
 <meta property="og:site_name" content="宫水三叶的刷题日记">
 <meta property="og:description" content="题目描述这是 LeetCode 上的 897. 递增顺序搜索树 ，难度为 简单。 给你一棵二叉搜索树，请你 按中序遍历 将其重新排列为一棵递增顺序搜索树，使树中最左边的节点成为树的根节点，并且每个节点没有左子节点，只有一个右子节点。 示例 1：  123输入：root &#x3D; [5,3,6,2,4,null,8,1,null,null,null,7,9]输出：[1,null,2,null,3,null">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://assets.leetcode.com/uploads/2020/11/17/ex1.jpg">
-<meta property="og:image" content="https://assets.leetcode.com/uploads/2020/11/17/ex2.jpg">
+<meta property="og:image" content="http://example.com/2021/04/25/897.%20%E9%80%92%E5%A2%9E%E9%A1%BA%E5%BA%8F%E6%90%9C%E7%B4%A2%E6%A0%91%EF%BC%88%E7%AE%80%E5%8D%95%EF%BC%89/image_0.png">
+<meta property="og:image" content="http://example.com/2021/04/25/897.%20%E9%80%92%E5%A2%9E%E9%A1%BA%E5%BA%8F%E6%90%9C%E7%B4%A2%E6%A0%91%EF%BC%88%E7%AE%80%E5%8D%95%EF%BC%89/image_1.png">
 <meta property="article:published_time" content="2021-04-24T18:21:36.000Z">
-<meta property="article:modified_time" content="2022-05-13T01:31:23.412Z">
+<meta property="article:modified_time" content="2022-05-13T04:10:57.927Z">
 <meta property="article:author" content="宫水三叶">
 <meta property="article:tag" content="递归">
 <meta property="article:tag" content="树的遍历">
 <meta property="article:tag" content="非递归">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://assets.leetcode.com/uploads/2020/11/17/ex1.jpg">
+<meta name="twitter:image" content="http://example.com/2021/04/25/897.%20%E9%80%92%E5%A2%9E%E9%A1%BA%E5%BA%8F%E6%90%9C%E7%B4%A2%E6%A0%91%EF%BC%88%E7%AE%80%E5%8D%95%EF%BC%89/image_0.png">
   
   
   <title>LC 897. 递增顺序搜索树 - 宫水三叶的刷题日记</title>
@@ -256,10 +256,10 @@
               <h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>这是 LeetCode 上的 <strong><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/increasing-order-search-tree/solution/gong-shui-san-xie-yi-ti-shuang-jie-di-gu-yc8l/">897. 递增顺序搜索树</a></strong> ，难度为 <strong>简单</strong>。</p>
 <p>给你一棵二叉搜索树，请你 按中序遍历 将其重新排列为一棵递增顺序搜索树，使树中最左边的节点成为树的根节点，并且每个节点没有左子节点，只有一个右子节点。</p>
 <p>示例 1：</p>
-<p><img src="https://assets.leetcode.com/uploads/2020/11/17/ex1.jpg" srcset="/img/loading.gif" lazyload alt=""></p>
+<p><img src="/2021/04/25/897.%20%E9%80%92%E5%A2%9E%E9%A1%BA%E5%BA%8F%E6%90%9C%E7%B4%A2%E6%A0%91%EF%BC%88%E7%AE%80%E5%8D%95%EF%BC%89/image_0.png" srcset="/img/loading.gif" lazyload alt></p>
 <figure class="highlight angelscript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs angelscript">输入：root = [<span class="hljs-number">5</span>,<span class="hljs-number">3</span>,<span class="hljs-number">6</span>,<span class="hljs-number">2</span>,<span class="hljs-number">4</span>,<span class="hljs-literal">null</span>,<span class="hljs-number">8</span>,<span class="hljs-number">1</span>,<span class="hljs-literal">null</span>,<span class="hljs-literal">null</span>,<span class="hljs-literal">null</span>,<span class="hljs-number">7</span>,<span class="hljs-number">9</span>]<br><br>输出：[<span class="hljs-number">1</span>,<span class="hljs-literal">null</span>,<span class="hljs-number">2</span>,<span class="hljs-literal">null</span>,<span class="hljs-number">3</span>,<span class="hljs-literal">null</span>,<span class="hljs-number">4</span>,<span class="hljs-literal">null</span>,<span class="hljs-number">5</span>,<span class="hljs-literal">null</span>,<span class="hljs-number">6</span>,<span class="hljs-literal">null</span>,<span class="hljs-number">7</span>,<span class="hljs-literal">null</span>,<span class="hljs-number">8</span>,<span class="hljs-literal">null</span>,<span class="hljs-number">9</span>]<br></code></pre></div></td></tr></table></figure>
 <p>示例 2：</p>
-<p><img src="https://assets.leetcode.com/uploads/2020/11/17/ex2.jpg" srcset="/img/loading.gif" lazyload alt=""></p>
+<p><img src="/2021/04/25/897.%20%E9%80%92%E5%A2%9E%E9%A1%BA%E5%BA%8F%E6%90%9C%E7%B4%A2%E6%A0%91%EF%BC%88%E7%AE%80%E5%8D%95%EF%BC%89/image_1.png" srcset="/img/loading.gif" lazyload alt></p>
 <figure class="highlight nix"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs nix">输入：<span class="hljs-attr">root</span> = [<span class="hljs-number">5</span>,<span class="hljs-number">1</span>,<span class="hljs-number">7</span>]<br><br>输出：[<span class="hljs-number">1</span>,<span class="hljs-literal">null</span>,<span class="hljs-number">5</span>,<span class="hljs-literal">null</span>,<span class="hljs-number">7</span>]<br></code></pre></div></td></tr></table></figure>
 <p>提示：</p>
 <ul>

@@ -23,14 +23,14 @@
 <meta property="og:site_name" content="宫水三叶的刷题日记">
 <meta property="og:description" content="题目描述这是 LeetCode 上的 686. 重复叠加字符串匹配 ，难度为 中等。 给定两个字符串 a 和 b，寻找重复叠加字符串 a 的最小次数，使得字符串 b 成为叠加后的字符串 a 的子串，如果不存在则返回 -1。 注意：字符串 &quot;abc&quot; 重复叠加 0 次是 &quot;&quot;，重复叠加 1 次是 &quot;abc&quot;，重复叠加 2 次是 &quot;">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://pic.leetcode-cn.com/1640128316-fdWyyB-image.png">
+<meta property="og:image" content="http://example.com/2021/12/21/686.%20%E9%87%8D%E5%A4%8D%E5%8F%A0%E5%8A%A0%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%8C%B9%E9%85%8D%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/image_0.png">
 <meta property="article:published_time" content="2021-12-21T15:37:28.000Z">
-<meta property="article:modified_time" content="2022-05-13T01:31:23.372Z">
+<meta property="article:modified_time" content="2022-05-13T04:10:44.803Z">
 <meta property="article:author" content="宫水三叶">
 <meta property="article:tag" content="字符串哈希">
 <meta property="article:tag" content="KMP">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://pic.leetcode-cn.com/1640128316-fdWyyB-image.png">
+<meta name="twitter:image" content="http://example.com/2021/12/21/686.%20%E9%87%8D%E5%A4%8D%E5%8F%A0%E5%8A%A0%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%8C%B9%E9%85%8D%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/image_0.png">
   
   
   <title>LC 686. 重复叠加字符串匹配 - 宫水三叶的刷题日记</title>
@@ -266,7 +266,7 @@
 <p><strong>对于「下界」的分析是容易的：至少将 <code>a</code> 复制长度大于等于 <code>b</code> 的长度，才有可能匹配。</strong></p>
 <p>在明确了「下界」后，再分析再经过多少次复制，能够明确得到答案，能够得到明确答案的最小复制次数即是上界。</p>
 <p><strong>由于主串是由 <code>a</code> 复制多次而来，并且是从主串中找到子串 <code>b</code>，因此可以明确子串的起始位置，不会超过 <code>a</code> 的长度。</strong></p>
-<p><img src="https://pic.leetcode-cn.com/1640128316-fdWyyB-image.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<p><img src="/2021/12/21/686.%20%E9%87%8D%E5%A4%8D%E5%8F%A0%E5%8A%A0%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%8C%B9%E9%85%8D%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/image_0.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
 <p>即<strong>长度越过 <code>a</code> 长度的起始匹配位置，必然在此前已经被匹配过了。</strong></p>
 <p>由此，我们可知复制次数「上界」最多为「下界 + $1$」。</p>
 <p>令 <code>a</code> 的长度为 $n$，<code>b</code> 的长度为 $m$，下界次数为 $c1$，上界次数为 $c2 = c1 + 1$。</p>

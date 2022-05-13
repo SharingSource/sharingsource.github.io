@@ -23,15 +23,15 @@
 <meta property="og:site_name" content="宫水三叶的刷题日记">
 <meta property="og:description" content="题目描述这是 LeetCode 上的 461. 汉明距离 ，难度为 简单。 两个整数之间的汉明距离指的是这两个数字对应二进制位不同的位置的数目。 给出两个整数 x 和 y，计算它们之间的汉明距离。 注意：0 ≤ x, y &lt; 231. 示例:12345678910输入: x &#x3D; 1, y &#x3D; 4输出: 2解释:1   (0 0 0 1)4   (0 1 0 0)       ↑   ↑上面的">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://pic.leetcode-cn.com/1622076908-buohoV-image.png">
-<meta property="og:image" content="https://pic.leetcode-cn.com/1622076955-PjLfhh-image.png">
-<meta property="og:image" content="https://pic.leetcode-cn.com/1622078171-LQURLc-image.png">
+<meta property="og:image" content="http://example.com/2021/05/27/461.%20%E6%B1%89%E6%98%8E%E8%B7%9D%E7%A6%BB%EF%BC%88%E7%AE%80%E5%8D%95%EF%BC%89/image_0.png">
+<meta property="og:image" content="http://example.com/2021/05/27/461.%20%E6%B1%89%E6%98%8E%E8%B7%9D%E7%A6%BB%EF%BC%88%E7%AE%80%E5%8D%95%EF%BC%89/image_1.png">
+<meta property="og:image" content="http://example.com/2021/05/27/461.%20%E6%B1%89%E6%98%8E%E8%B7%9D%E7%A6%BB%EF%BC%88%E7%AE%80%E5%8D%95%EF%BC%89/image_2.png">
 <meta property="article:published_time" content="2021-05-26T17:11:17.000Z">
-<meta property="article:modified_time" content="2022-05-13T01:31:23.324Z">
+<meta property="article:modified_time" content="2022-05-13T04:10:35.322Z">
 <meta property="article:author" content="宫水三叶">
 <meta property="article:tag" content="位运算">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://pic.leetcode-cn.com/1622076908-buohoV-image.png">
+<meta name="twitter:image" content="http://example.com/2021/05/27/461.%20%E6%B1%89%E6%98%8E%E8%B7%9D%E7%A6%BB%EF%BC%88%E7%AE%80%E5%8D%95%EF%BC%89/image_0.png">
   
   
   <title>LC 461. 汉明距离 - 宫水三叶的刷题日记</title>
@@ -260,7 +260,7 @@
 <hr>
 <h3 id="逐位比较"><a href="#逐位比较" class="headerlink" title="逐位比较"></a>逐位比较</h3><p>本身不改变 $x$ 和 $y$，每次取不同的偏移位进行比较，不同则加一。</p>
 <p>循环固定取满 $32$ 。</p>
-<p><img src="https://pic.leetcode-cn.com/1622076908-buohoV-image.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<p><img src="/2021/05/27/461.%20%E6%B1%89%E6%98%8E%E8%B7%9D%E7%A6%BB%EF%BC%88%E7%AE%80%E5%8D%95%EF%BC%89/image_0.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
 <p>代码：<br><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">hammingDistance</span><span class="hljs-params">(<span class="hljs-type">int</span> x, <span class="hljs-type">int</span> y)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">ans</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">32</span>; i++) &#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">a</span> <span class="hljs-operator">=</span> (x &gt;&gt; i) &amp; <span class="hljs-number">1</span> , b = (y &gt;&gt; i) &amp; <span class="hljs-number">1</span>;<br>            ans += a != b ? <span class="hljs-number">1</span> : <span class="hljs-number">0</span>;<br>        &#125;<br>        <span class="hljs-keyword">return</span> ans;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure></p>
 <ul>
 <li>时间复杂度：$O(C)$，$C$ 固定为 $32$</li>
@@ -269,7 +269,7 @@
 <hr>
 <h3 id="右移统计"><a href="#右移统计" class="headerlink" title="右移统计"></a>右移统计</h3><p>每次都统计当前 $x$ 和 $y$ 的最后一位，统计完则将 $x$ 和 $y$ 右移一位。</p>
 <p>当 $x$ 和 $y$ 的最高一位 $1$ 都被统计过之后，循环结束。</p>
-<p><img src="https://pic.leetcode-cn.com/1622076955-PjLfhh-image.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<p><img src="/2021/05/27/461.%20%E6%B1%89%E6%98%8E%E8%B7%9D%E7%A6%BB%EF%BC%88%E7%AE%80%E5%8D%95%EF%BC%89/image_1.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
 <p>代码：<br><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">hammingDistance</span><span class="hljs-params">(<span class="hljs-type">int</span> x, <span class="hljs-type">int</span> y)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">ans</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">while</span> ((x | y) != <span class="hljs-number">0</span>) &#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">a</span> <span class="hljs-operator">=</span> x &amp; <span class="hljs-number">1</span>, b = y &amp; <span class="hljs-number">1</span>;<br>            ans += a ^ b;<br>            x &gt;&gt;= <span class="hljs-number">1</span>; y &gt;&gt;= <span class="hljs-number">1</span>;<br>        &#125;<br>        <span class="hljs-keyword">return</span> ans;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure></p>
 <ul>
 <li>时间复杂度：$O(C)$，$C$ 最多为 $32$</li>
@@ -278,7 +278,7 @@
 <hr>
 <h3 id="lowbit"><a href="#lowbit" class="headerlink" title="lowbit"></a>lowbit</h3><p>熟悉树状数组的同学都知道，<code>lowbit</code> 可以快速求得 $x$ 二进制表示中最低位 $1$ 表示的值。</p>
 <p>因此我们可以先将 $x$ 和 $y$ 进行异或，再统计异或结果中 $1$ 的个数。</p>
-<p><img src="https://pic.leetcode-cn.com/1622078171-LQURLc-image.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<p><img src="/2021/05/27/461.%20%E6%B1%89%E6%98%8E%E8%B7%9D%E7%A6%BB%EF%BC%88%E7%AE%80%E5%8D%95%EF%BC%89/image_2.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
 <p>代码：<br><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-type">int</span> <span class="hljs-title function_">lowbit</span><span class="hljs-params">(<span class="hljs-type">int</span> x)</span> &#123;<br>        <span class="hljs-keyword">return</span> x &amp; -x;<br>    &#125;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">hammingDistance</span><span class="hljs-params">(<span class="hljs-type">int</span> x, <span class="hljs-type">int</span> y)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">ans</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> x ^ y; i &gt; <span class="hljs-number">0</span>; i -= lowbit(i)) ans++;<br>        <span class="hljs-keyword">return</span> ans;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure></p>
 <ul>
 <li>时间复杂度：$O(C)$，$C$ 最多为 $32$</li>

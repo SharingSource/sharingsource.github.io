@@ -23,15 +23,15 @@
 <meta property="og:site_name" content="宫水三叶的刷题日记">
 <meta property="og:description" content="题目描述这是 LeetCode 上的 92. 反转链表 II ，难度为 中等。 给你单链表的头指针 head 和两个整数 left 和 right ，其中 left &lt;&#x3D; right 。请你反转从位置 left 到位置 right 的链表节点，返回 反转后的链表 。 示例 1： 12输入：head &#x3D; [1,2,3,4,5], left &#x3D; 2, right &#x3D; 4输出：[1,4,3,2,5">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://assets.leetcode.com/uploads/2021/02/19/rev2ex2.jpg">
-<meta property="og:image" content="https://pic.leetcode-cn.com/1616031596-ekuAbr-image.png">
-<meta property="og:image" content="https://pic.leetcode-cn.com/1616032232-vevBFo-image.png">
+<meta property="og:image" content="http://example.com/2021/03/18/92.%20%E5%8F%8D%E8%BD%AC%E9%93%BE%E8%A1%A8%20II%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/image_0.png">
+<meta property="og:image" content="http://example.com/2021/03/18/92.%20%E5%8F%8D%E8%BD%AC%E9%93%BE%E8%A1%A8%20II%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/image_1.png">
+<meta property="og:image" content="http://example.com/2021/03/18/92.%20%E5%8F%8D%E8%BD%AC%E9%93%BE%E8%A1%A8%20II%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/image_2.png">
 <meta property="article:published_time" content="2021-03-17T17:48:04.000Z">
-<meta property="article:modified_time" content="2022-05-13T01:31:23.380Z">
+<meta property="article:modified_time" content="2022-05-13T04:10:49.514Z">
 <meta property="article:author" content="宫水三叶">
 <meta property="article:tag" content="链表">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://assets.leetcode.com/uploads/2021/02/19/rev2ex2.jpg">
+<meta name="twitter:image" content="http://example.com/2021/03/18/92.%20%E5%8F%8D%E8%BD%AC%E9%93%BE%E8%A1%A8%20II%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/image_0.png">
   
   
   <title>LC 92. 反转链表 II - 宫水三叶的刷题日记</title>
@@ -254,7 +254,7 @@
             <div class="markdown-body">
               <h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>这是 LeetCode 上的 <strong><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/reverse-linked-list-ii/solution/yi-ge-neng-ying-yong-suo-you-lian-biao-t-vjx6/">92. 反转链表 II</a></strong> ，难度为 <strong>中等</strong>。</p>
 <p>给你单链表的头指针 head 和两个整数 left 和 right ，其中 left &lt;= right 。请你反转从位置 left 到位置 right 的链表节点，返回 反转后的链表 。</p>
-<p>示例 1：<br><img src="https://assets.leetcode.com/uploads/2021/02/19/rev2ex2.jpg" srcset="/img/loading.gif" lazyload alt=""></p>
+<p>示例 1：<br><img src="/2021/03/18/92.%20%E5%8F%8D%E8%BD%AC%E9%93%BE%E8%A1%A8%20II%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/image_0.png" srcset="/img/loading.gif" lazyload alt></p>
 <figure class="highlight stylus"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs stylus">输入：head = <span class="hljs-selector-attr">[1,2,3,4,5]</span>, <span class="hljs-attribute">left</span> = <span class="hljs-number">2</span>, right = <span class="hljs-number">4</span><br>输出：<span class="hljs-selector-attr">[1,4,3,2,5]</span><br></code></pre></div></td></tr></table></figure>
 <p>示例 2：<br><figure class="highlight stylus"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs stylus">输入：head = <span class="hljs-selector-attr">[5]</span>, <span class="hljs-attribute">left</span> = <span class="hljs-number">1</span>, right = <span class="hljs-number">1</span><br>输出：<span class="hljs-selector-attr">[5]</span><br></code></pre></div></td></tr></table></figure></p>
 <p>提示：</p>
@@ -268,9 +268,9 @@
 <h3 id="朴素解法"><a href="#朴素解法" class="headerlink" title="朴素解法"></a>朴素解法</h3><p>为了减少边界判断，我们可以建立一个虚拟头结点 dummy，使其指向 head，最终返回 dummy.next。</p>
 <p>这种「哨兵」技巧能应用在所有的「链表」题目。</p>
 <p>黄色部分的节点代表需要「翻转」的部分：</p>
-<p><img src="https://pic.leetcode-cn.com/1616031596-ekuAbr-image.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<p><img src="/2021/03/18/92.%20%E5%8F%8D%E8%BD%AC%E9%93%BE%E8%A1%A8%20II%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/image_1.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
 <p>之后就是常规的模拟，步骤我写在示意图里啦 ~ </p>
-<p><img src="https://pic.leetcode-cn.com/1616032232-vevBFo-image.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<p><img src="/2021/03/18/92.%20%E5%8F%8D%E8%BD%AC%E9%93%BE%E8%A1%A8%20II%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/image_2.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
 <p>代码：</p>
 <figure class="highlight java"><figcaption><span>[]</span></figcaption><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> ListNode <span class="hljs-title function_">reverseBetween</span><span class="hljs-params">(ListNode head, <span class="hljs-type">int</span> l, <span class="hljs-type">int</span> r)</span> &#123;<br>        <span class="hljs-type">ListNode</span> <span class="hljs-variable">dummy</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">ListNode</span>(<span class="hljs-number">0</span>);<br>        dummy.next = head;<br><br>        r -= l;<br>        <span class="hljs-type">ListNode</span> <span class="hljs-variable">hh</span> <span class="hljs-operator">=</span> dummy;<br>        <span class="hljs-keyword">while</span> (l-- &gt; <span class="hljs-number">1</span>) hh = hh.next;<br><br>        <span class="hljs-type">ListNode</span> <span class="hljs-variable">a</span> <span class="hljs-operator">=</span> hh.next, b = a.next;<br>        <span class="hljs-keyword">while</span> (r-- &gt; <span class="hljs-number">0</span>) &#123;<br>            <span class="hljs-type">ListNode</span> <span class="hljs-variable">tmp</span> <span class="hljs-operator">=</span> b.next;<br>            b.next = a;<br>            a = b;<br>            b = tmp;<br>        &#125;<br>        <br>        hh.next.next = b;<br>        hh.next = a;<br>        <span class="hljs-keyword">return</span> dummy.next;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
 <ul>

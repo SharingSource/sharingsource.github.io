@@ -23,17 +23,17 @@
 <meta property="og:site_name" content="宫水三叶的刷题日记">
 <meta property="og:description" content="题目描述这是 LeetCode 上的 剑指 Offer 15. 二进制中1的个数 ，难度为 简单。 请实现一个函数，输入一个整数（以二进制串形式），输出该数二进制表示中 1 的个数。例如，把 9 表示成二进制是 1001，有 2 位是 1。因此，如果输入 9，则该函数输出 2。 示例 1：123输入：00000000000000000000000000001011输出：3解释：输入的二进制串 00">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://pic.leetcode-cn.com/1616375441-WGCssd-image.png">
-<meta property="og:image" content="https://pic.leetcode-cn.com/1616375636-fXCFNF-image.png">
-<meta property="og:image" content="https://pic.leetcode-cn.com/1616375636-fXCFNF-image.png">
-<meta property="og:image" content="https://pic.leetcode-cn.com/1616378128-yBWadF-image.png">
+<meta property="og:image" content="http://example.com/2021/06/23/%E5%89%91%E6%8C%87%20Offer%2015.%20%E4%BA%8C%E8%BF%9B%E5%88%B6%E4%B8%AD1%E7%9A%84%E4%B8%AA%E6%95%B0%EF%BC%88%E7%AE%80%E5%8D%95%EF%BC%89/image_0.png">
+<meta property="og:image" content="http://example.com/2021/06/23/%E5%89%91%E6%8C%87%20Offer%2015.%20%E4%BA%8C%E8%BF%9B%E5%88%B6%E4%B8%AD1%E7%9A%84%E4%B8%AA%E6%95%B0%EF%BC%88%E7%AE%80%E5%8D%95%EF%BC%89/image_1.png">
+<meta property="og:image" content="http://example.com/2021/06/23/%E5%89%91%E6%8C%87%20Offer%2015.%20%E4%BA%8C%E8%BF%9B%E5%88%B6%E4%B8%AD1%E7%9A%84%E4%B8%AA%E6%95%B0%EF%BC%88%E7%AE%80%E5%8D%95%EF%BC%89/image_2.png">
+<meta property="og:image" content="http://example.com/2021/06/23/%E5%89%91%E6%8C%87%20Offer%2015.%20%E4%BA%8C%E8%BF%9B%E5%88%B6%E4%B8%AD1%E7%9A%84%E4%B8%AA%E6%95%B0%EF%BC%88%E7%AE%80%E5%8D%95%EF%BC%89/image_3.png">
 <meta property="article:published_time" content="2021-06-22T17:11:37.000Z">
-<meta property="article:modified_time" content="2022-05-13T01:31:23.053Z">
+<meta property="article:modified_time" content="2022-05-13T04:09:34.071Z">
 <meta property="article:author" content="宫水三叶">
 <meta property="article:tag" content="位运算">
 <meta property="article:tag" content="分治">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://pic.leetcode-cn.com/1616375441-WGCssd-image.png">
+<meta name="twitter:image" content="http://example.com/2021/06/23/%E5%89%91%E6%8C%87%20Offer%2015.%20%E4%BA%8C%E8%BF%9B%E5%88%B6%E4%B8%AD1%E7%9A%84%E4%B8%AA%E6%95%B0%EF%BC%88%E7%AE%80%E5%8D%95%EF%BC%89/image_0.png">
   
   
   <title>LC 剑指 Offer 15. 二进制中1的个数 - 宫水三叶的刷题日记</title>
@@ -263,7 +263,7 @@
 </ul>
 <hr>
 <h3 id="「位数检查」解法"><a href="#「位数检查」解法" class="headerlink" title="「位数检查」解法"></a>「位数检查」解法</h3><p>一个朴素的做法是，对 <code>int</code> 的每一位进行检查，并统计 $1$ 的个数。</p>
-<p><img src="https://pic.leetcode-cn.com/1616375441-WGCssd-image.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<p><img src="/2021/06/23/%E5%89%91%E6%8C%87%20Offer%2015.%20%E4%BA%8C%E8%BF%9B%E5%88%B6%E4%B8%AD1%E7%9A%84%E4%B8%AA%E6%95%B0%EF%BC%88%E7%AE%80%E5%8D%95%EF%BC%89/image_0.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
 <p>代码：<br><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">hammingWeight</span><span class="hljs-params">(<span class="hljs-type">int</span> n)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">ans</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">32</span>; i++) &#123;<br>            ans += ((n &gt;&gt; i) &amp; <span class="hljs-number">1</span>);<br>        &#125;<br>        <span class="hljs-keyword">return</span> ans;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure></p>
 <ul>
 <li>时间复杂度：$O(k)$，$k$ 为 <code>int</code> 的位数，固定为 $32$ 位</li>
@@ -274,7 +274,7 @@
 <p>因此另外一个做法是：通过 <code>n &amp; 1</code> 来统计当前 $n$ 的最低位是否为 $1$，同时每次直接对 $n$ 进行右移并高位补 0。</p>
 <p>当 $n = 0$ 代表，我们已经将所有的 $1$ 统计完成。</p>
 <p>这样的做法，可以确保只会循环到最高位的 $1$。</p>
-<p><img src="https://pic.leetcode-cn.com/1616375636-fXCFNF-image.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<p><img src="/2021/06/23/%E5%89%91%E6%8C%87%20Offer%2015.%20%E4%BA%8C%E8%BF%9B%E5%88%B6%E4%B8%AD1%E7%9A%84%E4%B8%AA%E6%95%B0%EF%BC%88%E7%AE%80%E5%8D%95%EF%BC%89/image_1.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
 <p>代码：<br><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">hammingWeight</span><span class="hljs-params">(<span class="hljs-type">int</span> n)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">ans</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">while</span> (n != <span class="hljs-number">0</span>) &#123;<br>            ans += (n &amp; <span class="hljs-number">1</span>);<br>            n &gt;&gt;&gt;= <span class="hljs-number">1</span>;<br>        &#125;<br>        <span class="hljs-keyword">return</span> ans;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure></p>
 <ul>
 <li>时间复杂度：$O(k)$，$k$ 为 <code>int</code> 的位数，固定为 $32$ 位，最坏情况 $n$ 的二进制表示全是 $1$</li>
@@ -285,7 +285,7 @@
 <p>那么是否有办法，只对位数为 $1$ 的二进制位进行处理呢？</p>
 <p>使用 <code>lowbit</code> 即可做到，<code>lowbit</code> 会在 $O(1)$ 复杂度内返回二进制表示中最低位 $1$ 所表示的数值。</p>
 <p>例如 $(0000…111100)_2$ 传入 <code>lowbit</code> 返回 $(0000…000100)_2$；$(0000…00011)_2$ 传入 <code>lowbit</code> 返回 $(0000…00001)_2$ …</p>
-<p><img src="https://pic.leetcode-cn.com/1616375636-fXCFNF-image.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<p><img src="/2021/06/23/%E5%89%91%E6%8C%87%20Offer%2015.%20%E4%BA%8C%E8%BF%9B%E5%88%B6%E4%B8%AD1%E7%9A%84%E4%B8%AA%E6%95%B0%EF%BC%88%E7%AE%80%E5%8D%95%EF%BC%89/image_2.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
 <p>代码：<br><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">hammingWeight</span><span class="hljs-params">(<span class="hljs-type">int</span> n)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">ans</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> n; i != <span class="hljs-number">0</span>; i -= lowbit(i)) ans++;<br>        <span class="hljs-keyword">return</span> ans;<br>    &#125;<br>    <span class="hljs-type">int</span> <span class="hljs-title function_">lowbit</span><span class="hljs-params">(<span class="hljs-type">int</span> x)</span> &#123;<br>        <span class="hljs-keyword">return</span> x &amp; -x;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure></p>
 <ul>
 <li>时间复杂度：$O(k)$，$k$ 为 <code>int</code> 的位数，固定为 $32$ 位，最坏情况 $n$ 的二进制表示全是 $1$</li>
@@ -293,7 +293,7 @@
 </ul>
 <hr>
 <h3 id="「分组统计」解法"><a href="#「分组统计」解法" class="headerlink" title="「分组统计」解法"></a>「分组统计」解法</h3><p>以上三种解法都是 $O(k)$ 的，事实上我们可以通过分组统计的方式，做到比 $O(k)$ 更低的复杂度。</p>
-<p><img src="https://pic.leetcode-cn.com/1616378128-yBWadF-image.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<p><img src="/2021/06/23/%E5%89%91%E6%8C%87%20Offer%2015.%20%E4%BA%8C%E8%BF%9B%E5%88%B6%E4%B8%AD1%E7%9A%84%E4%B8%AA%E6%95%B0%EF%BC%88%E7%AE%80%E5%8D%95%EF%BC%89/image_3.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
 <p>代码：<br><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">hammingWeight</span><span class="hljs-params">(<span class="hljs-type">int</span> n)</span> &#123;<br>        n = (n &amp; <span class="hljs-number">0x55555555</span>) + ((n &gt;&gt;&gt; <span class="hljs-number">1</span>)  &amp; <span class="hljs-number">0x55555555</span>);<br>        n = (n &amp; <span class="hljs-number">0x33333333</span>) + ((n &gt;&gt;&gt; <span class="hljs-number">2</span>)  &amp; <span class="hljs-number">0x33333333</span>);<br>        n = (n &amp; <span class="hljs-number">0x0f0f0f0f</span>) + ((n &gt;&gt;&gt; <span class="hljs-number">4</span>)  &amp; <span class="hljs-number">0x0f0f0f0f</span>);<br>        n = (n &amp; <span class="hljs-number">0x00ff00ff</span>) + ((n &gt;&gt;&gt; <span class="hljs-number">8</span>)  &amp; <span class="hljs-number">0x00ff00ff</span>);<br>        n = (n &amp; <span class="hljs-number">0x0000ffff</span>) + ((n &gt;&gt;&gt; <span class="hljs-number">16</span>) &amp; <span class="hljs-number">0x0000ffff</span>);<br>        <span class="hljs-keyword">return</span> n;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure></p>
 <ul>
 <li>时间复杂度：$O(\log{k})$，$k$ 为 <code>int</code> 的位数，固定为 $32$ 位</li>

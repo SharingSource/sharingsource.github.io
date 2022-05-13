@@ -23,13 +23,13 @@
 <meta property="og:site_name" content="宫水三叶的刷题日记">
 <meta property="og:description" content="题目描述这是 LeetCode 上的 33. 搜索旋转排序数组 ，难度为 中等。 整数数组 nums 按升序排列，数组中的值 互不相同 。 在传递给函数之前，nums 在预先未知的某个下标 k （0 &lt;&#x3D; k &lt; nums.length）上进行了旋转，使数组变为 [nums[k], nums[k+1], ..., nums[n-1], nums[0], nums[1], ..., nu">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://pic.leetcode-cn.com/1611652146-DwiKES-0.png">
+<meta property="og:image" content="http://example.com/2021/01/26/33.%20%E6%90%9C%E7%B4%A2%E6%97%8B%E8%BD%AC%E6%8E%92%E5%BA%8F%E6%95%B0%E7%BB%84%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/image_0.png">
 <meta property="article:published_time" content="2021-01-26T00:42:20.000Z">
-<meta property="article:modified_time" content="2022-05-13T01:31:23.248Z">
+<meta property="article:modified_time" content="2022-05-13T04:10:16.629Z">
 <meta property="article:author" content="宫水三叶">
 <meta property="article:tag" content="二分">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://pic.leetcode-cn.com/1611652146-DwiKES-0.png">
+<meta name="twitter:image" content="http://example.com/2021/01/26/33.%20%E6%90%9C%E7%B4%A2%E6%97%8B%E8%BD%AC%E6%8E%92%E5%BA%8F%E6%95%B0%E7%BB%84%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/image_0.png">
   
   
   <title>LC 33. 搜索旋转排序数组 - 宫水三叶的刷题日记</title>
@@ -258,13 +258,13 @@
 <p>示例 1：<br><figure class="highlight accesslog"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs accesslog">输入：nums = <span class="hljs-string">[4,5,6,7,0,1,2]</span>, target = <span class="hljs-number">0</span><br><br>输出：<span class="hljs-number">4</span><br></code></pre></div></td></tr></table></figure><br>示例 2：<br><figure class="highlight accesslog"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs accesslog">输入：nums = <span class="hljs-string">[4,5,6,7,0,1,2]</span>, target = <span class="hljs-number">3</span><br><br>输出：-<span class="hljs-number">1</span><br></code></pre></div></td></tr></table></figure><br>示例 3：<br><figure class="highlight aspectj"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs aspectj">输入：nums = [<span class="hljs-number">1</span>], <span class="hljs-keyword">target</span> = <span class="hljs-number">0</span><br><br>输出：<span class="hljs-number">-1</span><br></code></pre></div></td></tr></table></figure></p>
 <p>提示：</p>
 <ul>
-<li>1 &lt;= nums.length &lt;= 5000</li>
-<li>-$10^4$ &lt;= nums[i] &lt;= $10^4$</li>
-<li>nums 中的每个值都 独一无二</li>
-<li>题目数据保证 nums 在预先未知的某个下标上进行了旋转</li>
-<li>-$10^4$ &lt;= target &lt;= $10^4$</li>
+<li>$1 &lt;= nums.length &lt;= 5000$</li>
+<li>$-10^4 &lt;= nums[i] &lt;= 10^4$</li>
+<li><code>nums</code> 中的每个值都 独一无二</li>
+<li>题目数据保证 <code>nums</code> 在预先未知的某个下标上进行了旋转</li>
+<li>$-10^4 &lt;= target &lt;= 10^4$</li>
 </ul>
-<p>进阶：你可以设计一个时间复杂度为 O(log n) 的解决方案吗？</p>
+<p>进阶：你可以设计一个时间复杂度为 $O(\log{n})$ 的解决方案吗？</p>
 <hr>
 <h3 id="朴素解法"><a href="#朴素解法" class="headerlink" title="朴素解法"></a>朴素解法</h3><p>但凡是从有序序列中找某个数，我们第一反应应该是「二分」。</p>
 <p>这道题是一个原本有序的数组在某个点上进行了旋转，其实就是将原本一段升序的数组分为了两段。</p>
@@ -282,7 +282,7 @@
 <p>「二分」不是单纯指从有序数组中快速找某个数，这只是「二分」的一个应用。</p>
 <p><strong>「二分」的本质是两段性，并非单调性。只要一段满足某个性质，另外一段不满足某个性质，就可以用「二分」。</strong></p>
 <p>经过旋转的数组，显然前半段满足 <code>&gt;= nums[0]</code>，而后半段不满足 <code>&gt;= nums[0]</code>。我们可以以此作为依据，通过「二分」找到旋转点。</p>
-<p><img src="https://pic.leetcode-cn.com/1611652146-DwiKES-0.png" srcset="/img/loading.gif" lazyload alt="0.png"></p>
+<p><img src="/2021/01/26/33.%20%E6%90%9C%E7%B4%A2%E6%97%8B%E8%BD%AC%E6%8E%92%E5%BA%8F%E6%95%B0%E7%BB%84%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/image_0.png" srcset="/img/loading.gif" lazyload alt="0.png"></p>
 <p>找到旋转点之后，再通过比较 <code>target</code> 和 <code>nums[0]</code> 的大小，确定 <code>target</code> 落在旋转点的左边还是右边。</p>
 <p>代码：<br><figure class="highlight java"><figcaption><span>[]</span></figcaption><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">search</span><span class="hljs-params">(<span class="hljs-type">int</span>[] nums, <span class="hljs-type">int</span> target)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> nums.length;<br>        <span class="hljs-keyword">if</span> (n == <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> -<span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">if</span> (n == <span class="hljs-number">1</span>) <span class="hljs-keyword">return</span> nums[<span class="hljs-number">0</span>] == target ? <span class="hljs-number">0</span> : -<span class="hljs-number">1</span>;<br><br>        <span class="hljs-comment">// 第一次「二分」：从中间开始找，找到满足 &gt;=nums[0] 的分割点（旋转点）</span><br>        <span class="hljs-type">int</span> <span class="hljs-variable">l</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>, r = n - <span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">while</span> (l &lt; r) &#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">mid</span> <span class="hljs-operator">=</span> l + r + <span class="hljs-number">1</span> &gt;&gt; <span class="hljs-number">1</span>;<br>            <span class="hljs-keyword">if</span> (nums[mid] &gt;= nums[<span class="hljs-number">0</span>]) &#123;<br>                l = mid;<br>            &#125; <span class="hljs-keyword">else</span> &#123;<br>                r = mid - <span class="hljs-number">1</span>;<br>            &#125;<br>        &#125;<br><br>        <span class="hljs-comment">// 第二次「二分」：通过和 nums[0] 进行比较，得知 target 是在旋转点的左边还是右边</span><br>        <span class="hljs-keyword">if</span> (target &gt;= nums[<span class="hljs-number">0</span>]) &#123;<br>            l = <span class="hljs-number">0</span>;<br>        &#125; <span class="hljs-keyword">else</span> &#123;<br>            l = l + <span class="hljs-number">1</span>;<br>            r = n - <span class="hljs-number">1</span>;<br>        &#125;<br>        <span class="hljs-keyword">while</span> (l &lt; r) &#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">mid</span> <span class="hljs-operator">=</span> l + r &gt;&gt; <span class="hljs-number">1</span>;<br>            <span class="hljs-keyword">if</span> (nums[mid] &gt;= target) &#123;<br>                r = mid;<br>            &#125; <span class="hljs-keyword">else</span> &#123;<br>                l = mid + <span class="hljs-number">1</span>;<br>            &#125;<br>        &#125;<br><br>        <span class="hljs-keyword">return</span> nums[r] == target ? r : -<span class="hljs-number">1</span>;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure></p>
 <ul>

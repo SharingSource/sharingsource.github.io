@@ -23,17 +23,17 @@
 <meta property="og:site_name" content="宫水三叶的刷题日记">
 <meta property="og:description" content="题目描述这是 LeetCode 上的 179. 最大数 ，难度为 中等。 给定一组非负整数 nums，重新排列每个数的顺序（每个数不可拆分）使之组成一个最大的整数。 注意：输出结果可能非常大，所以你需要返回一个字符串而不是整数。 示例 1：123输入：nums &#x3D; [10,2]输出：&quot;210&quot;示例 2：123输入：nums &#x3D; [3,30,34,5,9]输出：&quot;953">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://pic.leetcode-cn.com/1618191664-aUaIFS-image.png">
-<meta property="og:image" content="https://pic.leetcode-cn.com/1618207470-nFVtbm-image.png">
-<meta property="og:image" content="https://pic.leetcode-cn.com/1618209987-kPJqkw-image.png">
-<meta property="og:image" content="https://pic.leetcode-cn.com/1618210019-pYydoU-image.png">
-<meta property="og:image" content="https://pic.leetcode-cn.com/1618210522-mJgnzX-image.png">
+<meta property="og:image" content="http://example.com/2021/04/12/179.%20%E6%9C%80%E5%A4%A7%E6%95%B0%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/image_0.png">
+<meta property="og:image" content="http://example.com/2021/04/12/179.%20%E6%9C%80%E5%A4%A7%E6%95%B0%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/image_1.png">
+<meta property="og:image" content="http://example.com/2021/04/12/179.%20%E6%9C%80%E5%A4%A7%E6%95%B0%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/image_2.png">
+<meta property="og:image" content="http://example.com/2021/04/12/179.%20%E6%9C%80%E5%A4%A7%E6%95%B0%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/image_3.png">
+<meta property="og:image" content="http://example.com/2021/04/12/179.%20%E6%9C%80%E5%A4%A7%E6%95%B0%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/image_4.png">
 <meta property="article:published_time" content="2021-04-11T19:36:38.000Z">
-<meta property="article:modified_time" content="2022-05-13T01:31:23.330Z">
+<meta property="article:modified_time" content="2022-05-13T04:10:36.490Z">
 <meta property="article:author" content="宫水三叶">
 <meta property="article:tag" content="贪心">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://pic.leetcode-cn.com/1618191664-aUaIFS-image.png">
+<meta name="twitter:image" content="http://example.com/2021/04/12/179.%20%E6%9C%80%E5%A4%A7%E6%95%B0%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/image_0.png">
   
   
   <title>LC 179. 最大数 - 宫水三叶的刷题日记</title>
@@ -289,7 +289,7 @@
 <p>因此 $ans &lt; max$ 必然不成立，得证 $ans \geqslant max$ 成立，结合 $ans \leqslant max$ 可得贪心解为最优。</p>
 <p>举个🌰，如果有 $ans &lt; max$，那么意味着在 $ans$ 中至少有一对数字互换可以使得 $ans$ 变大，</p>
 <p>那么在排序逻辑中 $x$ 所在的整体（可能不只有 $x$ 一个数）应该被排在 $y$ 所在的整体（可能不只有 $y$ 一个数）前面。</p>
-<p><img src="https://pic.leetcode-cn.com/1618191664-aUaIFS-image.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<p><img src="/2021/04/12/179.%20%E6%9C%80%E5%A4%A7%E6%95%B0%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/image_0.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
 <h4 id="2-全序关系"><a href="#2-全序关系" class="headerlink" title="2. 全序关系"></a>2. 全序关系</h4><p>我们使用符号 $@$ 来代指我们的「排序」逻辑：</p>
 <ul>
 <li>如果 $a$ 必须排在 $b$ 的前面，我们记作 $a @ b$；</li>
@@ -310,20 +310,20 @@
 <p>这里的「传递性」其实也可以使用与 <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/largest-number/solution/zui-da-shu-by-leetcode-solution-sid5/">官方题解</a> 类似的手法来证明。</p>
 <p><strong>我们可以利用「两个等长的拼接字符串，字典序大小关系与数值大小关系一致」这一性质来证明，因为字符串 $ac$ 和 $ca$ 必然是等长的。</strong></p>
 <p>接下来，让我们从「自定义排序逻辑」出发，换个思路来证明 $a@c$：</p>
-<p><img src="https://pic.leetcode-cn.com/1618207470-nFVtbm-image.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<p><img src="/2021/04/12/179.%20%E6%9C%80%E5%A4%A7%E6%95%B0%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/image_1.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
 <p><strong>然后我们只需要证明在不同的 $i$ $j$ 关系之间（共三种情况），$a@c$ 恒成立即可：</strong></p>
 <ol>
 <li>当 $i == j$ 的时候：</li>
 </ol>
-<p><img src="https://pic.leetcode-cn.com/1618209987-kPJqkw-image.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<p><img src="/2021/04/12/179.%20%E6%9C%80%E5%A4%A7%E6%95%B0%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/image_2.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
 <ol>
 <li>当 $i &gt; j$ 的时候：</li>
 </ol>
-<p><img src="https://pic.leetcode-cn.com/1618210019-pYydoU-image.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<p><img src="/2021/04/12/179.%20%E6%9C%80%E5%A4%A7%E6%95%B0%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/image_3.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
 <ol>
 <li>当 $i &lt; j$ 的时候：</li>
 </ol>
-<p><img src="https://pic.leetcode-cn.com/1618210522-mJgnzX-image.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<p><img src="/2021/04/12/179.%20%E6%9C%80%E5%A4%A7%E6%95%B0%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/image_4.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
 <p><strong>综上，我们证明了无论在何种情况下，只要有 $a@b$ 和 $b@c$ 的话，那么 $a@c$ 恒成立。</strong></p>
 <p><strong>我们之所以能这样证明「传递性」，本质是利用了自定义排序逻辑中「对于确定任意元素 $a$ 和 $b$ 之间的排序关系只依赖于 $a$ 和 $b$ 的第一个不同元素之间的大小关系」这一性质。</strong></p>
 <hr>

@@ -23,16 +23,16 @@
 <meta property="og:site_name" content="宫水三叶的刷题日记">
 <meta property="og:description" content="题目描述这是 LeetCode 上的 面试题 17.21. 直方图的水量 ，难度为 困难。 给定一个直方图(也称柱状图)，假设有人从上面源源不断地倒水，最后直方图能存多少水量?直方图的宽度为 1。 上面是由数组 [0,1,0,2,1,0,1,3,2,1,2,1] 表示的直方图，在这种情况下，可以接 6 个单位的水（蓝色部分表示水）。 感谢 Marcos 贡献此图。 示例:123输入: [0,1,0">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2018/10/22/rainwatertrap.png">
-<meta property="og:image" content="https://pic.leetcode-cn.com/1617328567-AkILvh-image.png">
+<meta property="og:image" content="http://example.com/2021/04/02/%E9%9D%A2%E8%AF%95%E9%A2%98%2017.21.%20%E7%9B%B4%E6%96%B9%E5%9B%BE%E7%9A%84%E6%B0%B4%E9%87%8F%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/image_0.png">
+<meta property="og:image" content="http://example.com/2021/04/02/%E9%9D%A2%E8%AF%95%E9%A2%98%2017.21.%20%E7%9B%B4%E6%96%B9%E5%9B%BE%E7%9A%84%E6%B0%B4%E9%87%8F%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/image_1.png">
 <meta property="article:published_time" content="2021-04-01T17:58:12.000Z">
-<meta property="article:modified_time" content="2022-05-13T01:31:23.155Z">
+<meta property="article:modified_time" content="2022-05-13T04:09:53.738Z">
 <meta property="article:author" content="宫水三叶">
 <meta property="article:tag" content="动态规划">
 <meta property="article:tag" content="双指针">
 <meta property="article:tag" content="数学">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2018/10/22/rainwatertrap.png">
+<meta name="twitter:image" content="http://example.com/2021/04/02/%E9%9D%A2%E8%AF%95%E9%A2%98%2017.21.%20%E7%9B%B4%E6%96%B9%E5%9B%BE%E7%9A%84%E6%B0%B4%E9%87%8F%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/image_0.png">
   
   
   <title>LC 面试题 17.21. 直方图的水量 - 宫水三叶的刷题日记</title>
@@ -255,7 +255,7 @@
             <div class="markdown-body">
               <h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>这是 LeetCode 上的 <strong><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/volume-of-histogram-lcci/solution/gong-shui-san-xie-yi-ti-si-jie-po-su-yu-sqadp/">面试题 17.21. 直方图的水量</a></strong> ，难度为 <strong>困难</strong>。</p>
 <p>给定一个直方图(也称柱状图)，假设有人从上面源源不断地倒水，最后直方图能存多少水量?直方图的宽度为 1。</p>
-<p><img src="https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2018/10/22/rainwatertrap.png" srcset="/img/loading.gif" lazyload alt=""><br>上面是由数组 [0,1,0,2,1,0,1,3,2,1,2,1] 表示的直方图，在这种情况下，可以接 6 个单位的水（蓝色部分表示水）。 感谢 Marcos 贡献此图。</p>
+<p><img src="/2021/04/02/%E9%9D%A2%E8%AF%95%E9%A2%98%2017.21.%20%E7%9B%B4%E6%96%B9%E5%9B%BE%E7%9A%84%E6%B0%B4%E9%87%8F%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/image_0.png" srcset="/img/loading.gif" lazyload alt><br>上面是由数组 [0,1,0,2,1,0,1,3,2,1,2,1] 表示的直方图，在这种情况下，可以接 6 个单位的水（蓝色部分表示水）。 感谢 Marcos 贡献此图。</p>
 <p>示例:<br><figure class="highlight dns"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs dns">输入: [<span class="hljs-number">0,1,0,2</span>,<span class="hljs-number">1,0,1,3</span>,<span class="hljs-number">2,1,2,1</span>]<br><br>输出: <span class="hljs-number">6</span><br></code></pre></div></td></tr></table></figure></p>
 <hr>
 <h3 id="朴素解法"><a href="#朴素解法" class="headerlink" title="朴素解法"></a>朴素解法</h3><p>对于每根柱子而言，我们只需要找出「其左边最高的柱子」和「其右边最高的柱子」。</p>
@@ -308,7 +308,7 @@
 <p>然后分别「从左往右」和「从右往左」计算一次最大高度覆盖面积 $lSum$ 和 $rSum$。</p>
 <p><strong>显然会出现重复面积，并且重复面积只会独立地出现在「山峰」的左边和右边。</strong></p>
 <p>利用此特性，我们可以通过简单的等式关系求解出「雨水面积」：</p>
-<p><img src="https://pic.leetcode-cn.com/1617328567-AkILvh-image.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<p><img src="/2021/04/02/%E9%9D%A2%E8%AF%95%E9%A2%98%2017.21.%20%E7%9B%B4%E6%96%B9%E5%9B%BE%E7%9A%84%E6%B0%B4%E9%87%8F%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/image_1.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
 <p>代码：<br><figure class="highlight java"><figcaption><span>[]</span></figcaption><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">trap</span><span class="hljs-params">(<span class="hljs-type">int</span>[] height)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> height.length;<br><br>        <span class="hljs-type">int</span> <span class="hljs-variable">sum</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>, max = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; n; i++) &#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">cur</span> <span class="hljs-operator">=</span> height[i];<br>            sum += cur;<br>            max = Math.max(max, cur);<br>        &#125;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">full</span> <span class="hljs-operator">=</span> max * n;<br><br>        <span class="hljs-type">int</span> <span class="hljs-variable">lSum</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>, lMax = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; n; i++) &#123;<br>            lMax = Math.max(lMax, height[i]);<br>            lSum += lMax;<br>        &#125;<br><br>        <span class="hljs-type">int</span> <span class="hljs-variable">rSum</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>, rMax = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> n - <span class="hljs-number">1</span>; i &gt;= <span class="hljs-number">0</span>; i--) &#123;<br>            rMax = Math.max(rMax, height[i]);<br>            rSum += rMax;<br>        &#125;<br><br>        <span class="hljs-keyword">return</span> lSum + rSum - full - sum;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure></p>
 <ul>
 <li>时间复杂度：$O(n)$。</li>

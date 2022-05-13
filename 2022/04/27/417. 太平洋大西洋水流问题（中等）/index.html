@@ -23,16 +23,16 @@
 <meta property="og:site_name" content="宫水三叶的刷题日记">
 <meta property="og:description" content="题目描述这是 LeetCode 上的 417. 太平洋大西洋水流问题 ，难度为 中等。 有一个 m × n 的矩形岛屿，与 太平洋 和 大西洋 相邻。 “太平洋” 处于大陆的左边界和上边界，而 “大西洋” 处于大陆的右边界和下边界。 这个岛被分割成一个由若干方形单元格组成的网格。给定一个 m x n 的整数矩阵 heights ， $heights[r][c]$ 表示坐标 $(r, c)$ 上单元">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://assets.leetcode.com/uploads/2021/06/08/waterflow-grid.jpg">
+<meta property="og:image" content="http://example.com/2022/04/27/417.%20%E5%A4%AA%E5%B9%B3%E6%B4%8B%E5%A4%A7%E8%A5%BF%E6%B4%8B%E6%B0%B4%E6%B5%81%E9%97%AE%E9%A2%98%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/image_0.png">
 <meta property="article:published_time" content="2022-04-26T17:15:06.000Z">
-<meta property="article:modified_time" content="2022-05-13T01:31:22.989Z">
+<meta property="article:modified_time" content="2022-05-13T04:09:10.033Z">
 <meta property="article:author" content="宫水三叶">
 <meta property="article:tag" content="DFS">
 <meta property="article:tag" content="并查集">
 <meta property="article:tag" content="BFS">
 <meta property="article:tag" content="多源 BFS">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://assets.leetcode.com/uploads/2021/06/08/waterflow-grid.jpg">
+<meta name="twitter:image" content="http://example.com/2022/04/27/417.%20%E5%A4%AA%E5%B9%B3%E6%B4%8B%E5%A4%A7%E8%A5%BF%E6%B4%8B%E6%B0%B4%E6%B5%81%E9%97%AE%E9%A2%98%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/image_0.png">
   
   
   <title>LC 417. 太平洋大西洋水流问题 - 宫水三叶的刷题日记</title>
@@ -258,7 +258,7 @@
 <p>这个岛被分割成一个由若干方形单元格组成的网格。给定一个 <code>m x n</code> 的整数矩阵 <code>heights</code> ， $heights[r][c]$ 表示坐标 $(r, c)$ 上单元格 高于海平面的高度 。</p>
 <p>岛上雨水较多，如果相邻单元格的高度 小于或等于 当前单元格的高度，雨水可以直接向北、南、东、西流向相邻单元格。水可以从海洋附近的任何单元格流入海洋。</p>
 <p>返回 网格坐标 <code>result</code> 的 2D列表 ，其中 $result[i] = [r_i, c_i]$ 表示雨水可以从单元格 $(r_i, c_i)$ 流向 太平洋和大西洋 。</p>
-<p>示例 1：<br><img src="https://assets.leetcode.com/uploads/2021/06/08/waterflow-grid.jpg" srcset="/img/loading.gif" lazyload alt=""><br><figure class="highlight inform7"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs inform7">输入: heights = <span class="hljs-comment">[<span class="hljs-comment">[1,2,2,3,5]</span>,<span class="hljs-comment">[3,2,3,4,4]</span>,<span class="hljs-comment">[2,4,5,3,1]</span>,<span class="hljs-comment">[6,7,1,4,5]</span>,<span class="hljs-comment">[5,1,1,2,4]</span>]</span><br><br>输出: <span class="hljs-comment">[<span class="hljs-comment">[0,4]</span>,<span class="hljs-comment">[1,3]</span>,<span class="hljs-comment">[1,4]</span>,<span class="hljs-comment">[2,2]</span>,<span class="hljs-comment">[3,0]</span>,<span class="hljs-comment">[3,1]</span>,<span class="hljs-comment">[4,0]</span>]</span><br></code></pre></div></td></tr></table></figure><br>示例 2：<br><figure class="highlight lua"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs lua">输入: heights = <span class="hljs-string">[[2,1],[1,2]]</span><br><br>输出: <span class="hljs-string">[[0,0],[0,1],[1,0],[1,1]]</span><br></code></pre></div></td></tr></table></figure></p>
+<p>示例 1：<br><img src="/2022/04/27/417.%20%E5%A4%AA%E5%B9%B3%E6%B4%8B%E5%A4%A7%E8%A5%BF%E6%B4%8B%E6%B0%B4%E6%B5%81%E9%97%AE%E9%A2%98%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/image_0.png" srcset="/img/loading.gif" lazyload alt><br><figure class="highlight inform7"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs inform7">输入: heights = <span class="hljs-comment">[<span class="hljs-comment">[1,2,2,3,5]</span>,<span class="hljs-comment">[3,2,3,4,4]</span>,<span class="hljs-comment">[2,4,5,3,1]</span>,<span class="hljs-comment">[6,7,1,4,5]</span>,<span class="hljs-comment">[5,1,1,2,4]</span>]</span><br><br>输出: <span class="hljs-comment">[<span class="hljs-comment">[0,4]</span>,<span class="hljs-comment">[1,3]</span>,<span class="hljs-comment">[1,4]</span>,<span class="hljs-comment">[2,2]</span>,<span class="hljs-comment">[3,0]</span>,<span class="hljs-comment">[3,1]</span>,<span class="hljs-comment">[4,0]</span>]</span><br></code></pre></div></td></tr></table></figure><br>示例 2：<br><figure class="highlight lua"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs lua">输入: heights = <span class="hljs-string">[[2,1],[1,2]]</span><br><br>输出: <span class="hljs-string">[[0,0],[0,1],[1,0],[1,1]]</span><br></code></pre></div></td></tr></table></figure></p>
 <p>提示：</p>
 <ul>
 <li>$m == heights.length$</li>

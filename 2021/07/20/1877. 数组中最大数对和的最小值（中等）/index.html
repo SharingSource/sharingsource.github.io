@@ -23,13 +23,13 @@
 <meta property="og:site_name" content="宫水三叶的刷题日记">
 <meta property="og:description" content="题目描述这是 LeetCode 上的 1877. 数组中最大数对和的最小值 ，难度为 中等。 一个数对 (a,b) 的 数对和 等于 a + b 。最大数对和 是一个数对数组中最大的 数对和 。 比方说，如果我们有数对 (1,5) ，(2,3) 和 (4,4)，最大数对和 为 max(1+5, 2+3, 4+4) &#x3D; max(6, 5, 8) &#x3D; 8 。给你一个长度为 偶数 n 的数组 nums">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://pic.leetcode-cn.com/1626747498-lUHubw-image.png">
+<meta property="og:image" content="http://example.com/2021/07/20/1877.%20%E6%95%B0%E7%BB%84%E4%B8%AD%E6%9C%80%E5%A4%A7%E6%95%B0%E5%AF%B9%E5%92%8C%E7%9A%84%E6%9C%80%E5%B0%8F%E5%80%BC%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/image_0.png">
 <meta property="article:published_time" content="2021-07-19T18:39:46.000Z">
-<meta property="article:modified_time" content="2022-05-13T01:31:23.333Z">
+<meta property="article:modified_time" content="2022-05-13T04:10:37.122Z">
 <meta property="article:author" content="宫水三叶">
 <meta property="article:tag" content="贪心">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://pic.leetcode-cn.com/1626747498-lUHubw-image.png">
+<meta name="twitter:image" content="http://example.com/2021/07/20/1877.%20%E6%95%B0%E7%BB%84%E4%B8%AD%E6%9C%80%E5%A4%A7%E6%95%B0%E5%AF%B9%E5%92%8C%E7%9A%84%E6%9C%80%E5%B0%8F%E5%80%BC%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/image_0.png">
   
   
   <title>LC 1877. 数组中最大数对和的最小值 - 宫水三叶的刷题日记</title>
@@ -275,7 +275,7 @@
 <p>假设最大数对是 $(nums[i], nums[j])$，其中 $i &lt; j$，记两者之和为 $ans = nums[i] + nums[j]$。</p>
 <p>反证法证明，不存在别的数对组合会比 $(nums[i], nums[j])$ 更优：</p>
 <p>假设存在数对 $(nums[p], nums[q])$ 与 $(nums[i], nums[j])$ 进行调整使答案更优。</p>
-<p><img src="https://pic.leetcode-cn.com/1626747498-lUHubw-image.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<p><img src="/2021/07/20/1877.%20%E6%95%B0%E7%BB%84%E4%B8%AD%E6%9C%80%E5%A4%A7%E6%95%B0%E5%AF%B9%E5%92%8C%E7%9A%84%E6%9C%80%E5%B0%8F%E5%80%BC%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/image_0.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
 <p>接下来分情况讨论：</p>
 <ul>
 <li>调整为 $(nums[i], nums[p])$ 和 $(nums[q], nums[j])$：此时最大数对答案为 $nums[q] + nums[j]$，显然 $nums[q] + nums[j] &gt;= nums[i] + nums[j] = ans$。我们要最小化最大数对和，因此该调整方案不会让答案更好；</li>

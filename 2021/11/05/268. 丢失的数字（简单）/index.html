@@ -23,20 +23,20 @@
 <meta property="og:site_name" content="宫水三叶的刷题日记">
 <meta property="og:description" content="题目描述这是 LeetCode 上的 268. 丢失的数字 ，难度为 简单。 给定一个包含 $[0, n]$ 中 $n$ 个数的数组 $nums$ ，找出 $[0, n]$ 这个范围内没有出现在数组中的那个数。 示例 1：12345输入：nums &#x3D; [3,0,1]输出：2解释：n &#x3D; 3，因为有 3 个数字，所以所有的数字都在范围 [0,3] 内。2 是丢失的数字，因为它没有出现在 nums 中">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://pic.leetcode-cn.com/1636127261-exHwxl-image.png">
-<meta property="og:image" content="https://pic.leetcode-cn.com/1636127493-lMjpYi-image.png">
-<meta property="og:image" content="https://pic.leetcode-cn.com/1636127315-KjyCmt-image.png">
-<meta property="og:image" content="https://pic.leetcode-cn.com/1636127393-PzNAtL-image.png">
-<meta property="og:image" content="https://pic.leetcode-cn.com/1636127445-nSsgpq-image.png">
+<meta property="og:image" content="http://example.com/2021/11/05/268.%20%E4%B8%A2%E5%A4%B1%E7%9A%84%E6%95%B0%E5%AD%97%EF%BC%88%E7%AE%80%E5%8D%95%EF%BC%89/image_0.png">
+<meta property="og:image" content="http://example.com/2021/11/05/268.%20%E4%B8%A2%E5%A4%B1%E7%9A%84%E6%95%B0%E5%AD%97%EF%BC%88%E7%AE%80%E5%8D%95%EF%BC%89/image_1.png">
+<meta property="og:image" content="http://example.com/2021/11/05/268.%20%E4%B8%A2%E5%A4%B1%E7%9A%84%E6%95%B0%E5%AD%97%EF%BC%88%E7%AE%80%E5%8D%95%EF%BC%89/image_2.png">
+<meta property="og:image" content="http://example.com/2021/11/05/268.%20%E4%B8%A2%E5%A4%B1%E7%9A%84%E6%95%B0%E5%AD%97%EF%BC%88%E7%AE%80%E5%8D%95%EF%BC%89/image_3.png">
+<meta property="og:image" content="http://example.com/2021/11/05/268.%20%E4%B8%A2%E5%A4%B1%E7%9A%84%E6%95%B0%E5%AD%97%EF%BC%88%E7%AE%80%E5%8D%95%EF%BC%89/image_4.png">
 <meta property="article:published_time" content="2021-11-05T15:03:08.000Z">
-<meta property="article:modified_time" content="2022-05-13T01:31:23.089Z">
+<meta property="article:modified_time" content="2022-05-13T04:09:42.005Z">
 <meta property="article:author" content="宫水三叶">
 <meta property="article:tag" content="哈希表">
 <meta property="article:tag" content="模拟">
 <meta property="article:tag" content="数学">
 <meta property="article:tag" content="位运算">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://pic.leetcode-cn.com/1636127261-exHwxl-image.png">
+<meta name="twitter:image" content="http://example.com/2021/11/05/268.%20%E4%B8%A2%E5%A4%B1%E7%9A%84%E6%95%B0%E5%AD%97%EF%BC%88%E7%AE%80%E5%8D%95%EF%BC%89/image_0.png">
   
   
   <title>LC 268. 丢失的数字 - 宫水三叶的刷题日记</title>
@@ -270,7 +270,7 @@
 <p>进阶：你能否实现线性时间复杂度、仅使用额外常数空间的算法解决此问题?</p>
 <hr>
 <h3 id="系统排序"><a href="#系统排序" class="headerlink" title="系统排序"></a>系统排序</h3><p>一个简单的做法是直接对 $nums$ 进行排序，找到符合 $nums[i] \neq i$ 的位置即是答案，如果不存在 $nums[i] \neq i$ 的位置，则 $n$ 为答案。</p>
-<p><img src="https://pic.leetcode-cn.com/1636127261-exHwxl-image.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<p><img src="/2021/11/05/268.%20%E4%B8%A2%E5%A4%B1%E7%9A%84%E6%95%B0%E5%AD%97%EF%BC%88%E7%AE%80%E5%8D%95%EF%BC%89/image_0.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
 <p>代码；<br><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">missingNumber</span><span class="hljs-params">(<span class="hljs-type">int</span>[] nums)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> nums.length;<br>        Arrays.sort(nums);<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; n; i++) &#123;<br>            <span class="hljs-keyword">if</span> (nums[i] != i) <span class="hljs-keyword">return</span> i;<br>        &#125;<br>        <span class="hljs-keyword">return</span> n;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure></p>
 <ul>
 <li>时间复杂度：假定 <code>Arrays.sort</code> 使用的是双轴快排实现。复杂度为 $O(n\log{n})$</li>
@@ -278,7 +278,7 @@
 </ul>
 <hr>
 <h3 id="数组哈希"><a href="#数组哈希" class="headerlink" title="数组哈希"></a>数组哈希</h3><p>利用 $nums$ 的数值范围为 $[0,n]$，且只有一个值缺失，我们可以直接开一个大小为 $n + 1$ 的数组充当哈希表，进行计数，没被统计到的数值即是答案。</p>
-<p><img src="https://pic.leetcode-cn.com/1636127493-lMjpYi-image.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<p><img src="/2021/11/05/268.%20%E4%B8%A2%E5%A4%B1%E7%9A%84%E6%95%B0%E5%AD%97%EF%BC%88%E7%AE%80%E5%8D%95%EF%BC%89/image_1.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
 <p>代码：<br><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">missingNumber</span><span class="hljs-params">(<span class="hljs-type">int</span>[] nums)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> nums.length;<br>        <span class="hljs-type">boolean</span>[] hash = <span class="hljs-keyword">new</span> <span class="hljs-title class_">boolean</span>[n + <span class="hljs-number">1</span>];<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; n; i++) hash[nums[i]] = <span class="hljs-literal">true</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; n; i++) &#123;<br>            <span class="hljs-keyword">if</span> (!hash[i]) <span class="hljs-keyword">return</span> i;<br>        &#125;<br>        <span class="hljs-keyword">return</span> n;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure></p>
 <ul>
 <li>时间复杂度：$O(n)$</li>
@@ -286,7 +286,7 @@
 </ul>
 <hr>
 <h3 id="原地哈希"><a href="#原地哈希" class="headerlink" title="原地哈希"></a>原地哈希</h3><p>事实上，我们可以将 $nums$ 本身作为哈希表进行使用，将 $nums[i]$ 放到其应该出现的位置 $i$ 上（ $i &lt; n$ ），然后对 $nums$ 进行检查，找到满足 $nums[i] \neq i$ 的位置即是答案，如果不存在 $nums[i] \neq i$ 的位置，则 $n$ 为答案。</p>
-<p><img src="https://pic.leetcode-cn.com/1636127315-KjyCmt-image.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<p><img src="/2021/11/05/268.%20%E4%B8%A2%E5%A4%B1%E7%9A%84%E6%95%B0%E5%AD%97%EF%BC%88%E7%AE%80%E5%8D%95%EF%BC%89/image_2.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
 <p>代码：<br><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">missingNumber</span><span class="hljs-params">(<span class="hljs-type">int</span>[] nums)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> nums.length;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; n; i++) &#123;<br>            <span class="hljs-keyword">if</span> (nums[i] != i &amp;&amp; nums[i] &lt; n) swap(nums, nums[i], i--);<br>        &#125;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; n; i++) &#123;<br>            <span class="hljs-keyword">if</span> (nums[i] != i) <span class="hljs-keyword">return</span> i;<br>        &#125;<br>        <span class="hljs-keyword">return</span> n;<br>    &#125;<br>    <span class="hljs-keyword">void</span> <span class="hljs-title function_">swap</span><span class="hljs-params">(<span class="hljs-type">int</span>[] nums, <span class="hljs-type">int</span> i, <span class="hljs-type">int</span> j)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">c</span> <span class="hljs-operator">=</span> nums[i];<br>        nums[i] = nums[j];<br>        nums[j] = c;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure></p>
 <ul>
 <li>时间复杂度：$O(n)$</li>
@@ -294,7 +294,7 @@
 </ul>
 <hr>
 <h3 id="作差法"><a href="#作差法" class="headerlink" title="作差法"></a>作差法</h3><p>利用 $nums$ 的数值范围为 $[1, n]$，我们可以先计算出 $[1, n]$ 的总和 $sum$（利用等差数列求和公式），再计算 $nums$ 的总和 $cur$，两者之间的差值即是 $nums$ 中缺失的数字。</p>
-<p><img src="https://pic.leetcode-cn.com/1636127393-PzNAtL-image.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<p><img src="/2021/11/05/268.%20%E4%B8%A2%E5%A4%B1%E7%9A%84%E6%95%B0%E5%AD%97%EF%BC%88%E7%AE%80%E5%8D%95%EF%BC%89/image_3.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
 <p>代码：<br><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">missingNumber</span><span class="hljs-params">(<span class="hljs-type">int</span>[] nums)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> nums.length;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">cur</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>, sum = n * (n + <span class="hljs-number">1</span>) / <span class="hljs-number">2</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i : nums) cur += i;<br>        <span class="hljs-keyword">return</span> sum - cur;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure></p>
 <ul>
 <li>时间复杂度：$O(n)$</li>
@@ -304,7 +304,7 @@
 <h3 id="异或"><a href="#异或" class="headerlink" title="异或"></a>异或</h3><p>找缺失数、找出现一次数都是异或的经典应用。</p>
 <p>我们可以先求得 $[1, n]$ 的异或和 $ans$，然后用 $ans$ 对各个 $nums[i]$ 进行异或。</p>
 <p>这样最终得到的异或和表达式中，只有缺失元素出现次数为 $1$ 次，其余元素均出现两次（$x ⊕x = 0$），即最终答案 $ans$ 为缺失元素。</p>
-<p><img src="https://pic.leetcode-cn.com/1636127445-nSsgpq-image.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<p><img src="/2021/11/05/268.%20%E4%B8%A2%E5%A4%B1%E7%9A%84%E6%95%B0%E5%AD%97%EF%BC%88%E7%AE%80%E5%8D%95%EF%BC%89/image_4.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
 <p>代码：<br><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">missingNumber</span><span class="hljs-params">(<span class="hljs-type">int</span>[] nums)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> nums.length;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">ans</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt;= n; i++) ans ^= i;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i : nums) ans ^= i;<br>        <span class="hljs-keyword">return</span> ans;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure></p>
 <ul>
 <li>时间复杂度：$O(n)$</li>

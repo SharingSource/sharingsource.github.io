@@ -23,15 +23,15 @@
 <meta property="og:site_name" content="宫水三叶的刷题日记">
 <meta property="og:description" content="题目描述这是 LeetCode 上的 137. 只出现一次的数字 II ，难度为 中等。 给你一个整数数组 nums ，除某个元素仅出现 一次 外，其余每个元素都恰出现 三次 。请你找出并返回那个只出现了一次的元素。 示例 1：123输入：nums &#x3D; [2,2,3,2]输出：3示例 2：123输入：nums &#x3D; [0,1,0,1,0,1,99]输出：99 提示：  1 &lt;&#x3D; nums.le">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://pic.leetcode-cn.com/1619711233-IMBWOM-image.png">
-<meta property="og:image" content="https://pic.leetcode-cn.com/1619711751-eNDISi-image.png">
+<meta property="og:image" content="http://example.com/2021/04/30/137.%20%E5%8F%AA%E5%87%BA%E7%8E%B0%E4%B8%80%E6%AC%A1%E7%9A%84%E6%95%B0%E5%AD%97%20II%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/image_0.png">
+<meta property="og:image" content="http://example.com/2021/04/30/137.%20%E5%8F%AA%E5%87%BA%E7%8E%B0%E4%B8%80%E6%AC%A1%E7%9A%84%E6%95%B0%E5%AD%97%20II%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/image_1.png">
 <meta property="article:published_time" content="2021-04-29T17:33:50.000Z">
-<meta property="article:modified_time" content="2022-05-13T01:31:23.348Z">
+<meta property="article:modified_time" content="2022-05-13T04:10:40.436Z">
 <meta property="article:author" content="宫水三叶">
 <meta property="article:tag" content="哈希表">
 <meta property="article:tag" content="位运算">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://pic.leetcode-cn.com/1619711233-IMBWOM-image.png">
+<meta name="twitter:image" content="http://example.com/2021/04/30/137.%20%E5%8F%AA%E5%87%BA%E7%8E%B0%E4%B8%80%E6%AC%A1%E7%9A%84%E6%95%B0%E5%AD%97%20II%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/image_0.png">
   
   
   <title>LC 137. 只出现一次的数字 II - 宫水三叶的刷题日记</title>
@@ -286,9 +286,9 @@
 <hr>
 <h3 id="DFA"><a href="#DFA" class="headerlink" title="DFA"></a>DFA</h3><p>如果我们考虑「除了某个元素只出现一次以外，其余每个元素均出现两次」的情况，那么可以使用「异或」运算。</p>
 <p>利用相同数异或为 0 的性质，可以帮助我们很好实现状态切换：</p>
-<p><img src="https://pic.leetcode-cn.com/1619711233-IMBWOM-image.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<p><img src="/2021/04/30/137.%20%E5%8F%AA%E5%87%BA%E7%8E%B0%E4%B8%80%E6%AC%A1%E7%9A%84%E6%95%B0%E5%AD%97%20II%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/image_0.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
 <p>本题是考虑「除了某个元素只出现一次以外，其余每个元素均出现三次」的情况，那么对应了「出现 0 次」、「出现 1 次」和「出现 2 次」三种状态，意味着至少需要两位进行记录，且状态转换关系为：</p>
-<p><img src="https://pic.leetcode-cn.com/1619711751-eNDISi-image.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<p><img src="/2021/04/30/137.%20%E5%8F%AA%E5%87%BA%E7%8E%B0%E4%B8%80%E6%AC%A1%E7%9A%84%E6%95%B0%E5%AD%97%20II%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/image_1.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
 <p>那么如何将上述 DFA 用表达式表示出来呢？有以下几种方法：</p>
 <ol>
 <li><p>用「真值表」写出「逻辑函数表达式」可参考 <a target="_blank" rel="noopener" href="https://wenku.baidu.com/view/e9460ad96729647d27284b73f242336c1eb930f0.html">这里</a>，化简过程可以参考 <a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E5%8D%A1%E8%AF%BA%E5%9B%BE%E5%8C%96%E7%AE%80%E6%B3%95">卡诺图化简法</a> 。</p>

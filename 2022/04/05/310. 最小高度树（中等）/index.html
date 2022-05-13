@@ -23,18 +23,18 @@
 <meta property="og:site_name" content="宫水三叶的刷题日记">
 <meta property="og:description" content="题目描述这是 LeetCode 上的 310. 最小高度树 ，难度为 中等。 树是一个无向图，其中任何两个顶点只通过一条路径连接。 换句话说，一个任何没有简单环路的连通图都是一棵树。 给你一棵包含 $n$ 个节点的树，标记为 $0$ 到 $n - 1$ 。给定数字 $n$ 和一个有 $n - 1$ 条无向边的 edges 列表（每一个边都是一对标签），其中 $edges[i] &#x3D; [a_i, b_">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://assets.leetcode.com/uploads/2020/09/01/e1.jpg">
-<meta property="og:image" content="https://assets.leetcode.com/uploads/2020/09/01/e2.jpg">
-<meta property="og:image" content="https://pic.leetcode-cn.com/1649200815-gwBeVF-image.png">
-<meta property="og:image" content="https://pic.leetcode-cn.com/1649217558-PdfTqV-%E6%8B%BC%E6%8E%A5%E5%9B%BE.jpeg">
+<meta property="og:image" content="http://example.com/2022/04/05/310.%20%E6%9C%80%E5%B0%8F%E9%AB%98%E5%BA%A6%E6%A0%91%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/image_0.png">
+<meta property="og:image" content="http://example.com/2022/04/05/310.%20%E6%9C%80%E5%B0%8F%E9%AB%98%E5%BA%A6%E6%A0%91%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/image_1.png">
+<meta property="og:image" content="http://example.com/2022/04/05/310.%20%E6%9C%80%E5%B0%8F%E9%AB%98%E5%BA%A6%E6%A0%91%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/image_2.png">
+<meta property="og:image" content="http://example.com/2022/04/05/310.%20%E6%9C%80%E5%B0%8F%E9%AB%98%E5%BA%A6%E6%A0%91%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/image_3.png">
 <meta property="article:published_time" content="2022-04-05T15:07:31.000Z">
-<meta property="article:modified_time" content="2022-05-13T01:31:22.956Z">
+<meta property="article:modified_time" content="2022-05-13T04:08:56.323Z">
 <meta property="article:author" content="宫水三叶">
 <meta property="article:tag" content="动态规划">
 <meta property="article:tag" content="DFS">
 <meta property="article:tag" content="树形 DP">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://assets.leetcode.com/uploads/2020/09/01/e1.jpg">
+<meta name="twitter:image" content="http://example.com/2022/04/05/310.%20%E6%9C%80%E5%B0%8F%E9%AB%98%E5%BA%A6%E6%A0%91%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/image_0.png">
   
   
   <title>LC 310. 最小高度树 - 宫水三叶的刷题日记</title>
@@ -261,7 +261,7 @@
 <p>可选择树中任何一个节点作为根。当选择节点 $x$ 作为根节点时，设结果树的高度为 $h$ 。在所有可能的树中，具有最小高度的树（即，<code>min(h)</code>）被称为 最小高度树 。</p>
 <p>请你找到所有的 <strong>最小高度树</strong> 并按 <strong>任意顺序</strong> 返回它们的根节点标签列表。</p>
 <p>树的 <strong>高度</strong> 是指根节点和叶子节点之间最长向下路径上边的数量。</p>
-<p>示例 1：<br><img src="https://assets.leetcode.com/uploads/2020/09/01/e1.jpg" srcset="/img/loading.gif" lazyload alt=""><br><figure class="highlight inform7"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs inform7">输入：n = 4, edges = <span class="hljs-comment">[<span class="hljs-comment">[1,0]</span>,<span class="hljs-comment">[1,2]</span>,<span class="hljs-comment">[1,3]</span>]</span><br><br>输出：<span class="hljs-comment">[1]</span><br><br>解释：如图所示，当根是标签为 1 的节点时，树的高度是 1 ，这是唯一的最小高度树。<br></code></pre></div></td></tr></table></figure><br>示例 2：<br><img src="https://assets.leetcode.com/uploads/2020/09/01/e2.jpg" srcset="/img/loading.gif" lazyload alt=""><br><figure class="highlight inform7"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs inform7">输入：n = 6, edges = <span class="hljs-comment">[<span class="hljs-comment">[3,0]</span>,<span class="hljs-comment">[3,1]</span>,<span class="hljs-comment">[3,2]</span>,<span class="hljs-comment">[3,4]</span>,<span class="hljs-comment">[5,4]</span>]</span><br><br>输出：<span class="hljs-comment">[3,4]</span><br></code></pre></div></td></tr></table></figure></p>
+<p>示例 1：<br><img src="/2022/04/05/310.%20%E6%9C%80%E5%B0%8F%E9%AB%98%E5%BA%A6%E6%A0%91%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/image_0.png" srcset="/img/loading.gif" lazyload alt><br><figure class="highlight inform7"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs inform7">输入：n = 4, edges = <span class="hljs-comment">[<span class="hljs-comment">[1,0]</span>,<span class="hljs-comment">[1,2]</span>,<span class="hljs-comment">[1,3]</span>]</span><br><br>输出：<span class="hljs-comment">[1]</span><br><br>解释：如图所示，当根是标签为 1 的节点时，树的高度是 1 ，这是唯一的最小高度树。<br></code></pre></div></td></tr></table></figure><br>示例 2：<br><img src="/2022/04/05/310.%20%E6%9C%80%E5%B0%8F%E9%AB%98%E5%BA%A6%E6%A0%91%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/image_1.png" srcset="/img/loading.gif" lazyload alt><br><figure class="highlight inform7"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs inform7">输入：n = 6, edges = <span class="hljs-comment">[<span class="hljs-comment">[3,0]</span>,<span class="hljs-comment">[3,1]</span>,<span class="hljs-comment">[3,2]</span>,<span class="hljs-comment">[3,4]</span>,<span class="hljs-comment">[5,4]</span>]</span><br><br>输出：<span class="hljs-comment">[3,4]</span><br></code></pre></div></td></tr></table></figure></p>
 <p>提示：</p>
 <ul>
 <li>$1 &lt;= n &lt;= 2 * 10^4$</li>
@@ -276,7 +276,7 @@
 <p>当确定以某个点为根节点时，整棵树的形态唯一固定，不妨以编号为 $0$ 的节点作为根节点进行分析。</p>
 <p>假设当前处理到的节点为 <code>u</code>，其是从父节点 <code>fa</code> 遍历而来，且将要遍历的子节点为 <code>j</code>。</p>
 <p>即树的形态如图所示（一些可能有的出边用虚线表示）：</p>
-<p><img src="https://pic.leetcode-cn.com/1649200815-gwBeVF-image.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<p><img src="/2022/04/05/310.%20%E6%9C%80%E5%B0%8F%E9%AB%98%E5%BA%A6%E6%A0%91%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/image_2.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
 <p><strong>树形 DP 问题通常将问题根据「方向」进行划分</strong>。</p>
 <p>对于当前处理到的节点 <code>u</code> 而言，我们根据是否考虑「从 <code>fa</code> 到 <code>u</code> 的出边」将其分为「往上」和「往下」两个方向。</p>
 <p>假设我们可以通过 <code>DFS</code> 预处理出 $f$ 数组和 $g$ 数组，<strong>其中 $f[u]$ 代表在以 $0$ 号点为根节点的树中，以 <code>u</code> 节点为子树根节点时，往下的最大高度；$g[u]$ 代表在以 $0$ 号点为根节点的树中，以 <code>u</code> 节点为子节点时，往上的最大高度</strong>。那么最终以 <code>u</code> 为根节点的最大高度为 $\max(f[u], g[u])$。</p>
@@ -292,7 +292,7 @@
 <h3 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h3><p>似乎还是有同学不太理解，这里再补充说明一下好了。</p>
 <p>归根结底，以  <code>u</code> 为根节点的最大深度，必然是下面三种情况之一（往下、往上 和 往上再往下）。</p>
 <p>其中对 $f$ 数组的拆分（变为 $f1$ 和 $f2$）以及记录取得 $f1$ 对应的子节点 $p[i]$，目的都是为了能够正确统计「往上再往下」的情况（统计该情况时，不能考虑从 <code>fa</code> 经过 <code>u</code> 的路径，因此需要记录一个非严格的次大值 $f2$）。</p>
-<p><img src="https://pic.leetcode-cn.com/1649217558-PdfTqV-%E6%8B%BC%E6%8E%A5%E5%9B%BE.jpeg" srcset="/img/loading.gif" lazyload alt="拼接图.jpeg"></p>
+<p><img src="/2022/04/05/310.%20%E6%9C%80%E5%B0%8F%E9%AB%98%E5%BA%A6%E6%A0%91%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/image_3.png" srcset="/img/loading.gif" lazyload alt="拼接图.jpeg"></p>
 <hr>
 <h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>这是我们「刷穿 LeetCode」系列文章的第 <code>No.310</code> 篇，系列开始于 2021/01/01，截止于起始日 LeetCode 上共有 1916 道题目，部分是有锁题，我们将先把所有不带锁的题目刷完。</p>
 <p>在这个系列文章里面，除了讲解解题思路以外，还会尽可能给出最为简洁的代码。如果涉及通解还会相应的代码模板。</p>

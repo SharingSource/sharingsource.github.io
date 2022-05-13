@@ -23,16 +23,16 @@
 <meta property="og:site_name" content="宫水三叶的刷题日记">
 <meta property="og:description" content="题目描述这是 LeetCode 上的 1787. 使所有区间的异或结果为零 ，难度为 困难。 给你一个整数数组 nums 和一个整数 k 。区间 [left, right]&#96;&#96;（left &lt;&#x3D; right）的 异或结果 是对下标位于 left 和 right（包括 left 和 right ）之间所有元素进行 XOR 运算的结果：nums[left] XOR nums[left+1] XOR">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://pic.leetcode-cn.com/1621904944-ApPozf-image.png">
-<meta property="og:image" content="https://pic.leetcode-cn.com/1621907349-YZYOCA-image.png">
+<meta property="og:image" content="http://example.com/2021/05/25/1787.%20%E4%BD%BF%E6%89%80%E6%9C%89%E5%8C%BA%E9%97%B4%E7%9A%84%E5%BC%82%E6%88%96%E7%BB%93%E6%9E%9C%E4%B8%BA%E9%9B%B6%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/image_0.png">
+<meta property="og:image" content="http://example.com/2021/05/25/1787.%20%E4%BD%BF%E6%89%80%E6%9C%89%E5%8C%BA%E9%97%B4%E7%9A%84%E5%BC%82%E6%88%96%E7%BB%93%E6%9E%9C%E4%B8%BA%E9%9B%B6%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/image_1.png">
 <meta property="article:published_time" content="2021-05-24T18:20:55.000Z">
-<meta property="article:modified_time" content="2022-05-13T01:31:23.363Z">
+<meta property="article:modified_time" content="2022-05-13T04:10:44.231Z">
 <meta property="article:author" content="宫水三叶">
 <meta property="article:tag" content="数学">
 <meta property="article:tag" content="线性 DP">
 <meta property="article:tag" content="异或">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://pic.leetcode-cn.com/1621904944-ApPozf-image.png">
+<meta name="twitter:image" content="http://example.com/2021/05/25/1787.%20%E4%BD%BF%E6%89%80%E6%9C%89%E5%8C%BA%E9%97%B4%E7%9A%84%E5%BC%82%E6%88%96%E7%BB%93%E6%9E%9C%E4%B8%BA%E9%9B%B6%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/image_0.png">
   
   
   <title>LC 1787. 使所有区间的异或结果为零 - 宫水三叶的刷题日记</title>
@@ -276,9 +276,9 @@
 <p>即答案数组必然每 $k$ 个一组进行重复。</p>
 <p>也可以从滑动窗口的角度分析：窗口每滑动一格，会新增和删除一个值。对于异或而言，新增和删除都是对值本身做异或，因此新增值和删除值相等（保持窗口内异或值为 $0$）。</p>
 <p>因此我们将这个一维的输入看成二维，从而将问题转化为：<strong>使得最终每列相等，同时「首行」的异或值为 $0$ 的最小修改次数。</strong></p>
-<p><img src="https://pic.leetcode-cn.com/1621904944-ApPozf-image.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<p><img src="/2021/05/25/1787.%20%E4%BD%BF%E6%89%80%E6%9C%89%E5%8C%BA%E9%97%B4%E7%9A%84%E5%BC%82%E6%88%96%E7%BB%93%E6%9E%9C%E4%B8%BA%E9%9B%B6%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/image_0.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
 <p>当然 $n$ 和 $k$ 未必成倍数关系，这时候最后一行可能为不足 $k$ 个。这也是为什么上面没有说「每行异或结果为 $0$」，而是说「首行异或结果为 $0$」的原因：</p>
-<p><img src="https://pic.leetcode-cn.com/1621907349-YZYOCA-image.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<p><img src="/2021/05/25/1787.%20%E4%BD%BF%E6%89%80%E6%9C%89%E5%8C%BA%E9%97%B4%E7%9A%84%E5%BC%82%E6%88%96%E7%BB%93%E6%9E%9C%E4%B8%BA%E9%9B%B6%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/image_1.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
 <hr>
 <h3 id="动态规划"><a href="#动态规划" class="headerlink" title="动态规划"></a>动态规划</h3><p>定义 $f[i][xor]$ 为考虑前 $i$ 列，且首行前 $i$ 列异或值为 $xor$ 的最小修改次数，最终答案为 $f[k - 1][0]$。</p>
 <p>第一维的范围为 $[0, k)$，由输入参数给出；第二维为 $[0, 2^{10})$，根据题目给定的数据范围 <code>0 &lt;= nums[i] &lt; 2^10</code> 可得（异或为不进位加法，因此最大异或结果不会超过 $2^{10}$）。</p>

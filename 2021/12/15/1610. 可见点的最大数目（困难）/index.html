@@ -23,12 +23,12 @@
 <meta property="og:site_name" content="宫水三叶的刷题日记">
 <meta property="og:description" content="题目描述这是 LeetCode 上的 1610. 可见点的最大数目 ，难度为 困难。 给你一个点数组 points 和一个表示角度的整数 angle ，你的位置是 location，其中 $location &#x3D; [pos_x, pos_y]$ 且 $points[i] &#x3D; [x_i, y_i]$ 都表示 X-Y 平面上的整数坐标。 最开始，你面向东方进行观测。你 不能 进行移动改变位置，但可以通过">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2020/10/04/89a07e9b-00ab-4967-976a-c723b2aa8656.png">
-<meta property="og:image" content="https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2020/10/04/5010bfd3-86e6-465f-ac64-e9df941d2e49.png">
-<meta property="og:image" content="https://pic.leetcode-cn.com/1639611664-QjUKzI-image.png">
-<meta property="og:image" content="https://pic.leetcode-cn.com/1639611358-yyaoPb-image.png">
+<meta property="og:image" content="http://example.com/2021/12/15/1610.%20%E5%8F%AF%E8%A7%81%E7%82%B9%E7%9A%84%E6%9C%80%E5%A4%A7%E6%95%B0%E7%9B%AE%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/image_0.png">
+<meta property="og:image" content="http://example.com/2021/12/15/1610.%20%E5%8F%AF%E8%A7%81%E7%82%B9%E7%9A%84%E6%9C%80%E5%A4%A7%E6%95%B0%E7%9B%AE%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/image_1.png">
+<meta property="og:image" content="http://example.com/2021/12/15/1610.%20%E5%8F%AF%E8%A7%81%E7%82%B9%E7%9A%84%E6%9C%80%E5%A4%A7%E6%95%B0%E7%9B%AE%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/image_2.png">
+<meta property="og:image" content="http://example.com/2021/12/15/1610.%20%E5%8F%AF%E8%A7%81%E7%82%B9%E7%9A%84%E6%9C%80%E5%A4%A7%E6%95%B0%E7%9B%AE%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/image_3.png">
 <meta property="article:published_time" content="2021-12-15T15:42:27.000Z">
-<meta property="article:modified_time" content="2022-05-13T01:31:23.225Z">
+<meta property="article:modified_time" content="2022-05-13T04:10:08.420Z">
 <meta property="article:author" content="宫水三叶">
 <meta property="article:tag" content="双指针">
 <meta property="article:tag" content="滑动窗口">
@@ -36,7 +36,7 @@
 <meta property="article:tag" content="几何">
 <meta property="article:tag" content="排序">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2020/10/04/89a07e9b-00ab-4967-976a-c723b2aa8656.png">
+<meta name="twitter:image" content="http://example.com/2021/12/15/1610.%20%E5%8F%AF%E8%A7%81%E7%82%B9%E7%9A%84%E6%9C%80%E5%A4%A7%E6%95%B0%E7%9B%AE%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/image_0.png">
   
   
   <title>LC 1610. 可见点的最大数目 - 宫水三叶的刷题日记</title>
@@ -263,7 +263,7 @@
 <p>对于每个点，如果由该点、你的位置以及从你的位置直接向东的方向形成的角度 位于你的视野中 ，那么你就可以看到它。</p>
 <p>同一个坐标上可以有多个点。你所在的位置也可能存在一些点，但不管你的怎么旋转，总是可以看到这些点。同时，点不会阻碍你看到其他点。</p>
 <p>返回你能看到的点的最大数目。</p>
-<p>示例 1：<br><img src="https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2020/10/04/89a07e9b-00ab-4967-976a-c723b2aa8656.png" srcset="/img/loading.gif" lazyload alt=""><br><figure class="highlight inform7"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs inform7">输入：points = <span class="hljs-comment">[<span class="hljs-comment">[2,1]</span>,<span class="hljs-comment">[2,2]</span>,<span class="hljs-comment">[3,3]</span>]</span>, angle = 90, location = <span class="hljs-comment">[1,1]</span><br><br>输出：3<br><br>解释：阴影区域代表你的视野。在你的视野中，所有的点都清晰可见，尽管 <span class="hljs-comment">[2,2]</span> 和 <span class="hljs-comment">[3,3]</span>在同一条直线上，你仍然可以看到 <span class="hljs-comment">[3,3]</span> 。<br></code></pre></div></td></tr></table></figure><br>示例 2：<br><figure class="highlight inform7"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs inform7">输入：points = <span class="hljs-comment">[<span class="hljs-comment">[2,1]</span>,<span class="hljs-comment">[2,2]</span>,<span class="hljs-comment">[3,4]</span>,<span class="hljs-comment">[1,1]</span>]</span>, angle = 90, location = <span class="hljs-comment">[1,1]</span><br><br>输出：4<br><br>解释：在你的视野中，所有的点都清晰可见，包括你所在位置的那个点。<br></code></pre></div></td></tr></table></figure><br>示例 3：<br><img src="https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2020/10/04/5010bfd3-86e6-465f-ac64-e9df941d2e49.png" srcset="/img/loading.gif" lazyload alt=""><br><figure class="highlight lua"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs lua">输入：points = <span class="hljs-string">[[1,0],[2,1]]</span>, angle = <span class="hljs-number">13</span>, location = [<span class="hljs-number">1</span>,<span class="hljs-number">1</span>]<br><br>输出：<span class="hljs-number">1</span><br><br>解释：如图所示，你只能看到两点之一。<br></code></pre></div></td></tr></table></figure></p>
+<p>示例 1：<br><img src="/2021/12/15/1610.%20%E5%8F%AF%E8%A7%81%E7%82%B9%E7%9A%84%E6%9C%80%E5%A4%A7%E6%95%B0%E7%9B%AE%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/image_0.png" srcset="/img/loading.gif" lazyload alt><br><figure class="highlight inform7"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs inform7">输入：points = <span class="hljs-comment">[<span class="hljs-comment">[2,1]</span>,<span class="hljs-comment">[2,2]</span>,<span class="hljs-comment">[3,3]</span>]</span>, angle = 90, location = <span class="hljs-comment">[1,1]</span><br><br>输出：3<br><br>解释：阴影区域代表你的视野。在你的视野中，所有的点都清晰可见，尽管 <span class="hljs-comment">[2,2]</span> 和 <span class="hljs-comment">[3,3]</span>在同一条直线上，你仍然可以看到 <span class="hljs-comment">[3,3]</span> 。<br></code></pre></div></td></tr></table></figure><br>示例 2：<br><figure class="highlight inform7"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs inform7">输入：points = <span class="hljs-comment">[<span class="hljs-comment">[2,1]</span>,<span class="hljs-comment">[2,2]</span>,<span class="hljs-comment">[3,4]</span>,<span class="hljs-comment">[1,1]</span>]</span>, angle = 90, location = <span class="hljs-comment">[1,1]</span><br><br>输出：4<br><br>解释：在你的视野中，所有的点都清晰可见，包括你所在位置的那个点。<br></code></pre></div></td></tr></table></figure><br>示例 3：<br><img src="/2021/12/15/1610.%20%E5%8F%AF%E8%A7%81%E7%82%B9%E7%9A%84%E6%9C%80%E5%A4%A7%E6%95%B0%E7%9B%AE%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/image_1.png" srcset="/img/loading.gif" lazyload alt><br><figure class="highlight lua"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs lua">输入：points = <span class="hljs-string">[[1,0],[2,1]]</span>, angle = <span class="hljs-number">13</span>, location = [<span class="hljs-number">1</span>,<span class="hljs-number">1</span>]<br><br>输出：<span class="hljs-number">1</span><br><br>解释：如图所示，你只能看到两点之一。<br></code></pre></div></td></tr></table></figure></p>
 <p>提示：</p>
 <ul>
 <li>$1 &lt;= points.length &lt;= 10^5$</li>
@@ -276,7 +276,7 @@
 <h3 id="数学"><a href="#数学" class="headerlink" title="数学"></a>数学</h3><p>这是一道思维难度不大，但细节繁多的题目。</p>
 <p>题目要我们旋转出一个角度为 $angle$ 的、可无限延伸的覆盖面，使得该覆盖面所能覆盖 $points$ 中的点最多。</p>
 <p>我们所在的位置为 $location = (x,y)$，我们可以将 $(x,y)$ 作为「极点」，求所有 $points[i]$ 的「极角」。</p>
-<p><img src="https://pic.leetcode-cn.com/1639611664-QjUKzI-image.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<p><img src="/2021/12/15/1610.%20%E5%8F%AF%E8%A7%81%E7%82%B9%E7%9A%84%E6%9C%80%E5%A4%A7%E6%95%B0%E7%9B%AE%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/image_2.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
 <p>令 $points[i] =(a,b)$，与极点关系 $dx = a - x;dy = b - y$。</p>
 <p>求极角的方式有两种：</p>
 <ol>
@@ -287,7 +287,7 @@
 </ol>
 <p>得到夹角数组 $list$ 后，对其进行排序，问题初步转换为：在夹角数组中找到连续一段 $[i, j]$，使得 $list[i]$ 和 $list[j]$ 的角度差不超过 $angle$。</p>
 <p>但直接在原数组 $list$ 操作，会漏掉夹角横跨一四象限的情况：</p>
-<p><img src="https://pic.leetcode-cn.com/1639611358-yyaoPb-image.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<p><img src="/2021/12/15/1610.%20%E5%8F%AF%E8%A7%81%E7%82%B9%E7%9A%84%E6%9C%80%E5%A4%A7%E6%95%B0%E7%9B%AE%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/image_3.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
 <p>因此，另外一个细节是，在求连续段长度时，先对夹角数组进行拷贝拼接，并对拼接部分增加偏移量（确保数组仍具有单调性）。</p>
 <p>具体的，设夹角数组长度为 $n$，此时令 $list[n + i] = list[i] + 2 * PI$，从而将问题彻底转换为求连续段问题。</p>
 <p>求解最长合法连续段 $[i,j]$ 可用「双指针」实现「滑动窗口」来做。</p>
