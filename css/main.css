@@ -299,7 +299,7 @@ html {
 }
 html,
 body {
-  font-family: Monaco;
+  font-family: var(--font-family-sans-serif);
 }
 html,
 body,
@@ -893,7 +893,7 @@ label {
 .markdown-body {
   font-size: 1rem;
   line-height: 1.6;
-  font-family: Monaco;
+  font-family: var(--font-family-sans-serif);
   margin-bottom: 2rem;
   color: var(--post-text-color);
 }
