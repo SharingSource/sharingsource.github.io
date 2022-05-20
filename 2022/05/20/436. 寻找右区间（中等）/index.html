@@ -16,15 +16,15 @@
   <meta name="author" content="宫水三叶">
   <meta name="keywords" content="算法, 数据结构, 题解">
   
-    <meta name="description" content="题目描述这是 LeetCode 上的 436. 寻找右区间 ，难度为 简单。 给你一个区间数组 intervals ，其中 $intervals[i] &#x3D; [start_i, end_i]$，且每个 $start_i$ 都 不同 。 区间 $i$ 的 右侧区间 可以记作区间 $j$ ，并满足 $start_j &gt;&#x3D; end_i$ ，且 $start_j$ 最小化 。 返回一个由每个区间 $i">
+    <meta name="description" content="题目描述这是 LeetCode 上的 436. 寻找右区间 ，难度为 中等。 给你一个区间数组 intervals ，其中 $intervals[i] &#x3D; [start_i, end_i]$，且每个 $start_i$ 都 不同 。 区间 $i$ 的 右侧区间 可以记作区间 $j$ ，并满足 $start_j &gt;&#x3D; end_i$ ，且 $start_j$ 最小化 。 返回一个由每个区间 $i">
 <meta property="og:type" content="article">
 <meta property="og:title" content="LC 436. 寻找右区间">
 <meta property="og:url" content="https://sharingsource.github.io/2022/05/20/436.%20%E5%AF%BB%E6%89%BE%E5%8F%B3%E5%8C%BA%E9%97%B4%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/index.html">
 <meta property="og:site_name" content="宫水三叶的刷题日记">
-<meta property="og:description" content="题目描述这是 LeetCode 上的 436. 寻找右区间 ，难度为 简单。 给你一个区间数组 intervals ，其中 $intervals[i] &#x3D; [start_i, end_i]$，且每个 $start_i$ 都 不同 。 区间 $i$ 的 右侧区间 可以记作区间 $j$ ，并满足 $start_j &gt;&#x3D; end_i$ ，且 $start_j$ 最小化 。 返回一个由每个区间 $i">
+<meta property="og:description" content="题目描述这是 LeetCode 上的 436. 寻找右区间 ，难度为 中等。 给你一个区间数组 intervals ，其中 $intervals[i] &#x3D; [start_i, end_i]$，且每个 $start_i$ 都 不同 。 区间 $i$ 的 右侧区间 可以记作区间 $j$ ，并满足 $start_j &gt;&#x3D; end_i$ ，且 $start_j$ 最小化 。 返回一个由每个区间 $i">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-05-19T17:53:33.000Z">
-<meta property="article:modified_time" content="2022-05-20T02:42:11.577Z">
+<meta property="article:modified_time" content="2022-05-20T02:50:06.353Z">
 <meta property="article:author" content="宫水三叶">
 <meta property="article:tag" content="双指针">
 <meta property="article:tag" content="二分">
@@ -238,7 +238,7 @@
             <h1 style="display: none">LC 436. 寻找右区间</h1>
             
             <div class="markdown-body">
-              <h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>这是 LeetCode 上的 <strong><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/find-right-interval/solution/by-ac_oier-sijp/">436. 寻找右区间</a></strong> ，难度为 <strong>简单</strong>。</p>
+              <h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>这是 LeetCode 上的 <strong><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/find-right-interval/solution/by-ac_oier-sijp/">436. 寻找右区间</a></strong> ，难度为 <strong>中等</strong>。</p>
 <p>给你一个区间数组 <code>intervals</code> ，其中 $intervals[i] = [start_i, end_i]$，且每个 $start_i$ 都 不同 。</p>
 <p>区间 $i$ 的 右侧区间 可以记作区间 $j$ ，并满足 $start_j &gt;= end_i$ ，且 $start_j$ 最小化 。</p>
 <p>返回一个由每个区间 $i$ 的 右侧区间 的最小起始位置组成的数组。如果某个区间 $i$ 不存在对应的 右侧区间 ，则下标 $i$ 处的值设为 $-1$ 。</p>
