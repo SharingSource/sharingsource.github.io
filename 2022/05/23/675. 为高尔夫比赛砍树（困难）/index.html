@@ -27,7 +27,7 @@
 <meta property="og:image" content="https://sharingsource.github.io/2022/05/23/675.%20%E4%B8%BA%E9%AB%98%E5%B0%94%E5%A4%AB%E6%AF%94%E8%B5%9B%E7%A0%8D%E6%A0%91%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/image_1.png">
 <meta property="og:image" content="https://sharingsource.github.io/2022/05/23/675.%20%E4%B8%BA%E9%AB%98%E5%B0%94%E5%A4%AB%E6%AF%94%E8%B5%9B%E7%A0%8D%E6%A0%91%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/image_2.png">
 <meta property="article:published_time" content="2022-05-22T17:23:27.000Z">
-<meta property="article:modified_time" content="2022-05-23T04:01:34.462Z">
+<meta property="article:modified_time" content="2022-05-23T05:43:55.778Z">
 <meta property="article:author" content="宫水三叶">
 <meta property="article:tag" content="并查集">
 <meta property="article:tag" content="图论 BFS">
@@ -277,8 +277,8 @@
 <li>空间复杂度：$O(n \times m)$</li>
 </ul>
 <hr>
-<h3 id="AStar-算法"><a href="#AStar-算法" class="headerlink" title="AStar 算法"></a>AStar 算法</h3><p><strong>由于问题的本质是求最短路，同时原问题的边权为 $1$，因此套用其他复杂度比 <code>01 BFS</code> 高的最短路算法，对于本题而言是没有意义，但运用启发式搜索 AStar 算法来优化则是有意义。</strong></p>
-<p>因为在 <code>01 BFS</code> 过程中，我们会无差别往「四联通」方向进行搜索，直到找到「当前树点的下一个目标位置」为止，而实际上，两点之间的最短路径往往与两点之间的相对位置相关。</p>
+<h3 id="AStar-算法"><a href="#AStar-算法" class="headerlink" title="AStar 算法"></a>AStar 算法</h3><p><strong>由于问题的本质是求最短路，同时原问题的边权为 $1$，因此套用其他复杂度比 <code>BFS</code> 高的最短路算法，对于本题而言是没有意义，但运用启发式搜索 AStar 算法来优化则是有意义。</strong></p>
+<p>因为在 <code>BFS</code> 过程中，我们会无差别往「四联通」方向进行搜索，直到找到「当前树点的下一个目标位置」为止，而实际上，两点之间的最短路径往往与两点之间的相对位置相关。</p>
 <p>举个 🌰，当前我们在位置 $S$，我们目标位置是 $T$，而 $T$ 在 $S$ 的右下方，此时我们应当优先搜索方向”往右下方”的路径，当无法从”往右下方”的路径到达 $T$，我们再考虑搜索其他大方向的路径：</p>
 <p><img src="/2022/05/23/675.%20%E4%B8%BA%E9%AB%98%E5%B0%94%E5%A4%AB%E6%AF%94%E8%B5%9B%E7%A0%8D%E6%A0%91%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/image_2.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
 <p>如何设计这样带有优先级的搜索顺序，则是 AStar 算法「启发式函数」的设计过程，其本质是对应了对「最小步数」的估算，只有当我们确保「最小步数估算 &gt;= 实际最小步数」，AStar 算法的正确性才得以保证。</p>
