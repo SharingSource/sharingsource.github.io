@@ -16,22 +16,22 @@
   <meta name="author" content="宫水三叶">
   <meta name="keywords" content="算法, 数据结构, 题解">
   
-    <meta name="description" content="题目描述这是 LeetCode 上的 472. 连接词 ，难度为 困难。 给你一个 不含重复 单词的字符串数组 words ，请你找出并返回 words 中的所有 连接词 。 连接词 定义为：一个完全由给定数组中的至少两个较短单词组成的字符串。 示例 1：1234567输入：words &#x3D; [&quot;cat&quot;,&quot;cats&quot;,&quot;catsdogcats&amp;qu">
+    <meta name="description" content="题目描述这是 LeetCode 上的 829. 连续整数求和 ，难度为 困难。 给定一个正整数 $n$，返回 连续正整数满足所有数字之和为 $n$ 的组数 。  示例 1:12345输入: n &#x3D; 5输出: 2解释: 5 &#x3D; 2 + 3，共有两组连续整数([5],[2,3])求和后为 5。示例 2:12345输入: n &#x3D; 9输出: 3解释: 9 &#x3D; 4 + 5 &#x3D; 2 + 3 + 4示例 3:1">
 <meta property="og:type" content="article">
-<meta property="og:title" content="LC 472. 连接词">
-<meta property="og:url" content="https://sharingsource.github.io/2021/12/27/472.%20%E8%BF%9E%E6%8E%A5%E8%AF%8D%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/index.html">
+<meta property="og:title" content="LC 829. 连续整数求和">
+<meta property="og:url" content="https://sharingsource.github.io/2022/06/03/829.%20%E8%BF%9E%E7%BB%AD%E6%95%B4%E6%95%B0%E6%B1%82%E5%92%8C%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/index.html">
 <meta property="og:site_name" content="宫水三叶的刷题日记">
-<meta property="og:description" content="题目描述这是 LeetCode 上的 472. 连接词 ，难度为 困难。 给你一个 不含重复 单词的字符串数组 words ，请你找出并返回 words 中的所有 连接词 。 连接词 定义为：一个完全由给定数组中的至少两个较短单词组成的字符串。 示例 1：1234567输入：words &#x3D; [&quot;cat&quot;,&quot;cats&quot;,&quot;catsdogcats&amp;qu">
+<meta property="og:description" content="题目描述这是 LeetCode 上的 829. 连续整数求和 ，难度为 困难。 给定一个正整数 $n$，返回 连续正整数满足所有数字之和为 $n$ 的组数 。  示例 1:12345输入: n &#x3D; 5输出: 2解释: 5 &#x3D; 2 + 3，共有两组连续整数([5],[2,3])求和后为 5。示例 2:12345输入: n &#x3D; 9输出: 3解释: 9 &#x3D; 4 + 5 &#x3D; 2 + 3 + 4示例 3:1">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2021-12-27T15:43:29.000Z">
-<meta property="article:modified_time" content="2022-05-18T08:27:33.033Z">
+<meta property="article:published_time" content="2022-06-02T16:59:18.000Z">
+<meta property="article:modified_time" content="2022-06-03T02:04:06.664Z">
 <meta property="article:author" content="宫水三叶">
-<meta property="article:tag" content="字符串哈希">
-<meta property="article:tag" content="序列 DP">
+<meta property="article:tag" content="数学">
+<meta property="article:tag" content="数论">
 <meta name="twitter:card" content="summary_large_image">
   
   
-  <title>LC 472. 连接词 - 宫水三叶的刷题日记</title>
+  <title>LC 829. 连续整数求和 - 宫水三叶的刷题日记</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -176,12 +176,12 @@
 </nav>
 
     <div class="banner" id="banner" parallax=true
-         style="background: url('/img/image_162.jpg') no-repeat center center;
+         style="background: url('/img/image_51.jpeg') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="LC 472. 连接词">
+            <span class="h2" id="subtitle" title="LC 829. 连续整数求和">
               
             </span>
 
@@ -196,8 +196,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-12-27 23:43" pubdate>
-        2021年12月27日
+      <time datetime="2022-06-03 00:59" pubdate>
+        2022年6月3日
       </time>
     </span>
   
@@ -233,44 +233,34 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">LC 472. 连接词</h1>
+            <h1 style="display: none">LC 829. 连续整数求和</h1>
             
             <div class="markdown-body">
-              <h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>这是 LeetCode 上的 <strong><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/concatenated-words/solution/gong-shui-san-xie-xu-lie-dpzi-fu-chuan-h-p7no/">472. 连接词</a></strong> ，难度为 <strong>困难</strong>。</p>
-<p>给你一个 不含重复 单词的字符串数组 <code>words</code> ，请你找出并返回 <code>words</code> 中的所有 连接词 。</p>
-<p>连接词 定义为：一个完全由给定数组中的至少两个较短单词组成的字符串。</p>
-<p>示例 1：<br><figure class="highlight prolog"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs prolog">输入：words = [<span class="hljs-string">&quot;cat&quot;</span>,<span class="hljs-string">&quot;cats&quot;</span>,<span class="hljs-string">&quot;catsdogcats&quot;</span>,<span class="hljs-string">&quot;dog&quot;</span>,<span class="hljs-string">&quot;dogcatsdog&quot;</span>,<span class="hljs-string">&quot;hippopotamuses&quot;</span>,<span class="hljs-string">&quot;rat&quot;</span>,<span class="hljs-string">&quot;ratcatdogcat&quot;</span>]<br><br>输出：[<span class="hljs-string">&quot;catsdogcats&quot;</span>,<span class="hljs-string">&quot;dogcatsdog&quot;</span>,<span class="hljs-string">&quot;ratcatdogcat&quot;</span>]<br><br>解释：<span class="hljs-string">&quot;catsdogcats&quot;</span> 由 <span class="hljs-string">&quot;cats&quot;</span>, <span class="hljs-string">&quot;dog&quot;</span> 和 <span class="hljs-string">&quot;cats&quot;</span> 组成; <br>     <span class="hljs-string">&quot;dogcatsdog&quot;</span> 由 <span class="hljs-string">&quot;dog&quot;</span>, <span class="hljs-string">&quot;cats&quot;</span> 和 <span class="hljs-string">&quot;dog&quot;</span> 组成; <br>     <span class="hljs-string">&quot;ratcatdogcat&quot;</span> 由 <span class="hljs-string">&quot;rat&quot;</span>, <span class="hljs-string">&quot;cat&quot;</span>, <span class="hljs-string">&quot;dog&quot;</span> 和 <span class="hljs-string">&quot;cat&quot;</span> 组成。<br></code></pre></div></td></tr></table></figure><br>示例 2：<br><figure class="highlight prolog"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs prolog">输入：words = [<span class="hljs-string">&quot;cat&quot;</span>,<span class="hljs-string">&quot;dog&quot;</span>,<span class="hljs-string">&quot;catdog&quot;</span>]<br><br>输出：[<span class="hljs-string">&quot;catdog&quot;</span>]<br></code></pre></div></td></tr></table></figure></p>
-<p>提示：</p>
+              <h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>这是 LeetCode 上的 <strong><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/consecutive-numbers-sum/solution/by-ac_oier-220q/">829. 连续整数求和</a></strong> ，难度为 <strong>困难</strong>。</p>
+<p>给定一个正整数 $n$，返回 连续正整数满足所有数字之和为 $n$ 的组数 。 </p>
+<p>示例 1:<br><figure class="highlight makefile"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs makefile"><span class="hljs-section">输入: n = 5</span><br><br><span class="hljs-section">输出: 2</span><br><br><span class="hljs-section">解释: 5 = 2 + 3，共有两组连续整数([5],[2,3])求和后为 5。</span><br></code></pre></div></td></tr></table></figure><br>示例 2:<br><figure class="highlight tap"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs tap">输入: n = 9<br><br>输出: 3<br><br>解释:<span class="hljs-number"> 9 </span>=<span class="hljs-number"> 4 </span>+<span class="hljs-number"> 5 </span>=<span class="hljs-number"> 2 </span>+<span class="hljs-number"> 3 </span>+ 4<br></code></pre></div></td></tr></table></figure><br>示例 3:<br><figure class="highlight tap"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs tap">输入: n = 15<br><br>输出: 4<br><br>解释:<span class="hljs-number"> 15 </span>=<span class="hljs-number"> 8 </span>+<span class="hljs-number"> 7 </span>=<span class="hljs-number"> 4 </span>+<span class="hljs-number"> 5 </span>+<span class="hljs-number"> 6 </span>=<span class="hljs-number"> 1 </span>+<span class="hljs-number"> 2 </span>+<span class="hljs-number"> 3 </span>+<span class="hljs-number"> 4 </span>+ 5<br></code></pre></div></td></tr></table></figure></p>
+<p>提示:</p>
 <ul>
-<li>$1 &lt;= words.length &lt;= 10^4$</li>
-<li>$0 &lt;= words[i].length &lt;= 1000$</li>
-<li>$words[i]$ 仅由小写字母组成</li>
-<li>$0 &lt;= sum(words[i].length) &lt;= 10^5$</li>
+<li>$1 &lt;= n &lt;= 10^9$</li>
 </ul>
 <hr>
-<h3 id="序列-DP-字符串哈希"><a href="#序列-DP-字符串哈希" class="headerlink" title="序列 DP + 字符串哈希"></a>序列 DP + 字符串哈希</h3><p>给定数组 $words$，先考虑如何判断某个 $s = words[i]$ 是否为「连接词」。</p>
-<p>为了方便，我们称组成 <code>s</code> 的每个连接部分为 <code>item</code>。</p>
-<p>举个 🌰，例如 <code>s = abc</code>，其可能的 <code>item</code> 组合为 <code>a</code> 和 <code>bc</code>。</p>
-<p>判断单个字符串是否为连接词可使用动态规划求解：<strong>定义 $f[i]$ 为考虑 <code>s</code> 的前 $i$ 个字符（令下标从 $1$ 开始），能够切分出的最大 <code>item</code> 数的个数。</strong></p>
-<p>这里之所以采用「记录 $f[i]$ 为最大分割 <code>item</code> 数（<code>int</code> 类型动规数组）」，而不是「记录 $f[i]$ 为是否可由多个 <code>item</code> 组成（<code>bool</code> 类型动规数组）」，是因为每个 $s = words[i]$ 至少可由自身组成，采用 <code>bool</code> 记录状态的话，最终 $f[n]$ 必然为 <code>True</code>，需要额外处理最后一个状态，干脆记录最大分割数量好了。此时如果 <code>s</code> 为「连接词」必然有 $f[n] &gt; 1$。</p>
-<p>不失一般性的考虑 $f[i]$ 该如何转移：<strong>假设 $f[i]$ 可由 $f[j]$ 转移而来（其中 $j &lt; i$），那么能够转移的充要条件为 $f[j] != 0$ 且子串 $s[(j + 1)..i]$ 在 $words$ 出现过</strong>。</p>
-<p>其中枚举 $i$ 和 $j$ 的复杂度已经去到 $O(n^2)$ 了，如果常规通过 <code>HashMap</code> 等数据结构判断某个字符串是否存在，执行哈希函数时需要对字符进行遍历，整体复杂度去到了 $O(n^3)$，会 <code>TLE</code>。</p>
-<p><strong>我们通过「字符串哈希」方式来优化判断某个子串是否存在于 $words$ 中。</strong></p>
-<p>具体的，在判断每个 $s = words[i]$ 是否为为连接词前，先对 $words$ 进行遍历，预处理每个 $words[i]$ 的哈希值，并存入 <code>HashSet</code> 中，这样我们将「判断某个子串是否存在于 $words$」的问题转化为「判断某个数值是否存在于 <code>Set</code> 当中」。</p>
-<p>又由于 <strong>我们在计算某个子串 <code>s</code> 的哈希值时，是从前往后处理每一位的 $s[i]$，因此在转移 $f[i]$ 时，我们期望能够从前往后处理子串，这是常规的从 $[0, i - 1]$ 范围内找可转移点 $f[j]$ 无法做到的</strong>。</p>
-<p>所以 <strong>我们调整转移逻辑为：从 $f[i]$ 出发，枚举范围 $[i + 1, n]$，找到可由 $f[i]$ 所能更新的状态 $f[j]$，并尝试使用 $f[i]$ 来更新 $f[j]$。转移方程为：</strong></p>
+<h3 id="数论"><a href="#数论" class="headerlink" title="数论"></a>数论</h3><p>假设我们存在某个连续段之和为 $n$，假定该连续段首项为 $a$，长度为 $k$，根据「等差数列求和」可知：</p>
 <script type="math/tex; mode=display">
-f[j] = \max(f[j], f[i] + 1)</script><p>当然，能够转移的前提条件为 $f[i]$ 为有效值，且子串 $s[(i + 1), j]$ 在 $words$ 出现过。</p>
-<blockquote>
-<p>一些细节：为了方便，我们定义 $f[i] = -1$ 为无效状态；<br>另外由于字符串哈希会产生哈希碰撞，这里在计算哈希值的时候，修改了一下哈希计算方式（额外增加了一个 <code>OFFSET</code>），当时的目的是想在电脑没电前 <code>AC</code>，而另一个更加稳妥的方式是使用双哈希，或是干脆记录某个哈希值对应了哪些字符串。</p>
-</blockquote>
-<p>代码：<br><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    Set&lt;Long&gt; set = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashSet</span>&lt;&gt;();<br>    <span class="hljs-type">int</span> <span class="hljs-variable">P</span> <span class="hljs-operator">=</span> <span class="hljs-number">131</span>, OFFSET = <span class="hljs-number">128</span>;<br>    <span class="hljs-keyword">public</span> List&lt;String&gt; <span class="hljs-title function_">findAllConcatenatedWordsInADict</span><span class="hljs-params">(String[] words)</span> &#123;<br>        <span class="hljs-keyword">for</span> (String s : words) &#123;<br>            <span class="hljs-type">long</span> <span class="hljs-variable">hash</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">char</span> c : s.toCharArray()) hash = hash * P + (c - <span class="hljs-string">&#x27;a&#x27;</span>) + OFFSET;<br>            set.add(hash);<br>        &#125;<br>        List&lt;String&gt; ans = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();<br>        <span class="hljs-keyword">for</span> (String s : words) &#123;<br>            <span class="hljs-keyword">if</span> (check(s)) ans.add(s);<br>        &#125;<br>        <span class="hljs-keyword">return</span> ans;<br>    &#125;<br>    <span class="hljs-type">boolean</span> <span class="hljs-title function_">check</span><span class="hljs-params">(String s)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> s.length();<br>        <span class="hljs-type">int</span>[] f = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[n + <span class="hljs-number">1</span>];<br>        Arrays.fill(f, -<span class="hljs-number">1</span>);<br>        f[<span class="hljs-number">0</span>] = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt;= n; i++) &#123;<br>            <span class="hljs-keyword">if</span> (f[i] == -<span class="hljs-number">1</span>) <span class="hljs-keyword">continue</span>;<br>            <span class="hljs-type">long</span> <span class="hljs-variable">cur</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> i + <span class="hljs-number">1</span>; j &lt;= n; j++) &#123;<br>                cur = cur * P + (s.charAt(j - <span class="hljs-number">1</span>) - <span class="hljs-string">&#x27;a&#x27;</span>) + OFFSET;<br>                <span class="hljs-keyword">if</span> (set.contains(cur)) f[j] = Math.max(f[j], f[i] + <span class="hljs-number">1</span>);<br>            &#125;<br>            <span class="hljs-keyword">if</span> (f[n] &gt; <span class="hljs-number">1</span>) <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>        &#125;<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure></p>
+\frac{(a + a + k - 1) \times k}{2} = n</script><p>简单变形可得：</p>
+<script type="math/tex; mode=display">
+(2a + k - 1) \times k = 2n \Leftrightarrow 2a = \frac{2n}{k} - k + 1</script><p>根据首项 $a$ 和 $k$ 均为正整数，可得：</p>
+<script type="math/tex; mode=display">
+2a = \frac{2n}{k} - k + 1 \geq 2</script><p>进一步可得：</p>
+<script type="math/tex; mode=display">
+\frac{2n}{k} \geq k + 1 \Leftrightarrow \frac{2n}{k} > k</script><p>综上，根据 $(2a + k - 1) \times k = 2n$ 和 $\frac{2n}{k} &gt; k$ 可知，$k$ 必然是 $2n$ 的约数，并且为「较小」的约数。</p>
+<p>因此我们可以在 $[1, \sqrt{2n})$ 范围内枚举 $k$，如果 $k$ 为 $2n$ 约数，并且结合 $(2a + k - 1) \times k = 2n$ 可验证 $a$ 合法，说明找到了一组合法的 $(a, k)$，对答案进行累加。</p>
+<p>代码：<br><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">consecutiveNumbersSum</span><span class="hljs-params">(<span class="hljs-type">int</span> n)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">ans</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; n *= <span class="hljs-number">2</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">k</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>; k * k &lt; n; k++) &#123;<br>            <span class="hljs-keyword">if</span> (n % k != <span class="hljs-number">0</span>) <span class="hljs-keyword">continue</span>;<br>            <span class="hljs-keyword">if</span> ((n / k - (k - <span class="hljs-number">1</span>)) % <span class="hljs-number">2</span> == <span class="hljs-number">0</span>) ans++;<br>        &#125;<br>        <span class="hljs-keyword">return</span> ans;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure></p>
 <ul>
-<li>时间复杂度：令 $n$ 为 $words$ 数组长度，$N = \sum_{i = 0}^{n - 1}words[i].length$，根据数据范围 $N$ 最大为 $1e5$。预处理出 <code>Set</code> 的复杂度为 $O(N)$；会对所有 $words[i]$ 执行 <code>check</code> 操作，复杂度为 $O((words[i].length)^2)$，总的计算量最大值为 $O(N^2)$，由于存在剪枝，实际上达不到该计算量</li>
-<li>空间复杂度：$O(n + \max(words[i].length))$</li>
+<li>时间复杂度：$O(\sqrt{2n})$</li>
+<li>空间复杂度：$O(1)$</li>
 </ul>
 <hr>
-<h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>这是我们「刷穿 LeetCode」系列文章的第 <code>No.472</code> 篇，系列开始于 2021/01/01，截止于起始日 LeetCode 上共有 1916 道题目，部分是有锁题，我们将先把所有不带锁的题目刷完。</p>
+<h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>这是我们「刷穿 LeetCode」系列文章的第 <code>No.829</code> 篇，系列开始于 2021/01/01，截止于起始日 LeetCode 上共有 1916 道题目，部分是有锁题，我们将先把所有不带锁的题目刷完。</p>
 <p>在这个系列文章里面，除了讲解解题思路以外，还会尽可能给出最为简洁的代码。如果涉及通解还会相应的代码模板。</p>
 <p>为了方便各位同学能够电脑上进行调试和提交代码，我建立了相关的仓库：<a target="_blank" rel="noopener" href="https://github.com/SharingSource/LogicStack-LeetCode">https://github.com/SharingSource/LogicStack-LeetCode</a> 。</p>
 <p>在仓库地址里，你可以看到系列文章的题解链接、系列文章的相应代码、LeetCode 原题链接和其他优选题解。</p>
@@ -284,9 +274,9 @@ f[j] = \max(f[j], f[i] + 1)</script><p>当然，能够转移的前提条件为 $
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%93%88%E5%B8%8C/">字符串哈希</a>
+                      <a class="hover-with-bg" href="/tags/%E6%95%B0%E5%AD%A6/">数学</a>
                     
-                      <a class="hover-with-bg" href="/tags/%E5%BA%8F%E5%88%97-DP/">序列 DP</a>
+                      <a class="hover-with-bg" href="/tags/%E6%95%B0%E8%AE%BA/">数论</a>
                     
                   </div>
                 
@@ -303,18 +293,12 @@ f[j] = \max(f[j], f[i] + 1)</script><p>当然，能够转移的前提条件为 $
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2021/12/28/1995.%20%E7%BB%9F%E8%AE%A1%E7%89%B9%E6%AE%8A%E5%9B%9B%E5%85%83%E7%BB%84%EF%BC%88%E7%AE%80%E5%8D%95%EF%BC%89/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">LC 1995. 统计特殊四元组</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/12/26/825.%20%E9%80%82%E9%BE%84%E7%9A%84%E6%9C%8B%E5%8F%8B%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/">
-                        <span class="hidden-mobile">LC 825. 适龄的朋友</span>
+                      <a href="/2022/06/02/450.%20%E5%88%A0%E9%99%A4%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E4%B8%AD%E7%9A%84%E8%8A%82%E7%82%B9%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/">
+                        <span class="hidden-mobile">LC 450. 删除二叉搜索树中的节点</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
