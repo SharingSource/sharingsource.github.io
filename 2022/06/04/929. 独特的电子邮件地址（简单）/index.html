@@ -16,22 +16,21 @@
   <meta name="author" content="宫水三叶">
   <meta name="keywords" content="算法, 数据结构, 题解">
   
-    <meta name="description" content="题目描述这是 LeetCode 上的 1154. 一年中的第几天 ，难度为简单。 给你一个字符串 date，按 YYYY-MM-DD 格式表示一个 现行公元纪年法 日期。 请你计算并返回该日期是当年的第几天。 通常情况下，我们认为 1 月 1 日是每年的第 1 天，1 月 2 日是每年的第 2 天，依此类推。每个月的天数与现行公元纪年法（格里高利历）一致。 示例 1：123输入：date &#x3D; &amp;q">
+    <meta name="description" content="题目描述这是 LeetCode 上的 929. 独特的电子邮件地址 ，难度为 简单。 每个 有效电子邮件地址 都由一个 本地名 和一个 域名 组成，以 &#39;@&#39; 符号分隔。除小写字母之外，电子邮件地址还可以含有一个或多个 &#39;.&#39; 或 &#39;+&#39; 。  例如，在 alice@leetcode.com 中， alice 是 本地名 ，而 leetcode.co">
 <meta property="og:type" content="article">
-<meta property="og:title" content="LC 1155. 掷骰子的N种方法">
-<meta property="og:url" content="https://sharingsource.github.io/2021/07/13/1155.%20%E6%8E%B7%E9%AA%B0%E5%AD%90%E7%9A%84N%E7%A7%8D%E6%96%B9%E6%B3%95%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89%20copy/index.html">
+<meta property="og:title" content="LC 929. 独特的电子邮件地址">
+<meta property="og:url" content="https://sharingsource.github.io/2022/06/04/929.%20%E7%8B%AC%E7%89%B9%E7%9A%84%E7%94%B5%E5%AD%90%E9%82%AE%E4%BB%B6%E5%9C%B0%E5%9D%80%EF%BC%88%E7%AE%80%E5%8D%95%EF%BC%89/index.html">
 <meta property="og:site_name" content="宫水三叶的刷题日记">
-<meta property="og:description" content="题目描述这是 LeetCode 上的 1154. 一年中的第几天 ，难度为简单。 给你一个字符串 date，按 YYYY-MM-DD 格式表示一个 现行公元纪年法 日期。 请你计算并返回该日期是当年的第几天。 通常情况下，我们认为 1 月 1 日是每年的第 1 天，1 月 2 日是每年的第 2 天，依此类推。每个月的天数与现行公元纪年法（格里高利历）一致。 示例 1：123输入：date &#x3D; &amp;q">
+<meta property="og:description" content="题目描述这是 LeetCode 上的 929. 独特的电子邮件地址 ，难度为 简单。 每个 有效电子邮件地址 都由一个 本地名 和一个 域名 组成，以 &#39;@&#39; 符号分隔。除小写字母之外，电子邮件地址还可以含有一个或多个 &#39;.&#39; 或 &#39;+&#39; 。  例如，在 alice@leetcode.com 中， alice 是 本地名 ，而 leetcode.co">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2021-07-12T21:50:54.000Z">
-<meta property="article:modified_time" content="2022-05-18T08:26:14.183Z">
+<meta property="article:published_time" content="2022-06-03T17:17:03.000Z">
+<meta property="article:modified_time" content="2022-06-04T01:46:51.597Z">
 <meta property="article:author" content="宫水三叶">
 <meta property="article:tag" content="模拟">
-<meta property="article:tag" content="前缀和">
 <meta name="twitter:card" content="summary_large_image">
   
   
-  <title>LC 1155. 掷骰子的N种方法 - 宫水三叶的刷题日记</title>
+  <title>LC 929. 独特的电子邮件地址 - 宫水三叶的刷题日记</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -176,12 +175,12 @@
 </nav>
 
     <div class="banner" id="banner" parallax=true
-         style="background: url('/img/image_54.jpeg') no-repeat center center;
+         style="background: url('/img/image_181.jpg') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="LC 1155. 掷骰子的N种方法">
+            <span class="h2" id="subtitle" title="LC 929. 独特的电子邮件地址">
               
             </span>
 
@@ -196,8 +195,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-07-13 05:50" pubdate>
-        2021年7月13日
+      <time datetime="2022-06-04 01:17" pubdate>
+        2022年6月4日
       </time>
     </span>
   
@@ -233,33 +232,43 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">LC 1155. 掷骰子的N种方法</h1>
+            <h1 style="display: none">LC 929. 独特的电子邮件地址</h1>
             
             <div class="markdown-body">
-              <h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>这是 LeetCode 上的 <strong><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/day-of-the-year/solution/gong-shui-san-xie-jian-dan-qian-zhui-he-lwo2g/">1154. 一年中的第几天</a></strong> ，难度为<strong>简单</strong>。</p>
-<p>给你一个字符串 <code>date</code>，按 <code>YYYY-MM-DD</code> 格式表示一个 现行公元纪年法 日期。</p>
-<p>请你计算并返回该日期是当年的第几天。</p>
-<p>通常情况下，我们认为 <code>1</code> 月 <code>1</code> 日是每年的第 <code>1</code> 天，<code>1</code> 月 <code>2</code> 日是每年的第 <code>2</code> 天，依此类推。每个月的天数与现行公元纪年法（格里高利历）一致。</p>
-<p>示例 1：<br><figure class="highlight abnf"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs abnf">输入：date <span class="hljs-operator">=</span> <span class="hljs-string">&quot;2019-01-09&quot;</span><br><br>输出：<span class="hljs-number">9</span><br></code></pre></div></td></tr></table></figure><br>示例 2：<br><figure class="highlight abnf"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs abnf">输入：date <span class="hljs-operator">=</span> <span class="hljs-string">&quot;2019-02-10&quot;</span><br><br>输出：<span class="hljs-number">41</span><br></code></pre></div></td></tr></table></figure><br>示例 3：<br><figure class="highlight abnf"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs abnf">输入：date <span class="hljs-operator">=</span> <span class="hljs-string">&quot;2003-03-01&quot;</span><br><br>输出：<span class="hljs-number">60</span><br></code></pre></div></td></tr></table></figure><br>示例 4：<br><figure class="highlight abnf"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs abnf">输入：date <span class="hljs-operator">=</span> <span class="hljs-string">&quot;2004-03-01&quot;</span><br><br>输出：<span class="hljs-number">61</span><br></code></pre></div></td></tr></table></figure></p>
+              <h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>这是 LeetCode 上的 <strong><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/unique-email-addresses/solution/by-ac_oier-d3zu/">929. 独特的电子邮件地址</a></strong> ，难度为 <strong>简单</strong>。</p>
+<p>每个 有效电子邮件地址 都由一个 本地名 和一个 域名 组成，以 <code>&#39;@&#39;</code> 符号分隔。除小写字母之外，电子邮件地址还可以含有一个或多个 <code>&#39;.&#39;</code> 或 <code>&#39;+&#39;</code> 。</p>
+<ul>
+<li>例如，在 <code>alice@leetcode.com</code> 中， <code>alice</code> 是 本地名 ，而 <code>leetcode.com</code> 是域名 。</li>
+</ul>
+<p>如果在电子邮件地址的 本地名 部分中的某些字符之间添加句点（’<code>.&#39;</code>），则发往那里的邮件将会转发到本地名中没有点的同一地址。请注意，此规则 不适用于域名 。</p>
+<ul>
+<li>例如，<code>&quot;alice.z@leetcode.com”</code> 和 <code>“alicez@leetcode.com”</code> 会转发到同一电子邮件地址。</li>
+</ul>
+<p>如果在 本地名 中添加加号（<code>&#39;+&#39;</code>），则会忽略第一个加号后面的所有内容。这允许过滤某些电子邮件。同样，此规则 不适用于域名 。</p>
+<ul>
+<li>例如 <code>m.y+name@email.com</code> 将转发到 <code>my@email.com</code>。</li>
+</ul>
+<p>可以同时使用这两个规则。</p>
+<p>给你一个字符串数组 <code>emails</code>，我们会向每个 <code>emails[i]</code> 发送一封电子邮件。返回实际收到邮件的不同地址数目。</p>
+<p>示例 1：<br><figure class="highlight perl"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs perl">输入：emails = [<span class="hljs-string">&quot;test.email+alex@leetcode.com&quot;</span>,<span class="hljs-string">&quot;test.e.mail+bob.cathy@leetcode.com&quot;</span>,<span class="hljs-string">&quot;testemail+david@lee.tcode.com&quot;</span>]<br><br>输出：<span class="hljs-number">2</span><br><br>解释：实际收到邮件的是 <span class="hljs-string">&quot;testemail@leetcode.com&quot;</span> 和 <span class="hljs-string">&quot;testemail@lee.tcode.com&quot;</span>。<br></code></pre></div></td></tr></table></figure><br>示例 2：<br><figure class="highlight perl"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs perl">输入：emails = [<span class="hljs-string">&quot;a@leetcode.com&quot;</span>,<span class="hljs-string">&quot;b@leetcode.com&quot;</span>,<span class="hljs-string">&quot;c@leetcode.com&quot;</span>]<br><br>输出：<span class="hljs-number">3</span><br></code></pre></div></td></tr></table></figure></p>
 <p>提示：</p>
 <ul>
-<li><code>date.length == 10</code></li>
-<li><code>date[4] == date[7] == &#39;-&#39;</code>，其他的 <code>date[i]</code> 都是数字</li>
-<li><code>date</code> 表示的范围从 <code>1900</code> 年 <code>1</code> 月 <code>1</code> 日至 <code>2019</code> 年 <code>12</code> 月 <code>31</code> 日</li>
+<li>$1 &lt;= emails.length &lt;= 100$</li>
+<li>$1 &lt;= emails[i].length &lt;= 100$</li>
+<li><code>emails[i]</code> 由小写英文字母、<code>&#39;+&#39;</code>、<code>&#39;.&#39;</code> 和 <code>&#39;@&#39;</code> 组成</li>
+<li>每个 <code>emails[i]</code> 都包含有且仅有一个 <code>&#39;@&#39;</code> 字符</li>
+<li>所有本地名和域名都不为空</li>
+<li>本地名不会以 <code>&#39;+&#39;</code> 字符作为开头</li>
 </ul>
 <hr>
-<h3 id="模拟"><a href="#模拟" class="headerlink" title="模拟"></a>模拟</h3><p>根据题意进行模拟即可。</p>
-<p>由于每年月份的天数都相对固定（仅有闰年 $2$ 月份不同），因此我们可以使用 <code>static</code> 进行打表预处理。</p>
-<p>使用 <code>nums</code> 构建一个平年的月份数组，再通过「前缀和」得到平年的每个月的天数总和。</p>
-<p>最后将 <code>date</code> 按照 <code>-</code> 分割为年月日，分别进行计数。</p>
-<p>注意，当年份为闰年且当前月份超过了 $2$ 月份，要追加一天。</p>
-<p>代码：<br><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">static</span> <span class="hljs-type">int</span>[] nums = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[]&#123;<span class="hljs-number">31</span>, <span class="hljs-number">28</span>, <span class="hljs-number">31</span>, <span class="hljs-number">30</span>, <span class="hljs-number">31</span>, <span class="hljs-number">30</span>, <span class="hljs-number">31</span>, <span class="hljs-number">31</span>, <span class="hljs-number">30</span>, <span class="hljs-number">31</span>, <span class="hljs-number">30</span>, <span class="hljs-number">31</span>&#125;;<br>    <span class="hljs-keyword">static</span> <span class="hljs-type">int</span>[] f = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[<span class="hljs-number">13</span>];<br>    <span class="hljs-keyword">static</span> &#123;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>; i &lt;= <span class="hljs-number">12</span>; i++) f[i] = f[i - <span class="hljs-number">1</span>] + nums[i - <span class="hljs-number">1</span>];<br>    &#125;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">dayOfYear</span><span class="hljs-params">(String date)</span> &#123;<br>        String[] ss = date.split(<span class="hljs-string">&quot;-&quot;</span>);<br>        <span class="hljs-type">int</span> <span class="hljs-variable">y</span> <span class="hljs-operator">=</span> Integer.parseInt(ss[<span class="hljs-number">0</span>]), m = Integer.parseInt(ss[<span class="hljs-number">1</span>]), d = Integer.parseInt(ss[<span class="hljs-number">2</span>]);<br>        <span class="hljs-type">boolean</span> <span class="hljs-variable">isLeap</span> <span class="hljs-operator">=</span> (y % <span class="hljs-number">4</span> == <span class="hljs-number">0</span> &amp;&amp; y % <span class="hljs-number">100</span> != <span class="hljs-number">0</span>) || y % <span class="hljs-number">400</span> == <span class="hljs-number">0</span>;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">ans</span> <span class="hljs-operator">=</span> m &gt; <span class="hljs-number">2</span> &amp;&amp; isLeap ? f[m - <span class="hljs-number">1</span>] + <span class="hljs-number">1</span> : f[m - <span class="hljs-number">1</span>];<br>        <span class="hljs-keyword">return</span> ans + d;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure></p>
+<h3 id="模拟"><a href="#模拟" class="headerlink" title="模拟"></a>模拟</h3><p>根据题意进行模拟。</p>
+<p>代码：<br><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">numUniqueEmails</span><span class="hljs-params">(String[] emails)</span> &#123;<br>        Set&lt;String&gt; set = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashSet</span>&lt;&gt;();<br>        <span class="hljs-keyword">for</span> (String s : emails) &#123;<br>            <span class="hljs-type">StringBuilder</span> <span class="hljs-variable">sb</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">StringBuilder</span>();<br>            <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> s.length(), i = <span class="hljs-number">0</span>;<br>            <span class="hljs-type">boolean</span> <span class="hljs-variable">ok</span> <span class="hljs-operator">=</span> <span class="hljs-literal">true</span>;<br>            <span class="hljs-keyword">while</span> (i &lt; n) &#123;<br>                <span class="hljs-type">char</span> <span class="hljs-variable">c</span> <span class="hljs-operator">=</span> s.charAt(i);<br>                <span class="hljs-keyword">if</span> (c == <span class="hljs-string">&#x27;@&#x27;</span>) <span class="hljs-keyword">break</span>;<br>                <span class="hljs-keyword">if</span> (c == <span class="hljs-string">&#x27;.&#x27;</span> &amp;&amp; ++i &gt;= <span class="hljs-number">0</span>) <span class="hljs-keyword">continue</span>;<br>                <span class="hljs-keyword">if</span> (c == <span class="hljs-string">&#x27;+&#x27;</span>) ok = <span class="hljs-literal">false</span>;<br>                <span class="hljs-keyword">if</span> (ok) sb.append(c);<br>                i++;<br>            &#125;<br>            set.add(sb.append(s.substring(i)).toString());<br>        &#125;<br>        <span class="hljs-keyword">return</span> set.size();<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure></p>
 <ul>
-<li>时间复杂度：$O(1)$</li>
-<li>空间复杂度：$O(1)$</li>
+<li>时间复杂度：$O(\sum_{i = 0}^{n - 1} len(emails[i]))$</li>
+<li>空间复杂度：$O(\sum_{i = 0}^{n - 1} len(emails[i]))$</li>
 </ul>
 <hr>
-<h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>这是我们「刷穿 LeetCode」系列文章的第 <code>No.1154</code> 篇，系列开始于 2021/01/01，截止于起始日 LeetCode 上共有 1916 道题目，部分是有锁题，我们将先把所有不带锁的题目刷完。</p>
+<h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>这是我们「刷穿 LeetCode」系列文章的第 <code>No.929</code> 篇，系列开始于 2021/01/01，截止于起始日 LeetCode 上共有 1916 道题目，部分是有锁题，我们将先把所有不带锁的题目刷完。</p>
 <p>在这个系列文章里面，除了讲解解题思路以外，还会尽可能给出最为简洁的代码。如果涉及通解还会相应的代码模板。</p>
 <p>为了方便各位同学能够电脑上进行调试和提交代码，我建立了相关的仓库：<a target="_blank" rel="noopener" href="https://github.com/SharingSource/LogicStack-LeetCode">https://github.com/SharingSource/LogicStack-LeetCode</a> 。</p>
 <p>在仓库地址里，你可以看到系列文章的题解链接、系列文章的相应代码、LeetCode 原题链接和其他优选题解。</p>
@@ -274,8 +283,6 @@
                     <i class="iconfont icon-tags"></i>
                     
                       <a class="hover-with-bg" href="/tags/%E6%A8%A1%E6%8B%9F/">模拟</a>
-                    
-                      <a class="hover-with-bg" href="/tags/%E5%89%8D%E7%BC%80%E5%92%8C/">前缀和</a>
                     
                   </div>
                 
@@ -292,18 +299,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2021/07/13/1155.%20%E6%8E%B7%E9%AA%B0%E5%AD%90%E7%9A%84N%E7%A7%8D%E6%96%B9%E6%B3%95%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">LC 1155. 掷骰子的N种方法</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/07/13/218.%20%E5%A4%A9%E9%99%85%E7%BA%BF%E9%97%AE%E9%A2%98%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/">
-                        <span class="hidden-mobile">LC 218. 天际线问题</span>
+                      <a href="/2022/06/03/238.%20%E9%99%A4%E8%87%AA%E8%BA%AB%E4%BB%A5%E5%A4%96%E6%95%B0%E7%BB%84%E7%9A%84%E4%B9%98%E7%A7%AF%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/">
+                        <span class="hidden-mobile">LC 238. 除自身以外数组的乘积</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
