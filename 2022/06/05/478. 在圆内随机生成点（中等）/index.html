@@ -16,23 +16,22 @@
   <meta name="author" content="宫水三叶">
   <meta name="keywords" content="算法, 数据结构, 题解">
   
-    <meta name="description" content="题目描述这是 LeetCode 上的 233. 数字 1 的个数 ，难度为 困难。 给定一个整数 $n$，计算所有小于等于 $n$ 的非负整数中数字 $1$ 出现的个数。 示例 1：123输入：n &#x3D; 13输出：6示例 2：123输入：n &#x3D; 0输出：0 提示：  0 &lt;&#x3D; n &lt;&#x3D; $2 * 10^9$   基本分析这是一道经典的「数位 DP」模板题的简化版，原题在 这里 。 这几天">
+    <meta name="description" content="题目描述这是 LeetCode 上的 478. 在圆内随机生成点 ，难度为 中等。 给定圆的半径和圆心的位置，实现函数 randPoint，在圆中产生均匀随机点。 实现 Solution 类:  Solution(double radius, double x_center, double y_center) 用圆的半径 radius 和圆心的位置 $(x_center, y_center)$ 初">
 <meta property="og:type" content="article">
-<meta property="og:title" content="LC 233. 数字 1 的个数">
-<meta property="og:url" content="https://sharingsource.github.io/2021/08/13/233.%20%E6%95%B0%E5%AD%97%201%20%E7%9A%84%E4%B8%AA%E6%95%B0%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/index.html">
+<meta property="og:title" content="LC 478. 在圆内随机生成点">
+<meta property="og:url" content="https://sharingsource.github.io/2022/06/05/478.%20%E5%9C%A8%E5%9C%86%E5%86%85%E9%9A%8F%E6%9C%BA%E7%94%9F%E6%88%90%E7%82%B9%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/index.html">
 <meta property="og:site_name" content="宫水三叶的刷题日记">
-<meta property="og:description" content="题目描述这是 LeetCode 上的 233. 数字 1 的个数 ，难度为 困难。 给定一个整数 $n$，计算所有小于等于 $n$ 的非负整数中数字 $1$ 出现的个数。 示例 1：123输入：n &#x3D; 13输出：6示例 2：123输入：n &#x3D; 0输出：0 提示：  0 &lt;&#x3D; n &lt;&#x3D; $2 * 10^9$   基本分析这是一道经典的「数位 DP」模板题的简化版，原题在 这里 。 这几天">
+<meta property="og:description" content="题目描述这是 LeetCode 上的 478. 在圆内随机生成点 ，难度为 中等。 给定圆的半径和圆心的位置，实现函数 randPoint，在圆中产生均匀随机点。 实现 Solution 类:  Solution(double radius, double x_center, double y_center) 用圆的半径 radius 和圆心的位置 $(x_center, y_center)$ 初">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2021-08-12T19:04:53.000Z">
-<meta property="article:modified_time" content="2022-05-18T08:28:54.977Z">
+<meta property="article:published_time" content="2022-06-04T18:01:51.000Z">
+<meta property="article:modified_time" content="2022-06-05T04:23:04.905Z">
 <meta property="article:author" content="宫水三叶">
-<meta property="article:tag" content="动态规划">
-<meta property="article:tag" content="模拟">
-<meta property="article:tag" content="数位 DP">
+<meta property="article:tag" content="数学">
+<meta property="article:tag" content="随机化">
 <meta name="twitter:card" content="summary_large_image">
   
   
-  <title>LC 233. 数字 1 的个数 - 宫水三叶的刷题日记</title>
+  <title>LC 478. 在圆内随机生成点 - 宫水三叶的刷题日记</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -177,12 +176,12 @@
 </nav>
 
     <div class="banner" id="banner" parallax=true
-         style="background: url('/img/image_216.jpg') no-repeat center center;
+         style="background: url('/img/image_177.jpg') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="LC 233. 数字 1 的个数">
+            <span class="h2" id="subtitle" title="LC 478. 在圆内随机生成点">
               
             </span>
 
@@ -197,8 +196,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-08-13 03:04" pubdate>
-        2021年8月13日
+      <time datetime="2022-06-05 02:01" pubdate>
+        2022年6月5日
       </time>
     </span>
   
@@ -234,45 +233,36 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">LC 233. 数字 1 的个数</h1>
+            <h1 style="display: none">LC 478. 在圆内随机生成点</h1>
             
             <div class="markdown-body">
-              <h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>这是 LeetCode 上的 <strong><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/number-of-digit-one/solution/gong-shui-san-xie-jiang-shu-wei-dp-wen-t-c9oi/">233. 数字 1 的个数</a></strong> ，难度为 <strong>困难</strong>。</p>
-<p>给定一个整数 $n$，计算所有小于等于 $n$ 的非负整数中数字 $1$ 出现的个数。</p>
-<p>示例 1：<br><figure class="highlight abnf"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs abnf">输入：n <span class="hljs-operator">=</span> <span class="hljs-number">13</span><br><br>输出：<span class="hljs-number">6</span><br></code></pre></div></td></tr></table></figure><br>示例 2：<br><figure class="highlight abnf"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs abnf">输入：n <span class="hljs-operator">=</span> <span class="hljs-number">0</span><br><br>输出：<span class="hljs-number">0</span><br></code></pre></div></td></tr></table></figure></p>
+              <h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>这是 LeetCode 上的 <strong><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/generate-random-point-in-a-circle/solution/by-ac_oier-btkm/">478. 在圆内随机生成点</a></strong> ，难度为 <strong>中等</strong>。</p>
+<p>给定圆的半径和圆心的位置，实现函数 <code>randPoint</code>，在圆中产生均匀随机点。</p>
+<p>实现 <code>Solution</code> 类:</p>
+<ul>
+<li><code>Solution(double radius, double x_center, double y_center)</code> 用圆的半径 <code>radius</code> 和圆心的位置 $(x_center, y_center)$ 初始化对象</li>
+<li><code>randPoint()</code> 返回圆内的一个随机点。圆周上的一点被认为在圆内。答案作为数组返回 $[x, y]$ 。</li>
+</ul>
+<p>示例 1：<br><figure class="highlight prolog"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs prolog">输入: <br>[<span class="hljs-string">&quot;Solution&quot;</span>,<span class="hljs-string">&quot;randPoint&quot;</span>,<span class="hljs-string">&quot;randPoint&quot;</span>,<span class="hljs-string">&quot;randPoint&quot;</span>]<br>[[<span class="hljs-number">1.0</span>, <span class="hljs-number">0.0</span>, <span class="hljs-number">0.0</span>], [], [], []]<br>输出: [null, [<span class="hljs-number">-0.02493</span>, <span class="hljs-number">-0.38077</span>], [<span class="hljs-number">0.82314</span>, <span class="hljs-number">0.38945</span>], [<span class="hljs-number">0.36572</span>, <span class="hljs-number">0.17248</span>]]<br><br>解释:<br><span class="hljs-symbol">Solution</span> solution = new <span class="hljs-symbol">Solution</span>(<span class="hljs-number">1.0</span>, <span class="hljs-number">0.0</span>, <span class="hljs-number">0.0</span>);<br>solution.randPoint ();//返回[<span class="hljs-number">-0.02493</span>，<span class="hljs-number">-0.38077</span>]<br>solution.randPoint ();//返回[<span class="hljs-number">0.82314</span>,<span class="hljs-number">0.38945</span>]<br>solution.randPoint ();//返回[<span class="hljs-number">0.36572</span>,<span class="hljs-number">0.17248</span><br></code></pre></div></td></tr></table></figure></p>
 <p>提示：</p>
 <ul>
-<li>0 &lt;= n &lt;= $2 * 10^9$</li>
+<li>$0 &lt; radius &lt;= 10^8$</li>
+<li>$-10^7 &lt;= x_center, y_center &lt;= 10^7$</li>
+<li><code>randPoint</code> 最多被调用 $3 \times 10^4$ 次</li>
 </ul>
 <hr>
-<h3 id="基本分析"><a href="#基本分析" class="headerlink" title="基本分析"></a>基本分析</h3><p>这是一道经典的「数位 DP」模板题的简化版，原题在 <a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P1980">这里</a> 。</p>
-<p>这几天每日一题出得挺好，「序列 DP」、「区间 DP」、「数位 DP」轮着来 🤣</p>
-<p>但由于本题只需求 $1$ 出现的次数，而不需要求解 $0$ 到 $9$ 的出现次数，同时意味着不需要考虑统计 $0$ 次数时的前导零边界问题。</p>
-<p>因此，也可以不当作数位 DP 题来做，只当作一道计数类模拟题来求解。</p>
-<hr>
-<h3 id="计数类模拟"><a href="#计数类模拟" class="headerlink" title="计数类模拟"></a>计数类模拟</h3><p>回到本题，我们需要计算 $[1, n]$ 范围内所有数中 $1$ 出现的次数。</p>
-<p>我们可以统计 $1$ 在每一位出现的次数，将其累加起来即是答案。</p>
-<p>举个 🌰，对于一个长度为 $m$ 的数字 $n$，我们可以计算其在「个位（从右起第 $1$ 位）」、「十位（第 $2$ 位）」、「百位（第 $3$ 位）」和「第 $m$ 位」中 $1$ 出现的次数。</p>
-<p>假设有 $n = abcde$，即 $m = 5$，假设我们需要统计第 $3$ 位中 $1$ 出现的次数，即可统计满足 $—1—$ 形式，同时满足 $1 &lt;= —1— &lt;= abcde$ 要求的数有多少个，我们称 $1 &lt;= —1— &lt;= abcde$ 关系为「大小要求」。</p>
-<p>我们只需对 $c$ 前后出现的值进行分情况讨论：</p>
+<h3 id="等概率随机采样"><a href="#等概率随机采样" class="headerlink" title="等概率随机采样"></a>等概率随机采样</h3><p>为了方便，我们称圆心为 $(x, y)$，半径为 $r$。</p>
+<p>对给定圆内的点进行等概率随机采样，容易想到随机化两个信息：一个是距离圆心的距离 <code>len</code>（在范围 $[0, r]$ 中进行随机），另外一个是夹角 <code>ang</code>（在范围 $[0, 2\pi]$ 中随机，随便找个参考线即可，例如以往 $x$ 轴正方向的射线为参考）。</p>
+<p>然后根据 <code>len</code> 和 <code>ang</code> 直接计算对应的点的坐标，这样 <strong>可以确保随机出来的点一定在圆内，但并非「等概率」。</strong></p>
+<p>在不考虑夹角的情况下，我们本质是在 $[0, r]$ 范围内随机，这在「一维」上「等概率」是成立的，因为满足「任意连续段中点被抽到的次数与总次数的比例」与「该连续段长度与总长度的比例」。</p>
+<p>但在圆中并非如此，不考虑夹角时，「任意连续段 <code>len</code> 与总长度 <code>r</code> 的比例」和「<code>len</code> 对应面积与总面积比例」并不相等。例如 <code>len</code> 有 $\frac{1}{2}$ 的概率取到小于等于 $\frac{r}{2}$ 的值，而半径为 $\frac{r}{2}$ 扫过的面积仅为总面积的 $\frac{1}{4}$，因此我们的 <code>len</code> 不能直接在 $[0, r]$ 范围内随机，为了消除这种一维转圆导致的「等概率」失效，我们可以从 $[0, r^2]$ 内随机再开平方，从而确保距离与面积比例一致。</p>
+<p>代码：<br><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-type">double</span> r, x, y;<br>    <span class="hljs-type">Random</span> <span class="hljs-variable">random</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Random</span>();<br>    <span class="hljs-keyword">public</span> <span class="hljs-title function_">Solution</span><span class="hljs-params">(<span class="hljs-type">double</span> _r, <span class="hljs-type">double</span> _x, <span class="hljs-type">double</span> _y)</span> &#123;<br>        r = _r; x = _x; y = _y;<br>    &#125;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">double</span>[] randPoint() &#123;<br>        <span class="hljs-type">double</span> <span class="hljs-variable">len</span> <span class="hljs-operator">=</span> Math.sqrt(random.nextDouble(r * r)), ang = random.nextDouble(<span class="hljs-number">2</span> * Math.PI);<br>        <span class="hljs-type">double</span> <span class="hljs-variable">nx</span> <span class="hljs-operator">=</span> x + len * Math.cos(ang), ny = y + len * Math.sin(ang);<br>        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">double</span>[]&#123;nx, ny&#125;;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure></p>
 <ul>
-<li>当 $c$ 前面的部分 $&lt; ab$，即范围为 $[0, ab)$，此时必然满足「大小要求」，因此后面的部分可以任意取，即范围为 $[0, 99]$。根据「乘法原理」，可得知此时数量为 $ab * 100$；</li>
-<li>当 $c$ 前面的部分 $= ab$，这时候「大小关系」主要取决于 $c$：<ul>
-<li>当 $c = 0$，必然不满足「大小要求」，数量为 $0$；</li>
-<li>当 $c = 1$，此时「大小关系」取决于后部分，后面的取值范围为 $[0, de]$，数量为 $1 * (de + 1)$；</li>
-<li>当 $c &gt; 1$，必然满足「大小关系」，后面的部分可以任意取，即范围为 $[0, 99]$，数量为 $1 * 100$；</li>
-</ul>
-</li>
-<li>当 $c$ 前面的部分 $&gt; ab$，必然不满足「大小要求」，数量为 $0$。</li>
-</ul>
-<p>其他数位的分析同理。</p>
-<p>代码：<br><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">countDigitOne</span><span class="hljs-params">(<span class="hljs-type">int</span> n)</span> &#123;<br>        <span class="hljs-type">String</span> <span class="hljs-variable">s</span> <span class="hljs-operator">=</span> String.valueOf(n);<br>        <span class="hljs-type">int</span> <span class="hljs-variable">m</span> <span class="hljs-operator">=</span> s.length();<br>        <span class="hljs-keyword">if</span> (m == <span class="hljs-number">1</span>) <span class="hljs-keyword">return</span> n &gt; <span class="hljs-number">0</span> ? <span class="hljs-number">1</span> : <span class="hljs-number">0</span>;<br>        <span class="hljs-comment">// 计算第 i 位前缀代表的数值，和后缀代表的数值</span><br>        <span class="hljs-comment">// 例如 abcde 则有 ps[2] = ab; ss[2] = de</span><br>        <span class="hljs-type">int</span>[] ps = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[m], ss = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[m];<br>        ss[<span class="hljs-number">0</span>] = Integer.parseInt(s.substring(<span class="hljs-number">1</span>));<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>; i &lt; m - <span class="hljs-number">1</span>; i++) &#123;<br>            ps[i] = Integer.parseInt(s.substring(<span class="hljs-number">0</span>, i));<br>            ss[i] = Integer.parseInt(s.substring(i + <span class="hljs-number">1</span>));<br>        &#125;<br>        ps[m - <span class="hljs-number">1</span>] = Integer.parseInt(s.substring(<span class="hljs-number">0</span>, m - <span class="hljs-number">1</span>));<br>        <span class="hljs-comment">// 分情况讨论</span><br>        <span class="hljs-type">int</span> <span class="hljs-variable">ans</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; m; i++) &#123;<br>            <span class="hljs-comment">// x 为当前位数值，len 为当前位后面长度为多少</span><br>            <span class="hljs-type">int</span> <span class="hljs-variable">x</span> <span class="hljs-operator">=</span> s.charAt(i) - <span class="hljs-string">&#x27;0&#x27;</span>, len = m - i - <span class="hljs-number">1</span>;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">prefix</span> <span class="hljs-operator">=</span> ps[i], suffix = ss[i];<br>            <span class="hljs-type">int</span> <span class="hljs-variable">tot</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>            tot += prefix * Math.pow(<span class="hljs-number">10</span>, len);<br>            <span class="hljs-keyword">if</span> (x == <span class="hljs-number">0</span>) &#123;<br>            &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (x == <span class="hljs-number">1</span>) &#123;<br>                tot += suffix + <span class="hljs-number">1</span>;<br>            &#125; <span class="hljs-keyword">else</span> &#123;<br>                tot += Math.pow(<span class="hljs-number">10</span>, len);<br>            &#125;<br>            ans += tot;<br>        &#125;<br>        <span class="hljs-keyword">return</span> ans;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure></p>
-<ul>
-<li>时间复杂度：$O(m)$</li>
-<li>空间复杂度：$O(m)$</li>
+<li>时间复杂度：$O(1)$</li>
+<li>空间复杂度：$O(1)$</li>
 </ul>
 <hr>
-<h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>这是我们「刷穿 LeetCode」系列文章的第 <code>No.233</code> 篇，系列开始于 2021/01/01，截止于起始日 LeetCode 上共有 1916 道题目，部分是有锁题，我们将先把所有不带锁的题目刷完。</p>
+<h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>这是我们「刷穿 LeetCode」系列文章的第 <code>No.478</code> 篇，系列开始于 2021/01/01，截止于起始日 LeetCode 上共有 1916 道题目，部分是有锁题，我们将先把所有不带锁的题目刷完。</p>
 <p>在这个系列文章里面，除了讲解解题思路以外，还会尽可能给出最为简洁的代码。如果涉及通解还会相应的代码模板。</p>
 <p>为了方便各位同学能够电脑上进行调试和提交代码，我建立了相关的仓库：<a target="_blank" rel="noopener" href="https://github.com/SharingSource/LogicStack-LeetCode">https://github.com/SharingSource/LogicStack-LeetCode</a> 。</p>
 <p>在仓库地址里，你可以看到系列文章的题解链接、系列文章的相应代码、LeetCode 原题链接和其他优选题解。</p>
@@ -286,11 +276,9 @@
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/">动态规划</a>
+                      <a class="hover-with-bg" href="/tags/%E6%95%B0%E5%AD%A6/">数学</a>
                     
-                      <a class="hover-with-bg" href="/tags/%E6%A8%A1%E6%8B%9F/">模拟</a>
-                    
-                      <a class="hover-with-bg" href="/tags/%E6%95%B0%E4%BD%8D-DP/">数位 DP</a>
+                      <a class="hover-with-bg" href="/tags/%E9%9A%8F%E6%9C%BA%E5%8C%96/">随机化</a>
                     
                   </div>
                 
@@ -307,18 +295,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2021/08/14/1583.%20%E7%BB%9F%E8%AE%A1%E4%B8%8D%E5%BC%80%E5%BF%83%E7%9A%84%E6%9C%8B%E5%8F%8B%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">LC 1583. 统计不开心的朋友</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/08/12/516.%20%E6%9C%80%E9%95%BF%E5%9B%9E%E6%96%87%E5%AD%90%E5%BA%8F%E5%88%97%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/">
-                        <span class="hidden-mobile">LC 516. 最长回文子序列</span>
+                      <a href="/2022/06/04/929.%20%E7%8B%AC%E7%89%B9%E7%9A%84%E7%94%B5%E5%AD%90%E9%82%AE%E4%BB%B6%E5%9C%B0%E5%9D%80%EF%BC%88%E7%AE%80%E5%8D%95%EF%BC%89/">
+                        <span class="hidden-mobile">LC 929. 独特的电子邮件地址</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
