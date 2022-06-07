@@ -16,22 +16,21 @@
   <meta name="author" content="宫水三叶">
   <meta name="keywords" content="算法, 数据结构, 题解">
   
-    <meta name="description" content="题目描述这是 LeetCode 上的 553. 最优除法 ，难度为 中等。 给定一组正整数，相邻的整数之间将会进行浮点除法操作。例如， [2,3,4] -&gt; 2 &#x2F; 3 &#x2F; 4 。 但是，你可以在任意位置添加任意数目的括号，来改变算数的优先级。你需要找出怎么添加括号，才能得到最大的结果，并且返回相应的字符串格式的表达式。你的表达式不应该含有冗余的括号。 示例：1234567891011121">
+    <meta name="description" content="题目描述这是 LeetCode 上的 875. 爱吃香蕉的珂珂 ，难度为 中等。 珂珂喜欢吃香蕉。这里有 n 堆香蕉，第 i 堆中有 piles[i] 根香蕉。警卫已经离开了，将在 h 小时后回来。 珂珂可以决定她吃香蕉的速度 k （单位：根&#x2F;小时）。每个小时，她将会选择一堆香蕉，从中吃掉 k 根。如果这堆香蕉少于 k 根，她将吃掉这堆的所有香蕉，然后这一小时内不会再吃更多的香蕉。   珂珂喜欢慢">
 <meta property="og:type" content="article">
-<meta property="og:title" content="LC 553. 最优除法">
-<meta property="og:url" content="https://sharingsource.github.io/2022/02/26/553.%20%E6%9C%80%E4%BC%98%E9%99%A4%E6%B3%95%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/index.html">
+<meta property="og:title" content="LC 875. 爱吃香蕉的珂珂">
+<meta property="og:url" content="https://sharingsource.github.io/2022/06/07/875.%20%E7%88%B1%E5%90%83%E9%A6%99%E8%95%89%E7%9A%84%E7%8F%82%E7%8F%82%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/index.html">
 <meta property="og:site_name" content="宫水三叶的刷题日记">
-<meta property="og:description" content="题目描述这是 LeetCode 上的 553. 最优除法 ，难度为 中等。 给定一组正整数，相邻的整数之间将会进行浮点除法操作。例如， [2,3,4] -&gt; 2 &#x2F; 3 &#x2F; 4 。 但是，你可以在任意位置添加任意数目的括号，来改变算数的优先级。你需要找出怎么添加括号，才能得到最大的结果，并且返回相应的字符串格式的表达式。你的表达式不应该含有冗余的括号。 示例：1234567891011121">
+<meta property="og:description" content="题目描述这是 LeetCode 上的 875. 爱吃香蕉的珂珂 ，难度为 中等。 珂珂喜欢吃香蕉。这里有 n 堆香蕉，第 i 堆中有 piles[i] 根香蕉。警卫已经离开了，将在 h 小时后回来。 珂珂可以决定她吃香蕉的速度 k （单位：根&#x2F;小时）。每个小时，她将会选择一堆香蕉，从中吃掉 k 根。如果这堆香蕉少于 k 根，她将吃掉这堆的所有香蕉，然后这一小时内不会再吃更多的香蕉。   珂珂喜欢慢">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2022-02-26T15:31:42.000Z">
-<meta property="article:modified_time" content="2022-05-18T08:27:03.677Z">
+<meta property="article:published_time" content="2022-06-06T16:51:01.000Z">
+<meta property="article:modified_time" content="2022-06-07T02:38:56.334Z">
 <meta property="article:author" content="宫水三叶">
-<meta property="article:tag" content="数学">
-<meta property="article:tag" content="贪心">
+<meta property="article:tag" content="二分">
 <meta name="twitter:card" content="summary_large_image">
   
   
-  <title>LC 553. 最优除法 - 宫水三叶的刷题日记</title>
+  <title>LC 875. 爱吃香蕉的珂珂 - 宫水三叶的刷题日记</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -176,12 +175,12 @@
 </nav>
 
     <div class="banner" id="banner" parallax=true
-         style="background: url('/img/image_177.jpg') no-repeat center center;
+         style="background: url('/img/image_186.jpg') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="LC 553. 最优除法">
+            <span class="h2" id="subtitle" title="LC 875. 爱吃香蕉的珂珂">
               
             </span>
 
@@ -196,8 +195,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2022-02-26 23:31" pubdate>
-        2022年2月26日
+      <time datetime="2022-06-07 00:51" pubdate>
+        2022年6月7日
       </time>
     </span>
   
@@ -233,32 +232,37 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">LC 553. 最优除法</h1>
+            <h1 style="display: none">LC 875. 爱吃香蕉的珂珂</h1>
             
             <div class="markdown-body">
-              <h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>这是 LeetCode 上的 <strong><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/optimal-division/solution/gong-shui-san-xie-shu-xue-lei-tan-xin-yu-61sq/">553. 最优除法</a></strong> ，难度为 <strong>中等</strong>。</p>
-<p>给定一组正整数，相邻的整数之间将会进行浮点除法操作。例如， [2,3,4] -&gt; 2 / 3 / 4 。</p>
-<p>但是，你可以在任意位置添加任意数目的括号，来改变算数的优先级。你需要找出怎么添加括号，才能得到最大的结果，并且返回相应的字符串格式的表达式。你的表达式不应该含有冗余的括号。</p>
-<p>示例：<br><figure class="highlight awk"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs awk">输入: [<span class="hljs-number">1000</span>,<span class="hljs-number">100</span>,<span class="hljs-number">10</span>,<span class="hljs-number">2</span>]<br><br>输出: <span class="hljs-string">&quot;1000/(100/10/2)&quot;</span><br><br>解释:<br><span class="hljs-number">1000</span><span class="hljs-regexp">/(100/</span><span class="hljs-number">10</span><span class="hljs-regexp">/2) = 1000/</span>((<span class="hljs-number">100</span><span class="hljs-regexp">/10)/</span><span class="hljs-number">2</span>) = <span class="hljs-number">200</span><br>但是，以下加粗的括号 <span class="hljs-string">&quot;1000/((100/10)/2)&quot;</span> 是冗余的，<br>因为他们并不影响操作的优先级，所以你需要返回 <span class="hljs-string">&quot;1000/(100/10/2)&quot;</span>。<br><br>其他用例:<br><span class="hljs-number">1000</span><span class="hljs-regexp">/(100/</span><span class="hljs-number">10</span>)/<span class="hljs-number">2</span> = <span class="hljs-number">50</span><br><span class="hljs-number">1000</span><span class="hljs-regexp">/(100/</span>(<span class="hljs-number">10</span>/<span class="hljs-number">2</span>)) = <span class="hljs-number">50</span><br><span class="hljs-number">1000</span><span class="hljs-regexp">/100/</span><span class="hljs-number">10</span>/<span class="hljs-number">2</span> = <span class="hljs-number">0.5</span><br><span class="hljs-number">1000</span><span class="hljs-regexp">/100/</span>(<span class="hljs-number">10</span>/<span class="hljs-number">2</span>) = <span class="hljs-number">2</span><br></code></pre></div></td></tr></table></figure><br>说明:</p>
+              <h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>这是 LeetCode 上的 <strong><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/koko-eating-bananas/solution/by-ac_oier-4z7i/">875. 爱吃香蕉的珂珂</a></strong> ，难度为 <strong>中等</strong>。</p>
+<p>珂珂喜欢吃香蕉。这里有 <code>n</code> 堆香蕉，第 <code>i</code> 堆中有 <code>piles[i]</code> 根香蕉。警卫已经离开了，将在 <code>h</code> 小时后回来。</p>
+<p>珂珂可以决定她吃香蕉的速度 <code>k</code> （单位：根/小时）。每个小时，她将会选择一堆香蕉，从中吃掉 <code>k</code> 根。如果这堆香蕉少于 <code>k</code> 根，她将吃掉这堆的所有香蕉，然后这一小时内不会再吃更多的香蕉。  </p>
+<p>珂珂喜欢慢慢吃，但仍然想在警卫回来前吃掉所有的香蕉。</p>
+<p>返回她可以在 <code>h</code> 小时内吃掉所有香蕉的最小速度 <code>k</code>（<code>k</code> 为整数）。</p>
+<p>示例 1：<br><figure class="highlight dns"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs dns">输入：piles = [<span class="hljs-number">3,6,7,11</span>], h = <span class="hljs-number">8</span><br><br>输出：<span class="hljs-number">4</span><br></code></pre></div></td></tr></table></figure><br>示例 2：<br><figure class="highlight accesslog"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs accesslog">输入：piles = <span class="hljs-string">[30,11,23,4,20]</span>, h = <span class="hljs-number">5</span><br><br>输出：<span class="hljs-number">30</span><br></code></pre></div></td></tr></table></figure><br>示例 3：<br><figure class="highlight accesslog"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs accesslog">输入：piles = <span class="hljs-string">[30,11,23,4,20]</span>, h = <span class="hljs-number">6</span><br><br>输出：<span class="hljs-number">23</span><br></code></pre></div></td></tr></table></figure></p>
+<p>提示：</p>
 <ul>
-<li>输入数组的长度在 $[1, 10]$ 之间。</li>
-<li>数组中每个元素的大小都在 $[2, 1000]$ 之间。</li>
-<li>每个测试用例只有一个最优除法解。</li>
+<li>$1 &lt;= piles.length &lt;= 10^4$</li>
+<li>$piles.length &lt;= h &lt;= 10^9$</li>
+<li>$1 &lt;= piles[i] &lt;= 10^9$</li>
 </ul>
 <hr>
-<h3 id="数学-贪心"><a href="#数学-贪心" class="headerlink" title="数学 + 贪心"></a>数学 + 贪心</h3><p>我们假定取得最优解的表示为 $\frac{a}{b}$，可以留意到任意的 $nums[i]$ 的范围为 $[2, 1000]$，因此我们应当让尽可能多的 $nums[i]$ 参与 $a$（分子）的构建中。</p>
-<p>因此一种可以构成最优表示的方式为「将除第一位以外的所有数作为一组，进行连除（转乘法），从而将所有 <strong>可以</strong> 变成分子的数都参与到 $a$ 的构建中」。</p>
-<p>即有：</p>
-<script type="math/tex; mode=display">
-\frac{nums[0]}{nums[1] / nums[2] / ... / nums[n - 1]} = \frac{nums[0]}{nums[1] * \frac{1}{nums[2]} * ... * \frac{1}{nums[n - 1]}} = \frac{nums[0] * nums[2] * ... * nums[n - 1]}{nums[1]}</script><p>综上，我们只需要从前往后进行构建出连除的答案，如果 $nums$ 的长度大于 $2$，再追加一对大括号即可。</p>
-<p>$[a_0, a_1, … , a_n]$ =&gt; $a_0/a_1/…/a_n$ =&gt; $a_0/(a_1/…/a_n)$</p>
-<p>代码：<br><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> String <span class="hljs-title function_">optimalDivision</span><span class="hljs-params">(<span class="hljs-type">int</span>[] nums)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> nums.length;<br>        <span class="hljs-type">StringBuilder</span> <span class="hljs-variable">sb</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">StringBuilder</span>();<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; n; i++) &#123;<br>            sb.append(nums[i]);<br>            <span class="hljs-keyword">if</span> (i + <span class="hljs-number">1</span> &lt; n) sb.append(<span class="hljs-string">&quot;/&quot;</span>);<br>        &#125;<br>        <span class="hljs-keyword">if</span> (n &gt; <span class="hljs-number">2</span>) &#123;<br>            sb.insert(sb.indexOf(<span class="hljs-string">&quot;/&quot;</span>) + <span class="hljs-number">1</span>, <span class="hljs-string">&quot;(&quot;</span>);<br>            sb.append(<span class="hljs-string">&quot;)&quot;</span>);<br>        &#125;<br>        <span class="hljs-keyword">return</span> sb.toString();<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure></p>
+<h3 id="二分"><a href="#二分" class="headerlink" title="二分"></a>二分</h3><p>由于存在「吃完这堆的所有香蕉，然后这一小时内不会再吃更多的香蕉」的条件，因此不会存在多堆香蕉共用一个小时的情况，即每堆香蕉都是相互独立，同时可以明确每堆香蕉的耗时为 $\left \lceil \frac{piles[i]}{k} \right \rceil$（其中 $k$ 为速度）。</p>
+<p>因此我们可以二分 $k$ 值，在以 $k$ 为分割点的数组上具有「二段性」：</p>
 <ul>
-<li>时间复杂度：$O(n)$</li>
-<li>空间复杂度：$O(n * C)$，其中 $C$ 为 $nums[i]$ 的最大长度，对于本题 $C = 4$</li>
+<li>小于 $k$ 的值，总耗时 $ans$ 必然不满足 $ans \leq h$</li>
+<li>大于等于 $k$ 的值，总耗时 $ans$ 必然满足 $ans \leq h$</li>
+</ul>
+<p>然后我们需要确定二分的范围，每堆香蕉至少消耗一个小时，因此大于 $\max(piles[i])$ 的速度值 $k$ 是没有意义的（与 $k = \max(piles[i])$ 等价），因此我们可以先对 <code>piles</code> 进行一次遍历，找最大值，再二分；也可以直接利用数据范围 $1 &lt;= piles[i] &lt;= 10^9$ 确定一个粗略边界进行二分。</p>
+<p>最后的 <code>check</code> 函数，只需要计算当前速率 $k$ 所对应的总耗时 $ans$，再与 $h$ 做比较即可。</p>
+<p>代码：<br><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">minEatingSpeed</span><span class="hljs-params">(<span class="hljs-type">int</span>[] piles, <span class="hljs-type">int</span> h)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">l</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>, r = (<span class="hljs-type">int</span>)<span class="hljs-number">1e9</span>;<br>        <span class="hljs-keyword">while</span> (l &lt; r) &#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">mid</span> <span class="hljs-operator">=</span> l + r &gt;&gt; <span class="hljs-number">1</span>;<br>            <span class="hljs-keyword">if</span> (check(piles, mid, h)) r = mid;<br>            <span class="hljs-keyword">else</span> l = mid + <span class="hljs-number">1</span>;<br>        &#125;<br>        <span class="hljs-keyword">return</span> r;<br>    &#125;<br>    <span class="hljs-type">boolean</span> <span class="hljs-title function_">check</span><span class="hljs-params">(<span class="hljs-type">int</span>[] p, <span class="hljs-type">int</span> k, <span class="hljs-type">int</span> h)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">ans</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> x : p) ans += Math.ceil(x * <span class="hljs-number">1.0</span> / k);<br>        <span class="hljs-keyword">return</span> ans &lt;= h;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure></p>
+<ul>
+<li>时间复杂度：令 $n$ 数组长度，$m = 1e9$ 为最大的 $piles[i]$，复杂度为 $O(n\log{m})$</li>
+<li>空间复杂度：$O(1)$</li>
 </ul>
 <hr>
-<h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>这是我们「刷穿 LeetCode」系列文章的第 <code>No.553</code> 篇，系列开始于 2021/01/01，截止于起始日 LeetCode 上共有 1916 道题目，部分是有锁题，我们将先把所有不带锁的题目刷完。</p>
+<h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>这是我们「刷穿 LeetCode」系列文章的第 <code>No.875</code> 篇，系列开始于 2021/01/01，截止于起始日 LeetCode 上共有 1916 道题目，部分是有锁题，我们将先把所有不带锁的题目刷完。</p>
 <p>在这个系列文章里面，除了讲解解题思路以外，还会尽可能给出最为简洁的代码。如果涉及通解还会相应的代码模板。</p>
 <p>为了方便各位同学能够电脑上进行调试和提交代码，我建立了相关的仓库：<a target="_blank" rel="noopener" href="https://github.com/SharingSource/LogicStack-LeetCode">https://github.com/SharingSource/LogicStack-LeetCode</a> 。</p>
 <p>在仓库地址里，你可以看到系列文章的题解链接、系列文章的相应代码、LeetCode 原题链接和其他优选题解。</p>
@@ -272,9 +276,7 @@
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/%E6%95%B0%E5%AD%A6/">数学</a>
-                    
-                      <a class="hover-with-bg" href="/tags/%E8%B4%AA%E5%BF%83/">贪心</a>
+                      <a class="hover-with-bg" href="/tags/%E4%BA%8C%E5%88%86/">二分</a>
                     
                   </div>
                 
@@ -291,18 +293,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2022/02/27/1601.%20%E6%9C%80%E5%A4%9A%E5%8F%AF%E8%BE%BE%E6%88%90%E7%9A%84%E6%8D%A2%E6%A5%BC%E8%AF%B7%E6%B1%82%E6%95%B0%E7%9B%AE%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">LC 1601. 最多可达成的换楼请求数目</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2022/02/25/2016.%20%E5%A2%9E%E9%87%8F%E5%85%83%E7%B4%A0%E4%B9%8B%E9%97%B4%E7%9A%84%E6%9C%80%E5%A4%A7%E5%B7%AE%E5%80%BC%EF%BC%88%E7%AE%80%E5%8D%95%EF%BC%89/">
-                        <span class="hidden-mobile">LC 2016. 增量元素之间的最大差值</span>
+                      <a href="/2022/06/06/732.%20%E6%88%91%E7%9A%84%E6%97%A5%E7%A8%8B%E5%AE%89%E6%8E%92%E8%A1%A8%20III%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/">
+                        <span class="hidden-mobile">LC 732. 我的日程安排表 III</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
