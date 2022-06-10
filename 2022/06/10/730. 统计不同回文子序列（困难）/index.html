@@ -16,22 +16,22 @@
   <meta name="author" content="宫水三叶">
   <meta name="keywords" content="算法, 数据结构, 题解">
   
-    <meta name="description" content="题目描述这是 LeetCode 上的 881. 救生艇 ，难度为 中等。 第 i 个人的体重为 people[i]，每艘船可以承载的最大重量为 limit。 每艘船最多可同时载两人，但条件是这些人的重量之和最多为 limit。 返回载到每一个人所需的最小船数。(保证每个人都能被船载)。 示例 1：12345输入：people &#x3D; [1,2], limit &#x3D; 3输出：1解释：1 艘船载 (1, 2">
+    <meta name="description" content="题目描述这是 LeetCode 上的 730. 统计不同回文子序列 ，难度为 困难。 给定一个字符串 s，返回 s 中不同的非空「回文子序列」个数 。 通过从 s 中删除 $0$ 个或多个字符来获得子序列。 如果一个字符序列与它反转后的字符序列一致，那么它是「回文字符序列」。 如果有某个 $i$ , 满足 $a_i$ !&#x3D; $b_i$ ，则两个序列 a1, a2, ... 和 b1, b2, ..">
 <meta property="og:type" content="article">
-<meta property="og:title" content="LC 881. 救生艇">
-<meta property="og:url" content="https://sharingsource.github.io/2021/08/26/881.%20%E6%95%91%E7%94%9F%E8%89%87%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/index.html">
+<meta property="og:title" content="LC 730. 统计不同回文子序列">
+<meta property="og:url" content="https://sharingsource.github.io/2022/06/10/730.%20%E7%BB%9F%E8%AE%A1%E4%B8%8D%E5%90%8C%E5%9B%9E%E6%96%87%E5%AD%90%E5%BA%8F%E5%88%97%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/index.html">
 <meta property="og:site_name" content="宫水三叶的刷题日记">
-<meta property="og:description" content="题目描述这是 LeetCode 上的 881. 救生艇 ，难度为 中等。 第 i 个人的体重为 people[i]，每艘船可以承载的最大重量为 limit。 每艘船最多可同时载两人，但条件是这些人的重量之和最多为 limit。 返回载到每一个人所需的最小船数。(保证每个人都能被船载)。 示例 1：12345输入：people &#x3D; [1,2], limit &#x3D; 3输出：1解释：1 艘船载 (1, 2">
+<meta property="og:description" content="题目描述这是 LeetCode 上的 730. 统计不同回文子序列 ，难度为 困难。 给定一个字符串 s，返回 s 中不同的非空「回文子序列」个数 。 通过从 s 中删除 $0$ 个或多个字符来获得子序列。 如果一个字符序列与它反转后的字符序列一致，那么它是「回文字符序列」。 如果有某个 $i$ , 满足 $a_i$ !&#x3D; $b_i$ ，则两个序列 a1, a2, ... 和 b1, b2, ..">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2021-08-25T18:49:10.000Z">
-<meta property="article:modified_time" content="2022-05-18T08:26:31.871Z">
+<meta property="article:published_time" content="2022-06-09T17:34:29.000Z">
+<meta property="article:modified_time" content="2022-06-10T03:38:15.455Z">
 <meta property="article:author" content="宫水三叶">
-<meta property="article:tag" content="双指针">
-<meta property="article:tag" content="贪心">
+<meta property="article:tag" content="动态规划">
+<meta property="article:tag" content="区间 DP">
 <meta name="twitter:card" content="summary_large_image">
   
   
-  <title>LC 881. 救生艇 - 宫水三叶的刷题日记</title>
+  <title>LC 730. 统计不同回文子序列 - 宫水三叶的刷题日记</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -176,12 +176,12 @@
 </nav>
 
     <div class="banner" id="banner" parallax=true
-         style="background: url('/img/image_114.jpeg') no-repeat center center;
+         style="background: url('/img/image_38.jpeg') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="LC 881. 救生艇">
+            <span class="h2" id="subtitle" title="LC 730. 统计不同回文子序列">
               
             </span>
 
@@ -196,8 +196,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-08-26 02:49" pubdate>
-        2021年8月26日
+      <time datetime="2022-06-10 01:34" pubdate>
+        2022年6月10日
       </time>
     </span>
   
@@ -233,58 +233,46 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">LC 881. 救生艇</h1>
+            <h1 style="display: none">LC 730. 统计不同回文子序列</h1>
             
             <div class="markdown-body">
-              <h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>这是 LeetCode 上的 <strong><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/boats-to-save-people/solution/gong-shui-san-xie-noxiang-xin-ke-xue-xi-hosg8/">881. 救生艇</a></strong> ，难度为 <strong>中等</strong>。</p>
-<p>第 <code>i</code> 个人的体重为 <code>people[i]</code>，每艘船可以承载的最大重量为 <code>limit</code>。</p>
-<p>每艘船最多可同时载两人，但条件是这些人的重量之和最多为 <code>limit</code>。</p>
-<p>返回载到每一个人所需的最小船数。(保证每个人都能被船载)。</p>
-<p>示例 1：<br><figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">输入：people = [1,2], <span class="hljs-built_in">limit</span> = 3<br><br>输出：1<br><br>解释：1 艘船载 (1, 2)<br></code></pre></div></td></tr></table></figure><br>示例 2：<br><figure class="highlight gcode"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs gcode">输入：people = [<span class="hljs-number">3</span>,<span class="hljs-number">2</span>,<span class="hljs-number">2</span>,<span class="hljs-number">1</span>], limit = <span class="hljs-number">3</span><br><br>输出：<span class="hljs-number">3</span><br><br>解释：<span class="hljs-number">3</span> 艘船分别载 <span class="hljs-comment">(1, 2)</span>, <span class="hljs-comment">(2)</span> 和 <span class="hljs-comment">(3)</span><br></code></pre></div></td></tr></table></figure><br>示例 3：<br><figure class="highlight gcode"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs gcode">输入：people = [<span class="hljs-number">3</span>,<span class="hljs-number">5</span>,<span class="hljs-number">3</span>,<span class="hljs-number">4</span>], limit = <span class="hljs-number">5</span><br><br>输出：<span class="hljs-number">4</span><br><br>解释：<span class="hljs-number">4</span> 艘船分别载 <span class="hljs-comment">(3)</span>, <span class="hljs-comment">(3)</span>, <span class="hljs-comment">(4)</span>, <span class="hljs-comment">(5)</span><br></code></pre></div></td></tr></table></figure></p>
+              <h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>这是 LeetCode 上的 <strong><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/count-different-palindromic-subsequences/solution/by-ac_oier-lbva/">730. 统计不同回文子序列</a></strong> ，难度为 <strong>困难</strong>。</p>
+<p>给定一个字符串 <code>s</code>，返回 <code>s</code> 中不同的非空「回文子序列」个数 。</p>
+<p>通过从 <code>s</code> 中删除 $0$ 个或多个字符来获得子序列。</p>
+<p>如果一个字符序列与它反转后的字符序列一致，那么它是「回文字符序列」。</p>
+<p>如果有某个 $i$ , 满足 $a_i$ != $b_i$ ，则两个序列 <code>a1, a2, ...</code> 和 <code>b1, b2, ...</code> 不同。</p>
+<p>注意：</p>
+<ul>
+<li>结果可能很大，你需要对 $10^9 + 7$ 取模 。</li>
+</ul>
+<p>示例 1：<br><figure class="highlight 1c"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs 1c">输入：s = &#x27;bccb&#x27;<br><br>输出：<span class="hljs-number">6</span><br><br>解释：<span class="hljs-number">6</span> 个不同的非空回文子字符序列分别为：&#x27;b&#x27;, &#x27;c&#x27;, &#x27;bb&#x27;, &#x27;cc&#x27;, &#x27;bcb&#x27;, &#x27;bccb&#x27;。<br>注意：&#x27;bcb&#x27; 虽然出现两次但仅计数一次。<br></code></pre></div></td></tr></table></figure><br>示例 2：<br><figure class="highlight dns"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs dns">输入：s = &#x27;abcdabcdabcdabcdabcdabcdabcdabcddcbadcbadcbadcbadcbadcbadcbadcba&#x27;<br><br>输出：<span class="hljs-number">104860361</span><br><br>解释：共有 <span class="hljs-number">3104860382</span> 个不同的非空回文子序列，<span class="hljs-number">104860361</span> 对 <span class="hljs-number">109</span> + <span class="hljs-number">7</span> 取模后的值。<br></code></pre></div></td></tr></table></figure></p>
 <p>提示：</p>
 <ul>
-<li>1 &lt;= people.length &lt;= 50000</li>
-<li>1 &lt;= people[i] &lt;= limit &lt;= 30000</li>
+<li>$1 &lt;= s.length &lt;= 1000$</li>
+<li><code>s[i]</code> 仅包含 <code>&#39;a&#39;</code>, <code>&#39;b&#39;</code>, <code>&#39;c&#39;</code> 或 <code>&#39;d&#39;</code> </li>
 </ul>
 <hr>
-<h3 id="贪心"><a href="#贪心" class="headerlink" title="贪心"></a>贪心</h3><p>一个直观的想法是：由于一个船要么载两人要么载一人，在人数给定的情况下，为了让使用的总船数最小，要当尽可能让更多船载两人，即尽可能多的构造出数量之和不超过 $limit$ 的二元组。</p>
-<p>先对 $people$ 进行排序，然后使用两个指针 <code>l</code> 和 <code>r</code> 分别从首尾开始进行匹配：</p>
+<h3 id="区间-DP"><a href="#区间-DP" class="headerlink" title="区间 DP"></a>区间 DP</h3><p>往长度较少的回文串两端添加字符，可能组成新的长度大的回文串，容易想到「区间 DP」，同时 <code>s</code> 仅由 $4$ 类小写字母组成，也是一个切入点。</p>
+<p>根据区间 DP 的一般思路，定义 $f[i][j]$ 为考虑字符串 <code>s</code> 中的 $[i,j]$ 范围内回文子序列的个数，最终答案为 $f[0][n - 1]$。</p>
+<p><strong>不失一般性考虑 $f[i][j]$ 该如何转移，通过枚举 <code>abcd</code> 作为回文方案「边缘字符」来进行统计，即分别统计各类字符作为「边缘字符」时对 $f[i][j]$ 的贡献，此类统计方式天生不存在重复性问题。</strong></p>
+<p>假设当前枚举到的字符为 $k$ ：</p>
 <ul>
-<li>如果 $people[l] + people[r] &lt;= limit$，说明两者可以同船，此时船的数量加一，两个指针分别往中间靠拢；</li>
-<li>如果 $people[l] + people[r] &gt; limit$，说明不能成组，由于题目确保人的重量不会超过 $limit$，此时让 $people[r]$ 独立成船，船的数量加一，<code>r</code> 指针左移。</li>
-</ul>
-<p><strong>我们猜想这样「最重匹配最轻、次重匹配次轻」的做法能使双人船的重量之和尽可能平均，从而使双人船的数量最大化。</strong></p>
-<p>接下来，我们使用「归纳法」证明猜想的正确性。</p>
-<p>假设最优成船组合中二元组的数量为 $c1$，我们贪心做法的二元组数量为 $c2$。</p>
-<p>最终答案 = 符合条件的二元组的数量 + 剩余人数数量，而在符合条件的二元组数量固定的情况下，剩余人数也固定。因此我们只需要证明 $c1 = c2$ 即可。</p>
-<p>通常使用「归纳法」进行证明，都会先从边界入手。</p>
-<p>当我们处理最重的人 $people[r]$（此时 $r$ 为原始右边界 $n - 1$）时：</p>
-<ul>
-<li>假设其与 $people[l]$（此时 $l$ 为原始左边界 $0$）之和超过 $limit$，说明 $people[r]$ 与数组任一成员组合都会超过 $limit$，即无论在最优组合还是贪心组合中，$people[r]$ 都会独立成船；</li>
-<li><p>假设 $people[r] + people[l] &lt;= limit$，说明数组中存在至少一个成员能够与 $people[l]$ 成船：</p>
-<ul>
-<li><p>假设在最优组合中 $people[l]$ 独立成船，此时如果将贪心组合 $(people[l], people[r])$ 中的 $people[l]$ 拆分出来独立成船，贪心二元组数量 $c2$ 必然不会变大（可能还会变差），即将「贪心解」调整成「最优解」结果不会变好；</p>
-</li>
-<li><p>假设在最优组合中，$people[l]$ 不是独立成船，又因此当前 $r$ 处于原始右边界，因此与 $people[l]$ 成组的成员 $people[x]$ 必然满足 $people[x] &lt;= people[r]$。<br>此时我们将 $people[x]$ 和 $people[r]$ 位置进行交换（将贪心组合调整成最优组合），此时带来的影响包括：</p>
-<ul>
-<li>与 $people[l]$ 成组的对象从 $people[r]$ 变为 $people[x]$，但因为 $people[x] &lt;= people[r]$，即有 $people[l] + people[x] &lt;= people[l] + people[r] &lt;= limit$，仍为合法二元组，消耗船的数量为 $1$；</li>
-<li><p>原本位置 $x$ 的值从 $people[x]$ 变大为 $people[r]$，如果调整后的值能组成二元组，那么原本更小的值也能组成二元组，结果没有变化；如果调整后不能成为组成二元组，那么结果可能会因此变差。</p>
-<p>综上，将 $people[x]$ 和 $people[r]$ 位置进行交换（将贪心组合调整成最优组合），贪心二元组数量 $c2$ 不会变大，即将「贪心解」调整成「最优解」结果不会变好。</p>
-</li>
+<li>若 $s[i…j]$ 中没有字符 $k$，则字符 $k$ 对 $f[i][j]$ 贡献为 $0$，跳过；</li>
+<li>若 $s[i…j]$ 中存在字符 $k$，根据字符 $k$ 在范围 $s[i…j]$ 中「最小下标」和「最大下标」进行分情况讨论，假设字符 $k$ 在 $s[i…j]$ 中「最靠左」的位置为 $l$，「最靠右」的位置为 $r$：<ul>
+<li>当 $l = r$ 时，此时字符 $k$ 对 $f[i][j]$ 的贡献为 $1$，即 <code>k</code> 本身；</li>
+<li>当 $l = r - 1$ 时，说明字符 $k$ 中间不存在任何字符，此时字符 $k$ 对 $f[i][j]$ 的贡献为 $2$，包括 <code>k</code> 和 <code>kk</code> 两种回文方案；</li>
+<li>其余情况，可根据已算得的「小区间回文方案」进行延伸（两段分别补充位于 $l$ 和 $r$ 的字符 $k$），得到新的大区间方案，此部分对 $f[i][j]$ 的贡献是 $f[l + 1][r - 1]$，另外还有 <code>k</code> 和 <code>kk</code> 两种回文方案，因此总的对答案的贡献为 $f[l + 1][r - 1] + 2$。</li>
 </ul>
 </li>
 </ul>
-</li>
-</ul>
-<p><strong>对于边界情况，我们证明了从「贪心解」调整为「最优解」不会使得结果更好，因此可以保留当前的贪心决策，然后将问题规模缩减为 $n - 1$ 或者 $n - 2$，同时数列仍然满足升序特性，即归纳分析所依赖的结构没有发生改变，可以将上述的推理分析推广到每一个决策的回合（新边界）中。</strong></p>
-<p><strong>至此，我们证明了将「贪心解」调整为「最优解」结果不会变好，即贪心解是最优解之一。</strong></p>
-<p>代码：<br><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">numRescueBoats</span><span class="hljs-params">(<span class="hljs-type">int</span>[] people, <span class="hljs-type">int</span> limit)</span> &#123;<br>        Arrays.sort(people);<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> people.length;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">l</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>, r = n - <span class="hljs-number">1</span>;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">ans</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">while</span> (l &lt;= r) &#123;<br>            <span class="hljs-keyword">if</span> (people[l] + people[r] &lt;= limit) l++;<br>            r--;<br>            ans++;<br>        &#125;<br>        <span class="hljs-keyword">return</span> ans;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure></p>
+<p>统计 $s[i…j]$ 中各类字符「最靠左」和「最靠右」的位置，可通过调整枚举方向来实现：从大到小枚举 $i$，同时维护 <code>L[s[i]-&#39;a&#39;] = i</code>，即可得到「最靠左」的位置；在确定左端点 $i$ 之后，从小到达枚举右端点 $j$，同时维护 <code>R[s[i]-&#39;a&#39;] = j</code>，即可得到「最靠右」的位置。</p>
+<p>代码：<br><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-type">int</span> <span class="hljs-variable">MOD</span> <span class="hljs-operator">=</span> (<span class="hljs-type">int</span>)<span class="hljs-number">1e9</span>+<span class="hljs-number">7</span>;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">countPalindromicSubsequences</span><span class="hljs-params">(String s)</span> &#123;<br>        <span class="hljs-type">char</span>[] cs = s.toCharArray();<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> cs.length;<br>        <span class="hljs-type">int</span>[][] f = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[n][n];<br>        <span class="hljs-type">int</span>[] L = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[<span class="hljs-number">4</span>], R = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[<span class="hljs-number">4</span>];<br>        Arrays.fill(L, -<span class="hljs-number">1</span>);<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> n - <span class="hljs-number">1</span>; i &gt;= <span class="hljs-number">0</span>; i--) &#123;<br>            L[cs[i] - <span class="hljs-string">&#x27;a&#x27;</span>] = i;<br>            Arrays.fill(R, -<span class="hljs-number">1</span>);<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> i; j &lt; n; j++) &#123;<br>                R[cs[j] - <span class="hljs-string">&#x27;a&#x27;</span>] = j;<br>                <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">k</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; k &lt; <span class="hljs-number">4</span>; k++) &#123;<br>                    <span class="hljs-keyword">if</span> (L[k] == -<span class="hljs-number">1</span> || R[k] == -<span class="hljs-number">1</span>) <span class="hljs-keyword">continue</span>;<br>                    <span class="hljs-type">int</span> <span class="hljs-variable">l</span> <span class="hljs-operator">=</span> L[k], r = R[k];<br>                    <span class="hljs-keyword">if</span> (l == r) f[i][j] = (f[i][j] + <span class="hljs-number">1</span>) % MOD;<br>                    <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (l == r - <span class="hljs-number">1</span>) f[i][j] = (f[i][j] + <span class="hljs-number">2</span>) % MOD;<br>                    <span class="hljs-keyword">else</span> f[i][j] = (f[i][j] + f[l + <span class="hljs-number">1</span>][r - <span class="hljs-number">1</span>] + <span class="hljs-number">2</span>) % MOD;<br>                &#125;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> f[<span class="hljs-number">0</span>][n - <span class="hljs-number">1</span>];<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure></p>
 <ul>
-<li>时间复杂度：排序复杂度为 $O(n\log{n})$；双指针统计答案复杂度为 $O(n)$。整体复杂度为 $O(n\log{n})$</li>
-<li>空间复杂度：$O(\log{n})$</li>
+<li>时间复杂度：$O(C \times n^2)$，其中 $C = 4$ 为字符集大小</li>
+<li>空间复杂度：$O(n^2)$</li>
 </ul>
 <hr>
-<h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>这是我们「刷穿 LeetCode」系列文章的第 <code>No.881</code> 篇，系列开始于 2021/01/01，截止于起始日 LeetCode 上共有 1916 道题目，部分是有锁题，我们将先把所有不带锁的题目刷完。</p>
+<h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>这是我们「刷穿 LeetCode」系列文章的第 <code>No.730</code> 篇，系列开始于 2021/01/01，截止于起始日 LeetCode 上共有 1916 道题目，部分是有锁题，我们将先把所有不带锁的题目刷完。</p>
 <p>在这个系列文章里面，除了讲解解题思路以外，还会尽可能给出最为简洁的代码。如果涉及通解还会相应的代码模板。</p>
 <p>为了方便各位同学能够电脑上进行调试和提交代码，我建立了相关的仓库：<a target="_blank" rel="noopener" href="https://github.com/SharingSource/LogicStack-LeetCode">https://github.com/SharingSource/LogicStack-LeetCode</a> 。</p>
 <p>在仓库地址里，你可以看到系列文章的题解链接、系列文章的相应代码、LeetCode 原题链接和其他优选题解。</p>
@@ -298,9 +286,9 @@
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/%E5%8F%8C%E6%8C%87%E9%92%88/">双指针</a>
+                      <a class="hover-with-bg" href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/">动态规划</a>
                     
-                      <a class="hover-with-bg" href="/tags/%E8%B4%AA%E5%BF%83/">贪心</a>
+                      <a class="hover-with-bg" href="/tags/%E5%8C%BA%E9%97%B4-DP/">区间 DP</a>
                     
                   </div>
                 
@@ -317,18 +305,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2021/08/27/295.%20%E6%95%B0%E6%8D%AE%E6%B5%81%E7%9A%84%E4%B8%AD%E4%BD%8D%E6%95%B0%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">LC 295. 数据流的中位数</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/08/25/797.%20%E6%89%80%E6%9C%89%E5%8F%AF%E8%83%BD%E7%9A%84%E8%B7%AF%E5%BE%84%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/">
-                        <span class="hidden-mobile">LC 797. 所有可能的路径</span>
+                      <a href="/2022/06/09/497.%20%E9%9D%9E%E9%87%8D%E5%8F%A0%E7%9F%A9%E5%BD%A2%E4%B8%AD%E7%9A%84%E9%9A%8F%E6%9C%BA%E7%82%B9%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/">
+                        <span class="hidden-mobile">LC 497. 非重叠矩形中的随机点</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
