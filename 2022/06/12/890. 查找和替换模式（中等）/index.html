@@ -16,28 +16,22 @@
   <meta name="author" content="宫水三叶">
   <meta name="keywords" content="算法, 数据结构, 题解">
   
-    <meta name="description" content="题目描述这是 LeetCode 上的 926. 将字符串翻转到单调递增 ，难度为 中等。 如果一个二进制字符串，是以一些 $0$（可能没有 $0$）后面跟着一些 $1$（也可能没有 $1$）的形式组成的，那么该字符串是 单调递增 的。 给你一个二进制字符串 s，你可以将任何 $0$ 翻转为 $1$ 或者将 $1$ 翻转为 $0$ 。 返回使 s 单调递增的最小翻转次数。 示例 1：12345输入：">
+    <meta name="description" content="题目描述这是 LeetCode 上的 890. 查找和替换模式 ，难度为 中等。 你有一个单词列表 words 和一个模式  pattern，你想知道 words 中的哪些单词与模式匹配。 如果存在字母的排列 p ，使得将模式中的每个字母 x 替换为 p(x) 之后，我们就得到了所需的单词，那么单词与模式是匹配的。 （回想一下，字母的排列是从字母到字母的双射：每个字母映射到另一个字母，没有两个字母">
 <meta property="og:type" content="article">
-<meta property="og:title" content="LC 926. 将字符串翻转到单调递增">
-<meta property="og:url" content="https://sharingsource.github.io/2022/06/11/926.%20%E5%B0%86%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%BF%BB%E8%BD%AC%E5%88%B0%E5%8D%95%E8%B0%83%E9%80%92%E5%A2%9E%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/index.html">
+<meta property="og:title" content="LC 890. 查找和替换模式">
+<meta property="og:url" content="https://sharingsource.github.io/2022/06/12/890.%20%E6%9F%A5%E6%89%BE%E5%92%8C%E6%9B%BF%E6%8D%A2%E6%A8%A1%E5%BC%8F%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/index.html">
 <meta property="og:site_name" content="宫水三叶的刷题日记">
-<meta property="og:description" content="题目描述这是 LeetCode 上的 926. 将字符串翻转到单调递增 ，难度为 中等。 如果一个二进制字符串，是以一些 $0$（可能没有 $0$）后面跟着一些 $1$（也可能没有 $1$）的形式组成的，那么该字符串是 单调递增 的。 给你一个二进制字符串 s，你可以将任何 $0$ 翻转为 $1$ 或者将 $1$ 翻转为 $0$ 。 返回使 s 单调递增的最小翻转次数。 示例 1：12345输入：">
+<meta property="og:description" content="题目描述这是 LeetCode 上的 890. 查找和替换模式 ，难度为 中等。 你有一个单词列表 words 和一个模式  pattern，你想知道 words 中的哪些单词与模式匹配。 如果存在字母的排列 p ，使得将模式中的每个字母 x 替换为 p(x) 之后，我们就得到了所需的单词，那么单词与模式是匹配的。 （回想一下，字母的排列是从字母到字母的双射：每个字母映射到另一个字母，没有两个字母">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2022-06-10T16:43:35.000Z">
-<meta property="article:modified_time" content="2022-06-11T02:30:27.283Z">
+<meta property="article:published_time" content="2022-06-11T16:39:45.000Z">
+<meta property="article:modified_time" content="2022-06-12T02:32:15.898Z">
 <meta property="article:author" content="宫水三叶">
-<meta property="article:tag" content="动态规划">
-<meta property="article:tag" content="二分">
-<meta property="article:tag" content="前缀和">
-<meta property="article:tag" content="贪心">
-<meta property="article:tag" content="容斥原理">
-<meta property="article:tag" content="序列 DP">
-<meta property="article:tag" content="枚举">
-<meta property="article:tag" content="LIS">
+<meta property="article:tag" content="哈希表">
+<meta property="article:tag" content="模拟">
 <meta name="twitter:card" content="summary_large_image">
   
   
-  <title>LC 926. 将字符串翻转到单调递增 - 宫水三叶的刷题日记</title>
+  <title>LC 890. 查找和替换模式 - 宫水三叶的刷题日记</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -182,12 +176,12 @@
 </nav>
 
     <div class="banner" id="banner" parallax=true
-         style="background: url('/img/image_74.jpeg') no-repeat center center;
+         style="background: url('/img/image_18.jpg') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="LC 926. 将字符串翻转到单调递增">
+            <span class="h2" id="subtitle" title="LC 890. 查找和替换模式">
               
             </span>
 
@@ -202,8 +196,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2022-06-11 00:43" pubdate>
-        2022年6月11日
+      <time datetime="2022-06-12 00:39" pubdate>
+        2022年6月12日
       </time>
     </span>
   
@@ -239,42 +233,30 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">LC 926. 将字符串翻转到单调递增</h1>
+            <h1 style="display: none">LC 890. 查找和替换模式</h1>
             
             <div class="markdown-body">
-              <h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>这是 LeetCode 上的 <strong><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/flip-string-to-monotone-increasing/solution/by-ac_oier-h0we/">926. 将字符串翻转到单调递增</a></strong> ，难度为 <strong>中等</strong>。</p>
-<p>如果一个二进制字符串，是以一些 $0$（可能没有 $0$）后面跟着一些 $1$（也可能没有 $1$）的形式组成的，那么该字符串是 单调递增 的。</p>
-<p>给你一个二进制字符串 <code>s</code>，你可以将任何 $0$ 翻转为 $1$ 或者将 $1$ 翻转为 $0$ 。</p>
-<p>返回使 <code>s</code> 单调递增的最小翻转次数。</p>
-<p>示例 1：<br><figure class="highlight abnf"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs abnf">输入：s <span class="hljs-operator">=</span> <span class="hljs-string">&quot;00110&quot;</span><br><br>输出：<span class="hljs-number">1</span><br><br>解释：翻转最后一位得到 <span class="hljs-number">00111</span>.<br></code></pre></div></td></tr></table></figure><br>示例 2：<br><figure class="highlight abnf"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs abnf">输入：s <span class="hljs-operator">=</span> <span class="hljs-string">&quot;010110&quot;</span><br><br>输出：<span class="hljs-number">2</span><br><br>解释：翻转得到 <span class="hljs-number">011111</span>，或者是 <span class="hljs-number">000111</span>。<br></code></pre></div></td></tr></table></figure><br>示例 3：<br><figure class="highlight abnf"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs abnf">输入：s <span class="hljs-operator">=</span> <span class="hljs-string">&quot;00011000&quot;</span><br><br>输出：<span class="hljs-number">2</span><br><br>解释：翻转得到 <span class="hljs-number">00000000</span>。<br></code></pre></div></td></tr></table></figure></p>
+              <h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>这是 LeetCode 上的 <strong><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/find-and-replace-pattern/solution/by-ac_oier-s4cw/">890. 查找和替换模式</a></strong> ，难度为 <strong>中等</strong>。</p>
+<p>你有一个单词列表 <code>words</code> 和一个模式  <code>pattern</code>，你想知道 <code>words</code> 中的哪些单词与模式匹配。</p>
+<p>如果存在字母的排列 <code>p</code> ，使得将模式中的每个字母 <code>x</code> 替换为 <code>p(x)</code> 之后，我们就得到了所需的单词，那么单词与模式是匹配的。</p>
+<p>（回想一下，字母的排列是从字母到字母的双射：每个字母映射到另一个字母，没有两个字母映射到同一个字母。）</p>
+<p>返回 <code>words</code> 中与给定模式匹配的单词列表。</p>
+<p>你可以按任何顺序返回答案。</p>
+<p>示例：<br><figure class="highlight stylus"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs stylus">输入：words = <span class="hljs-selector-attr">[<span class="hljs-string">&quot;abc&quot;</span>,<span class="hljs-string">&quot;deq&quot;</span>,<span class="hljs-string">&quot;mee&quot;</span>,<span class="hljs-string">&quot;aqq&quot;</span>,<span class="hljs-string">&quot;dkd&quot;</span>,<span class="hljs-string">&quot;ccc&quot;</span>]</span>, pattern = <span class="hljs-string">&quot;abb&quot;</span><br><br>输出：<span class="hljs-selector-attr">[<span class="hljs-string">&quot;mee&quot;</span>,<span class="hljs-string">&quot;aqq&quot;</span>]</span><br><br>解释：<br><span class="hljs-string">&quot;mee&quot;</span> 与模式匹配，因为存在排列 &#123;<span class="hljs-selector-tag">a</span> -&gt; m, <span class="hljs-selector-tag">b</span> -&gt; e, ...&#125;。<br><span class="hljs-string">&quot;ccc&quot;</span> 与模式不匹配，因为 &#123;<span class="hljs-selector-tag">a</span> -&gt; c, <span class="hljs-selector-tag">b</span> -&gt; c, ...&#125; 不是排列。<br>因为 <span class="hljs-selector-tag">a</span> 和 <span class="hljs-selector-tag">b</span> 映射到同一个字母。<br></code></pre></div></td></tr></table></figure></p>
 <p>提示：</p>
 <ul>
-<li>$1 &lt;= s.length &lt;= 10^5$</li>
-<li><code>s[i]</code> 为 <code>&#39;0&#39;</code> 或 <code>&#39;1&#39;</code></li>
+<li>$1 &lt;= words.length &lt;= 50$</li>
+<li>$1 &lt;= pattern.length = words[i].length &lt;= 20$</li>
 </ul>
 <hr>
-<h3 id="LIS-问题贪心解"><a href="#LIS-问题贪心解" class="headerlink" title="LIS 问题贪心解"></a>LIS 问题贪心解</h3><p>根据题意，不难想到将原题进行等价转换：<strong>令 <code>s</code> 长度为 $n$，原问题等价于在 <code>s</code> 中找到最长不下降子序列，设其长度为 $ans$，那么对应的 $n - ans$ 即是答案。</strong></p>
-<p>由于数据范围为 $1e5$，因此我们需要使用 <code>LIS</code> 问题的贪心求解方式：<strong>使用 <code>g</code> 数组记录每个长度的最小结尾元素，即 <code>g[len] = x</code> 含义为长度为 $len$ 的最长不下降子序列的结尾元素为 $x$，然后在从前往后处理每个 $t = s[i]$ 时，由于是求解「最长不下降子序列」，等价于找「满足大于 $t$ 的最小下标」，这可以运用「二分」进行求解。</strong></p>
-<blockquote>
-<p>不了解 <code>LIS</code> 问题或者不清楚 <code>LIS</code>  问题贪心解法的同学可以看前置 🧀 : <strong><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzU4NDE3MTEyMA==&amp;mid=2247487814&amp;idx=1&amp;sn=e33023c2d474ff75af83eda1c4d01892">LCS 问题与 LIS 问题的相互关系，以及 LIS 问题的最优解证明</a></strong>，里面详细讲解了 <code>LIS</code> 贪心解的正确性证明，以及 <code>LCS</code> 和 <code>LIS</code> 在特定条件下存在的内在联系。</p>
-</blockquote>
-<p>代码：<br><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">minFlipsMonoIncr</span><span class="hljs-params">(String s)</span> &#123;<br>        <span class="hljs-type">char</span>[] cs = s.toCharArray();<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> cs.length, ans = <span class="hljs-number">0</span>;<br>        <span class="hljs-type">int</span>[] g = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[n + <span class="hljs-number">10</span>];<br>        Arrays.fill(g, n + <span class="hljs-number">10</span>);<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; n; i++) &#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">t</span> <span class="hljs-operator">=</span> s.charAt(i) - <span class="hljs-string">&#x27;0&#x27;</span>;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">l</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>, r = i + <span class="hljs-number">1</span>;<br>            <span class="hljs-keyword">while</span> (l &lt; r) &#123;<br>                <span class="hljs-type">int</span> <span class="hljs-variable">mid</span> <span class="hljs-operator">=</span> l + r &gt;&gt; <span class="hljs-number">1</span>;<br>                <span class="hljs-keyword">if</span> (g[mid] &gt; t) r = mid;<br>                <span class="hljs-keyword">else</span> l = mid + <span class="hljs-number">1</span>;<br>            &#125;<br>            g[r] = t;<br>            ans = Math.max(ans, r);<br>        &#125;<br>        <span class="hljs-keyword">return</span> n - ans;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure></p>
+<h3 id="哈希表-模拟"><a href="#哈希表-模拟" class="headerlink" title="哈希表 模拟"></a>哈希表 模拟</h3><p>根据题意进行模拟即可，使用 <code>map</code> 记录具体的映射关系，使用 <code>vis</code> 记录哪些字符已被映射，利用字符集大小只有 $26$，我们可以使用数组充当哈希表。</p>
+<p>代码：<br><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> List&lt;String&gt; <span class="hljs-title function_">findAndReplacePattern</span><span class="hljs-params">(String[] ws, String pe)</span> &#123;<br>        List&lt;String&gt; ans = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();<br>        <span class="hljs-type">int</span>[] map = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[<span class="hljs-number">26</span>], vis = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[<span class="hljs-number">26</span>];<br>        <span class="hljs-keyword">for</span> (String s : ws) &#123;<br>            Arrays.fill(map, -<span class="hljs-number">1</span>);<br>            Arrays.fill(vis, <span class="hljs-number">0</span>);<br>            <span class="hljs-type">boolean</span> <span class="hljs-variable">ok</span> <span class="hljs-operator">=</span> <span class="hljs-literal">true</span>;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; pe.length() &amp;&amp; ok; i++) &#123;<br>                <span class="hljs-type">int</span> <span class="hljs-variable">c1</span> <span class="hljs-operator">=</span> s.charAt(i) - <span class="hljs-string">&#x27;a&#x27;</span>, c2 = pe.charAt(i) - <span class="hljs-string">&#x27;a&#x27;</span>;<br>                <span class="hljs-keyword">if</span> (map[c1] == -<span class="hljs-number">1</span> &amp;&amp; vis[c2] == <span class="hljs-number">0</span>) &#123;<br>                    map[c1] = c2; vis[c2] = <span class="hljs-number">1</span>;<br>                &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (map[c1] != c2) ok = <span class="hljs-literal">false</span>;<br>            &#125;<br>            <span class="hljs-keyword">if</span> (ok) ans.add(s);<br>        &#125;<br>        <span class="hljs-keyword">return</span> ans;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure></p>
 <ul>
-<li>时间复杂度：$O(n\log{n})$</li>
-<li>空间复杂度：$O(n)$</li>
+<li>时间复杂度：$O(\sum_{i = 0}^{n}len(ws[i]) + n \times C)$，其中 $C = 26$ 代表字符集大小</li>
+<li>空间复杂度：$O(C)$</li>
 </ul>
 <hr>
-<h3 id="前缀和-枚举"><a href="#前缀和-枚举" class="headerlink" title="前缀和 + 枚举"></a>前缀和 + 枚举</h3><p>更进一步，利用 <code>s</code> 只存在 $0$ 和 $1$ 两种数值，我们知道最后的目标序列形如 <code>000...000</code>、<code>000...111</code> 或 <code>111...111</code> 的形式。</p>
-<p>因此我们可以枚举目标序列的 $0$ 和 $1$ 分割点位置 $idx$（分割点是 $0$ 是 $1$ 都可以，不消耗改变次数）。</p>
-<p>于是问题转换为：分割点 $idx$ 左边有多少个 $1$（目标序列中分割点左边均为 $0$，因此 $1$ 的个数为左边的改变次数），分割点 $idx$ 的右边有多少个 $0$（目标序列中分割点右边均为 $1$，因此 $0$ 的个数为右边的改变次数），两者之和即是分割点为 $idx$ 时的总变化次数，所有 $idx$ 的总变化次数最小值即是答案。</p>
-<p>而求解某个点左边或者右边有多少 $1$ 和 $0$ 可通过「前缀和」进行优化。</p>
-<p>代码：<br><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">minFlipsMonoIncr</span><span class="hljs-params">(String s)</span> &#123;<br>        <span class="hljs-type">char</span>[] cs = s.toCharArray();<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> cs.length, ans = n;<br>        <span class="hljs-type">int</span>[] sum = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[n + <span class="hljs-number">10</span>];<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>; i &lt;= n; i++) sum[i] = sum[i - <span class="hljs-number">1</span>] + (cs[i - <span class="hljs-number">1</span>] - <span class="hljs-string">&#x27;0&#x27;</span>);<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>; i &lt;= n; i++) &#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">l</span> <span class="hljs-operator">=</span> sum[i - <span class="hljs-number">1</span>], r = (n - i) - (sum[n] - sum[i]);<br>            ans = Math.min(ans, l + r);<br>        &#125;<br>        <span class="hljs-keyword">return</span> ans;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure></p>
-<ul>
-<li>时间复杂度：$O(n)$</li>
-<li>空间复杂度：$O(n)$</li>
-</ul>
-<hr>
-<h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>这是我们「刷穿 LeetCode」系列文章的第 <code>No.926</code> 篇，系列开始于 2021/01/01，截止于起始日 LeetCode 上共有 1916 道题目，部分是有锁题，我们将先把所有不带锁的题目刷完。</p>
+<h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>这是我们「刷穿 LeetCode」系列文章的第 <code>No.890</code> 篇，系列开始于 2021/01/01，截止于起始日 LeetCode 上共有 1916 道题目，部分是有锁题，我们将先把所有不带锁的题目刷完。</p>
 <p>在这个系列文章里面，除了讲解解题思路以外，还会尽可能给出最为简洁的代码。如果涉及通解还会相应的代码模板。</p>
 <p>为了方便各位同学能够电脑上进行调试和提交代码，我建立了相关的仓库：<a target="_blank" rel="noopener" href="https://github.com/SharingSource/LogicStack-LeetCode">https://github.com/SharingSource/LogicStack-LeetCode</a> 。</p>
 <p>在仓库地址里，你可以看到系列文章的题解链接、系列文章的相应代码、LeetCode 原题链接和其他优选题解。</p>
@@ -288,21 +270,9 @@
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/">动态规划</a>
+                      <a class="hover-with-bg" href="/tags/%E5%93%88%E5%B8%8C%E8%A1%A8/">哈希表</a>
                     
-                      <a class="hover-with-bg" href="/tags/%E4%BA%8C%E5%88%86/">二分</a>
-                    
-                      <a class="hover-with-bg" href="/tags/%E5%89%8D%E7%BC%80%E5%92%8C/">前缀和</a>
-                    
-                      <a class="hover-with-bg" href="/tags/%E8%B4%AA%E5%BF%83/">贪心</a>
-                    
-                      <a class="hover-with-bg" href="/tags/%E5%AE%B9%E6%96%A5%E5%8E%9F%E7%90%86/">容斥原理</a>
-                    
-                      <a class="hover-with-bg" href="/tags/%E5%BA%8F%E5%88%97-DP/">序列 DP</a>
-                    
-                      <a class="hover-with-bg" href="/tags/%E6%9E%9A%E4%B8%BE/">枚举</a>
-                    
-                      <a class="hover-with-bg" href="/tags/LIS/">LIS</a>
+                      <a class="hover-with-bg" href="/tags/%E6%A8%A1%E6%8B%9F/">模拟</a>
                     
                   </div>
                 
@@ -319,18 +289,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2022/06/12/890.%20%E6%9F%A5%E6%89%BE%E5%92%8C%E6%9B%BF%E6%8D%A2%E6%A8%A1%E5%BC%8F%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">LC 890. 查找和替换模式</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2022/06/10/730.%20%E7%BB%9F%E8%AE%A1%E4%B8%8D%E5%90%8C%E5%9B%9E%E6%96%87%E5%AD%90%E5%BA%8F%E5%88%97%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/">
-                        <span class="hidden-mobile">LC 730. 统计不同回文子序列</span>
+                      <a href="/2022/06/11/926.%20%E5%B0%86%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%BF%BB%E8%BD%AC%E5%88%B0%E5%8D%95%E8%B0%83%E9%80%92%E5%A2%9E%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/">
+                        <span class="hidden-mobile">LC 926. 将字符串翻转到单调递增</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
