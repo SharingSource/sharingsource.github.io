@@ -16,22 +16,22 @@
   <meta name="author" content="宫水三叶">
   <meta name="keywords" content="算法, 数据结构, 题解">
   
-    <meta name="description" content="题目描述这是 LeetCode 上的 1588. 所有奇数长度子数组的和 ，难度为 简单。 给你一个正整数数组 arr ，请你计算所有可能的奇数长度子数组的和。 子数组 定义为原数组中的一个连续子序列。 请你返回 arr 中 所有奇数长度子数组的和 。 示例 1：123456789101112131415输入：arr &#x3D; [1,4,2,5,3]输出：58解释：所有奇数长度子数组和它们的和为：[1]">
+    <meta name="description" content="题目描述这是 LeetCode 上的 719. 找出第 K 小的数对距离 ，难度为 困难。 数对 $(a,b)$ 由整数 a 和 b 组成，其数对距离定义为 a 和 b 的绝对差值。 给你一个整数数组 nums 和一个整数 $k$ ，数对由 $nums[i]$ 和 $nums[j]$ 组成且满足 $0 &lt;&#x3D; i &lt; j &lt; nums.length$ 。 返回 所有数对距离中 第">
 <meta property="og:type" content="article">
-<meta property="og:title" content="LC 1588. 所有奇数长度子数组的和">
-<meta property="og:url" content="https://sharingsource.github.io/2021/08/29/1588.%20%E6%89%80%E6%9C%89%E5%A5%87%E6%95%B0%E9%95%BF%E5%BA%A6%E5%AD%90%E6%95%B0%E7%BB%84%E7%9A%84%E5%92%8C%EF%BC%88%E7%AE%80%E5%8D%95%EF%BC%89/index.html">
+<meta property="og:title" content="LC 719. 找出第 K 小的数对距离">
+<meta property="og:url" content="https://sharingsource.github.io/2022/06/15/719.%20%E6%89%BE%E5%87%BA%E7%AC%AC%20K%20%E5%B0%8F%E7%9A%84%E6%95%B0%E5%AF%B9%E8%B7%9D%E7%A6%BB%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/index.html">
 <meta property="og:site_name" content="宫水三叶的刷题日记">
-<meta property="og:description" content="题目描述这是 LeetCode 上的 1588. 所有奇数长度子数组的和 ，难度为 简单。 给你一个正整数数组 arr ，请你计算所有可能的奇数长度子数组的和。 子数组 定义为原数组中的一个连续子序列。 请你返回 arr 中 所有奇数长度子数组的和 。 示例 1：123456789101112131415输入：arr &#x3D; [1,4,2,5,3]输出：58解释：所有奇数长度子数组和它们的和为：[1]">
+<meta property="og:description" content="题目描述这是 LeetCode 上的 719. 找出第 K 小的数对距离 ，难度为 困难。 数对 $(a,b)$ 由整数 a 和 b 组成，其数对距离定义为 a 和 b 的绝对差值。 给你一个整数数组 nums 和一个整数 $k$ ，数对由 $nums[i]$ 和 $nums[j]$ 组成且满足 $0 &lt;&#x3D; i &lt; j &lt; nums.length$ 。 返回 所有数对距离中 第">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2021-08-28T17:45:16.000Z">
-<meta property="article:modified_time" content="2022-05-18T08:27:23.632Z">
+<meta property="article:published_time" content="2022-06-14T17:31:05.000Z">
+<meta property="article:modified_time" content="2022-06-15T13:49:10.225Z">
 <meta property="article:author" content="宫水三叶">
-<meta property="article:tag" content="数学">
-<meta property="article:tag" content="前缀和">
+<meta property="article:tag" content="双指针">
+<meta property="article:tag" content="二分">
 <meta name="twitter:card" content="summary_large_image">
   
   
-  <title>LC 1588. 所有奇数长度子数组的和 - 宫水三叶的刷题日记</title>
+  <title>LC 719. 找出第 K 小的数对距离 - 宫水三叶的刷题日记</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -176,12 +176,12 @@
 </nav>
 
     <div class="banner" id="banner" parallax=true
-         style="background: url('/img/image_1.jpg') no-repeat center center;
+         style="background: url('/img/image_74.jpeg') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="LC 1588. 所有奇数长度子数组的和">
+            <span class="h2" id="subtitle" title="LC 719. 找出第 K 小的数对距离">
               
             </span>
 
@@ -196,8 +196,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-08-29 01:45" pubdate>
-        2021年8月29日
+      <time datetime="2022-06-15 01:31" pubdate>
+        2022年6月15日
       </time>
     </span>
   
@@ -233,49 +233,38 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">LC 1588. 所有奇数长度子数组的和</h1>
+            <h1 style="display: none">LC 719. 找出第 K 小的数对距离</h1>
             
             <div class="markdown-body">
-              <h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>这是 LeetCode 上的 <strong><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/sum-of-all-odd-length-subarrays/solution/gong-shui-san-xie-yi-ti-shuang-jie-qian-18jq3/">1588. 所有奇数长度子数组的和</a></strong> ，难度为 <strong>简单</strong>。</p>
-<p>给你一个正整数数组 <code>arr</code> ，请你计算所有可能的奇数长度子数组的和。</p>
-<p>子数组 定义为原数组中的一个连续子序列。</p>
-<p>请你返回 <code>arr</code> 中 所有奇数长度子数组的和 。</p>
-<p>示例 1：<br><figure class="highlight inform7"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs inform7">输入：arr = <span class="hljs-comment">[1,4,2,5,3]</span><br><br>输出：58<br><br>解释：所有奇数长度子数组和它们的和为：<br><span class="hljs-comment">[1]</span> = 1<br><span class="hljs-comment">[4]</span> = 4<br><span class="hljs-comment">[2]</span> = 2<br><span class="hljs-comment">[5]</span> = 5<br><span class="hljs-comment">[3]</span> = 3<br><span class="hljs-comment">[1,4,2]</span> = 7<br><span class="hljs-comment">[4,2,5]</span> = 11<br><span class="hljs-comment">[2,5,3]</span> = 10<br><span class="hljs-comment">[1,4,2,5,3]</span> = 15<br>我们将所有值求和得到 1 + 4 + 2 + 5 + 3 + 7 + 11 + 10 + 15 = 58<br></code></pre></div></td></tr></table></figure><br>示例 2：<br><figure class="highlight inform7"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs inform7">输入：arr = <span class="hljs-comment">[1,2]</span><br><br>输出：3<br><br>解释：总共只有 2 个长度为奇数的子数组，<span class="hljs-comment">[1]</span> 和 <span class="hljs-comment">[2]</span>。它们的和为 3 。<br></code></pre></div></td></tr></table></figure><br>示例 3：<br><figure class="highlight fix"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs fix"><span class="hljs-attr">输入：arr </span>=<span class="hljs-string"> [10,11,12]</span><br><span class="hljs-string"></span><br><span class="hljs-string">输出：66</span><br></code></pre></div></td></tr></table></figure></p>
+              <h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>这是 LeetCode 上的 <strong><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/find-k-th-smallest-pair-distance/solution/by-ac_oier-o4if/">719. 找出第 K 小的数对距离</a></strong> ，难度为 <strong>困难</strong>。</p>
+<p>数对 $(a,b)$ 由整数 <code>a</code> 和 <code>b</code> 组成，其数对距离定义为 <code>a</code> 和 <code>b</code> 的绝对差值。</p>
+<p>给你一个整数数组 <code>nums</code> 和一个整数 $k$ ，数对由 $nums[i]$ 和 $nums[j]$ 组成且满足 $0 &lt;= i &lt; j &lt; nums.length$ 。</p>
+<p>返回 所有数对距离中 第 $k$ 小的数对距离。</p>
+<p>示例 1：<br><figure class="highlight livescript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs livescript">输入：nums = [<span class="hljs-number">1</span>,<span class="hljs-number">3</span>,<span class="hljs-number">1</span>], k = <span class="hljs-number">1</span><br><br>输出：<span class="hljs-number">0</span><br><br>解释：数对和对应的距离如下：<br><span class="hljs-function"><span class="hljs-params">(<span class="hljs-number">1</span>,<span class="hljs-number">3</span>)</span> -&gt;</span> <span class="hljs-number">2</span><br><span class="hljs-function"><span class="hljs-params">(<span class="hljs-number">1</span>,<span class="hljs-number">1</span>)</span> -&gt;</span> <span class="hljs-number">0</span><br><span class="hljs-function"><span class="hljs-params">(<span class="hljs-number">3</span>,<span class="hljs-number">1</span>)</span> -&gt;</span> <span class="hljs-number">2</span><br>距离第 <span class="hljs-number">1</span> 小的数对是 (<span class="hljs-number">1</span>,<span class="hljs-number">1</span>) ，距离为 <span class="hljs-number">0</span> 。<br></code></pre></div></td></tr></table></figure><br>示例 2：<br><figure class="highlight fix"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs fix"><span class="hljs-attr">输入：nums </span>=<span class="hljs-string"> [1,1,1], k = 2</span><br><span class="hljs-string"></span><br><span class="hljs-string">输出：0</span><br></code></pre></div></td></tr></table></figure><br>示例 3：<br><figure class="highlight fix"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs fix"><span class="hljs-attr">输入：nums </span>=<span class="hljs-string"> [1,6,1], k = 3</span><br><span class="hljs-string"></span><br><span class="hljs-string">输出：5</span><br></code></pre></div></td></tr></table></figure></p>
 <p>提示：</p>
 <ul>
-<li>1 &lt;= arr.length &lt;= 100</li>
-<li>1 &lt;= arr[i] &lt;= 1000</li>
+<li>$n == nums.length$</li>
+<li>$2 &lt;= n &lt;= 10^4$</li>
+<li>$0 &lt;= nums[i] &lt;= 10^6$</li>
+<li>$1 &lt;= k &lt;= n \times (n - 1) / 2$</li>
 </ul>
 <hr>
-<h3 id="前缀和"><a href="#前缀和" class="headerlink" title="前缀和"></a>前缀和</h3><p>枚举所有长度为奇数的子数组，我们可以通过「枚举长度 - 枚举左端点，并计算右端点」的两层循环来做。</p>
-<p>而对于区间 $[l, r]$ 的和问题，可以直接再加一层循环来做，这样复杂度来到了 $O(n^3)$，但本题数据范围只有 $100$，也是可以过的。</p>
-<p>对于此类区间求和问题，我们应当想到使用「前缀和」进行优化：使用 $O(n)$ 的复杂度预处理出前缀和数组，每次查询 $[l, r]$ 区间和可以在 $O(1)$ 返回。</p>
-<p>代码：<br><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">sumOddLengthSubarrays</span><span class="hljs-params">(<span class="hljs-type">int</span>[] arr)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> arr.length;<br>        <span class="hljs-type">int</span>[] sum = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[n + <span class="hljs-number">1</span>];<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>; i &lt;= n; i++) sum[i] = sum[i - <span class="hljs-number">1</span>] + arr[i - <span class="hljs-number">1</span>];<br>        <span class="hljs-type">int</span> <span class="hljs-variable">ans</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">len</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>; len &lt;= n; len += <span class="hljs-number">2</span>) &#123;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">l</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; l + len - <span class="hljs-number">1</span> &lt; n; l++) &#123;<br>                <span class="hljs-type">int</span> <span class="hljs-variable">r</span> <span class="hljs-operator">=</span> l + len - <span class="hljs-number">1</span>;<br>                ans += sum[r + <span class="hljs-number">1</span>] - sum[l];<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> ans;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure></p>
+<h3 id="二分-双指针"><a href="#二分-双指针" class="headerlink" title="二分 + 双指针"></a>二分 + 双指针</h3><p>根据题意，由于对距离定义使用的是绝对值，因此从原数组中找数对 $(i, j)$，等价于在排序数组中找数对 $(i, j)$。</p>
+<p>同时由于 $k$ 的范围为 $n^2$，因此我们不能使用复杂度为 $O(k\log{n})$ 的「多路归并」做法来做。</p>
+<p>利用数据范围 $0 &lt;= nums[i] &lt;= 10^6$，我们知道距离值域范围为 $[0, 10^6]$，假设所能形成的距离序列为 $A = a_1, a_2, … ,a_m$，此时在以第 $k$ 小的距离值为分割点的数轴上，具有「二段性」，记这第 $k$ 小的距离值为 $a_k$：</p>
 <ul>
-<li>时间复杂度：$O(n^2)$</li>
-<li>空间复杂度：$O(n)$</li>
+<li>处于 $a_k$ 右侧的所有位置 $a_i$（包含 $a_k$）<strong>必然满足</strong>「序列 $A$ 中值小于等于 $a_i$ 的数不少于 $k$ 个」；</li>
+<li>处于 $a_k$ 左侧的所有位置 $a_i$（不包含 $a_k$）<strong>不一定满足</strong>「序列 $A$ 中值小于等于 $a_i$ 的数不少于 $k$ 个」（当且仅当 $a_k$ 在序列 $A$ 中不重复，或 $a_k$ 恰好是连续段距离值中的左端点时，必然不满足）。</li>
+</ul>
+<p>因此这本质上是一个满足 <code>1?</code> 特性（而不是 <code>10</code> 特性）的问题，我们可以使用「二分」来找到 $a_k$ 值。</p>
+<p>假设当前我们二分到的值是 $x$，利用我们排序好的 <code>nums</code>，我们并不需要真正的构建出序列 $A$，即可统计值小于等于 $x$ 的数量：枚举左端点 $i$，每次找第一个不满足条件的右端点 $j$（由于 $j$ 是第一个不满足条件的值，因此合法右端点范围为 $[i + 1, j - 1]$，共 $j - i - 1$ 个），利用 <code>nums</code> 有序，并且所有 $nums[i]$ 均为正数，可知 $j$ 会随着 $i$ 增大而逐步增大，即这部分利用「双指针」可实现 $O(n)$ 复杂度。</p>
+<p>代码：<br><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">smallestDistancePair</span><span class="hljs-params">(<span class="hljs-type">int</span>[] nums, <span class="hljs-type">int</span> k)</span> &#123;<br>        Arrays.sort(nums);<br>        <span class="hljs-type">int</span> <span class="hljs-variable">l</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>, r = (<span class="hljs-type">int</span>)<span class="hljs-number">1e6</span>;<br>        <span class="hljs-keyword">while</span> (l &lt; r) &#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">mid</span> <span class="hljs-operator">=</span> l + r &gt;&gt; <span class="hljs-number">1</span>;<br>            <span class="hljs-keyword">if</span> (check(nums, mid) &gt;= k) r = mid;<br>            <span class="hljs-keyword">else</span> l = mid + <span class="hljs-number">1</span>;<br>        &#125;<br>        <span class="hljs-keyword">return</span> r;<br>    &#125;<br>    <span class="hljs-type">int</span> <span class="hljs-title function_">check</span><span class="hljs-params">(<span class="hljs-type">int</span>[] nums, <span class="hljs-type">int</span> x)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> nums.length, ans = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>, j = <span class="hljs-number">1</span>; i &lt; n; i++) &#123;<br>            <span class="hljs-keyword">while</span> (j &lt; n &amp;&amp; nums[j] - nums[i] &lt;= x) j++;<br>            ans += j - i - <span class="hljs-number">1</span>;<br>        &#125;<br>        <span class="hljs-keyword">return</span> ans;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure></p>
+<ul>
+<li>时间复杂度：排序的复杂度为 $O(n\log{n})$，二分答案复杂度为 $O(n\log{m})$，其中 $m = 1e6$ 为距离值域。整体复杂度为 $O(n\log{m})$</li>
+<li>空间复杂度：$O(\log{n})$</li>
 </ul>
 <hr>
-<h3 id="数学"><a href="#数学" class="headerlink" title="数学"></a>数学</h3><p>事实上，我们可以统计任意值 $arr[i]$ 在奇数子数组的出现次数。</p>
-<p>对于原数组的任意位置 $i$ 而言，其左边共有 $i$ 个数，右边共有 $n - i - 1$ 个数。</p>
-<p><strong>$arr[i]$ 作为某个奇数子数组的成员的充要条件为：其所在奇数子数组左右两边元素个数奇偶性相同。</strong></p>
-<p>于是问题转换为如何求得「$arr[i]$ 在原数组中两边连续一段元素个为奇数的方案数」和「$arr[i]$ 在原数组两边连续一段元素个数为偶数的方案数」。</p>
-<p>由于我们已经知道 $arr[i]$ 左边共有 $i$ 个数，右边共有 $n - i - 1$ 个数，因此可以算得组合数：</p>
-<ul>
-<li>位置 $i$ 左边奇数个数的方案数为 $(i + 1) / 2$，右边奇数个数的方案数为 $(n - i) / 2$；</li>
-<li>位置 $i$ 左边偶数（非零）个数的方案数为 $i / 2$，右边偶数（非零）个数的方案数为 $(n - i - 1) / 2$；<ul>
-<li>考虑左右两边不选也属于合法的偶数个数方案数，因此在上述分析基础上对偶数方案数自增 $1$。</li>
-</ul>
-</li>
-</ul>
-<p>至此，我们得到了位置 $i$ 左右奇数和偶数的方案数个数，根据「如果 $arr[i]$ 位于奇数子数组中，其左右两边元素个数奇偶性相同」以及「乘法原理」，我们知道 $arr[i]$ 同出现在多少个奇数子数组中，再乘上 $arr[i]$ 即是 $arr[i]$ 对答案的贡献。</p>
-<p>代码：<br><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">sumOddLengthSubarrays</span><span class="hljs-params">(<span class="hljs-type">int</span>[] arr)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> arr.length;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">ans</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; n; i++) &#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">l1</span> <span class="hljs-operator">=</span> (i + <span class="hljs-number">1</span>) / <span class="hljs-number">2</span>, r1 = (n - i) / <span class="hljs-number">2</span>; <span class="hljs-comment">// 奇数</span><br>            <span class="hljs-type">int</span> <span class="hljs-variable">l2</span> <span class="hljs-operator">=</span> i / <span class="hljs-number">2</span>, r2 = (n - i - <span class="hljs-number">1</span>) / <span class="hljs-number">2</span>; <span class="hljs-comment">// 偶数</span><br>            l2++; r2++;<br>            ans += (l1 * r1 + l2 * r2) * arr[i];<br>        &#125;<br>        <span class="hljs-keyword">return</span> ans;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure></p>
-<ul>
-<li>时间复杂度：$O(n)$</li>
-<li>空间复杂度：$O(1)$</li>
-</ul>
-<hr>
-<h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>这是我们「刷穿 LeetCode」系列文章的第 <code>No.1588</code> 篇，系列开始于 2021/01/01，截止于起始日 LeetCode 上共有 1916 道题目，部分是有锁题，我们将先把所有不带锁的题目刷完。</p>
+<h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>这是我们「刷穿 LeetCode」系列文章的第 <code>No.719</code> 篇，系列开始于 2021/01/01，截止于起始日 LeetCode 上共有 1916 道题目，部分是有锁题，我们将先把所有不带锁的题目刷完。</p>
 <p>在这个系列文章里面，除了讲解解题思路以外，还会尽可能给出最为简洁的代码。如果涉及通解还会相应的代码模板。</p>
 <p>为了方便各位同学能够电脑上进行调试和提交代码，我建立了相关的仓库：<a target="_blank" rel="noopener" href="https://github.com/SharingSource/LogicStack-LeetCode">https://github.com/SharingSource/LogicStack-LeetCode</a> 。</p>
 <p>在仓库地址里，你可以看到系列文章的题解链接、系列文章的相应代码、LeetCode 原题链接和其他优选题解。</p>
@@ -289,9 +278,9 @@
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/%E6%95%B0%E5%AD%A6/">数学</a>
+                      <a class="hover-with-bg" href="/tags/%E5%8F%8C%E6%8C%87%E9%92%88/">双指针</a>
                     
-                      <a class="hover-with-bg" href="/tags/%E5%89%8D%E7%BC%80%E5%92%8C/">前缀和</a>
+                      <a class="hover-with-bg" href="/tags/%E4%BA%8C%E5%88%86/">二分</a>
                     
                   </div>
                 
@@ -308,18 +297,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2021/08/30/528.%20%E6%8C%89%E6%9D%83%E9%87%8D%E9%9A%8F%E6%9C%BA%E9%80%89%E6%8B%A9%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">LC 528. 按权重随机选择</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/08/28/1480.%20%E4%B8%80%E7%BB%B4%E6%95%B0%E7%BB%84%E7%9A%84%E5%8A%A8%E6%80%81%E5%92%8C%EF%BC%88%E7%AE%80%E5%8D%95%EF%BC%89/">
-                        <span class="hidden-mobile">LC 1480. 一维数组的动态和</span>
+                      <a href="/2022/06/14/498.%20%E5%AF%B9%E8%A7%92%E7%BA%BF%E9%81%8D%E5%8E%86%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/">
+                        <span class="hidden-mobile">LC 498. 对角线遍历</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
