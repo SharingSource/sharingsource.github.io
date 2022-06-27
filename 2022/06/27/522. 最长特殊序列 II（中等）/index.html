@@ -16,22 +16,25 @@
   <meta name="author" content="宫水三叶">
   <meta name="keywords" content="算法, 数据结构, 题解">
   
-    <meta name="description" content="题目描述这是 LeetCode 上的 553. 最优除法 ，难度为 中等。 给定一组正整数，相邻的整数之间将会进行浮点除法操作。例如， [2,3,4] -&gt; 2 &#x2F; 3 &#x2F; 4 。 但是，你可以在任意位置添加任意数目的括号，来改变算数的优先级。你需要找出怎么添加括号，才能得到最大的结果，并且返回相应的字符串格式的表达式。你的表达式不应该含有冗余的括号。 示例：1234567891011121">
+    <meta name="description" content="题目描述这是 LeetCode 上的 522. 最长特殊序列 II ，难度为 中等。 给定字符串列表 strs，返回其中 最长的特殊序列 。如果最长特殊序列不存在，返回 $-1$ 。 特殊序列 定义如下：该序列为某字符串 独有的子序列（即不能是其他字符串的子序列）。 s 的 子序列可以通过删去字符串 s 中的某些字符实现。  例如，&quot;abc&quot; 是 &quot;aebdc&amp;quo">
 <meta property="og:type" content="article">
-<meta property="og:title" content="LC 553. 最优除法">
-<meta property="og:url" content="https://sharingsource.github.io/2022/02/26/553.%20%E6%9C%80%E4%BC%98%E9%99%A4%E6%B3%95%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/index.html">
+<meta property="og:title" content="LC 522. 最长特殊序列 II">
+<meta property="og:url" content="https://sharingsource.github.io/2022/06/27/522.%20%E6%9C%80%E9%95%BF%E7%89%B9%E6%AE%8A%E5%BA%8F%E5%88%97%20II%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/index.html">
 <meta property="og:site_name" content="宫水三叶的刷题日记">
-<meta property="og:description" content="题目描述这是 LeetCode 上的 553. 最优除法 ，难度为 中等。 给定一组正整数，相邻的整数之间将会进行浮点除法操作。例如， [2,3,4] -&gt; 2 &#x2F; 3 &#x2F; 4 。 但是，你可以在任意位置添加任意数目的括号，来改变算数的优先级。你需要找出怎么添加括号，才能得到最大的结果，并且返回相应的字符串格式的表达式。你的表达式不应该含有冗余的括号。 示例：1234567891011121">
+<meta property="og:description" content="题目描述这是 LeetCode 上的 522. 最长特殊序列 II ，难度为 中等。 给定字符串列表 strs，返回其中 最长的特殊序列 。如果最长特殊序列不存在，返回 $-1$ 。 特殊序列 定义如下：该序列为某字符串 独有的子序列（即不能是其他字符串的子序列）。 s 的 子序列可以通过删去字符串 s 中的某些字符实现。  例如，&quot;abc&quot; 是 &quot;aebdc&amp;quo">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2022-02-26T15:31:42.000Z">
-<meta property="article:modified_time" content="2022-05-18T08:27:03.677Z">
+<meta property="article:published_time" content="2022-06-26T17:17:05.000Z">
+<meta property="article:modified_time" content="2022-06-27T02:31:21.700Z">
 <meta property="article:author" content="宫水三叶">
-<meta property="article:tag" content="数学">
-<meta property="article:tag" content="贪心">
+<meta property="article:tag" content="动态规划">
+<meta property="article:tag" content="最长公共子序列">
+<meta property="article:tag" content="序列 DP">
+<meta property="article:tag" content="LCS">
+<meta property="article:tag" content="枚举">
 <meta name="twitter:card" content="summary_large_image">
   
   
-  <title>LC 553. 最优除法 - 宫水三叶的刷题日记</title>
+  <title>LC 522. 最长特殊序列 II - 宫水三叶的刷题日记</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -176,12 +179,12 @@
 </nav>
 
     <div class="banner" id="banner" parallax=true
-         style="background: url('/img/image_177.jpg') no-repeat center center;
+         style="background: url('/img/image_115.jpeg') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="LC 553. 最优除法">
+            <span class="h2" id="subtitle" title="LC 522. 最长特殊序列 II">
               
             </span>
 
@@ -196,8 +199,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2022-02-26 23:31" pubdate>
-        2022年2月26日
+      <time datetime="2022-06-27 01:17" pubdate>
+        2022年6月27日
       </time>
     </span>
   
@@ -233,32 +236,38 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">LC 553. 最优除法</h1>
+            <h1 style="display: none">LC 522. 最长特殊序列 II</h1>
             
             <div class="markdown-body">
-              <h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>这是 LeetCode 上的 <strong><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/optimal-division/solution/gong-shui-san-xie-shu-xue-lei-tan-xin-yu-61sq/">553. 最优除法</a></strong> ，难度为 <strong>中等</strong>。</p>
-<p>给定一组正整数，相邻的整数之间将会进行浮点除法操作。例如， [2,3,4] -&gt; 2 / 3 / 4 。</p>
-<p>但是，你可以在任意位置添加任意数目的括号，来改变算数的优先级。你需要找出怎么添加括号，才能得到最大的结果，并且返回相应的字符串格式的表达式。你的表达式不应该含有冗余的括号。</p>
-<p>示例：<br><figure class="highlight awk"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs awk">输入: [<span class="hljs-number">1000</span>,<span class="hljs-number">100</span>,<span class="hljs-number">10</span>,<span class="hljs-number">2</span>]<br><br>输出: <span class="hljs-string">&quot;1000/(100/10/2)&quot;</span><br><br>解释:<br><span class="hljs-number">1000</span><span class="hljs-regexp">/(100/</span><span class="hljs-number">10</span><span class="hljs-regexp">/2) = 1000/</span>((<span class="hljs-number">100</span><span class="hljs-regexp">/10)/</span><span class="hljs-number">2</span>) = <span class="hljs-number">200</span><br>但是，以下加粗的括号 <span class="hljs-string">&quot;1000/((100/10)/2)&quot;</span> 是冗余的，<br>因为他们并不影响操作的优先级，所以你需要返回 <span class="hljs-string">&quot;1000/(100/10/2)&quot;</span>。<br><br>其他用例:<br><span class="hljs-number">1000</span><span class="hljs-regexp">/(100/</span><span class="hljs-number">10</span>)/<span class="hljs-number">2</span> = <span class="hljs-number">50</span><br><span class="hljs-number">1000</span><span class="hljs-regexp">/(100/</span>(<span class="hljs-number">10</span>/<span class="hljs-number">2</span>)) = <span class="hljs-number">50</span><br><span class="hljs-number">1000</span><span class="hljs-regexp">/100/</span><span class="hljs-number">10</span>/<span class="hljs-number">2</span> = <span class="hljs-number">0.5</span><br><span class="hljs-number">1000</span><span class="hljs-regexp">/100/</span>(<span class="hljs-number">10</span>/<span class="hljs-number">2</span>) = <span class="hljs-number">2</span><br></code></pre></div></td></tr></table></figure><br>说明:</p>
+              <h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>这是 LeetCode 上的 <strong><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/longest-uncommon-subsequence-ii/solution/by-ac_oier-vuez/">522. 最长特殊序列 II</a></strong> ，难度为 <strong>中等</strong>。</p>
+<p>给定字符串列表 <code>strs</code>，返回其中 最长的特殊序列 。如果最长特殊序列不存在，返回 $-1$ 。</p>
+<p>特殊序列 定义如下：该序列为某字符串 独有的子序列（即不能是其他字符串的子序列）。</p>
+<p><code>s</code> 的 子序列可以通过删去字符串 <code>s</code> 中的某些字符实现。</p>
 <ul>
-<li>输入数组的长度在 $[1, 10]$ 之间。</li>
-<li>数组中每个元素的大小都在 $[2, 1000]$ 之间。</li>
-<li>每个测试用例只有一个最优除法解。</li>
+<li>例如，<code>&quot;abc&quot;</code> 是 <code>&quot;aebdc&quot;</code> 的子序列，因为您可以删除 <code>&quot;aebdc&quot;</code> 中的下划线字符来得到 <code>&quot;abc&quot;</code> 。<code>&quot;aebdc&quot;</code> 的子序列还包括 <code>&quot;aebdc&quot;</code>、 <code>&quot;aeb&quot;</code> 和 <code>&quot;&quot;</code> (空字符串)。</li>
+</ul>
+<p>示例 1：<br><figure class="highlight armasm"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs armasm">输入: <span class="hljs-keyword">strs</span> = [<span class="hljs-string">&quot;aba&quot;</span>,<span class="hljs-string">&quot;cdc&quot;</span>,<span class="hljs-string">&quot;eae&quot;</span>]<br><br>输出: <span class="hljs-number">3</span><br></code></pre></div></td></tr></table></figure><br>示例 2:<br><figure class="highlight armasm"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs armasm">输入: <span class="hljs-keyword">strs</span> = [<span class="hljs-string">&quot;aaa&quot;</span>,<span class="hljs-string">&quot;aaa&quot;</span>,<span class="hljs-string">&quot;aa&quot;</span>]<br><br>输出: -<span class="hljs-number">1</span><br></code></pre></div></td></tr></table></figure></p>
+<p>提示:</p>
+<ul>
+<li>$2 &lt;= strs.length &lt;= 50$</li>
+<li>$1 &lt;= strs[i].length &lt;= 10$</li>
+<li><code>strs[i]</code> 只包含小写英文字母</li>
 </ul>
 <hr>
-<h3 id="数学-贪心"><a href="#数学-贪心" class="headerlink" title="数学 + 贪心"></a>数学 + 贪心</h3><p>我们假定取得最优解的表示为 $\frac{a}{b}$，可以留意到任意的 $nums[i]$ 的范围为 $[2, 1000]$，因此我们应当让尽可能多的 $nums[i]$ 参与 $a$（分子）的构建中。</p>
-<p>因此一种可以构成最优表示的方式为「将除第一位以外的所有数作为一组，进行连除（转乘法），从而将所有 <strong>可以</strong> 变成分子的数都参与到 $a$ 的构建中」。</p>
-<p>即有：</p>
-<script type="math/tex; mode=display">
-\frac{nums[0]}{nums[1] / nums[2] / ... / nums[n - 1]} = \frac{nums[0]}{nums[1] * \frac{1}{nums[2]} * ... * \frac{1}{nums[n - 1]}} = \frac{nums[0] * nums[2] * ... * nums[n - 1]}{nums[1]}</script><p>综上，我们只需要从前往后进行构建出连除的答案，如果 $nums$ 的长度大于 $2$，再追加一对大括号即可。</p>
-<p>$[a_0, a_1, … , a_n]$ =&gt; $a_0/a_1/…/a_n$ =&gt; $a_0/(a_1/…/a_n)$</p>
-<p>代码：<br><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> String <span class="hljs-title function_">optimalDivision</span><span class="hljs-params">(<span class="hljs-type">int</span>[] nums)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> nums.length;<br>        <span class="hljs-type">StringBuilder</span> <span class="hljs-variable">sb</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">StringBuilder</span>();<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; n; i++) &#123;<br>            sb.append(nums[i]);<br>            <span class="hljs-keyword">if</span> (i + <span class="hljs-number">1</span> &lt; n) sb.append(<span class="hljs-string">&quot;/&quot;</span>);<br>        &#125;<br>        <span class="hljs-keyword">if</span> (n &gt; <span class="hljs-number">2</span>) &#123;<br>            sb.insert(sb.indexOf(<span class="hljs-string">&quot;/&quot;</span>) + <span class="hljs-number">1</span>, <span class="hljs-string">&quot;(&quot;</span>);<br>            sb.append(<span class="hljs-string">&quot;)&quot;</span>);<br>        &#125;<br>        <span class="hljs-keyword">return</span> sb.toString();<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure></p>
+<h3 id="LCS"><a href="#LCS" class="headerlink" title="LCS"></a>LCS</h3><p>记 <code>strs</code> 数组长度为 $n$，单个 $strs[i]$ 的最大长度 $m$。其中 $n$ 数据范围为 $50$，$m$ 数据范围为 $10$。</p>
+<p>根据题意，我们可以枚举每个 $s1 = str[i]$，检查其是否为其他 $s2 = strs[j]$ 的子序列，这需要枚举所有点对，复杂度为 $O(n^2)$。同时记录遍历过程中的最大长度 <code>ans</code>，用于剪枝（对于字符串长度本身小于等于 <code>ans</code> 的 $strs[i]$ 可直接跳过）。</p>
+<p>我们可以实现一个 <code>check</code> 函数来检查 <code>s1</code> 是否为 <code>s2</code> 的子序列，该问题可转化为求 <code>s1</code> 和 <code>s2</code> 的最长公共子序列长度。若最长公共子序列长度为 <code>s1</code> 长度，说明 <code>s1</code> 为 <code>s2</code> 的子序列，此时 $strs[i]$ 不满足条件，否则我们使用 $strs[i]$ 的长度来更新 <code>ans</code>。<code>check</code> 函数的复杂度为 $O(m^2)$。</p>
+<blockquote>
+<p><strong>不了解 LCS 的同学可以看前置 🧀 : <a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzU4NDE3MTEyMA==&amp;mid=2247492097&amp;idx=1&amp;sn=f51f29d86df809d8ac43a40a1369b3d6">LCS 模板题</a></strong></p>
+</blockquote>
+<p>因此总的计算量为 $n^2 \times m^2 = 2.5 * 10^5$，可以过。</p>
+<p>代码：<br><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">findLUSlength</span><span class="hljs-params">(String[] strs)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> strs.length, ans = -<span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; n; i++) &#123;<br>            <span class="hljs-keyword">if</span> (strs[i].length() &lt;= ans) <span class="hljs-keyword">continue</span>;<br>            <span class="hljs-type">boolean</span> <span class="hljs-variable">ok</span> <span class="hljs-operator">=</span> <span class="hljs-literal">true</span>;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; j &lt; n &amp;&amp; ok; j++) &#123;<br>                <span class="hljs-keyword">if</span> (i == j) <span class="hljs-keyword">continue</span>;<br>                <span class="hljs-keyword">if</span> (check(strs[i], strs[j])) ok = <span class="hljs-literal">false</span>;<br>            &#125;<br>            <span class="hljs-keyword">if</span> (ok) ans = strs[i].length();<br>        &#125;<br>        <span class="hljs-keyword">return</span> ans;<br>    &#125;<br>    <span class="hljs-type">boolean</span> <span class="hljs-title function_">check</span><span class="hljs-params">(String s1, String s2)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> s1.length(), m = s2.length();<br>        <span class="hljs-keyword">if</span> (m &lt; n) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>        <span class="hljs-type">int</span>[][] f = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[n + <span class="hljs-number">1</span>][m + <span class="hljs-number">1</span>];<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>; i &lt;= n; i++) &#123;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>; j &lt;= m; j++) &#123;<br>                f[i][j] = s1.charAt(i - <span class="hljs-number">1</span>) == s2.charAt(j - <span class="hljs-number">1</span>) ? f[i - <span class="hljs-number">1</span>][j - <span class="hljs-number">1</span>] + <span class="hljs-number">1</span> : f[i - <span class="hljs-number">1</span>][j - <span class="hljs-number">1</span>];<br>                f[i][j] = Math.max(f[i][j], f[i - <span class="hljs-number">1</span>][j]);<br>                f[i][j] = Math.max(f[i][j], f[i][j - <span class="hljs-number">1</span>]);<br>                <span class="hljs-keyword">if</span> (f[i][j] == n) <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure></p>
 <ul>
-<li>时间复杂度：$O(n)$</li>
-<li>空间复杂度：$O(n * C)$，其中 $C$ 为 $nums[i]$ 的最大长度，对于本题 $C = 4$</li>
+<li>时间复杂度：检查每个 $strs[i]$ 是否符合要求，需要枚举所有的点对，复杂度为 $O(n^2)$；求解 LCS 问题的复杂度为 $O(m^2)$。整体复杂度为 $O(n^2 \times m^2)$</li>
+<li>空间复杂度：$O(m^2)$</li>
 </ul>
 <hr>
-<h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>这是我们「刷穿 LeetCode」系列文章的第 <code>No.553</code> 篇，系列开始于 2021/01/01，截止于起始日 LeetCode 上共有 1916 道题目，部分是有锁题，我们将先把所有不带锁的题目刷完。</p>
+<h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>这是我们「刷穿 LeetCode」系列文章的第 <code>No.522</code> 篇，系列开始于 2021/01/01，截止于起始日 LeetCode 上共有 1916 道题目，部分是有锁题，我们将先把所有不带锁的题目刷完。</p>
 <p>在这个系列文章里面，除了讲解解题思路以外，还会尽可能给出最为简洁的代码。如果涉及通解还会相应的代码模板。</p>
 <p>为了方便各位同学能够电脑上进行调试和提交代码，我建立了相关的仓库：<a target="_blank" rel="noopener" href="https://github.com/SharingSource/LogicStack-LeetCode">https://github.com/SharingSource/LogicStack-LeetCode</a> 。</p>
 <p>在仓库地址里，你可以看到系列文章的题解链接、系列文章的相应代码、LeetCode 原题链接和其他优选题解。</p>
@@ -272,9 +281,15 @@
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/%E6%95%B0%E5%AD%A6/">数学</a>
+                      <a class="hover-with-bg" href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/">动态规划</a>
                     
-                      <a class="hover-with-bg" href="/tags/%E8%B4%AA%E5%BF%83/">贪心</a>
+                      <a class="hover-with-bg" href="/tags/%E6%9C%80%E9%95%BF%E5%85%AC%E5%85%B1%E5%AD%90%E5%BA%8F%E5%88%97/">最长公共子序列</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%BA%8F%E5%88%97-DP/">序列 DP</a>
+                    
+                      <a class="hover-with-bg" href="/tags/LCS/">LCS</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E6%9E%9A%E4%B8%BE/">枚举</a>
                     
                   </div>
                 
@@ -291,18 +306,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2022/02/27/1601.%20%E6%9C%80%E5%A4%9A%E5%8F%AF%E8%BE%BE%E6%88%90%E7%9A%84%E6%8D%A2%E6%A5%BC%E8%AF%B7%E6%B1%82%E6%95%B0%E7%9B%AE%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">LC 1601. 最多可达成的换楼请求数目</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2022/02/25/2016.%20%E5%A2%9E%E9%87%8F%E5%85%83%E7%B4%A0%E4%B9%8B%E9%97%B4%E7%9A%84%E6%9C%80%E5%A4%A7%E5%B7%AE%E5%80%BC%EF%BC%88%E7%AE%80%E5%8D%95%EF%BC%89/">
-                        <span class="hidden-mobile">LC 2016. 增量元素之间的最大差值</span>
+                      <a href="/2022/06/26/710.%20%E9%BB%91%E5%90%8D%E5%8D%95%E4%B8%AD%E7%9A%84%E9%9A%8F%E6%9C%BA%E6%95%B0%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/">
+                        <span class="hidden-mobile">LC 710. 黑名单中的随机数</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
