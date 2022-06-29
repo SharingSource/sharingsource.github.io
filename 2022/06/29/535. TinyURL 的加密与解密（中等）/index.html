@@ -24,7 +24,7 @@
 <meta property="og:description" content="题目描述这是 LeetCode 上的 535. TinyURL 的加密与解密 ，难度为 中等。 TinyURL 是一种 URL 简化服务， 比如：当你输入一个 URL https:&#x2F;&#x2F;leetcode.com&#x2F;problems&#x2F;design-tinyurl 时，它将返回一个简化的URL http:&#x2F;&#x2F;tinyurl.com&#x2F;4e9iAk 。 请你设计一个类来加密与解密 TinyURL 。 加密和解">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-06-28T16:59:59.000Z">
-<meta property="article:modified_time" content="2022-06-29T01:49:54.806Z">
+<meta property="article:modified_time" content="2022-06-29T04:54:46.690Z">
 <meta property="article:author" content="宫水三叶">
 <meta property="article:tag" content="哈希表">
 <meta property="article:tag" content="模拟">
@@ -262,6 +262,18 @@
 <li>时间复杂度：<code>encode</code> 操作复杂度为 $O(C + L)$，其中 $C = 6$ 为短串长度，$L$ 为传入参数 <code>longUrl</code> 的长度（存入哈希表需要计算 <code>longUrl</code> 哈希值，该过程需要遍历 <code>longUrl</code>）；<code>decode</code> 操作复杂度为 $O(C)$，其中 $L$ 为传入参数 <code>shortUrl</code> 的长度，该长度固定为 <code>prefix</code> 长度加 $6$</li>
 <li>空间复杂度：$O(K \times L)$，其中 $K$ 为调用次数，$L$ 为平均 <code>longUrl</code> 长度</li>
 </ul>
+<hr>
+<h3 id="关于使用「自增-id」的答疑"><a href="#关于使用「自增-id」的答疑" class="headerlink" title="关于使用「自增 id」的答疑"></a>关于使用「自增 <code>id</code>」的答疑</h3><p>群里有同学问到为啥要使用「哈希存储映射关系」的方式，而不是用「自增 <code>id</code>」的方式，感觉可能是一部分同学的共同疑惑，这里统一回答一下。</p>
+<p>其中两点较为致命的弊端是：</p>
+<ol>
+<li><p>使用「自增 <code>id</code>」更容易被枚举；<br> （再补充，提出原问题的好奇宝宝又问了另外一个问题）关于被枚举的坏处：粗略来说会导致安全性下降，被攻击的可能性大大增强。因为可枚举意味着，不能光靠 URL 特定发放来确保安全。<br> 结合具体场景来说，假设某个活动日期生成了短 URL 的活动链接，只有特定用户可以访问，可枚举意味着竞品只需要大概知道你自增 id 当前在什么范围即可拿到活动链接，即使活动链接做了鉴权，也能通过攻击手段导致服务请求数量突增，影响真实的活动用户使用。<br> 或许这个场景并不致命，竞品要拿到活动链接有很多方式，未必是通过枚举短 URL 来做到。<br> 但另外一个场景则是致命的，就是可枚举会导致使用短 URL 服务的「验证服务」失效。<br> 例如某个服务会通过「邮件/短信」发送短 URL 链接，让用户通过点击短 URL 来验证是否为某个「邮箱/手机号」的拥有者，短 URL 可枚举，意味着只需要知道当前自增 <code>id</code> 大概范围，就可通过枚举的方式访问到真实的验证地址，从而实现「不收到某个邮件/短信」也可以通过验证的目的。</p>
+</li>
+<li><p>相比于使用「哈希存储映射关系」的方式，不好重用：</p>
+<p> 举个🌰，例如映射关系都是 $7$ 天过期，每天会产生了 $10$ 个短 URL，当进行到第 $8$ 天，此时 <code>id</code> 已经自增到 $71$，同时第一天产生的短 URL 已过期，但是实现上，我们不好将 <code>id</code> 进行回拨（需要考虑当重用数字用完后要回到 $71$ 的位置）。也就是说，发现而且重用某些数字段（过期的 <code>id</code>）会为“自增”带来困扰，而引入「重用池」则违背了选择自增方案的初衷。</p>
+<p> 但「哈希存储映射关系」要实现重用则是简单的，如果随机产生的短 URL 发生冲突，只需要直接拒绝进行重试即可，一旦产生短 URL 无冲突，则可以直接使用。同时由于随机通常服从某种分布，我们无须引入「过期时间戳」等信息，即可达到「某个短 URL 在使用后的一段时间后，都不会被随机到（不会在过期后就被迅速重用）」的作用，这一点可以通过调大 $k$ 值来进一步保证。</p>
+</li>
+</ol>
+<p>防杠声明：当然，如果你只是在单纯的做算法题，就当我没说 🤣</p>
 <hr>
 <h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>这是我们「刷穿 LeetCode」系列文章的第 <code>No.535</code> 篇，系列开始于 2021/01/01，截止于起始日 LeetCode 上共有 1916 道题目，部分是有锁题，我们将先把所有不带锁的题目刷完。</p>
 <p>在这个系列文章里面，除了讲解解题思路以外，还会尽可能给出最为简洁的代码。如果涉及通解还会相应的代码模板。</p>
