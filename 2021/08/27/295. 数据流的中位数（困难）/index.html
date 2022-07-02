@@ -16,18 +16,17 @@
   <meta name="author" content="宫水三叶">
   <meta name="keywords" content="算法, 数据结构, 题解">
   
-    <meta name="description" content="题目描述这是 LeetCode 上的 295. 数据流的中位数 ，难度为 困难。 中位数是有序列表中间的数。如果列表长度是偶数，中位数则是中间两个数的平均值。 例如， [2,3,4] 的中位数是 3 [2,3] 的中位数是 (2 + 3) &#x2F; 2 &#x3D; 2.5 设计一个支持以下两种操作的数据结构：  void addNum(int num) - 从数据流中添加一个整数到数据结构中。 double f">
+    <meta name="description" content="题目描述这是 LeetCode 上的 295. 数据流的中位数 ，难度为 困难。 中位数是有序列表中间的数。如果列表长度是偶数，中位数则是中间两个数的平均值。 例如，  [2,3,4] 的中位数是 $3$ [2,3] 的中位数是 $(2 + 3) &#x2F; 2 &#x3D; 2.5$  设计一个支持以下两种操作的数据结构：  void addNum(int num) - 从数据流中添加一个整数到数据结构中。 do">
 <meta property="og:type" content="article">
 <meta property="og:title" content="LC 295. 数据流的中位数">
 <meta property="og:url" content="https://sharingsource.github.io/2021/08/27/295.%20%E6%95%B0%E6%8D%AE%E6%B5%81%E7%9A%84%E4%B8%AD%E4%BD%8D%E6%95%B0%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/index.html">
 <meta property="og:site_name" content="宫水三叶的刷题日记">
-<meta property="og:description" content="题目描述这是 LeetCode 上的 295. 数据流的中位数 ，难度为 困难。 中位数是有序列表中间的数。如果列表长度是偶数，中位数则是中间两个数的平均值。 例如， [2,3,4] 的中位数是 3 [2,3] 的中位数是 (2 + 3) &#x2F; 2 &#x3D; 2.5 设计一个支持以下两种操作的数据结构：  void addNum(int num) - 从数据流中添加一个整数到数据结构中。 double f">
+<meta property="og:description" content="题目描述这是 LeetCode 上的 295. 数据流的中位数 ，难度为 困难。 中位数是有序列表中间的数。如果列表长度是偶数，中位数则是中间两个数的平均值。 例如，  [2,3,4] 的中位数是 $3$ [2,3] 的中位数是 $(2 + 3) &#x2F; 2 &#x3D; 2.5$  设计一个支持以下两种操作的数据结构：  void addNum(int num) - 从数据流中添加一个整数到数据结构中。 do">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-08-26T17:41:09.000Z">
-<meta property="article:modified_time" content="2022-05-18T08:26:38.200Z">
+<meta property="article:modified_time" content="2022-07-02T01:34:41.941Z">
 <meta property="article:author" content="宫水三叶">
-<meta property="article:tag" content="优先队列">
-<meta property="article:tag" content="堆">
+<meta property="article:tag" content="优先队列（堆）">
 <meta name="twitter:card" content="summary_large_image">
   
   
@@ -239,18 +238,20 @@
               <h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>这是 LeetCode 上的 <strong><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/find-median-from-data-stream/solution/gong-shui-san-xie-jing-dian-shu-ju-jie-g-pqy8/">295. 数据流的中位数</a></strong> ，难度为 <strong>困难</strong>。</p>
 <p>中位数是有序列表中间的数。如果列表长度是偶数，中位数则是中间两个数的平均值。</p>
 <p>例如，</p>
-<p>[2,3,4] 的中位数是 3</p>
-<p>[2,3] 的中位数是 (2 + 3) / 2 = 2.5</p>
+<ul>
+<li><code>[2,3,4]</code> 的中位数是 $3$</li>
+<li><code>[2,3]</code> 的中位数是 $(2 + 3) / 2 = 2.5$</li>
+</ul>
 <p>设计一个支持以下两种操作的数据结构：</p>
 <ul>
-<li>void addNum(int num) - 从数据流中添加一个整数到数据结构中。</li>
-<li>double findMedian() - 返回目前所有元素的中位数。<br>示例：<figure class="highlight stylus"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs stylus"><span class="hljs-function"><span class="hljs-title">addNum</span><span class="hljs-params">(<span class="hljs-number">1</span>)</span></span><br><span class="hljs-function"><span class="hljs-title">addNum</span><span class="hljs-params">(<span class="hljs-number">2</span>)</span></span><br><span class="hljs-function"><span class="hljs-title">findMedian</span><span class="hljs-params">()</span></span> -&gt; <span class="hljs-number">1.5</span><br><span class="hljs-function"><span class="hljs-title">addNum</span><span class="hljs-params">(<span class="hljs-number">3</span>)</span></span> <br><span class="hljs-function"><span class="hljs-title">findMedian</span><span class="hljs-params">()</span></span> -&gt; <span class="hljs-number">2</span><br></code></pre></div></td></tr></table></figure>
-</li>
+<li><code>void addNum(int num)</code> - 从数据流中添加一个整数到数据结构中。</li>
+<li><code>double findMedian()</code> - 返回目前所有元素的中位数。</li>
 </ul>
+<p>示例：<br><figure class="highlight stylus"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs stylus"><span class="hljs-function"><span class="hljs-title">addNum</span><span class="hljs-params">(<span class="hljs-number">1</span>)</span></span><br><span class="hljs-function"><span class="hljs-title">addNum</span><span class="hljs-params">(<span class="hljs-number">2</span>)</span></span><br><span class="hljs-function"><span class="hljs-title">findMedian</span><span class="hljs-params">()</span></span> -&gt; <span class="hljs-number">1.5</span><br><span class="hljs-function"><span class="hljs-title">addNum</span><span class="hljs-params">(<span class="hljs-number">3</span>)</span></span> <br><span class="hljs-function"><span class="hljs-title">findMedian</span><span class="hljs-params">()</span></span> -&gt; <span class="hljs-number">2</span><br></code></pre></div></td></tr></table></figure></p>
 <p>进阶:</p>
 <ul>
-<li>如果数据流中所有整数都在 0 到 100 范围内，你将如何优化你的算法？</li>
-<li>如果数据流中 99% 的整数都在 0 到 100 范围内，你将如何优化你的算法？</li>
+<li>如果数据流中所有整数都在 $0$ 到 $100$ 范围内，你将如何优化你的算法？</li>
+<li>如果数据流中 <code>99%</code> 的整数都在 $0$ 到 $100$ 范围内，你将如何优化你的算法？</li>
 </ul>
 <hr>
 <h3 id="数据结构运用"><a href="#数据结构运用" class="headerlink" title="数据结构运用"></a>数据结构运用</h3><p>这是一道经典的数据结构运用题。</p>
@@ -309,9 +310,7 @@
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/%E4%BC%98%E5%85%88%E9%98%9F%E5%88%97/">优先队列</a>
-                    
-                      <a class="hover-with-bg" href="/tags/%E5%A0%86/">堆</a>
+                      <a class="hover-with-bg" href="/tags/%E4%BC%98%E5%85%88%E9%98%9F%E5%88%97%EF%BC%88%E5%A0%86%EF%BC%89/">优先队列（堆）</a>
                     
                   </div>
                 
