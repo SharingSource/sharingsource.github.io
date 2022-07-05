@@ -1,0 +1,624 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/oimg/RoundCorner.png">
+  <link rel="icon" href="/oimg/RoundCorner.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="宫水三叶">
+  <meta name="keywords" content="算法, 数据结构, 题解">
+  
+    <meta name="description" content="题目描述这是 LeetCode 上的 729. 我的日程安排表 I ，难度为 中等。 实现一个 MyCalendar 类来存放你的日程安排。如果要添加的日程安排不会造成 重复预订 ，则可以存储这个新的日程安排。 当两个日程安排有一些时间上的交叉时（例如两个日程安排都在同一时间内），就会产生 重复预订 。 日程可以用一对整数 start 和 end 表示，这里的时间是半开区间，即 $[start,">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LC 729. 我的日程安排表 I">
+<meta property="og:url" content="https://sharingsource.github.io/2022/07/05/729.%20%E6%88%91%E7%9A%84%E6%97%A5%E7%A8%8B%E5%AE%89%E6%8E%92%E8%A1%A8%20I%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/index.html">
+<meta property="og:site_name" content="宫水三叶的刷题日记">
+<meta property="og:description" content="题目描述这是 LeetCode 上的 729. 我的日程安排表 I ，难度为 中等。 实现一个 MyCalendar 类来存放你的日程安排。如果要添加的日程安排不会造成 重复预订 ，则可以存储这个新的日程安排。 当两个日程安排有一些时间上的交叉时（例如两个日程安排都在同一时间内），就会产生 重复预订 。 日程可以用一对整数 start 和 end 表示，这里的时间是半开区间，即 $[start,">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://sharingsource.github.io/2022/07/05/729.%20%E6%88%91%E7%9A%84%E6%97%A5%E7%A8%8B%E5%AE%89%E6%8E%92%E8%A1%A8%20I%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/image_0.png">
+<meta property="article:published_time" content="2022-07-04T17:10:28.000Z">
+<meta property="article:modified_time" content="2022-07-05T02:26:24.719Z">
+<meta property="article:author" content="宫水三叶">
+<meta property="article:tag" content="哈希表">
+<meta property="article:tag" content="模拟">
+<meta property="article:tag" content="线段树">
+<meta property="article:tag" content="位运算">
+<meta property="article:tag" content="红黑树">
+<meta property="article:tag" content="线段树（动态开点）">
+<meta property="article:tag" content="分块">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://sharingsource.github.io/2022/07/05/729.%20%E6%88%91%E7%9A%84%E6%97%A5%E7%A8%8B%E5%AE%89%E6%8E%92%E8%A1%A8%20I%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/image_0.png">
+  
+  
+  <title>LC 729. 我的日程安排表 I - 宫水三叶的刷题日记</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/hint.css/2.7.0/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.7.2/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"sharingsource.github.io","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"|","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"IDifiViRkVDTgu27Nu50GQkE-gzGzoHsz","app_key":"gt98pupgyYjPKYQASrGmD9kM","server_url":"https://idifivir.lc-cn-n1-shared.com","path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.1.0"></head>
+
+
+<body>
+  <header style="height: 50vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>宫水三叶の刷题日记</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/image_106.jpeg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="LC 729. 我的日程安排表 I">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-author" aria-hidden="true"></i>
+      宫水三叶
+    </span>
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2022-07-05 01:10" pubdate>
+        2022年7月5日
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">LC 729. 我的日程安排表 I</h1>
+            
+            <div class="markdown-body">
+              <h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>这是 LeetCode 上的 <strong><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/my-calendar-i/solution/by-ac_oier-hnjl/">729. 我的日程安排表 I</a></strong> ，难度为 <strong>中等</strong>。</p>
+<p>实现一个 <code>MyCalendar</code> 类来存放你的日程安排。如果要添加的日程安排不会造成 重复预订 ，则可以存储这个新的日程安排。</p>
+<p>当两个日程安排有一些时间上的交叉时（例如两个日程安排都在同一时间内），就会产生 重复预订 。</p>
+<p>日程可以用一对整数 <code>start</code> 和 <code>end</code> 表示，这里的时间是半开区间，即 $[start, end)$, 实数 $x$ 的范围为，  $start &lt;= x &lt; end$ 。</p>
+<p>实现 MyCalendar 类：</p>
+<ul>
+<li><code>MyCalendar()</code> 初始化日历对象。</li>
+<li><code>boolean book(int start, int end)</code> 如果可以将日程安排成功添加到日历中而不会导致重复预订，返回 <code>true</code>。否则，返回 <code>false</code> 并且不要将该日程安排添加到日历中。</li>
+</ul>
+<p>示例：<br><figure class="highlight lua"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs lua">输入：<br>[<span class="hljs-string">&quot;MyCalendar&quot;</span>, <span class="hljs-string">&quot;book&quot;</span>, <span class="hljs-string">&quot;book&quot;</span>, <span class="hljs-string">&quot;book&quot;</span>]<br><span class="hljs-string">[[], [10, 20], [15, 25], [20, 30]]</span><br><br>输出：<br>[null, <span class="hljs-literal">true</span>, <span class="hljs-literal">false</span>, <span class="hljs-literal">true</span>]<br><br>解释：<br>MyCalendar myCalendar = new MyCalendar();<br>myCalendar.book(<span class="hljs-number">10</span>, <span class="hljs-number">20</span>); // <span class="hljs-keyword">return</span> True<br>myCalendar.book(<span class="hljs-number">15</span>, <span class="hljs-number">25</span>); // <span class="hljs-keyword">return</span> False ，这个日程安排不能添加到日历中，因为时间 <span class="hljs-number">15</span> 已经被另一个日程安排预订了。<br>myCalendar.book(<span class="hljs-number">20</span>, <span class="hljs-number">30</span>); // <span class="hljs-keyword">return</span> True ，这个日程安排可以添加到日历中，因为第一个日程安排预订的每个时间都小于 <span class="hljs-number">20</span> ，且不包含时间 <span class="hljs-number">20</span> 。<br></code></pre></div></td></tr></table></figure></p>
+<p>提示：</p>
+<ul>
+<li>$0 &lt;= start &lt; end &lt;= 10^9$</li>
+<li>每个测试用例，调用 <code>book</code> 方法的次数最多不超过 $1000$ 次。</li>
+</ul>
+<hr>
+<h3 id="模拟"><a href="#模拟" class="headerlink" title="模拟"></a>模拟</h3><p>利用 <code>book</code> 操作最多调用 $1000$ 次，我们可以使用一个数组存储所有已被预定的日期 $[start, end - 1]$，对于每次 <code>book</code> 操作，检查当前传入的 $[start, end)$ 是否会与已有的日期冲突，冲突返回 <code>False</code>，否则将 $[start, end- 1]$ 插入数组并返回 <code>True</code>。</p>
+<p>代码：<br><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">MyCalendar</span> &#123;<br>    List&lt;<span class="hljs-type">int</span>[]&gt; list = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">book</span><span class="hljs-params">(<span class="hljs-type">int</span> start, <span class="hljs-type">int</span> end)</span> &#123;<br>        end--;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span>[] info : list) &#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">l</span> <span class="hljs-operator">=</span> info[<span class="hljs-number">0</span>], r = info[<span class="hljs-number">1</span>];<br>            <span class="hljs-keyword">if</span> (start &gt; r || end &lt; l) <span class="hljs-keyword">continue</span>;<br>            <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>        &#125;<br>        list.add(<span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[]&#123;start, end&#125;);<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure></p>
+<ul>
+<li>时间复杂度：令 $n$ 为 <code>book</code> 的最大调用次数，复杂度为 $O(n^2)$</li>
+<li>空间复杂度：$O(n)$</li>
+</ul>
+<hr>
+<h3 id="线段树（动态开点）"><a href="#线段树（动态开点）" class="headerlink" title="线段树（动态开点）"></a>线段树（动态开点）</h3><p>线段树维护的节点信息包括：</p>
+<ul>
+<li><code>ls/rs</code>: 分别代表当前节点的左右子节点在线段树数组 <code>tr</code> 中的下标；</li>
+<li><code>add</code>: 懒标记；</li>
+<li><code>val</code>: 为当前区间的所包含的点的数量。</li>
+</ul>
+<p>对于常规的线段树实现来说，都是一开始就调用 <code>build</code> 操作创建空树，而线段树一般以「满二叉树」的形式用数组存储，因此需要 $4 * n$ 的空间，并且这些空间在起始 <code>build</code> 空树的时候已经锁死。</p>
+<p>如果一道题仅仅是「值域很大」的离线题（提前知晓所有的询问），我们还能通过「离散化」来进行处理，将值域映射到一个小空间去，从而解决 <code>MLE</code>  问题。</p>
+<p>但对于本题而言，由于「强制在线」的原因，我们无法进行「离散化」，同时值域大小达到 $1e9$ 级别，因此如果我们想要使用「线段树」进行求解，只能采取「动态开点」的方式进行。</p>
+<p>动态开点的优势在于，不需要事前构造空树，而是在插入操作 <code>add</code> 和查询操作 <code>query</code> 时根据访问需要进行「开点」操作。由于我们不保证查询和插入都是连续的，因此对于父节点 $u$ 而言，我们不能通过 <code>u &lt;&lt; 1</code> 和 <code>u &lt;&lt; 1  | 1</code> 的固定方式进行访问，而要将节点 $tr[u]$ 的左右节点所在 <code>tr</code> 数组的下标进行存储，分别记为 <code>ls</code> 和 <code>rs</code> 属性。对于 $tr[u].ls = 0$ 和 $tr[u].rs = 0$ 则是代表子节点尚未被创建，当需要访问到它们，而又尚未创建的时候，则将其进行创建。</p>
+<p>由于存在「懒标记」，线段树的插入和查询都是 $\log{n}$ 的，因此我们在单次操作的时候，最多会创建数量级为 $\log{n}$ 的点，因此空间复杂度为 $O(m\log{n})$，而不是 $O(4 * n)$，而开点数的预估需不能仅仅根据 $\log{n}$ 来进行，还要对常熟进行分析，才能得到准确的点数上界。</p>
+<p>动态开点相比于原始的线段树实现，本质仍是使用「满二叉树」的形式进行存储，只不过是按需创建区间，如果我们是按照连续段进行查询或插入，最坏情况下仍然会占到 $4 <em> n$ 的空间，因此盲猜 $\log{n}$ 的常数在 $4$ 左右，保守一点可以直接估算到 $6$，因此我们可以估算点数为 $6 </em> m * \log{n}$，其中 $n = 1e9$ 和 $m = 1e3$ 分别代表值域大小和查询次数。</p>
+<p>当然一个比较实用的估点方式可以「尽可能的多开点数」，利用题目给定的空间上界和我们创建的自定义类（结构体）的大小，尽可能的多开（ <code>Java</code> 的 $128M$ 可以开到 $5 * 10^6$ 以上）。</p>
+<p>代码：<br><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">MyCalendar</span> &#123;<br>    <span class="hljs-keyword">class</span> <span class="hljs-title class_">Node</span> &#123;<br>        <span class="hljs-comment">// ls 和 rs 分别代表当前节点的左右子节点在 tr 的下标</span><br>        <span class="hljs-comment">// val 代表当前节点有多少数</span><br>        <span class="hljs-comment">// add 为懒标记</span><br>        <span class="hljs-type">int</span> ls, rs, add, val;<br>    &#125;<br>    <span class="hljs-type">int</span> <span class="hljs-variable">N</span> <span class="hljs-operator">=</span> (<span class="hljs-type">int</span>)<span class="hljs-number">1e9</span>, M = <span class="hljs-number">120010</span>, cnt = <span class="hljs-number">1</span>;<br>    Node[] tr = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Node</span>[M];<br>    <span class="hljs-keyword">void</span> <span class="hljs-title function_">update</span><span class="hljs-params">(<span class="hljs-type">int</span> u, <span class="hljs-type">int</span> lc, <span class="hljs-type">int</span> rc, <span class="hljs-type">int</span> l, <span class="hljs-type">int</span> r, <span class="hljs-type">int</span> v)</span> &#123;<br>        <span class="hljs-keyword">if</span> (l &lt;= lc &amp;&amp; rc &lt;= r) &#123;<br>            tr[u].val += (rc - lc + <span class="hljs-number">1</span>) * v;<br>            tr[u].add += v;<br>            <span class="hljs-keyword">return</span> ;<br>        &#125;<br>        lazyCreate(u);<br>        pushdown(u, rc - lc + <span class="hljs-number">1</span>);<br>        <span class="hljs-type">int</span> <span class="hljs-variable">mid</span> <span class="hljs-operator">=</span> lc + rc &gt;&gt; <span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">if</span> (l &lt;= mid) update(tr[u].ls, lc, mid, l, r, v);<br>        <span class="hljs-keyword">if</span> (r &gt; mid) update(tr[u].rs, mid + <span class="hljs-number">1</span>, rc, l, r, v);<br>        pushup(u);<br>    &#125;<br>    <span class="hljs-type">int</span> <span class="hljs-title function_">query</span><span class="hljs-params">(<span class="hljs-type">int</span> u, <span class="hljs-type">int</span> lc, <span class="hljs-type">int</span> rc, <span class="hljs-type">int</span> l, <span class="hljs-type">int</span> r)</span> &#123;<br>        <span class="hljs-keyword">if</span> (l &lt;= lc &amp;&amp; rc &lt;= r) <span class="hljs-keyword">return</span> tr[u].val;<br>        lazyCreate(u);<br>        pushdown(u, rc - lc + <span class="hljs-number">1</span>);<br>        <span class="hljs-type">int</span> <span class="hljs-variable">mid</span> <span class="hljs-operator">=</span> lc + rc &gt;&gt; <span class="hljs-number">1</span>, ans = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">if</span> (l &lt;= mid) ans = query(tr[u].ls, lc, mid, l, r);<br>        <span class="hljs-keyword">if</span> (r &gt; mid) ans += query(tr[u].rs, mid + <span class="hljs-number">1</span>, rc, l, r);<br>        <span class="hljs-keyword">return</span> ans;<br>    &#125;<br>    <span class="hljs-keyword">void</span> <span class="hljs-title function_">lazyCreate</span><span class="hljs-params">(<span class="hljs-type">int</span> u)</span> &#123;<br>        <span class="hljs-keyword">if</span> (tr[u] == <span class="hljs-literal">null</span>) tr[u] = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Node</span>();<br>        <span class="hljs-keyword">if</span> (tr[u].ls == <span class="hljs-number">0</span>) &#123;<br>            tr[u].ls = ++cnt;<br>            tr[tr[u].ls] = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Node</span>();<br>        &#125;<br>        <span class="hljs-keyword">if</span> (tr[u].rs == <span class="hljs-number">0</span>) &#123;<br>            tr[u].rs = ++cnt;<br>            tr[tr[u].rs] = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Node</span>();<br>        &#125;<br>    &#125;<br>    <span class="hljs-keyword">void</span> <span class="hljs-title function_">pushdown</span><span class="hljs-params">(<span class="hljs-type">int</span> u, <span class="hljs-type">int</span> len)</span> &#123;<br>        tr[tr[u].ls].add += tr[u].add; tr[tr[u].rs].add += tr[u].add;<br>        tr[tr[u].ls].val += (len - len / <span class="hljs-number">2</span>) * tr[u].add; tr[tr[u].rs].val += len / <span class="hljs-number">2</span> * tr[u].add;<br>        tr[u].add = <span class="hljs-number">0</span>;<br>    &#125;<br>    <span class="hljs-keyword">void</span> <span class="hljs-title function_">pushup</span><span class="hljs-params">(<span class="hljs-type">int</span> u)</span> &#123;<br>        tr[u].val = tr[tr[u].ls].val + tr[tr[u].rs].val;<br>    &#125;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">book</span><span class="hljs-params">(<span class="hljs-type">int</span> start, <span class="hljs-type">int</span> end)</span> &#123;<br>        <span class="hljs-keyword">if</span> (query(<span class="hljs-number">1</span>, <span class="hljs-number">1</span>, N + <span class="hljs-number">1</span>, start + <span class="hljs-number">1</span>, end) &gt; <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>        update(<span class="hljs-number">1</span>, <span class="hljs-number">1</span>, N + <span class="hljs-number">1</span>, start + <span class="hljs-number">1</span>, end, <span class="hljs-number">1</span>);<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure></p>
+<ul>
+<li>时间复杂度：令 $n$ 为值域大小，本题固定为 $1e9$，线段树的查询和增加复杂度均为 $O(\log{n})$</li>
+<li>空间复杂度：令询问数量为 $m$，复杂度为 $O(m\log{n})$</li>
+</ul>
+<hr>
+<h3 id="分块-位运算（分桶）"><a href="#分块-位运算（分桶）" class="headerlink" title="分块 + 位运算（分桶）"></a>分块 + 位运算（分桶）</h3><p>另一个留有遗憾的算法是「分块」，朴素的分块做法是使用一个布尔数组 <code>region</code> 代表某个块是否有被占用，使用哈希表记录具体某个位置是否被占用，但可惜被奇怪的测评机制卡了。</p>
+<p><img src="/2022/07/05/729.%20%E6%88%91%E7%9A%84%E6%97%A5%E7%A8%8B%E5%AE%89%E6%8E%92%E8%A1%A8%20I%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/image_0.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<p><code>TLE</code> 代码：<br><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">MyCalendar</span> &#123;<br>    <span class="hljs-keyword">static</span> <span class="hljs-type">Boolean</span> <span class="hljs-variable">T</span> <span class="hljs-operator">=</span> Boolean.TRUE, F = Boolean.FALSE;<br>    <span class="hljs-keyword">static</span> <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> (<span class="hljs-type">int</span>)<span class="hljs-number">1e9</span>, len = (<span class="hljs-type">int</span>) Math.sqrt(n) + <span class="hljs-number">30</span>;<br>    <span class="hljs-keyword">static</span> <span class="hljs-type">boolean</span>[] region = <span class="hljs-keyword">new</span> <span class="hljs-title class_">boolean</span>[len];<br>    <span class="hljs-keyword">static</span> Map&lt;Integer, Boolean&gt; map = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();<br>    <span class="hljs-type">int</span> <span class="hljs-title function_">getIdx</span><span class="hljs-params">(<span class="hljs-type">int</span> x)</span> &#123;<br>        <span class="hljs-keyword">return</span> x / len;<br>    &#125;<br>    <span class="hljs-keyword">void</span> <span class="hljs-title function_">add</span><span class="hljs-params">(<span class="hljs-type">int</span> l, <span class="hljs-type">int</span> r)</span> &#123;<br>        <span class="hljs-keyword">if</span> (getIdx(l) == getIdx(r)) &#123;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">k</span> <span class="hljs-operator">=</span> l; k &lt;= r; k++) map.put(k, T);<br>        &#125; <span class="hljs-keyword">else</span> &#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> l, i = r;<br>            <span class="hljs-keyword">while</span> (getIdx(j) == getIdx(l)) map.put(j++, T);<br>            <span class="hljs-keyword">while</span> (getIdx(i) == getIdx(r)) map.put(i--, T);<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">k</span> <span class="hljs-operator">=</span> getIdx(j); k &lt;= getIdx(i); k++) region[k] = <span class="hljs-literal">true</span>;<br>        &#125;<br>    &#125;<br>    <span class="hljs-type">boolean</span> <span class="hljs-title function_">query</span><span class="hljs-params">(<span class="hljs-type">int</span> l, <span class="hljs-type">int</span> r)</span> &#123;<br>        <span class="hljs-keyword">if</span> (getIdx(l) == getIdx(r)) &#123;<br>            <span class="hljs-type">boolean</span> <span class="hljs-variable">cur</span> <span class="hljs-operator">=</span> region[getIdx(l)];<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">k</span> <span class="hljs-operator">=</span> l; k &lt;= r; k++) &#123;<br>                <span class="hljs-keyword">if</span> (map.getOrDefault(k, F) || cur) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>            &#125;<br>            <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>        &#125; <span class="hljs-keyword">else</span> &#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> l, i = r;<br>            <span class="hljs-keyword">while</span> (getIdx(j) == getIdx(l)) &#123;<br>                <span class="hljs-keyword">if</span> (map.getOrDefault(j, F) || region[getIdx(j)]) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>                j++;<br>            &#125;<br>            <span class="hljs-keyword">while</span> (getIdx(i) == getIdx(r)) &#123;<br>                <span class="hljs-keyword">if</span> (map.getOrDefault(i, F) || region[getIdx(i)]) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>                i--;<br>            &#125;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">k</span> <span class="hljs-operator">=</span> getIdx(j); k &lt;= getIdx(i); k++) &#123;<br>                <span class="hljs-keyword">if</span> (region[k]) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>            &#125;<br>            <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>        &#125;<br>    &#125;<br>    <span class="hljs-keyword">public</span> <span class="hljs-title function_">MyCalendar</span><span class="hljs-params">()</span> &#123;<br>        Arrays.fill(region, <span class="hljs-literal">false</span>);<br>        map.clear();<br>    &#125;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">book</span><span class="hljs-params">(<span class="hljs-type">int</span> start, <span class="hljs-type">int</span> end)</span> &#123;<br>        <span class="hljs-keyword">if</span> (query(start, end - <span class="hljs-number">1</span>)) &#123;<br>            add(start, end - <span class="hljs-number">1</span>);<br>            <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>        &#125;<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure></p>
+<p>但我们知道分块算法的复杂度并不糟糕，而哈希表可能是被卡常数的关键，因此我们可以使用 <code>int</code> 数组来充当哈希表，由于只需要记录「是否被占用」，因此我们可以使用 <code>int</code> 的每一位充当格子，通过这种「分桶 + 位运算」，有效降低常数。</p>
+<p><code>AC</code> 代码（<code>2022-07-05</code> 可过）：<br><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">MyCalendar</span> &#123;<br>    <span class="hljs-keyword">static</span> <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> (<span class="hljs-type">int</span>)<span class="hljs-number">1e9</span>, len = (<span class="hljs-type">int</span>) Math.sqrt(n) + <span class="hljs-number">50</span>, cnt = <span class="hljs-number">32</span>;<br>    <span class="hljs-keyword">static</span> <span class="hljs-type">boolean</span>[] region = <span class="hljs-keyword">new</span> <span class="hljs-title class_">boolean</span>[len];<br>    <span class="hljs-keyword">static</span> <span class="hljs-type">int</span>[] map = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[n / cnt];<br>    <span class="hljs-type">int</span> <span class="hljs-title function_">getIdx</span><span class="hljs-params">(<span class="hljs-type">int</span> x)</span> &#123;<br>        <span class="hljs-keyword">return</span> x / len;<br>    &#125;<br>    <span class="hljs-type">boolean</span> <span class="hljs-title function_">get</span><span class="hljs-params">(<span class="hljs-type">int</span> x)</span> &#123;<br>        <span class="hljs-keyword">return</span> ((map[x / cnt] &gt;&gt; (x % cnt)) &amp; <span class="hljs-number">1</span>) == <span class="hljs-number">1</span>;<br>    &#125;<br>    <span class="hljs-keyword">void</span> <span class="hljs-title function_">set</span><span class="hljs-params">(<span class="hljs-type">int</span> x)</span> &#123;<br>        map[x / cnt] |= (<span class="hljs-number">1</span> &lt;&lt; (x % cnt));<br>    &#125;<br>    <span class="hljs-keyword">void</span> <span class="hljs-title function_">add</span><span class="hljs-params">(<span class="hljs-type">int</span> l, <span class="hljs-type">int</span> r)</span> &#123;<br>        <span class="hljs-keyword">if</span> (getIdx(l) == getIdx(r)) &#123;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">k</span> <span class="hljs-operator">=</span> l; k &lt;= r; k++) set(k);<br>        &#125; <span class="hljs-keyword">else</span> &#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> l, i = r;<br>            <span class="hljs-keyword">while</span> (getIdx(j) == getIdx(l)) set(j++);<br>            <span class="hljs-keyword">while</span> (getIdx(i) == getIdx(r)) set(i--);<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">k</span> <span class="hljs-operator">=</span> getIdx(j); k &lt;= getIdx(i); k++) region[k] = <span class="hljs-literal">true</span>;<br>        &#125;<br>    &#125;<br>    <span class="hljs-type">boolean</span> <span class="hljs-title function_">query</span><span class="hljs-params">(<span class="hljs-type">int</span> l, <span class="hljs-type">int</span> r)</span> &#123;<br>        <span class="hljs-keyword">if</span> (getIdx(l) == getIdx(r)) &#123;<br>            <span class="hljs-type">boolean</span> <span class="hljs-variable">cur</span> <span class="hljs-operator">=</span> region[getIdx(l)];<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">k</span> <span class="hljs-operator">=</span> l; k &lt;= r; k++) &#123;<br>                <span class="hljs-keyword">if</span> (get(k) || cur) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>            &#125;<br>            <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>        &#125; <span class="hljs-keyword">else</span> &#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> l, i = r;<br>            <span class="hljs-keyword">while</span> (getIdx(j) == getIdx(l)) &#123;<br>                <span class="hljs-keyword">if</span> (get(j) || region[getIdx(j)]) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>                j++;<br>            &#125;<br>            <span class="hljs-keyword">while</span> (getIdx(i) == getIdx(r)) &#123;<br>                <span class="hljs-keyword">if</span> (get(i) || region[getIdx(i)]) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>                i--;<br>            &#125;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">k</span> <span class="hljs-operator">=</span> getIdx(j); k &lt;= getIdx(i); k++) &#123;<br>                <span class="hljs-keyword">if</span> (region[k]) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>            &#125;<br>            <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>        &#125;<br>    &#125;<br>    <span class="hljs-keyword">public</span> <span class="hljs-title function_">MyCalendar</span><span class="hljs-params">()</span> &#123;<br>        Arrays.fill(region, <span class="hljs-literal">false</span>);<br>        Arrays.fill(map, <span class="hljs-number">0</span>);<br>    &#125;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">book</span><span class="hljs-params">(<span class="hljs-type">int</span> start, <span class="hljs-type">int</span> end)</span> &#123;<br>        <span class="hljs-keyword">if</span> (query(start, end - <span class="hljs-number">1</span>)) &#123;<br>            add(start, end - <span class="hljs-number">1</span>);<br>            <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>        &#125;<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure></p>
+<ul>
+<li>时间复杂度：$O(n\sqrt{m})$</li>
+<li>空间复杂度：$O(\sqrt{m} + \frac{M}{k})$，其中 $M = 1e9$ 为值域大小，$k = 32$ 为单个数字的能够存储的格子数</li>
+</ul>
+<hr>
+<h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>这是我们「刷穿 LeetCode」系列文章的第 <code>No.729</code> 篇，系列开始于 2021/01/01，截止于起始日 LeetCode 上共有 1916 道题目，部分是有锁题，我们将先把所有不带锁的题目刷完。</p>
+<p>在这个系列文章里面，除了讲解解题思路以外，还会尽可能给出最为简洁的代码。如果涉及通解还会相应的代码模板。</p>
+<p>为了方便各位同学能够电脑上进行调试和提交代码，我建立了相关的仓库：<a target="_blank" rel="noopener" href="https://github.com/SharingSource/LogicStack-LeetCode">https://github.com/SharingSource/LogicStack-LeetCode</a> 。</p>
+<p>在仓库地址里，你可以看到系列文章的题解链接、系列文章的相应代码、LeetCode 原题链接和其他优选题解。</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%93%88%E5%B8%8C%E8%A1%A8/">哈希表</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E6%A8%A1%E6%8B%9F/">模拟</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E7%BA%BF%E6%AE%B5%E6%A0%91/">线段树</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E4%BD%8D%E8%BF%90%E7%AE%97/">位运算</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E7%BA%A2%E9%BB%91%E6%A0%91/">红黑树</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E7%BA%BF%E6%AE%B5%E6%A0%91%EF%BC%88%E5%8A%A8%E6%80%81%E5%BC%80%E7%82%B9%EF%BC%89/">线段树（动态开点）</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%88%86%E5%9D%97/">分块</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/07/03/556.%20%E4%B8%8B%E4%B8%80%E4%B8%AA%E6%9B%B4%E5%A4%A7%E5%85%83%E7%B4%A0%20III%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/">
+                        <span class="hidden-mobile">LC 556. 下一个更大元素 III</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://cdn.staticfile.org/valine/1.4.18/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"IDifiViRkVDTgu27Nu50GQkE-gzGzoHsz","appKey":"gt98pupgyYjPKYQASrGmD9kM","path":"window.location.pathname","placeholder":"发一条友善的评论（为方便交流，记得填上方的昵称再留言哦 ~ 🍭","avatar":"","meta":["nick","mail"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":true},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          Fluid.plugins.initFancyBox('#valine .vcontent img:not(.vemoji)');
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+  <div class="col-lg-7 mx-auto nopadding-x-md">
+    <div class="container custom post-custom mx-auto">
+      <img src="/oimg/gzh-qrcode.webp" srcset="/img/loading.gif" lazyload class="rounded mx-auto d-block mt-5" style="width:80%">
+    </div>
+  </div>
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- LeanCloud 统计PV -->
+        <span id="leancloud-site-pv-container" style="display: none">
+            总访问量 
+            <span id="leancloud-site-pv"></span>
+             次
+          </span>
+      
+      
+        <!-- LeanCloud 统计UV -->
+        <span id="leancloud-site-uv-container" style="display: none">
+            总访客数 
+            <span id="leancloud-site-uv"></span>
+             人
+          </span>
+      
+
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.staticfile.org/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.staticfile.org/tocbot/4.18.2/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.staticfile.org/anchor-js/4.3.1/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.11/clipboard.min.js" ></script>
+  
+
+
+
+
+  <script defer src="/js/leancloud.js" ></script>
+
+
+
+  <script  src="https://cdn.bootcdn.net/ajax/libs/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        loader: {
+          
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.staticfile.org/mathjax/3.2.0/es5/tex-svg.js" ></script>
+
+  
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>
