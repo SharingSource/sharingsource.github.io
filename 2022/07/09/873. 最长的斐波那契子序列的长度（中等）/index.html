@@ -16,23 +16,23 @@
   <meta name="author" content="宫水三叶">
   <meta name="keywords" content="算法, 数据结构, 题解">
   
-    <meta name="description" content="题目描述这是 LeetCode 上的 475. 供暖器 ，难度为 中等。 冬季已经来临。 你的任务是设计一个有固定加热半径的供暖器向所有房屋供暖。 在加热器的加热半径范围内的每个房屋都可以获得供暖。 现在，给出位于一条水平线上的房屋 houses 和供暖器 heaters 的位置，请你找出并返回可以覆盖所有房屋的最小加热半径。 说明：所有供暖器都遵循你的半径标准，加热的半径也一样。 示例 1:12">
+    <meta name="description" content="题目描述这是 LeetCode 上的 873. 最长的斐波那契子序列的长度 ，难度为 中等。 如果序列 $X_1, X_2, …, X_n$ 满足下列条件，就说它是 斐波那契式 的：  n &gt;&#x3D; 3 对于所有 i + 2 &lt;&#x3D; n，都有 $Xi + X{i+1} &#x3D; X_{i+2}$  给定一个严格递增的正整数数组形成序列 arr，找到 arr 中最长的斐波那契式的子序列的长度。如果一">
 <meta property="og:type" content="article">
-<meta property="og:title" content="LC 475. 供暖器">
-<meta property="og:url" content="https://sharingsource.github.io/2021/12/19/475.%20%E4%BE%9B%E6%9A%96%E5%99%A8%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/index.html">
+<meta property="og:title" content="LC 873. 最长的斐波那契子序列的长度">
+<meta property="og:url" content="https://sharingsource.github.io/2022/07/09/873.%20%E6%9C%80%E9%95%BF%E7%9A%84%E6%96%90%E6%B3%A2%E9%82%A3%E5%A5%91%E5%AD%90%E5%BA%8F%E5%88%97%E7%9A%84%E9%95%BF%E5%BA%A6%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/index.html">
 <meta property="og:site_name" content="宫水三叶的刷题日记">
-<meta property="og:description" content="题目描述这是 LeetCode 上的 475. 供暖器 ，难度为 中等。 冬季已经来临。 你的任务是设计一个有固定加热半径的供暖器向所有房屋供暖。 在加热器的加热半径范围内的每个房屋都可以获得供暖。 现在，给出位于一条水平线上的房屋 houses 和供暖器 heaters 的位置，请你找出并返回可以覆盖所有房屋的最小加热半径。 说明：所有供暖器都遵循你的半径标准，加热的半径也一样。 示例 1:12">
+<meta property="og:description" content="题目描述这是 LeetCode 上的 873. 最长的斐波那契子序列的长度 ，难度为 中等。 如果序列 $X_1, X_2, …, X_n$ 满足下列条件，就说它是 斐波那契式 的：  n &gt;&#x3D; 3 对于所有 i + 2 &lt;&#x3D; n，都有 $Xi + X{i+1} &#x3D; X_{i+2}$  给定一个严格递增的正整数数组形成序列 arr，找到 arr 中最长的斐波那契式的子序列的长度。如果一">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2021-12-19T15:14:04.000Z">
-<meta property="article:modified_time" content="2022-06-07T02:38:56.365Z">
+<meta property="article:published_time" content="2022-07-08T16:43:45.000Z">
+<meta property="article:modified_time" content="2022-07-09T04:20:17.185Z">
 <meta property="article:author" content="宫水三叶">
-<meta property="article:tag" content="二分">
-<meta property="article:tag" content="双指针">
-<meta property="article:tag" content="排序">
+<meta property="article:tag" content="哈希表">
+<meta property="article:tag" content="动态规划">
+<meta property="article:tag" content="序列 DP">
 <meta name="twitter:card" content="summary_large_image">
   
   
-  <title>LC 475. 供暖器 - 宫水三叶的刷题日记</title>
+  <title>LC 873. 最长的斐波那契子序列的长度 - 宫水三叶的刷题日记</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -177,12 +177,12 @@
 </nav>
 
     <div class="banner" id="banner" parallax=true
-         style="background: url('/img/image_216.jpg') no-repeat center center;
+         style="background: url('/img/image_70.jpeg') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="LC 475. 供暖器">
+            <span class="h2" id="subtitle" title="LC 873. 最长的斐波那契子序列的长度">
               
             </span>
 
@@ -197,8 +197,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-12-19 23:14" pubdate>
-        2021年12月19日
+      <time datetime="2022-07-09 00:43" pubdate>
+        2022年7月9日
       </time>
     </span>
   
@@ -234,40 +234,39 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">LC 475. 供暖器</h1>
+            <h1 style="display: none">LC 873. 最长的斐波那契子序列的长度</h1>
             
             <div class="markdown-body">
-              <h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>这是 LeetCode 上的 <strong><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/heaters/solution/gong-shui-san-xie-er-fen-shuang-zhi-zhen-mys4/">475. 供暖器</a></strong> ，难度为 <strong>中等</strong>。</p>
-<p>冬季已经来临。 你的任务是设计一个有固定加热半径的供暖器向所有房屋供暖。</p>
-<p>在加热器的加热半径范围内的每个房屋都可以获得供暖。</p>
-<p>现在，给出位于一条水平线上的房屋 <code>houses</code> 和供暖器 <code>heaters</code> 的位置，请你找出并返回可以覆盖所有房屋的最小加热半径。</p>
-<p>说明：所有供暖器都遵循你的半径标准，加热的半径也一样。</p>
-<p>示例 1:<br><figure class="highlight makefile"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs makefile"><span class="hljs-section">输入: houses = [1,2,3], heaters = [2]</span><br><br><span class="hljs-section">输出: 1</span><br><br><span class="hljs-section">解释: 仅在位置2上有一个供暖器。如果我们将加热半径设为1，那么所有房屋就都能得到供暖。</span><br></code></pre></div></td></tr></table></figure><br>示例 2:<br><figure class="highlight makefile"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs makefile"><span class="hljs-section">输入: houses = [1,2,3,4], heaters = [1,4]</span><br><br><span class="hljs-section">输出: 1</span><br><br><span class="hljs-section">解释: 在位置1, 4上有两个供暖器。我们需要将加热半径设为1，这样所有房屋就都能得到供暖。</span><br></code></pre></div></td></tr></table></figure><br>示例 3：<br><figure class="highlight inform7"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs inform7">输入：houses = <span class="hljs-comment">[1,5]</span>, heaters = <span class="hljs-comment">[2]</span><br><br>输出：3<br></code></pre></div></td></tr></table></figure></p>
+              <h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>这是 LeetCode 上的 <strong><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/length-of-longest-fibonacci-subsequence/solution/by-ac_oier-beo2/">873. 最长的斐波那契子序列的长度</a></strong> ，难度为 <strong>中等</strong>。</p>
+<p>如果序列 $X_1, X_2, …, X_n$ 满足下列条件，就说它是 斐波那契式 的：</p>
+<ul>
+<li><code>n &gt;= 3</code></li>
+<li>对于所有 <code>i + 2 &lt;= n</code>，都有 $X<em>i + X</em>{i+1} = X_{i+2}$</li>
+</ul>
+<p>给定一个严格递增的正整数数组形成序列 <code>arr</code>，找到 <code>arr</code> 中最长的斐波那契式的子序列的长度。如果一个不存在，返回  $0$ 。</p>
+<p>（回想一下，子序列是从原序列 <code>arr</code> 中派生出来的，它从 <code>arr</code> 中删掉任意数量的元素（也可以不删），而不改变其余元素的顺序。例如， <code>[3, 5, 8]</code> 是 <code>[3, 4, 5, 6, 7, 8]</code> 的一个子序列）</p>
+<p>示例 1：<br><figure class="highlight dns"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs dns">输入: arr = [<span class="hljs-number">1,2,3,4</span>,<span class="hljs-number">5,6,7,8</span>]<br><br>输出: <span class="hljs-number">5</span><br><br>解释: 最长的斐波那契式子序列为 [<span class="hljs-number">1,2,3,5</span>,<span class="hljs-number">8</span>] 。<br></code></pre></div></td></tr></table></figure><br>示例 2：<br><figure class="highlight inform7"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs inform7">输入: arr = <span class="hljs-comment">[1,3,7,11,12,14,18]</span><br><br>输出: 3<br><br>解释: 最长的斐波那契式子序列有 <span class="hljs-comment">[1,11,12]</span>、<span class="hljs-comment">[3,11,14]</span> 以及 <span class="hljs-comment">[7,11,18]</span> 。<br></code></pre></div></td></tr></table></figure></p>
 <p>提示：</p>
 <ul>
-<li>$1 &lt;= houses.length, heaters.length &lt;= 3 \times 10^4$</li>
-<li>$1 &lt;= houses[i], heaters[i] &lt;= 10^9$</li>
+<li>$3 &lt;= arr.length &lt;= 1000$</li>
+<li>$1 &lt;= arr[i] &lt; arr[i + 1] &lt;= 10^9$</li>
 </ul>
 <hr>
-<h3 id="二分-双指针"><a href="#二分-双指针" class="headerlink" title="二分 + 双指针"></a>二分 + 双指针</h3><p>需要求得最小加热半径 $ans$，使得所有的 $houses[i]$ 均被覆盖。</p>
-<p>在以 $ans$ 为分割点的数轴上具有「二段性」：</p>
+<h3 id="序列-DP"><a href="#序列-DP" class="headerlink" title="序列 DP"></a>序列 DP</h3><p>定义 $f[i][j]$ 为使用 $arr[i]$ 为斐波那契数列的最后一位，使用 $arr[j]$ 为倒数第二位（即 $arr[i]$ 的前一位）时的最长数列长度。</p>
+<p>不失一般性考虑 $f[i][j]$ 该如何计算，首先根据斐波那契数列的定义，我们可以直接算得 $arr[j]$ 前一位的值为 $arr[i] - arr[j]$，而快速得知 $arr[i] - arr[j]$ 值的坐标 $t$，可以利用 <code>arr</code> 的严格单调递增性质，使用「哈希表」对坐标进行转存，若坐标 $t$ 存在，并且符合 $t &lt; j$，说明此时至少凑成了长度为 $3$ 的斐波那契数列，同时结合状态定义，可以使用 $f[t][j]$ 来更新 $f[i][j]$，即有状态转移方程：</p>
+<script type="math/tex; mode=display">
+f[i][j] = \max(3, f[j][t] + 1)</script><p>同时，当我们「从小到大」枚举 $i$，并且「从大到小」枚举 $j$ 时，我们可以进行如下的剪枝操作：</p>
 <ul>
-<li>数值小于 $ans$ 的半径无法覆盖所有的房子；</li>
-<li>数值大于等于 $ans$ 的半径可以覆盖所有房子。</li>
+<li>可行性剪枝：当出现 $arr[i] - arr[j] &gt;= arr[j]$，说明即使存在值为 $arr[i] - arr[j]$ 的下标 $t$，根据 <code>arr</code> 单调递增性质，也不满足 $t &lt; j &lt; i$ 的要求，且继续枚举更小的 $j$，仍然有 $arr[i] - arr[j] &gt;= arr[j]$，仍不合法，直接 <code>break</code> 掉当前枚举 $j$ 的搜索分支；</li>
+<li>最优性剪枝：假设当前最大长度为 <code>ans</code>，只有当 $j + 2 &gt; ans$，我们才有必要往下搜索，$j + 2$ 的含义为以 $arr[j]$ 为斐波那契数列倒数第二个数时的理论最大长度。</li>
 </ul>
-<p>因此可直接「二分答案」，考虑应该在什么范围内进行「二分」。</p>
-<p>可以从数据范围入手，使用 $1e9$ 为二分上界，该做法能确保答案在二分范围内。</p>
-<p>考虑如何实现 <code>check</code> 函数。</p>
-<p>先对 $houses$ 和 $heaters$ 进行排序，使用 $i$ 指向当前处理到的 $houses[i]$；$j$ 指向 <strong>可能</strong> 覆盖到 $houses[i]$ 的最小下标 $heaters[j]$；$x$ 代表当前需要 <code>check</code> 的半径。</p>
-<p>当且仅当 $heaters[j] + x &lt; houses[i]$ 时，$houses[i]$ 必然不能被 $heaters[j]$ 所覆盖，此时让 $j$ 自增。</p>
-<p>找到合适的 $j$ 之后，再检查 $heaters[j] - x &lt;= houses[i] &lt;= heaters[j] + x$ 是否满足，即可知道 $houses[i]$ 的覆盖情况。</p>
-<p>代码：<br><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">findRadius</span><span class="hljs-params">(<span class="hljs-type">int</span>[] houses, <span class="hljs-type">int</span>[] heaters)</span> &#123;<br>        Arrays.sort(houses);<br>        Arrays.sort(heaters);<br>        <span class="hljs-type">int</span> <span class="hljs-variable">l</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>, r = (<span class="hljs-type">int</span>) <span class="hljs-number">1e9</span>;<br>        <span class="hljs-keyword">while</span> (l &lt; r) &#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">mid</span> <span class="hljs-operator">=</span> l + r &gt;&gt; <span class="hljs-number">1</span>;<br>            <span class="hljs-keyword">if</span> (check(houses, heaters, mid)) r = mid;<br>            <span class="hljs-keyword">else</span> l = mid + <span class="hljs-number">1</span>;<br>        &#125;<br>        <span class="hljs-keyword">return</span> r;<br>    &#125;<br>    <span class="hljs-type">boolean</span> <span class="hljs-title function_">check</span><span class="hljs-params">(<span class="hljs-type">int</span>[] houses, <span class="hljs-type">int</span>[] heaters, <span class="hljs-type">int</span> x)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> houses.length, m = heaters.length;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>, j = <span class="hljs-number">0</span>; i &lt; n; i++) &#123;<br>            <span class="hljs-keyword">while</span> (j &lt; m &amp;&amp; houses[i] &gt; heaters[j] + x) j++;<br>            <span class="hljs-keyword">if</span> (j &lt; m &amp;&amp; heaters[j] - x &lt;= houses[i] &amp;&amp; houses[i] &lt;= heaters[j] + x) <span class="hljs-keyword">continue</span>;<br>            <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>        &#125;<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure></p>
+<p>代码：<br><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">lenLongestFibSubseq</span><span class="hljs-params">(<span class="hljs-type">int</span>[] arr)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> arr.length, ans = <span class="hljs-number">0</span>;<br>        Map&lt;Integer, Integer&gt; map = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; n; i++) map.put(arr[i], i);<br>        <span class="hljs-type">int</span>[][] f = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[n][n];<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; n; i++) &#123;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> i - <span class="hljs-number">1</span>; j &gt;= <span class="hljs-number">0</span> &amp;&amp; j + <span class="hljs-number">2</span> &gt; ans; j--) &#123;<br>                <span class="hljs-keyword">if</span> (arr[i] - arr[j] &gt;= arr[j]) <span class="hljs-keyword">break</span>;<br>                <span class="hljs-type">int</span> <span class="hljs-variable">t</span> <span class="hljs-operator">=</span> map.getOrDefault(arr[i] - arr[j], -<span class="hljs-number">1</span>);<br>                <span class="hljs-keyword">if</span> (t == -<span class="hljs-number">1</span>) <span class="hljs-keyword">continue</span>;<br>                f[i][j] = Math.max(<span class="hljs-number">3</span>, f[j][t] + <span class="hljs-number">1</span>);<br>                ans = Math.max(ans, f[i][j]);<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> ans;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure></p>
 <ul>
-<li>时间复杂度：令 $n$ 和 $m$ 分别为 <code>houses</code> 和 <code>heaters</code> 长度，$L = 1e9$ 为最大长度，对其进行排序复杂度为 $O(n\log{n} + m\log{m})$，在 $[0, L]$ 范围进行二分，单次 <code>check</code> 会使用「双指针」判断是否每个 $houses[i]$ 是否被覆盖，复杂度为 $O(\max(n, m) \times \log{L})$。整体复杂度为 $O(\max(n, m) \times \log{L})$</li>
-<li>空间复杂度：排序所需要消耗的空间。复杂度为 $O(\log{n} + \log{m})$</li>
+<li>时间复杂度：存入哈希表复杂度为 $O(n)$；<code>DP</code> 过程复杂度为 $O(n^2)$。整体复杂度为 $O(n^2)$</li>
+<li>空间复杂度：$O(n^2)$</li>
 </ul>
 <hr>
-<h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>这是我们「刷穿 LeetCode」系列文章的第 <code>No.475</code> 篇，系列开始于 2021/01/01，截止于起始日 LeetCode 上共有 1916 道题目，部分是有锁题，我们将先把所有不带锁的题目刷完。</p>
+<h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>这是我们「刷穿 LeetCode」系列文章的第 <code>No.873</code> 篇，系列开始于 2021/01/01，截止于起始日 LeetCode 上共有 1916 道题目，部分是有锁题，我们将先把所有不带锁的题目刷完。</p>
 <p>在这个系列文章里面，除了讲解解题思路以外，还会尽可能给出最为简洁的代码。如果涉及通解还会相应的代码模板。</p>
 <p>为了方便各位同学能够电脑上进行调试和提交代码，我建立了相关的仓库：<a target="_blank" rel="noopener" href="https://github.com/SharingSource/LogicStack-LeetCode">https://github.com/SharingSource/LogicStack-LeetCode</a> 。</p>
 <p>在仓库地址里，你可以看到系列文章的题解链接、系列文章的相应代码、LeetCode 原题链接和其他优选题解。</p>
@@ -281,11 +280,11 @@
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/%E4%BA%8C%E5%88%86/">二分</a>
+                      <a class="hover-with-bg" href="/tags/%E5%93%88%E5%B8%8C%E8%A1%A8/">哈希表</a>
                     
-                      <a class="hover-with-bg" href="/tags/%E5%8F%8C%E6%8C%87%E9%92%88/">双指针</a>
+                      <a class="hover-with-bg" href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/">动态规划</a>
                     
-                      <a class="hover-with-bg" href="/tags/%E6%8E%92%E5%BA%8F/">排序</a>
+                      <a class="hover-with-bg" href="/tags/%E5%BA%8F%E5%88%97-DP/">序列 DP</a>
                     
                   </div>
                 
@@ -302,18 +301,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2021/12/21/686.%20%E9%87%8D%E5%A4%8D%E5%8F%A0%E5%8A%A0%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%8C%B9%E9%85%8D%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">LC 686. 重复叠加字符串匹配</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/12/19/997.%20%E6%89%BE%E5%88%B0%E5%B0%8F%E9%95%87%E7%9A%84%E6%B3%95%E5%AE%98%EF%BC%88%E7%AE%80%E5%8D%95%EF%BC%89/">
-                        <span class="hidden-mobile">LC 997. 找到小镇的法官</span>
+                      <a href="/2022/07/08/1217.%20%E7%8E%A9%E7%AD%B9%E7%A0%81%EF%BC%88%E7%AE%80%E5%8D%95%EF%BC%89/">
+                        <span class="hidden-mobile">LC 1217. 玩筹码</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
