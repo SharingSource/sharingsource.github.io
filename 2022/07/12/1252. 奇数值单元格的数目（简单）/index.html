@@ -1,0 +1,609 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/oimg/RoundCorner.png">
+  <link rel="icon" href="/oimg/RoundCorner.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="宫水三叶">
+  <meta name="keywords" content="算法, 数据结构, 题解">
+  
+    <meta name="description" content="题目描述这是 LeetCode 上的 1252. 奇数值单元格的数目 ，难度为 简单。 给你一个 $m \times n$ 的矩阵，最开始的时候，每个单元格中的值都是 $0$。 另有一个二维索引数组 indices，$indices[i] &#x3D; [r_i, c_i]$ 指向矩阵中的某个位置，其中 $r_i$ 和 $c_i$ 分别表示指定的行和列（从 $0$ 开始编号）。 对 $indices[i]$">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LC 1252. 奇数值单元格的数目">
+<meta property="og:url" content="https://sharingsource.github.io/2022/07/12/1252.%20%E5%A5%87%E6%95%B0%E5%80%BC%E5%8D%95%E5%85%83%E6%A0%BC%E7%9A%84%E6%95%B0%E7%9B%AE%EF%BC%88%E7%AE%80%E5%8D%95%EF%BC%89/index.html">
+<meta property="og:site_name" content="宫水三叶的刷题日记">
+<meta property="og:description" content="题目描述这是 LeetCode 上的 1252. 奇数值单元格的数目 ，难度为 简单。 给你一个 $m \times n$ 的矩阵，最开始的时候，每个单元格中的值都是 $0$。 另有一个二维索引数组 indices，$indices[i] &#x3D; [r_i, c_i]$ 指向矩阵中的某个位置，其中 $r_i$ 和 $c_i$ 分别表示指定的行和列（从 $0$ 开始编号）。 对 $indices[i]$">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://sharingsource.github.io/2022/07/12/1252.%20%E5%A5%87%E6%95%B0%E5%80%BC%E5%8D%95%E5%85%83%E6%A0%BC%E7%9A%84%E6%95%B0%E7%9B%AE%EF%BC%88%E7%AE%80%E5%8D%95%EF%BC%89/image_0.png">
+<meta property="og:image" content="https://sharingsource.github.io/2022/07/12/1252.%20%E5%A5%87%E6%95%B0%E5%80%BC%E5%8D%95%E5%85%83%E6%A0%BC%E7%9A%84%E6%95%B0%E7%9B%AE%EF%BC%88%E7%AE%80%E5%8D%95%EF%BC%89/image_1.png">
+<meta property="article:published_time" content="2022-07-11T17:07:15.000Z">
+<meta property="article:modified_time" content="2022-07-12T08:11:14.324Z">
+<meta property="article:author" content="宫水三叶">
+<meta property="article:tag" content="模拟">
+<meta property="article:tag" content="位运算">
+<meta property="article:tag" content="计数">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://sharingsource.github.io/2022/07/12/1252.%20%E5%A5%87%E6%95%B0%E5%80%BC%E5%8D%95%E5%85%83%E6%A0%BC%E7%9A%84%E6%95%B0%E7%9B%AE%EF%BC%88%E7%AE%80%E5%8D%95%EF%BC%89/image_0.png">
+  
+  
+  <title>LC 1252. 奇数值单元格的数目 - 宫水三叶的刷题日记</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/hint.css/2.7.0/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.7.2/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"sharingsource.github.io","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"|","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"IDifiViRkVDTgu27Nu50GQkE-gzGzoHsz","app_key":"gt98pupgyYjPKYQASrGmD9kM","server_url":"https://idifivir.lc-cn-n1-shared.com","path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.1.0"></head>
+
+
+<body>
+  <header style="height: 50vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>宫水三叶の刷题日记</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/image_48.jpeg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="LC 1252. 奇数值单元格的数目">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-author" aria-hidden="true"></i>
+      宫水三叶
+    </span>
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2022-07-12 01:07" pubdate>
+        2022年7月12日
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">LC 1252. 奇数值单元格的数目</h1>
+            
+            <div class="markdown-body">
+              <h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>这是 LeetCode 上的 <strong><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/cells-with-odd-values-in-a-matrix/solution/by-ac_oier-p0za/">1252. 奇数值单元格的数目</a></strong> ，难度为 <strong>简单</strong>。</p>
+<p>给你一个 $m \times n$ 的矩阵，最开始的时候，每个单元格中的值都是 $0$。</p>
+<p>另有一个二维索引数组 <code>indices</code>，$indices[i] = [r_i, c_i]$ 指向矩阵中的某个位置，其中 $r_i$ 和 $c_i$ 分别表示指定的行和列（从 $0$ 开始编号）。</p>
+<p>对 $indices[i]$ 所指向的每个位置，应同时执行下述增量操作：</p>
+<ul>
+<li>$r_i$ 行上的所有单元格，加 $1$ 。</li>
+<li>$c_i$ 列上的所有单元格，加 $1$ 。</li>
+</ul>
+<p>给你 $m$、$n$ 和 $indices$ 。请你在执行完所有 $indices$ 指定的增量操作后，返回矩阵中 奇数值单元格 的数目。</p>
+<p>示例 1：<br><img src="/2022/07/12/1252.%20%E5%A5%87%E6%95%B0%E5%80%BC%E5%8D%95%E5%85%83%E6%A0%BC%E7%9A%84%E6%95%B0%E7%9B%AE%EF%BC%88%E7%AE%80%E5%8D%95%EF%BC%89/image_0.png" srcset="/img/loading.gif" lazyload alt><br><figure class="highlight lua"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs lua">输入：m = <span class="hljs-number">2</span>, n = <span class="hljs-number">3</span>, indices = <span class="hljs-string">[[0,1],[1,1]]</span><br><br>输出：<span class="hljs-number">6</span><br><br>解释：最开始的矩阵是 <span class="hljs-string">[[0,0,0],[0,0,0]]</span>。<br>第一次增量操作后得到 <span class="hljs-string">[[1,2,1],[0,1,0]]</span>。<br>最后的矩阵是 <span class="hljs-string">[[1,3,1],[1,3,1]]</span>，里面有 <span class="hljs-number">6</span> 个奇数。<br></code></pre></div></td></tr></table></figure><br>示例 2：<br><img src="/2022/07/12/1252.%20%E5%A5%87%E6%95%B0%E5%80%BC%E5%8D%95%E5%85%83%E6%A0%BC%E7%9A%84%E6%95%B0%E7%9B%AE%EF%BC%88%E7%AE%80%E5%8D%95%EF%BC%89/image_1.png" srcset="/img/loading.gif" lazyload alt><br><figure class="highlight lua"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs lua">输入：m = <span class="hljs-number">2</span>, n = <span class="hljs-number">2</span>, indices = <span class="hljs-string">[[1,1],[0,0]]</span><br><br>输出：<span class="hljs-number">0</span><br><br>解释：最后的矩阵是 <span class="hljs-string">[[2,2],[2,2]]</span>，里面没有奇数。<br></code></pre></div></td></tr></table></figure></p>
+<p>提示：</p>
+<ul>
+<li>$1 &lt;= m, n &lt;= 50$</li>
+<li>$1 &lt;= indices.length &lt;= 100$</li>
+<li>$0 &lt;= r_i &lt; m$</li>
+<li>$0 &lt;= c_i &lt; n$</li>
+</ul>
+<p>进阶：你可以设计一个时间复杂度为 $O(n + m + indices.length)$ 且仅用 $O(n + m)$ 额外空间的算法来解决此问题吗？</p>
+<hr>
+<h3 id="基本分析"><a href="#基本分析" class="headerlink" title="基本分析"></a>基本分析</h3><p>容易想到时间复杂度为 $O(l + m \times n)$，空间复杂度为 $O(m + n)$ 的做法，在此不再赘述。</p>
+<p>对于某个位置最终累加值为奇数的充要条件为「所在行被累加次数的奇偶性」与「所在列被累加次数的奇偶性」不同。</p>
+<p>因此我们可以统计累加次数为奇数的行数 $a$（累加次数为偶数的行数为 $m - a$），累加次数为奇数的列数 $b$（累加次数为偶数的列数为 $n - b$），根据乘法原理，最终答案为 $a \times (n - b) + (m - a) \times b$。</p>
+<hr>
+<h3 id="计数模拟"><a href="#计数模拟" class="headerlink" title="计数模拟"></a>计数模拟</h3><p>由于我们只需关系某个位置的奇偶性，而不关心具体的累加值，我们可以创建两个数组 <code>r</code> 和 <code>c</code>，统计每行和每列的累加值的奇偶性。</p>
+<p>当 $r[idx]$ 为 <code>True</code> 含义为第 $idx$ 行的累加值为奇数，否则为偶数。列数组 <code>c</code> 的统计规则同理。</p>
+<p>Java 代码：<br><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">oddCells</span><span class="hljs-params">(<span class="hljs-type">int</span> m, <span class="hljs-type">int</span> n, <span class="hljs-type">int</span>[][] ins)</span> &#123;<br>        <span class="hljs-type">boolean</span>[] r = <span class="hljs-keyword">new</span> <span class="hljs-title class_">boolean</span>[m], c = <span class="hljs-keyword">new</span> <span class="hljs-title class_">boolean</span>[n];<br>        <span class="hljs-type">int</span> <span class="hljs-variable">a</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>, b = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span>[] info : ins) &#123;<br>            a += (r[info[<span class="hljs-number">0</span>]] = !r[info[<span class="hljs-number">0</span>]]) ? <span class="hljs-number">1</span> : -<span class="hljs-number">1</span>;<br>            b += (c[info[<span class="hljs-number">1</span>]] = !c[info[<span class="hljs-number">1</span>]]) ? <span class="hljs-number">1</span> : -<span class="hljs-number">1</span>;<br>        &#125;<br>        <span class="hljs-keyword">return</span> a * (n - b) + (m - a) * b;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure><br>TypeScript 代码：<br><figure class="highlight typescript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs TypeScript"><span class="hljs-keyword">function</span> <span class="hljs-title function_">oddCells</span>(<span class="hljs-params">m: <span class="hljs-built_in">number</span>, n: <span class="hljs-built_in">number</span>, ins: <span class="hljs-built_in">number</span>[][]</span>): <span class="hljs-built_in">number</span> &#123;<br>    <span class="hljs-keyword">const</span> r = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Array</span>&lt;<span class="hljs-built_in">boolean</span>&gt;(m).<span class="hljs-title function_">fill</span>(<span class="hljs-literal">false</span>), c = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Array</span>&lt;<span class="hljs-built_in">boolean</span>&gt;(n).<span class="hljs-title function_">fill</span>(<span class="hljs-literal">false</span>)<br>    <span class="hljs-keyword">let</span> a = <span class="hljs-number">0</span>, b = <span class="hljs-number">0</span><br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">const</span> [i, j] <span class="hljs-keyword">of</span> ins) &#123;<br>        a += (r[i] = !r[i]) ? <span class="hljs-number">1</span> : -<span class="hljs-number">1</span><br>        b += (c[j] = !c[j]) ? <span class="hljs-number">1</span> : -<span class="hljs-number">1</span><br>    &#125;<br>    <span class="hljs-keyword">return</span> a * (n - b) + (m - a) * b<br>&#125;;<br></code></pre></div></td></tr></table></figure><br>Python 代码：<br><figure class="highlight plaintext"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Python3">class Solution:<br>    def oddCells(self, m: int, n: int, ins: List[List[int]]) -&gt; int:<br>        r, c = [False] * m, [False] * n<br>        for i, j in ins:<br>            r[i] ^= 1<br>            c[j] ^= 1<br>        a, b = sum(r), sum(c)<br>        return a * (n - b) + (m - a) * b<br></code></pre></div></td></tr></table></figure></p>
+<ul>
+<li>时间复杂度：构建计数数组的复杂度为 $O(m + n)$，统计奇数行和奇数列复杂度为 $O(l)$，其中 $l$ 为数组 <code>ins</code> 的长度，复杂度为 $O(m + n + l)$</li>
+<li>空间复杂度：$O(m + n)$</li>
+</ul>
+<hr>
+<h3 id="位运算"><a href="#位运算" class="headerlink" title="位运算"></a>位运算</h3><p>更进一步，我们可以使用两个 <code>long</code> 变量 $c1$ 和 $c2$ 来分别充当行和列的计数数组，当 $c1$ 的第 $k$ 位为 $1$，代表第 $k$ 行累加值为奇数，当 $c1$ 的第 $k$ 位为 $0$，代表第 $k$ 行累加值为偶数；$c2$ 的计数规则同理。而翻转二进制中的某一位可使用「异或」操作。</p>
+<p>当处理完所有的 <code>ins</code> 之后，可通过「遍历 $c1$ 的低 $m$ 位 + 遍历 $c2$ 的低 $n$ 位」来得到行数中奇数个数 $a$，列数中奇数个数 $b$，复杂度为 $O(m + n)$；也可以使用 <code>bitCount</code> 统计 <code>long</code> 二进制数中 $1$ 的个数（本质是分治操作），复杂度为 $O(\log{64})$。</p>
+<p>Java 代码：<br><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">oddCells</span><span class="hljs-params">(<span class="hljs-type">int</span> m, <span class="hljs-type">int</span> n, <span class="hljs-type">int</span>[][] ins)</span> &#123;<br>        <span class="hljs-type">long</span> <span class="hljs-variable">c1</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>, c2 = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span>[] info : ins) &#123;<br>            c1 ^= <span class="hljs-number">1L</span> &lt;&lt; info[<span class="hljs-number">0</span>];<br>            c2 ^= <span class="hljs-number">1L</span> &lt;&lt; info[<span class="hljs-number">1</span>];<br>        &#125;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">a</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>, b = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; m; i++) a += ((c1 &gt;&gt; i) &amp; <span class="hljs-number">1</span>);<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; n; i++) b += ((c2 &gt;&gt; i) &amp; <span class="hljs-number">1</span>);<br>        <span class="hljs-keyword">return</span> a * (n - b) + (m - a) * b;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure><br>Java 代码：<br><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">oddCells</span><span class="hljs-params">(<span class="hljs-type">int</span> m, <span class="hljs-type">int</span> n, <span class="hljs-type">int</span>[][] ins)</span> &#123;<br>        <span class="hljs-type">long</span> <span class="hljs-variable">c1</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>, c2 = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span>[] info : ins) &#123;<br>            c1 ^= <span class="hljs-number">1L</span> &lt;&lt; info[<span class="hljs-number">0</span>];<br>            c2 ^= <span class="hljs-number">1L</span> &lt;&lt; info[<span class="hljs-number">1</span>];<br>        &#125;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">a</span> <span class="hljs-operator">=</span> Long.bitCount(c1), b = Long.bitCount(c2);<br>        <span class="hljs-keyword">return</span> a * (n - b) + (m - a) * b;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure><br>TypeScript 代码：<br><figure class="highlight typescript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs TypeScript"><span class="hljs-keyword">function</span> <span class="hljs-title function_">oddCells</span>(<span class="hljs-params">m: <span class="hljs-built_in">number</span>, n: <span class="hljs-built_in">number</span>, ins: <span class="hljs-built_in">number</span>[][]</span>): <span class="hljs-built_in">number</span> &#123;<br>    <span class="hljs-keyword">const</span> c1 = [<span class="hljs-number">0</span>, <span class="hljs-number">0</span>], c2 = [<span class="hljs-number">0</span>, <span class="hljs-number">0</span>]<br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">const</span> [i, j] <span class="hljs-keyword">of</span> ins) &#123;<br>        c1[<span class="hljs-title class_">Math</span>.<span class="hljs-title function_">ceil</span>(i / <span class="hljs-number">32</span>)] ^= (<span class="hljs-number">1</span> &lt;&lt; (i % <span class="hljs-number">32</span>))<br>        c2[<span class="hljs-title class_">Math</span>.<span class="hljs-title function_">ceil</span>(j / <span class="hljs-number">32</span>)] ^= (<span class="hljs-number">1</span> &lt;&lt; (j % <span class="hljs-number">32</span>))<br>    &#125;<br>    <span class="hljs-keyword">let</span> a = <span class="hljs-number">0</span>, b = <span class="hljs-number">0</span><br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; m; i++) a += (c1[<span class="hljs-title class_">Math</span>.<span class="hljs-title function_">ceil</span>(i / <span class="hljs-number">32</span>)] &gt;&gt; (i % <span class="hljs-number">32</span>) &amp; <span class="hljs-number">1</span>)<br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; n; i++) b += (c2[<span class="hljs-title class_">Math</span>.<span class="hljs-title function_">ceil</span>(i / <span class="hljs-number">32</span>)] &gt;&gt; (i % <span class="hljs-number">32</span>) &amp; <span class="hljs-number">1</span>)<br>    <span class="hljs-keyword">return</span> a * (n - b) + (m - a) * b<br>&#125;;<br></code></pre></div></td></tr></table></figure><br>Python 代码：<br><figure class="highlight plaintext"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Python3">class Solution:<br>    def oddCells(self, m: int, n: int, ins: List[List[int]]) -&gt; int:<br>        c1, c2 = 0, 0<br>        for i, j in ins:<br>            c1 ^= (1 &lt;&lt; i)<br>            c2 ^= (1 &lt;&lt; j)<br>        a, b = 0, 0<br>        for i in range(m):<br>            a += (c1 &gt;&gt; i) &amp; 1<br>        for i in range(n):<br>            b += (c2 &gt;&gt; i) &amp; 1<br>        return a * (n - b) + (m - a) * b<br></code></pre></div></td></tr></table></figure></p>
+<ul>
+<li>时间复杂度：处理所有的 <code>ins</code> 复杂度为 $O(l)$，其中 $l$ 为数组 <code>ins</code> 的长度；使用遍历方式统计奇数行和奇数列个数复杂度为 $O(m + n)$；使用 <code>bitCount</code> 操作统计二进制中 $1$ 个数，复杂度为 $O(\log{C})$，其中 $C = 64$ 为 <code>long</code> 二进制数长度，整体复杂度为 $O(l + m + n)$ 或 $O(l + \log{C})$ </li>
+<li>空间复杂度：$O(1)$</li>
+</ul>
+<hr>
+<h3 id="答疑"><a href="#答疑" class="headerlink" title="答疑"></a>答疑</h3><p>评论区有同学提到 <code>bitCount</code> 的复杂度问题，如下是 <code>Long.bitCount</code> 操作的源码：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-type">int</span> <span class="hljs-title function_">bitCount</span><span class="hljs-params">(<span class="hljs-type">long</span> i)</span> &#123;<br>    <span class="hljs-comment">// HD, Figure 5-14</span><br>    i = i - ((i &gt;&gt;&gt; <span class="hljs-number">1</span>) &amp; <span class="hljs-number">0x5555555555555555L</span>);<br>    i = (i &amp; <span class="hljs-number">0x3333333333333333L</span>) + ((i &gt;&gt;&gt; <span class="hljs-number">2</span>) &amp; <span class="hljs-number">0x3333333333333333L</span>);<br>    i = (i + (i &gt;&gt;&gt; <span class="hljs-number">4</span>)) &amp; <span class="hljs-number">0x0f0f0f0f0f0f0f0fL</span>;<br>    i = i + (i &gt;&gt;&gt; <span class="hljs-number">8</span>);<br>    i = i + (i &gt;&gt;&gt; <span class="hljs-number">16</span>);<br>    i = i + (i &gt;&gt;&gt; <span class="hljs-number">32</span>);<br>    <span class="hljs-keyword">return</span> (<span class="hljs-type">int</span>)i &amp; <span class="hljs-number">0x7f</span>;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<p>这自然不是通过遍历统计位数的 $O(n)$ 做法，普遍会认为是 $O(1)$。</p>
+<p>但上述操作目的是进行成组统计（分治），而能够这样写是因为默认了 <code>long</code> 是 $64$ 长度，因此严格意义来说这段代码复杂度是 $O(\log{64})$ 的。</p>
+<p>作为对比，可以把 <code>Integer.bitCount</code>  的源码看一下：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-type">int</span> <span class="hljs-title function_">bitCount</span><span class="hljs-params">(<span class="hljs-type">int</span> i)</span> &#123;<br>    <span class="hljs-comment">// HD, Figure 5-2</span><br>    i = i - ((i &gt;&gt;&gt; <span class="hljs-number">1</span>) &amp; <span class="hljs-number">0x55555555</span>);<br>    i = (i &amp; <span class="hljs-number">0x33333333</span>) + ((i &gt;&gt;&gt; <span class="hljs-number">2</span>) &amp; <span class="hljs-number">0x33333333</span>);<br>    i = (i + (i &gt;&gt;&gt; <span class="hljs-number">4</span>)) &amp; <span class="hljs-number">0x0f0f0f0f</span>;<br>    i = i + (i &gt;&gt;&gt; <span class="hljs-number">8</span>);<br>    i = i + (i &gt;&gt;&gt; <span class="hljs-number">16</span>);<br>    <span class="hljs-keyword">return</span> i &amp; <span class="hljs-number">0x3f</span>;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<p>统计原理如出一辙，而能够这样统计，是因为默认了 <code>int</code> 长度为 $32$，其分组统计所需要的操作次数也与二进制数的长度相关，因此复杂度为 $O(\log{32})$。</p>
+<p>将上述两个 <code>bitCount</code> 视为 $O(1)$ 都是不对的。</p>
+<hr>
+<h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>这是我们「刷穿 LeetCode」系列文章的第 <code>No.1252</code> 篇，系列开始于 2021/01/01，截止于起始日 LeetCode 上共有 1916 道题目，部分是有锁题，我们将先把所有不带锁的题目刷完。</p>
+<p>在这个系列文章里面，除了讲解解题思路以外，还会尽可能给出最为简洁的代码。如果涉及通解还会相应的代码模板。</p>
+<p>为了方便各位同学能够电脑上进行调试和提交代码，我建立了相关的仓库：<a target="_blank" rel="noopener" href="https://github.com/SharingSource/LogicStack-LeetCode">https://github.com/SharingSource/LogicStack-LeetCode</a> 。</p>
+<p>在仓库地址里，你可以看到系列文章的题解链接、系列文章的相应代码、LeetCode 原题链接和其他优选题解。</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E6%A8%A1%E6%8B%9F/">模拟</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E4%BD%8D%E8%BF%90%E7%AE%97/">位运算</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E8%AE%A1%E6%95%B0/">计数</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/07/11/676.%20%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E9%AD%94%E6%B3%95%E5%AD%97%E5%85%B8%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/">
+                        <span class="hidden-mobile">LC 676. 实现一个魔法字典</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://cdn.staticfile.org/valine/1.4.18/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"IDifiViRkVDTgu27Nu50GQkE-gzGzoHsz","appKey":"gt98pupgyYjPKYQASrGmD9kM","path":"window.location.pathname","placeholder":"发一条友善的评论（为方便交流，记得填上方的昵称再留言哦 ~ 🍭","avatar":"","meta":["nick","mail"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":true},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          Fluid.plugins.initFancyBox('#valine .vcontent img:not(.vemoji)');
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+  <div class="col-lg-7 mx-auto nopadding-x-md">
+    <div class="container custom post-custom mx-auto">
+      <img src="/oimg/gzh-qrcode.webp" srcset="/img/loading.gif" lazyload class="rounded mx-auto d-block mt-5" style="width:80%">
+    </div>
+  </div>
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- LeanCloud 统计PV -->
+        <span id="leancloud-site-pv-container" style="display: none">
+            总访问量 
+            <span id="leancloud-site-pv"></span>
+             次
+          </span>
+      
+      
+        <!-- LeanCloud 统计UV -->
+        <span id="leancloud-site-uv-container" style="display: none">
+            总访客数 
+            <span id="leancloud-site-uv"></span>
+             人
+          </span>
+      
+
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.staticfile.org/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.staticfile.org/tocbot/4.18.2/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.staticfile.org/anchor-js/4.3.1/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.11/clipboard.min.js" ></script>
+  
+
+
+
+
+  <script defer src="/js/leancloud.js" ></script>
+
+
+
+  <script  src="https://cdn.bootcdn.net/ajax/libs/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        loader: {
+          
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.staticfile.org/mathjax/3.2.0/es5/tex-svg.js" ></script>
+
+  
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>
