@@ -1,0 +1,602 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/oimg/RoundCorner.png">
+  <link rel="icon" href="/oimg/RoundCorner.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="宫水三叶">
+  <meta name="keywords" content="算法, 数据结构, 题解">
+  
+    <meta name="description" content="题目描述这是 LeetCode 上的 1206. 设计跳表 ，难度为 困难。 不使用任何库函数，设计一个 跳表 。 跳表 是在 $O(log{n})$ 时间内完成增加、删除、搜索操作的数据结构。跳表相比于树堆与红黑树，其功能与性能相当，并且跳表的代码长度相较下更短，其设计思想与链表相似。 例如，一个跳表包含 [30, 40, 50, 60, 70, 90]，然后增加 80、45 到跳表中，以下图的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LC 1206. 设计跳表">
+<meta property="og:url" content="https://sharingsource.github.io/2022/07/26/1206.%20%E8%AE%BE%E8%AE%A1%E8%B7%B3%E8%A1%A8%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/index.html">
+<meta property="og:site_name" content="宫水三叶的刷题日记">
+<meta property="og:description" content="题目描述这是 LeetCode 上的 1206. 设计跳表 ，难度为 困难。 不使用任何库函数，设计一个 跳表 。 跳表 是在 $O(log{n})$ 时间内完成增加、删除、搜索操作的数据结构。跳表相比于树堆与红黑树，其功能与性能相当，并且跳表的代码长度相较下更短，其设计思想与链表相似。 例如，一个跳表包含 [30, 40, 50, 60, 70, 90]，然后增加 80、45 到跳表中，以下图的">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://sharingsource.github.io/2022/07/26/1206.%20%E8%AE%BE%E8%AE%A1%E8%B7%B3%E8%A1%A8%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/image_0.png">
+<meta property="og:image" content="https://sharingsource.github.io/2022/07/26/1206.%20%E8%AE%BE%E8%AE%A1%E8%B7%B3%E8%A1%A8%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/image_1.png">
+<meta property="article:published_time" content="2022-07-25T17:36:29.000Z">
+<meta property="article:modified_time" content="2022-07-26T04:31:11.795Z">
+<meta property="article:author" content="宫水三叶">
+<meta property="article:tag" content="链表">
+<meta property="article:tag" content="数据结构">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://sharingsource.github.io/2022/07/26/1206.%20%E8%AE%BE%E8%AE%A1%E8%B7%B3%E8%A1%A8%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/image_0.png">
+  
+  
+  <title>LC 1206. 设计跳表 - 宫水三叶的刷题日记</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/hint.css/2.7.0/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.7.2/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"sharingsource.github.io","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"|","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"IDifiViRkVDTgu27Nu50GQkE-gzGzoHsz","app_key":"gt98pupgyYjPKYQASrGmD9kM","server_url":"https://idifivir.lc-cn-n1-shared.com","path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.1.0"></head>
+
+
+<body>
+  <header style="height: 50vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>宫水三叶の刷题日记</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/image_188.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="LC 1206. 设计跳表">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-author" aria-hidden="true"></i>
+      宫水三叶
+    </span>
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2022-07-26 01:36" pubdate>
+        2022年7月26日
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">LC 1206. 设计跳表</h1>
+            
+            <div class="markdown-body">
+              <h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>这是 LeetCode 上的 <strong><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/design-skiplist/solution/by-ac_oier-38rd/">1206. 设计跳表</a></strong> ，难度为 <strong>困难</strong>。</p>
+<p>不使用任何库函数，设计一个 跳表 。</p>
+<p>跳表 是在 $O(log{n})$ 时间内完成增加、删除、搜索操作的数据结构。跳表相比于树堆与红黑树，其功能与性能相当，并且跳表的代码长度相较下更短，其设计思想与链表相似。</p>
+<p>例如，一个跳表包含 <code>[30, 40, 50, 60, 70, 90]</code>，然后增加 <code>80</code>、<code>45</code> 到跳表中，以下图的方式操作：</p>
+<p><img src="/2022/07/26/1206.%20%E8%AE%BE%E8%AE%A1%E8%B7%B3%E8%A1%A8%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/image_0.png" srcset="/img/loading.gif" lazyload alt></p>
+<p>跳表中有很多层，每一层是一个短的链表。在第一层的作用下，增加、删除和搜索操作的时间复杂度不超过 $O(n)$。跳表的每一个操作的平均时间复杂度是 $O(\log{n})$，空间复杂度是 $O(n)$。</p>
+<p>在本题中，你的设计应该要包含这些函数：</p>
+<ul>
+<li><code>bool search(int target)</code>: 返回 <code>target</code> 是否存在于跳表中。</li>
+<li><code>void add(int num)</code>: 插入一个元素到跳表。</li>
+<li><code>bool erase(int num)</code>: 在跳表中删除一个值，如果 <code>num</code> 不存在，直接返回 <code>false</code>. 如果存在多个 <code>num</code> ，删除其中任意一个即可。</li>
+</ul>
+<p>注意，跳表中可能存在多个相同的值，你的代码需要处理这种情况。</p>
+<p>示例 1:<br><figure class="highlight pgsql"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs pgsql">输入<br>[&quot;Skiplist&quot;, &quot;add&quot;, &quot;add&quot;, &quot;add&quot;, &quot;search&quot;, &quot;add&quot;, &quot;search&quot;, &quot;erase&quot;, &quot;erase&quot;, &quot;search&quot;]<br>[[], [<span class="hljs-number">1</span>], [<span class="hljs-number">2</span>], [<span class="hljs-number">3</span>], [<span class="hljs-number">0</span>], [<span class="hljs-number">4</span>], [<span class="hljs-number">1</span>], [<span class="hljs-number">0</span>], [<span class="hljs-number">1</span>], [<span class="hljs-number">1</span>]]<br><br>输出<br>[<span class="hljs-keyword">null</span>, <span class="hljs-keyword">null</span>, <span class="hljs-keyword">null</span>, <span class="hljs-keyword">null</span>, <span class="hljs-keyword">false</span>, <span class="hljs-keyword">null</span>, <span class="hljs-keyword">true</span>, <span class="hljs-keyword">false</span>, <span class="hljs-keyword">true</span>, <span class="hljs-keyword">false</span>]<br><br>解释<br>Skiplist skiplist = <span class="hljs-built_in">new</span> Skiplist();<br>skiplist.<span class="hljs-keyword">add</span>(<span class="hljs-number">1</span>);<br>skiplist.<span class="hljs-keyword">add</span>(<span class="hljs-number">2</span>);<br>skiplist.<span class="hljs-keyword">add</span>(<span class="hljs-number">3</span>);<br>skiplist.<span class="hljs-keyword">search</span>(<span class="hljs-number">0</span>);   // 返回 <span class="hljs-keyword">false</span><br>skiplist.<span class="hljs-keyword">add</span>(<span class="hljs-number">4</span>);<br>skiplist.<span class="hljs-keyword">search</span>(<span class="hljs-number">1</span>);   // 返回 <span class="hljs-keyword">true</span><br>skiplist.erase(<span class="hljs-number">0</span>);    // 返回 <span class="hljs-keyword">false</span>，<span class="hljs-number">0</span> 不在跳表中<br>skiplist.erase(<span class="hljs-number">1</span>);    // 返回 <span class="hljs-keyword">true</span><br>skiplist.<span class="hljs-keyword">search</span>(<span class="hljs-number">1</span>);   // 返回 <span class="hljs-keyword">false</span>，<span class="hljs-number">1</span> 已被擦除<br></code></pre></div></td></tr></table></figure></p>
+<p>提示:</p>
+<ul>
+<li>$0 &lt;= num, target &lt;= 2 \times 10^4$</li>
+<li>调用 <code>search</code>, <code>add</code>,  <code>erase</code> 操作次数不大于 $5 \times 10^44$</li>
+</ul>
+<hr>
+<h3 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构"></a>数据结构</h3><p>对于单链表而言，所有的操作（增删改查）都遵循「先查找，再操作」的步骤，这导致在单链表上所有操作复杂度均为 $O(n)$（瓶颈在于查找过程）。</p>
+<p>跳表相对于单链表，则是通过引入「多层」链表来优化查找过程，其中每层链表均是「有序」链表：</p>
+<ul>
+<li><p>对于单链表的 <code>Node</code> 设计而言，我们只需存储对应的节点值 <code>val</code>，以及当前节点的下一节点的指针 <code>ne</code> 即可（<code>ne</code> 为一指针变量）</p>
+</li>
+<li><p>对于跳表来说，除了存储对应的节点值 <code>val</code> 以外，我们需要存储当前节点在「每一层」的下一节点指针 <code>ne</code>（<code>ne</code> 为指针数组）</p>
+</li>
+</ul>
+<p>跳表的 <code>level</code> 编号从下往上递增，最下层的链表为元素最全的有序单链表，而查找过程则是按照 <code>level</code> 从上往下进行。</p>
+<p><img src="/2022/07/26/1206.%20%E8%AE%BE%E8%AE%A1%E8%B7%B3%E8%A1%A8%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/image_1.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<p>操作次数的数据范围为 $n = 5 \times 10^4$，因此设计最大的 <code>level</code> 为 $\log{n}$ 即可确保复杂度，但由于操作次数 $n = 5 \times 10^4$ 不可能全是 <code>add</code> 操作，因此这里直接取 <code>level</code> 为 $10$。</p>
+<p>同时为了简化，建立一个哨兵节点 <code>he</code>，哨兵值的值应当足够小（根据数据范围，设定为 $-1$ 即可），所有的操作（假设当前操作的传入值为 <code>t</code>），先进行统一化的查找：<strong>查找出每一层比 <code>t</code> 严格小的最后一个节点，将其存成 <code>ns</code> 数组。即 $ns[i]$ 为 $level = i$ 层严格比 $t$ 小的最后一个节点。</strong></p>
+<p>再根据不同的操作进行下一步动作：</p>
+<ul>
+<li><code>search</code> 操作：由于最后一层必然是元素最全的单链表，因此可以直接访问 <code>ns[0].ne[0]</code> 即是所有元素中满足大于等于 <code>t</code> 的第一个元素，通过判断其值与传入值 <code>t</code> 的大小关系来决定结果；</li>
+<li><code>add</code> 操作：由于最后一层必然是元素最全的单链表，因此我们「从下往上」进行插入，最底下一层必然要插入，然后以一半的概率往上传递；</li>
+<li><code>erase</code> 操作：与 <code>add</code> 操作互逆，按照「从下往上」的顺序进行删除。需要注意的是，由于相同的值在跳表中可能存在多个，因此我们在「从下往上」删除过程中需要判断待删除的元素与 <code>ns[0].ne[0]</code> 是否为同一元素（即要判断地址是否相同，而不是值相同）。</li>
+</ul>
+<p>Java 代码：<br><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Skiplist</span> &#123;<br>    <span class="hljs-type">int</span> <span class="hljs-variable">level</span> <span class="hljs-operator">=</span> <span class="hljs-number">10</span>;<br>    <span class="hljs-keyword">class</span> <span class="hljs-title class_">Node</span> &#123;<br>        <span class="hljs-type">int</span> val;<br>        Node[] ne = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Node</span>[level];<br>        Node (<span class="hljs-type">int</span> _val) &#123;<br>            val = _val;<br>        &#125;<br>    &#125;<br>    <span class="hljs-type">Random</span> <span class="hljs-variable">random</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Random</span>();<br>    <span class="hljs-type">Node</span> <span class="hljs-variable">he</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Node</span>(-<span class="hljs-number">1</span>);<br>    <span class="hljs-keyword">void</span> <span class="hljs-title function_">find</span><span class="hljs-params">(<span class="hljs-type">int</span> t, Node[] ns)</span> &#123;<br>        <span class="hljs-type">Node</span> <span class="hljs-variable">cur</span> <span class="hljs-operator">=</span> he;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> level - <span class="hljs-number">1</span>; i &gt;= <span class="hljs-number">0</span>; i--) &#123;<br>            <span class="hljs-keyword">while</span> (cur.ne[i] != <span class="hljs-literal">null</span> &amp;&amp; cur.ne[i].val &lt; t) cur = cur.ne[i];<br>            ns[i] = cur;<br>        &#125;<br>    &#125;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">search</span><span class="hljs-params">(<span class="hljs-type">int</span> t)</span> &#123;<br>        Node[] ns = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Node</span>[level];<br>        find(t, ns);<br>        <span class="hljs-keyword">return</span> ns[<span class="hljs-number">0</span>].ne[<span class="hljs-number">0</span>] != <span class="hljs-literal">null</span> &amp;&amp; ns[<span class="hljs-number">0</span>].ne[<span class="hljs-number">0</span>].val == t;<br>    &#125;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">add</span><span class="hljs-params">(<span class="hljs-type">int</span> t)</span> &#123;<br>        Node[] ns = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Node</span>[level];<br>        find(t, ns);<br>        <span class="hljs-type">Node</span> <span class="hljs-variable">node</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Node</span>(t);<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; level; i++) &#123;<br>            node.ne[i] = ns[i].ne[i];<br>            ns[i].ne[i] = node;<br>            <span class="hljs-keyword">if</span> (random.nextInt(<span class="hljs-number">2</span>) == <span class="hljs-number">0</span>) <span class="hljs-keyword">break</span>;<br>        &#125;<br>    &#125;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">erase</span><span class="hljs-params">(<span class="hljs-type">int</span> t)</span> &#123;<br>        Node[] ns = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Node</span>[level];<br>        find(t, ns);<br>        <span class="hljs-type">Node</span> <span class="hljs-variable">node</span> <span class="hljs-operator">=</span> ns[<span class="hljs-number">0</span>].ne[<span class="hljs-number">0</span>];<br>        <span class="hljs-keyword">if</span> (node == <span class="hljs-literal">null</span> || node.val != t) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; level &amp;&amp; ns[i].ne[i] == node; i++) ns[i].ne[i] = ns[i].ne[i].ne[i];<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure><br>TypeScript 代码：<br><figure class="highlight typescript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs TypeScript"><span class="hljs-keyword">const</span> <span class="hljs-attr">level</span>: <span class="hljs-built_in">number</span> = <span class="hljs-number">10</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">TNode</span> &#123;<br>    <span class="hljs-attr">val</span>: <span class="hljs-built_in">number</span><br>    <span class="hljs-attr">ne</span>: <span class="hljs-title class_">TNode</span>[] = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Array</span>&lt;<span class="hljs-title class_">TNode</span>&gt;(level)<br>    <span class="hljs-title function_">constructor</span>(<span class="hljs-params">_val: <span class="hljs-built_in">number</span></span>) &#123;<br>        <span class="hljs-variable language_">this</span>.<span class="hljs-property">val</span> = _val<br>    &#125; <br>&#125;<br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Skiplist</span> &#123;<br>    <span class="hljs-attr">he</span>: <span class="hljs-title class_">TNode</span> = <span class="hljs-keyword">new</span> <span class="hljs-title class_">TNode</span>(-<span class="hljs-number">1</span>)<br>    <span class="hljs-title function_">find</span>(<span class="hljs-attr">t</span>: <span class="hljs-built_in">number</span>, <span class="hljs-attr">ns</span>: <span class="hljs-title class_">TNode</span>[]): <span class="hljs-built_in">void</span> &#123;<br>        <span class="hljs-keyword">let</span> cur = <span class="hljs-variable language_">this</span>.<span class="hljs-property">he</span><br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = level - <span class="hljs-number">1</span>; i &gt;= <span class="hljs-number">0</span>; i--) &#123;<br>            <span class="hljs-keyword">while</span> (cur.<span class="hljs-property">ne</span>[i] != <span class="hljs-literal">null</span> &amp;&amp; cur.<span class="hljs-property">ne</span>[i].<span class="hljs-property">val</span> &lt; t) cur = cur.<span class="hljs-property">ne</span>[i]<br>            ns[i] = cur<br>        &#125;<br>    &#125;<br>    <span class="hljs-title function_">search</span>(<span class="hljs-attr">t</span>: <span class="hljs-built_in">number</span>): <span class="hljs-built_in">boolean</span> &#123;<br>        <span class="hljs-keyword">let</span> <span class="hljs-attr">ns</span>: <span class="hljs-title class_">TNode</span>[] = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Array</span>&lt;<span class="hljs-title class_">TNode</span>&gt;(level)<br>        <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">find</span>(t, ns)<br>        <span class="hljs-keyword">return</span> ns[<span class="hljs-number">0</span>].<span class="hljs-property">ne</span>[<span class="hljs-number">0</span>] != <span class="hljs-literal">null</span> &amp;&amp; ns[<span class="hljs-number">0</span>].<span class="hljs-property">ne</span>[<span class="hljs-number">0</span>].<span class="hljs-property">val</span> == t<br>    &#125;<br>    <span class="hljs-title function_">add</span>(<span class="hljs-attr">t</span>: <span class="hljs-built_in">number</span>): <span class="hljs-built_in">void</span> &#123;<br>        <span class="hljs-keyword">let</span> <span class="hljs-attr">ns</span>: <span class="hljs-title class_">TNode</span>[] = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Array</span>&lt;<span class="hljs-title class_">TNode</span>&gt;(level)<br>        <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">find</span>(t, ns)<br>        <span class="hljs-keyword">const</span> node = <span class="hljs-keyword">new</span> <span class="hljs-title class_">TNode</span>(t)<br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; level; i++) &#123;<br>            node.<span class="hljs-property">ne</span>[i] = ns[i].<span class="hljs-property">ne</span>[i]<br>            ns[i].<span class="hljs-property">ne</span>[i] = node<br>            <span class="hljs-keyword">if</span> (<span class="hljs-title class_">Math</span>.<span class="hljs-title function_">round</span>(<span class="hljs-title class_">Math</span>.<span class="hljs-title function_">random</span>()) == <span class="hljs-number">0</span>) <span class="hljs-keyword">break</span><br>        &#125;<br>    &#125;<br>    <span class="hljs-title function_">erase</span>(<span class="hljs-attr">t</span>: <span class="hljs-built_in">number</span>): <span class="hljs-built_in">boolean</span> &#123;<br>        <span class="hljs-keyword">let</span> <span class="hljs-attr">ns</span>: <span class="hljs-title class_">TNode</span>[] = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Array</span>&lt;<span class="hljs-title class_">TNode</span>&gt;(level)<br>        <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">find</span>(t, ns)<br>        <span class="hljs-keyword">const</span> node = ns[<span class="hljs-number">0</span>].<span class="hljs-property">ne</span>[<span class="hljs-number">0</span>]<br>        <span class="hljs-keyword">if</span> (node == <span class="hljs-literal">null</span> || node.<span class="hljs-property">val</span> != t) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span><br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; level &amp;&amp; ns[i].<span class="hljs-property">ne</span>[i] == node; i++) ns[i].<span class="hljs-property">ne</span>[i] = ns[i].<span class="hljs-property">ne</span>[i].<span class="hljs-property">ne</span>[i]<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span><br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure></p>
+<ul>
+<li>时间复杂度：所有操作的复杂度瓶颈在于 <code>find</code> 查找，<code>find</code> 查找期望复杂度为 $O(\log{n})$</li>
+<li>空间复杂度：$O(n)$</li>
+</ul>
+<hr>
+<h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>这是我们「刷穿 LeetCode」系列文章的第 <code>No.1206</code> 篇，系列开始于 2021/01/01，截止于起始日 LeetCode 上共有 1916 道题目，部分是有锁题，我们将先把所有不带锁的题目刷完。</p>
+<p>在这个系列文章里面，除了讲解解题思路以外，还会尽可能给出最为简洁的代码。如果涉及通解还会相应的代码模板。</p>
+<p>为了方便各位同学能够电脑上进行调试和提交代码，我建立了相关的仓库：<a target="_blank" rel="noopener" href="https://github.com/SharingSource/LogicStack-LeetCode">https://github.com/SharingSource/LogicStack-LeetCode</a> 。</p>
+<p>在仓库地址里，你可以看到系列文章的题解链接、系列文章的相应代码、LeetCode 原题链接和其他优选题解。</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E9%93%BE%E8%A1%A8/">链表</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/07/25/919.%20%E5%AE%8C%E5%85%A8%E4%BA%8C%E5%8F%89%E6%A0%91%E6%8F%92%E5%85%A5%E5%99%A8%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/">
+                        <span class="hidden-mobile">LC 919. 完全二叉树插入器</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://cdn.staticfile.org/valine/1.4.18/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"IDifiViRkVDTgu27Nu50GQkE-gzGzoHsz","appKey":"gt98pupgyYjPKYQASrGmD9kM","path":"window.location.pathname","placeholder":"发一条友善的评论（为方便交流，记得填上方的昵称再留言哦 ~ 🍭","avatar":"","meta":["nick","mail"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":true},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          Fluid.plugins.initFancyBox('#valine .vcontent img:not(.vemoji)');
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+  <div class="col-lg-7 mx-auto nopadding-x-md">
+    <div class="container custom post-custom mx-auto">
+      <img src="/oimg/gzh-qrcode.webp" srcset="/img/loading.gif" lazyload class="rounded mx-auto d-block mt-5" style="width:80%">
+    </div>
+  </div>
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- LeanCloud 统计PV -->
+        <span id="leancloud-site-pv-container" style="display: none">
+            总访问量 
+            <span id="leancloud-site-pv"></span>
+             次
+          </span>
+      
+      
+        <!-- LeanCloud 统计UV -->
+        <span id="leancloud-site-uv-container" style="display: none">
+            总访客数 
+            <span id="leancloud-site-uv"></span>
+             人
+          </span>
+      
+
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.staticfile.org/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.staticfile.org/tocbot/4.18.2/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.staticfile.org/anchor-js/4.3.1/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.11/clipboard.min.js" ></script>
+  
+
+
+
+
+  <script defer src="/js/leancloud.js" ></script>
+
+
+
+  <script  src="https://cdn.bootcdn.net/ajax/libs/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        loader: {
+          
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.staticfile.org/mathjax/3.2.0/es5/tex-svg.js" ></script>
+
+  
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>
