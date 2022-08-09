@@ -28,7 +28,7 @@
 <meta property="og:image" content="https://sharingsource.github.io/2022/08/08/761.%20%E7%89%B9%E6%AE%8A%E7%9A%84%E4%BA%8C%E8%BF%9B%E5%88%B6%E5%BA%8F%E5%88%97%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/image_2.png">
 <meta property="og:image" content="https://sharingsource.github.io/2022/08/08/761.%20%E7%89%B9%E6%AE%8A%E7%9A%84%E4%BA%8C%E8%BF%9B%E5%88%B6%E5%BA%8F%E5%88%97%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/image_3.png">
 <meta property="article:published_time" content="2022-08-07T17:39:44.000Z">
-<meta property="article:modified_time" content="2022-08-09T03:43:26.779Z">
+<meta property="article:modified_time" content="2022-08-09T04:02:07.680Z">
 <meta property="article:author" content="宫水三叶">
 <meta property="article:tag" content="构造">
 <meta name="twitter:card" content="summary_large_image">
@@ -258,7 +258,7 @@
 <p>根据题目对「特殊字符串」的定义可知，给定字符串 <code>s</code> 的总得分为 $0$，且任意前缀串不会出现得分为负数的情况。</p>
 <p>考虑将 <code>s</code> 进行划分为多个足够小特殊字符串 <code>item</code>（足够小的含义为每个 <code>item</code> 无法再进行划分），每个 <code>item</code> 的总得分为 $0$。根据 <code>s</code> 定义，必然可恰好划分为多个 <code>item</code>。</p>
 <p>每次操作可以将相邻特殊字符串进行交换，于是问题转换为将 <code>s</code> 进行重排，求其重排后字典序最大的方案。</p>
-<p>首先可以证明一个合法 <code>item</code> 必然满足 <code>1...0</code> 的形式，可通过「反证法」进行进行证明：定义了 <code>item</code> 总得分为 $0$，且长度不为 $0$，因此必然有 <code>1</code> 有 <code>0</code>。<strong>若第一位字符为 <code>0</code>，则必然能够从第一位字符作为起点，找到一个得分为负数的子串，这与 <code>s</code> 本身的定义冲突（<code>s</code> 中不存在得分为负数的子串）；若最后一位为 <code>1</code>，根据 <code>item</code> 总得分为 $0$，可知当前 <code>item</code> 去掉最后一位后得分为负，也与 <code>s</code> 本身定义冲突（<code>s</code> 中不存在得分为负数的子串）。</strong></p>
+<p>首先可以证明一个合法 <code>item</code> 必然满足 <code>1...0</code> 的形式，可通过「反证法」进行进行证明：定义了 <code>item</code> 总得分为 $0$，且长度不为 $0$，因此必然有 <code>1</code> 有 <code>0</code>。<strong>若第一位字符为 <code>0</code>，则必然能够从第一位字符作为起点，找到一个得分为负数的子串，这与 <code>s</code> 本身的定义冲突（<code>s</code> 中不存在得分为负数的前缀串）；若最后一位为 <code>1</code>，根据 <code>item</code> 总得分为 $0$，可知当前 <code>item</code> 去掉最后一位后得分为负，也与 <code>s</code> 本身定义冲突（<code>s</code> 中不存在得分为负数的前缀串）。</strong></p>
 <p>因此可将构造分两步进行：</p>
 <ol>
 <li>对于每个 <code>item</code> 进行重排，使其调整为字典序最大</li>
@@ -270,25 +270,25 @@
 <p><strong>这样根据「排序比较逻辑」需要证明在集合上具有<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E5%85%A8%E5%BA%8F%E5%85%B3%E7%B3%BB">「全序关系」</a>:</strong></p>
 <p>我们使用符号 $@$ 来代指我们的「排序」逻辑：</p>
 <ul>
-<li>如果 $a$ 必须排在 $b$ 的前面，我们记作 $a @ b$；</li>
-<li>如果 $a$ 必须排在 $b$ 的后面，我们记作 $b @ a$；</li>
-<li>如果 $a$ 既可以排在 $b$ 的前面，也可以排在 $b$ 的后面，我们记作 $a#b$；</li>
+<li>如果 $a$ 必须排在 $b$ 的前面，我们记作 <code>a@b</code>；</li>
+<li>如果 $a$ 必须排在 $b$ 的后面，我们记作 <code>b@a</code>；</li>
+<li>如果 $a$ 既可以排在 $b$ 的前面，也可以排在 $b$ 的后面，我们记作 <code>a#b</code>；</li>
 </ul>
 <p><strong>2.1 完全性</strong></p>
-<p><strong>具有完全性是指从集合 <code>items</code> 中任意取出两个元素 $a$ 和 $b$，必然满足 $a @ b$、$b @ a$ 和 $a#b$ 三者之一。</strong></p>
+<p><strong>具有完全性是指从集合 <code>items</code> 中任意取出两个元素 $a$ 和 $b$，必然满足 <code>a@b</code>、<code>b@a</code> 和 <code>a#b</code> 三者之一。</strong></p>
 <p><strong>这点其实不需要额外证明，因为由 $a$ 和 $b$ 拼接的字符串 $ab$ 和 $ba$ 所在「字典序大小关系中」要么完全相等，要么具有明确的字典序大小关系，导致 $a$ 必须排在前面或者后面。</strong></p>
 <p><strong>2.2 反对称性</strong></p>
-<p><strong>具有反对称性是指由 $a@b$ 和 $b@a$ 能够推导出 $a#b$。</strong></p>
+<p><strong>具有反对称性是指由 <code>a@b</code> 和 <code>b@a</code> 能够推导出 <code>a#b</code>。</strong></p>
 <p>$a@b$ 说明字符串 $ab$ 的字典序大小数值要比字符串 $ba$ 字典序大小数值大。</p>
 <p>$b@a$ 说明字符串 $ab$ 的字典序大小数值要比字符串 $ba$ 字典序大小数值小。</p>
 <p><strong>这样，基于「字典序本身满足全序关系」和「数学上的 $a \geqslant b$ 和 $a \leqslant b$ 可推导出 $a = b$」。</strong></p>
-<p><strong>得证 $a@b$ 和 $b@a$ 能够推导出 $a#b$。</strong></p>
+<p><strong>得证 <code>a@b</code> 和 <code>b@a</code> 能够推导出 <code>a#b</code>。</strong></p>
 <p><strong>2.3 传递性</strong></p>
-<p><strong>具有传递性是指由 $a@b$ 和 $b@c$ 能够推导出 $a@c$。</strong></p>
+<p><strong>具有传递性是指由 <code>a@b</code> 和 <code>b@c</code> 能够推导出 <code>a@c</code>。</strong></p>
 <p><strong>我们可以利用「两个等长的拼接字符串，字典序大小关系与数值大小关系一致」这一性质来证明，因为字符串 $ac$ 和 $ca$ 必然是等长的。</strong></p>
-<p>接下来，让我们从「自定义排序逻辑」出发，换个思路来证明 $a@c$：</p>
+<p>接下来，让我们从「自定义排序逻辑」出发，换个思路来证明 <code>a@c</code>：</p>
 <p><img src="/2022/08/08/761.%20%E7%89%B9%E6%AE%8A%E7%9A%84%E4%BA%8C%E8%BF%9B%E5%88%B6%E5%BA%8F%E5%88%97%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/image_0.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
-<p><strong>然后我们只需要证明在不同的 $i$ $j$ 关系之间（共三种情况），$a@c$ 恒成立即可：</strong></p>
+<p><strong>然后我们只需要证明在不同的 $i$ $j$ 关系之间（共三种情况），<code>a@c</code> 恒成立即可：</strong></p>
 <ol>
 <li>当 $i == j$ 的时候：</li>
 </ol>
@@ -301,7 +301,7 @@
 <li>当 $i &lt; j$ 的时候：</li>
 </ol>
 <p><img src="/2022/08/08/761.%20%E7%89%B9%E6%AE%8A%E7%9A%84%E4%BA%8C%E8%BF%9B%E5%88%B6%E5%BA%8F%E5%88%97%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/image_3.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
-<p><strong>综上，我们证明了无论在何种情况下，只要有 $a@b$ 和 $b@c$ 的话，那么 $a@c$ 恒成立。</strong></p>
+<p><strong>综上，我们证明了无论在何种情况下，只要有 <code>a@b</code> 和 <code>b@c</code> 的话，那么 <code>a@c</code> 恒成立。</strong></p>
 <p><strong>我们之所以能这样证明「传递性」，本质是利用了自定义排序逻辑中「对于确定任意元素 $a$ 和 $b$ 之间的排序关系只依赖于 $a$ 和 $b$ 的第一个不同元素之间的大小关系」这一性质。</strong></p>
 <p>最终，我们证明了该「排序比较逻辑」必然能排序出字典序最大的方案。</p>
 <p>Java 代码：<br><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> String <span class="hljs-title function_">makeLargestSpecial</span><span class="hljs-params">(String s)</span> &#123;<br>        <span class="hljs-keyword">if</span> (s.length() == <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> s;<br>        List&lt;String&gt; list = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();<br>        <span class="hljs-type">char</span>[] cs = s.toCharArray();<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>, j = <span class="hljs-number">0</span>, k = <span class="hljs-number">0</span>; i &lt; cs.length; i++) &#123;<br>            k += cs[i] == <span class="hljs-string">&#x27;1&#x27;</span> ? <span class="hljs-number">1</span> : -<span class="hljs-number">1</span>;<br>            <span class="hljs-keyword">if</span> (k == <span class="hljs-number">0</span>) &#123;<br>                list.add(<span class="hljs-string">&quot;1&quot;</span> + makeLargestSpecial(s.substring(j + <span class="hljs-number">1</span>, i)) + <span class="hljs-string">&quot;0&quot;</span>);<br>                j = i + <span class="hljs-number">1</span>;<br>            &#125;<br>        &#125;<br>        Collections.sort(list, (a, b)-&gt;(b + a).compareTo(a + b));<br>        <span class="hljs-type">StringBuilder</span> <span class="hljs-variable">sb</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">StringBuilder</span>();<br>        <span class="hljs-keyword">for</span> (String str : list) sb.append(str);<br>        <span class="hljs-keyword">return</span> sb.toString();<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure><br>TypeScript 代码：<br><figure class="highlight typescript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs TypeScript"><span class="hljs-keyword">function</span> <span class="hljs-title function_">makeLargestSpecial</span>(<span class="hljs-params">s: <span class="hljs-built_in">string</span></span>): <span class="hljs-built_in">string</span> &#123;<br>    <span class="hljs-keyword">const</span> list = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Array</span>&lt;<span class="hljs-built_in">string</span>&gt;()<br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>, j = <span class="hljs-number">0</span>, k = <span class="hljs-number">0</span>; i &lt; s.<span class="hljs-property">length</span>; i++) &#123;<br>        k += s[i] == <span class="hljs-string">&#x27;1&#x27;</span> ? <span class="hljs-number">1</span> : -<span class="hljs-number">1</span><br>        <span class="hljs-keyword">if</span> (k == <span class="hljs-number">0</span>) &#123;<br>            list.<span class="hljs-title function_">push</span>(<span class="hljs-string">&#x27;1&#x27;</span> + <span class="hljs-title function_">makeLargestSpecial</span>(s.<span class="hljs-title function_">substring</span>(j + <span class="hljs-number">1</span>, i)) + <span class="hljs-string">&#x27;0&#x27;</span>)<br>            j = i + <span class="hljs-number">1</span><br>        &#125;<br>    &#125;<br>    list.<span class="hljs-title function_">sort</span>(<span class="hljs-function">(<span class="hljs-params">a, b</span>)=&gt;</span>(b + a).<span class="hljs-title function_">localeCompare</span>(a + b));<br>    <span class="hljs-keyword">return</span> [...list].<span class="hljs-title function_">join</span>(<span class="hljs-string">&quot;&quot;</span>)<br>&#125;;<br></code></pre></div></td></tr></table></figure></p>
