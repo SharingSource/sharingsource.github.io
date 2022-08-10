@@ -16,22 +16,23 @@
   <meta name="author" content="宫水三叶">
   <meta name="keywords" content="算法, 数据结构, 题解">
   
-    <meta name="description" content="题目描述这是 LeetCode 上的 881. 救生艇 ，难度为 中等。 第 i 个人的体重为 people[i]，每艘船可以承载的最大重量为 limit。 每艘船最多可同时载两人，但条件是这些人的重量之和最多为 limit。 返回载到每一个人所需的最小船数。(保证每个人都能被船载)。 示例 1：12345输入：people &#x3D; [1,2], limit &#x3D; 3输出：1解释：1 艘船载 (1, 2">
+    <meta name="description" content="题目描述这是 LeetCode 上的 640. 求解方程 ，难度为 中等。 求解一个给定的方程，将 x 以字符串 &quot;x&#x3D;#value&quot; 的形式返回。该方程仅包含 &#39;+&#39; ， &#39;-&#39; 操作，变量 x 和其对应系数。 如果方程没有解，请返回 &quot;No solution&quot;。如果方程有无限解，则返回 &quot;Infinite sol">
 <meta property="og:type" content="article">
-<meta property="og:title" content="LC 881. 救生艇">
-<meta property="og:url" content="https://sharingsource.github.io/2021/08/26/881.%20%E6%95%91%E7%94%9F%E8%89%87%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/index.html">
+<meta property="og:title" content="LC 640. 求解方程">
+<meta property="og:url" content="https://sharingsource.github.io/2022/08/10/640.%20%E6%B1%82%E8%A7%A3%E6%96%B9%E7%A8%8B%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/index.html">
 <meta property="og:site_name" content="宫水三叶的刷题日记">
-<meta property="og:description" content="题目描述这是 LeetCode 上的 881. 救生艇 ，难度为 中等。 第 i 个人的体重为 people[i]，每艘船可以承载的最大重量为 limit。 每艘船最多可同时载两人，但条件是这些人的重量之和最多为 limit。 返回载到每一个人所需的最小船数。(保证每个人都能被船载)。 示例 1：12345输入：people &#x3D; [1,2], limit &#x3D; 3输出：1解释：1 艘船载 (1, 2">
+<meta property="og:description" content="题目描述这是 LeetCode 上的 640. 求解方程 ，难度为 中等。 求解一个给定的方程，将 x 以字符串 &quot;x&#x3D;#value&quot; 的形式返回。该方程仅包含 &#39;+&#39; ， &#39;-&#39; 操作，变量 x 和其对应系数。 如果方程没有解，请返回 &quot;No solution&quot;。如果方程有无限解，则返回 &quot;Infinite sol">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2021-08-25T18:49:10.000Z">
-<meta property="article:modified_time" content="2022-05-18T08:26:31.871Z">
+<meta property="article:published_time" content="2022-08-09T17:21:14.000Z">
+<meta property="article:modified_time" content="2022-08-10T02:57:55.634Z">
 <meta property="article:author" content="宫水三叶">
+<meta property="article:tag" content="模拟">
 <meta property="article:tag" content="双指针">
-<meta property="article:tag" content="贪心">
+<meta property="article:tag" content="数学">
 <meta name="twitter:card" content="summary_large_image">
   
   
-  <title>LC 881. 救生艇 - 宫水三叶的刷题日记</title>
+  <title>LC 640. 求解方程 - 宫水三叶的刷题日记</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -176,12 +177,12 @@
 </nav>
 
     <div class="banner" id="banner" parallax=true
-         style="background: url('/img/image_114.jpeg') no-repeat center center;
+         style="background: url('/img/image_46.jpeg') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="LC 881. 救生艇">
+            <span class="h2" id="subtitle" title="LC 640. 求解方程">
               
             </span>
 
@@ -196,8 +197,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-08-26 02:49" pubdate>
-        2021年8月26日
+      <time datetime="2022-08-10 01:21" pubdate>
+        2022年8月10日
       </time>
     </span>
   
@@ -233,58 +234,42 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">LC 881. 救生艇</h1>
+            <h1 style="display: none">LC 640. 求解方程</h1>
             
             <div class="markdown-body">
-              <h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>这是 LeetCode 上的 <strong><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/boats-to-save-people/solution/gong-shui-san-xie-noxiang-xin-ke-xue-xi-hosg8/">881. 救生艇</a></strong> ，难度为 <strong>中等</strong>。</p>
-<p>第 <code>i</code> 个人的体重为 <code>people[i]</code>，每艘船可以承载的最大重量为 <code>limit</code>。</p>
-<p>每艘船最多可同时载两人，但条件是这些人的重量之和最多为 <code>limit</code>。</p>
-<p>返回载到每一个人所需的最小船数。(保证每个人都能被船载)。</p>
-<p>示例 1：<br><figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">输入：people = [1,2], <span class="hljs-built_in">limit</span> = 3<br><br>输出：1<br><br>解释：1 艘船载 (1, 2)<br></code></pre></div></td></tr></table></figure><br>示例 2：<br><figure class="highlight gcode"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs gcode">输入：people = [<span class="hljs-number">3</span>,<span class="hljs-number">2</span>,<span class="hljs-number">2</span>,<span class="hljs-number">1</span>], limit = <span class="hljs-number">3</span><br><br>输出：<span class="hljs-number">3</span><br><br>解释：<span class="hljs-number">3</span> 艘船分别载 <span class="hljs-comment">(1, 2)</span>, <span class="hljs-comment">(2)</span> 和 <span class="hljs-comment">(3)</span><br></code></pre></div></td></tr></table></figure><br>示例 3：<br><figure class="highlight gcode"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs gcode">输入：people = [<span class="hljs-number">3</span>,<span class="hljs-number">5</span>,<span class="hljs-number">3</span>,<span class="hljs-number">4</span>], limit = <span class="hljs-number">5</span><br><br>输出：<span class="hljs-number">4</span><br><br>解释：<span class="hljs-number">4</span> 艘船分别载 <span class="hljs-comment">(3)</span>, <span class="hljs-comment">(3)</span>, <span class="hljs-comment">(4)</span>, <span class="hljs-comment">(5)</span><br></code></pre></div></td></tr></table></figure></p>
-<p>提示：</p>
+              <h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>这是 LeetCode 上的 <strong><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/solve-the-equation/solution/by-ac_oier-fvee/">640. 求解方程</a></strong> ，难度为 <strong>中等</strong>。</p>
+<p>求解一个给定的方程，将 <code>x</code> 以字符串 <code>&quot;x=#value&quot;</code> 的形式返回。该方程仅包含 <code>&#39;+&#39;</code> ， <code>&#39;-&#39;</code> 操作，变量 <code>x</code> 和其对应系数。</p>
+<p>如果方程没有解，请返回 <code>&quot;No solution&quot;</code>。如果方程有无限解，则返回 <code>&quot;Infinite solutions&quot;</code>。</p>
+<p>题目保证，如果方程中只有一个解，则 ‘x’ 的值是一个整数。</p>
+<p>示例 1：<br><figure class="highlight gams"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs gams">输入: <span class="hljs-keyword">equation</span> = <span class="hljs-string">&quot;x+5-3+x=6+x-2&quot;</span><br><br>输出: <span class="hljs-string">&quot;x=2&quot;</span><br></code></pre></div></td></tr></table></figure><br>示例 2:<br><figure class="highlight gams"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs gams">输入: <span class="hljs-keyword">equation</span> = <span class="hljs-string">&quot;x=x&quot;</span><br><br>输出: <span class="hljs-string">&quot;Infinite solutions&quot;</span><br></code></pre></div></td></tr></table></figure><br>示例 3:<br><figure class="highlight gams"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs gams">输入: <span class="hljs-keyword">equation</span> = <span class="hljs-string">&quot;2x=x&quot;</span><br><br>输出: <span class="hljs-string">&quot;x=0&quot;</span><br></code></pre></div></td></tr></table></figure></p>
+<p>提示:</p>
 <ul>
-<li>1 &lt;= people.length &lt;= 50000</li>
-<li>1 &lt;= people[i] &lt;= limit &lt;= 30000</li>
+<li>$3 &lt;= equation.length &lt;= 1000$</li>
+<li><code>equation</code> 只有一个 <code>&#39;=&#39;</code>.</li>
+<li><code>equation</code> 方程由整数组成，其绝对值在 $[0, 100]$ 范围内，不含前导零和变量 <code>&#39;x&#39;</code> 。 </li>
 </ul>
 <hr>
-<h3 id="贪心"><a href="#贪心" class="headerlink" title="贪心"></a>贪心</h3><p>一个直观的想法是：由于一个船要么载两人要么载一人，在人数给定的情况下，为了让使用的总船数最小，要当尽可能让更多船载两人，即尽可能多的构造出数量之和不超过 $limit$ 的二元组。</p>
-<p>先对 $people$ 进行排序，然后使用两个指针 <code>l</code> 和 <code>r</code> 分别从首尾开始进行匹配：</p>
+<h3 id="模拟"><a href="#模拟" class="headerlink" title="模拟"></a>模拟</h3><p>为了方便，我们令 <code>equation</code> 为 <code>s</code>。</p>
+<p>由于运算符只有 <code>+</code> 和 <code>-</code>，因此无须考虑运算优先级，可在遍历过程中进行计算。</p>
+<p>使用变量 <code>x</code> 和 <code>num</code> 分别代指当前运算结果中 $x$ 的系数以及数值部分，从前往后处理 <code>s</code> 的每个字符，根据字符类型进行分情况讨论，假设当前处理到的数值为 $s[i]$：</p>
 <ul>
-<li>如果 $people[l] + people[r] &lt;= limit$，说明两者可以同船，此时船的数量加一，两个指针分别往中间靠拢；</li>
-<li>如果 $people[l] + people[r] &gt; limit$，说明不能成组，由于题目确保人的重量不会超过 $limit$，此时让 $people[r]$ 独立成船，船的数量加一，<code>r</code> 指针左移。</li>
+<li>若 $s[i] =$ <code>+/-</code>：此时影响的是下一个运算数值的正负，修改对应的 <code>op</code> 标识；</li>
+<li>若 $s[i] =$ <code>数值</code>：此时将完整的运算值进行取出（运算值可能是关于 $x$ 的描述，可能是纯数值），假设连续段 $s[i:j - 1]$ 之间为当前运算值，根据 $s[j - 1]$ 是否为字符 <code>x</code> 可知，是要将 $s[i:j - 2]$ 的数值累加到变量 <code>x</code>，还是将 $s[i:j - 1]$ 的数值累加到变量 <code>num</code>；</li>
+<li>若 $s[i] =$ <code>=</code>：此时代表方程的左边已处理完，将变量 <code>x</code> 和 <code>num</code> 进行翻转（含义为将左边的运算结果移项到右边），并继续往后处理。</li>
 </ul>
-<p><strong>我们猜想这样「最重匹配最轻、次重匹配次轻」的做法能使双人船的重量之和尽可能平均，从而使双人船的数量最大化。</strong></p>
-<p>接下来，我们使用「归纳法」证明猜想的正确性。</p>
-<p>假设最优成船组合中二元组的数量为 $c1$，我们贪心做法的二元组数量为 $c2$。</p>
-<p>最终答案 = 符合条件的二元组的数量 + 剩余人数数量，而在符合条件的二元组数量固定的情况下，剩余人数也固定。因此我们只需要证明 $c1 = c2$ 即可。</p>
-<p>通常使用「归纳法」进行证明，都会先从边界入手。</p>
-<p>当我们处理最重的人 $people[r]$（此时 $r$ 为原始右边界 $n - 1$）时：</p>
+<p>当整个字符串 <code>s</code> 处理完后，我们得到最终关于 $x$ 的系数 <code>x</code>，以及数值大小 <code>num</code>。</p>
+<p>根据 <code>x</code> 是否为 $0$ 可知答案：</p>
 <ul>
-<li>假设其与 $people[l]$（此时 $l$ 为原始左边界 $0$）之和超过 $limit$，说明 $people[r]$ 与数组任一成员组合都会超过 $limit$，即无论在最优组合还是贪心组合中，$people[r]$ 都会独立成船；</li>
-<li><p>假设 $people[r] + people[l] &lt;= limit$，说明数组中存在至少一个成员能够与 $people[l]$ 成船：</p>
-<ul>
-<li><p>假设在最优组合中 $people[l]$ 独立成船，此时如果将贪心组合 $(people[l], people[r])$ 中的 $people[l]$ 拆分出来独立成船，贪心二元组数量 $c2$ 必然不会变大（可能还会变差），即将「贪心解」调整成「最优解」结果不会变好；</p>
-</li>
-<li><p>假设在最优组合中，$people[l]$ 不是独立成船，又因此当前 $r$ 处于原始右边界，因此与 $people[l]$ 成组的成员 $people[x]$ 必然满足 $people[x] &lt;= people[r]$。<br>此时我们将 $people[x]$ 和 $people[r]$ 位置进行交换（将贪心组合调整成最优组合），此时带来的影响包括：</p>
-<ul>
-<li>与 $people[l]$ 成组的对象从 $people[r]$ 变为 $people[x]$，但因为 $people[x] &lt;= people[r]$，即有 $people[l] + people[x] &lt;= people[l] + people[r] &lt;= limit$，仍为合法二元组，消耗船的数量为 $1$；</li>
-<li><p>原本位置 $x$ 的值从 $people[x]$ 变大为 $people[r]$，如果调整后的值能组成二元组，那么原本更小的值也能组成二元组，结果没有变化；如果调整后不能成为组成二元组，那么结果可能会因此变差。</p>
-<p>综上，将 $people[x]$ 和 $people[r]$ 位置进行交换（将贪心组合调整成最优组合），贪心二元组数量 $c2$ 不会变大，即将「贪心解」调整成「最优解」结果不会变好。</p>
-</li>
+<li>若 <code>x</code> 为 $0$：此时根据 <code>num</code> 是否为 $0$ 可知是 <code>Infinite solutions</code>（对应 <code>num</code> 为 $0$） 还是 <code>No solution</code>（对应 <code>num</code> 不为 $0$）</li>
+<li>若 <code>x</code> 不为 $0$：对 <code>x</code> 和 <code>num</code> 进行约分后，返回对应答案。</li>
 </ul>
-</li>
-</ul>
-</li>
-</ul>
-<p><strong>对于边界情况，我们证明了从「贪心解」调整为「最优解」不会使得结果更好，因此可以保留当前的贪心决策，然后将问题规模缩减为 $n - 1$ 或者 $n - 2$，同时数列仍然满足升序特性，即归纳分析所依赖的结构没有发生改变，可以将上述的推理分析推广到每一个决策的回合（新边界）中。</strong></p>
-<p><strong>至此，我们证明了将「贪心解」调整为「最优解」结果不会变好，即贪心解是最优解之一。</strong></p>
-<p>代码：<br><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">numRescueBoats</span><span class="hljs-params">(<span class="hljs-type">int</span>[] people, <span class="hljs-type">int</span> limit)</span> &#123;<br>        Arrays.sort(people);<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> people.length;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">l</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>, r = n - <span class="hljs-number">1</span>;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">ans</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">while</span> (l &lt;= r) &#123;<br>            <span class="hljs-keyword">if</span> (people[l] + people[r] &lt;= limit) l++;<br>            r--;<br>            ans++;<br>        &#125;<br>        <span class="hljs-keyword">return</span> ans;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure></p>
+<p>Java 代码：<br><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> String <span class="hljs-title function_">solveEquation</span><span class="hljs-params">(String s)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">x</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>, num = <span class="hljs-number">0</span>, n = s.length();<br>        <span class="hljs-type">char</span>[] cs = s.toCharArray();<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>, op = <span class="hljs-number">1</span>; i &lt; n; ) &#123;<br>            <span class="hljs-keyword">if</span> (cs[i] == <span class="hljs-string">&#x27;+&#x27;</span>) &#123;<br>                op = <span class="hljs-number">1</span>; i++;<br>            &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (cs[i] == <span class="hljs-string">&#x27;-&#x27;</span>) &#123;<br>                op = -<span class="hljs-number">1</span>; i++;<br>            &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (cs[i] == <span class="hljs-string">&#x27;=&#x27;</span>) &#123;<br>                x *= -<span class="hljs-number">1</span>; num *= -<span class="hljs-number">1</span>; op = <span class="hljs-number">1</span>; i++;<br>            &#125; <span class="hljs-keyword">else</span> &#123;<br>                <span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> i;<br>                <span class="hljs-keyword">while</span> (j &lt; n &amp;&amp; cs[j] != <span class="hljs-string">&#x27;+&#x27;</span> &amp;&amp; cs[j] != <span class="hljs-string">&#x27;-&#x27;</span> &amp;&amp; cs[j] != <span class="hljs-string">&#x27;=&#x27;</span>) j++;<br>                <span class="hljs-keyword">if</span> (cs[j - <span class="hljs-number">1</span>] == <span class="hljs-string">&#x27;x&#x27;</span>) x += (i &lt; j - <span class="hljs-number">1</span> ? Integer.parseInt(s.substring(i, j - <span class="hljs-number">1</span>)) : <span class="hljs-number">1</span>) * op;<br>                <span class="hljs-keyword">else</span> num += Integer.parseInt(s.substring(i, j)) * op;<br>                i = j;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">if</span> (x == <span class="hljs-number">0</span>) <span class="hljs-type">return</span> <span class="hljs-variable">num</span> <span class="hljs-operator">=</span>= <span class="hljs-number">0</span> ? <span class="hljs-string">&quot;Infinite solutions&quot;</span> : <span class="hljs-string">&quot;No solution&quot;</span>;    <br>        <span class="hljs-keyword">else</span> <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;x=&quot;</span> + (num / -x);<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure><br>TypeScript 代码：<br><figure class="highlight typescript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs TypeScript"><span class="hljs-keyword">function</span> <span class="hljs-title function_">solveEquation</span>(<span class="hljs-params">s: <span class="hljs-built_in">string</span></span>): <span class="hljs-built_in">string</span> &#123;<br>    <span class="hljs-keyword">let</span> x = <span class="hljs-number">0</span>, num = <span class="hljs-number">0</span>, n = s.<span class="hljs-property">length</span><br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>, op = <span class="hljs-number">1</span>; i &lt; n; ) &#123;<br>        <span class="hljs-keyword">if</span> (s[i] == <span class="hljs-string">&#x27;+&#x27;</span>) &#123;<br>            op = <span class="hljs-number">1</span>; i++;<br>        &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (s[i] == <span class="hljs-string">&#x27;-&#x27;</span>) &#123;<br>            op = -<span class="hljs-number">1</span>; i++<br>        &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (s[i] == <span class="hljs-string">&#x27;=&#x27;</span>) &#123;<br>            x *= -<span class="hljs-number">1</span>; num *= -<span class="hljs-number">1</span>; op = <span class="hljs-number">1</span>; i++;<br>        &#125; <span class="hljs-keyword">else</span> &#123;<br>            <span class="hljs-keyword">let</span> j = i<br>            <span class="hljs-keyword">while</span> (j &lt; n &amp;&amp; s[j] != <span class="hljs-string">&#x27;+&#x27;</span> &amp;&amp; s[j] != <span class="hljs-string">&#x27;-&#x27;</span> &amp;&amp; s[j] != <span class="hljs-string">&#x27;=&#x27;</span>) j++<br>            <span class="hljs-keyword">if</span> (s[j - <span class="hljs-number">1</span>] == <span class="hljs-string">&#x27;x&#x27;</span>) x += (i &lt; j - <span class="hljs-number">1</span> ? <span class="hljs-title class_">Number</span>(s.<span class="hljs-title function_">substring</span>(i, j - <span class="hljs-number">1</span>)) : <span class="hljs-number">1</span>) * op<br>            <span class="hljs-keyword">else</span> num += <span class="hljs-title class_">Number</span>(s.<span class="hljs-title function_">substring</span>(i, j)) * op<br>            i = j<br>        &#125;<br>    &#125;<br>    <span class="hljs-keyword">if</span> (x == <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> num == <span class="hljs-number">0</span> ? <span class="hljs-string">&quot;Infinite solutions&quot;</span> : <span class="hljs-string">&quot;No solution&quot;</span>    <br>    <span class="hljs-keyword">else</span> <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;x=&quot;</span> + (num / -x)<br>&#125;;<br></code></pre></div></td></tr></table></figure></p>
 <ul>
-<li>时间复杂度：排序复杂度为 $O(n\log{n})$；双指针统计答案复杂度为 $O(n)$。整体复杂度为 $O(n\log{n})$</li>
-<li>空间复杂度：$O(\log{n})$</li>
+<li>时间复杂度：$O(n)$</li>
+<li>空间复杂度：使用 <code>charAt</code> 替换 <code>toCharArray</code>。复杂度为 $O(1)$</li>
 </ul>
 <hr>
-<h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>这是我们「刷穿 LeetCode」系列文章的第 <code>No.881</code> 篇，系列开始于 2021/01/01，截止于起始日 LeetCode 上共有 1916 道题目，部分是有锁题，我们将先把所有不带锁的题目刷完。</p>
+<h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>这是我们「刷穿 LeetCode」系列文章的第 <code>No.640</code> 篇，系列开始于 2021/01/01，截止于起始日 LeetCode 上共有 1916 道题目，部分是有锁题，我们将先把所有不带锁的题目刷完。</p>
 <p>在这个系列文章里面，除了讲解解题思路以外，还会尽可能给出最为简洁的代码。如果涉及通解还会相应的代码模板。</p>
 <p>为了方便各位同学能够电脑上进行调试和提交代码，我建立了相关的仓库：<a target="_blank" rel="noopener" href="https://github.com/SharingSource/LogicStack-LeetCode">https://github.com/SharingSource/LogicStack-LeetCode</a> 。</p>
 <p>在仓库地址里，你可以看到系列文章的题解链接、系列文章的相应代码、LeetCode 原题链接和其他优选题解。</p>
@@ -298,9 +283,11 @@
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
+                      <a class="hover-with-bg" href="/tags/%E6%A8%A1%E6%8B%9F/">模拟</a>
+                    
                       <a class="hover-with-bg" href="/tags/%E5%8F%8C%E6%8C%87%E9%92%88/">双指针</a>
                     
-                      <a class="hover-with-bg" href="/tags/%E8%B4%AA%E5%BF%83/">贪心</a>
+                      <a class="hover-with-bg" href="/tags/%E6%95%B0%E5%AD%A6/">数学</a>
                     
                   </div>
                 
@@ -317,18 +304,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2021/08/27/295.%20%E6%95%B0%E6%8D%AE%E6%B5%81%E7%9A%84%E4%B8%AD%E4%BD%8D%E6%95%B0%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">LC 295. 数据流的中位数</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/08/25/797.%20%E6%89%80%E6%9C%89%E5%8F%AF%E8%83%BD%E7%9A%84%E8%B7%AF%E5%BE%84%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/">
-                        <span class="hidden-mobile">LC 797. 所有可能的路径</span>
+                      <a href="/2022/08/09/1413.%20%E9%80%90%E6%AD%A5%E6%B1%82%E5%92%8C%E5%BE%97%E5%88%B0%E6%AD%A3%E6%95%B0%E7%9A%84%E6%9C%80%E5%B0%8F%E5%80%BC%EF%BC%88%E7%AE%80%E5%8D%95%EF%BC%89/">
+                        <span class="hidden-mobile">LC 1413. 逐步求和得到正数的最小值</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
