@@ -16,23 +16,22 @@
   <meta name="author" content="宫水三叶">
   <meta name="keywords" content="算法, 数据结构, 题解">
   
-    <meta name="description" content="题目描述这是 LeetCode 上的 34. 在排序数组中查找元素的第一个和最后一个位置 ，难度为 中等。 给定一个按照升序排列的整数数组 nums，和一个目标值 target。 找出给定目标值在数组中的开始位置和结束位置。 如果数组中不存在目标值 target，返回 $[-1, -1]$。 进阶：  你可以设计并实现时间复杂度为 $O(\log{n})$ 的算法解决此问题吗？  示例 1：123">
+    <meta name="description" content="题目描述这是 LeetCode 上的 1417. 重新格式化字符串 ，难度为 简单。 给你一个混合了数字和字母的字符串 s，其中的字母均为小写英文字母。 请你将该字符串重新格式化，使得任意两个相邻字符的类型都不同。也就是说，字母后面应该跟着数字，而数字后面应该跟着字母。 请你返回重新格式化后的字符串；如果无法按要求重新格式化，则返回一个空字符串。 示例 1：12345输入：s &#x3D; &quot;a0">
 <meta property="og:type" content="article">
-<meta property="og:title" content="LC 34. 在排序数组中查找元素的第一个和最后一个位置">
-<meta property="og:url" content="https://sharingsource.github.io/2021/01/27/34.%20%E5%9C%A8%E6%8E%92%E5%BA%8F%E6%95%B0%E7%BB%84%E4%B8%AD%E6%9F%A5%E6%89%BE%E5%85%83%E7%B4%A0%E7%9A%84%E7%AC%AC%E4%B8%80%E4%B8%AA%E5%92%8C%E6%9C%80%E5%90%8E%E4%B8%80%E4%B8%AA%E4%BD%8D%E7%BD%AE%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/index.html">
+<meta property="og:title" content="LC 1417. 重新格式化字符串">
+<meta property="og:url" content="https://sharingsource.github.io/2022/08/11/1417.%20%E9%87%8D%E6%96%B0%E6%A0%BC%E5%BC%8F%E5%8C%96%E5%AD%97%E7%AC%A6%E4%B8%B2%EF%BC%88%E7%AE%80%E5%8D%95%EF%BC%89/index.html">
 <meta property="og:site_name" content="宫水三叶的刷题日记">
-<meta property="og:description" content="题目描述这是 LeetCode 上的 34. 在排序数组中查找元素的第一个和最后一个位置 ，难度为 中等。 给定一个按照升序排列的整数数组 nums，和一个目标值 target。 找出给定目标值在数组中的开始位置和结束位置。 如果数组中不存在目标值 target，返回 $[-1, -1]$。 进阶：  你可以设计并实现时间复杂度为 $O(\log{n})$ 的算法解决此问题吗？  示例 1：123">
+<meta property="og:description" content="题目描述这是 LeetCode 上的 1417. 重新格式化字符串 ，难度为 简单。 给你一个混合了数字和字母的字符串 s，其中的字母均为小写英文字母。 请你将该字符串重新格式化，使得任意两个相邻字符的类型都不同。也就是说，字母后面应该跟着数字，而数字后面应该跟着字母。 请你返回重新格式化后的字符串；如果无法按要求重新格式化，则返回一个空字符串。 示例 1：12345输入：s &#x3D; &quot;a0">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://sharingsource.github.io/2021/01/27/34.%20%E5%9C%A8%E6%8E%92%E5%BA%8F%E6%95%B0%E7%BB%84%E4%B8%AD%E6%9F%A5%E6%89%BE%E5%85%83%E7%B4%A0%E7%9A%84%E7%AC%AC%E4%B8%80%E4%B8%AA%E5%92%8C%E6%9C%80%E5%90%8E%E4%B8%80%E4%B8%AA%E4%BD%8D%E7%BD%AE%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/image_0.png">
-<meta property="article:published_time" content="2021-01-26T23:02:29.000Z">
-<meta property="article:modified_time" content="2022-05-18T08:28:22.424Z">
+<meta property="article:published_time" content="2022-08-10T17:30:11.000Z">
+<meta property="article:modified_time" content="2022-08-11T02:54:15.830Z">
 <meta property="article:author" content="宫水三叶">
-<meta property="article:tag" content="二分">
+<meta property="article:tag" content="模拟">
+<meta property="article:tag" content="双指针">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://sharingsource.github.io/2021/01/27/34.%20%E5%9C%A8%E6%8E%92%E5%BA%8F%E6%95%B0%E7%BB%84%E4%B8%AD%E6%9F%A5%E6%89%BE%E5%85%83%E7%B4%A0%E7%9A%84%E7%AC%AC%E4%B8%80%E4%B8%AA%E5%92%8C%E6%9C%80%E5%90%8E%E4%B8%80%E4%B8%AA%E4%BD%8D%E7%BD%AE%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/image_0.png">
   
   
-  <title>LC 34. 在排序数组中查找元素的第一个和最后一个位置 - 宫水三叶的刷题日记</title>
+  <title>LC 1417. 重新格式化字符串 - 宫水三叶的刷题日记</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -177,12 +176,12 @@
 </nav>
 
     <div class="banner" id="banner" parallax=true
-         style="background: url('/img/image_150.jpg') no-repeat center center;
+         style="background: url('/img/image_166.jpg') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="LC 34. 在排序数组中查找元素的第一个和最后一个位置">
+            <span class="h2" id="subtitle" title="LC 1417. 重新格式化字符串">
               
             </span>
 
@@ -197,8 +196,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-01-27 07:02" pubdate>
-        2021年1月27日
+      <time datetime="2022-08-11 01:30" pubdate>
+        2022年8月11日
       </time>
     </span>
   
@@ -234,39 +233,28 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">LC 34. 在排序数组中查找元素的第一个和最后一个位置</h1>
+            <h1 style="display: none">LC 1417. 重新格式化字符串</h1>
             
             <div class="markdown-body">
-              <h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>这是 LeetCode 上的 <strong><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/find-first-and-last-position-of-element-in-sorted-array/solution/sha-sha-gao-bu-qing-ru-he-ding-yi-er-fen-rrj1/">34. 在排序数组中查找元素的第一个和最后一个位置</a></strong> ，难度为 <strong>中等</strong>。</p>
-<p>给定一个按照升序排列的整数数组 <code>nums</code>，和一个目标值 <code>target</code>。</p>
-<p>找出给定目标值在数组中的开始位置和结束位置。</p>
-<p>如果数组中不存在目标值 <code>target</code>，返回 $[-1, -1]$。</p>
-<p><strong>进阶：</strong></p>
-<ul>
-<li>你可以设计并实现时间复杂度为 $O(\log{n})$ 的算法解决此问题吗？</li>
-</ul>
-<p>示例 1：<br><figure class="highlight inform7"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs inform7">输入：nums = <span class="hljs-comment">[5,7,7,8,8,10]</span>, target = 8<br><br>输出：<span class="hljs-comment">[3,4]</span><br></code></pre></div></td></tr></table></figure><br>示例 2：<br><figure class="highlight inform7"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs inform7">输入：nums = <span class="hljs-comment">[5,7,7,8,8,10]</span>, target = 6<br><br>输出：<span class="hljs-comment">[-1,-1]</span><br></code></pre></div></td></tr></table></figure><br>示例 3：<br><figure class="highlight inform7"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs inform7">输入：nums = <span class="hljs-comment">[]</span>, target = 0<br><br>输出：<span class="hljs-comment">[-1,-1]</span><br></code></pre></div></td></tr></table></figure></p>
+              <h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>这是 LeetCode 上的 <strong><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/reformat-the-string/solution/by-ac_oier-uk8z/">1417. 重新格式化字符串</a></strong> ，难度为 <strong>简单</strong>。</p>
+<p>给你一个混合了数字和字母的字符串 <code>s</code>，其中的字母均为小写英文字母。</p>
+<p>请你将该字符串重新格式化，使得任意两个相邻字符的类型都不同。也就是说，字母后面应该跟着数字，而数字后面应该跟着字母。</p>
+<p>请你返回重新格式化后的字符串；如果无法按要求重新格式化，则返回一个空字符串。</p>
+<p>示例 1：<br><figure class="highlight nix"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs nix">输入：<span class="hljs-attr">s</span> = <span class="hljs-string">&quot;a0b1c2&quot;</span><br><br>输出：<span class="hljs-string">&quot;0a1b2c&quot;</span><br><br>解释：<span class="hljs-string">&quot;0a1b2c&quot;</span> 中任意两个相邻字符的类型都不同。 <span class="hljs-string">&quot;a0b1c2&quot;</span>, <span class="hljs-string">&quot;0a1b2c&quot;</span>, <span class="hljs-string">&quot;0c2a1b&quot;</span> 也是满足题目要求的答案。<br></code></pre></div></td></tr></table></figure><br>示例 2：<br><figure class="highlight abnf"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs abnf">输入：s <span class="hljs-operator">=</span> <span class="hljs-string">&quot;leetcode&quot;</span><br><br>输出：<span class="hljs-string">&quot;&quot;</span><br><br>解释：<span class="hljs-string">&quot;leetcode&quot;</span> 中只有字母，所以无法满足重新格式化的条件。<br></code></pre></div></td></tr></table></figure><br>示例 3：<br><figure class="highlight abnf"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs abnf">输入：s <span class="hljs-operator">=</span> <span class="hljs-string">&quot;1229857369&quot;</span><br><br>输出：<span class="hljs-string">&quot;&quot;</span><br><br>解释：<span class="hljs-string">&quot;1229857369&quot;</span> 中只有数字，所以无法满足重新格式化的条件。<br></code></pre></div></td></tr></table></figure><br>示例 4：<br><figure class="highlight abnf"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs abnf">输入：s <span class="hljs-operator">=</span> <span class="hljs-string">&quot;covid2019&quot;</span><br><br>输出：<span class="hljs-string">&quot;c2o0v1i9d&quot;</span><br></code></pre></div></td></tr></table></figure><br>示例 5：<br><figure class="highlight abnf"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs abnf">输入：s <span class="hljs-operator">=</span> <span class="hljs-string">&quot;ab123&quot;</span><br><br>输出：<span class="hljs-string">&quot;1a2b3&quot;</span><br></code></pre></div></td></tr></table></figure></p>
 <p>提示：</p>
 <ul>
-<li>$0 &lt;= nums.length &lt;= 10^5$</li>
-<li>$-10^9 &lt;= nums[i] &lt;= 10^9$</li>
-<li><code>nums</code> 是一个非递减数组</li>
-<li>$-10^9 &lt;= target &lt;= 10^9$</li>
+<li>$1 &lt;= s.length &lt;= 500$</li>
+<li><code>s</code> 仅由小写英文字母和/或数字组成。</li>
 </ul>
 <hr>
-<h3 id="二分解法"><a href="#二分解法" class="headerlink" title="二分解法"></a>二分解法</h3><p>这是一道「二分查找」的裸题。</p>
-<p>「二分」有一个比较容易混淆的点是：当需要找目标值第一次出现的下标时，条件应该写成 <code>nums[mid] &gt;= target</code> 还是 <code>nums[mid] &lt;= target</code>。</p>
-<p>其实有一个很好理解的方法：</p>
-<p><strong>由于二分是从中间开始找起的，所以找的必然是条件区间中靠近中心的的边界值。</strong></p>
-<p>文字不好理解，我们结合图片来看：</p>
-<p><img src="/2021/01/27/34.%20%E5%9C%A8%E6%8E%92%E5%BA%8F%E6%95%B0%E7%BB%84%E4%B8%AD%E6%9F%A5%E6%89%BE%E5%85%83%E7%B4%A0%E7%9A%84%E7%AC%AC%E4%B8%80%E4%B8%AA%E5%92%8C%E6%9C%80%E5%90%8E%E4%B8%80%E4%B8%AA%E4%BD%8D%E7%BD%AE%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/image_0.png" srcset="/img/loading.gif" lazyload alt="640.png"></p>
-<p>代码：<br><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span>[] searchRange(<span class="hljs-type">int</span>[] nums, <span class="hljs-type">int</span> target) &#123;<br>        <span class="hljs-type">int</span>[] ans = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[]&#123;-<span class="hljs-number">1</span>, -<span class="hljs-number">1</span>&#125;;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> nums.length;<br>        <span class="hljs-keyword">if</span> (n == <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> ans;<br><br>        <span class="hljs-type">int</span> <span class="hljs-variable">l</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>, r = n - <span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">while</span> (l &lt; r) &#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">mid</span> <span class="hljs-operator">=</span> l + r &gt;&gt; <span class="hljs-number">1</span>;<br>            <span class="hljs-keyword">if</span> (nums[mid] &gt;= target) &#123;<br>                r = mid;<br>            &#125; <span class="hljs-keyword">else</span> &#123;<br>                l = mid + <span class="hljs-number">1</span>;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">if</span> (nums[l] != target) &#123;<br>            <span class="hljs-keyword">return</span> ans;<br>        &#125; <span class="hljs-keyword">else</span> &#123;<br>            ans[<span class="hljs-number">0</span>] = l;<br>            l = <span class="hljs-number">0</span>; r = n - <span class="hljs-number">1</span>;<br>            <span class="hljs-keyword">while</span> (l &lt; r) &#123;<br>                <span class="hljs-type">int</span> <span class="hljs-variable">mid</span> <span class="hljs-operator">=</span> l + r + <span class="hljs-number">1</span> &gt;&gt; <span class="hljs-number">1</span>;<br>                <span class="hljs-keyword">if</span> (nums[mid] &lt;= target) &#123;<br>                    l = mid;<br>                &#125; <span class="hljs-keyword">else</span> &#123;<br>                    r = mid - <span class="hljs-number">1</span>;<br>                &#125;<br>            &#125; <br>            ans[<span class="hljs-number">1</span>] = l;<br>            <span class="hljs-keyword">return</span> ans;<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure></p>
+<h3 id="模拟"><a href="#模拟" class="headerlink" title="模拟"></a>模拟</h3><p>起始先对字符串 <code>s</code> 进行遍历，将其分成字母串和数字串，若两者长度差值超过 $1$，说明无法构造成间隔字符串（返回空串），否则对两字符串使用双指针算法进行构造。</p>
+<p>Java 代码：<br><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> String <span class="hljs-title function_">reformat</span><span class="hljs-params">(String s)</span> &#123;<br>        <span class="hljs-type">StringBuilder</span> <span class="hljs-variable">a</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">StringBuilder</span>(), b = <span class="hljs-keyword">new</span> <span class="hljs-title class_">StringBuilder</span>();<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">char</span> c : s.toCharArray()) &#123;<br>            <span class="hljs-keyword">if</span> (c &gt;= <span class="hljs-string">&#x27;a&#x27;</span>) a.append(c);<br>            <span class="hljs-keyword">else</span> b.append(c);<br>        &#125;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> a.length(), m = b.length(), tot = n + m;<br>        <span class="hljs-keyword">if</span> (Math.abs(n - m) &gt; <span class="hljs-number">1</span>) <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;&quot;</span>;<br>        <span class="hljs-type">StringBuilder</span> <span class="hljs-variable">sb</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">StringBuilder</span>();<br>        <span class="hljs-keyword">while</span> (sb.length() != tot) &#123;<br>            <span class="hljs-keyword">if</span> (n &gt; m) sb.append(a.charAt(--n));<br>            <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (n &lt; m) sb.append(b.charAt(--m));<br>            <span class="hljs-keyword">else</span> &#123;<br>                <span class="hljs-keyword">if</span> (!sb.isEmpty() &amp;&amp; sb.charAt(sb.length() - <span class="hljs-number">1</span>) &gt;= <span class="hljs-string">&#x27;a&#x27;</span>) sb.append(b.charAt(--m));<br>                <span class="hljs-keyword">else</span> sb.append(a.charAt(--n));<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> sb.toString();<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure><br>TypeScript 代码：<br><figure class="highlight typescript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs TypeScript"><span class="hljs-keyword">function</span> <span class="hljs-title function_">reformat</span>(<span class="hljs-params">s: <span class="hljs-built_in">string</span></span>): <span class="hljs-built_in">string</span> &#123;<br>    <span class="hljs-keyword">let</span> a = <span class="hljs-string">&quot;&quot;</span>, b = <span class="hljs-string">&quot;&quot;</span><br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; s.<span class="hljs-property">length</span>; i++) &#123;<br>        <span class="hljs-keyword">if</span> (s[i] &gt;= <span class="hljs-string">&#x27;a&#x27;</span>) a += s[i]<br>        <span class="hljs-keyword">else</span> b += s[i]<br>    &#125;<br>    <span class="hljs-keyword">let</span> n = a.<span class="hljs-property">length</span>, m = b.<span class="hljs-property">length</span>, tot = n + m<br>    <span class="hljs-keyword">if</span> (<span class="hljs-title class_">Math</span>.<span class="hljs-title function_">abs</span>(n - m) &gt; <span class="hljs-number">1</span>) <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;&quot;</span><br>    <span class="hljs-keyword">let</span> ans = <span class="hljs-string">&quot;&quot;</span><br>    <span class="hljs-keyword">while</span> (ans.<span class="hljs-property">length</span> &lt; tot) &#123;<br>        <span class="hljs-keyword">if</span> (n &lt; m) ans += b[--m]<br>        <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (n &gt; m) ans += a[--n]<br>        <span class="hljs-keyword">else</span> &#123;<br>            <span class="hljs-keyword">if</span> (ans.<span class="hljs-property">length</span> != <span class="hljs-number">0</span> &amp;&amp; ans[ans.<span class="hljs-property">length</span> - <span class="hljs-number">1</span>] &gt;= <span class="hljs-string">&#x27;a&#x27;</span>) ans += b[--m]<br>            <span class="hljs-keyword">else</span> ans += a[--n]<br>        &#125;<br>    &#125;<br>    <span class="hljs-keyword">return</span> ans<br>&#125;;<br></code></pre></div></td></tr></table></figure></p>
 <ul>
-<li>时间复杂度：$O(\log{n})$</li>
-<li>空间复杂度：$O(1)$</li>
+<li>时间复杂度：$O(n)$</li>
+<li>空间复杂度：$O(n)$</li>
 </ul>
 <hr>
-<h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>这是我们「刷穿 LeetCode」系列文章的第 <code>No.34</code> 篇，系列开始于 2021/01/01，截止于起始日 LeetCode 上共有 1916 道题目，部分是有锁题，我们将先把所有不带锁的题目刷完。</p>
+<h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>这是我们「刷穿 LeetCode」系列文章的第 <code>No.1417</code> 篇，系列开始于 2021/01/01，截止于起始日 LeetCode 上共有 1916 道题目，部分是有锁题，我们将先把所有不带锁的题目刷完。</p>
 <p>在这个系列文章里面，除了讲解解题思路以外，还会尽可能给出最为简洁的代码。如果涉及通解还会相应的代码模板。</p>
 <p>为了方便各位同学能够电脑上进行调试和提交代码，我建立了相关的仓库：<a target="_blank" rel="noopener" href="https://github.com/SharingSource/LogicStack-LeetCode">https://github.com/SharingSource/LogicStack-LeetCode</a> 。</p>
 <p>在仓库地址里，你可以看到系列文章的题解链接、系列文章的相应代码、LeetCode 原题链接和其他优选题解。</p>
@@ -280,7 +268,9 @@
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/%E4%BA%8C%E5%88%86/">二分</a>
+                      <a class="hover-with-bg" href="/tags/%E6%A8%A1%E6%8B%9F/">模拟</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%8F%8C%E6%8C%87%E9%92%88/">双指针</a>
                     
                   </div>
                 
@@ -297,18 +287,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2021/01/27/724.%20%E5%AF%BB%E6%89%BE%E6%95%B0%E7%BB%84%E7%9A%84%E4%B8%AD%E5%BF%83%E4%B8%8B%E6%A0%87%EF%BC%88%E7%AE%80%E5%8D%95%EF%BC%89/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">LC 724. 寻找数组的中心下标</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/01/26/32.%20%E6%9C%80%E9%95%BF%E6%9C%89%E6%95%88%E6%8B%AC%E5%8F%B7%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/">
-                        <span class="hidden-mobile">LC 32. 最长有效括号</span>
+                      <a href="/2022/08/10/640.%20%E6%B1%82%E8%A7%A3%E6%96%B9%E7%A8%8B%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/">
+                        <span class="hidden-mobile">LC 640. 求解方程</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

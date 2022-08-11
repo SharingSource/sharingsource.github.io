@@ -16,16 +16,16 @@
   <meta name="author" content="宫水三叶">
   <meta name="keywords" content="算法, 数据结构, 题解">
   
-    <meta name="description" content="题目描述这是 LeetCode 上的 154. 寻找旋转排序数组中的最小值 II ，难度为 困难。 已知一个长度为 n 的数组，预先按照升序排列，经由 1 到 n 次 旋转 后，得到输入数组。 例如，原数组 nums &#x3D; [0,1,4,4,5,6,7] 在变化后可能得到：  若旋转 4 次，则可以得到 [4,5,6,7,0,1,4] 若旋转 7 次，则可以得到 [0,1,4,4,5,6,7]  注">
+    <meta name="description" content="题目描述这是 LeetCode 上的 154. 寻找旋转排序数组中的最小值 II ，难度为 困难。 已知一个长度为 n 的数组，预先按照升序排列，经由 $1$ 到 $n$ 次 旋转 后，得到输入数组。 例如，原数组 nums &#x3D; [0,1,4,4,5,6,7] 在变化后可能得到：  若旋转 $4$ 次，则可以得到 [4,5,6,7,0,1,4] 若旋转 $74 次，则可以得到 [0,1,4,4,5">
 <meta property="og:type" content="article">
 <meta property="og:title" content="LC 154. 寻找旋转排序数组中的最小值 II">
 <meta property="og:url" content="https://sharingsource.github.io/2021/04/09/154.%20%E5%AF%BB%E6%89%BE%E6%97%8B%E8%BD%AC%E6%8E%92%E5%BA%8F%E6%95%B0%E7%BB%84%E4%B8%AD%E7%9A%84%E6%9C%80%E5%B0%8F%E5%80%BC%20II%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/index.html">
 <meta property="og:site_name" content="宫水三叶的刷题日记">
-<meta property="og:description" content="题目描述这是 LeetCode 上的 154. 寻找旋转排序数组中的最小值 II ，难度为 困难。 已知一个长度为 n 的数组，预先按照升序排列，经由 1 到 n 次 旋转 后，得到输入数组。 例如，原数组 nums &#x3D; [0,1,4,4,5,6,7] 在变化后可能得到：  若旋转 4 次，则可以得到 [4,5,6,7,0,1,4] 若旋转 7 次，则可以得到 [0,1,4,4,5,6,7]  注">
+<meta property="og:description" content="题目描述这是 LeetCode 上的 154. 寻找旋转排序数组中的最小值 II ，难度为 困难。 已知一个长度为 n 的数组，预先按照升序排列，经由 $1$ 到 $n$ 次 旋转 后，得到输入数组。 例如，原数组 nums &#x3D; [0,1,4,4,5,6,7] 在变化后可能得到：  若旋转 $4$ 次，则可以得到 [4,5,6,7,0,1,4] 若旋转 $74 次，则可以得到 [0,1,4,4,5">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://sharingsource.github.io/2021/04/09/154.%20%E5%AF%BB%E6%89%BE%E6%97%8B%E8%BD%AC%E6%8E%92%E5%BA%8F%E6%95%B0%E7%BB%84%E4%B8%AD%E7%9A%84%E6%9C%80%E5%B0%8F%E5%80%BC%20II%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/image_0.png">
 <meta property="article:published_time" content="2021-04-08T17:05:08.000Z">
-<meta property="article:modified_time" content="2022-05-18T08:27:34.503Z">
+<meta property="article:modified_time" content="2022-08-11T02:54:15.828Z">
 <meta property="article:author" content="宫水三叶">
 <meta property="article:tag" content="二分">
 <meta name="twitter:card" content="summary_large_image">
@@ -238,22 +238,22 @@
             
             <div class="markdown-body">
               <h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>这是 LeetCode 上的 <strong><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/find-minimum-in-rotated-sorted-array-ii/solution/gong-shui-san-xie-xiang-jie-wei-he-yuan-7xbty/">154. 寻找旋转排序数组中的最小值 II</a></strong> ，难度为 <strong>困难</strong>。</p>
-<p>已知一个长度为 n 的数组，预先按照升序排列，经由 1 到 n 次 旋转 后，得到输入数组。</p>
-<p>例如，原数组 nums = [0,1,4,4,5,6,7] 在变化后可能得到：</p>
+<p>已知一个长度为 <code>n</code> 的数组，预先按照升序排列，经由 $1$ 到 $n$ 次 旋转 后，得到输入数组。</p>
+<p>例如，原数组 <code>nums = [0,1,4,4,5,6,7]</code> 在变化后可能得到：</p>
 <ul>
-<li>若旋转 4 次，则可以得到 [4,5,6,7,0,1,4]</li>
-<li>若旋转 7 次，则可以得到 [0,1,4,4,5,6,7]</li>
+<li>若旋转 $4$ 次，则可以得到 <code>[4,5,6,7,0,1,4]</code></li>
+<li>若旋转 $74 次，则可以得到 <code>[0,1,4,4,5,6,7]</code></li>
 </ul>
-<p>注意，数组 [a[0], a[1], a[2], …, a[n-1]] 旋转一次 的结果为数组 [a[n-1], a[0], a[1], a[2], …, a[n-2]] 。</p>
-<p>给你一个可能存在「重复」元素值的数组 nums ，它原来是一个升序排列的数组，并按上述情形进行了多次旋转。</p>
+<p>注意，数组 <code>[a[0], a[1], a[2], ..., a[n-1]]</code> 旋转一次 的结果为数组 <code>[a[n-1], a[0], a[1], a[2], ..., a[n-2]]</code> 。</p>
+<p>给你一个可能存在「重复」元素值的数组 <code>nums</code> ，它原来是一个升序排列的数组，并按上述情形进行了多次旋转。</p>
 <p>请你找出并返回数组中的「最小元素」。</p>
 <p>示例 1：<br><figure class="highlight fix"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs fix"><span class="hljs-attr">输入：nums </span>=<span class="hljs-string"> [1,3,5]</span><br><span class="hljs-string"></span><br><span class="hljs-string">输出：1</span><br></code></pre></div></td></tr></table></figure><br>示例 2：<br><figure class="highlight accesslog"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs accesslog">输入：nums = <span class="hljs-string">[2,2,2,0,1]</span><br><br>输出：<span class="hljs-number">0</span><br></code></pre></div></td></tr></table></figure></p>
 <p>提示：</p>
 <ul>
-<li>n == nums.length</li>
-<li>1 &lt;= n &lt;= 5000</li>
-<li>-5000 &lt;= nums[i] &lt;= 5000</li>
-<li>nums 原来是一个升序排序的数组，并进行了 1 至 n 次旋转</li>
+<li>$n == nums.length$</li>
+<li>$1 &lt;= n &lt;= 5000$</li>
+<li>$-5000 &lt;= nums[i] &lt;= 5000$</li>
+<li><code>nums</code> 原来是一个升序排序的数组，并进行了 $1$ 至 $n$ 次旋转</li>
 </ul>
 <p>进阶：</p>
 <ul>
@@ -261,17 +261,17 @@
 <li>允许重复会影响算法的时间复杂度吗？会如何影响，为什么？</li>
 </ul>
 <hr>
-<h3 id="二分解法"><a href="#二分解法" class="headerlink" title="二分解法"></a>二分解法</h3><p>根据题意，我们知道，所谓的旋转其实就是「将某个下标前面的所有数整体移到后面，使得数组从整体有序变为分段有序」。</p>
+<h3 id="二分"><a href="#二分" class="headerlink" title="二分"></a>二分</h3><p>根据题意，我们知道，所谓的旋转其实就是「将某个下标前面的所有数整体移到后面，使得数组从整体有序变为分段有序」。</p>
 <p>但和 <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/find-minimum-in-rotated-sorted-array/solution/gong-shui-san-xie-yan-ge-olognyi-qi-kan-6d969/">153. 寻找旋转排序数组中的最小值</a> 不同的是，本题元素并不唯一。</p>
 <p><strong>这意味着我们无法直接根据与</strong> $nums[0]$ <strong>的大小关系，将数组划分为两段，即无法通过「二分」来找到旋转点。</strong></p>
 <p><strong>因为「二分」的本质是二段性，并非单调性。只要一段满足某个性质，另外一段不满足某个性质，就可以用「二分」。</strong></p>
 <p>如果你有看过我 <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/search-in-rotated-sorted-array/solution/shua-chuan-lc-yan-ge-ologn100yi-qi-kan-q-xifo/">严格 O(logN)，一起看清二分的本质</a> 这篇题解，你应该很容易就理解上句话的意思。如果没有也没关系，我们可以先解决本题，在理解后你再去做 <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/find-minimum-in-rotated-sorted-array/">153. 寻找旋转排序数组中的最小值</a>，我认为这两题都是一样的，不存在先后关系。</p>
 <p>举个🌰，我们使用数据 [0,1,2,2,2,3,4,5] 来理解为什么不同的旋转点会导致「二段性丢失」：</p>
 <p><img src="/2021/04/09/154.%20%E5%AF%BB%E6%89%BE%E6%97%8B%E8%BD%AC%E6%8E%92%E5%BA%8F%E6%95%B0%E7%BB%84%E4%B8%AD%E7%9A%84%E6%9C%80%E5%B0%8F%E5%80%BC%20II%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/image_0.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
-<p>代码：<br><figure class="highlight java"><figcaption><span>[]</span></figcaption><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">findMin</span><span class="hljs-params">(<span class="hljs-type">int</span>[] nums)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> nums.length;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">l</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>, r = n - <span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">while</span> (l &lt; r &amp;&amp; nums[<span class="hljs-number">0</span>] == nums[r]) r--;<br>        <span class="hljs-keyword">while</span> (l &lt; r) &#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">mid</span> <span class="hljs-operator">=</span> l + r + <span class="hljs-number">1</span> &gt;&gt; <span class="hljs-number">1</span>;<br>            <span class="hljs-keyword">if</span> (nums[mid] &gt;= nums[<span class="hljs-number">0</span>]) &#123;<br>                l = mid;<br>            &#125; <span class="hljs-keyword">else</span> &#123;<br>                r = mid - <span class="hljs-number">1</span>;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> r + <span class="hljs-number">1</span> &lt; n ? nums[r + <span class="hljs-number">1</span>] : nums[<span class="hljs-number">0</span>];<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure></p>
+<p>Java 代码：<br><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">minArray</span><span class="hljs-params">(<span class="hljs-type">int</span>[] nums)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> nums.length;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">l</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>, r = n - <span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">while</span> (l &lt; r &amp;&amp; nums[<span class="hljs-number">0</span>] == nums[r]) r--;<br>        <span class="hljs-keyword">while</span> (l &lt; r) &#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">mid</span> <span class="hljs-operator">=</span> l + r + <span class="hljs-number">1</span> &gt;&gt; <span class="hljs-number">1</span>;<br>            <span class="hljs-keyword">if</span> (nums[mid] &gt;= nums[<span class="hljs-number">0</span>]) l = mid;                <br>            <span class="hljs-keyword">else</span> r = mid - <span class="hljs-number">1</span>;<br>        &#125;<br>        <span class="hljs-keyword">return</span> r + <span class="hljs-number">1</span> &lt; n ? nums[r + <span class="hljs-number">1</span>] : nums[<span class="hljs-number">0</span>];<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure><br>TypeScript 代码：<br><figure class="highlight typescript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs TypeScript"><span class="hljs-keyword">function</span> <span class="hljs-title function_">minArray</span>(<span class="hljs-params">nums: <span class="hljs-built_in">number</span>[]</span>): <span class="hljs-built_in">number</span> &#123;<br>    <span class="hljs-keyword">const</span> n = nums.<span class="hljs-property">length</span><br>    <span class="hljs-keyword">let</span> l = <span class="hljs-number">0</span>, r = n - <span class="hljs-number">1</span><br>    <span class="hljs-keyword">while</span> (l &lt; r &amp;&amp; nums[<span class="hljs-number">0</span>] == nums[r]) r--<br>    <span class="hljs-keyword">while</span> (l &lt; r) &#123;<br>        <span class="hljs-keyword">const</span> mid = l + r + <span class="hljs-number">1</span> &gt;&gt; <span class="hljs-number">1</span><br>        <span class="hljs-keyword">if</span> (nums[mid] &gt;= nums[<span class="hljs-number">0</span>]) l = mid<br>        <span class="hljs-keyword">else</span> r = mid - <span class="hljs-number">1</span><br>    &#125;<br>    <span class="hljs-keyword">return</span> r + <span class="hljs-number">1</span> &lt; n ? nums[r + <span class="hljs-number">1</span>] : nums[<span class="hljs-number">0</span>]<br>&#125;;<br></code></pre></div></td></tr></table></figure></p>
 <ul>
-<li>时间复杂度：恢复二段性处理中，最坏的情况下（考虑整个数组都是同一个数）复杂度是 $O(n)$，而之后的找旋转点是「二分」，复杂度为 $O(log{n})$。整体复杂度为 $O(n)$ 的。</li>
-<li>空间复杂度：$O(1)$。</li>
+<li>时间复杂度：恢复二段性处理中，最坏的情况下（考虑整个数组都是同一个数）复杂度是 $O(n)$，而之后的找旋转点是「二分」，复杂度为 $O(\log{n})$。整体复杂度为 $O(n)$ </li>
+<li>空间复杂度：$O(1)$</li>
 </ul>
 <hr>
 <h3 id="进阶"><a href="#进阶" class="headerlink" title="进阶"></a>进阶</h3><p>如果真正理解「二分」的话，本题和 <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/find-minimum-in-rotated-sorted-array/">153. 寻找旋转排序数组中的最小值</a> 区别不大。</p>
