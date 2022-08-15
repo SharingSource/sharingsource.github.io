@@ -1,0 +1,611 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/oimg/RoundCorner.png">
+  <link rel="icon" href="/oimg/RoundCorner.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="宫水三叶">
+  <meta name="keywords" content="算法, 数据结构, 题解">
+  
+    <meta name="description" content="题目描述这是 LeetCode 上的 641. 设计循环双端队列 ，难度为 中等。 设计实现双端队列。 实现 MyCircularDeque 类:  MyCircularDeque(int k) ：构造函数,双端队列最大为 $k$ 。 boolean insertFront()：将一个元素添加到双端队列头部。 如果操作成功返回 true ，否则返回 false 。 boolean insertLa">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LC 641. 设计循环双端队列">
+<meta property="og:url" content="https://sharingsource.github.io/2022/08/15/641.%20%E8%AE%BE%E8%AE%A1%E5%BE%AA%E7%8E%AF%E5%8F%8C%E7%AB%AF%E9%98%9F%E5%88%97%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/index.html">
+<meta property="og:site_name" content="宫水三叶的刷题日记">
+<meta property="og:description" content="题目描述这是 LeetCode 上的 641. 设计循环双端队列 ，难度为 中等。 设计实现双端队列。 实现 MyCircularDeque 类:  MyCircularDeque(int k) ：构造函数,双端队列最大为 $k$ 。 boolean insertFront()：将一个元素添加到双端队列头部。 如果操作成功返回 true ，否则返回 false 。 boolean insertLa">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-08-14T17:27:36.000Z">
+<meta property="article:modified_time" content="2022-08-15T05:45:58.310Z">
+<meta property="article:author" content="宫水三叶">
+<meta property="article:tag" content="链表">
+<meta property="article:tag" content="数据结构">
+<meta property="article:tag" content="数组">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  <title>LC 641. 设计循环双端队列 - 宫水三叶的刷题日记</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/hint.css/2.7.0/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.7.2/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"sharingsource.github.io","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"|","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"IDifiViRkVDTgu27Nu50GQkE-gzGzoHsz","app_key":"gt98pupgyYjPKYQASrGmD9kM","server_url":"https://idifivir.lc-cn-n1-shared.com","path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.1.0"></head>
+
+
+<body>
+  <header style="height: 50vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>宫水三叶の刷题日记</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/image_176.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="LC 641. 设计循环双端队列">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-author" aria-hidden="true"></i>
+      宫水三叶
+    </span>
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2022-08-15 01:27" pubdate>
+        2022年8月15日
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">LC 641. 设计循环双端队列</h1>
+            
+            <div class="markdown-body">
+              <h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>这是 LeetCode 上的 <strong><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/design-circular-deque/solution/by-ac_oier-fwhm/">641. 设计循环双端队列</a></strong> ，难度为 <strong>中等</strong>。</p>
+<p>设计实现双端队列。</p>
+<p>实现 <code>MyCircularDeque</code> 类:</p>
+<ul>
+<li><code>MyCircularDeque(int k)</code> ：构造函数,双端队列最大为 $k$ 。</li>
+<li><code>boolean insertFront()</code>：将一个元素添加到双端队列头部。 如果操作成功返回 <code>true</code> ，否则返回 <code>false</code> 。</li>
+<li><code>boolean insertLast()</code> ：将一个元素添加到双端队列尾部。如果操作成功返回 <code>true</code> ，否则返回 <code>false</code> 。</li>
+<li><code>boolean deleteFront()</code> ：从双端队列头部删除一个元素。 如果操作成功返回 <code>true</code> ，否则返回 <code>false</code> 。</li>
+<li><code>boolean deleteLast()</code> ：从双端队列尾部删除一个元素。如果操作成功返回 <code>true</code> ，否则返回 <code>false</code> 。</li>
+<li><code>int getFront()</code> ：从双端队列头部获得一个元素。如果双端队列为空，返回 <code>-1</code> 。</li>
+<li><code>int getRear()</code> ：获得双端队列的最后一个元素。 如果双端队列为空，返回 <code>-1</code> 。</li>
+<li><code>boolean isEmpty()</code> ：若双端队列为空，则返回 <code>true</code> ，否则返回 <code>false</code>  。</li>
+<li><code>boolean isFull()</code> ：若双端队列满了，则返回 <code>true</code> ，否则返回 <code>false</code> 。</li>
+</ul>
+<p>示例 1：<br><figure class="highlight awk"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs awk">输入<br>[<span class="hljs-string">&quot;MyCircularDeque&quot;</span>, <span class="hljs-string">&quot;insertLast&quot;</span>, <span class="hljs-string">&quot;insertLast&quot;</span>, <span class="hljs-string">&quot;insertFront&quot;</span>, <span class="hljs-string">&quot;insertFront&quot;</span>, <span class="hljs-string">&quot;getRear&quot;</span>, <span class="hljs-string">&quot;isFull&quot;</span>, <span class="hljs-string">&quot;deleteLast&quot;</span>, <span class="hljs-string">&quot;insertFront&quot;</span>, <span class="hljs-string">&quot;getFront&quot;</span>]<br>[[<span class="hljs-number">3</span>], [<span class="hljs-number">1</span>], [<span class="hljs-number">2</span>], [<span class="hljs-number">3</span>], [<span class="hljs-number">4</span>], [], [], [], [<span class="hljs-number">4</span>], []]<br><br>输出<br>[null, true, true, true, false, <span class="hljs-number">2</span>, true, true, true, <span class="hljs-number">4</span>]<br><br>解释<br>MyCircularDeque circularDeque = new MycircularDeque(<span class="hljs-number">3</span>); <span class="hljs-regexp">//</span> 设置容量大小为<span class="hljs-number">3</span><br>circularDeque.insertLast(<span class="hljs-number">1</span>);			        <span class="hljs-regexp">//</span> 返回 true<br>circularDeque.insertLast(<span class="hljs-number">2</span>);			        <span class="hljs-regexp">//</span> 返回 true<br>circularDeque.insertFront(<span class="hljs-number">3</span>);			        <span class="hljs-regexp">//</span> 返回 true<br>circularDeque.insertFront(<span class="hljs-number">4</span>);			        <span class="hljs-regexp">//</span> 已经满了，返回 false<br>circularDeque.getRear();  				<span class="hljs-regexp">//</span> 返回 <span class="hljs-number">2</span><br>circularDeque.isFull();				        <span class="hljs-regexp">//</span> 返回 true<br>circularDeque.deleteLast();			        <span class="hljs-regexp">//</span> 返回 true<br>circularDeque.insertFront(<span class="hljs-number">4</span>);			        <span class="hljs-regexp">//</span> 返回 true<br>circularDeque.getFront();				<span class="hljs-regexp">//</span> 返回 <span class="hljs-number">4</span><br></code></pre></div></td></tr></table></figure></p>
+<p>提示：</p>
+<ul>
+<li>$1 &lt;= k &lt;= 1000$</li>
+<li>$0 &lt;= value &lt;= 1000$</li>
+<li><code>insertFront</code>, <code>insertLast</code>, <code>deleteFront</code>, <code>deleteLast</code>, <code>getFront</code>, <code>getRear</code>, <code>isEmpty</code>, <code>isFull</code>  调用次数不大于 <code>2000</code> 次</li>
+</ul>
+<hr>
+<h3 id="基本分析"><a href="#基本分析" class="headerlink" title="基本分析"></a>基本分析</h3><p>一个基本的实现，需要满足除构造函数以外复杂度为 $O(k)$ 以外，其余操作均为 $O(1)$。</p>
+<p>常规实现包含两种方式：<strong>数组实现</strong> 与 <strong>链表实现</strong>。</p>
+<p>其中数组实现可以利用调用次数较小，开成调用次数 $3$ 倍大小，然后从中间开始往两边存储，这样做就不用考虑下标边的界问题；而更为常规的解法是构造一个与限定空间 $k$ 等大的数组，使用两下标并配合坐标转换来做，对于下标自增操作而言，只需要进行「加一取模」即可，而对于下标自减操作，由于考虑负值问题，需要进行「增加限定空间偏移后，进行减一再取模」。</p>
+<p>而链表实现则无须考虑额外的下标转换问题，但需要额外定义类。</p>
+<hr>
+<h3 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h3><p>使用两坐标 <code>he</code> 和 <code>ta</code> 分别代表队列头和尾（初始值均为 $0$），使用 <code>cnt</code> 记录当前队列元素大小，使用 <code>k</code> 记录初始化时指定的空间大小。</p>
+<p>对各类操作进行逻辑控制：</p>
+<ul>
+<li><code>insertFront</code> 操作：需要对 <code>he</code> 进行自减操作，即 <code>he = (he + k - 1) % k</code> 为目标位置，同时对 <code>cnt</code> 进行自增；</li>
+<li><code>insertLast</code> 操作：需要对 <code>ta</code> 进行自增操作，但 <code>ta</code> 起始指向是待插入位置，因此 <code>ta</code> 为目标位置，随后更新 <code>ta = (ta + 1) % k</code>，同时对 <code>cnt</code> 进行自增；</li>
+<li><code>deleteFront</code> 操作：需要对 <code>he</code> 进行自增操作，直接更新 <code>he = (he + 1) % k</code>，同时更新 <code>cnt</code> 进行自减；</li>
+<li><code>deleteLast</code> 操作：需要对 <code>ta</code> 进行自减操作，更新 <code>ta = (ta + k - 1) % k</code>，同时更新 <code>cnt</code> 进行自减；</li>
+<li><code>getFront</code> 操作：返回 <code>nums[he]</code> 即可， 若 <code>isFull</code> 为 <code>True</code>，返回 <code>-1</code>；</li>
+<li><code>getRear</code> 操作：返回 <code>nums[ta - 1]</code>，由于存在负值问题，需要转换为返回 <code>nums[(ta + k - 1) % k]</code> 若 <code>isFull</code> 为 <code>True</code>，返回 <code>-1</code>；</li>
+<li><code>isEmpty</code> 操作：根据 <code>cnt</code> 与 <code>k</code> 的关系进行返回；</li>
+<li><code>isFull</code> 操作：根据 <code>cnt</code> 与 <code>k</code> 的关系进行返回；</li>
+</ul>
+<p>Java 代码：<br><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">MyCircularDeque</span> &#123;<br>    <span class="hljs-type">int</span>[] nums;<br>    <span class="hljs-type">int</span> he, ta, cnt, k;<br>    <span class="hljs-keyword">public</span> <span class="hljs-title function_">MyCircularDeque</span><span class="hljs-params">(<span class="hljs-type">int</span> _k)</span> &#123;<br>        k = _k;<br>        nums = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[k];<br>    &#125;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">insertFront</span><span class="hljs-params">(<span class="hljs-type">int</span> value)</span> &#123;<br>        <span class="hljs-keyword">if</span> (isFull()) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>        he = (he + k - <span class="hljs-number">1</span>) % k;<br>        nums[he] = value; cnt++;<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>    &#125;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">insertLast</span><span class="hljs-params">(<span class="hljs-type">int</span> value)</span> &#123;<br>        <span class="hljs-keyword">if</span> (isFull()) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>        nums[ta++] = value; cnt++;<br>        ta %= k;<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>    &#125;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">deleteFront</span><span class="hljs-params">()</span> &#123;<br>        <span class="hljs-keyword">if</span> (isEmpty()) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>        he = (he + <span class="hljs-number">1</span>) % k; cnt--;<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>    &#125;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">deleteLast</span><span class="hljs-params">()</span> &#123;<br>        <span class="hljs-keyword">if</span> (isEmpty()) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>        ta = (ta + k - <span class="hljs-number">1</span>) % k; cnt--;<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>    &#125;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">getFront</span><span class="hljs-params">()</span> &#123;<br>        <span class="hljs-keyword">return</span> isEmpty() ? -<span class="hljs-number">1</span> : nums[he];<br>    &#125;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">getRear</span><span class="hljs-params">()</span> &#123;<br>        <span class="hljs-keyword">return</span> isEmpty() ? -<span class="hljs-number">1</span> : nums[(ta + k - <span class="hljs-number">1</span>) % k];<br>    &#125;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">isEmpty</span><span class="hljs-params">()</span> &#123;<br>        <span class="hljs-type">return</span> <span class="hljs-variable">cnt</span> <span class="hljs-operator">=</span>= <span class="hljs-number">0</span>;<br>    &#125;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">isFull</span><span class="hljs-params">()</span> &#123;<br>        <span class="hljs-type">return</span> <span class="hljs-variable">cnt</span> <span class="hljs-operator">=</span>= k;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure><br>TypeScript 代码：<br><figure class="highlight typescript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs TypeScript"><span class="hljs-keyword">class</span> <span class="hljs-title class_">MyCircularDeque</span> &#123;<br>    he = <span class="hljs-number">0</span>; ta = <span class="hljs-number">0</span>; cnt = <span class="hljs-number">0</span>; k = <span class="hljs-number">0</span>;<br>    <span class="hljs-attr">nums</span>: <span class="hljs-built_in">number</span>[];<br>    <span class="hljs-title function_">constructor</span>(<span class="hljs-params">_k: <span class="hljs-built_in">number</span></span>) &#123;<br>        <span class="hljs-variable language_">this</span>.<span class="hljs-property">k</span> = _k<br>        <span class="hljs-variable language_">this</span>.<span class="hljs-property">he</span> = <span class="hljs-variable language_">this</span>.<span class="hljs-property">ta</span> = <span class="hljs-variable language_">this</span>.<span class="hljs-property">cnt</span> = <span class="hljs-number">0</span><br>        <span class="hljs-variable language_">this</span>.<span class="hljs-property">nums</span> = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Array</span>&lt;<span class="hljs-built_in">number</span>&gt;(<span class="hljs-variable language_">this</span>.<span class="hljs-property">k</span>)<br>    &#125;<br>    <span class="hljs-title function_">insertFront</span>(<span class="hljs-attr">value</span>: <span class="hljs-built_in">number</span>): <span class="hljs-built_in">boolean</span> &#123;<br>        <span class="hljs-keyword">if</span> (<span class="hljs-variable language_">this</span>.<span class="hljs-title function_">isFull</span>()) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span><br>        <span class="hljs-variable language_">this</span>.<span class="hljs-property">he</span> = (<span class="hljs-variable language_">this</span>.<span class="hljs-property">he</span> + <span class="hljs-variable language_">this</span>.<span class="hljs-property">k</span> - <span class="hljs-number">1</span>) % <span class="hljs-variable language_">this</span>.<span class="hljs-property">k</span><br>        <span class="hljs-variable language_">this</span>.<span class="hljs-property">nums</span>[<span class="hljs-variable language_">this</span>.<span class="hljs-property">he</span>] = value<br>        <span class="hljs-variable language_">this</span>.<span class="hljs-property">cnt</span>++<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span><br>    &#125;<br>    <span class="hljs-title function_">insertLast</span>(<span class="hljs-attr">value</span>: <span class="hljs-built_in">number</span>): <span class="hljs-built_in">boolean</span> &#123;<br>        <span class="hljs-keyword">if</span> (<span class="hljs-variable language_">this</span>.<span class="hljs-title function_">isFull</span>()) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span><br>        <span class="hljs-variable language_">this</span>.<span class="hljs-property">nums</span>[<span class="hljs-variable language_">this</span>.<span class="hljs-property">ta</span>++] = value<br>        <span class="hljs-variable language_">this</span>.<span class="hljs-property">ta</span> %= <span class="hljs-variable language_">this</span>.<span class="hljs-property">k</span><br>        <span class="hljs-variable language_">this</span>.<span class="hljs-property">cnt</span>++<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span><br>    &#125;<br>    <span class="hljs-title function_">deleteFront</span>(): <span class="hljs-built_in">boolean</span> &#123;<br>        <span class="hljs-keyword">if</span> (<span class="hljs-variable language_">this</span>.<span class="hljs-title function_">isEmpty</span>()) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span><br>        <span class="hljs-variable language_">this</span>.<span class="hljs-property">he</span> = (<span class="hljs-variable language_">this</span>.<span class="hljs-property">he</span> + <span class="hljs-number">1</span>) % <span class="hljs-variable language_">this</span>.<span class="hljs-property">k</span><br>        <span class="hljs-variable language_">this</span>.<span class="hljs-property">cnt</span>--<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span><br>    &#125;<br>    <span class="hljs-title function_">deleteLast</span>(): <span class="hljs-built_in">boolean</span> &#123;<br>        <span class="hljs-keyword">if</span> (<span class="hljs-variable language_">this</span>.<span class="hljs-title function_">isEmpty</span>()) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span><br>        <span class="hljs-variable language_">this</span>.<span class="hljs-property">ta</span> = (<span class="hljs-variable language_">this</span>.<span class="hljs-property">ta</span> + <span class="hljs-variable language_">this</span>.<span class="hljs-property">k</span> - <span class="hljs-number">1</span>) % <span class="hljs-variable language_">this</span>.<span class="hljs-property">k</span><br>        <span class="hljs-variable language_">this</span>.<span class="hljs-property">cnt</span>--<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span><br>    &#125;<br>    <span class="hljs-title function_">getFront</span>(): <span class="hljs-built_in">number</span> &#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">isEmpty</span>() ? -<span class="hljs-number">1</span> : <span class="hljs-variable language_">this</span>.<span class="hljs-property">nums</span>[<span class="hljs-variable language_">this</span>.<span class="hljs-property">he</span>]<br>    &#125;<br>    <span class="hljs-title function_">getRear</span>(): <span class="hljs-built_in">number</span> &#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">isEmpty</span>() ? -<span class="hljs-number">1</span> : <span class="hljs-variable language_">this</span>.<span class="hljs-property">nums</span>[(<span class="hljs-variable language_">this</span>.<span class="hljs-property">ta</span> + <span class="hljs-variable language_">this</span>.<span class="hljs-property">k</span> - <span class="hljs-number">1</span>) % <span class="hljs-variable language_">this</span>.<span class="hljs-property">k</span>]<br>    &#125;<br>    <span class="hljs-title function_">isEmpty</span>(): <span class="hljs-built_in">boolean</span> &#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-variable language_">this</span>.<span class="hljs-property">cnt</span> == <span class="hljs-number">0</span><br>    &#125;<br>    <span class="hljs-title function_">isFull</span>(): <span class="hljs-built_in">boolean</span> &#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-variable language_">this</span>.<span class="hljs-property">cnt</span> == <span class="hljs-variable language_">this</span>.<span class="hljs-property">k</span><br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure></p>
+<ul>
+<li>时间复杂度：除在初始化函数中构造容器复杂度为 $O(k)$ 以外，其余操作复杂度均为 $O(1)$</li>
+<li>空间复杂度：$O(n)$</li>
+</ul>
+<hr>
+<h3 id="链表"><a href="#链表" class="headerlink" title="链表"></a>链表</h3><p>创建 <code>Node</code> 代指每个操作的元素，使用双向链表来构造循环队列。</p>
+<p>各类操作均对应基本的链表操作，不再赘述。</p>
+<p>Java 代码：<br><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">MyCircularDeque</span> &#123;<br>    <span class="hljs-keyword">class</span> <span class="hljs-title class_">Node</span> &#123;<br>        Node prev, next;<br>        <span class="hljs-type">int</span> val;<br>        Node (<span class="hljs-type">int</span> _val) &#123;<br>            val = _val;<br>        &#125;<br>    &#125;<br>    <span class="hljs-type">int</span> cnt, k;<br>    Node he, ta;<br>    <span class="hljs-keyword">public</span> <span class="hljs-title function_">MyCircularDeque</span><span class="hljs-params">(<span class="hljs-type">int</span> _k)</span> &#123;<br>        k = _k;<br>        he = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Node</span>(-<span class="hljs-number">1</span>); ta = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Node</span>(-<span class="hljs-number">1</span>);<br>        he.next = ta; ta.prev = he;<br>    &#125;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">insertFront</span><span class="hljs-params">(<span class="hljs-type">int</span> value)</span> &#123;<br>        <span class="hljs-keyword">if</span> (isFull()) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>        <span class="hljs-type">Node</span> <span class="hljs-variable">node</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Node</span>(value);<br>        node.next = he.next;<br>        node.prev = he;<br>        he.next.prev = node;<br>        he.next = node;<br>        cnt++;<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>    &#125;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">insertLast</span><span class="hljs-params">(<span class="hljs-type">int</span> value)</span> &#123;<br>        <span class="hljs-keyword">if</span> (isFull()) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>        <span class="hljs-type">Node</span> <span class="hljs-variable">node</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Node</span>(value);<br>        node.next = ta;<br>        node.prev = ta.prev;<br>        ta.prev.next = node;<br>        ta.prev = node;<br>        cnt++;<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>    &#125;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">deleteFront</span><span class="hljs-params">()</span> &#123;<br>        <span class="hljs-keyword">if</span> (isEmpty()) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>        he.next.next.prev = he;<br>        he.next = he.next.next;<br>        cnt--;<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>    &#125;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">deleteLast</span><span class="hljs-params">()</span> &#123;<br>        <span class="hljs-keyword">if</span> (isEmpty()) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>        ta.prev.prev.next = ta;<br>        ta.prev = ta.prev.prev;<br>        cnt--;<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>    &#125;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">getFront</span><span class="hljs-params">()</span> &#123;<br>        <span class="hljs-keyword">return</span> isEmpty() ? -<span class="hljs-number">1</span> : he.next.val;<br>    &#125;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">getRear</span><span class="hljs-params">()</span> &#123;<br>        <span class="hljs-keyword">return</span> isEmpty() ? -<span class="hljs-number">1</span> : ta.prev.val;<br>    &#125;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">isEmpty</span><span class="hljs-params">()</span> &#123;<br>        <span class="hljs-type">return</span> <span class="hljs-variable">cnt</span> <span class="hljs-operator">=</span>= <span class="hljs-number">0</span>;<br>    &#125;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">isFull</span><span class="hljs-params">()</span> &#123;<br>        <span class="hljs-type">return</span> <span class="hljs-variable">cnt</span> <span class="hljs-operator">=</span>= k;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure><br>TypeScript 代码：<br><figure class="highlight typescript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs TypeScript"><span class="hljs-keyword">class</span> <span class="hljs-title class_">TNode</span> &#123;<br>    <span class="hljs-attr">prev</span>: <span class="hljs-title class_">TNode</span> = <span class="hljs-literal">null</span>; <span class="hljs-attr">next</span>: <span class="hljs-title class_">TNode</span> = <span class="hljs-literal">null</span>;<br>    <span class="hljs-attr">val</span>: <span class="hljs-built_in">number</span> = <span class="hljs-number">0</span>;<br>    <span class="hljs-title function_">constructor</span>(<span class="hljs-params">_val: <span class="hljs-built_in">number</span></span>) &#123;<br>        <span class="hljs-variable language_">this</span>.<span class="hljs-property">val</span> = _val<br>    &#125;<br>&#125;<br><span class="hljs-keyword">class</span> <span class="hljs-title class_">MyCircularDeque</span> &#123;<br>    he = <span class="hljs-literal">null</span>; ta = <span class="hljs-literal">null</span>;<br>    cnt = <span class="hljs-number">0</span>; k = <span class="hljs-number">0</span>;<br>    <span class="hljs-title function_">constructor</span>(<span class="hljs-params">_k: <span class="hljs-built_in">number</span></span>) &#123;<br>        <span class="hljs-variable language_">this</span>.<span class="hljs-property">cnt</span> = <span class="hljs-number">0</span>; <span class="hljs-variable language_">this</span>.<span class="hljs-property">k</span> = _k;<br>        <span class="hljs-variable language_">this</span>.<span class="hljs-property">he</span> = <span class="hljs-keyword">new</span> <span class="hljs-title class_">TNode</span>(-<span class="hljs-number">1</span>); <span class="hljs-variable language_">this</span>.<span class="hljs-property">ta</span> = <span class="hljs-keyword">new</span> <span class="hljs-title class_">TNode</span>(-<span class="hljs-number">1</span>);<br>        <span class="hljs-variable language_">this</span>.<span class="hljs-property">he</span>.<span class="hljs-property">next</span> = <span class="hljs-variable language_">this</span>.<span class="hljs-property">ta</span><br>        <span class="hljs-variable language_">this</span>.<span class="hljs-property">ta</span>.<span class="hljs-property">prev</span> = <span class="hljs-variable language_">this</span>.<span class="hljs-property">he</span><br>    &#125;<br>    <span class="hljs-title function_">insertFront</span>(<span class="hljs-attr">value</span>: <span class="hljs-built_in">number</span>): <span class="hljs-built_in">boolean</span> &#123;<br>        <span class="hljs-keyword">if</span> (<span class="hljs-variable language_">this</span>.<span class="hljs-title function_">isFull</span>()) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span><br>        <span class="hljs-keyword">const</span> node = <span class="hljs-keyword">new</span> <span class="hljs-title class_">TNode</span>(value)<br>        node.<span class="hljs-property">next</span> = <span class="hljs-variable language_">this</span>.<span class="hljs-property">he</span>.<span class="hljs-property">next</span><br>        node.<span class="hljs-property">prev</span> = <span class="hljs-variable language_">this</span>.<span class="hljs-property">he</span><br>        <span class="hljs-variable language_">this</span>.<span class="hljs-property">he</span>.<span class="hljs-property">next</span>.<span class="hljs-property">prev</span> = node<br>        <span class="hljs-variable language_">this</span>.<span class="hljs-property">he</span>.<span class="hljs-property">next</span> = node<br>        <span class="hljs-variable language_">this</span>.<span class="hljs-property">cnt</span>++<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span><br>    &#125;<br>    <span class="hljs-title function_">insertLast</span>(<span class="hljs-attr">value</span>: <span class="hljs-built_in">number</span>): <span class="hljs-built_in">boolean</span> &#123;<br>        <span class="hljs-keyword">if</span> (<span class="hljs-variable language_">this</span>.<span class="hljs-title function_">isFull</span>()) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span><br>        <span class="hljs-keyword">const</span> node = <span class="hljs-keyword">new</span> <span class="hljs-title class_">TNode</span>(value)<br>        node.<span class="hljs-property">next</span> = <span class="hljs-variable language_">this</span>.<span class="hljs-property">ta</span><br>        node.<span class="hljs-property">prev</span> = <span class="hljs-variable language_">this</span>.<span class="hljs-property">ta</span>.<span class="hljs-property">prev</span><br>        <span class="hljs-variable language_">this</span>.<span class="hljs-property">ta</span>.<span class="hljs-property">prev</span>.<span class="hljs-property">next</span> = node<br>        <span class="hljs-variable language_">this</span>.<span class="hljs-property">ta</span>.<span class="hljs-property">prev</span> = node<br>        <span class="hljs-variable language_">this</span>.<span class="hljs-property">cnt</span>++<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span><br>    &#125;<br>    <span class="hljs-title function_">deleteFront</span>(): <span class="hljs-built_in">boolean</span> &#123;<br>        <span class="hljs-keyword">if</span> (<span class="hljs-variable language_">this</span>.<span class="hljs-title function_">isEmpty</span>()) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span><br>        <span class="hljs-variable language_">this</span>.<span class="hljs-property">he</span>.<span class="hljs-property">next</span>.<span class="hljs-property">next</span>.<span class="hljs-property">prev</span> = <span class="hljs-variable language_">this</span>.<span class="hljs-property">he</span><br>        <span class="hljs-variable language_">this</span>.<span class="hljs-property">he</span>.<span class="hljs-property">next</span> = <span class="hljs-variable language_">this</span>.<span class="hljs-property">he</span>.<span class="hljs-property">next</span>.<span class="hljs-property">next</span><br>        <span class="hljs-variable language_">this</span>.<span class="hljs-property">cnt</span>--<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span><br>    &#125;<br>    <span class="hljs-title function_">deleteLast</span>(): <span class="hljs-built_in">boolean</span> &#123;<br>        <span class="hljs-keyword">if</span> (<span class="hljs-variable language_">this</span>.<span class="hljs-title function_">isEmpty</span>()) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span><br>        <span class="hljs-variable language_">this</span>.<span class="hljs-property">ta</span>.<span class="hljs-property">prev</span>.<span class="hljs-property">prev</span>.<span class="hljs-property">next</span> = <span class="hljs-variable language_">this</span>.<span class="hljs-property">ta</span><br>        <span class="hljs-variable language_">this</span>.<span class="hljs-property">ta</span>.<span class="hljs-property">prev</span> = <span class="hljs-variable language_">this</span>.<span class="hljs-property">ta</span>.<span class="hljs-property">prev</span>.<span class="hljs-property">prev</span><br>        <span class="hljs-variable language_">this</span>.<span class="hljs-property">cnt</span>--<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span><br>    &#125;<br>    <span class="hljs-title function_">getFront</span>(): <span class="hljs-built_in">number</span> &#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">isEmpty</span>() ? -<span class="hljs-number">1</span> : <span class="hljs-variable language_">this</span>.<span class="hljs-property">he</span>.<span class="hljs-property">next</span>.<span class="hljs-property">val</span><br>    &#125;<br>    <span class="hljs-title function_">getRear</span>(): <span class="hljs-built_in">number</span> &#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">isEmpty</span>() ? -<span class="hljs-number">1</span> : <span class="hljs-variable language_">this</span>.<span class="hljs-property">ta</span>.<span class="hljs-property">prev</span>.<span class="hljs-property">val</span><br>    &#125;<br>    <span class="hljs-title function_">isEmpty</span>(): <span class="hljs-built_in">boolean</span> &#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-variable language_">this</span>.<span class="hljs-property">cnt</span> == <span class="hljs-number">0</span><br>    &#125;<br>    <span class="hljs-title function_">isFull</span>(): <span class="hljs-built_in">boolean</span> &#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-variable language_">this</span>.<span class="hljs-property">cnt</span> == <span class="hljs-variable language_">this</span>.<span class="hljs-property">k</span><br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure></p>
+<ul>
+<li>时间复杂度：所有操作复杂度均为 $O(1)$</li>
+<li>空间复杂度：$O(n)$</li>
+</ul>
+<hr>
+<h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>这是我们「刷穿 LeetCode」系列文章的第 <code>No.641</code> 篇，系列开始于 2021/01/01，截止于起始日 LeetCode 上共有 1916 道题目，部分是有锁题，我们将先把所有不带锁的题目刷完。</p>
+<p>在这个系列文章里面，除了讲解解题思路以外，还会尽可能给出最为简洁的代码。如果涉及通解还会相应的代码模板。</p>
+<p>为了方便各位同学能够电脑上进行调试和提交代码，我建立了相关的仓库：<a target="_blank" rel="noopener" href="https://github.com/SharingSource/LogicStack-LeetCode">https://github.com/SharingSource/LogicStack-LeetCode</a> 。</p>
+<p>在仓库地址里，你可以看到系列文章的题解链接、系列文章的相应代码、LeetCode 原题链接和其他优选题解。</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E9%93%BE%E8%A1%A8/">链表</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E6%95%B0%E7%BB%84/">数组</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/08/14/%E5%89%91%E6%8C%87%20Offer%20II%20005.%20%E5%8D%95%E8%AF%8D%E9%95%BF%E5%BA%A6%E7%9A%84%E6%9C%80%E5%A4%A7%E4%B9%98%E7%A7%AF%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/">
+                        <span class="hidden-mobile">LC 剑指 Offer II 005. 单词长度的最大乘积</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://cdn.staticfile.org/valine/1.4.18/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"IDifiViRkVDTgu27Nu50GQkE-gzGzoHsz","appKey":"gt98pupgyYjPKYQASrGmD9kM","path":"window.location.pathname","placeholder":"发一条友善的评论（为方便交流，记得填上方的昵称再留言哦 ~ 🍭","avatar":"","meta":["nick","mail"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":true},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          Fluid.plugins.initFancyBox('#valine .vcontent img:not(.vemoji)');
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+  <div class="col-lg-7 mx-auto nopadding-x-md">
+    <div class="container custom post-custom mx-auto">
+      <img src="/oimg/gzh-qrcode.webp" srcset="/img/loading.gif" lazyload class="rounded mx-auto d-block mt-5" style="width:80%">
+    </div>
+  </div>
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- LeanCloud 统计PV -->
+        <span id="leancloud-site-pv-container" style="display: none">
+            总访问量 
+            <span id="leancloud-site-pv"></span>
+             次
+          </span>
+      
+      
+        <!-- LeanCloud 统计UV -->
+        <span id="leancloud-site-uv-container" style="display: none">
+            总访客数 
+            <span id="leancloud-site-uv"></span>
+             人
+          </span>
+      
+
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.staticfile.org/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.staticfile.org/tocbot/4.18.2/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.staticfile.org/anchor-js/4.3.1/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.11/clipboard.min.js" ></script>
+  
+
+
+
+
+  <script defer src="/js/leancloud.js" ></script>
+
+
+
+  <script  src="https://cdn.bootcdn.net/ajax/libs/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        loader: {
+          
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.staticfile.org/mathjax/3.2.0/es5/tex-svg.js" ></script>
+
+  
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>
