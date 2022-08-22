@@ -1,0 +1,622 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/oimg/RoundCorner.png">
+  <link rel="icon" href="/oimg/RoundCorner.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="宫水三叶">
+  <meta name="keywords" content="算法, 数据结构, 题解">
+  
+    <meta name="description" content="题目描述这是 LeetCode 上的 654. 最大二叉树 ，难度为 中等。 给定一个不重复的整数数组 nums。 最大二叉树 可以用下面的算法从 nums 递归地构建:  创建一个根节点，其值为 nums 中的最大值。 递归地在最大值 左边 的 子数组前缀上 构建左子树。 递归地在最大值 右边 的 子数组后缀上 构建右子树。  返回 nums 构建的最大二叉树。 示例 1：12345678910">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LC 654. 最大二叉树">
+<meta property="og:url" content="https://sharingsource.github.io/2022/08/20/654.%20%E6%9C%80%E5%A4%A7%E4%BA%8C%E5%8F%89%E6%A0%91%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/index.html">
+<meta property="og:site_name" content="宫水三叶的刷题日记">
+<meta property="og:description" content="题目描述这是 LeetCode 上的 654. 最大二叉树 ，难度为 中等。 给定一个不重复的整数数组 nums。 最大二叉树 可以用下面的算法从 nums 递归地构建:  创建一个根节点，其值为 nums 中的最大值。 递归地在最大值 左边 的 子数组前缀上 构建左子树。 递归地在最大值 右边 的 子数组后缀上 构建右子树。  返回 nums 构建的最大二叉树。 示例 1：12345678910">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://sharingsource.github.io/2022/08/20/654.%20%E6%9C%80%E5%A4%A7%E4%BA%8C%E5%8F%89%E6%A0%91%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/image_0.png">
+<meta property="og:image" content="https://sharingsource.github.io/2022/08/20/654.%20%E6%9C%80%E5%A4%A7%E4%BA%8C%E5%8F%89%E6%A0%91%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/image_1.png">
+<meta property="article:published_time" content="2022-08-19T17:37:43.000Z">
+<meta property="article:modified_time" content="2022-08-22T12:44:16.755Z">
+<meta property="article:author" content="宫水三叶">
+<meta property="article:tag" content="二叉树">
+<meta property="article:tag" content="线段树">
+<meta property="article:tag" content="递归">
+<meta property="article:tag" content="单调栈">
+<meta property="article:tag" content="分治">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://sharingsource.github.io/2022/08/20/654.%20%E6%9C%80%E5%A4%A7%E4%BA%8C%E5%8F%89%E6%A0%91%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/image_0.png">
+  
+  
+  <title>LC 654. 最大二叉树 - 宫水三叶的刷题日记</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/hint.css/2.7.0/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.7.2/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"sharingsource.github.io","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"|","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"IDifiViRkVDTgu27Nu50GQkE-gzGzoHsz","app_key":"gt98pupgyYjPKYQASrGmD9kM","server_url":"https://idifivir.lc-cn-n1-shared.com","path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.1.0"></head>
+
+
+<body>
+  <header style="height: 50vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>宫水三叶の刷题日记</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/image_79.jpeg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="LC 654. 最大二叉树">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-author" aria-hidden="true"></i>
+      宫水三叶
+    </span>
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2022-08-20 01:37" pubdate>
+        2022年8月20日
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">LC 654. 最大二叉树</h1>
+            
+            <div class="markdown-body">
+              <h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>这是 LeetCode 上的 <strong><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/maximum-binary-tree/solution/by-ac_oier-s0wc/">654. 最大二叉树</a></strong> ，难度为 <strong>中等</strong>。</p>
+<p>给定一个不重复的整数数组 <code>nums</code>。 最大二叉树 可以用下面的算法从 <code>nums</code> 递归地构建:</p>
+<ol>
+<li>创建一个根节点，其值为 <code>nums</code> 中的最大值。</li>
+<li>递归地在最大值 左边 的 子数组前缀上 构建左子树。</li>
+<li>递归地在最大值 右边 的 子数组后缀上 构建右子树。</li>
+</ol>
+<p>返回 <code>nums</code> 构建的最大二叉树。</p>
+<p>示例 1：<br><img src="/2022/08/20/654.%20%E6%9C%80%E5%A4%A7%E4%BA%8C%E5%8F%89%E6%A0%91%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/image_0.png" srcset="/img/loading.gif" lazyload alt><br><figure class="highlight inform7"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs inform7">输入：nums = <span class="hljs-comment">[3,2,1,6,0,5]</span><br><br>输出：<span class="hljs-comment">[6,3,5,null,2,0,null,null,1]</span><br><br>解释：递归调用如下所示：<br>- <span class="hljs-comment">[3,2,1,6,0,5]</span> 中的最大值是 6 ，左边部分是 <span class="hljs-comment">[3,2,1]</span> ，右边部分是 <span class="hljs-comment">[0,5]</span> 。<br>    - <span class="hljs-comment">[3,2,1]</span> 中的最大值是 3 ，左边部分是 <span class="hljs-comment">[]</span> ，右边部分是 <span class="hljs-comment">[2,1]</span> 。<br>        - 空数组，无子节点。<br>        - <span class="hljs-comment">[2,1]</span> 中的最大值是 2 ，左边部分是 <span class="hljs-comment">[]</span> ，右边部分是 <span class="hljs-comment">[1]</span> 。<br>            - 空数组，无子节点。<br>            - 只有一个元素，所以子节点是一个值为 1 的节点。<br>    - <span class="hljs-comment">[0,5]</span> 中的最大值是 5 ，左边部分是 <span class="hljs-comment">[0]</span> ，右边部分是 <span class="hljs-comment">[]</span> 。<br>        - 只有一个元素，所以子节点是一个值为 0 的节点。<br>        - 空数组，无子节点。<br></code></pre></div></td></tr></table></figure><br>示例 2：<br><img src="/2022/08/20/654.%20%E6%9C%80%E5%A4%A7%E4%BA%8C%E5%8F%89%E6%A0%91%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/image_1.png" srcset="/img/loading.gif" lazyload alt><br><figure class="highlight nix"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs nix">输入：<span class="hljs-attr">nums</span> = [<span class="hljs-number">3</span>,<span class="hljs-number">2</span>,<span class="hljs-number">1</span>]<br><br>输出：[<span class="hljs-number">3</span>,<span class="hljs-literal">null</span>,<span class="hljs-number">2</span>,<span class="hljs-literal">null</span>,<span class="hljs-number">1</span>]<br></code></pre></div></td></tr></table></figure></p>
+<p>提示：</p>
+<ul>
+<li>$1 &lt;= nums.length &lt;= 1000$</li>
+<li>$0 &lt;= nums[i] &lt;= 1000$</li>
+<li><code>nums</code> 中的所有整数 互不相同</li>
+</ul>
+<hr>
+<h3 id="基本分析"><a href="#基本分析" class="headerlink" title="基本分析"></a>基本分析</h3><p>根据题目描述，可知该问题本质是「区间求最值」问题（RMQ）。</p>
+<p>而求解 RMQ 有多种方式：递归分治、有序集合/ST/线段树 和 单调栈。</p>
+<p>其中递归分治做法复杂度为 $O(n^2)$，对本题来说可过；而其余诸如线段树的方式需要 $O(n\log{n})$ 的建树和单次 $O(\log{n})$ 的查询，整体复杂度为 $O(n\log{n})$；单调栈解法则是整体复杂度为 $O(n)$。</p>
+<hr>
+<h3 id="递归分治"><a href="#递归分治" class="headerlink" title="递归分治"></a>递归分治</h3><p>设置递归函数 <code>TreeNode build(int[] nums, int l, int r)</code> 含义为从 <code>nums</code> 中的 $[l, r]$ 下标范围进行构建，返回构建后的头结点。</p>
+<p>当 $l &gt; r$ 时，返回空节点，否则在 $[l, r]$ 中进行扫描，找到最大值对应的下标 <code>idx</code> 并创建对应的头结点，递归构建 $[l, idx - 1]$ 和 $[idx + 1, r]$ 作为头节点的左右子树。</p>
+<p>Java 代码：<br><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> TreeNode <span class="hljs-title function_">constructMaximumBinaryTree</span><span class="hljs-params">(<span class="hljs-type">int</span>[] nums)</span> &#123;<br>        <span class="hljs-keyword">return</span> build(nums, <span class="hljs-number">0</span>, nums.length - <span class="hljs-number">1</span>);<br>    &#125;<br>    TreeNode <span class="hljs-title function_">build</span><span class="hljs-params">(<span class="hljs-type">int</span>[] nums, <span class="hljs-type">int</span> l, <span class="hljs-type">int</span> r)</span> &#123;<br>        <span class="hljs-keyword">if</span> (l &gt; r) <span class="hljs-keyword">return</span> <span class="hljs-literal">null</span>;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">idx</span> <span class="hljs-operator">=</span> l;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> l; i &lt;= r; i++) &#123;<br>            <span class="hljs-keyword">if</span> (nums[i] &gt; nums[idx]) idx = i;<br>        &#125;<br>        <span class="hljs-type">TreeNode</span> <span class="hljs-variable">ans</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">TreeNode</span>(nums[idx]);<br>        ans.left = build(nums, l, idx - <span class="hljs-number">1</span>);<br>        ans.right = build(nums, idx + <span class="hljs-number">1</span>, r);<br>        <span class="hljs-keyword">return</span> ans;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure><br>TypeScript 代码：<br><figure class="highlight typescript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs TypeScript"><span class="hljs-keyword">function</span> <span class="hljs-title function_">constructMaximumBinaryTree</span>(<span class="hljs-params">nums: <span class="hljs-built_in">number</span>[]</span>): <span class="hljs-title class_">TreeNode</span> | <span class="hljs-literal">null</span> &#123;<br>    <span class="hljs-keyword">return</span> <span class="hljs-title function_">build</span>(nums, <span class="hljs-number">0</span>, nums.<span class="hljs-property">length</span> - <span class="hljs-number">1</span>)<br>&#125;;<br><span class="hljs-keyword">function</span> <span class="hljs-title function_">build</span>(<span class="hljs-params">nums: <span class="hljs-built_in">number</span>[], l: <span class="hljs-built_in">number</span>, r: <span class="hljs-built_in">number</span></span>): <span class="hljs-title class_">TreeNode</span> | <span class="hljs-literal">null</span> &#123;<br>    <span class="hljs-keyword">if</span> (l &gt; r) <span class="hljs-keyword">return</span> <span class="hljs-literal">null</span><br>    <span class="hljs-keyword">let</span> idx = l<br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = l; i &lt;= r; i++) &#123;<br>        <span class="hljs-keyword">if</span> (nums[i] &gt; nums[idx]) idx = i<br>    &#125;<br>    <span class="hljs-keyword">const</span> ans = <span class="hljs-keyword">new</span> <span class="hljs-title class_">TreeNode</span>(nums[idx])<br>    ans.<span class="hljs-property">left</span> = <span class="hljs-title function_">build</span>(nums, l, idx - <span class="hljs-number">1</span>)<br>    ans.<span class="hljs-property">right</span> = <span class="hljs-title function_">build</span>(nums, idx + <span class="hljs-number">1</span>, r)<br>    <span class="hljs-keyword">return</span> ans<br>&#125;<br></code></pre></div></td></tr></table></figure></p>
+<ul>
+<li>时间复杂度：$O(n^2)$</li>
+<li>空间复杂度：忽略递归带来的额外空间开销，复杂度为 $O(1)$</li>
+</ul>
+<hr>
+<h3 id="线段树"><a href="#线段树" class="headerlink" title="线段树"></a>线段树</h3><p>抽象成区间求和问题后，涉及「单点修改」和「区间查询」，再结合节点数量为 $1e3$，可使用 <code>build</code> $4n$ 空间不带懒标记的线段树进行求解。</p>
+<p>设计线段树节点 <code>Node</code> 包含属性：左节点下标 <code>l</code>、右节点下标 <code>r</code> 和当前区间 $[l, r]$ 所对应的最值 $val$。</p>
+<p>构建线段树的过程为基本的线段树模板内容，而构建答案树的过程与递归分治过程类型（将线性找最值过程用线段树优化）。</p>
+<p>Java 代码：<br><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">class</span> <span class="hljs-title class_">Node</span> &#123;<br>        <span class="hljs-type">int</span> l, r, val;<br>        Node (<span class="hljs-type">int</span> _l, <span class="hljs-type">int</span> _r) &#123;<br>            l = _l; r = _r;<br>        &#125;<br>    &#125;<br>    <span class="hljs-keyword">void</span> <span class="hljs-title function_">build</span><span class="hljs-params">(<span class="hljs-type">int</span> u, <span class="hljs-type">int</span> l, <span class="hljs-type">int</span> r)</span> &#123;<br>        tr[u] = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Node</span>(l, r);<br>        <span class="hljs-keyword">if</span> (l == r) <span class="hljs-keyword">return</span> ;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">mid</span> <span class="hljs-operator">=</span> l + r &gt;&gt; <span class="hljs-number">1</span>;<br>        build(u &lt;&lt; <span class="hljs-number">1</span>, l, mid);<br>        build(u &lt;&lt; <span class="hljs-number">1</span> | <span class="hljs-number">1</span>, mid + <span class="hljs-number">1</span>, r);<br>    &#125;<br>    <span class="hljs-keyword">void</span> <span class="hljs-title function_">update</span><span class="hljs-params">(<span class="hljs-type">int</span> u, <span class="hljs-type">int</span> x, <span class="hljs-type">int</span> v)</span> &#123;<br>        <span class="hljs-keyword">if</span> (tr[u].l == x &amp;&amp; tr[u].r == x) &#123;<br>            tr[u].val = Math.max(tr[u].val, v);<br>            <span class="hljs-keyword">return</span> ;<br>        &#125;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">mid</span> <span class="hljs-operator">=</span> tr[u].l + tr[u].r &gt;&gt; <span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">if</span> (x &lt;= mid) update(u &lt;&lt; <span class="hljs-number">1</span>, x, v);<br>        <span class="hljs-keyword">else</span> update(u &lt;&lt; <span class="hljs-number">1</span> | <span class="hljs-number">1</span>, x, v);<br>        pushup(u);<br>    &#125;<br>    <span class="hljs-type">int</span> <span class="hljs-title function_">query</span><span class="hljs-params">(<span class="hljs-type">int</span> u, <span class="hljs-type">int</span> l, <span class="hljs-type">int</span> r)</span> &#123;<br>        <span class="hljs-keyword">if</span> (l &lt;= tr[u].l &amp;&amp; tr[u].r &lt;= r) <span class="hljs-keyword">return</span> tr[u].val;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">mid</span> <span class="hljs-operator">=</span> tr[u].l + tr[u].r &gt;&gt; <span class="hljs-number">1</span>, ans = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">if</span> (l &lt;= mid) ans = query(u &lt;&lt; <span class="hljs-number">1</span>, l, r);<br>        <span class="hljs-keyword">if</span> (r &gt; mid) ans = Math.max(ans, query(u &lt;&lt; <span class="hljs-number">1</span> | <span class="hljs-number">1</span>, l, r));<br>        <span class="hljs-keyword">return</span> ans;<br>    &#125;<br>    <span class="hljs-keyword">void</span> <span class="hljs-title function_">pushup</span><span class="hljs-params">(<span class="hljs-type">int</span> u)</span> &#123;<br>        tr[u].val = Math.max(tr[u &lt;&lt; <span class="hljs-number">1</span>].val, tr[u &lt;&lt; <span class="hljs-number">1</span> | <span class="hljs-number">1</span>].val);<br>    &#125;<br>    Node[] tr = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Node</span>[<span class="hljs-number">4010</span>];<br>    <span class="hljs-type">int</span>[] hash = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[<span class="hljs-number">1010</span>];<br>    <span class="hljs-keyword">public</span> TreeNode <span class="hljs-title function_">constructMaximumBinaryTree</span><span class="hljs-params">(<span class="hljs-type">int</span>[] nums)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> nums.length;<br>        build(<span class="hljs-number">1</span>, <span class="hljs-number">1</span>, n);<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; n; i++) &#123;<br>            hash[nums[i]] = i + <span class="hljs-number">1</span>;<br>            update(<span class="hljs-number">1</span>, i + <span class="hljs-number">1</span>, nums[i]);<br>        &#125;<br>        <span class="hljs-keyword">return</span> dfs(nums, <span class="hljs-number">1</span>, n);<br>    &#125;<br>    TreeNode <span class="hljs-title function_">dfs</span><span class="hljs-params">(<span class="hljs-type">int</span>[] nums, <span class="hljs-type">int</span> l, <span class="hljs-type">int</span> r)</span> &#123;<br>        <span class="hljs-keyword">if</span> (l &gt; r) <span class="hljs-keyword">return</span> <span class="hljs-literal">null</span>;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">val</span> <span class="hljs-operator">=</span> query(<span class="hljs-number">1</span>, l, r), idx = hash[val];<br>        <span class="hljs-type">TreeNode</span> <span class="hljs-variable">ans</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">TreeNode</span>(val);<br>        ans.left = dfs(nums, l, idx - <span class="hljs-number">1</span>);<br>        ans.right = dfs(nums, idx + <span class="hljs-number">1</span>, r);<br>        <span class="hljs-keyword">return</span> ans;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure><br>TypeScript 代码：<br><figure class="highlight typescript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs TypeScript"><span class="hljs-keyword">class</span> <span class="hljs-title class_">TNode</span> &#123;<br>    l = <span class="hljs-number">0</span>; r = <span class="hljs-number">0</span>; val = <span class="hljs-number">0</span>;<br>    <span class="hljs-title function_">constructor</span> (<span class="hljs-attr">_l</span>: <span class="hljs-built_in">number</span>, <span class="hljs-attr">_r</span>: <span class="hljs-built_in">number</span>) &#123;<br>        <span class="hljs-variable language_">this</span>.<span class="hljs-property">l</span> = _l; <span class="hljs-variable language_">this</span>.<span class="hljs-property">r</span> = _r;<br>    &#125;<br>&#125;<br><span class="hljs-keyword">const</span> <span class="hljs-attr">tr</span>: <span class="hljs-title class_">TNode</span>[] = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Array</span>&lt;<span class="hljs-title class_">TNode</span>&gt;(<span class="hljs-number">4010</span>)<br><span class="hljs-keyword">const</span> <span class="hljs-attr">hash</span>: <span class="hljs-built_in">number</span>[] = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Array</span>&lt;<span class="hljs-built_in">number</span>&gt;(<span class="hljs-number">1010</span>)<br><span class="hljs-keyword">function</span> <span class="hljs-title function_">constructMaximumBinaryTree</span>(<span class="hljs-params">nums: <span class="hljs-built_in">number</span>[]</span>): <span class="hljs-title class_">TreeNode</span> | <span class="hljs-literal">null</span> &#123;<br>    <span class="hljs-keyword">const</span> n = nums.<span class="hljs-property">length</span><br>    <span class="hljs-title function_">build</span>(<span class="hljs-number">1</span>, <span class="hljs-number">1</span>, n)<br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; n; i++) &#123;<br>        hash[nums[i]] = i + <span class="hljs-number">1</span><br>        <span class="hljs-title function_">update</span>(<span class="hljs-number">1</span>, i + <span class="hljs-number">1</span>, nums[i])<br>    &#125;<br>    <span class="hljs-keyword">return</span> <span class="hljs-title function_">dfs</span>(nums, <span class="hljs-number">1</span>, n)<br>&#125;;<br><span class="hljs-keyword">function</span> <span class="hljs-title function_">build</span>(<span class="hljs-params">u: <span class="hljs-built_in">number</span>, l: <span class="hljs-built_in">number</span>, r: <span class="hljs-built_in">number</span></span>): <span class="hljs-built_in">void</span> &#123;<br>    tr[u] = <span class="hljs-keyword">new</span> <span class="hljs-title class_">TNode</span>(l, r)<br>    <span class="hljs-keyword">if</span> (l == r) <span class="hljs-keyword">return</span> <br>    <span class="hljs-keyword">const</span> mid = l + r &gt;&gt; <span class="hljs-number">1</span><br>    <span class="hljs-title function_">build</span>(u &lt;&lt; <span class="hljs-number">1</span>, l, mid)<br>    <span class="hljs-title function_">build</span>(u &lt;&lt; <span class="hljs-number">1</span> | <span class="hljs-number">1</span>, mid + <span class="hljs-number">1</span>, r)<br>&#125;<br><span class="hljs-keyword">function</span> <span class="hljs-title function_">update</span>(<span class="hljs-params">u: <span class="hljs-built_in">number</span>, x: <span class="hljs-built_in">number</span>, v: <span class="hljs-built_in">number</span></span>): <span class="hljs-built_in">void</span> &#123;<br>    <span class="hljs-keyword">if</span> (tr[u].<span class="hljs-property">l</span> == x &amp;&amp; tr[u].<span class="hljs-property">r</span> == x) &#123;<br>        tr[u].<span class="hljs-property">val</span> = <span class="hljs-title class_">Math</span>.<span class="hljs-title function_">max</span>(tr[u].<span class="hljs-property">val</span>, v)<br>        <span class="hljs-keyword">return</span> <br>    &#125;<br>    <span class="hljs-keyword">const</span> mid = tr[u].<span class="hljs-property">l</span> + tr[u].<span class="hljs-property">r</span> &gt;&gt; <span class="hljs-number">1</span><br>    <span class="hljs-keyword">if</span> (x &lt;= mid) <span class="hljs-title function_">update</span>(u &lt;&lt; <span class="hljs-number">1</span>, x, v)<br>    <span class="hljs-keyword">else</span> <span class="hljs-title function_">update</span>(u &lt;&lt; <span class="hljs-number">1</span> | <span class="hljs-number">1</span>, x, v)<br>    <span class="hljs-title function_">pushup</span>(u)<br>&#125;<br><span class="hljs-keyword">function</span> <span class="hljs-title function_">query</span>(<span class="hljs-params">u: <span class="hljs-built_in">number</span>, l: <span class="hljs-built_in">number</span>, r: <span class="hljs-built_in">number</span></span>): <span class="hljs-built_in">number</span> &#123;<br>    <span class="hljs-keyword">if</span> (l &lt;= tr[u].<span class="hljs-property">l</span> &amp;&amp; tr[u].<span class="hljs-property">r</span> &lt;= r) <span class="hljs-keyword">return</span> tr[u].<span class="hljs-property">val</span><br>    <span class="hljs-keyword">let</span> mid = tr[u].<span class="hljs-property">l</span> + tr[u].<span class="hljs-property">r</span> &gt;&gt; <span class="hljs-number">1</span>, ans = <span class="hljs-number">0</span><br>    <span class="hljs-keyword">if</span> (l &lt;= mid) ans = <span class="hljs-title function_">query</span>(u &lt;&lt; <span class="hljs-number">1</span>, l, r)<br>    <span class="hljs-keyword">if</span> (r &gt; mid) ans = <span class="hljs-title class_">Math</span>.<span class="hljs-title function_">max</span>(ans, <span class="hljs-title function_">query</span>(u &lt;&lt; <span class="hljs-number">1</span> | <span class="hljs-number">1</span>, l, r))<br>    <span class="hljs-keyword">return</span> ans<br>&#125;<br><span class="hljs-keyword">function</span> <span class="hljs-title function_">pushup</span>(<span class="hljs-params">u: <span class="hljs-built_in">number</span></span>): <span class="hljs-built_in">void</span> &#123;<br>    tr[u].<span class="hljs-property">val</span> = <span class="hljs-title class_">Math</span>.<span class="hljs-title function_">max</span>(tr[u &lt;&lt; <span class="hljs-number">1</span>].<span class="hljs-property">val</span>, tr[u &lt;&lt; <span class="hljs-number">1</span> | <span class="hljs-number">1</span>].<span class="hljs-property">val</span>)<br>&#125;<br><span class="hljs-keyword">function</span> <span class="hljs-title function_">dfs</span>(<span class="hljs-params">nums: <span class="hljs-built_in">number</span>[], l: <span class="hljs-built_in">number</span>, r: <span class="hljs-built_in">number</span></span>): <span class="hljs-title class_">TreeNode</span> &#123;<br>    <span class="hljs-keyword">if</span> (l &gt; r) <span class="hljs-keyword">return</span> <span class="hljs-literal">null</span><br>    <span class="hljs-keyword">let</span> val = <span class="hljs-title function_">query</span>(<span class="hljs-number">1</span>, l, r), idx = hash[val]<br>    <span class="hljs-keyword">const</span> ans = <span class="hljs-keyword">new</span> <span class="hljs-title class_">TreeNode</span>(val)<br>    ans.<span class="hljs-property">left</span> = <span class="hljs-title function_">dfs</span>(nums, l, idx - <span class="hljs-number">1</span>)<br>    ans.<span class="hljs-property">right</span> = <span class="hljs-title function_">dfs</span>(nums, idx + <span class="hljs-number">1</span>, r)<br>    <span class="hljs-keyword">return</span> ans<br>&#125;<br><br></code></pre></div></td></tr></table></figure></p>
+<ul>
+<li>时间复杂度：构建线段树复杂度为 $O(n\log{n})$；构造答案树复杂度为 $O(n\log{n})$。整体复杂度为 $O(n\log{n})$</li>
+<li>空间复杂度：$O(n)$</li>
+</ul>
+<hr>
+<h3 id="单调栈"><a href="#单调栈" class="headerlink" title="单调栈"></a>单调栈</h3><p>更进一步，根据题目对树的构建的描述可知，<code>nums</code> 中的任二节点所在构建树的水平截面上的位置仅由下标大小决定。</p>
+<p>不难想到可抽象为找最近元素问题，可使用单调栈求解。</p>
+<p>具体的，我们可以从前往后处理所有的 $nums[i]$，若存在栈顶元素并且栈顶元素的值比当前值要小，根据我们从前往后处理的逻辑，可确定栈顶元素可作为当前 $nums[i]$ 对应节点的左节点，同时为了确保最终 $nums[i]$ 的左节点为 $[0, i - 1]$ 范围的最大值，我们需要确保在构建 $nums[i]$ 节点与其左节点的关系时，$[0, i - 1]$ 中的最大值最后出队，此时可知容器栈具有「单调递减」特性。基于此，我们可以分析出，当处理完 $nums[i]$ 节点与其左节点关系后，可明确 $nums[i]$ 可作为未出栈的栈顶元素的右节点。</p>
+<blockquote>
+<p>一些细节：<code>Java</code> 容易使用 <code>ArrayDeque</code> 充当容器，但为与 <code>TS</code> 保存一致，两者均使用数组充当容器。</p>
+</blockquote>
+<p>Java 代码：<br><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">static</span> TreeNode[] stk = <span class="hljs-keyword">new</span> <span class="hljs-title class_">TreeNode</span>[<span class="hljs-number">1010</span>];<br>    <span class="hljs-keyword">public</span> TreeNode <span class="hljs-title function_">constructMaximumBinaryTree</span><span class="hljs-params">(<span class="hljs-type">int</span>[] nums)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">he</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>, ta = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> x : nums) &#123;<br>            <span class="hljs-type">TreeNode</span> <span class="hljs-variable">node</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">TreeNode</span>(x);<br>            <span class="hljs-keyword">while</span> (he &lt; ta &amp;&amp; stk[ta - <span class="hljs-number">1</span>].val &lt; x) node.left = stk[--ta];<br>            <span class="hljs-keyword">if</span> (he &lt; ta) stk[ta - <span class="hljs-number">1</span>].right = node;<br>            stk[ta++] = node;<br>        &#125;<br>        <span class="hljs-keyword">return</span> stk[<span class="hljs-number">0</span>];<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure><br>TypeScript 代码：<br><figure class="highlight typescript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs TypeScript"><span class="hljs-keyword">const</span> stk = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Array</span>&lt;<span class="hljs-title class_">TreeNode</span>&gt;(<span class="hljs-number">1010</span>)<br><span class="hljs-keyword">function</span> <span class="hljs-title function_">constructMaximumBinaryTree</span>(<span class="hljs-params">nums: <span class="hljs-built_in">number</span>[]</span>): <span class="hljs-title class_">TreeNode</span> | <span class="hljs-literal">null</span> &#123;<br>    <span class="hljs-keyword">let</span> he = <span class="hljs-number">0</span>, ta = <span class="hljs-number">0</span><br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">const</span> x <span class="hljs-keyword">of</span> nums) &#123;<br>        <span class="hljs-keyword">const</span> node = <span class="hljs-keyword">new</span> <span class="hljs-title class_">TreeNode</span>(x)<br>        <span class="hljs-keyword">while</span> (he &lt; ta &amp;&amp; stk[ta - <span class="hljs-number">1</span>].<span class="hljs-property">val</span> &lt; x) node.<span class="hljs-property">left</span> = stk[--ta]<br>        <span class="hljs-keyword">if</span> (he &lt; ta) stk[ta - <span class="hljs-number">1</span>].<span class="hljs-property">right</span> = node<br>        stk[ta++] = node<br>    &#125;<br>    <span class="hljs-keyword">return</span> stk[<span class="hljs-number">0</span>]<br>&#125;;<br></code></pre></div></td></tr></table></figure></p>
+<ul>
+<li>时间复杂度：$O(n)$</li>
+<li>空间复杂度：$O(n)$</li>
+</ul>
+<hr>
+<h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>这是我们「刷穿 LeetCode」系列文章的第 <code>No.654</code> 篇，系列开始于 2021/01/01，截止于起始日 LeetCode 上共有 1916 道题目，部分是有锁题，我们将先把所有不带锁的题目刷完。</p>
+<p>在这个系列文章里面，除了讲解解题思路以外，还会尽可能给出最为简洁的代码。如果涉及通解还会相应的代码模板。</p>
+<p>为了方便各位同学能够电脑上进行调试和提交代码，我建立了相关的仓库：<a target="_blank" rel="noopener" href="https://github.com/SharingSource/LogicStack-LeetCode">https://github.com/SharingSource/LogicStack-LeetCode</a> 。</p>
+<p>在仓库地址里，你可以看到系列文章的题解链接、系列文章的相应代码、LeetCode 原题链接和其他优选题解。</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/">二叉树</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E7%BA%BF%E6%AE%B5%E6%A0%91/">线段树</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E9%80%92%E5%BD%92/">递归</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%8D%95%E8%B0%83%E6%A0%88/">单调栈</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%88%86%E6%B2%BB/">分治</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/08/21/1455.%20%E6%A3%80%E6%9F%A5%E5%8D%95%E8%AF%8D%E6%98%AF%E5%90%A6%E4%B8%BA%E5%8F%A5%E4%B8%AD%E5%85%B6%E4%BB%96%E5%8D%95%E8%AF%8D%E7%9A%84%E5%89%8D%E7%BC%80%EF%BC%88%E7%AE%80%E5%8D%95%EF%BC%89/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">LC 1455. 检查单词是否为句中其他单词的前缀</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/08/19/1450.%20%E5%9C%A8%E6%97%A2%E5%AE%9A%E6%97%B6%E9%97%B4%E5%81%9A%E4%BD%9C%E4%B8%9A%E7%9A%84%E5%AD%A6%E7%94%9F%E4%BA%BA%E6%95%B0%EF%BC%88%E7%AE%80%E5%8D%95%EF%BC%89/">
+                        <span class="hidden-mobile">LC 1450. 在既定时间做作业的学生人数</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://cdn.staticfile.org/valine/1.4.18/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"IDifiViRkVDTgu27Nu50GQkE-gzGzoHsz","appKey":"gt98pupgyYjPKYQASrGmD9kM","path":"window.location.pathname","placeholder":"发一条友善的评论（为方便交流，记得填上方的昵称再留言哦 ~ 🍭","avatar":"","meta":["nick","mail"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":true},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          Fluid.plugins.initFancyBox('#valine .vcontent img:not(.vemoji)');
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+  <div class="col-lg-7 mx-auto nopadding-x-md">
+    <div class="container custom post-custom mx-auto">
+      <img src="/oimg/gzh-qrcode.webp" srcset="/img/loading.gif" lazyload class="rounded mx-auto d-block mt-5" style="width:80%">
+    </div>
+  </div>
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- LeanCloud 统计PV -->
+        <span id="leancloud-site-pv-container" style="display: none">
+            总访问量 
+            <span id="leancloud-site-pv"></span>
+             次
+          </span>
+      
+      
+        <!-- LeanCloud 统计UV -->
+        <span id="leancloud-site-uv-container" style="display: none">
+            总访客数 
+            <span id="leancloud-site-uv"></span>
+             人
+          </span>
+      
+
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.staticfile.org/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.staticfile.org/tocbot/4.18.2/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.staticfile.org/anchor-js/4.3.1/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.11/clipboard.min.js" ></script>
+  
+
+
+
+
+  <script defer src="/js/leancloud.js" ></script>
+
+
+
+  <script  src="https://cdn.bootcdn.net/ajax/libs/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        loader: {
+          
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.staticfile.org/mathjax/3.2.0/es5/tex-svg.js" ></script>
+
+  
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>
