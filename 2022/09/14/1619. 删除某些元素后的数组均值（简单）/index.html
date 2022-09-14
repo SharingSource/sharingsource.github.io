@@ -16,23 +16,22 @@
   <meta name="author" content="宫水三叶">
   <meta name="keywords" content="算法, 数据结构, 题解">
   
-    <meta name="description" content="题目描述这是 LeetCode 上的 640. 求解方程 ，难度为 中等。 求解一个给定的方程，将 x 以字符串 &quot;x&#x3D;#value&quot; 的形式返回。该方程仅包含 &#39;+&#39; ， &#39;-&#39; 操作，变量 x 和其对应系数。 如果方程没有解，请返回 &quot;No solution&quot;。如果方程有无限解，则返回 &quot;Infinite sol">
+    <meta name="description" content="题目描述这是 LeetCode 上的 1619. 删除某些元素后的数组均值 ，难度为 简单。 给你一个整数数组 arr，请你删除最小 5% 的数字和最大 5% 的数字后，剩余数字的平均值。 与 标准答案 误差在 $10^{-5}$ 的结果都被视为正确结果。 示例 1：12345输入：arr &#x3D; [1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,3]输出：2.00000解">
 <meta property="og:type" content="article">
-<meta property="og:title" content="LC 640. 求解方程">
-<meta property="og:url" content="https://sharingsource.github.io/2022/08/10/640.%20%E6%B1%82%E8%A7%A3%E6%96%B9%E7%A8%8B%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/index.html">
+<meta property="og:title" content="LC 1619. 删除某些元素后的数组均值">
+<meta property="og:url" content="https://sharingsource.github.io/2022/09/14/1619.%20%E5%88%A0%E9%99%A4%E6%9F%90%E4%BA%9B%E5%85%83%E7%B4%A0%E5%90%8E%E7%9A%84%E6%95%B0%E7%BB%84%E5%9D%87%E5%80%BC%EF%BC%88%E7%AE%80%E5%8D%95%EF%BC%89/index.html">
 <meta property="og:site_name" content="宫水三叶的刷题日记">
-<meta property="og:description" content="题目描述这是 LeetCode 上的 640. 求解方程 ，难度为 中等。 求解一个给定的方程，将 x 以字符串 &quot;x&#x3D;#value&quot; 的形式返回。该方程仅包含 &#39;+&#39; ， &#39;-&#39; 操作，变量 x 和其对应系数。 如果方程没有解，请返回 &quot;No solution&quot;。如果方程有无限解，则返回 &quot;Infinite sol">
+<meta property="og:description" content="题目描述这是 LeetCode 上的 1619. 删除某些元素后的数组均值 ，难度为 简单。 给你一个整数数组 arr，请你删除最小 5% 的数字和最大 5% 的数字后，剩余数字的平均值。 与 标准答案 误差在 $10^{-5}$ 的结果都被视为正确结果。 示例 1：12345输入：arr &#x3D; [1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,3]输出：2.00000解">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2022-08-09T17:21:14.000Z">
-<meta property="article:modified_time" content="2022-08-10T02:57:55.634Z">
+<meta property="article:published_time" content="2022-09-13T16:48:03.000Z">
+<meta property="article:modified_time" content="2022-09-14T02:20:01.324Z">
 <meta property="article:author" content="宫水三叶">
 <meta property="article:tag" content="模拟">
-<meta property="article:tag" content="双指针">
-<meta property="article:tag" content="数学">
+<meta property="article:tag" content="排序">
 <meta name="twitter:card" content="summary_large_image">
   
   
-  <title>LC 640. 求解方程 - 宫水三叶的刷题日记</title>
+  <title>LC 1619. 删除某些元素后的数组均值 - 宫水三叶的刷题日记</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -177,12 +176,12 @@
 </nav>
 
     <div class="banner" id="banner" parallax=true
-         style="background: url('/img/image_46.jpeg') no-repeat center center;
+         style="background: url('/img/image_107.jpeg') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="LC 640. 求解方程">
+            <span class="h2" id="subtitle" title="LC 1619. 删除某些元素后的数组均值">
               
             </span>
 
@@ -197,8 +196,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2022-08-10 01:21" pubdate>
-        2022年8月10日
+      <time datetime="2022-09-14 00:48" pubdate>
+        2022年9月14日
       </time>
     </span>
   
@@ -234,42 +233,28 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">LC 640. 求解方程</h1>
+            <h1 style="display: none">LC 1619. 删除某些元素后的数组均值</h1>
             
             <div class="markdown-body">
-              <h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>这是 LeetCode 上的 <strong><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/solve-the-equation/solution/by-ac_oier-fvee/">640. 求解方程</a></strong> ，难度为 <strong>中等</strong>。</p>
-<p>求解一个给定的方程，将 <code>x</code> 以字符串 <code>&quot;x=#value&quot;</code> 的形式返回。该方程仅包含 <code>&#39;+&#39;</code> ， <code>&#39;-&#39;</code> 操作，变量 <code>x</code> 和其对应系数。</p>
-<p>如果方程没有解，请返回 <code>&quot;No solution&quot;</code>。如果方程有无限解，则返回 <code>&quot;Infinite solutions&quot;</code>。</p>
-<p>题目保证，如果方程中只有一个解，则 ‘x’ 的值是一个整数。</p>
-<p>示例 1：<br><figure class="highlight gams"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs gams">输入: <span class="hljs-keyword">equation</span> = <span class="hljs-string">&quot;x+5-3+x=6+x-2&quot;</span><br><br>输出: <span class="hljs-string">&quot;x=2&quot;</span><br></code></pre></div></td></tr></table></figure><br>示例 2:<br><figure class="highlight gams"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs gams">输入: <span class="hljs-keyword">equation</span> = <span class="hljs-string">&quot;x=x&quot;</span><br><br>输出: <span class="hljs-string">&quot;Infinite solutions&quot;</span><br></code></pre></div></td></tr></table></figure><br>示例 3:<br><figure class="highlight gams"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs gams">输入: <span class="hljs-keyword">equation</span> = <span class="hljs-string">&quot;2x=x&quot;</span><br><br>输出: <span class="hljs-string">&quot;x=0&quot;</span><br></code></pre></div></td></tr></table></figure></p>
-<p>提示:</p>
+              <h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>这是 LeetCode 上的 <strong><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/mean-of-array-after-removing-some-elements/solution/by-ac_oier-73w7/">1619. 删除某些元素后的数组均值</a></strong> ，难度为 <strong>简单</strong>。</p>
+<p>给你一个整数数组 <code>arr</code>，请你删除最小 <code>5%</code> 的数字和最大 <code>5%</code> 的数字后，剩余数字的平均值。</p>
+<p>与 标准答案 误差在 $10^{-5}$ 的结果都被视为正确结果。</p>
+<p>示例 1：<br><figure class="highlight dns"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs dns">输入：arr = [<span class="hljs-number">1,2,2,2</span>,<span class="hljs-number">2,2,2,2</span>,<span class="hljs-number">2,2,2,2</span>,<span class="hljs-number">2,2,2,2</span>,<span class="hljs-number">2,2,2,3</span>]<br><br>输出：<span class="hljs-number">2.00000</span><br><br>解释：删除数组中最大和最小的元素后，所有元素都等于 <span class="hljs-number">2</span>，所以平均值为 <span class="hljs-number">2</span> 。<br></code></pre></div></td></tr></table></figure><br>示例 2：<br><figure class="highlight dns"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs dns">输入：arr = [<span class="hljs-number">6,2,7,5</span>,<span class="hljs-number">1,2,0,3</span>,<span class="hljs-number">10,2,5,0</span>,<span class="hljs-number">5,5,0,8</span>,<span class="hljs-number">7,6,8,0</span>]<br><br>输出：<span class="hljs-number">4.00000</span><br></code></pre></div></td></tr></table></figure><br>示例 3：<br><figure class="highlight dns"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs dns">输入：arr = [<span class="hljs-number">6,0,7,0</span>,<span class="hljs-number">7,5,7,8</span>,<span class="hljs-number">3,4,0,7</span>,<span class="hljs-number">8,1,6,8</span>,<span class="hljs-number">1,1,2,4</span>,<span class="hljs-number">8,1,9,5</span>,<span class="hljs-number">4,3,8,5</span>,<span class="hljs-number">10,8,6,6</span>,<span class="hljs-number">1,0,6,10</span>,<span class="hljs-number">8,2,3,4</span>]<br><br>输出：<span class="hljs-number">4.77778</span><br></code></pre></div></td></tr></table></figure><br>示例 4：<br><figure class="highlight dns"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs dns">输入：arr = [<span class="hljs-number">9,7,8,7</span>,<span class="hljs-number">7,8,4,4</span>,<span class="hljs-number">6,8,8,7</span>,<span class="hljs-number">6,8,8,9</span>,<span class="hljs-number">2,6,0,0</span>,<span class="hljs-number">1,10,8,6</span>,<span class="hljs-number">3,3,5,1</span>,<span class="hljs-number">10,9,0,7</span>,<span class="hljs-number">10,0,10,4</span>,<span class="hljs-number">1,10,6,9</span>,<span class="hljs-number">3,6,0,0</span>,<span class="hljs-number">2,7,0,6</span>,<span class="hljs-number">7,2,9,7</span>,<span class="hljs-number">7,3,0,1</span>,<span class="hljs-number">6,1,10,3</span>]<br><br>输出：<span class="hljs-number">5.27778</span><br></code></pre></div></td></tr></table></figure><br>示例 5：<br><figure class="highlight dns"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs dns">输入：arr = [<span class="hljs-number">4,8,4,10</span>,<span class="hljs-number">0,7,1,3</span>,<span class="hljs-number">7,8,8,3</span>,<span class="hljs-number">4,1,6,2</span>,<span class="hljs-number">1,1,8,0</span>,<span class="hljs-number">9,8,0,3</span>,<span class="hljs-number">9,10,3,10</span>,<span class="hljs-number">1,10,7,3</span>,<span class="hljs-number">2,1,4,9</span>,<span class="hljs-number">10,7,6,4</span>,<span class="hljs-number">0,8,5,1</span>,<span class="hljs-number">2,1,6,2</span>,<span class="hljs-number">5,0,7,10</span>,<span class="hljs-number">9,10,3,7</span>,<span class="hljs-number">10,5,8,5</span>,<span class="hljs-number">7,6,7,6</span>,<span class="hljs-number">10,9,5,10</span>,<span class="hljs-number">5,5,7,2</span>,<span class="hljs-number">10,7,7,8</span>,<span class="hljs-number">2,0,1,1</span>]<br><br>输出：<span class="hljs-number">5.29167</span><br></code></pre></div></td></tr></table></figure></p>
+<p>提示：</p>
 <ul>
-<li>$3 &lt;= equation.length &lt;= 1000$</li>
-<li><code>equation</code> 只有一个 <code>&#39;=&#39;</code>.</li>
-<li><code>equation</code> 方程由整数组成，其绝对值在 $[0, 100]$ 范围内，不含前导零和变量 <code>&#39;x&#39;</code> 。 </li>
+<li>$20 &lt;= arr.length &lt;= 1000$</li>
+<li><code>arr.length</code> 是 <code>20</code> 的 倍数 </li>
+<li>$0 &lt;= arr[i] &lt;= 10^5$</li>
 </ul>
 <hr>
-<h3 id="模拟"><a href="#模拟" class="headerlink" title="模拟"></a>模拟</h3><p>为了方便，我们令 <code>equation</code> 为 <code>s</code>。</p>
-<p>由于运算符只有 <code>+</code> 和 <code>-</code>，因此无须考虑运算优先级，可在遍历过程中进行计算。</p>
-<p>使用变量 <code>x</code> 和 <code>num</code> 分别代指当前运算结果中 $x$ 的系数以及数值部分，从前往后处理 <code>s</code> 的每个字符，根据字符类型进行分情况讨论，假设当前处理到的数值为 $s[i]$：</p>
+<h3 id="模拟"><a href="#模拟" class="headerlink" title="模拟"></a>模拟</h3><p>根据题意进行模拟即可：先对 <code>arr</code> 进行排序，再计算出待统计的左右端点（端点以外的数值为 <code>5%</code> 最值），最后计算出相应均值。</p>
+<p>Java 代码：<br><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">double</span> <span class="hljs-title function_">trimMean</span><span class="hljs-params">(<span class="hljs-type">int</span>[] arr)</span> &#123;<br>        Arrays.sort(arr);<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> arr.length, tot = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> n / <span class="hljs-number">20</span>; i &lt; n - n / <span class="hljs-number">20</span>; i++) tot += arr[i];<br>        <span class="hljs-keyword">return</span> tot * <span class="hljs-number">1.0</span> / (n * <span class="hljs-number">0.9</span>);<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure><br>TypeScript 代码：<br><figure class="highlight typescript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs TypeScript"><span class="hljs-keyword">function</span> <span class="hljs-title function_">trimMean</span>(<span class="hljs-params">arr: <span class="hljs-built_in">number</span>[]</span>): <span class="hljs-built_in">number</span> &#123;<br>    arr.<span class="hljs-title function_">sort</span>(<span class="hljs-function">(<span class="hljs-params">a,b</span>)=&gt;</span>a-b)<br>    <span class="hljs-keyword">let</span> n = arr.<span class="hljs-property">length</span>, tot = <span class="hljs-number">0</span><br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = n / <span class="hljs-number">20</span>; i &lt; n - n / <span class="hljs-number">20</span>; i++) tot += arr[i]<br>    <span class="hljs-keyword">return</span> tot / (n * <span class="hljs-number">0.9</span>)<br>&#125;;<br></code></pre></div></td></tr></table></figure></p>
 <ul>
-<li>若 $s[i] =$ <code>+/-</code>：此时影响的是下一个运算数值的正负，修改对应的 <code>op</code> 标识；</li>
-<li>若 $s[i] =$ <code>数值</code>：此时将完整的运算值进行取出（运算值可能是关于 $x$ 的描述，可能是纯数值），假设连续段 $s[i:j - 1]$ 之间为当前运算值，根据 $s[j - 1]$ 是否为字符 <code>x</code> 可知，是要将 $s[i:j - 2]$ 的数值累加到变量 <code>x</code>，还是将 $s[i:j - 1]$ 的数值累加到变量 <code>num</code>；</li>
-<li>若 $s[i] =$ <code>=</code>：此时代表方程的左边已处理完，将变量 <code>x</code> 和 <code>num</code> 进行翻转（含义为将左边的运算结果移项到右边），并继续往后处理。</li>
-</ul>
-<p>当整个字符串 <code>s</code> 处理完后，我们得到最终关于 $x$ 的系数 <code>x</code>，以及数值大小 <code>num</code>。</p>
-<p>根据 <code>x</code> 是否为 $0$ 可知答案：</p>
-<ul>
-<li>若 <code>x</code> 为 $0$：此时根据 <code>num</code> 是否为 $0$ 可知是 <code>Infinite solutions</code>（对应 <code>num</code> 为 $0$） 还是 <code>No solution</code>（对应 <code>num</code> 不为 $0$）</li>
-<li>若 <code>x</code> 不为 $0$：对 <code>x</code> 和 <code>num</code> 进行约分后，返回对应答案。</li>
-</ul>
-<p>Java 代码：<br><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> String <span class="hljs-title function_">solveEquation</span><span class="hljs-params">(String s)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">x</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>, num = <span class="hljs-number">0</span>, n = s.length();<br>        <span class="hljs-type">char</span>[] cs = s.toCharArray();<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>, op = <span class="hljs-number">1</span>; i &lt; n; ) &#123;<br>            <span class="hljs-keyword">if</span> (cs[i] == <span class="hljs-string">&#x27;+&#x27;</span>) &#123;<br>                op = <span class="hljs-number">1</span>; i++;<br>            &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (cs[i] == <span class="hljs-string">&#x27;-&#x27;</span>) &#123;<br>                op = -<span class="hljs-number">1</span>; i++;<br>            &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (cs[i] == <span class="hljs-string">&#x27;=&#x27;</span>) &#123;<br>                x *= -<span class="hljs-number">1</span>; num *= -<span class="hljs-number">1</span>; op = <span class="hljs-number">1</span>; i++;<br>            &#125; <span class="hljs-keyword">else</span> &#123;<br>                <span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> i;<br>                <span class="hljs-keyword">while</span> (j &lt; n &amp;&amp; cs[j] != <span class="hljs-string">&#x27;+&#x27;</span> &amp;&amp; cs[j] != <span class="hljs-string">&#x27;-&#x27;</span> &amp;&amp; cs[j] != <span class="hljs-string">&#x27;=&#x27;</span>) j++;<br>                <span class="hljs-keyword">if</span> (cs[j - <span class="hljs-number">1</span>] == <span class="hljs-string">&#x27;x&#x27;</span>) x += (i &lt; j - <span class="hljs-number">1</span> ? Integer.parseInt(s.substring(i, j - <span class="hljs-number">1</span>)) : <span class="hljs-number">1</span>) * op;<br>                <span class="hljs-keyword">else</span> num += Integer.parseInt(s.substring(i, j)) * op;<br>                i = j;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">if</span> (x == <span class="hljs-number">0</span>) <span class="hljs-type">return</span> <span class="hljs-variable">num</span> <span class="hljs-operator">=</span>= <span class="hljs-number">0</span> ? <span class="hljs-string">&quot;Infinite solutions&quot;</span> : <span class="hljs-string">&quot;No solution&quot;</span>;    <br>        <span class="hljs-keyword">else</span> <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;x=&quot;</span> + (num / -x);<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure><br>TypeScript 代码：<br><figure class="highlight typescript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs TypeScript"><span class="hljs-keyword">function</span> <span class="hljs-title function_">solveEquation</span>(<span class="hljs-params">s: <span class="hljs-built_in">string</span></span>): <span class="hljs-built_in">string</span> &#123;<br>    <span class="hljs-keyword">let</span> x = <span class="hljs-number">0</span>, num = <span class="hljs-number">0</span>, n = s.<span class="hljs-property">length</span><br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>, op = <span class="hljs-number">1</span>; i &lt; n; ) &#123;<br>        <span class="hljs-keyword">if</span> (s[i] == <span class="hljs-string">&#x27;+&#x27;</span>) &#123;<br>            op = <span class="hljs-number">1</span>; i++;<br>        &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (s[i] == <span class="hljs-string">&#x27;-&#x27;</span>) &#123;<br>            op = -<span class="hljs-number">1</span>; i++<br>        &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (s[i] == <span class="hljs-string">&#x27;=&#x27;</span>) &#123;<br>            x *= -<span class="hljs-number">1</span>; num *= -<span class="hljs-number">1</span>; op = <span class="hljs-number">1</span>; i++;<br>        &#125; <span class="hljs-keyword">else</span> &#123;<br>            <span class="hljs-keyword">let</span> j = i<br>            <span class="hljs-keyword">while</span> (j &lt; n &amp;&amp; s[j] != <span class="hljs-string">&#x27;+&#x27;</span> &amp;&amp; s[j] != <span class="hljs-string">&#x27;-&#x27;</span> &amp;&amp; s[j] != <span class="hljs-string">&#x27;=&#x27;</span>) j++<br>            <span class="hljs-keyword">if</span> (s[j - <span class="hljs-number">1</span>] == <span class="hljs-string">&#x27;x&#x27;</span>) x += (i &lt; j - <span class="hljs-number">1</span> ? <span class="hljs-title class_">Number</span>(s.<span class="hljs-title function_">substring</span>(i, j - <span class="hljs-number">1</span>)) : <span class="hljs-number">1</span>) * op<br>            <span class="hljs-keyword">else</span> num += <span class="hljs-title class_">Number</span>(s.<span class="hljs-title function_">substring</span>(i, j)) * op<br>            i = j<br>        &#125;<br>    &#125;<br>    <span class="hljs-keyword">if</span> (x == <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> num == <span class="hljs-number">0</span> ? <span class="hljs-string">&quot;Infinite solutions&quot;</span> : <span class="hljs-string">&quot;No solution&quot;</span>    <br>    <span class="hljs-keyword">else</span> <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;x=&quot;</span> + (num / -x)<br>&#125;;<br></code></pre></div></td></tr></table></figure></p>
-<ul>
-<li>时间复杂度：$O(n)$</li>
-<li>空间复杂度：使用 <code>charAt</code> 替换 <code>toCharArray</code>。复杂度为 $O(1)$</li>
+<li>时间复杂度：$O(n\log{n})$</li>
+<li>空间复杂度：$O(\log{n})$</li>
 </ul>
 <hr>
-<h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>这是我们「刷穿 LeetCode」系列文章的第 <code>No.640</code> 篇，系列开始于 2021/01/01，截止于起始日 LeetCode 上共有 1916 道题目，部分是有锁题，我们将先把所有不带锁的题目刷完。</p>
+<h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>这是我们「刷穿 LeetCode」系列文章的第 <code>No.1619</code> 篇，系列开始于 2021/01/01，截止于起始日 LeetCode 上共有 1916 道题目，部分是有锁题，我们将先把所有不带锁的题目刷完。</p>
 <p>在这个系列文章里面，除了讲解解题思路以外，还会尽可能给出最为简洁的代码。如果涉及通解还会相应的代码模板。</p>
 <p>为了方便各位同学能够电脑上进行调试和提交代码，我建立了相关的仓库：<a target="_blank" rel="noopener" href="https://github.com/SharingSource/LogicStack-LeetCode">https://github.com/SharingSource/LogicStack-LeetCode</a> 。</p>
 <p>在仓库地址里，你可以看到系列文章的题解链接、系列文章的相应代码、LeetCode 原题链接和其他优选题解。</p>
@@ -285,9 +270,7 @@
                     
                       <a class="hover-with-bg" href="/tags/%E6%A8%A1%E6%8B%9F/">模拟</a>
                     
-                      <a class="hover-with-bg" href="/tags/%E5%8F%8C%E6%8C%87%E9%92%88/">双指针</a>
-                    
-                      <a class="hover-with-bg" href="/tags/%E6%95%B0%E5%AD%A6/">数学</a>
+                      <a class="hover-with-bg" href="/tags/%E6%8E%92%E5%BA%8F/">排序</a>
                     
                   </div>
                 
@@ -304,18 +287,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2022/08/10/%E5%89%91%E6%8C%87%20Offer%2053%20-%20II.%200%EF%BD%9En-1%E4%B8%AD%E7%BC%BA%E5%A4%B1%E7%9A%84%E6%95%B0%E5%AD%97%EF%BC%88%E7%AE%80%E5%8D%95%EF%BC%89/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">LC 剑指 Offer 53 - II. 0～n-1中缺失的数字</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2022/08/09/1413.%20%E9%80%90%E6%AD%A5%E6%B1%82%E5%92%8C%E5%BE%97%E5%88%B0%E6%AD%A3%E6%95%B0%E7%9A%84%E6%9C%80%E5%B0%8F%E5%80%BC%EF%BC%88%E7%AE%80%E5%8D%95%EF%BC%89/">
-                        <span class="hidden-mobile">LC 1413. 逐步求和得到正数的最小值</span>
+                      <a href="/2022/09/13/670.%20%E6%9C%80%E5%A4%A7%E4%BA%A4%E6%8D%A2%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/">
+                        <span class="hidden-mobile">LC 670. 最大交换</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
