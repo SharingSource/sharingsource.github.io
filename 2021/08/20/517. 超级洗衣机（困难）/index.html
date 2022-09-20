@@ -19,14 +19,14 @@
     <meta name="description" content="题目描述这是 LeetCode 上的 517. 超级洗衣机 ，难度为 困难。 假设有 n 台超级洗衣机放在同一排上。开始的时候，每台洗衣机内可能有一定量的衣服，也可能是空的。 在每一步操作中，你可以选择任意 m (1 &lt;&#x3D; m &lt;&#x3D; n) 台洗衣机，与此同时将每台洗衣机的一件衣服送到相邻的一台洗衣机。 给定一个整数数组 machines 代表从左至右每台洗衣机中的衣物数量，请给出能让所">
 <meta property="og:type" content="article">
 <meta property="og:title" content="LC 517. 超级洗衣机">
-<meta property="og:url" content="https://sharingsource.github.io/2021/09/29/517.%20%E8%B6%85%E7%BA%A7%E6%B4%97%E8%A1%A3%E6%9C%BA%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/index.html">
+<meta property="og:url" content="https://sharingsource.github.io/2021/08/20/517.%20%E8%B6%85%E7%BA%A7%E6%B4%97%E8%A1%A3%E6%9C%BA%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/index.html">
 <meta property="og:site_name" content="宫水三叶的刷题日记">
 <meta property="og:description" content="题目描述这是 LeetCode 上的 517. 超级洗衣机 ，难度为 困难。 假设有 n 台超级洗衣机放在同一排上。开始的时候，每台洗衣机内可能有一定量的衣服，也可能是空的。 在每一步操作中，你可以选择任意 m (1 &lt;&#x3D; m &lt;&#x3D; n) 台洗衣机，与此同时将每台洗衣机的一件衣服送到相邻的一台洗衣机。 给定一个整数数组 machines 代表从左至右每台洗衣机中的衣物数量，请给出能让所">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2021-09-28T16:05:04.000Z">
-<meta property="article:modified_time" content="2022-05-18T08:29:12.077Z">
+<meta property="article:published_time" content="2021-08-19T16:00:00.000Z">
+<meta property="article:modified_time" content="2022-09-20T04:53:11.002Z">
 <meta property="article:author" content="宫水三叶">
-<meta property="article:tag" content="贪心算法">
+<meta property="article:tag" content="贪心">
 <meta name="twitter:card" content="summary_large_image">
   
   
@@ -195,8 +195,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-09-29 00:05" pubdate>
-        2021年9月29日
+      <time datetime="2021-08-20 00:00" pubdate>
+        2021年8月20日
       </time>
     </span>
   
@@ -242,9 +242,9 @@
 <p>示例 1：<br><figure class="highlight tap"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs tap">输入：machines = [1,0,5]<br><br>输出：3<br><br>解释：<br>第一步:   <span class="hljs-number"> 1 </span>   <span class="hljs-number"> 0 </span>&lt;--<span class="hljs-number"> 5 </span>   =&gt;   <span class="hljs-number"> 1 </span>   <span class="hljs-number"> 1 </span>    4<br>第二步:   <span class="hljs-number"> 1 </span>&lt;--<span class="hljs-number"> 1 </span>&lt;--<span class="hljs-number"> 4 </span>   =&gt;   <span class="hljs-number"> 2 </span>   <span class="hljs-number"> 1 </span>   <span class="hljs-number"> 3 </span>   <br>第三步:   <span class="hljs-number"> 2 </span>   <span class="hljs-number"> 1 </span>&lt;--<span class="hljs-number"> 3 </span>   =&gt;   <span class="hljs-number"> 2 </span>   <span class="hljs-number"> 2 </span>   <span class="hljs-number"> 2 </span>  <br></code></pre></div></td></tr></table></figure><br>示例 2：<br><figure class="highlight tap"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs tap">输入：machines = [0,3,0]<br><br>输出：2<br><br>解释：<br>第一步:   <span class="hljs-number"> 0 </span>&lt;--<span class="hljs-number"> 3 </span>   <span class="hljs-number"> 0 </span>   =&gt;   <span class="hljs-number"> 1 </span>   <span class="hljs-number"> 2 </span>   <span class="hljs-number"> 0 </span>   <br>第二步:   <span class="hljs-number"> 1 </span>   <span class="hljs-number"> 2 </span>--&gt;<span class="hljs-number"> 0 </span>   =&gt;   <span class="hljs-number"> 1 </span>   <span class="hljs-number"> 1 </span>   <span class="hljs-number"> 1 </span>    <br></code></pre></div></td></tr></table></figure><br>示例 3：<br><figure class="highlight fix"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs fix"><span class="hljs-attr">输入：machines </span>=<span class="hljs-string"> [0,2,0]</span><br><span class="hljs-string"></span><br><span class="hljs-string">输出：-1</span><br><span class="hljs-string"></span><br><span class="hljs-string">解释：</span><br><span class="hljs-string">不可能让所有三个洗衣机同时剩下相同数量的衣物。</span><br></code></pre></div></td></tr></table></figure></p>
 <p>提示：</p>
 <ul>
-<li>n == machines.length</li>
-<li>1 &lt;= n &lt;= $10^4$</li>
-<li>0 &lt;= machines[i] &lt;= $10^5$</li>
+<li>$n = machines.length$</li>
+<li>$1 &lt;= n &lt;= 10^4$</li>
+<li>$0 &lt;= machines[i] &lt;= 10^5$</li>
 </ul>
 <hr>
 <h3 id="基本分析"><a href="#基本分析" class="headerlink" title="基本分析"></a>基本分析</h3><p>由于最终是要让所有洗衣机衣服相等，因此无解的情况很好分析，如果衣服数量 $sum$ 不能整除洗衣机数量 $n$ 的话，则返回 $-1$，否则必然有解（最坏情况下，每次只移动一件衣服，也可以使得衣服均分），要求最小移动次数。</p>
@@ -294,7 +294,7 @@
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95/">贪心算法</a>
+                      <a class="hover-with-bg" href="/tags/%E8%B4%AA%E5%BF%83/">贪心</a>
                     
                   </div>
                 
@@ -311,9 +311,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2021/09/29/223.%20%E7%9F%A9%E5%BD%A2%E9%9D%A2%E7%A7%AF%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/">
+                      <a href="/2021/08/20/297.%20%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%BA%8F%E5%88%97%E5%8C%96%E4%B8%8E%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">LC 223. 矩形面积</span>
+                        <span class="hidden-mobile">LC 297. 二叉树的序列化与反序列化</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -321,8 +321,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/09/27/437.%20%E8%B7%AF%E5%BE%84%E6%80%BB%E5%92%8C%20III%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/">
-                        <span class="hidden-mobile">LC 437. 路径总和 III</span>
+                      <a href="/2021/08/19/345.%20%E5%8F%8D%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%AD%E7%9A%84%E5%85%83%E9%9F%B3%E5%AD%97%E6%AF%8D%EF%BC%88%E7%AE%80%E5%8D%95%EF%BC%89/">
+                        <span class="hidden-mobile">LC 345. 反转字符串中的元音字母</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
