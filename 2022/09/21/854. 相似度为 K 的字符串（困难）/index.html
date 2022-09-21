@@ -16,25 +16,22 @@
   <meta name="author" content="宫水三叶">
   <meta name="keywords" content="算法, 数据结构, 题解">
   
-    <meta name="description" content="题目描述这是 LeetCode 上的 1035. 不相交的线 ，难度为 中等。 在两条独立的水平线上按给定的顺序写下 nums1 和 nums2 中的整数。 现在，可以绘制一些连接两个数字 nums1[i] 和 nums2[j] 的直线，这些直线需要同时满足满足：  nums1[i] &#x3D;&#x3D; nums2[j] 且绘制的直线不与任何其他连线（非水平线）相交。  请注意，连线即使在端点也不能相交：每个数">
+    <meta name="description" content="题目描述这是 LeetCode 上的 854. 相似度为 K 的字符串 ，难度为 困难。 对于某些非负整数 k ，如果交换 $s_1$ 中两个字母的位置恰好 k 次，能够使结果字符串等于 $s_2$ ，则认为字符串 $s_1$ 和 $s_2$ 的 相似度为 k 。 给你两个字母异位词 $s_1$ 和 $s_2$ ，返回 $s_1$ 和 $s_2$ 的相似度 k 的最小值。 示例 1：123输入：s">
 <meta property="og:type" content="article">
-<meta property="og:title" content="LC 1035. 不相交的线">
-<meta property="og:url" content="https://sharingsource.github.io/2021/05/21/1035.%20%E4%B8%8D%E7%9B%B8%E4%BA%A4%E7%9A%84%E7%BA%BF%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/index.html">
+<meta property="og:title" content="LC 854. 相似度为 K 的字符串">
+<meta property="og:url" content="https://sharingsource.github.io/2022/09/21/854.%20%E7%9B%B8%E4%BC%BC%E5%BA%A6%E4%B8%BA%20K%20%E7%9A%84%E5%AD%97%E7%AC%A6%E4%B8%B2%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/index.html">
 <meta property="og:site_name" content="宫水三叶的刷题日记">
-<meta property="og:description" content="题目描述这是 LeetCode 上的 1035. 不相交的线 ，难度为 中等。 在两条独立的水平线上按给定的顺序写下 nums1 和 nums2 中的整数。 现在，可以绘制一些连接两个数字 nums1[i] 和 nums2[j] 的直线，这些直线需要同时满足满足：  nums1[i] &#x3D;&#x3D; nums2[j] 且绘制的直线不与任何其他连线（非水平线）相交。  请注意，连线即使在端点也不能相交：每个数">
+<meta property="og:description" content="题目描述这是 LeetCode 上的 854. 相似度为 K 的字符串 ，难度为 困难。 对于某些非负整数 k ，如果交换 $s_1$ 中两个字母的位置恰好 k 次，能够使结果字符串等于 $s_2$ ，则认为字符串 $s_1$ 和 $s_2$ 的 相似度为 k 。 给你两个字母异位词 $s_1$ 和 $s_2$ ，返回 $s_1$ 和 $s_2$ 的相似度 k 的最小值。 示例 1：123输入：s">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2019/04/28/142.png">
-<meta property="article:published_time" content="2021-05-20T17:27:17.000Z">
-<meta property="article:modified_time" content="2022-05-18T08:28:09.515Z">
+<meta property="article:published_time" content="2022-09-20T17:41:06.000Z">
+<meta property="article:modified_time" content="2022-09-21T02:59:53.438Z">
 <meta property="article:author" content="宫水三叶">
-<meta property="article:tag" content="最长公共子序列">
-<meta property="article:tag" content="序列 DP">
-<meta property="article:tag" content="LCS">
+<meta property="article:tag" content="启发式搜索">
+<meta property="article:tag" content="AStar 算法">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2019/04/28/142.png">
   
   
-  <title>LC 1035. 不相交的线 - 宫水三叶的刷题日记</title>
+  <title>LC 854. 相似度为 K 的字符串 - 宫水三叶的刷题日记</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -179,12 +176,12 @@
 </nav>
 
     <div class="banner" id="banner" parallax=true
-         style="background: url('/img/image_157.jpg') no-repeat center center;
+         style="background: url('/img/image_66.png') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="LC 1035. 不相交的线">
+            <span class="h2" id="subtitle" title="LC 854. 相似度为 K 的字符串">
               
             </span>
 
@@ -199,8 +196,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-05-21 01:27" pubdate>
-        2021年5月21日
+      <time datetime="2022-09-21 01:41" pubdate>
+        2022年9月21日
       </time>
     </span>
   
@@ -236,58 +233,34 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">LC 1035. 不相交的线</h1>
+            <h1 style="display: none">LC 854. 相似度为 K 的字符串</h1>
             
             <div class="markdown-body">
-              <h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>这是 LeetCode 上的 <strong><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/uncrossed-lines/solution/gong-shui-san-xie-noxiang-xin-ke-xue-xi-bkaas/">1035. 不相交的线</a></strong> ，难度为 <strong>中等</strong>。</p>
-<p>在两条独立的水平线上按给定的顺序写下 nums1 和 nums2 中的整数。</p>
-<p>现在，可以绘制一些连接两个数字 nums1[i] 和 nums2[j] 的直线，这些直线需要同时满足满足：</p>
-<ul>
-<li>nums1[i] == nums2[j]</li>
-<li>且绘制的直线不与任何其他连线（非水平线）相交。</li>
-</ul>
-<p>请注意，连线即使在端点也不能相交：每个数字只能属于一条连线。</p>
-<p>以这种方法绘制线条，并返回可以绘制的最大连线数。</p>
-<p>示例 1：</p>
-<p><img src="https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2019/04/28/142.png" srcset="/img/loading.gif" lazyload style="zoom:18%;"></p>
-<figure class="highlight gcode"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs gcode">输入：<span class="hljs-symbol">nums1</span> = [<span class="hljs-number">1</span>,<span class="hljs-number">4</span>,<span class="hljs-number">2</span>], <span class="hljs-symbol">nums2</span> = [<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">4</span>]<br><br>输出：<span class="hljs-number">2</span><br><br>解释：可以画出两条不交叉的线，如上图所示。 <br>但无法画出第三条不相交的直线，因为从 <span class="hljs-symbol">nums1</span>[<span class="hljs-number">1</span>]=<span class="hljs-number">4</span> 到 <span class="hljs-symbol">nums2</span>[<span class="hljs-number">2</span>]=<span class="hljs-number">4</span> 的直线将与从 <span class="hljs-symbol">nums1</span>[<span class="hljs-number">2</span>]=<span class="hljs-number">2</span> 到 <span class="hljs-symbol">nums2</span>[<span class="hljs-number">1</span>]=<span class="hljs-number">2</span> 的直线相交。<br></code></pre></div></td></tr></table></figure>
-<p>示例 2：<br><figure class="highlight accesslog"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs accesslog">输入：nums1 = <span class="hljs-string">[2,5,1,2,5]</span>, nums2 = <span class="hljs-string">[10,5,2,1,5,2]</span><br><br>输出：<span class="hljs-number">3</span><br></code></pre></div></td></tr></table></figure><br>示例 3：<br><figure class="highlight accesslog"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs accesslog">输入：nums1 = <span class="hljs-string">[1,3,7,1,7,5]</span>, nums2 = <span class="hljs-string">[1,9,2,5,1]</span><br><br>输出：<span class="hljs-number">2</span><br></code></pre></div></td></tr></table></figure></p>
+              <h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>这是 LeetCode 上的 <strong><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/k-similar-strings/solution/by-ac_oier-w8nf/">854. 相似度为 K 的字符串</a></strong> ，难度为 <strong>困难</strong>。</p>
+<p>对于某些非负整数 <code>k</code> ，如果交换 $s_1$ 中两个字母的位置恰好 <code>k</code> 次，能够使结果字符串等于 $s_2$ ，则认为字符串 $s_1$ 和 $s_2$ 的 相似度为 <code>k</code> 。</p>
+<p>给你两个字母异位词 $s_1$ 和 $s_2$ ，返回 $s_1$ 和 $s_2$ 的相似度 <code>k</code> 的最小值。</p>
+<p>示例 1：<br><figure class="highlight armasm"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs armasm">输入：<span class="hljs-built_in">s1</span> = <span class="hljs-string">&quot;ab&quot;</span>, <span class="hljs-built_in">s2</span> = <span class="hljs-string">&quot;ba&quot;</span><br><br>输出：<span class="hljs-number">1</span><br></code></pre></div></td></tr></table></figure><br>示例 2：<br><figure class="highlight armasm"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs armasm">输入：<span class="hljs-built_in">s1</span> = <span class="hljs-string">&quot;abc&quot;</span>, <span class="hljs-built_in">s2</span> = <span class="hljs-string">&quot;bca&quot;</span><br><br>输出：<span class="hljs-number">2</span><br></code></pre></div></td></tr></table></figure></p>
 <p>提示：</p>
 <ul>
-<li>1 &lt;= nums1.length &lt;= 500</li>
-<li>1 &lt;= nums2.length &lt;= 500</li>
-<li>1 &lt;= nums1[i], nums2[i] &lt;= 2000</li>
+<li>$1 &lt;= s1.length &lt;= 20$</li>
+<li>$s2.length = s1.length$</li>
+<li><code>s1</code> 和 <code>s2</code>  只包含集合 <code>&#123;&#39;a&#39;, &#39;b&#39;, &#39;c&#39;, &#39;d&#39;, &#39;e&#39;, &#39;f&#39;&#125;</code> 中的小写字母</li>
+<li><code>s2</code> 是 <code>s1</code> 的一个字母异位词</li>
 </ul>
 <hr>
-<h3 id="动态规划"><a href="#动态规划" class="headerlink" title="动态规划"></a>动态规划</h3><p>这是一道「<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/longest-common-subsequence/solution/gong-shui-san-xie-zui-chang-gong-gong-zi-xq0h/">最长公共子序列（LCS）</a>」的轻度变形题。</p>
-<p>为了让你更好的与「<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/longest-common-subsequence/solution/gong-shui-san-xie-zui-chang-gong-gong-zi-xq0h/">最长公共子序列（LCS）</a>」裸题进行对比，我们使用 $s1$ 代指 $nums1$，$s2$ 代指 $nums2$。</p>
-<p>对于这类题都使用如下「状态定义」即可：</p>
-<p><strong>$f[i][j]$ 代表考虑 $s1$ 的前 $i$ 个字符、考虑 $s2$ 的前 $j$ 的字符，形成的最长公共子序列长度。</strong></p>
-<p>然后不失一般性的考虑 $f[i][j]$ 如何转移。</p>
-<p><strong>由于我们的「状态定义」只是说「考虑前 $i$ 个和考虑前 $j$ 个字符」，并没有说「一定要包含第 $i$ 个或者第 $j$ 个字符」（这也是「最长公共子序列 LCS」与「最长上升子序列 LIS」状态定义上的最大不同）。</strong></p>
-<p>我们需要考虑「不包含 $s1[i]$，不包含 $s2[j]$」、「不包含 $s1[i]$，包含 $s2[j]$」「包含 $s1[i]$，不包含 $s2[j]$」、「包含 $s1[i]$，包含 $s2[j]$」四种情况：</p>
+<h3 id="AStar-算法"><a href="#AStar-算法" class="headerlink" title="AStar 算法"></a>AStar 算法</h3><p>问题本质为将 <code>s1</code> 转换为 <code>s2</code> 的最小操作次数，由于题目确保了 <code>s1</code> 和 <code>s2</code> 互为字母异位词（必然有解），因此最好的求解方式是使用 AStar 算法。</p>
+<p>可直接根据本题规则来设计 AStar 的启发式函数: 对于两个状态 <code>a</code> 和 <code>b</code> 直接计算出「理论最小转换次数」: <strong>不同字符串的转换成本之和，由于每一次交换最多可减少两个不同的字符，我们可计算 <code>a</code> 与 <code>b</code> 的不同字符数量 $ans$，对应的理论最小转换次数为 $\left \lfloor \frac{ans + 1}{2} \right \rfloor$。</strong></p>
+<p>需要注意的是：<strong>由于我们衡量某个字符 <code>str</code> 的估值是以目标字符串 <code>target</code> 为基准，因此我们只能确保 <code>target</code> 出队时为「距离最短」，而不能确保中间节点出队时「距离最短」，因此我们不能单纯根据某个节点是否「曾经入队」而决定是否入队，还要结合当前节点的「最小距离」是否被更新而决定是否入队。</strong></p>
+<blockquote>
+<p>一些细节：在使用当前状态（字符串）<code>poll</code> 拓展新状态（字符串）<code>nstr</code> 时，只拓展能够减少不同字符数量的方案，从而收窄搜索空间。</p>
+</blockquote>
+<p>Java 代码：<br><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-type">int</span> n;<br>    String t;<br>    <span class="hljs-type">int</span> <span class="hljs-title function_">f</span><span class="hljs-params">(String s)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">ans</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; n; i++) ans += s.charAt(i) != t.charAt(i) ? <span class="hljs-number">1</span> : <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">return</span> ans + <span class="hljs-number">1</span> &gt;&gt; <span class="hljs-number">1</span>;<br>    &#125;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">kSimilarity</span><span class="hljs-params">(String s1, String s2)</span> &#123;<br>        <span class="hljs-keyword">if</span> (s1.equals(s2)) <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>        t = s2;<br>        n = s1.length();<br>        Map&lt;String, Integer&gt; map = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();<br>        PriorityQueue&lt;String&gt; pq = <span class="hljs-keyword">new</span> <span class="hljs-title class_">PriorityQueue</span>&lt;&gt;((a,b)-&gt;&#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">v1</span> <span class="hljs-operator">=</span> f(a), v2 = f(b), d1 = map.get(a), d2 = map.get(b);<br>            <span class="hljs-keyword">return</span> (v1 + d1) - (v2 + d2);<br>        &#125;);<br>        map.put(s1, <span class="hljs-number">0</span>);<br>        pq.add(s1);<br>        <span class="hljs-keyword">while</span> (!pq.isEmpty()) &#123;<br>            <span class="hljs-type">String</span> <span class="hljs-variable">poll</span> <span class="hljs-operator">=</span> pq.poll();<br>            <span class="hljs-type">int</span> <span class="hljs-variable">step</span> <span class="hljs-operator">=</span> map.get(poll);<br>            <span class="hljs-type">char</span>[] cs = poll.toCharArray();<br>            <span class="hljs-type">int</span> <span class="hljs-variable">idx</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>            <span class="hljs-keyword">while</span> (idx &lt; n &amp;&amp; cs[idx] == t.charAt(idx)) idx++;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> idx + <span class="hljs-number">1</span>; i &lt; n; i++) &#123;<br>                <span class="hljs-keyword">if</span> (cs[i] == t.charAt(idx) &amp;&amp; cs[i] != t.charAt(i)) &#123;<br>                    swap(cs, idx, i);<br>                    <span class="hljs-type">String</span> <span class="hljs-variable">nstr</span> <span class="hljs-operator">=</span> String.valueOf(cs);<br>                    <span class="hljs-keyword">if</span> (map.containsKey(nstr) &amp;&amp; map.get(nstr) &lt;= step + <span class="hljs-number">1</span>) <span class="hljs-keyword">continue</span>;<br>                    <span class="hljs-keyword">if</span> (nstr.equals(t)) <span class="hljs-keyword">return</span> step + <span class="hljs-number">1</span>;<br>                    map.put(nstr, step + <span class="hljs-number">1</span>);<br>                    pq.add(nstr);<br>                    swap(cs, idx, i);<br>                &#125;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> -<span class="hljs-number">1</span>; <span class="hljs-comment">// never</span><br>    &#125;<br>    <span class="hljs-keyword">void</span> <span class="hljs-title function_">swap</span><span class="hljs-params">(<span class="hljs-type">char</span>[] cs, <span class="hljs-type">int</span> i, <span class="hljs-type">int</span> j)</span> &#123;<br>        <span class="hljs-type">char</span> <span class="hljs-variable">c</span> <span class="hljs-operator">=</span> cs[i];<br>        cs[i] = cs[j];<br>        cs[j] = c;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure></p>
 <ul>
-<li>不包含 $s1[i]$，不包含 $s2[j]$：结合状态定义，可以使用 $f[i - 1][j - 1]$ 进行精确表示。</li>
-<li>包含 $s1[i]$，包含 $s2[j]$：前提是 $s1[i] = s2[j]$，可以使用 $f[i - 1][j - 1] + 1$ 进行精确表示。</li>
-<li>不包含 $s1[i]$，包含 $s2[j]$：结合状态定义，我们无法直接将该情况表示出来。<br> <strong>注意 $f[i - 1][j]$ 只是表示「必然不包含 $s1[i]$，但可能包含$s2[j]$」的情况，也就是说 $f[i - 1][j]$ 其实是该情况与情况 $1$ 的合集</strong>。<br> 但是由于我们求的是「最大值」，只需要确保「不漏」即可保证答案的正确（某些情况被重复参与比较不影响正确性），因此这里直接使用 $f[i - 1][j]$ 进行表示没有问题。<ul>
-<li>包含 $s1[i]$，不包含 $s2[j]$：与情况 $3$ 同理，直接使用 $f[i][j - 1]$ 表示没有问题。</li>
-</ul>
-</li>
-</ul>
-<p>$f[i][j]$ 就是在上述所有情况中取 $max$ 而来，由于情况 $1$ 被 情况 $3$ 和 情况 $4$ 所包含，因此我们只需要考虑 $f[i - 1][j]$、$f[i][j -1]$ 和 $f[i - 1][j - 1] + 1$ 三种状态即可，其中最后一种状态需要满足 $s1[i] = s2[j]$ 前提条件。</p>
-<p>因此我们最后的状态转移方程为：</p>
-<script type="math/tex; mode=display">
-f[i][j]=\begin{cases}
-\max(f[i - 1][j], f[i][j - 1], f[i - 1][j - 1] + 1) & s1[i] = s2[j] \\
-\max(f[i - 1][j], f[i][j - 1]) & s1[i] \neq s2[j] \\
-\end{cases}</script><p>上述分析过程建议加深理解，估计很多同学能 AC 但其实并不知道 LCS 问题的状态转移是包含了「重复状态比较」的。</p>
-<p>代码：<br><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">maxUncrossedLines</span><span class="hljs-params">(<span class="hljs-type">int</span>[] s1, <span class="hljs-type">int</span>[] s2)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> s1.length, m = s2.length;<br>        <span class="hljs-type">int</span>[][] f = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[n + <span class="hljs-number">1</span>][m + <span class="hljs-number">1</span>];<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>; i &lt;= n; i++) &#123;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>; j &lt;= m; j++) &#123;<br>                f[i][j] = Math.max(f[i - <span class="hljs-number">1</span>][j], f[i][j - <span class="hljs-number">1</span>]);<br>                <span class="hljs-keyword">if</span> (s1[i - <span class="hljs-number">1</span>] == s2[j - <span class="hljs-number">1</span>]) &#123;<br>                    f[i][j] = Math.max(f[i][j], f[i - <span class="hljs-number">1</span>][j - <span class="hljs-number">1</span>] + <span class="hljs-number">1</span>);<br>                &#125;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> f[n][m];<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure></p>
-<ul>
-<li>时间复杂度：$O(n * m)$</li>
-<li>空间复杂度：$O(n * m)$</li>
+<li>时间复杂度：启发式搜索不分析时空复杂度</li>
+<li>空间复杂度：启发式搜索不分析时空复杂度</li>
 </ul>
 <hr>
-<h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>这是我们「刷穿 LeetCode」系列文章的第 <code>No.1035</code> 篇，系列开始于 2021/01/01，截止于起始日 LeetCode 上共有 1916 道题目，部分是有锁题，我们将先把所有不带锁的题目刷完。</p>
+<h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>这是我们「刷穿 LeetCode」系列文章的第 <code>No.854</code> 篇，系列开始于 2021/01/01，截止于起始日 LeetCode 上共有 1916 道题目，部分是有锁题，我们将先把所有不带锁的题目刷完。</p>
 <p>在这个系列文章里面，除了讲解解题思路以外，还会尽可能给出最为简洁的代码。如果涉及通解还会相应的代码模板。</p>
 <p>为了方便各位同学能够电脑上进行调试和提交代码，我建立了相关的仓库：<a target="_blank" rel="noopener" href="https://github.com/SharingSource/LogicStack-LeetCode">https://github.com/SharingSource/LogicStack-LeetCode</a> 。</p>
 <p>在仓库地址里，你可以看到系列文章的题解链接、系列文章的相应代码、LeetCode 原题链接和其他优选题解。</p>
@@ -301,11 +274,9 @@ f[i][j]=\begin{cases}
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/%E6%9C%80%E9%95%BF%E5%85%AC%E5%85%B1%E5%AD%90%E5%BA%8F%E5%88%97/">最长公共子序列</a>
+                      <a class="hover-with-bg" href="/tags/%E5%90%AF%E5%8F%91%E5%BC%8F%E6%90%9C%E7%B4%A2/">启发式搜索</a>
                     
-                      <a class="hover-with-bg" href="/tags/%E5%BA%8F%E5%88%97-DP/">序列 DP</a>
-                    
-                      <a class="hover-with-bg" href="/tags/LCS/">LCS</a>
+                      <a class="hover-with-bg" href="/tags/AStar-%E7%AE%97%E6%B3%95/">AStar 算法</a>
                     
                   </div>
                 
@@ -322,18 +293,12 @@ f[i][j]=\begin{cases}
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2021/05/22/810.%20%E9%BB%91%E6%9D%BF%E5%BC%82%E6%88%96%E6%B8%B8%E6%88%8F%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">LC 810. 黑板异或游戏</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/05/20/692.%20%E5%89%8DK%E4%B8%AA%E9%AB%98%E9%A2%91%E5%8D%95%E8%AF%8D%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/">
-                        <span class="hidden-mobile">LC 692. 前K个高频单词</span>
+                      <a href="/2022/09/20/698.%20%E5%88%92%E5%88%86%E4%B8%BAk%E4%B8%AA%E7%9B%B8%E7%AD%89%E7%9A%84%E5%AD%90%E9%9B%86%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/">
+                        <span class="hidden-mobile">LC 698. 划分为k个相等的子集</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
