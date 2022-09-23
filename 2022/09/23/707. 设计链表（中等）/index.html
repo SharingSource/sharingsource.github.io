@@ -1,0 +1,583 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/oimg/RoundCorner.png">
+  <link rel="icon" href="/oimg/RoundCorner.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="宫水三叶">
+  <meta name="keywords" content="算法, 数据结构, 题解">
+  
+    <meta name="description" content="题目描述这是 LeetCode 上的 707. 设计链表 ，难度为 中等。 设计链表的实现。您可以选择使用单链表或双链表。 单链表中的节点应该具有两个属性：val 和 next。val 是当前节点的值，next 是指向下一个节点的指针&#x2F;引用。 如果要使用双向链表，则还需要一个属性 prev 以指示链表中的上一个节点。假设链表中的所有节点都是 0-index 的。 在链表类中实现这些功能：  get">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LC 707. 设计链表">
+<meta property="og:url" content="https://sharingsource.github.io/2022/09/23/707.%20%E8%AE%BE%E8%AE%A1%E9%93%BE%E8%A1%A8%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/index.html">
+<meta property="og:site_name" content="宫水三叶的刷题日记">
+<meta property="og:description" content="题目描述这是 LeetCode 上的 707. 设计链表 ，难度为 中等。 设计链表的实现。您可以选择使用单链表或双链表。 单链表中的节点应该具有两个属性：val 和 next。val 是当前节点的值，next 是指向下一个节点的指针&#x2F;引用。 如果要使用双向链表，则还需要一个属性 prev 以指示链表中的上一个节点。假设链表中的所有节点都是 0-index 的。 在链表类中实现这些功能：  get">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-09-22T17:24:43.000Z">
+<meta property="article:modified_time" content="2022-09-23T03:31:01.321Z">
+<meta property="article:author" content="宫水三叶">
+<meta property="article:tag" content="链表">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  <title>LC 707. 设计链表 - 宫水三叶的刷题日记</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/hint.css/2.7.0/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.7.2/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"sharingsource.github.io","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"|","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"IDifiViRkVDTgu27Nu50GQkE-gzGzoHsz","app_key":"gt98pupgyYjPKYQASrGmD9kM","server_url":"https://idifivir.lc-cn-n1-shared.com","path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.1.0"></head>
+
+
+<body>
+  <header style="height: 50vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>宫水三叶の刷题日记</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/image_90.jpeg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="LC 707. 设计链表">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-author" aria-hidden="true"></i>
+      宫水三叶
+    </span>
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2022-09-23 01:24" pubdate>
+        2022年9月23日
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">LC 707. 设计链表</h1>
+            
+            <div class="markdown-body">
+              <h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>这是 LeetCode 上的 <strong><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/design-linked-list/solution/by-ac_oier-vaib/">707. 设计链表</a></strong> ，难度为 <strong>中等</strong>。</p>
+<p>设计链表的实现。您可以选择使用单链表或双链表。</p>
+<p>单链表中的节点应该具有两个属性：<code>val</code> 和 <code>next</code>。<code>val</code> 是当前节点的值，<code>next</code> 是指向下一个节点的指针/引用。</p>
+<p>如果要使用双向链表，则还需要一个属性 <code>prev</code> 以指示链表中的上一个节点。假设链表中的所有节点都是 <code>0-index</code> 的。</p>
+<p>在链表类中实现这些功能：</p>
+<ul>
+<li><code>get(index)</code>：获取链表中第 <code>index</code> 个节点的值。如果索引无效，则返回<code>-1</code>。</li>
+<li><code>addAtHead(val)</code>：在链表的第一个元素之前添加一个值为 <code>val</code> 的节点。插入后，新节点将成为链表的第一个节点。</li>
+<li><code>addAtTail(val)</code>：将值为 <code>val</code> 的节点追加到链表的最后一个元素。</li>
+<li><code>addAtIndex(index,val)</code>：在链表中的第 <code>index</code> 个节点之前添加值为 <code>val</code>  的节点。如果 <code>index</code> 等于链表的长度，则该节点将附加到链表的末尾。如果 <code>index</code> 大于链表长度，则不会插入节点。如果 <code>index</code> 小于 <code>0</code>，则在头部插入节点。</li>
+<li><code>deleteAtIndex(index)</code>：如果索引 <code>index</code> 有效，则删除链表中的第 <code>index</code> 个节点。</li>
+</ul>
+<p>示例：<br><figure class="highlight apache"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs apache"><span class="hljs-attribute">MyLinkedList</span> linkedList = new MyLinkedList();<br><span class="hljs-attribute">linkedList</span>.addAtHead(<span class="hljs-number">1</span>);<br><span class="hljs-attribute">linkedList</span>.addAtTail(<span class="hljs-number">3</span>);<br><span class="hljs-attribute">linkedList</span>.addAtIndex(<span class="hljs-number">1</span>,<span class="hljs-number">2</span>);   //链表变为<span class="hljs-number">1</span>-&gt; <span class="hljs-number">2</span>-&gt; <span class="hljs-number">3</span><br><span class="hljs-attribute">linkedList</span>.get(<span class="hljs-number">1</span>);            //返回<span class="hljs-number">2</span><br><span class="hljs-attribute">linkedList</span>.deleteAtIndex(<span class="hljs-number">1</span>);  //现在链表是<span class="hljs-number">1</span>-&gt; <span class="hljs-number">3</span><br><span class="hljs-attribute">linkedList</span>.get(<span class="hljs-number">1</span>);            //返回<span class="hljs-number">3</span><br></code></pre></div></td></tr></table></figure></p>
+<p>提示：</p>
+<ul>
+<li>所有 <code>val</code> 值都在 $[1, 1000]$ 之内。</li>
+<li>操作次数将在  $[1, 1000]$ 之内。</li>
+<li>请不要使用内置的 <code>LinkedList</code> 库。</li>
+</ul>
+<hr>
+<h3 id="双向链表"><a href="#双向链表" class="headerlink" title="双向链表"></a>双向链表</h3><p>一道手写链表裸题（啊嘿，$9$ 月活动的同学表示很棒 🤣</p>
+<p>由于需要涉及部分 <code>index</code> 相关操作，因此我们可以实现一个「双向链表」，同时使用变量 <code>sz</code> 记录下当前链表的总长度，这样在涉及 <code>index</code> 操作时，可从较近的一边出发遍历，剩下的则是常规的链表节点操作。</p>
+<blockquote>
+<p>一些细节：所有的链表题目我们都可以引入前后哨兵来简化边界处理；同时能写双链表自然能写单链表，因此如果你没有顺利写出双链表的话，在看了题解写完双链表后，再手写一遍单链表作为练习。</p>
+</blockquote>
+<p>Java 代码：<br><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">MyLinkedList</span> &#123;<br>    <span class="hljs-keyword">class</span> <span class="hljs-title class_">Node</span> &#123;<br>        Node prev, next;<br>        <span class="hljs-type">int</span> val;<br>        Node (<span class="hljs-type">int</span> _val) &#123;<br>            val = _val;<br>        &#125;<br>    &#125;<br>    <span class="hljs-type">Node</span> <span class="hljs-variable">he</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Node</span>(-<span class="hljs-number">1</span>), ta = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Node</span>(-<span class="hljs-number">1</span>);<br>    <span class="hljs-type">int</span> <span class="hljs-variable">sz</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">public</span> <span class="hljs-title function_">MyLinkedList</span><span class="hljs-params">()</span> &#123;<br>        he.next = ta; ta.prev = he;<br>    &#125;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">get</span><span class="hljs-params">(<span class="hljs-type">int</span> index)</span> &#123;<br>        <span class="hljs-type">Node</span> <span class="hljs-variable">node</span> <span class="hljs-operator">=</span> getNode(index);<br>        <span class="hljs-type">return</span> <span class="hljs-variable">node</span> <span class="hljs-operator">=</span>= <span class="hljs-literal">null</span> ? -<span class="hljs-number">1</span> : node.val;<br>    &#125;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">addAtHead</span><span class="hljs-params">(<span class="hljs-type">int</span> val)</span> &#123;<br>        <span class="hljs-type">Node</span> <span class="hljs-variable">node</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Node</span>(val);        <br>        node.next = he.next; node.prev = he;<br>        he.next.prev = node; he.next = node;<br>        sz++;<br>    &#125;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">addAtTail</span><span class="hljs-params">(<span class="hljs-type">int</span> val)</span> &#123;<br>        <span class="hljs-type">Node</span> <span class="hljs-variable">node</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Node</span>(val);<br>        node.prev = ta.prev; node.next = ta;<br>        ta.prev.next = node; ta.prev = node;<br>        sz++;<br>    &#125;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">addAtIndex</span><span class="hljs-params">(<span class="hljs-type">int</span> index, <span class="hljs-type">int</span> val)</span> &#123;<br>        <span class="hljs-keyword">if</span> (index &gt; sz) <span class="hljs-keyword">return</span> ;<br>        <span class="hljs-keyword">if</span> (index &lt;= <span class="hljs-number">0</span>) &#123;<br>            addAtHead(val); <br>        &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (index == sz) &#123;<br>            addAtTail(val);<br>        &#125; <span class="hljs-keyword">else</span> &#123;<br>            <span class="hljs-type">Node</span> <span class="hljs-variable">node</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Node</span>(val), cur = getNode(index);<br>            node.next = cur; node.prev = cur.prev;<br>            cur.prev.next = node; cur.prev = node;<br>            sz++;<br>        &#125;<br>    &#125;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">deleteAtIndex</span><span class="hljs-params">(<span class="hljs-type">int</span> index)</span> &#123;<br>        <span class="hljs-type">Node</span> <span class="hljs-variable">cur</span> <span class="hljs-operator">=</span> getNode(index);<br>        <span class="hljs-keyword">if</span> (cur == <span class="hljs-literal">null</span>) <span class="hljs-keyword">return</span> ;<br>        cur.next.prev = cur.prev;<br>        cur.prev.next = cur.next;<br>        sz--;<br>    &#125;<br>    Node <span class="hljs-title function_">getNode</span><span class="hljs-params">(<span class="hljs-type">int</span> index)</span> &#123;<br>        <span class="hljs-type">boolean</span> <span class="hljs-variable">isLeft</span> <span class="hljs-operator">=</span> index &lt; sz / <span class="hljs-number">2</span>;<br>        <span class="hljs-keyword">if</span> (!isLeft) index = sz - index - <span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">Node</span> <span class="hljs-variable">cur</span> <span class="hljs-operator">=</span> isLeft ? he.next : ta.prev; cur != ta &amp;&amp; cur != he; cur = isLeft ? cur.next : cur.prev) &#123;<br>            <span class="hljs-keyword">if</span> (index-- == <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> cur;<br>        &#125;<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">null</span>;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure><br>TypeScript 代码：<br><figure class="highlight typescript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs TypeScript"><span class="hljs-keyword">class</span> <span class="hljs-title class_">TNode</span> &#123;<br>    <span class="hljs-attr">prev</span>: <span class="hljs-title class_">TNode</span><br>    <span class="hljs-attr">next</span>: <span class="hljs-title class_">TNode</span><br>    <span class="hljs-attr">val</span>: <span class="hljs-built_in">number</span><br>    <span class="hljs-title function_">constructor</span>(<span class="hljs-params">_val: <span class="hljs-built_in">number</span></span>) &#123;<br>        <span class="hljs-variable language_">this</span>.<span class="hljs-property">val</span> = _val<br>    &#125;<br>&#125;<br><span class="hljs-keyword">class</span> <span class="hljs-title class_">MyLinkedList</span> &#123;<br>    he = <span class="hljs-keyword">new</span> <span class="hljs-title class_">TNode</span>(-<span class="hljs-number">1</span>)<br>    ta = <span class="hljs-keyword">new</span> <span class="hljs-title class_">TNode</span>(-<span class="hljs-number">1</span>)<br>    sz = <span class="hljs-number">0</span><br>    <span class="hljs-title function_">constructor</span>(<span class="hljs-params"></span>) &#123;<br>        <span class="hljs-variable language_">this</span>.<span class="hljs-property">he</span>.<span class="hljs-property">next</span> = <span class="hljs-variable language_">this</span>.<span class="hljs-property">ta</span>; <span class="hljs-variable language_">this</span>.<span class="hljs-property">ta</span>.<span class="hljs-property">prev</span> = <span class="hljs-variable language_">this</span>.<span class="hljs-property">he</span>    <br>    &#125;<br>    <span class="hljs-title function_">get</span>(<span class="hljs-attr">index</span>: <span class="hljs-built_in">number</span>): <span class="hljs-built_in">number</span> &#123;<br>        <span class="hljs-keyword">const</span> node = <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">getNode</span>(index)<br>        <span class="hljs-keyword">return</span> node == <span class="hljs-literal">null</span> ? -<span class="hljs-number">1</span> : node.<span class="hljs-property">val</span><br>    &#125;<br>    <span class="hljs-title function_">addAtHead</span>(<span class="hljs-attr">val</span>: <span class="hljs-built_in">number</span>): <span class="hljs-built_in">void</span> &#123;<br>        <span class="hljs-keyword">const</span> node = <span class="hljs-keyword">new</span> <span class="hljs-title class_">TNode</span>(val)<br>        node.<span class="hljs-property">next</span> = <span class="hljs-variable language_">this</span>.<span class="hljs-property">he</span>.<span class="hljs-property">next</span>; node.<span class="hljs-property">prev</span> = <span class="hljs-variable language_">this</span>.<span class="hljs-property">he</span><br>        <span class="hljs-variable language_">this</span>.<span class="hljs-property">he</span>.<span class="hljs-property">next</span>.<span class="hljs-property">prev</span> = node; <span class="hljs-variable language_">this</span>.<span class="hljs-property">he</span>.<span class="hljs-property">next</span> = node<br>        <span class="hljs-variable language_">this</span>.<span class="hljs-property">sz</span>++<br>    &#125;<br>    <span class="hljs-title function_">addAtTail</span>(<span class="hljs-attr">val</span>: <span class="hljs-built_in">number</span>): <span class="hljs-built_in">void</span> &#123;<br>        <span class="hljs-keyword">const</span> node = <span class="hljs-keyword">new</span> <span class="hljs-title class_">TNode</span>(val)<br>        node.<span class="hljs-property">prev</span> = <span class="hljs-variable language_">this</span>.<span class="hljs-property">ta</span>.<span class="hljs-property">prev</span>; node.<span class="hljs-property">next</span> = <span class="hljs-variable language_">this</span>.<span class="hljs-property">ta</span><br>        <span class="hljs-variable language_">this</span>.<span class="hljs-property">ta</span>.<span class="hljs-property">prev</span>.<span class="hljs-property">next</span> = node; <span class="hljs-variable language_">this</span>.<span class="hljs-property">ta</span>.<span class="hljs-property">prev</span> = node<br>        <span class="hljs-variable language_">this</span>.<span class="hljs-property">sz</span>++<br>    &#125;<br>    <span class="hljs-title function_">addAtIndex</span>(<span class="hljs-attr">index</span>: <span class="hljs-built_in">number</span>, <span class="hljs-attr">val</span>: <span class="hljs-built_in">number</span>): <span class="hljs-built_in">void</span> &#123;<br>        <span class="hljs-keyword">if</span> (index &gt; <span class="hljs-variable language_">this</span>.<span class="hljs-property">sz</span>) <span class="hljs-keyword">return</span> <br>        <span class="hljs-keyword">if</span> (index &lt;= <span class="hljs-number">0</span>) &#123;<br>            <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">addAtHead</span>(val)<br>        &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (index == <span class="hljs-variable language_">this</span>.<span class="hljs-property">sz</span>) &#123;<br>            <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">addAtTail</span>(val)<br>        &#125; <span class="hljs-keyword">else</span> &#123;<br>            <span class="hljs-keyword">const</span> node = <span class="hljs-keyword">new</span> <span class="hljs-title class_">TNode</span>(val), cur = <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">getNode</span>(index)<br>            node.<span class="hljs-property">next</span> = cur; node.<span class="hljs-property">prev</span> = cur.<span class="hljs-property">prev</span><br>            cur.<span class="hljs-property">prev</span>.<span class="hljs-property">next</span> = node; cur.<span class="hljs-property">prev</span> = node<br>            <span class="hljs-variable language_">this</span>.<span class="hljs-property">sz</span>++<br>        &#125;<br>    &#125;<br>    <span class="hljs-title function_">deleteAtIndex</span>(<span class="hljs-attr">index</span>: <span class="hljs-built_in">number</span>): <span class="hljs-built_in">void</span> &#123;<br>        <span class="hljs-keyword">const</span> cur = <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">getNode</span>(index)<br>        <span class="hljs-keyword">if</span> (cur == <span class="hljs-literal">null</span>) <span class="hljs-keyword">return</span> <br>        cur.<span class="hljs-property">prev</span>.<span class="hljs-property">next</span> = cur.<span class="hljs-property">next</span><br>        cur.<span class="hljs-property">next</span>.<span class="hljs-property">prev</span> = cur.<span class="hljs-property">prev</span><br>        <span class="hljs-variable language_">this</span>.<span class="hljs-property">sz</span>--<br>    &#125;<br>    <span class="hljs-title function_">getNode</span>(<span class="hljs-attr">index</span>: <span class="hljs-built_in">number</span>): <span class="hljs-title class_">TNode</span> | <span class="hljs-literal">null</span> &#123;<br>        <span class="hljs-keyword">const</span> isLeft = index &lt; <span class="hljs-variable language_">this</span>.<span class="hljs-property">sz</span> / <span class="hljs-number">2</span><br>        <span class="hljs-keyword">if</span> (!isLeft) index = <span class="hljs-variable language_">this</span>.<span class="hljs-property">sz</span> - index - <span class="hljs-number">1</span><br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> cur = isLeft ? <span class="hljs-variable language_">this</span>.<span class="hljs-property">he</span>.<span class="hljs-property">next</span> : <span class="hljs-variable language_">this</span>.<span class="hljs-property">ta</span>.<span class="hljs-property">prev</span>; cur != <span class="hljs-variable language_">this</span>.<span class="hljs-property">ta</span> &amp;&amp; cur != <span class="hljs-variable language_">this</span>.<span class="hljs-property">he</span>; cur = isLeft ? cur.<span class="hljs-property">next</span> : cur.<span class="hljs-property">prev</span>) &#123;<br>            <span class="hljs-keyword">if</span> (index-- == <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> cur<br>        &#125;<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">null</span><br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure><br>Python 代码：<br><figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Node</span>:<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self, _val</span>):<br>        self.val = _val<br>        self.prev = <span class="hljs-literal">None</span><br>        self.<span class="hljs-built_in">next</span> = <span class="hljs-literal">None</span><br><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">MyLinkedList</span>:<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self</span>):<br>        self.he = Node(-<span class="hljs-number">1</span>)<br>        self.ta = Node(-<span class="hljs-number">1</span>)<br>        self.he.<span class="hljs-built_in">next</span> = self.ta<br>        self.ta.prev = self.he<br>        self.sz = <span class="hljs-number">0</span><br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">get</span>(<span class="hljs-params">self, index: <span class="hljs-built_in">int</span></span>) -&gt; <span class="hljs-built_in">int</span>:<br>        node = self.getNode(index)<br>        <span class="hljs-keyword">return</span> node.val <span class="hljs-keyword">if</span> node <span class="hljs-keyword">else</span> -<span class="hljs-number">1</span><br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">addAtHead</span>(<span class="hljs-params">self, val: <span class="hljs-built_in">int</span></span>) -&gt; <span class="hljs-literal">None</span>:<br>        node = Node(val)<br>        node.<span class="hljs-built_in">next</span> = self.he.<span class="hljs-built_in">next</span><br>        node.prev = self.he<br>        self.he.<span class="hljs-built_in">next</span>.prev = node<br>        self.he.<span class="hljs-built_in">next</span> = node<br>        self.sz += <span class="hljs-number">1</span><br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">addAtTail</span>(<span class="hljs-params">self, val: <span class="hljs-built_in">int</span></span>) -&gt; <span class="hljs-literal">None</span>:<br>        node = Node(val)<br>        node.prev = self.ta.prev<br>        node.<span class="hljs-built_in">next</span> = self.ta<br>        self.ta.prev.<span class="hljs-built_in">next</span> = node<br>        self.ta.prev = node<br>        self.sz += <span class="hljs-number">1</span><br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">addAtIndex</span>(<span class="hljs-params">self, index: <span class="hljs-built_in">int</span>, val: <span class="hljs-built_in">int</span></span>) -&gt; <span class="hljs-literal">None</span>:<br>        <span class="hljs-keyword">if</span> index &gt; self.sz:<br>            <span class="hljs-keyword">return</span> <br>        <span class="hljs-keyword">if</span> index &lt;= <span class="hljs-number">0</span>:<br>            self.addAtHead(val)<br>        <span class="hljs-keyword">elif</span> index == self.sz:<br>            self.addAtTail(val)<br>        <span class="hljs-keyword">else</span>:<br>            node, cur = Node(val), self.getNode(index)<br>            node.<span class="hljs-built_in">next</span> = cur<br>            node.prev = cur.prev<br>            cur.prev.<span class="hljs-built_in">next</span> = node<br>            cur.prev = node<br>            self.sz += <span class="hljs-number">1</span><br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">deleteAtIndex</span>(<span class="hljs-params">self, index: <span class="hljs-built_in">int</span></span>) -&gt; <span class="hljs-literal">None</span>:<br>        node = self.getNode(index)<br>        <span class="hljs-keyword">if</span> node:<br>            node.prev.<span class="hljs-built_in">next</span> = node.<span class="hljs-built_in">next</span><br>            node.<span class="hljs-built_in">next</span>.prev = node.prev<br>            self.sz -= <span class="hljs-number">1</span><br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">getNode</span>(<span class="hljs-params">self, index: <span class="hljs-built_in">int</span></span>) -&gt; Node | <span class="hljs-literal">None</span>:<br>        isLeft = index &lt; self.sz / <span class="hljs-number">2</span><br>        <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> isLeft:<br>            index = self.sz - index - <span class="hljs-number">1</span><br>        cur = self.he.<span class="hljs-built_in">next</span> <span class="hljs-keyword">if</span> isLeft <span class="hljs-keyword">else</span> self.ta.prev<br>        <span class="hljs-keyword">while</span> cur != self.he <span class="hljs-keyword">and</span> cur != self.ta:<br>            <span class="hljs-keyword">if</span> index == <span class="hljs-number">0</span>:<br>                <span class="hljs-keyword">return</span> cur<br>            index -= <span class="hljs-number">1</span><br>            cur = cur.<span class="hljs-built_in">next</span> <span class="hljs-keyword">if</span> isLeft <span class="hljs-keyword">else</span> cur.prev<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">None</span><br></code></pre></div></td></tr></table></figure></p>
+<ul>
+<li>时间复杂度：涉及 <code>index</code> 的相关操作复杂度为 $O(index)$；其余操作均为 $O(1)$</li>
+<li>空间复杂度：$O(n)$</li>
+</ul>
+<hr>
+<h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>这是我们「刷穿 LeetCode」系列文章的第 <code>No.707</code> 篇，系列开始于 2021/01/01，截止于起始日 LeetCode 上共有 1916 道题目，部分是有锁题，我们将先把所有不带锁的题目刷完。</p>
+<p>在这个系列文章里面，除了讲解解题思路以外，还会尽可能给出最为简洁的代码。如果涉及通解还会相应的代码模板。</p>
+<p>为了方便各位同学能够电脑上进行调试和提交代码，我建立了相关的仓库：<a target="_blank" rel="noopener" href="https://github.com/SharingSource/LogicStack-LeetCode">https://github.com/SharingSource/LogicStack-LeetCode</a> 。</p>
+<p>在仓库地址里，你可以看到系列文章的题解链接、系列文章的相应代码、LeetCode 原题链接和其他优选题解。</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E9%93%BE%E8%A1%A8/">链表</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/09/22/1640.%20%E8%83%BD%E5%90%A6%E8%BF%9E%E6%8E%A5%E5%BD%A2%E6%88%90%E6%95%B0%E7%BB%84%EF%BC%88%E7%AE%80%E5%8D%95%EF%BC%89/">
+                        <span class="hidden-mobile">LC 1640. 能否连接形成数组</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://cdn.staticfile.org/valine/1.4.18/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"IDifiViRkVDTgu27Nu50GQkE-gzGzoHsz","appKey":"gt98pupgyYjPKYQASrGmD9kM","path":"window.location.pathname","placeholder":"发一条友善的评论（为方便交流，记得填上方的昵称再留言哦 ~ 🍭","avatar":"","meta":["nick","mail"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":true},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          Fluid.plugins.initFancyBox('#valine .vcontent img:not(.vemoji)');
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+  <div class="col-lg-7 mx-auto nopadding-x-md">
+    <div class="container custom post-custom mx-auto">
+      <img src="/oimg/gzh-qrcode.webp" srcset="/img/loading.gif" lazyload class="rounded mx-auto d-block mt-5" style="width:80%">
+    </div>
+  </div>
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- LeanCloud 统计PV -->
+        <span id="leancloud-site-pv-container" style="display: none">
+            总访问量 
+            <span id="leancloud-site-pv"></span>
+             次
+          </span>
+      
+      
+        <!-- LeanCloud 统计UV -->
+        <span id="leancloud-site-uv-container" style="display: none">
+            总访客数 
+            <span id="leancloud-site-uv"></span>
+             人
+          </span>
+      
+
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.staticfile.org/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.staticfile.org/tocbot/4.18.2/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.staticfile.org/anchor-js/4.3.1/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.11/clipboard.min.js" ></script>
+  
+
+
+
+
+  <script defer src="/js/leancloud.js" ></script>
+
+
+
+  <script  src="https://cdn.bootcdn.net/ajax/libs/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        loader: {
+          
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.staticfile.org/mathjax/3.2.0/es5/tex-svg.js" ></script>
+
+  
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>
