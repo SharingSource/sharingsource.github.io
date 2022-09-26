@@ -16,28 +16,21 @@
   <meta name="author" content="宫水三叶">
   <meta name="keywords" content="算法, 数据结构, 题解">
   
-    <meta name="description" content="题目描述这是 LeetCode 上的 926. 将字符串翻转到单调递增 ，难度为 中等。 如果一个二进制字符串，是以一些 $0$（可能没有 $0$）后面跟着一些 $1$（也可能没有 $1$）的形式组成的，那么该字符串是 单调递增 的。 给你一个二进制字符串 s，你可以将任何 $0$ 翻转为 $1$ 或者将 $1$ 翻转为 $0$ 。 返回使 s 单调递增的最小翻转次数。 示例 1：12345输入：">
+    <meta name="description" content="题目描述这是 LeetCode 上的 面试题 17.19. 消失的两个数字 ，难度为 困难。 给定一个数组，包含从 1 到 N 所有的整数，但其中缺了两个数字。你能在 $O(N)$ 时间内只用 $O(1)$ 的空间找到它们吗？ 以任意顺序返回这两个数字均可。 示例 1:123输入: [1]输出: [2,3]示例 2:123输入: [2,3]输出: [1,4]提示：  $nums.length &amp;l">
 <meta property="og:type" content="article">
-<meta property="og:title" content="LC 926. 将字符串翻转到单调递增">
-<meta property="og:url" content="https://sharingsource.github.io/2022/06/11/926.%20%E5%B0%86%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%BF%BB%E8%BD%AC%E5%88%B0%E5%8D%95%E8%B0%83%E9%80%92%E5%A2%9E%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/index.html">
+<meta property="og:title" content="LC 面试题 17.19. 消失的两个数字">
+<meta property="og:url" content="https://sharingsource.github.io/2022/09/26/%E9%9D%A2%E8%AF%95%E9%A2%98%2017.19.%20%E6%B6%88%E5%A4%B1%E7%9A%84%E4%B8%A4%E4%B8%AA%E6%95%B0%E5%AD%97%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/index.html">
 <meta property="og:site_name" content="宫水三叶的刷题日记">
-<meta property="og:description" content="题目描述这是 LeetCode 上的 926. 将字符串翻转到单调递增 ，难度为 中等。 如果一个二进制字符串，是以一些 $0$（可能没有 $0$）后面跟着一些 $1$（也可能没有 $1$）的形式组成的，那么该字符串是 单调递增 的。 给你一个二进制字符串 s，你可以将任何 $0$ 翻转为 $1$ 或者将 $1$ 翻转为 $0$ 。 返回使 s 单调递增的最小翻转次数。 示例 1：12345输入：">
+<meta property="og:description" content="题目描述这是 LeetCode 上的 面试题 17.19. 消失的两个数字 ，难度为 困难。 给定一个数组，包含从 1 到 N 所有的整数，但其中缺了两个数字。你能在 $O(N)$ 时间内只用 $O(1)$ 的空间找到它们吗？ 以任意顺序返回这两个数字均可。 示例 1:123输入: [1]输出: [2,3]示例 2:123输入: [2,3]输出: [1,4]提示：  $nums.length &amp;l">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2022-06-10T16:43:35.000Z">
-<meta property="article:modified_time" content="2022-06-11T02:30:27.283Z">
+<meta property="article:published_time" content="2022-09-25T17:11:07.000Z">
+<meta property="article:modified_time" content="2022-09-26T04:04:27.112Z">
 <meta property="article:author" content="宫水三叶">
-<meta property="article:tag" content="二分">
-<meta property="article:tag" content="前缀和">
-<meta property="article:tag" content="动态规划">
-<meta property="article:tag" content="贪心">
-<meta property="article:tag" content="容斥原理">
-<meta property="article:tag" content="枚举">
-<meta property="article:tag" content="序列 DP">
-<meta property="article:tag" content="LIS">
+<meta property="article:tag" content="数学">
 <meta name="twitter:card" content="summary_large_image">
   
   
-  <title>LC 926. 将字符串翻转到单调递增 - 宫水三叶的刷题日记</title>
+  <title>LC 面试题 17.19. 消失的两个数字 - 宫水三叶的刷题日记</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -182,12 +175,12 @@
 </nav>
 
     <div class="banner" id="banner" parallax=true
-         style="background: url('/img/image_74.jpeg') no-repeat center center;
+         style="background: url('/img/image_30.jpeg') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="LC 926. 将字符串翻转到单调递增">
+            <span class="h2" id="subtitle" title="LC 面试题 17.19. 消失的两个数字">
               
             </span>
 
@@ -202,8 +195,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2022-06-11 00:43" pubdate>
-        2022年6月11日
+      <time datetime="2022-09-26 01:11" pubdate>
+        2022年9月26日
       </time>
     </span>
   
@@ -239,42 +232,27 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">LC 926. 将字符串翻转到单调递增</h1>
+            <h1 style="display: none">LC 面试题 17.19. 消失的两个数字</h1>
             
             <div class="markdown-body">
-              <h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>这是 LeetCode 上的 <strong><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/flip-string-to-monotone-increasing/solution/by-ac_oier-h0we/">926. 将字符串翻转到单调递增</a></strong> ，难度为 <strong>中等</strong>。</p>
-<p>如果一个二进制字符串，是以一些 $0$（可能没有 $0$）后面跟着一些 $1$（也可能没有 $1$）的形式组成的，那么该字符串是 单调递增 的。</p>
-<p>给你一个二进制字符串 <code>s</code>，你可以将任何 $0$ 翻转为 $1$ 或者将 $1$ 翻转为 $0$ 。</p>
-<p>返回使 <code>s</code> 单调递增的最小翻转次数。</p>
-<p>示例 1：<br><figure class="highlight abnf"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs abnf">输入：s <span class="hljs-operator">=</span> <span class="hljs-string">&quot;00110&quot;</span><br><br>输出：<span class="hljs-number">1</span><br><br>解释：翻转最后一位得到 <span class="hljs-number">00111</span>.<br></code></pre></div></td></tr></table></figure><br>示例 2：<br><figure class="highlight abnf"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs abnf">输入：s <span class="hljs-operator">=</span> <span class="hljs-string">&quot;010110&quot;</span><br><br>输出：<span class="hljs-number">2</span><br><br>解释：翻转得到 <span class="hljs-number">011111</span>，或者是 <span class="hljs-number">000111</span>。<br></code></pre></div></td></tr></table></figure><br>示例 3：<br><figure class="highlight abnf"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs abnf">输入：s <span class="hljs-operator">=</span> <span class="hljs-string">&quot;00011000&quot;</span><br><br>输出：<span class="hljs-number">2</span><br><br>解释：翻转得到 <span class="hljs-number">00000000</span>。<br></code></pre></div></td></tr></table></figure></p>
-<p>提示：</p>
+              <h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>这是 LeetCode 上的 <strong><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/missing-two-lcci/solution/by-ac_oier-pgeh/">面试题 17.19. 消失的两个数字</a></strong> ，难度为 <strong>困难</strong>。</p>
+<p>给定一个数组，包含从 <code>1</code> 到 <code>N</code> 所有的整数，但其中缺了两个数字。你能在 $O(N)$ 时间内只用 $O(1)$ 的空间找到它们吗？</p>
+<p>以任意顺序返回这两个数字均可。</p>
+<p>示例 1:<br><figure class="highlight inform7"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs inform7">输入: <span class="hljs-comment">[1]</span><br><br>输出: <span class="hljs-comment">[2,3]</span><br></code></pre></div></td></tr></table></figure><br>示例 2:<br><figure class="highlight inform7"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs inform7">输入: <span class="hljs-comment">[2,3]</span><br><br>输出: <span class="hljs-comment">[1,4]</span><br></code></pre></div></td></tr></table></figure><br>提示：</p>
 <ul>
-<li>$1 &lt;= s.length &lt;= 10^5$</li>
-<li><code>s[i]</code> 为 <code>&#39;0&#39;</code> 或 <code>&#39;1&#39;</code></li>
+<li>$nums.length &lt;= 30000$</li>
 </ul>
 <hr>
-<h3 id="LIS-问题贪心解"><a href="#LIS-问题贪心解" class="headerlink" title="LIS 问题贪心解"></a>LIS 问题贪心解</h3><p>根据题意，不难想到将原题进行等价转换：<strong>令 <code>s</code> 长度为 $n$，原问题等价于在 <code>s</code> 中找到最长不下降子序列，设其长度为 $ans$，那么对应的 $n - ans$ 即是答案。</strong></p>
-<p>由于数据范围为 $1e5$，因此我们需要使用 <code>LIS</code> 问题的贪心求解方式：<strong>使用 <code>g</code> 数组记录每个长度的最小结尾元素，即 <code>g[len] = x</code> 含义为长度为 $len$ 的最长不下降子序列的结尾元素为 $x$，然后在从前往后处理每个 $t = s[i]$ 时，由于是求解「最长不下降子序列」，等价于找「满足大于 $t$ 的最小下标」，这可以运用「二分」进行求解。</strong></p>
-<blockquote>
-<p>不了解 <code>LIS</code> 问题或者不清楚 <code>LIS</code>  问题贪心解法的同学可以看前置 🧀 : <strong><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzU4NDE3MTEyMA==&amp;mid=2247487814&amp;idx=1&amp;sn=e33023c2d474ff75af83eda1c4d01892">LCS 问题与 LIS 问题的相互关系，以及 LIS 问题的最优解证明</a></strong>，里面详细讲解了 <code>LIS</code> 贪心解的正确性证明，以及 <code>LCS</code> 和 <code>LIS</code> 在特定条件下存在的内在联系。</p>
-</blockquote>
-<p>代码：<br><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">minFlipsMonoIncr</span><span class="hljs-params">(String s)</span> &#123;<br>        <span class="hljs-type">char</span>[] cs = s.toCharArray();<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> cs.length, ans = <span class="hljs-number">0</span>;<br>        <span class="hljs-type">int</span>[] g = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[n + <span class="hljs-number">10</span>];<br>        Arrays.fill(g, n + <span class="hljs-number">10</span>);<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; n; i++) &#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">t</span> <span class="hljs-operator">=</span> s.charAt(i) - <span class="hljs-string">&#x27;0&#x27;</span>;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">l</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>, r = i + <span class="hljs-number">1</span>;<br>            <span class="hljs-keyword">while</span> (l &lt; r) &#123;<br>                <span class="hljs-type">int</span> <span class="hljs-variable">mid</span> <span class="hljs-operator">=</span> l + r &gt;&gt; <span class="hljs-number">1</span>;<br>                <span class="hljs-keyword">if</span> (g[mid] &gt; t) r = mid;<br>                <span class="hljs-keyword">else</span> l = mid + <span class="hljs-number">1</span>;<br>            &#125;<br>            g[r] = t;<br>            ans = Math.max(ans, r);<br>        &#125;<br>        <span class="hljs-keyword">return</span> n - ans;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure></p>
-<ul>
-<li>时间复杂度：$O(n\log{n})$</li>
-<li>空间复杂度：$O(n)$</li>
-</ul>
-<hr>
-<h3 id="前缀和-枚举"><a href="#前缀和-枚举" class="headerlink" title="前缀和 + 枚举"></a>前缀和 + 枚举</h3><p>更进一步，利用 <code>s</code> 只存在 $0$ 和 $1$ 两种数值，我们知道最后的目标序列形如 <code>000...000</code>、<code>000...111</code> 或 <code>111...111</code> 的形式。</p>
-<p>因此我们可以枚举目标序列的 $0$ 和 $1$ 分割点位置 $idx$（分割点是 $0$ 是 $1$ 都可以，不消耗改变次数）。</p>
-<p>于是问题转换为：分割点 $idx$ 左边有多少个 $1$（目标序列中分割点左边均为 $0$，因此 $1$ 的个数为左边的改变次数），分割点 $idx$ 的右边有多少个 $0$（目标序列中分割点右边均为 $1$，因此 $0$ 的个数为右边的改变次数），两者之和即是分割点为 $idx$ 时的总变化次数，所有 $idx$ 的总变化次数最小值即是答案。</p>
-<p>而求解某个点左边或者右边有多少 $1$ 和 $0$ 可通过「前缀和」进行优化。</p>
-<p>代码：<br><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">minFlipsMonoIncr</span><span class="hljs-params">(String s)</span> &#123;<br>        <span class="hljs-type">char</span>[] cs = s.toCharArray();<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> cs.length, ans = n;<br>        <span class="hljs-type">int</span>[] sum = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[n + <span class="hljs-number">10</span>];<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>; i &lt;= n; i++) sum[i] = sum[i - <span class="hljs-number">1</span>] + (cs[i - <span class="hljs-number">1</span>] - <span class="hljs-string">&#x27;0&#x27;</span>);<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>; i &lt;= n; i++) &#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">l</span> <span class="hljs-operator">=</span> sum[i - <span class="hljs-number">1</span>], r = (n - i) - (sum[n] - sum[i]);<br>            ans = Math.min(ans, l + r);<br>        &#125;<br>        <span class="hljs-keyword">return</span> ans;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure></p>
+<h3 id="数学"><a href="#数学" class="headerlink" title="数学"></a>数学</h3><p>根据题意，给定 <code>nums</code> 的长度为 $m$ 且缺失了两个数，所有的 $nums[i]$ 加上缺失数字组成连续排列长度为 $n = m + 2$。</p>
+<p>根据等差数量求和公式可知，补齐后的排列总和为 $\frac{n \times (1 + n)}{2}$，补全后的理论总和与实际总和之间的差值 $cur = \frac{n \times (1 + n)}{2} - \sum_{i = 0}^{m - 1}nums[i]$ 为缺失数值之和。</p>
+<p>根据补全后数值各不相同可知，两者必不可能同时位于 $t = \left \lfloor \frac{cur}{2} \right \rfloor$ 的同一侧（偏大、偏小或数值重复），因此我们可以计算 $[1, t]$ 范围内的理论总和与实际总和之间的差值来确定其一（将问题转换为求解缺失一值），再结合缺失两值之和 $sum$ 算得答案。</p>
+<p>Java 代码：<br><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span>[] missingTwo(<span class="hljs-type">int</span>[] nums) &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> nums.length + <span class="hljs-number">2</span>, cur = n * (<span class="hljs-number">1</span> + n) / <span class="hljs-number">2</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> x : nums) cur -= x;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">sum</span> <span class="hljs-operator">=</span> cur, t = cur / <span class="hljs-number">2</span>;<br>        cur = t * (<span class="hljs-number">1</span> + t) / <span class="hljs-number">2</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> x : nums) &#123;<br>            <span class="hljs-keyword">if</span> (x &lt;= t) cur -= x;<br>        &#125;<br>        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[]&#123;cur, sum - cur&#125;;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure><br>TypeScript 代码：<br><figure class="highlight typescript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs TypeScript"><span class="hljs-keyword">function</span> <span class="hljs-title function_">missingTwo</span>(<span class="hljs-params">nums: <span class="hljs-built_in">number</span>[]</span>): <span class="hljs-built_in">number</span>[] &#123;<br>    <span class="hljs-keyword">let</span> n = nums.<span class="hljs-property">length</span> + <span class="hljs-number">2</span>, cur = <span class="hljs-title class_">Math</span>.<span class="hljs-title function_">floor</span>(n * (<span class="hljs-number">1</span> + n) / <span class="hljs-number">2</span>)<br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> x <span class="hljs-keyword">of</span> nums) cur -= x<br>    <span class="hljs-keyword">let</span> sum = cur, t = <span class="hljs-title class_">Math</span>.<span class="hljs-title function_">floor</span>(cur / <span class="hljs-number">2</span>)<br>    cur = <span class="hljs-title class_">Math</span>.<span class="hljs-title function_">floor</span>(t * (<span class="hljs-number">1</span> + t) / <span class="hljs-number">2</span>)<br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> x <span class="hljs-keyword">of</span> nums) &#123;<br>        <span class="hljs-keyword">if</span> (x &lt;= t) cur -= x<br>    &#125;<br>    <span class="hljs-keyword">return</span> [cur, sum - cur]<br>&#125;;<br></code></pre></div></td></tr></table></figure><br>Python 代码：<br><figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span>:<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">missingTwo</span>(<span class="hljs-params">self, nums: <span class="hljs-type">List</span>[<span class="hljs-built_in">int</span>]</span>) -&gt; <span class="hljs-type">List</span>[<span class="hljs-built_in">int</span>]:<br>        n = <span class="hljs-built_in">len</span>(nums) + <span class="hljs-number">2</span><br>        cur = n * (<span class="hljs-number">1</span> + n) // <span class="hljs-number">2</span> - <span class="hljs-built_in">sum</span>(nums)<br>        tot, t = cur, cur // <span class="hljs-number">2</span><br>        cur = t * (<span class="hljs-number">1</span> + t) // <span class="hljs-number">2</span> - <span class="hljs-built_in">sum</span>([x <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> nums <span class="hljs-keyword">if</span> x &lt;= t])<br>        <span class="hljs-keyword">return</span> [cur, tot - cur]<br></code></pre></div></td></tr></table></figure></p>
 <ul>
 <li>时间复杂度：$O(n)$</li>
-<li>空间复杂度：$O(n)$</li>
+<li>空间复杂度：$O(1)$</li>
 </ul>
 <hr>
-<h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>这是我们「刷穿 LeetCode」系列文章的第 <code>No.926</code> 篇，系列开始于 2021/01/01，截止于起始日 LeetCode 上共有 1916 道题目，部分是有锁题，我们将先把所有不带锁的题目刷完。</p>
+<h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>这是我们「刷穿 LeetCode」系列文章的第 <code>No.面试题 17.19</code> 篇，系列开始于 2021/01/01，截止于起始日 LeetCode 上共有 1916 道题目，部分是有锁题，我们将先把所有不带锁的题目刷完。</p>
 <p>在这个系列文章里面，除了讲解解题思路以外，还会尽可能给出最为简洁的代码。如果涉及通解还会相应的代码模板。</p>
 <p>为了方便各位同学能够电脑上进行调试和提交代码，我建立了相关的仓库：<a target="_blank" rel="noopener" href="https://github.com/SharingSource/LogicStack-LeetCode">https://github.com/SharingSource/LogicStack-LeetCode</a> 。</p>
 <p>在仓库地址里，你可以看到系列文章的题解链接、系列文章的相应代码、LeetCode 原题链接和其他优选题解。</p>
@@ -288,21 +266,7 @@
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/%E4%BA%8C%E5%88%86/">二分</a>
-                    
-                      <a class="hover-with-bg" href="/tags/%E5%89%8D%E7%BC%80%E5%92%8C/">前缀和</a>
-                    
-                      <a class="hover-with-bg" href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/">动态规划</a>
-                    
-                      <a class="hover-with-bg" href="/tags/%E8%B4%AA%E5%BF%83/">贪心</a>
-                    
-                      <a class="hover-with-bg" href="/tags/%E5%AE%B9%E6%96%A5%E5%8E%9F%E7%90%86/">容斥原理</a>
-                    
-                      <a class="hover-with-bg" href="/tags/%E6%9E%9A%E4%B8%BE/">枚举</a>
-                    
-                      <a class="hover-with-bg" href="/tags/%E5%BA%8F%E5%88%97-DP/">序列 DP</a>
-                    
-                      <a class="hover-with-bg" href="/tags/LIS/">LIS</a>
+                      <a class="hover-with-bg" href="/tags/%E6%95%B0%E5%AD%A6/">数学</a>
                     
                   </div>
                 
@@ -319,18 +283,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2022/06/12/890.%20%E6%9F%A5%E6%89%BE%E5%92%8C%E6%9B%BF%E6%8D%A2%E6%A8%A1%E5%BC%8F%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">LC 890. 查找和替换模式</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2022/06/10/730.%20%E7%BB%9F%E8%AE%A1%E4%B8%8D%E5%90%8C%E5%9B%9E%E6%96%87%E5%AD%90%E5%BA%8F%E5%88%97%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/">
-                        <span class="hidden-mobile">LC 730. 统计不同回文子序列</span>
+                      <a href="/2022/09/25/788.%20%E6%97%8B%E8%BD%AC%E6%95%B0%E5%AD%97%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/">
+                        <span class="hidden-mobile">LC 788. 旋转数字</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
