@@ -16,23 +16,21 @@
   <meta name="author" content="宫水三叶">
   <meta name="keywords" content="算法, 数据结构, 题解">
   
-    <meta name="description" content="题目描述这是 LeetCode 上的 475. 供暖器 ，难度为 中等。 冬季已经来临。 你的任务是设计一个有固定加热半径的供暖器向所有房屋供暖。 在加热器的加热半径范围内的每个房屋都可以获得供暖。 现在，给出位于一条水平线上的房屋 houses 和供暖器 heaters 的位置，请你找出并返回可以覆盖所有房屋的最小加热半径。 说明：所有供暖器都遵循你的半径标准，加热的半径也一样。 示例 1:12">
+    <meta name="description" content="题目描述这是 LeetCode 上的 面试题 01.02. 判定是否互为字符重排 ，难度为 简单。 给定两个字符串 s1 和 s2，请编写一个程序，确定其中一个字符串的字符重新排列后，能否变成另一个字符串。 示例 1：123输入: s1 &#x3D; &quot;abc&quot;, s2 &#x3D; &quot;bca&quot;输出: true 示例 2：123输入: s1 &#x3D; &quot;abc&quot;,">
 <meta property="og:type" content="article">
-<meta property="og:title" content="LC 475. 供暖器">
-<meta property="og:url" content="https://sharingsource.github.io/2021/12/19/475.%20%E4%BE%9B%E6%9A%96%E5%99%A8%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/index.html">
+<meta property="og:title" content="LC 面试题 01.02. 判定是否互为字符重排">
+<meta property="og:url" content="https://sharingsource.github.io/2022/09/27/%E9%9D%A2%E8%AF%95%E9%A2%98%2001.02.%20%E5%88%A4%E5%AE%9A%E6%98%AF%E5%90%A6%E4%BA%92%E4%B8%BA%E5%AD%97%E7%AC%A6%E9%87%8D%E6%8E%92%EF%BC%88%E7%AE%80%E5%8D%95%EF%BC%89/index.html">
 <meta property="og:site_name" content="宫水三叶的刷题日记">
-<meta property="og:description" content="题目描述这是 LeetCode 上的 475. 供暖器 ，难度为 中等。 冬季已经来临。 你的任务是设计一个有固定加热半径的供暖器向所有房屋供暖。 在加热器的加热半径范围内的每个房屋都可以获得供暖。 现在，给出位于一条水平线上的房屋 houses 和供暖器 heaters 的位置，请你找出并返回可以覆盖所有房屋的最小加热半径。 说明：所有供暖器都遵循你的半径标准，加热的半径也一样。 示例 1:12">
+<meta property="og:description" content="题目描述这是 LeetCode 上的 面试题 01.02. 判定是否互为字符重排 ，难度为 简单。 给定两个字符串 s1 和 s2，请编写一个程序，确定其中一个字符串的字符重新排列后，能否变成另一个字符串。 示例 1：123输入: s1 &#x3D; &quot;abc&quot;, s2 &#x3D; &quot;bca&quot;输出: true 示例 2：123输入: s1 &#x3D; &quot;abc&quot;,">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2021-12-19T15:14:04.000Z">
-<meta property="article:modified_time" content="2022-06-07T02:38:56.365Z">
+<meta property="article:published_time" content="2022-09-26T17:12:21.000Z">
+<meta property="article:modified_time" content="2022-09-27T01:48:34.275Z">
 <meta property="article:author" content="宫水三叶">
-<meta property="article:tag" content="二分">
-<meta property="article:tag" content="双指针">
-<meta property="article:tag" content="排序">
+<meta property="article:tag" content="模拟">
 <meta name="twitter:card" content="summary_large_image">
   
   
-  <title>LC 475. 供暖器 - 宫水三叶的刷题日记</title>
+  <title>LC 面试题 01.02. 判定是否互为字符重排 - 宫水三叶的刷题日记</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -177,12 +175,12 @@
 </nav>
 
     <div class="banner" id="banner" parallax=true
-         style="background: url('/img/image_216.jpg') no-repeat center center;
+         style="background: url('/img/image_41.png') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="LC 475. 供暖器">
+            <span class="h2" id="subtitle" title="LC 面试题 01.02. 判定是否互为字符重排">
               
             </span>
 
@@ -197,8 +195,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-12-19 23:14" pubdate>
-        2021年12月19日
+      <time datetime="2022-09-27 01:12" pubdate>
+        2022年9月27日
       </time>
     </span>
   
@@ -234,40 +232,26 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">LC 475. 供暖器</h1>
+            <h1 style="display: none">LC 面试题 01.02. 判定是否互为字符重排</h1>
             
             <div class="markdown-body">
-              <h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>这是 LeetCode 上的 <strong><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/heaters/solution/gong-shui-san-xie-er-fen-shuang-zhi-zhen-mys4/">475. 供暖器</a></strong> ，难度为 <strong>中等</strong>。</p>
-<p>冬季已经来临。 你的任务是设计一个有固定加热半径的供暖器向所有房屋供暖。</p>
-<p>在加热器的加热半径范围内的每个房屋都可以获得供暖。</p>
-<p>现在，给出位于一条水平线上的房屋 <code>houses</code> 和供暖器 <code>heaters</code> 的位置，请你找出并返回可以覆盖所有房屋的最小加热半径。</p>
-<p>说明：所有供暖器都遵循你的半径标准，加热的半径也一样。</p>
-<p>示例 1:<br><figure class="highlight makefile"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs makefile"><span class="hljs-section">输入: houses = [1,2,3], heaters = [2]</span><br><br><span class="hljs-section">输出: 1</span><br><br><span class="hljs-section">解释: 仅在位置2上有一个供暖器。如果我们将加热半径设为1，那么所有房屋就都能得到供暖。</span><br></code></pre></div></td></tr></table></figure><br>示例 2:<br><figure class="highlight makefile"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs makefile"><span class="hljs-section">输入: houses = [1,2,3,4], heaters = [1,4]</span><br><br><span class="hljs-section">输出: 1</span><br><br><span class="hljs-section">解释: 在位置1, 4上有两个供暖器。我们需要将加热半径设为1，这样所有房屋就都能得到供暖。</span><br></code></pre></div></td></tr></table></figure><br>示例 3：<br><figure class="highlight inform7"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs inform7">输入：houses = <span class="hljs-comment">[1,5]</span>, heaters = <span class="hljs-comment">[2]</span><br><br>输出：3<br></code></pre></div></td></tr></table></figure></p>
-<p>提示：</p>
+              <h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>这是 LeetCode 上的 <strong><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/check-permutation-lcci/solution/by-ac_oier-qj3j/">面试题 01.02. 判定是否互为字符重排</a></strong> ，难度为 <strong>简单</strong>。</p>
+<p>给定两个字符串 <code>s1</code> 和 <code>s2</code>，请编写一个程序，确定其中一个字符串的字符重新排列后，能否变成另一个字符串。</p>
+<p>示例 1：<br><figure class="highlight armasm"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs armasm">输入: <span class="hljs-built_in">s1</span> = <span class="hljs-string">&quot;abc&quot;</span>, <span class="hljs-built_in">s2</span> = <span class="hljs-string">&quot;bca&quot;</span><br><br>输出: true <br></code></pre></div></td></tr></table></figure><br>示例 2：<br><figure class="highlight armasm"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs armasm">输入: <span class="hljs-built_in">s1</span> = <span class="hljs-string">&quot;abc&quot;</span>, <span class="hljs-built_in">s2</span> = <span class="hljs-string">&quot;bad&quot;</span><br><br>输出: false<br></code></pre></div></td></tr></table></figure></p>
+<p>说明：</p>
 <ul>
-<li>$1 &lt;= houses.length, heaters.length &lt;= 3 \times 10^4$</li>
-<li>$1 &lt;= houses[i], heaters[i] &lt;= 10^9$</li>
+<li>$0 &lt;= len(s1) &lt;= 100$</li>
+<li>$0 &lt;= len(s2) &lt;= 100$</li>
 </ul>
 <hr>
-<h3 id="二分-双指针"><a href="#二分-双指针" class="headerlink" title="二分 + 双指针"></a>二分 + 双指针</h3><p>需要求得最小加热半径 $ans$，使得所有的 $houses[i]$ 均被覆盖。</p>
-<p>在以 $ans$ 为分割点的数轴上具有「二段性」：</p>
+<h3 id="模拟"><a href="#模拟" class="headerlink" title="模拟"></a>模拟</h3><p>根据题意，对两字符串进行词频统计，统计过程中使用变量 <code>tot</code> 记录词频不同的字符个数。</p>
+<p>Java 代码：<br><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">CheckPermutation</span><span class="hljs-params">(String s1, String s2)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> s1.length(), m = s2.length(), tot = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">if</span> (n != m) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>        <span class="hljs-type">int</span>[] cnts = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[<span class="hljs-number">128</span>];<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; n; i++) &#123;<br>            <span class="hljs-keyword">if</span> (++cnts[s1.charAt(i)] == <span class="hljs-number">1</span>) tot++;<br>            <span class="hljs-keyword">if</span> (--cnts[s2.charAt(i)] == <span class="hljs-number">0</span>) tot--;<br>        &#125;<br>        <span class="hljs-type">return</span> <span class="hljs-variable">tot</span> <span class="hljs-operator">=</span>= <span class="hljs-number">0</span>;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure><br>TypeScript 代码：<br><figure class="highlight typescript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs TypeScript"><span class="hljs-keyword">function</span> <span class="hljs-title function_">CheckPermutation</span>(<span class="hljs-params">s1: <span class="hljs-built_in">string</span>, s2: <span class="hljs-built_in">string</span></span>): <span class="hljs-built_in">boolean</span> &#123;<br>    <span class="hljs-keyword">let</span> n = s1.<span class="hljs-property">length</span>, m = s2.<span class="hljs-property">length</span>, tot = <span class="hljs-number">0</span><br>    <span class="hljs-keyword">if</span> (n != m) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span><br>    <span class="hljs-keyword">const</span> cnts = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Array</span>&lt;<span class="hljs-built_in">number</span>&gt;(<span class="hljs-number">128</span>).<span class="hljs-title function_">fill</span>(<span class="hljs-number">0</span>)<br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; n; i++) &#123;<br>        <span class="hljs-keyword">if</span> (++cnts[s1.<span class="hljs-title function_">charCodeAt</span>(i)] == <span class="hljs-number">1</span>) tot++<br>        <span class="hljs-keyword">if</span> (--cnts[s2.<span class="hljs-title function_">charCodeAt</span>(i)] == <span class="hljs-number">0</span>) tot--<br>    &#125;<br>    <span class="hljs-keyword">return</span> tot == <span class="hljs-number">0</span><br>&#125;;<br></code></pre></div></td></tr></table></figure><br>Python3 代码：<br><figure class="highlight plaintext"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Python3">class Solution:<br>    def CheckPermutation(self, s1: str, s2: str) -&gt; bool:<br>        return Counter(s1) == Counter(s2)<br></code></pre></div></td></tr></table></figure></p>
 <ul>
-<li>数值小于 $ans$ 的半径无法覆盖所有的房子；</li>
-<li>数值大于等于 $ans$ 的半径可以覆盖所有房子。</li>
-</ul>
-<p>因此可直接「二分答案」，考虑应该在什么范围内进行「二分」。</p>
-<p>可以从数据范围入手，使用 $1e9$ 为二分上界，该做法能确保答案在二分范围内。</p>
-<p>考虑如何实现 <code>check</code> 函数。</p>
-<p>先对 $houses$ 和 $heaters$ 进行排序，使用 $i$ 指向当前处理到的 $houses[i]$；$j$ 指向 <strong>可能</strong> 覆盖到 $houses[i]$ 的最小下标 $heaters[j]$；$x$ 代表当前需要 <code>check</code> 的半径。</p>
-<p>当且仅当 $heaters[j] + x &lt; houses[i]$ 时，$houses[i]$ 必然不能被 $heaters[j]$ 所覆盖，此时让 $j$ 自增。</p>
-<p>找到合适的 $j$ 之后，再检查 $heaters[j] - x &lt;= houses[i] &lt;= heaters[j] + x$ 是否满足，即可知道 $houses[i]$ 的覆盖情况。</p>
-<p>代码：<br><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">findRadius</span><span class="hljs-params">(<span class="hljs-type">int</span>[] houses, <span class="hljs-type">int</span>[] heaters)</span> &#123;<br>        Arrays.sort(houses);<br>        Arrays.sort(heaters);<br>        <span class="hljs-type">int</span> <span class="hljs-variable">l</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>, r = (<span class="hljs-type">int</span>) <span class="hljs-number">1e9</span>;<br>        <span class="hljs-keyword">while</span> (l &lt; r) &#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">mid</span> <span class="hljs-operator">=</span> l + r &gt;&gt; <span class="hljs-number">1</span>;<br>            <span class="hljs-keyword">if</span> (check(houses, heaters, mid)) r = mid;<br>            <span class="hljs-keyword">else</span> l = mid + <span class="hljs-number">1</span>;<br>        &#125;<br>        <span class="hljs-keyword">return</span> r;<br>    &#125;<br>    <span class="hljs-type">boolean</span> <span class="hljs-title function_">check</span><span class="hljs-params">(<span class="hljs-type">int</span>[] houses, <span class="hljs-type">int</span>[] heaters, <span class="hljs-type">int</span> x)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> houses.length, m = heaters.length;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>, j = <span class="hljs-number">0</span>; i &lt; n; i++) &#123;<br>            <span class="hljs-keyword">while</span> (j &lt; m &amp;&amp; houses[i] &gt; heaters[j] + x) j++;<br>            <span class="hljs-keyword">if</span> (j &lt; m &amp;&amp; heaters[j] - x &lt;= houses[i] &amp;&amp; houses[i] &lt;= heaters[j] + x) <span class="hljs-keyword">continue</span>;<br>            <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>        &#125;<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure></p>
-<ul>
-<li>时间复杂度：令 $n$ 和 $m$ 分别为 <code>houses</code> 和 <code>heaters</code> 长度，$L = 1e9$ 为最大长度，对其进行排序复杂度为 $O(n\log{n} + m\log{m})$，在 $[0, L]$ 范围进行二分，单次 <code>check</code> 会使用「双指针」判断是否每个 $houses[i]$ 是否被覆盖，复杂度为 $O(\max(n, m) \times \log{L})$。整体复杂度为 $O(\max(n, m) \times \log{L})$</li>
-<li>空间复杂度：排序所需要消耗的空间。复杂度为 $O(\log{n} + \log{m})$</li>
+<li>时间复杂度：$O(n)$</li>
+<li>空间复杂度：$O(C)$，其中 $C = 128$ 为字符集大小</li>
 </ul>
 <hr>
-<h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>这是我们「刷穿 LeetCode」系列文章的第 <code>No.475</code> 篇，系列开始于 2021/01/01，截止于起始日 LeetCode 上共有 1916 道题目，部分是有锁题，我们将先把所有不带锁的题目刷完。</p>
+<h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>这是我们「刷穿 LeetCode」系列文章的第 <code>No.面试题 01.02</code> 篇，系列开始于 2021/01/01，截止于起始日 LeetCode 上共有 1916 道题目，部分是有锁题，我们将先把所有不带锁的题目刷完。</p>
 <p>在这个系列文章里面，除了讲解解题思路以外，还会尽可能给出最为简洁的代码。如果涉及通解还会相应的代码模板。</p>
 <p>为了方便各位同学能够电脑上进行调试和提交代码，我建立了相关的仓库：<a target="_blank" rel="noopener" href="https://github.com/SharingSource/LogicStack-LeetCode">https://github.com/SharingSource/LogicStack-LeetCode</a> 。</p>
 <p>在仓库地址里，你可以看到系列文章的题解链接、系列文章的相应代码、LeetCode 原题链接和其他优选题解。</p>
@@ -281,11 +265,7 @@
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/%E4%BA%8C%E5%88%86/">二分</a>
-                    
-                      <a class="hover-with-bg" href="/tags/%E5%8F%8C%E6%8C%87%E9%92%88/">双指针</a>
-                    
-                      <a class="hover-with-bg" href="/tags/%E6%8E%92%E5%BA%8F/">排序</a>
+                      <a class="hover-with-bg" href="/tags/%E6%A8%A1%E6%8B%9F/">模拟</a>
                     
                   </div>
                 
@@ -302,18 +282,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2021/12/21/686.%20%E9%87%8D%E5%A4%8D%E5%8F%A0%E5%8A%A0%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%8C%B9%E9%85%8D%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">LC 686. 重复叠加字符串匹配</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/12/19/997.%20%E6%89%BE%E5%88%B0%E5%B0%8F%E9%95%87%E7%9A%84%E6%B3%95%E5%AE%98%EF%BC%88%E7%AE%80%E5%8D%95%EF%BC%89/">
-                        <span class="hidden-mobile">LC 997. 找到小镇的法官</span>
+                      <a href="/2022/09/26/%E9%9D%A2%E8%AF%95%E9%A2%98%2017.19.%20%E6%B6%88%E5%A4%B1%E7%9A%84%E4%B8%A4%E4%B8%AA%E6%95%B0%E5%AD%97%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/">
+                        <span class="hidden-mobile">LC 面试题 17.19. 消失的两个数字</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
