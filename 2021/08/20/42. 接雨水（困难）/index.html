@@ -19,19 +19,20 @@
     <meta name="description" content="题目描述这是 LeetCode 上的 42. 接雨水 ，难度为 困难。 给定 n 个非负整数表示每个宽度为 1 的柱子的高度图，计算按此排列的柱子，下雨之后能接多少雨水。 示例 1：  12345输入：height &#x3D; [0,1,0,2,1,0,1,3,2,1,2,1]输出：6解释：上面是由数组 [0,1,0,2,1,0,1,3,2,1,2,1] 表示的高度图，在这种情况下，可以接 6 个单位的雨">
 <meta property="og:type" content="article">
 <meta property="og:title" content="LC 42. 接雨水">
-<meta property="og:url" content="https://sharingsource.github.io/2021/02/02/42.%20%E6%8E%A5%E9%9B%A8%E6%B0%B4%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/index.html">
+<meta property="og:url" content="https://sharingsource.github.io/2021/08/20/42.%20%E6%8E%A5%E9%9B%A8%E6%B0%B4%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/index.html">
 <meta property="og:site_name" content="宫水三叶的刷题日记">
 <meta property="og:description" content="题目描述这是 LeetCode 上的 42. 接雨水 ，难度为 困难。 给定 n 个非负整数表示每个宽度为 1 的柱子的高度图，计算按此排列的柱子，下雨之后能接多少雨水。 示例 1：  12345输入：height &#x3D; [0,1,0,2,1,0,1,3,2,1,2,1]输出：6解释：上面是由数组 [0,1,0,2,1,0,1,3,2,1,2,1] 表示的高度图，在这种情况下，可以接 6 个单位的雨">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://sharingsource.github.io/2021/02/02/42.%20%E6%8E%A5%E9%9B%A8%E6%B0%B4%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/image_0.png">
-<meta property="og:image" content="https://sharingsource.github.io/2021/02/02/42.%20%E6%8E%A5%E9%9B%A8%E6%B0%B4%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/image_1.png">
-<meta property="article:published_time" content="2021-02-02T07:56:37.000Z">
-<meta property="article:modified_time" content="2022-05-18T08:27:48.698Z">
+<meta property="og:image" content="https://sharingsource.github.io/2021/08/20/42.%20%E6%8E%A5%E9%9B%A8%E6%B0%B4%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/image_0.png">
+<meta property="og:image" content="https://sharingsource.github.io/2021/08/20/42.%20%E6%8E%A5%E9%9B%A8%E6%B0%B4%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/image_1.png">
+<meta property="article:published_time" content="2021-08-19T16:00:00.000Z">
+<meta property="article:modified_time" content="2022-09-28T11:51:15.407Z">
 <meta property="article:author" content="宫水三叶">
+<meta property="article:tag" content="模拟">
 <meta property="article:tag" content="数学">
 <meta property="article:tag" content="单调栈">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://sharingsource.github.io/2021/02/02/42.%20%E6%8E%A5%E9%9B%A8%E6%B0%B4%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/image_0.png">
+<meta name="twitter:image" content="https://sharingsource.github.io/2021/08/20/42.%20%E6%8E%A5%E9%9B%A8%E6%B0%B4%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/image_0.png">
   
   
   <title>LC 42. 接雨水 - 宫水三叶的刷题日记</title>
@@ -199,8 +200,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-02-02 15:56" pubdate>
-        2021年2月2日
+      <time datetime="2021-08-20 00:00" pubdate>
+        2021年8月20日
       </time>
     </span>
   
@@ -240,30 +241,28 @@
             
             <div class="markdown-body">
               <h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>这是 LeetCode 上的 <strong><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/trapping-rain-water/solution/po-su-jie-fa-on2-cha-zhao-you-hua-on-dan-iu44/">42. 接雨水</a></strong> ，难度为 <strong>困难</strong>。</p>
-<p>给定 n 个非负整数表示每个宽度为 1 的柱子的高度图，计算按此排列的柱子，下雨之后能接多少雨水。</p>
+<p>给定 <code>n</code> 个非负整数表示每个宽度为 <code>1</code> 的柱子的高度图，计算按此排列的柱子，下雨之后能接多少雨水。</p>
 <p>示例 1：</p>
-<p><img src="/2021/02/02/42.%20%E6%8E%A5%E9%9B%A8%E6%B0%B4%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/image_0.png" srcset="/img/loading.gif" lazyload alt></p>
+<p><img src="/2021/08/20/42.%20%E6%8E%A5%E9%9B%A8%E6%B0%B4%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/image_0.png" srcset="/img/loading.gif" lazyload alt></p>
 <figure class="highlight dns"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs dns">输入：height = [<span class="hljs-number">0,1,0,2</span>,<span class="hljs-number">1,0,1,3</span>,<span class="hljs-number">2,1,2,1</span>]<br><br>输出：<span class="hljs-number">6</span><br><br>解释：上面是由数组 [<span class="hljs-number">0,1,0,2</span>,<span class="hljs-number">1,0,1,3</span>,<span class="hljs-number">2,1,2,1</span>] 表示的高度图，在这种情况下，可以接 <span class="hljs-number">6</span> 个单位的雨水（蓝色部分表示雨水）。 <br></code></pre></div></td></tr></table></figure>
 <p>示例 2：<br><figure class="highlight accesslog"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs accesslog">输入：height = <span class="hljs-string">[4,2,0,3,2,5]</span><br><br>输出：<span class="hljs-number">9</span><br></code></pre></div></td></tr></table></figure></p>
 <p>提示：</p>
 <ul>
-<li>n == height.length</li>
-<li>0 &lt;= n &lt;= 3 * $10^4$</li>
-<li>0 &lt;= height[i] &lt;= $10^5$</li>
+<li>$n = height.length$</li>
+<li>$0 &lt;= n &lt;= 3 * 10^4$</li>
+<li>$0 &lt;= height[i] &lt;= 10^5$</li>
 </ul>
 <hr>
 <h3 id="朴素解法"><a href="#朴素解法" class="headerlink" title="朴素解法"></a>朴素解法</h3><p>对于每根柱子而言，我们只需要找出「其左边最高的柱子」和「其右边最高的柱子」。</p>
 <p>对左右的最高柱子取一个最小值，再和当前柱子的高度做一个比较，即可得出当前位置可以接下的雨水。</p>
 <p>同时，边缘的柱子不可能接到雨水（某一侧没有柱子）。</p>
-<p>这样的做法属于「暴力做法」，但题目没有给数据范围，我们无法分析到底能否 AC。</p>
-<p>唯唯诺诺交一个，过了 ~ （好题，建议加入蓝桥杯</p>
 <p>代码：<br><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">trap</span><span class="hljs-params">(<span class="hljs-type">int</span>[] height)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> height.length;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">ans</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>; i &lt; n - <span class="hljs-number">1</span>; i++) &#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">cur</span> <span class="hljs-operator">=</span> height[i];<br><br>            <span class="hljs-comment">// 获取当前位置的左边最大值</span><br>            <span class="hljs-type">int</span> <span class="hljs-variable">l</span> <span class="hljs-operator">=</span> Integer.MIN_VALUE;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> i - <span class="hljs-number">1</span>; j &gt;= <span class="hljs-number">0</span>; j--) l = Math.max(l, height[j]);<br>            <span class="hljs-keyword">if</span> (l &lt;= cur) <span class="hljs-keyword">continue</span>;<br><br>            <span class="hljs-comment">// 获取当前位置的右边边最大值</span><br>            <span class="hljs-type">int</span> <span class="hljs-variable">r</span> <span class="hljs-operator">=</span> Integer.MIN_VALUE;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> i + <span class="hljs-number">1</span>; j &lt; n; j++) r = Math.max(r, height[j]);<br>            <span class="hljs-keyword">if</span> (r &lt;= cur) <span class="hljs-keyword">continue</span>;<br><br>            <span class="hljs-comment">// 计算当前位置可接的雨水</span><br>            ans += Math.min(l, r) - cur;<br>        &#125;<br>        <span class="hljs-keyword">return</span> ans;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure></p>
 <ul>
 <li>时间复杂度：需要处理所有非边缘的柱子，复杂度为 $O(n)$；对于每根柱子而言，需要往两边扫描分别找到最大值，复杂度为 $O(n)$。整体复杂度为 $O(n^2)$</li>
 <li>空间复杂度：$O(1)$</li>
 </ul>
 <hr>
-<h3 id="预处理最值解法"><a href="#预处理最值解法" class="headerlink" title="预处理最值解法"></a>预处理最值解法</h3><p>朴素解法的思路有了，我们想想怎么优化。</p>
+<h3 id="预处理最值"><a href="#预处理最值" class="headerlink" title="预处理最值"></a>预处理最值</h3><p>朴素解法的思路有了，我们想想怎么优化。</p>
 <p>事实上，任何的优化无非都是「减少重复」。</p>
 <p>想想在朴素思路中有哪些环节比较耗时，耗时环节中又有哪些地方是重复的，可以优化的。</p>
 <p>首先对每根柱子进行遍历，求解每根柱子可以接下多少雨水，这个 $O(n)$ 操作肯定省不了。</p>
@@ -279,7 +278,7 @@
 <li>空间复杂度：使用了数组存储两侧最大值。复杂度为 $O(n)$</li>
 </ul>
 <hr>
-<h3 id="单调栈解法"><a href="#单调栈解法" class="headerlink" title="单调栈解法"></a>单调栈解法</h3><p>前面我们讲到，优化思路将问题转化为：<strong>给定一个数组，如何求得任意位置的左半边的最大值和右半边的最大值。</strong></p>
+<h3 id="单调栈"><a href="#单调栈" class="headerlink" title="单调栈"></a>单调栈</h3><p>前面我们讲到，优化思路将问题转化为：<strong>给定一个数组，如何求得任意位置的左半边的最大值和右半边的最大值。</strong></p>
 <p>但仔细一想，其实我们并不需要找两侧最大值，只需要找到两侧最近的比当前位置高的柱子就行了。</p>
 <p>针对这一类找最近值的问题，有一个通用解法：<strong>单调栈</strong>。</p>
 <p><strong>单调栈其实就是在栈的基础上，维持一个栈内元素单调。</strong></p>
@@ -297,12 +296,12 @@
 <li>空间复杂度：栈最多存储 $n$ 个元素。复杂度为 $O(n)$</li>
 </ul>
 <hr>
-<h3 id="面积差值解法"><a href="#面积差值解法" class="headerlink" title="面积差值解法"></a>面积差值解法</h3><p>事实上，我们还能利用「面积差值」来进行求解。</p>
+<h3 id="面积差值"><a href="#面积差值" class="headerlink" title="面积差值"></a>面积差值</h3><p>事实上，我们还能利用「面积差值」来进行求解。</p>
 <p>我们先统计出「柱子面积」$sum$ 和「以柱子个数为宽、最高柱子高度为高的矩形面积」$full$。</p>
 <p>然后分别「从左往右」和「从右往左」计算一次最大高度覆盖面积 $lSum$ 和 $rSum$。</p>
 <p><strong>显然会出现重复面积，并且重复面积只会独立地出现在「山峰」的左边和右边。</strong></p>
 <p>利用此特性，我们可以通过简单的等式关系求解出「雨水面积」：</p>
-<p><img src="/2021/02/02/42.%20%E6%8E%A5%E9%9B%A8%E6%B0%B4%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/image_1.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<p><img src="/2021/08/20/42.%20%E6%8E%A5%E9%9B%A8%E6%B0%B4%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/image_1.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
 <p>代码：<br><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">trap</span><span class="hljs-params">(<span class="hljs-type">int</span>[] height)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> height.length;<br><br>        <span class="hljs-type">int</span> <span class="hljs-variable">sum</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>, max = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; n; i++) &#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">cur</span> <span class="hljs-operator">=</span> height[i];<br>            sum += cur;<br>            max = Math.max(max, cur);<br>        &#125;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">full</span> <span class="hljs-operator">=</span> max * n;<br><br>        <span class="hljs-type">int</span> <span class="hljs-variable">lSum</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>, lMax = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; n; i++) &#123;<br>            lMax = Math.max(lMax, height[i]);<br>            lSum += lMax;<br>        &#125;<br><br>        <span class="hljs-type">int</span> <span class="hljs-variable">rSum</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>, rMax = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> n - <span class="hljs-number">1</span>; i &gt;= <span class="hljs-number">0</span>; i--) &#123;<br>            rMax = Math.max(rMax, height[i]);<br>            rSum += rMax;<br>        &#125;<br><br>        <span class="hljs-keyword">return</span> lSum + rSum - full - sum;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure></p>
 <ul>
 <li>时间复杂度：$O(n)$</li>
@@ -323,6 +322,8 @@
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
+                      <a class="hover-with-bg" href="/tags/%E6%A8%A1%E6%8B%9F/">模拟</a>
+                    
                       <a class="hover-with-bg" href="/tags/%E6%95%B0%E5%AD%A6/">数学</a>
                     
                       <a class="hover-with-bg" href="/tags/%E5%8D%95%E8%B0%83%E6%A0%88/">单调栈</a>
@@ -342,9 +343,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2021/02/03/480.%20%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3%E4%B8%AD%E4%BD%8D%E6%95%B0%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/">
+                      <a href="/2021/08/20/297.%20%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%BA%8F%E5%88%97%E5%8C%96%E4%B8%8E%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">LC 480. 滑动窗口中位数</span>
+                        <span class="hidden-mobile">LC 297. 二叉树的序列化与反序列化</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -352,8 +353,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/02/02/424.%20%E6%9B%BF%E6%8D%A2%E5%90%8E%E7%9A%84%E6%9C%80%E9%95%BF%E9%87%8D%E5%A4%8D%E5%AD%97%E7%AC%A6%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/">
-                        <span class="hidden-mobile">LC 424. 替换后的最长重复字符</span>
+                      <a href="/2021/08/20/517.%20%E8%B6%85%E7%BA%A7%E6%B4%97%E8%A1%A3%E6%9C%BA%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/">
+                        <span class="hidden-mobile">LC 517. 超级洗衣机</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
