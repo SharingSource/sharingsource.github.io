@@ -16,22 +16,21 @@
   <meta name="author" content="宫水三叶">
   <meta name="keywords" content="算法, 数据结构, 题解">
   
-    <meta name="description" content="题目描述这是 LeetCode 上的 1154. 一年中的第几天 ，难度为简单。 给你一个字符串 date，按 YYYY-MM-DD 格式表示一个 现行公元纪年法 日期。 请你计算并返回该日期是当年的第几天。 通常情况下，我们认为 1 月 1 日是每年的第 1 天，1 月 2 日是每年的第 2 天，依此类推。每个月的天数与现行公元纪年法（格里高利历）一致。 示例 1：123输入：date &#x3D; &amp;q">
+    <meta name="description" content="题目描述这是 LeetCode 上的 777. 在LR字符串中交换相邻字符 ，难度为 中等。 在一个由 &#39;L&#39; ,&#39;R&#39; 和 &#39;X&#39; 三个字符组成的字符串（例如 &quot;RXXLRXRXL&quot;）中进行移动操作。 一次移动操作指用一个 &quot;LX&quot; 替换一个 &quot;XL&quot;，或者用一个 &quot;XR&amp;quo">
 <meta property="og:type" content="article">
-<meta property="og:title" content="LC 1155. 掷骰子的N种方法">
-<meta property="og:url" content="https://sharingsource.github.io/2021/07/13/1155.%20%E6%8E%B7%E9%AA%B0%E5%AD%90%E7%9A%84N%E7%A7%8D%E6%96%B9%E6%B3%95%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89%20copy/index.html">
+<meta property="og:title" content="LC 777. 在LR字符串中交换相邻字符">
+<meta property="og:url" content="https://sharingsource.github.io/2021/08/20/777.%20%E5%9C%A8LR%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%AD%E4%BA%A4%E6%8D%A2%E7%9B%B8%E9%82%BB%E5%AD%97%E7%AC%A6%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/index.html">
 <meta property="og:site_name" content="宫水三叶的刷题日记">
-<meta property="og:description" content="题目描述这是 LeetCode 上的 1154. 一年中的第几天 ，难度为简单。 给你一个字符串 date，按 YYYY-MM-DD 格式表示一个 现行公元纪年法 日期。 请你计算并返回该日期是当年的第几天。 通常情况下，我们认为 1 月 1 日是每年的第 1 天，1 月 2 日是每年的第 2 天，依此类推。每个月的天数与现行公元纪年法（格里高利历）一致。 示例 1：123输入：date &#x3D; &amp;q">
+<meta property="og:description" content="题目描述这是 LeetCode 上的 777. 在LR字符串中交换相邻字符 ，难度为 中等。 在一个由 &#39;L&#39; ,&#39;R&#39; 和 &#39;X&#39; 三个字符组成的字符串（例如 &quot;RXXLRXRXL&quot;）中进行移动操作。 一次移动操作指用一个 &quot;LX&quot; 替换一个 &quot;XL&quot;，或者用一个 &quot;XR&amp;quo">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2021-07-12T21:50:54.000Z">
-<meta property="article:modified_time" content="2022-05-18T08:26:14.183Z">
+<meta property="article:published_time" content="2021-08-19T16:00:00.000Z">
+<meta property="article:modified_time" content="2022-10-03T01:28:17.800Z">
 <meta property="article:author" content="宫水三叶">
-<meta property="article:tag" content="模拟">
-<meta property="article:tag" content="前缀和">
+<meta property="article:tag" content="双指针">
 <meta name="twitter:card" content="summary_large_image">
   
   
-  <title>LC 1155. 掷骰子的N种方法 - 宫水三叶的刷题日记</title>
+  <title>LC 777. 在LR字符串中交换相邻字符 - 宫水三叶的刷题日记</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -176,12 +175,12 @@
 </nav>
 
     <div class="banner" id="banner" parallax=true
-         style="background: url('/img/image_54.jpeg') no-repeat center center;
+         style="background: url('/img/image_63.jpeg') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="LC 1155. 掷骰子的N种方法">
+            <span class="h2" id="subtitle" title="LC 777. 在LR字符串中交换相邻字符">
               
             </span>
 
@@ -196,8 +195,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-07-13 05:50" pubdate>
-        2021年7月13日
+      <time datetime="2021-08-20 00:00" pubdate>
+        2021年8月20日
       </time>
     </span>
   
@@ -233,33 +232,34 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">LC 1155. 掷骰子的N种方法</h1>
+            <h1 style="display: none">LC 777. 在LR字符串中交换相邻字符</h1>
             
             <div class="markdown-body">
-              <h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>这是 LeetCode 上的 <strong><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/day-of-the-year/solution/gong-shui-san-xie-jian-dan-qian-zhui-he-lwo2g/">1154. 一年中的第几天</a></strong> ，难度为<strong>简单</strong>。</p>
-<p>给你一个字符串 <code>date</code>，按 <code>YYYY-MM-DD</code> 格式表示一个 现行公元纪年法 日期。</p>
-<p>请你计算并返回该日期是当年的第几天。</p>
-<p>通常情况下，我们认为 <code>1</code> 月 <code>1</code> 日是每年的第 <code>1</code> 天，<code>1</code> 月 <code>2</code> 日是每年的第 <code>2</code> 天，依此类推。每个月的天数与现行公元纪年法（格里高利历）一致。</p>
-<p>示例 1：<br><figure class="highlight abnf"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs abnf">输入：date <span class="hljs-operator">=</span> <span class="hljs-string">&quot;2019-01-09&quot;</span><br><br>输出：<span class="hljs-number">9</span><br></code></pre></div></td></tr></table></figure><br>示例 2：<br><figure class="highlight abnf"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs abnf">输入：date <span class="hljs-operator">=</span> <span class="hljs-string">&quot;2019-02-10&quot;</span><br><br>输出：<span class="hljs-number">41</span><br></code></pre></div></td></tr></table></figure><br>示例 3：<br><figure class="highlight abnf"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs abnf">输入：date <span class="hljs-operator">=</span> <span class="hljs-string">&quot;2003-03-01&quot;</span><br><br>输出：<span class="hljs-number">60</span><br></code></pre></div></td></tr></table></figure><br>示例 4：<br><figure class="highlight abnf"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs abnf">输入：date <span class="hljs-operator">=</span> <span class="hljs-string">&quot;2004-03-01&quot;</span><br><br>输出：<span class="hljs-number">61</span><br></code></pre></div></td></tr></table></figure></p>
+              <h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>这是 LeetCode 上的 <strong><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/swim-in-rising-water/solution/gong-shui-san-xie-yi-ti-shuang-jie-krusk-7c6o/">777. 在LR字符串中交换相邻字符</a></strong> ，难度为 <strong>中等</strong>。</p>
+<p>在一个由 <code>&#39;L&#39;</code> ,<code>&#39;R&#39;</code> 和 <code>&#39;X&#39;</code> 三个字符组成的字符串（例如 <code>&quot;RXXLRXRXL&quot;</code>）中进行移动操作。</p>
+<p>一次移动操作指用一个 <code>&quot;LX&quot;</code> 替换一个 <code>&quot;XL&quot;</code>，或者用一个 <code>&quot;XR&quot;</code> 替换一个 <code>&quot;RX&quot;</code>。</p>
+<p>现给定起始字符串 <code>start</code> 和结束字符串 <code>end</code>，请编写代码，当且仅当存在一系列移动操作使得 <code>start</code> 可以转换成 <code>end</code> 时， 返回 <code>True</code>。</p>
+<p>示例 :<br><figure class="highlight coq"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs coq">输入: start = <span class="hljs-string">&quot;RXXLRXRXL&quot;</span>, <span class="hljs-keyword">end</span> = <span class="hljs-string">&quot;XRLXXRRLX&quot;</span><br><br>输出: True<br><br>解释:<br>我们可以通过以下几步将start转换成<span class="hljs-keyword">end</span>:<br>RXXLRXRXL -&gt;<br>XRXLRXRXL -&gt;<br>XRLXRXRXL -&gt;<br>XRLXXRRXL -&gt;<br>XRLXXRRLX<br></code></pre></div></td></tr></table></figure></p>
 <p>提示：</p>
 <ul>
-<li><code>date.length == 10</code></li>
-<li><code>date[4] == date[7] == &#39;-&#39;</code>，其他的 <code>date[i]</code> 都是数字</li>
-<li><code>date</code> 表示的范围从 <code>1900</code> 年 <code>1</code> 月 <code>1</code> 日至 <code>2019</code> 年 <code>12</code> 月 <code>31</code> 日</li>
+<li>$1 &lt;= len(start) = len(end) &lt;= 10000$</li>
+<li><code>start</code> 和 <code>end</code> 中的字符串仅限于 <code>&#39;L&#39;</code>, <code>&#39;R&#39;</code> 和 <code>&#39;X&#39;</code></li>
 </ul>
 <hr>
-<h3 id="模拟"><a href="#模拟" class="headerlink" title="模拟"></a>模拟</h3><p>根据题意进行模拟即可。</p>
-<p>由于每年月份的天数都相对固定（仅有闰年 $2$ 月份不同），因此我们可以使用 <code>static</code> 进行打表预处理。</p>
-<p>使用 <code>nums</code> 构建一个平年的月份数组，再通过「前缀和」得到平年的每个月的天数总和。</p>
-<p>最后将 <code>date</code> 按照 <code>-</code> 分割为年月日，分别进行计数。</p>
-<p>注意，当年份为闰年且当前月份超过了 $2$ 月份，要追加一天。</p>
-<p>代码：<br><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">static</span> <span class="hljs-type">int</span>[] nums = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[]&#123;<span class="hljs-number">31</span>, <span class="hljs-number">28</span>, <span class="hljs-number">31</span>, <span class="hljs-number">30</span>, <span class="hljs-number">31</span>, <span class="hljs-number">30</span>, <span class="hljs-number">31</span>, <span class="hljs-number">31</span>, <span class="hljs-number">30</span>, <span class="hljs-number">31</span>, <span class="hljs-number">30</span>, <span class="hljs-number">31</span>&#125;;<br>    <span class="hljs-keyword">static</span> <span class="hljs-type">int</span>[] f = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[<span class="hljs-number">13</span>];<br>    <span class="hljs-keyword">static</span> &#123;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>; i &lt;= <span class="hljs-number">12</span>; i++) f[i] = f[i - <span class="hljs-number">1</span>] + nums[i - <span class="hljs-number">1</span>];<br>    &#125;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">dayOfYear</span><span class="hljs-params">(String date)</span> &#123;<br>        String[] ss = date.split(<span class="hljs-string">&quot;-&quot;</span>);<br>        <span class="hljs-type">int</span> <span class="hljs-variable">y</span> <span class="hljs-operator">=</span> Integer.parseInt(ss[<span class="hljs-number">0</span>]), m = Integer.parseInt(ss[<span class="hljs-number">1</span>]), d = Integer.parseInt(ss[<span class="hljs-number">2</span>]);<br>        <span class="hljs-type">boolean</span> <span class="hljs-variable">isLeap</span> <span class="hljs-operator">=</span> (y % <span class="hljs-number">4</span> == <span class="hljs-number">0</span> &amp;&amp; y % <span class="hljs-number">100</span> != <span class="hljs-number">0</span>) || y % <span class="hljs-number">400</span> == <span class="hljs-number">0</span>;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">ans</span> <span class="hljs-operator">=</span> m &gt; <span class="hljs-number">2</span> &amp;&amp; isLeap ? f[m - <span class="hljs-number">1</span>] + <span class="hljs-number">1</span> : f[m - <span class="hljs-number">1</span>];<br>        <span class="hljs-keyword">return</span> ans + d;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure></p>
+<h3 id="双指针"><a href="#双指针" class="headerlink" title="双指针"></a>双指针</h3><p>根据题意，我们每次移动要么是将 <code>XL</code> 变为 <code>LX</code>，要么是将 <code>RX</code> 变为 <code>XR</code>，而该两者操作可分别看做将 <code>L</code> 越过多个 <code>X</code> 向左移动，将 <code>R</code> 越过多个 <code>X</code> 向右移动。</p>
+<p>因此在 <code>start</code> 和 <code>end</code> 中序号相同的 <code>L</code> 和 <code>R</code> 必然满足坐标性质：</p>
+<ol>
+<li>序号相同的 <code>L</code> : <code>start</code> 的下标不小于 <code>end</code> 的下标（即 <code>L</code> 不能往右移动）</li>
+<li>序号相同的 <code>R</code> : <code>start</code> 的下标不大于 <code>end</code> 的下标（即 <code>R</code> 不能往左移动）</li>
+</ol>
+<p>其中「序号」是指在 <code>LR</code> 字符串中出现的相对顺序。</p>
+<p>代码：<br><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">canTransform</span><span class="hljs-params">(String start, String end)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> start.length(), i = <span class="hljs-number">0</span>, j = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">while</span> (i &lt; n || j &lt; n) &#123;<br>            <span class="hljs-keyword">while</span> (i &lt; n &amp;&amp; start.charAt(i) == <span class="hljs-string">&#x27;X&#x27;</span>) i++;<br>            <span class="hljs-keyword">while</span> (j &lt; n &amp;&amp; end.charAt(j) == <span class="hljs-string">&#x27;X&#x27;</span>) j++;<br>            <span class="hljs-keyword">if</span> (i == n || j == n) <span class="hljs-type">return</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span>= j;<br>            <span class="hljs-keyword">if</span> (start.charAt(i) != end.charAt(j)) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>            <span class="hljs-keyword">if</span> (start.charAt(i) == <span class="hljs-string">&#x27;L&#x27;</span> &amp;&amp; i &lt; j) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>            <span class="hljs-keyword">if</span> (start.charAt(i) == <span class="hljs-string">&#x27;R&#x27;</span> &amp;&amp; i &gt; j) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>            i++; j++;<br>        &#125;<br>        <span class="hljs-type">return</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span>= j;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure></p>
 <ul>
-<li>时间复杂度：$O(1)$</li>
+<li>时间复杂度：$O(n)$</li>
 <li>空间复杂度：$O(1)$</li>
 </ul>
 <hr>
-<h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>这是我们「刷穿 LeetCode」系列文章的第 <code>No.1154</code> 篇，系列开始于 2021/01/01，截止于起始日 LeetCode 上共有 1916 道题目，部分是有锁题，我们将先把所有不带锁的题目刷完。</p>
+<h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>这是我们「刷穿 LeetCode」系列文章的第 <code>No.777</code> 篇，系列开始于 2021/01/01，截止于起始日 LeetCode 上共有 1916 道题目，部分是有锁题，我们将先把所有不带锁的题目刷完。</p>
 <p>在这个系列文章里面，除了讲解解题思路以外，还会尽可能给出最为简洁的代码。如果涉及通解还会相应的代码模板。</p>
 <p>为了方便各位同学能够电脑上进行调试和提交代码，我建立了相关的仓库：<a target="_blank" rel="noopener" href="https://github.com/SharingSource/LogicStack-LeetCode">https://github.com/SharingSource/LogicStack-LeetCode</a> 。</p>
 <p>在仓库地址里，你可以看到系列文章的题解链接、系列文章的相应代码、LeetCode 原题链接和其他优选题解。</p>
@@ -273,9 +273,7 @@
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/%E6%A8%A1%E6%8B%9F/">模拟</a>
-                    
-                      <a class="hover-with-bg" href="/tags/%E5%89%8D%E7%BC%80%E5%92%8C/">前缀和</a>
+                      <a class="hover-with-bg" href="/tags/%E5%8F%8C%E6%8C%87%E9%92%88/">双指针</a>
                     
                   </div>
                 
@@ -292,9 +290,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2021/07/13/1155.%20%E6%8E%B7%E9%AA%B0%E5%AD%90%E7%9A%84N%E7%A7%8D%E6%96%B9%E6%B3%95%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/">
+                      <a href="/2021/08/20/517.%20%E8%B6%85%E7%BA%A7%E6%B4%97%E8%A1%A3%E6%9C%BA%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">LC 1155. 掷骰子的N种方法</span>
+                        <span class="hidden-mobile">LC 517. 超级洗衣机</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -302,8 +300,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/07/13/218.%20%E5%A4%A9%E9%99%85%E7%BA%BF%E9%97%AE%E9%A2%98%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/">
-                        <span class="hidden-mobile">LC 218. 天际线问题</span>
+                      <a href="/2021/08/19/345.%20%E5%8F%8D%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%AD%E7%9A%84%E5%85%83%E9%9F%B3%E5%AD%97%E6%AF%8D%EF%BC%88%E7%AE%80%E5%8D%95%EF%BC%89/">
+                        <span class="hidden-mobile">LC 345. 反转字符串中的元音字母</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
