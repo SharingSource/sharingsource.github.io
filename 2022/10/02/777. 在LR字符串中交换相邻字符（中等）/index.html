@@ -16,21 +16,21 @@
   <meta name="author" content="宫水三叶">
   <meta name="keywords" content="算法, 数据结构, 题解">
   
-    <meta name="description" content="题目描述这是 LeetCode 上的 1784. 检查二进制字符串字段 ，难度为 简单。 给你一个二进制字符串 s ，该字符串 不含前导零 。 如果 s 包含 零个或一个由连续的 &#39;1&#39; 组成的字段 ，返回 true。否则，返回 false。 如果 s 中 由连续若干个 &#39;1&#39; 组成的字段 数量不超过 1，返回 true。否则，返回 false。 示例 1：1234">
+    <meta name="description" content="题目描述这是 LeetCode 上的 777. 在LR字符串中交换相邻字符 ，难度为 中等。 在一个由 &#39;L&#39; ,&#39;R&#39; 和 &#39;X&#39; 三个字符组成的字符串（例如 &quot;RXXLRXRXL&quot;）中进行移动操作。 一次移动操作指用一个 &quot;LX&quot; 替换一个 &quot;XL&quot;，或者用一个 &quot;XR&amp;quo">
 <meta property="og:type" content="article">
-<meta property="og:title" content="LC 1784. 检查二进制字符串字段">
-<meta property="og:url" content="https://sharingsource.github.io/2021/08/20/1784.%20%E6%A3%80%E6%9F%A5%E4%BA%8C%E8%BF%9B%E5%88%B6%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%AD%97%E6%AE%B5%EF%BC%88%E7%AE%80%E5%8D%95%EF%BC%89/index.html">
+<meta property="og:title" content="LC 777. 在LR字符串中交换相邻字符">
+<meta property="og:url" content="https://sharingsource.github.io/2022/10/02/777.%20%E5%9C%A8LR%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%AD%E4%BA%A4%E6%8D%A2%E7%9B%B8%E9%82%BB%E5%AD%97%E7%AC%A6%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/index.html">
 <meta property="og:site_name" content="宫水三叶的刷题日记">
-<meta property="og:description" content="题目描述这是 LeetCode 上的 1784. 检查二进制字符串字段 ，难度为 简单。 给你一个二进制字符串 s ，该字符串 不含前导零 。 如果 s 包含 零个或一个由连续的 &#39;1&#39; 组成的字段 ，返回 true。否则，返回 false。 如果 s 中 由连续若干个 &#39;1&#39; 组成的字段 数量不超过 1，返回 true。否则，返回 false。 示例 1：1234">
+<meta property="og:description" content="题目描述这是 LeetCode 上的 777. 在LR字符串中交换相邻字符 ，难度为 中等。 在一个由 &#39;L&#39; ,&#39;R&#39; 和 &#39;X&#39; 三个字符组成的字符串（例如 &quot;RXXLRXRXL&quot;）中进行移动操作。 一次移动操作指用一个 &quot;LX&quot; 替换一个 &quot;XL&quot;，或者用一个 &quot;XR&amp;quo">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2021-08-19T16:00:00.000Z">
-<meta property="article:modified_time" content="2022-10-03T01:28:17.809Z">
+<meta property="article:published_time" content="2022-10-01T18:31:18.000Z">
+<meta property="article:modified_time" content="2022-10-04T06:15:59.515Z">
 <meta property="article:author" content="宫水三叶">
-<meta property="article:tag" content="模拟">
+<meta property="article:tag" content="双指针">
 <meta name="twitter:card" content="summary_large_image">
   
   
-  <title>LC 1784. 检查二进制字符串字段 - 宫水三叶的刷题日记</title>
+  <title>LC 777. 在LR字符串中交换相邻字符 - 宫水三叶的刷题日记</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -175,12 +175,12 @@
 </nav>
 
     <div class="banner" id="banner" parallax=true
-         style="background: url('/img/image_67.jpeg') no-repeat center center;
+         style="background: url('/img/image_63.jpeg') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="LC 1784. 检查二进制字符串字段">
+            <span class="h2" id="subtitle" title="LC 777. 在LR字符串中交换相邻字符">
               
             </span>
 
@@ -195,8 +195,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-08-20 00:00" pubdate>
-        2021年8月20日
+      <time datetime="2022-10-02 02:31" pubdate>
+        2022年10月2日
       </time>
     </span>
   
@@ -232,29 +232,34 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">LC 1784. 检查二进制字符串字段</h1>
+            <h1 style="display: none">LC 777. 在LR字符串中交换相邻字符</h1>
             
             <div class="markdown-body">
-              <h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>这是 LeetCode 上的 <strong><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/check-if-binary-string-has-at-most-one-segment-of-ones/solution/by-ac_oier-kiu6/">1784. 检查二进制字符串字段</a></strong> ，难度为 <strong>简单</strong>。</p>
-<p>给你一个二进制字符串 <code>s</code> ，该字符串 不含前导零 。</p>
-<p>如果 <code>s</code> 包含 零个或一个由连续的 <code>&#39;1&#39;</code> 组成的字段 ，返回 <code>true</code>。否则，返回 <code>false</code>。</p>
-<p>如果 <code>s</code> 中 由连续若干个 <code>&#39;1&#39;</code> 组成的字段 数量不超过 <code>1</code>，返回 <code>true</code>。否则，返回 <code>false</code>。</p>
-<p>示例 1：<br><figure class="highlight actionscript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs actionscript">输入：s = <span class="hljs-string">&quot;1001&quot;</span><br><br>输出：<span class="hljs-literal">false</span><br><br>解释：由连续若干个 <span class="hljs-string">&#x27;1&#x27;</span> 组成的字段数量为 <span class="hljs-number">2</span>，返回 <span class="hljs-literal">false</span><br></code></pre></div></td></tr></table></figure><br>示例 2：<br><figure class="highlight nix"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs nix">输入：<span class="hljs-attr">s</span> = <span class="hljs-string">&quot;110&quot;</span><br><br>输出：<span class="hljs-literal">true</span><br></code></pre></div></td></tr></table></figure></p>
+              <h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>这是 LeetCode 上的 <strong><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/swim-in-rising-water/solution/gong-shui-san-xie-yi-ti-shuang-jie-krusk-7c6o/">777. 在LR字符串中交换相邻字符</a></strong> ，难度为 <strong>中等</strong>。</p>
+<p>在一个由 <code>&#39;L&#39;</code> ,<code>&#39;R&#39;</code> 和 <code>&#39;X&#39;</code> 三个字符组成的字符串（例如 <code>&quot;RXXLRXRXL&quot;</code>）中进行移动操作。</p>
+<p>一次移动操作指用一个 <code>&quot;LX&quot;</code> 替换一个 <code>&quot;XL&quot;</code>，或者用一个 <code>&quot;XR&quot;</code> 替换一个 <code>&quot;RX&quot;</code>。</p>
+<p>现给定起始字符串 <code>start</code> 和结束字符串 <code>end</code>，请编写代码，当且仅当存在一系列移动操作使得 <code>start</code> 可以转换成 <code>end</code> 时， 返回 <code>True</code>。</p>
+<p>示例 :<br><figure class="highlight coq"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs coq">输入: start = <span class="hljs-string">&quot;RXXLRXRXL&quot;</span>, <span class="hljs-keyword">end</span> = <span class="hljs-string">&quot;XRLXXRRLX&quot;</span><br><br>输出: True<br><br>解释:<br>我们可以通过以下几步将start转换成<span class="hljs-keyword">end</span>:<br>RXXLRXRXL -&gt;<br>XRXLRXRXL -&gt;<br>XRLXRXRXL -&gt;<br>XRLXXRRXL -&gt;<br>XRLXXRRLX<br></code></pre></div></td></tr></table></figure></p>
 <p>提示：</p>
 <ul>
-<li>$1 &lt;= s.length &lt;= 100$</li>
-<li><code>s[i]</code> 为 <code>&#39;0&#39;</code> 或 <code>&#39;1&#39;</code></li>
-<li><code>s[0]</code> 为 <code>&#39;1&#39;</code></li>
+<li>$1 &lt;= len(start) = len(end) &lt;= 10000$</li>
+<li><code>start</code> 和 <code>end</code> 中的字符串仅限于 <code>&#39;L&#39;</code>, <code>&#39;R&#39;</code> 和 <code>&#39;X&#39;</code></li>
 </ul>
 <hr>
-<h3 id="模拟"><a href="#模拟" class="headerlink" title="模拟"></a>模拟</h3><p>根据题意进行模拟即可。</p>
-<p>Java 代码：<br><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">checkOnesSegment</span><span class="hljs-params">(String s)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> s.length(), cnt = <span class="hljs-number">0</span>, idx = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">while</span> (idx &lt; n &amp;&amp; cnt &lt;= <span class="hljs-number">1</span>) &#123;<br>            <span class="hljs-keyword">while</span> (idx &lt; n &amp;&amp; s.charAt(idx) == <span class="hljs-string">&#x27;0&#x27;</span>) idx++;<br>            <span class="hljs-keyword">if</span> (idx &lt; n) &#123;<br>                <span class="hljs-keyword">while</span> (idx &lt; n &amp;&amp; s.charAt(idx) == <span class="hljs-string">&#x27;1&#x27;</span>) idx++;<br>                cnt++;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> cnt &lt;= <span class="hljs-number">1</span>;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure><br>TypeScript 代码：<br><figure class="highlight typescript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs TypeScript"><span class="hljs-keyword">function</span> <span class="hljs-title function_">checkOnesSegment</span>(<span class="hljs-params">s: <span class="hljs-built_in">string</span></span>): <span class="hljs-built_in">boolean</span> &#123;<br>    <span class="hljs-keyword">let</span> n = s.<span class="hljs-property">length</span>, cnt = <span class="hljs-number">0</span>, idx = <span class="hljs-number">0</span><br>    <span class="hljs-keyword">while</span> (idx &lt; n &amp;&amp; cnt &lt;= <span class="hljs-number">1</span>) &#123;<br>        <span class="hljs-keyword">while</span> (idx &lt; n &amp;&amp; s[idx] == <span class="hljs-string">&#x27;0&#x27;</span>) idx++<br>        <span class="hljs-keyword">if</span> (idx &lt; n) &#123;<br>            <span class="hljs-keyword">while</span> (idx &lt; n &amp;&amp; s[idx] == <span class="hljs-string">&#x27;1&#x27;</span>) idx++<br>            cnt++<br>        &#125;<br>    &#125;<br>    <span class="hljs-keyword">return</span> cnt &lt;= <span class="hljs-number">1</span><br>&#125;;<br></code></pre></div></td></tr></table></figure><br>Python 代码：<br><figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span>:<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">checkOnesSegment</span>(<span class="hljs-params">self, s: <span class="hljs-built_in">str</span></span>) -&gt; <span class="hljs-built_in">bool</span>:<br>        n, cnt, idx = <span class="hljs-built_in">len</span>(s), <span class="hljs-number">0</span>, <span class="hljs-number">0</span><br>        <span class="hljs-keyword">while</span> idx &lt; n <span class="hljs-keyword">and</span> cnt &lt;= <span class="hljs-number">1</span>:<br>            <span class="hljs-keyword">while</span> idx &lt; n <span class="hljs-keyword">and</span> s[idx] == <span class="hljs-string">&#x27;0&#x27;</span>:<br>                idx += <span class="hljs-number">1</span><br>            <span class="hljs-keyword">if</span> idx &lt; n:<br>                <span class="hljs-keyword">while</span> idx &lt; n <span class="hljs-keyword">and</span> s[idx] == <span class="hljs-string">&#x27;1&#x27;</span>:<br>                    idx += <span class="hljs-number">1</span><br>                cnt += <span class="hljs-number">1</span><br>        <span class="hljs-keyword">return</span> cnt &lt;= <span class="hljs-number">1</span><br></code></pre></div></td></tr></table></figure></p>
+<h3 id="双指针"><a href="#双指针" class="headerlink" title="双指针"></a>双指针</h3><p>根据题意，我们每次移动要么是将 <code>XL</code> 变为 <code>LX</code>，要么是将 <code>RX</code> 变为 <code>XR</code>，而该两者操作可分别看做将 <code>L</code> 越过多个 <code>X</code> 向左移动，将 <code>R</code> 越过多个 <code>X</code> 向右移动。</p>
+<p>因此在 <code>start</code> 和 <code>end</code> 中序号相同的 <code>L</code> 和 <code>R</code> 必然满足坐标性质：</p>
+<ol>
+<li>序号相同的 <code>L</code> : <code>start</code> 的下标不小于 <code>end</code> 的下标（即 <code>L</code> 不能往右移动）</li>
+<li>序号相同的 <code>R</code> : <code>start</code> 的下标不大于 <code>end</code> 的下标（即 <code>R</code> 不能往左移动）</li>
+</ol>
+<p>其中「序号」是指在 <code>LR</code> 字符串中出现的相对顺序。</p>
+<p>代码：<br><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">canTransform</span><span class="hljs-params">(String start, String end)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> start.length(), i = <span class="hljs-number">0</span>, j = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">while</span> (i &lt; n || j &lt; n) &#123;<br>            <span class="hljs-keyword">while</span> (i &lt; n &amp;&amp; start.charAt(i) == <span class="hljs-string">&#x27;X&#x27;</span>) i++;<br>            <span class="hljs-keyword">while</span> (j &lt; n &amp;&amp; end.charAt(j) == <span class="hljs-string">&#x27;X&#x27;</span>) j++;<br>            <span class="hljs-keyword">if</span> (i == n || j == n) <span class="hljs-type">return</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span>= j;<br>            <span class="hljs-keyword">if</span> (start.charAt(i) != end.charAt(j)) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>            <span class="hljs-keyword">if</span> (start.charAt(i) == <span class="hljs-string">&#x27;L&#x27;</span> &amp;&amp; i &lt; j) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>            <span class="hljs-keyword">if</span> (start.charAt(i) == <span class="hljs-string">&#x27;R&#x27;</span> &amp;&amp; i &gt; j) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>            i++; j++;<br>        &#125;<br>        <span class="hljs-type">return</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span>= j;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure></p>
 <ul>
 <li>时间复杂度：$O(n)$</li>
 <li>空间复杂度：$O(1)$</li>
 </ul>
 <hr>
-<h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>这是我们「刷穿 LeetCode」系列文章的第 <code>No.1784</code> 篇，系列开始于 2021/01/01，截止于起始日 LeetCode 上共有 1916 道题目，部分是有锁题，我们将先把所有不带锁的题目刷完。</p>
+<h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>这是我们「刷穿 LeetCode」系列文章的第 <code>No.777</code> 篇，系列开始于 2021/01/01，截止于起始日 LeetCode 上共有 1916 道题目，部分是有锁题，我们将先把所有不带锁的题目刷完。</p>
 <p>在这个系列文章里面，除了讲解解题思路以外，还会尽可能给出最为简洁的代码。如果涉及通解还会相应的代码模板。</p>
 <p>为了方便各位同学能够电脑上进行调试和提交代码，我建立了相关的仓库：<a target="_blank" rel="noopener" href="https://github.com/SharingSource/LogicStack-LeetCode">https://github.com/SharingSource/LogicStack-LeetCode</a> 。</p>
 <p>在仓库地址里，你可以看到系列文章的题解链接、系列文章的相应代码、LeetCode 原题链接和其他优选题解。</p>
@@ -268,7 +273,7 @@
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/%E6%A8%A1%E6%8B%9F/">模拟</a>
+                      <a class="hover-with-bg" href="/tags/%E5%8F%8C%E6%8C%87%E9%92%88/">双指针</a>
                     
                   </div>
                 
@@ -285,9 +290,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2021/08/20/1622.%20%E5%A5%87%E5%A6%99%E5%BA%8F%E5%88%97%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/">
+                      <a href="/2022/10/03/1784.%20%E6%A3%80%E6%9F%A5%E4%BA%8C%E8%BF%9B%E5%88%B6%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%AD%97%E6%AE%B5%EF%BC%88%E7%AE%80%E5%8D%95%EF%BC%89/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">LC 1622. 奇妙序列</span>
+                        <span class="hidden-mobile">LC 1784. 检查二进制字符串字段</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -295,8 +300,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/08/20/2031.%201%20%E6%AF%94%200%20%E5%A4%9A%E7%9A%84%E5%AD%90%E6%95%B0%E7%BB%84%E4%B8%AA%E6%95%B0%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/">
-                        <span class="hidden-mobile">LC 2031. 1 比 0 多的子数组个数</span>
+                      <a href="/2022/10/01/1694.%20%E9%87%8D%E6%96%B0%E6%A0%BC%E5%BC%8F%E5%8C%96%E7%94%B5%E8%AF%9D%E5%8F%B7%E7%A0%81%EF%BC%88%E7%AE%80%E5%8D%95%EF%BC%89/">
+                        <span class="hidden-mobile">LC 1694. 重新格式化电话号码</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
