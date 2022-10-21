@@ -1,0 +1,591 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/oimg/RoundCorner.png">
+  <link rel="icon" href="/oimg/RoundCorner.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="宫水三叶">
+  <meta name="keywords" content="算法, 数据结构, 题解">
+  
+    <meta name="description" content="题目描述这是 LeetCode 上的 901. 股票价格跨度 ，难度为 中等。 编写一个 StockSpanner 类，它收集某些股票的每日报价，并返回该股票当日价格的跨度。 今天股票价格的跨度被定义为股票价格小于或等于今天价格的最大连续日数（从今天开始往回数，包括今天）。 例如，如果未来 7 天股票的价格是 [100, 80, 60, 70, 60, 75, 85]，那么股票跨度将是 [1, 1">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LC 901. 股票价格跨度">
+<meta property="og:url" content="https://sharingsource.github.io/2022/10/21/901.%20%E8%82%A1%E7%A5%A8%E4%BB%B7%E6%A0%BC%E8%B7%A8%E5%BA%A6%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/index.html">
+<meta property="og:site_name" content="宫水三叶的刷题日记">
+<meta property="og:description" content="题目描述这是 LeetCode 上的 901. 股票价格跨度 ，难度为 中等。 编写一个 StockSpanner 类，它收集某些股票的每日报价，并返回该股票当日价格的跨度。 今天股票价格的跨度被定义为股票价格小于或等于今天价格的最大连续日数（从今天开始往回数，包括今天）。 例如，如果未来 7 天股票的价格是 [100, 80, 60, 70, 60, 75, 85]，那么股票跨度将是 [1, 1">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-10-20T16:44:23.000Z">
+<meta property="article:modified_time" content="2022-10-21T05:29:17.880Z">
+<meta property="article:author" content="宫水三叶">
+<meta property="article:tag" content="单调栈">
+<meta property="article:tag" content="分块">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  <title>LC 901. 股票价格跨度 - 宫水三叶的刷题日记</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/hint.css/2.7.0/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.7.2/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"sharingsource.github.io","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"|","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"IDifiViRkVDTgu27Nu50GQkE-gzGzoHsz","app_key":"gt98pupgyYjPKYQASrGmD9kM","server_url":"https://idifivir.lc-cn-n1-shared.com","path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.1.0"></head>
+
+
+<body>
+  <header style="height: 50vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>宫水三叶の刷题日记</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/image_67.jpeg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="LC 901. 股票价格跨度">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-author" aria-hidden="true"></i>
+      宫水三叶
+    </span>
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2022-10-21 00:44" pubdate>
+        2022年10月21日
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">LC 901. 股票价格跨度</h1>
+            
+            <div class="markdown-body">
+              <h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>这是 LeetCode 上的 <strong><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/online-stock-span/solution/by-ac_oier-m8g7/">901. 股票价格跨度</a></strong> ，难度为 <strong>中等</strong>。</p>
+<p>编写一个 <code>StockSpanner</code> 类，它收集某些股票的每日报价，并返回该股票当日价格的跨度。</p>
+<p>今天股票价格的跨度被定义为股票价格小于或等于今天价格的最大连续日数（从今天开始往回数，包括今天）。</p>
+<p>例如，如果未来 <code>7</code> 天股票的价格是 <code>[100, 80, 60, 70, 60, 75, 85]</code>，那么股票跨度将是 <code>[1, 1, 1, 2, 1, 4, 6]</code>。</p>
+<p>示例：<br><figure class="highlight stylus"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs stylus">输入：<span class="hljs-selector-attr">[<span class="hljs-string">&quot;StockSpanner&quot;</span>,<span class="hljs-string">&quot;next&quot;</span>,<span class="hljs-string">&quot;next&quot;</span>,<span class="hljs-string">&quot;next&quot;</span>,<span class="hljs-string">&quot;next&quot;</span>,<span class="hljs-string">&quot;next&quot;</span>,<span class="hljs-string">&quot;next&quot;</span>,<span class="hljs-string">&quot;next&quot;</span>]</span>, <span class="hljs-selector-attr">[[]</span>,<span class="hljs-selector-attr">[100]</span>,<span class="hljs-selector-attr">[80]</span>,<span class="hljs-selector-attr">[60]</span>,<span class="hljs-selector-attr">[70]</span>,<span class="hljs-selector-attr">[60]</span>,<span class="hljs-selector-attr">[75]</span>,<span class="hljs-selector-attr">[85]</span>]<br><br>输出：<span class="hljs-selector-attr">[null,1,1,1,2,1,4,6]</span><br><br>解释：<br>首先，初始化 S = <span class="hljs-built_in">StockSpanner</span>()，然后：<br>S<span class="hljs-selector-class">.next</span>(<span class="hljs-number">100</span>) 被调用并返回 <span class="hljs-number">1</span>，<br>S<span class="hljs-selector-class">.next</span>(<span class="hljs-number">80</span>) 被调用并返回 <span class="hljs-number">1</span>，<br>S<span class="hljs-selector-class">.next</span>(<span class="hljs-number">60</span>) 被调用并返回 <span class="hljs-number">1</span>，<br>S<span class="hljs-selector-class">.next</span>(<span class="hljs-number">70</span>) 被调用并返回 <span class="hljs-number">2</span>，<br>S<span class="hljs-selector-class">.next</span>(<span class="hljs-number">60</span>) 被调用并返回 <span class="hljs-number">1</span>，<br>S<span class="hljs-selector-class">.next</span>(<span class="hljs-number">75</span>) 被调用并返回 <span class="hljs-number">4</span>，<br>S<span class="hljs-selector-class">.next</span>(<span class="hljs-number">85</span>) 被调用并返回 <span class="hljs-number">6</span>。<br><br>注意 (例如) S<span class="hljs-selector-class">.next</span>(<span class="hljs-number">75</span>) 返回 <span class="hljs-number">4</span>，因为截至今天的最后 <span class="hljs-number">4</span> 个价格<br>(包括今天的价格 <span class="hljs-number">75</span>) 小于或等于今天的价格。<br></code></pre></div></td></tr></table></figure></p>
+<p>提示：</p>
+<ul>
+<li>调用 <code>StockSpanner.next(int price)</code> 时，将有 $1 &lt;= price &lt;= 10^5$。</li>
+<li>每个测试用例最多可以调用  <code>10000</code> 次 <code>StockSpanner.next</code>。</li>
+<li>在所有测试用例中，最多调用 <code>150000</code> 次 <code>StockSpanner.next</code>。</li>
+<li>此问题的总时间限制减少了 <code>50%</code>。</li>
+</ul>
+<hr>
+<h3 id="分块"><a href="#分块" class="headerlink" title="分块"></a>分块</h3><p>又名优雅的暴力。</p>
+<p>这是一道在线问题，在调用 <code>next</code> 往数据流存入元素的同时，返回连续段不大于当前元素的数的个数。</p>
+<p>一个朴素的想法是：使用数组 <code>nums</code> 将所有 <code>price</code> 进行存储，每次返回时往前找到第一个不满足要求的位置，并返回连续段的长度。</p>
+<p>但对于 $10^4$ 的调用次数来看，该做法的复杂度为 $O(n^2)$，计算量为 $10^8$，不满足 <code>OJ</code> 要求。</p>
+<p>实际上我们可以利用「分块」思路对其进行优化，将与连续段的比较转换为与最值的比较。</p>
+<p>具体的，我们仍然使用 <code>nums</code> 对所有的 <code>price</code> 进行存储，同时使用 <code>region</code> 数组来存储每个连续段的最大值，其中 $region[loc] = x$ 含义为块编号为 <code>loc</code> 的最大值为 <code>x</code>，其中块编号 <code>loc</code> 块对应了数据编号 <code>idx</code> 的范围 $[(loc - 1) \times len + 1, loc \times len]$。</p>
+<p>对于 <code>next</code> 操作而言，除了直接更新数据数组 <code>nums[++idx] = price</code> 以外，我们还需要更新 <code>idx</code> 所在块的最值 <code>region[loc]</code>，然后从当前块 <code>loc</code> 开始往前扫描其余块，使用 <code>left</code> 和 <code>right</code> 代指当前处理到的块的左右端点，若当前块满足 <code>region[loc] &lt;= price</code>，说明块内所有元素均满足要求，直接将当前块 <code>loc</code> 所包含元素个数累加到答案中，直到遇到不满足的块或达到块数组边界，若存在遇到不满足要求的块，再使用 <code>right</code> 和 <code>left</code> 统计块内满足要求 <code>nums[i] &lt;= price</code> 的个数。</p>
+<p>对于块个数和大小的设定，是运用分块降低复杂度的关键，数的个数为 $10^4$，我们可以设定块大小为 $\sqrt{n} = 100$，这样也限定了块的个数为 $\sqrt{n} = 100$ 个。这样对于单次操作而言，我们最多遍历进行 $\sqrt{n}$ 次的块间操作，同时最多进行一次块内操作，整体复杂度为 $O(\sqrt{n})$，单次 <code>next</code> 操作计算量为 $2 \times 10^2$ 以内，单样例计算量为 $2 \times 10^6$，可以过。</p>
+<p>为了方便，我们令块编号 <code>loc</code> 和数据编号 <code>idx</code> 均从 $1$ 开始；同时为了防止每个样例都 <code>new</code> 大数组，我们采用 <code>static</code> 优化，并在 <code>StockSpanner</code> 的初始化中做重置工作。</p>
+<p>Java 代码：<br><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">StockSpanner</span> &#123;<br>    <span class="hljs-keyword">static</span> <span class="hljs-type">int</span> <span class="hljs-variable">N</span> <span class="hljs-operator">=</span> <span class="hljs-number">10010</span>, len = <span class="hljs-number">100</span>, idx = <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">static</span> <span class="hljs-type">int</span>[] nums = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[N], region = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[N / len + <span class="hljs-number">10</span>];<br>    <span class="hljs-keyword">public</span> <span class="hljs-title function_">StockSpanner</span><span class="hljs-params">()</span> &#123;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt;= getIdx(idx); i++) region[i] = <span class="hljs-number">0</span>;<br>        idx = <span class="hljs-number">0</span>;<br>    &#125;<br>    <span class="hljs-type">int</span> <span class="hljs-title function_">getIdx</span><span class="hljs-params">(<span class="hljs-type">int</span> x)</span> &#123;<br>        <span class="hljs-keyword">return</span> (x - <span class="hljs-number">1</span>) / len + <span class="hljs-number">1</span>;<br>    &#125;<br>    <span class="hljs-type">int</span> <span class="hljs-title function_">query</span><span class="hljs-params">(<span class="hljs-type">int</span> price)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">ans</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>, loc = getIdx(idx), left = (loc - <span class="hljs-number">1</span>) * len + <span class="hljs-number">1</span>, right = idx;<br>        <span class="hljs-keyword">while</span> (loc &gt;= <span class="hljs-number">1</span> &amp;&amp; region[loc] &lt;= price) &#123;<br>            ans += right - left + <span class="hljs-number">1</span>;<br>            loc--; right = left - <span class="hljs-number">1</span>; left = (loc - <span class="hljs-number">1</span>) * len + <span class="hljs-number">1</span>;<br>        &#125;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> right; loc &gt;= <span class="hljs-number">1</span> &amp;&amp; i &gt;= left &amp;&amp; nums[i] &lt;= price; i--) ans++;<br>        <span class="hljs-keyword">return</span> ans;<br>    &#125;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">next</span><span class="hljs-params">(<span class="hljs-type">int</span> price)</span> &#123;<br>        nums[++idx] = price;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">loc</span> <span class="hljs-operator">=</span> getIdx(idx);<br>        region[loc] = Math.max(region[loc], price);<br>        <span class="hljs-keyword">return</span> query(price);<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure><br>TypeScript 代码：<br><figure class="highlight typescript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs TypeScript"><span class="hljs-keyword">class</span> <span class="hljs-title class_">StockSpanner</span> &#123;<br>    <span class="hljs-attr">N</span>: <span class="hljs-built_in">number</span> = <span class="hljs-number">10010</span>; <span class="hljs-attr">sz</span>: <span class="hljs-built_in">number</span> = <span class="hljs-number">100</span>; <span class="hljs-attr">idx</span>: <span class="hljs-built_in">number</span> = <span class="hljs-number">0</span><br>    <span class="hljs-attr">nums</span>: <span class="hljs-built_in">number</span>[] = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Array</span>&lt;<span class="hljs-built_in">number</span>&gt;(<span class="hljs-variable language_">this</span>.<span class="hljs-property">N</span>).<span class="hljs-title function_">fill</span>(<span class="hljs-number">0</span>);<br>    region = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Array</span>&lt;<span class="hljs-built_in">number</span>&gt;(<span class="hljs-title class_">Math</span>.<span class="hljs-title function_">floor</span>(<span class="hljs-variable language_">this</span>.<span class="hljs-property">N</span> / <span class="hljs-variable language_">this</span>.<span class="hljs-property">sz</span>) + <span class="hljs-number">10</span>).<span class="hljs-title function_">fill</span>(<span class="hljs-number">0</span>)<br>    <span class="hljs-title function_">getIdx</span>(<span class="hljs-attr">x</span>: <span class="hljs-built_in">number</span>): <span class="hljs-built_in">number</span> &#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-title class_">Math</span>.<span class="hljs-title function_">floor</span>((x - <span class="hljs-number">1</span>) / <span class="hljs-variable language_">this</span>.<span class="hljs-property">sz</span>) + <span class="hljs-number">1</span><br>    &#125;<br>    <span class="hljs-title function_">query</span>(<span class="hljs-attr">price</span>: <span class="hljs-built_in">number</span>): <span class="hljs-built_in">number</span> &#123;<br>        <span class="hljs-keyword">let</span> ans = <span class="hljs-number">0</span>, loc = <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">getIdx</span>(<span class="hljs-variable language_">this</span>.<span class="hljs-property">idx</span>), left = (loc - <span class="hljs-number">1</span>) * <span class="hljs-variable language_">this</span>.<span class="hljs-property">sz</span> + <span class="hljs-number">1</span>, right = <span class="hljs-variable language_">this</span>.<span class="hljs-property">idx</span><br>        <span class="hljs-keyword">while</span> (loc &gt;= <span class="hljs-number">1</span> &amp;&amp; <span class="hljs-variable language_">this</span>.<span class="hljs-property">region</span>[loc] &lt;= price) &#123;<br>            ans += right - left + <span class="hljs-number">1</span><br>            loc--; right = left - <span class="hljs-number">1</span>; left = (loc - <span class="hljs-number">1</span>) * <span class="hljs-variable language_">this</span>.<span class="hljs-property">sz</span> + <span class="hljs-number">1</span><br>        &#125;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = right; loc &gt;= <span class="hljs-number">1</span> &amp;&amp; i &gt;= left &amp;&amp; <span class="hljs-variable language_">this</span>.<span class="hljs-property">nums</span>[i] &lt;= price; i--) ans++<br>        <span class="hljs-keyword">return</span> ans<br>    &#125;<br>    <span class="hljs-title function_">next</span>(<span class="hljs-attr">price</span>: <span class="hljs-built_in">number</span>): <span class="hljs-built_in">number</span> &#123;<br>        <span class="hljs-variable language_">this</span>.<span class="hljs-property">nums</span>[++<span class="hljs-variable language_">this</span>.<span class="hljs-property">idx</span>] = price<br>        <span class="hljs-keyword">const</span> loc = <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">getIdx</span>(<span class="hljs-variable language_">this</span>.<span class="hljs-property">idx</span>)<br>        <span class="hljs-variable language_">this</span>.<span class="hljs-property">region</span>[loc] = <span class="hljs-title class_">Math</span>.<span class="hljs-title function_">max</span>(<span class="hljs-variable language_">this</span>.<span class="hljs-property">region</span>[loc], price)<br>        <span class="hljs-keyword">return</span> <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">query</span>(price)<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure><br>Python3 代码：<br><figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">StockSpanner</span>:<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self</span>):<br>        self.N, self.sz, self.idx = <span class="hljs-number">10010</span>, <span class="hljs-number">110</span>, <span class="hljs-number">0</span><br>        self.nums, self.region = [<span class="hljs-number">0</span>] * self.N, [<span class="hljs-number">0</span>] * (self.N // self.sz + <span class="hljs-number">10</span>)<br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">next</span>(<span class="hljs-params">self, price: <span class="hljs-built_in">int</span></span>) -&gt; <span class="hljs-built_in">int</span>:<br>        <span class="hljs-keyword">def</span> <span class="hljs-title function_">getIdx</span>(<span class="hljs-params">x</span>):<br>            <span class="hljs-keyword">return</span> (x - <span class="hljs-number">1</span>) // self.sz + <span class="hljs-number">1</span><br><br>        <span class="hljs-keyword">def</span> <span class="hljs-title function_">query</span>(<span class="hljs-params">price</span>):<br>            ans, loc = <span class="hljs-number">0</span>, getIdx(self.idx)<br>            left, right = (loc - <span class="hljs-number">1</span>) * self.sz + <span class="hljs-number">1</span>, self.idx<br>            <span class="hljs-keyword">while</span> loc &gt;= <span class="hljs-number">1</span> <span class="hljs-keyword">and</span> self.region[loc] &lt;= price:<br>                ans += right - left + <span class="hljs-number">1</span><br>                loc -= <span class="hljs-number">1</span><br>                right, left = left - <span class="hljs-number">1</span>, (loc - <span class="hljs-number">1</span>) * self.sz + <span class="hljs-number">1</span><br>            <span class="hljs-keyword">while</span> loc &gt;= <span class="hljs-number">1</span> <span class="hljs-keyword">and</span> right &gt;= left <span class="hljs-keyword">and</span> self.nums[right] &lt;= price:<br>                right, ans = right - <span class="hljs-number">1</span>, ans + <span class="hljs-number">1</span><br>            <span class="hljs-keyword">return</span> ans<br><br>        self.idx += <span class="hljs-number">1</span><br>        loc = getIdx(self.idx)<br>        self.nums[self.idx] = price<br>        self.region[loc] = <span class="hljs-built_in">max</span>(self.region[loc], price)<br>        <span class="hljs-keyword">return</span> query(price)<br></code></pre></div></td></tr></table></figure></p>
+<ul>
+<li>时间复杂度：由于使用了 <code>static</code> 优化，<code>StockSpanner</code> 初始化时，需要对上一次使用的块进行重置，复杂度为 $O(\sqrt{n})$；由于块大小和数量均为 $\sqrt{n}$，<code>next</code> 操作复杂度为 $O(\sqrt{n})$</li>
+<li>空间复杂度：$O(n)$</li>
+</ul>
+<hr>
+<h3 id="单调栈"><a href="#单调栈" class="headerlink" title="单调栈"></a>单调栈</h3><p>另外一个容易想到的想法是使用「单调栈」，栈内以二元组 $(idx, price)$ 形式维护比当前元素 <code>price</code> 大的元素。</p>
+<p>每次执行 <code>next</code> 操作时，从栈顶开始处理，将所有满足「不大于 <code>price</code>」的元素进行出栈，从而找到当前元素 <code>price</code> 左边最近一个比其大的位置。</p>
+<p>Java 代码：<br><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">StockSpanner</span> &#123;<br>    Deque&lt;<span class="hljs-type">int</span>[]&gt; d = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayDeque</span>&lt;&gt;();<br>    <span class="hljs-type">int</span> <span class="hljs-variable">cur</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">next</span><span class="hljs-params">(<span class="hljs-type">int</span> price)</span> &#123;<br>        <span class="hljs-keyword">while</span> (!d.isEmpty() &amp;&amp; d.peekLast()[<span class="hljs-number">1</span>] &lt;= price) d.pollLast();<br>        <span class="hljs-type">int</span> <span class="hljs-variable">prev</span> <span class="hljs-operator">=</span> d.isEmpty() ? -<span class="hljs-number">1</span> : d.peekLast()[<span class="hljs-number">0</span>], ans = cur - prev;<br>        d.addLast(<span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[]&#123;cur++, price&#125;);<br>        <span class="hljs-keyword">return</span> ans;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure><br>TypeScript 代码：<br><figure class="highlight typescript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs TypeScript"><span class="hljs-keyword">class</span> <span class="hljs-title class_">StockSpanner</span> &#123;<br>    stk = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Array</span>&lt;<span class="hljs-title class_">Array</span>&lt;<span class="hljs-built_in">number</span>&gt;&gt;(<span class="hljs-number">10010</span>).<span class="hljs-title function_">fill</span>([<span class="hljs-number">0</span>, <span class="hljs-number">0</span>])<br>    he = <span class="hljs-number">0</span>; ta = <span class="hljs-number">0</span>; cur = <span class="hljs-number">0</span><br>    <span class="hljs-title function_">next</span>(<span class="hljs-attr">price</span>: <span class="hljs-built_in">number</span>): <span class="hljs-built_in">number</span> &#123;<br>        <span class="hljs-keyword">while</span> (<span class="hljs-variable language_">this</span>.<span class="hljs-property">he</span> &lt; <span class="hljs-variable language_">this</span>.<span class="hljs-property">ta</span> &amp;&amp; <span class="hljs-variable language_">this</span>.<span class="hljs-property">stk</span>[<span class="hljs-variable language_">this</span>.<span class="hljs-property">ta</span> - <span class="hljs-number">1</span>][<span class="hljs-number">1</span>] &lt;= price) <span class="hljs-variable language_">this</span>.<span class="hljs-property">ta</span>--<br>        <span class="hljs-keyword">const</span> prev = <span class="hljs-variable language_">this</span>.<span class="hljs-property">he</span> &gt;= <span class="hljs-variable language_">this</span>.<span class="hljs-property">ta</span> ? -<span class="hljs-number">1</span> : <span class="hljs-variable language_">this</span>.<span class="hljs-property">stk</span>[<span class="hljs-variable language_">this</span>.<span class="hljs-property">ta</span> - <span class="hljs-number">1</span>][<span class="hljs-number">0</span>], ans = <span class="hljs-variable language_">this</span>.<span class="hljs-property">cur</span> - prev<br>        <span class="hljs-variable language_">this</span>.<span class="hljs-property">stk</span>[<span class="hljs-variable language_">this</span>.<span class="hljs-property">ta</span>++] = [<span class="hljs-variable language_">this</span>.<span class="hljs-property">cur</span>++, price]<br>        <span class="hljs-keyword">return</span> ans<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure><br>Python3 代码：<br><figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">StockSpanner</span>:<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self</span>):<br>        self.stk = []<br>        self.cur = <span class="hljs-number">0</span><br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">next</span>(<span class="hljs-params">self, price: <span class="hljs-built_in">int</span></span>) -&gt; <span class="hljs-built_in">int</span>:<br>        <span class="hljs-keyword">while</span> self.stk <span class="hljs-keyword">and</span> self.stk[-<span class="hljs-number">1</span>][<span class="hljs-number">1</span>] &lt;= price:<br>            self.stk.pop()<br>        prev = -<span class="hljs-number">1</span> <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> self.stk <span class="hljs-keyword">else</span> self.stk[-<span class="hljs-number">1</span>][<span class="hljs-number">0</span>]<br>        ans = self.cur - prev<br>        self.stk.append([self.cur, price])<br>        self.cur += <span class="hljs-number">1</span><br>        <span class="hljs-keyword">return</span> ans<br></code></pre></div></td></tr></table></figure></p>
+<ul>
+<li>时间复杂度：<code>next</code> 操作的均摊复杂度为 $O(1)$</li>
+<li>空间复杂度：$O(n)$</li>
+</ul>
+<hr>
+<h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>这是我们「刷穿 LeetCode」系列文章的第 <code>No.901</code> 篇，系列开始于 2021/01/01，截止于起始日 LeetCode 上共有 1916 道题目，部分是有锁题，我们将先把所有不带锁的题目刷完。</p>
+<p>在这个系列文章里面，除了讲解解题思路以外，还会尽可能给出最为简洁的代码。如果涉及通解还会相应的代码模板。</p>
+<p>为了方便各位同学能够电脑上进行调试和提交代码，我建立了相关的仓库：<a target="_blank" rel="noopener" href="https://github.com/SharingSource/LogicStack-LeetCode">https://github.com/SharingSource/LogicStack-LeetCode</a> 。</p>
+<p>在仓库地址里，你可以看到系列文章的题解链接、系列文章的相应代码、LeetCode 原题链接和其他优选题解。</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%8D%95%E8%B0%83%E6%A0%88/">单调栈</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%88%86%E5%9D%97/">分块</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/10/20/779.%20%E7%AC%ACK%E4%B8%AA%E8%AF%AD%E6%B3%95%E7%AC%A6%E5%8F%B7%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/">
+                        <span class="hidden-mobile">LC 779. 第K个语法符号</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://cdn.staticfile.org/valine/1.4.18/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"IDifiViRkVDTgu27Nu50GQkE-gzGzoHsz","appKey":"gt98pupgyYjPKYQASrGmD9kM","path":"window.location.pathname","placeholder":"发一条友善的评论（为方便交流，记得填上方的昵称再留言哦 ~ 🍭","avatar":"","meta":["nick","mail"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":true},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          Fluid.plugins.initFancyBox('#valine .vcontent img:not(.vemoji)');
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+  <div class="col-lg-7 mx-auto nopadding-x-md">
+    <div class="container custom post-custom mx-auto">
+      <img src="/oimg/gzh-qrcode.webp" srcset="/img/loading.gif" lazyload class="rounded mx-auto d-block mt-5" style="width:80%">
+    </div>
+  </div>
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- LeanCloud 统计PV -->
+        <span id="leancloud-site-pv-container" style="display: none">
+            总访问量 
+            <span id="leancloud-site-pv"></span>
+             次
+          </span>
+      
+      
+        <!-- LeanCloud 统计UV -->
+        <span id="leancloud-site-uv-container" style="display: none">
+            总访客数 
+            <span id="leancloud-site-uv"></span>
+             人
+          </span>
+      
+
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.staticfile.org/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.staticfile.org/tocbot/4.18.2/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.staticfile.org/anchor-js/4.3.1/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.11/clipboard.min.js" ></script>
+  
+
+
+
+
+  <script defer src="/js/leancloud.js" ></script>
+
+
+
+  <script  src="https://cdn.bootcdn.net/ajax/libs/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        loader: {
+          
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.staticfile.org/mathjax/3.2.0/es5/tex-svg.js" ></script>
+
+  
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>
