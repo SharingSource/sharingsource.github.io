@@ -24,7 +24,7 @@
 <meta property="og:description" content="题目描述这是 LeetCode 上的 810. 黑板异或游戏 ，难度为 困难。 黑板上写着一个非负整数数组 nums[i] 。 Alice 和 Bob 轮流从黑板上擦掉一个数字，Alice 先手。如果擦除一个数字后，剩余的所有数字按位异或运算得出的结果等于 0 的话，当前玩家游戏失败。 (另外，如果只剩一个数字，按位异或运算得到它本身；如果无数字剩余，按位异或运算结果为 0。） 换种说法就是，轮到">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-05-21T18:09:08.000Z">
-<meta property="article:modified_time" content="2022-05-18T08:27:50.515Z">
+<meta property="article:modified_time" content="2022-10-28T05:04:36.426Z">
 <meta property="article:author" content="宫水三叶">
 <meta property="article:tag" content="数学">
 <meta property="article:tag" content="博弈论">
@@ -238,15 +238,15 @@
             
             <div class="markdown-body">
               <h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>这是 LeetCode 上的 <strong><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/chalkboard-xor-game/solution/gong-shui-san-xie-noxiang-xin-ke-xue-xi-ges7k/">810. 黑板异或游戏</a></strong> ，难度为 <strong>困难</strong>。</p>
-<p>黑板上写着一个非负整数数组 nums[i] 。</p>
-<p>Alice 和 Bob 轮流从黑板上擦掉一个数字，Alice 先手。如果擦除一个数字后，剩余的所有数字按位异或运算得出的结果等于 0 的话，当前玩家游戏失败。 (另外，如果只剩一个数字，按位异或运算得到它本身；如果无数字剩余，按位异或运算结果为 0。）</p>
-<p>换种说法就是，轮到某个玩家时，如果当前黑板上所有数字按位异或运算结果等于 0，这个玩家获胜。</p>
-<p>假设两个玩家每步都使用最优解，当且仅当 Alice 获胜时返回 true。</p>
+<p>黑板上写着一个非负整数数组 <code>nums[i]</code> 。</p>
+<p><code>Alice</code> 和 <code>Bob</code> 轮流从黑板上擦掉一个数字，<code>Alice</code> 先手。如果擦除一个数字后，剩余的所有数字按位异或运算得出的结果等于 <code>0</code> 的话，当前玩家游戏失败。 (另外，如果只剩一个数字，按位异或运算得到它本身；如果无数字剩余，按位异或运算结果为 <code>0</code>。）</p>
+<p>换种说法就是，轮到某个玩家时，如果当前黑板上所有数字按位异或运算结果等于 <code>0</code>，这个玩家获胜。</p>
+<p>假设两个玩家每步都使用最优解，当且仅当 <code>Alice</code> 获胜时返回 <code>true</code>。</p>
 <p>示例：<br><figure class="highlight tap"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs tap">输入: nums = [1, 1, 2]<br><br>输出: false<br><br>解释: <br>Alice 有两个选择: 擦掉数字<span class="hljs-number"> 1 </span>或 2。<br>如果擦掉 1, 数组变成 [1, 2]。剩余数字按位异或得到<span class="hljs-number"> 1 </span>XOR<span class="hljs-number"> 2 </span>= 3。那么 Bob 可以擦掉任意数字，因为 Alice 会成为擦掉最后一个数字的人，她总是会输。<br>如果 Alice 擦掉 2，那么数组变成[1, 1]。剩余数字按位异或得到<span class="hljs-number"> 1 </span>XOR<span class="hljs-number"> 1 </span>= 0。Alice 仍然会输掉游戏。<br></code></pre></div></td></tr></table></figure></p>
 <p>提示：</p>
 <ul>
-<li>1 &lt;= N &lt;= 1000</li>
-<li>0 &lt;= nums[i] &lt;= $2^{16}$</li>
+<li>$1 &lt;= N &lt;= 1000$</li>
+<li>$0 &lt;= nums[i] &lt;= 2^{16}$</li>
 </ul>
 <hr>
 <h3 id="基本分析"><a href="#基本分析" class="headerlink" title="基本分析"></a>基本分析</h3><p>这是一道「博弈论」题。</p>
@@ -268,12 +268,17 @@
 <p>假设后手操作前的异或和为 $Sum$（$Sum \neq 0$），「后手必败态」意味着去掉任意数字后异或和为 $0$。</p>
 <p>同时根据「相同数值异或结果为 $0$」的特性，我们知道去掉某个数值，等价于在原有异或和的基础上异或上这个值。</p>
 <p>则有：</p>
-<script type="math/tex; mode=display">Sum' = Sum ⊕ nums[i] = 0</script><p>由于是「后手必败态」，因此 $i$ 取任意一位，都满足上述式子。</p>
+<script type="math/tex; mode=display">
+Sum' = Sum ⊕ nums[i] = 0</script><p>由于是「后手必败态」，因此 $i$ 取任意一位，都满足上述式子。</p>
 <p>则有：</p>
-<script type="math/tex; mode=display">Sum ⊕ nums[0] = ... = Sum ⊕ nums[k] = ... = Sum ⊕ nums[n - 1] = 0</script><p>同时根据「任意数值与 $0$ 异或数值不变」的特性，我们将每一项进行异或：</p>
-<script type="math/tex; mode=display">(Sum ⊕ nums[0]) ⊕ ... ⊕ (Sum ⊕ nums[k]) ⊕ ... ⊕ (Sum ⊕ nums[n - 1]) = 0</script><p>根据交换律进行变换：</p>
-<script type="math/tex; mode=display">(Sum ⊕ Sum ⊕ ... ⊕ Sum) ⊕ (nums[0] ⊕ ... ⊕ nums[k] ⊕ ... ⊕ nums[n - 1]) = 0</script><p>再结合 $Sum$ 为原序列的异或和可得：</p>
-<script type="math/tex; mode=display">(Sum ⊕ Sum ⊕ ... ⊕ Sum) ⊕ Sum = 0 , Sum \neq 0</script><p>至此，我们分析出当处于「后手必败态」时，去掉任意一个数值会满足上述式子。</p>
+<script type="math/tex; mode=display">
+Sum ⊕ nums[0] = ... = Sum ⊕ nums[k] = ... = Sum ⊕ nums[n - 1] = 0</script><p>同时根据「任意数值与 $0$ 异或数值不变」的特性，我们将每一项进行异或：</p>
+<script type="math/tex; mode=display">
+(Sum ⊕ nums[0]) ⊕ ... ⊕ (Sum ⊕ nums[k]) ⊕ ... ⊕ (Sum ⊕ nums[n - 1]) = 0</script><p>根据交换律进行变换：</p>
+<script type="math/tex; mode=display">
+(Sum ⊕ Sum ⊕ ... ⊕ Sum) ⊕ (nums[0] ⊕ ... ⊕ nums[k] ⊕ ... ⊕ nums[n - 1]) = 0</script><p>再结合 $Sum$ 为原序列的异或和可得：</p>
+<script type="math/tex; mode=display">
+(Sum ⊕ Sum ⊕ ... ⊕ Sum) ⊕ Sum = 0 , Sum \neq 0</script><p>至此，我们分析出当处于「后手必败态」时，去掉任意一个数值会满足上述式子。</p>
 <p>根据「相同数值偶数次异或结果为 $0$」的特性，可推导出「后手必败态」会导致交回到先手的序列个数为偶数，由此推导后手操作前序列个数为奇数，后手操作前一个回合为偶数。</p>
 <p>到这一步，我们推导出想要出现「后手必败态」，先手操作前的序列个数应当为偶数。</p>
 <p>那么根据先手操作前序列个数为偶数（且异或和不为 $0$），是否能够推导出必然出现「后手必败态」呢？</p>
@@ -291,7 +296,6 @@
 <p>但「假定奇偶性」这一步是比较具有跳跃性的，这有点像我前面说到的「经验分析解法」，而本题解证明没有做任何的前置假定，单纯从「先手必胜态」和「后手必败态」进行推导，最终推导出「先手序列偶数必胜」的性质 ，更符合前面说到的「状态分析解法」。</p>
 <p>两种做法殊途同归，在某些博弈论问题上，「经验分析解法」可以通过「归纳」&amp;「反证」很好分析出来，但这要求选手本身具有一定的博弈论基础；而「状态分析解法」则对选手的题量要求低些，逻辑推理能力高些。</p>
 <p>两种方法并无优劣之分，都是科学严谨的做法。</p>
-<p>我十分建议大家将此题解与 <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/chalkboard-xor-game/solution/hei-ban-yi-huo-you-xi-by-leetcode-soluti-eb0c/">官方题解</a> 一同阅读，体会两种分析方法的区别。</p>
 <hr>
 <h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>这是我们「刷穿 LeetCode」系列文章的第 <code>No.810</code> 篇，系列开始于 2021/01/01，截止于起始日 LeetCode 上共有 1916 道题目，部分是有锁题，我们将先把所有不带锁的题目刷完。</p>
 <p>在这个系列文章里面，除了讲解解题思路以外，还会尽可能给出最为简洁的代码。如果涉及通解还会相应的代码模板。</p>
