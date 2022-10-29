@@ -16,22 +16,21 @@
   <meta name="author" content="宫水三叶">
   <meta name="keywords" content="算法, 数据结构, 题解">
   
-    <meta name="description" content="题目描述这是 LeetCode 上的 908. 最小差值 I ，难度为 中等。 给定一个整数数组 arr，找到 min(b) 的总和，其中 b 的范围为 arr 的每个（连续）子数组。 由于答案可能很大，因此 返回答案模 $10^9 + 7$ 。 示例 1：1234567输入：arr &#x3D; [3,1,2,4]输出：17解释：子数组为 [3]，[1]，[2]，[4]，[3,1]，[1,2]，[2,4]">
+    <meta name="description" content="题目描述这是 LeetCode 上的 1773. 统计匹配检索规则的物品数量 ，难度为 简单。 给你一个数组 items ，其中 $items[i] &#x3D; [type{i}, color{i}, name_{i}]$ ，描述第 i 件物品的类型、颜色以及名称。 另给你一条由两个字符串 ruleKey 和 ruleValue 表示的检索规则。 如果第 i 件物品能满足下述条件之一，则认为该物品与给定的">
 <meta property="og:type" content="article">
-<meta property="og:title" content="LC 907. 子数组的最小值之和">
-<meta property="og:url" content="https://sharingsource.github.io/2022/09/03/907.%20%E5%AD%90%E6%95%B0%E7%BB%84%E7%9A%84%E6%9C%80%E5%B0%8F%E5%80%BC%E4%B9%8B%E5%92%8C%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/index.html">
+<meta property="og:title" content="LC 1773. 统计匹配检索规则的物品数量">
+<meta property="og:url" content="https://sharingsource.github.io/2022/10/29/1773.%20%E7%BB%9F%E8%AE%A1%E5%8C%B9%E9%85%8D%E6%A3%80%E7%B4%A2%E8%A7%84%E5%88%99%E7%9A%84%E7%89%A9%E5%93%81%E6%95%B0%E9%87%8F%EF%BC%88%E7%AE%80%E5%8D%95%EF%BC%89/index.html">
 <meta property="og:site_name" content="宫水三叶的刷题日记">
-<meta property="og:description" content="题目描述这是 LeetCode 上的 908. 最小差值 I ，难度为 中等。 给定一个整数数组 arr，找到 min(b) 的总和，其中 b 的范围为 arr 的每个（连续）子数组。 由于答案可能很大，因此 返回答案模 $10^9 + 7$ 。 示例 1：1234567输入：arr &#x3D; [3,1,2,4]输出：17解释：子数组为 [3]，[1]，[2]，[4]，[3,1]，[1,2]，[2,4]">
+<meta property="og:description" content="题目描述这是 LeetCode 上的 1773. 统计匹配检索规则的物品数量 ，难度为 简单。 给你一个数组 items ，其中 $items[i] &#x3D; [type{i}, color{i}, name_{i}]$ ，描述第 i 件物品的类型、颜色以及名称。 另给你一条由两个字符串 ruleKey 和 ruleValue 表示的检索规则。 如果第 i 件物品能满足下述条件之一，则认为该物品与给定的">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2022-09-03T06:12:38.000Z">
-<meta property="article:modified_time" content="2022-09-04T01:38:40.055Z">
+<meta property="article:published_time" content="2022-10-28T18:20:08.000Z">
+<meta property="article:modified_time" content="2022-10-29T07:26:22.601Z">
 <meta property="article:author" content="宫水三叶">
-<meta property="article:tag" content="数学">
-<meta property="article:tag" content="单调栈">
+<meta property="article:tag" content="模拟">
 <meta name="twitter:card" content="summary_large_image">
   
   
-  <title>LC 907. 子数组的最小值之和 - 宫水三叶的刷题日记</title>
+  <title>LC 1773. 统计匹配检索规则的物品数量 - 宫水三叶的刷题日记</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -176,12 +175,12 @@
 </nav>
 
     <div class="banner" id="banner" parallax=true
-         style="background: url('/img/image_76.jpeg') no-repeat center center;
+         style="background: url('/img/image_27.jpg') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="LC 907. 子数组的最小值之和">
+            <span class="h2" id="subtitle" title="LC 1773. 统计匹配检索规则的物品数量">
               
             </span>
 
@@ -196,8 +195,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2022-09-03 14:12" pubdate>
-        2022年9月3日
+      <time datetime="2022-10-29 02:20" pubdate>
+        2022年10月29日
       </time>
     </span>
   
@@ -233,40 +232,36 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">LC 907. 子数组的最小值之和</h1>
+            <h1 style="display: none">LC 1773. 统计匹配检索规则的物品数量</h1>
             
             <div class="markdown-body">
-              <h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>这是 LeetCode 上的 <strong><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/sum-of-subarray-minimums/solution/by-ac_oier-h9cd/">908. 最小差值 I</a></strong> ，难度为 <strong>中等</strong>。</p>
-<p>给定一个整数数组 <code>arr</code>，找到 <code>min(b)</code> 的总和，其中 <code>b</code> 的范围为 <code>arr</code> 的每个（连续）子数组。</p>
-<p>由于答案可能很大，因此 返回答案模 $10^9 + 7$ 。</p>
-<p>示例 1：<br><figure class="highlight inform7"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs inform7">输入：arr = <span class="hljs-comment">[3,1,2,4]</span><br><br>输出：17<br><br>解释：<br>子数组为 <span class="hljs-comment">[3]</span>，<span class="hljs-comment">[1]</span>，<span class="hljs-comment">[2]</span>，<span class="hljs-comment">[4]</span>，<span class="hljs-comment">[3,1]</span>，<span class="hljs-comment">[1,2]</span>，<span class="hljs-comment">[2,4]</span>，<span class="hljs-comment">[3,1,2]</span>，<span class="hljs-comment">[1,2,4]</span>，<span class="hljs-comment">[3,1,2,4]</span>。 <br>最小值为 3，1，2，4，1，1，2，1，1，1，和为 17。<br></code></pre></div></td></tr></table></figure><br>示例 2：<br><figure class="highlight accesslog"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs accesslog">输入：arr = <span class="hljs-string">[11,81,94,43,3]</span><br><br>输出：<span class="hljs-number">444</span><br></code></pre></div></td></tr></table></figure></p>
+              <h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>这是 LeetCode 上的 <strong><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/count-items-matching-a-rule/solution/by-ac_oier-qyd6/">1773. 统计匹配检索规则的物品数量</a></strong> ，难度为 <strong>简单</strong>。</p>
+<p>给你一个数组 <code>items</code> ，其中 $items[i] = [type<em>{i}, color</em>{i}, name_{i}]$ ，描述第 <code>i</code> 件物品的类型、颜色以及名称。</p>
+<p>另给你一条由两个字符串 <code>ruleKey</code> 和 <code>ruleValue</code> 表示的检索规则。</p>
+<p>如果第 <code>i</code> 件物品能满足下述条件之一，则认为该物品与给定的检索规则 匹配 ：</p>
+<ul>
+<li><code>ruleKey = &quot;type&quot;</code> 且 $ruleValue = type_{i}$ 。</li>
+<li><code>ruleKey = &quot;color&quot;</code> 且 $ruleValue = color_{i}$。</li>
+<li><code>ruleKey = &quot;name&quot;</code> 且 $ruleValue = name{i}$。</li>
+</ul>
+<p>统计并返回 匹配检索规则的物品数量 。</p>
+<p>示例 1：<br><figure class="highlight prolog"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs prolog">输入：items = [[<span class="hljs-string">&quot;phone&quot;</span>,<span class="hljs-string">&quot;blue&quot;</span>,<span class="hljs-string">&quot;pixel&quot;</span>],[<span class="hljs-string">&quot;computer&quot;</span>,<span class="hljs-string">&quot;silver&quot;</span>,<span class="hljs-string">&quot;lenovo&quot;</span>],[<span class="hljs-string">&quot;phone&quot;</span>,<span class="hljs-string">&quot;gold&quot;</span>,<span class="hljs-string">&quot;iphone&quot;</span>]], ruleKey = <span class="hljs-string">&quot;color&quot;</span>, ruleValue = <span class="hljs-string">&quot;silver&quot;</span><br><br>输出：<span class="hljs-number">1</span><br><br>解释：只有一件物品匹配检索规则，这件物品是 [<span class="hljs-string">&quot;computer&quot;</span>,<span class="hljs-string">&quot;silver&quot;</span>,<span class="hljs-string">&quot;lenovo&quot;</span>] 。<br></code></pre></div></td></tr></table></figure><br>示例 2：<br><figure class="highlight prolog"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs prolog">输入：items = [[<span class="hljs-string">&quot;phone&quot;</span>,<span class="hljs-string">&quot;blue&quot;</span>,<span class="hljs-string">&quot;pixel&quot;</span>],[<span class="hljs-string">&quot;computer&quot;</span>,<span class="hljs-string">&quot;silver&quot;</span>,<span class="hljs-string">&quot;phone&quot;</span>],[<span class="hljs-string">&quot;phone&quot;</span>,<span class="hljs-string">&quot;gold&quot;</span>,<span class="hljs-string">&quot;iphone&quot;</span>]], ruleKey = <span class="hljs-string">&quot;type&quot;</span>, ruleValue = <span class="hljs-string">&quot;phone&quot;</span><br><br>输出：<span class="hljs-number">2</span><br><br>解释：只有两件物品匹配检索规则，这两件物品分别是 [<span class="hljs-string">&quot;phone&quot;</span>,<span class="hljs-string">&quot;blue&quot;</span>,<span class="hljs-string">&quot;pixel&quot;</span>] 和 [<span class="hljs-string">&quot;phone&quot;</span>,<span class="hljs-string">&quot;gold&quot;</span>,<span class="hljs-string">&quot;iphone&quot;</span>] 。注意，[<span class="hljs-string">&quot;computer&quot;</span>,<span class="hljs-string">&quot;silver&quot;</span>,<span class="hljs-string">&quot;phone&quot;</span>] 未匹配检索规则。<br></code></pre></div></td></tr></table></figure></p>
 <p>提示：</p>
 <ul>
-<li>$1 &lt;= arr.length &lt;= 3 \times 10^4$</li>
-<li>$1 &lt;= arr[i] &lt;= 3 \times 10^4$</li>
+<li>$1 &lt;= items.length &lt;= 10^4$</li>
+<li>$1 &lt;= type<em>{i}.length, color</em>{i}.length, name_{i}.length, ruleValue.length &lt;= 10$</li>
+<li><code>ruleKey</code> 等于 <code>&quot;type&quot;</code>、<code>&quot;color&quot;</code> 或 <code>&quot;name&quot;</code></li>
+<li>所有字符串仅由小写字母组成</li>
 </ul>
 <hr>
-<h3 id="单调栈-数学"><a href="#单调栈-数学" class="headerlink" title="单调栈 + 数学"></a>单调栈 + 数学</h3><p>原问题为求所有子数组的最小值之和，其可等价为求每个 $arr[i]$ 对答案的贡献，即每个 $arr[i]$ 可作为多少个子数组的最小值。</p>
-<p>假定我们能预处理出两数组 <code>l</code> 和 <code>r</code> 分别代表 $arr[i]$ 作为子数组最小值时，其所能到达的最远两端：</p>
-<ul>
-<li><code>l[i] = a</code> 代表下标 $a$ 为 $arr[i]$ 能够作为子数组最小值时的最远左边界，即为 $arr[i]$ 左边第一个比其小的元素（若不存在，则为 $a = -1$）</li>
-<li><code>r[i] = b</code> 代表跳表 $b$ 为 $arr[i]$ 能够作为子数组最小值时的最远右边界，即为 $arr[i]$ 右边第一个比其小的元素（若不存在，则为 $b = n$）</li>
-</ul>
-<p>子数组左端点个数为 $(i - a)$ 个，右端点个数为 $(b - i)$ 个，根据乘法原理可知，子数组个数为两者乘积，每个子数组对答案的贡献为 $arr[i]$。</p>
-<p>由于 <code>arr</code> 可能有重复元素，我们需要考虑取左右端点时，是取成「小于等于」还是「严格小于」：</p>
-<ul>
-<li>若两端均取成严格小于，且两端中间存在与 $arr[i]$ 等值元素，会导致相同子数组被重复统计；</li>
-<li>若两端均取成小于等于，且两端恰好存在与 $arr[i]$ 等值元素，会导致原本可以被添加到子数组的等值元素漏加；</li>
-<li>若一端取成严格小于，另一端取成小于等于，可确保不重不漏。</li>
-</ul>
-<p>至于预处理 <code>l</code> 和 <code>r</code> 则可以使用「单调栈」求解。</p>
-<p>代码：<br><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-type">int</span> <span class="hljs-variable">MOD</span> <span class="hljs-operator">=</span> (<span class="hljs-type">int</span>)<span class="hljs-number">1e9</span>+<span class="hljs-number">7</span>;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">sumSubarrayMins</span><span class="hljs-params">(<span class="hljs-type">int</span>[] arr)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> arr.length;<br>        <span class="hljs-type">int</span>[] l = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[n], r = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[n];<br>        Arrays.fill(l, -<span class="hljs-number">1</span>); Arrays.fill(r, n);<br>        Deque&lt;Integer&gt; d = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayDeque</span>&lt;&gt;();<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; n; i++) &#123;<br>            <span class="hljs-keyword">while</span> (!d.isEmpty() &amp;&amp; arr[d.peekLast()] &gt;= arr[i]) r[d.pollLast()] = i;<br>            d.addLast(i);<br>        &#125;<br>        d.clear();<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> n - <span class="hljs-number">1</span>; i &gt;= <span class="hljs-number">0</span>; i--) &#123;<br>            <span class="hljs-keyword">while</span> (!d.isEmpty() &amp;&amp; arr[d.peekLast()] &gt; arr[i]) l[d.pollLast()] = i;<br>            d.addLast(i);<br>        &#125;<br>        <span class="hljs-type">long</span> <span class="hljs-variable">ans</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; n; i++) &#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">a</span> <span class="hljs-operator">=</span> l[i], b = r[i];<br>            ans += (i - a) * <span class="hljs-number">1L</span> * (b - i) % MOD * arr[i] % MOD;<br>            ans %= MOD;<br>        &#125;<br>        <span class="hljs-keyword">return</span> (<span class="hljs-type">int</span>) ans;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure></p>
+<h3 id="模拟"><a href="#模拟" class="headerlink" title="模拟"></a>模拟</h3><p>根据题意进行模拟即可。</p>
+<p>Java 代码：<br><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">countMatches</span><span class="hljs-params">(List&lt;List&lt;String&gt;&gt; items, String k, String v)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">ans</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>, idx = k.charAt(<span class="hljs-number">0</span>) == <span class="hljs-string">&#x27;t&#x27;</span> ? <span class="hljs-number">0</span> : k.charAt(<span class="hljs-number">0</span>) == <span class="hljs-string">&#x27;c&#x27;</span> ? <span class="hljs-number">1</span> : <span class="hljs-number">2</span>;<br>        <span class="hljs-keyword">for</span> (List&lt;String&gt; item : items) &#123;<br>            <span class="hljs-keyword">if</span> (item.get(idx).equals(v)) ans++;<br>        &#125;<br>        <span class="hljs-keyword">return</span> ans;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure><br>TypeScript 代码：<br><figure class="highlight typescript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs TypeScript"><span class="hljs-keyword">function</span> <span class="hljs-title function_">countMatches</span>(<span class="hljs-params">items: <span class="hljs-built_in">string</span>[][], k: <span class="hljs-built_in">string</span>, v: <span class="hljs-built_in">string</span></span>): <span class="hljs-built_in">number</span> &#123;<br>    <span class="hljs-keyword">let</span> ans = <span class="hljs-number">0</span>, idx = k[<span class="hljs-number">0</span>] == <span class="hljs-string">&#x27;t&#x27;</span> ? <span class="hljs-number">0</span> : k[<span class="hljs-number">0</span>] == <span class="hljs-string">&#x27;c&#x27;</span> ? <span class="hljs-number">1</span> : <span class="hljs-number">2</span><br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">const</span> item <span class="hljs-keyword">of</span> items) &#123;<br>        <span class="hljs-keyword">if</span> (item[idx] == v) ans++<br>    &#125;<br>    <span class="hljs-keyword">return</span> ans<br>&#125;<br></code></pre></div></td></tr></table></figure><br>Python 代码：<br><figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span>:<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">countMatches</span>(<span class="hljs-params">self, items: <span class="hljs-type">List</span>[<span class="hljs-type">List</span>[<span class="hljs-built_in">str</span>]], k: <span class="hljs-built_in">str</span>, v: <span class="hljs-built_in">str</span></span>) -&gt; <span class="hljs-built_in">int</span>:<br>        ans, idx = <span class="hljs-number">0</span>, <span class="hljs-number">0</span> <span class="hljs-keyword">if</span> k[<span class="hljs-number">0</span>] == <span class="hljs-string">&#x27;t&#x27;</span> <span class="hljs-keyword">else</span> <span class="hljs-number">1</span> <span class="hljs-keyword">if</span> k[<span class="hljs-number">0</span>] == <span class="hljs-string">&#x27;c&#x27;</span> <span class="hljs-keyword">else</span> <span class="hljs-number">2</span><br>        <span class="hljs-keyword">for</span> item <span class="hljs-keyword">in</span> items:<br>            <span class="hljs-keyword">if</span> item[idx] == v:<br>                ans += <span class="hljs-number">1</span><br>        <span class="hljs-keyword">return</span> ans<br></code></pre></div></td></tr></table></figure></p>
 <ul>
 <li>时间复杂度：$O(n)$</li>
-<li>空间复杂度：$O(n)$</li>
+<li>空间复杂度：$O(1)$</li>
 </ul>
 <hr>
-<h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>这是我们「刷穿 LeetCode」系列文章的第 <code>No.907</code> 篇，系列开始于 2021/01/01，截止于起始日 LeetCode 上共有 1916 道题目，部分是有锁题，我们将先把所有不带锁的题目刷完。</p>
+<h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>这是我们「刷穿 LeetCode」系列文章的第 <code>No.1773</code> 篇，系列开始于 2021/01/01，截止于起始日 LeetCode 上共有 1916 道题目，部分是有锁题，我们将先把所有不带锁的题目刷完。</p>
 <p>在这个系列文章里面，除了讲解解题思路以外，还会尽可能给出最为简洁的代码。如果涉及通解还会相应的代码模板。</p>
 <p>为了方便各位同学能够电脑上进行调试和提交代码，我建立了相关的仓库：<a target="_blank" rel="noopener" href="https://github.com/SharingSource/LogicStack-LeetCode">https://github.com/SharingSource/LogicStack-LeetCode</a> 。</p>
 <p>在仓库地址里，你可以看到系列文章的题解链接、系列文章的相应代码、LeetCode 原题链接和其他优选题解。</p>
@@ -280,9 +275,7 @@
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/%E6%95%B0%E5%AD%A6/">数学</a>
-                    
-                      <a class="hover-with-bg" href="/tags/%E5%8D%95%E8%B0%83%E6%A0%88/">单调栈</a>
+                      <a class="hover-with-bg" href="/tags/%E6%A8%A1%E6%8B%9F/">模拟</a>
                     
                   </div>
                 
@@ -299,18 +292,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2022/09/04/1582.%20%E4%BA%8C%E8%BF%9B%E5%88%B6%E7%9F%A9%E9%98%B5%E4%B8%AD%E7%9A%84%E7%89%B9%E6%AE%8A%E4%BD%8D%E7%BD%AE%EF%BC%88%E7%AE%80%E5%8D%95%EF%BC%89/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">LC 1582. 二进制矩阵中的特殊位置</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2022/09/03/646.%20%E6%9C%80%E9%95%BF%E6%95%B0%E5%AF%B9%E9%93%BE%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/">
-                        <span class="hidden-mobile">LC 646. 最长数对链</span>
+                      <a href="/2022/10/28/907.%20%E5%AD%90%E6%95%B0%E7%BB%84%E7%9A%84%E6%9C%80%E5%B0%8F%E5%80%BC%E4%B9%8B%E5%92%8C%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/">
+                        <span class="hidden-mobile">LC 907. 子数组的最小值之和</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
