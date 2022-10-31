@@ -1,0 +1,587 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/oimg/RoundCorner.png">
+  <link rel="icon" href="/oimg/RoundCorner.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="宫水三叶">
+  <meta name="keywords" content="算法, 数据结构, 题解">
+  
+    <meta name="description" content="题目描述这是 LeetCode 上的 481. 神奇字符串 ，难度为 中等。 神奇字符串 s 仅由 &#39;1&#39; 和 &#39;2&#39; 组成，并需要遵守下面的规则：  神奇字符串 s 的神奇之处在于，串联字符串中 &#39;1&#39; 和 &#39;2&#39; 的连续出现次数可以生成该字符串。  s 的前几个元素是 s &#x3D; &quot;1221121221221121122……">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LC 481. 神奇字符串">
+<meta property="og:url" content="https://sharingsource.github.io/2022/10/31/481.%20%E7%A5%9E%E5%A5%87%E5%AD%97%E7%AC%A6%E4%B8%B2%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/index.html">
+<meta property="og:site_name" content="宫水三叶的刷题日记">
+<meta property="og:description" content="题目描述这是 LeetCode 上的 481. 神奇字符串 ，难度为 中等。 神奇字符串 s 仅由 &#39;1&#39; 和 &#39;2&#39; 组成，并需要遵守下面的规则：  神奇字符串 s 的神奇之处在于，串联字符串中 &#39;1&#39; 和 &#39;2&#39; 的连续出现次数可以生成该字符串。  s 的前几个元素是 s &#x3D; &quot;1221121221221121122……">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-10-30T16:51:26.000Z">
+<meta property="article:modified_time" content="2022-10-31T03:23:53.816Z">
+<meta property="article:author" content="宫水三叶">
+<meta property="article:tag" content="模拟">
+<meta property="article:tag" content="双指针">
+<meta property="article:tag" content="构造">
+<meta property="article:tag" content="打表">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  <title>LC 481. 神奇字符串 - 宫水三叶的刷题日记</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/hint.css/2.7.0/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.7.2/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"sharingsource.github.io","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"|","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"IDifiViRkVDTgu27Nu50GQkE-gzGzoHsz","app_key":"gt98pupgyYjPKYQASrGmD9kM","server_url":"https://idifivir.lc-cn-n1-shared.com","path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.1.0"></head>
+
+
+<body>
+  <header style="height: 50vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>宫水三叶の刷题日记</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/image_38.jpeg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="LC 481. 神奇字符串">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-author" aria-hidden="true"></i>
+      宫水三叶
+    </span>
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2022-10-31 00:51" pubdate>
+        2022年10月31日
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">LC 481. 神奇字符串</h1>
+            
+            <div class="markdown-body">
+              <h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>这是 LeetCode 上的 <strong><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/magical-string/solution/by-ac_oier-7wjo/">481. 神奇字符串</a></strong> ，难度为 <strong>中等</strong>。</p>
+<p>神奇字符串 <code>s</code> 仅由 <code>&#39;1&#39;</code> 和 <code>&#39;2&#39;</code> 组成，并需要遵守下面的规则：</p>
+<ul>
+<li>神奇字符串 <code>s</code> 的神奇之处在于，串联字符串中 <code>&#39;1&#39;</code> 和 <code>&#39;2&#39;</code> 的连续出现次数可以生成该字符串。</li>
+</ul>
+<p><code>s</code> 的前几个元素是 <code>s = &quot;1221121221221121122……&quot;</code> 。如果将 <code>s</code> 中连续的若干 <code>1</code> 和 <code>2</code> 进行分组，可以得到 <code>&quot;1 22 11 2 1 22 1 22 11 2 11 22 ......&quot;</code> 。每组中 <code>1</code> 或者 <code>2</code> 的出现次数分别是 <code>&quot;1 2 2 1 1 2 1 2 2 1 2 2 ......&quot;</code> 。上面的出现次数正是 s 自身。</p>
+<p>给你一个整数 <code>n</code> ，返回在神奇字符串 <code>s</code> 的前 <code>n</code> 个数字中 <code>1</code> 的数目。</p>
+<p>示例 1：<br><figure class="highlight tap"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs tap">输入：n = 6<br><br>输出：3<br><br>解释：神奇字符串 s 的前<span class="hljs-number"> 6 </span>个元素是 “122112”，它包含三个 1，因此返回<span class="hljs-number"> 3 </span>。 <br></code></pre></div></td></tr></table></figure><br>示例 2：<br><figure class="highlight abnf"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs abnf">输入：n <span class="hljs-operator">=</span> <span class="hljs-number">1</span><br><br>输出：<span class="hljs-number">1</span><br></code></pre></div></td></tr></table></figure></p>
+<p>提示：</p>
+<ul>
+<li>$1 &lt;= n &lt;= 10^5$</li>
+</ul>
+<hr>
+<h3 id="双指针-构造-打表"><a href="#双指针-构造-打表" class="headerlink" title="双指针 + 构造 + 打表"></a>双指针 + 构造 + 打表</h3><p>我们将相关的字符串分为三类：<strong>题目描述的神奇字符串 <code>s</code> 称为“原串”，对 <code>s</code> 进行连续段划分所得的串叫“划分串”，对划分串进行计数的串叫“计数串”</strong>。</p>
+<p>解题的核心思路：<strong>由于划分串是对原串的划分，同时计数串又与原串相同，因此可得三类串均只有 <code>1</code> 和 <code>2</code> 两种数值。即可知划分串的每段长度只能是「长度为 <code>1</code>」或「长度为 <code>2</code>」，利用划分串的每段构造长度有限，我们可以通过「简单分情况讨论」的方式进行构造</strong>。</p>
+<p>具体的，我们需要利用「原串和计数串的相同的性质」对 <code>s</code> 进行构造：不难发现计数串总是不长于原串，因此我们可以使用变量 <code>i</code> 来记录当前构造到原串位置，使用变量 <code>j</code> 来记录计数串对应到的实际位置。</p>
+<p>不失一般性假设当前构造到 <code>s</code> 中的某一位为 <code>last</code>，而计数串对应的实际位置为 <code>t</code>，由于两者均只有 <code>1</code> 和 <code>2</code> 两种可能，我们可以对其进行简单的分情况讨论（可见代码注释）。</p>
+<blockquote>
+<p>一些细节：由于神奇字符串起始字符固定，构造逻辑固定，因此神奇字符串唯一固定。<br>我们可以采取 <code>static</code> 代码块的方式进行打表预处理（<code>Java</code> 中的 <code>static</code> 代码块只会在类加载的过程执行一次，而 <code>LC</code> 的测评机制是实例化多个 <code>Solution</code> 对象来跑多个样例，但 <code>Solution</code> 类仍只会被加载一次，即 <code>static</code> 在多个样例测评中只会被执行一次。</p>
+</blockquote>
+<p>Java 代码：<br><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">static</span> <span class="hljs-type">int</span> <span class="hljs-variable">N</span> <span class="hljs-operator">=</span> <span class="hljs-number">100010</span>;<br>    <span class="hljs-keyword">static</span> <span class="hljs-type">int</span>[] f = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[N];<br>    <span class="hljs-keyword">static</span> &#123;<br>        <span class="hljs-type">StringBuilder</span> <span class="hljs-variable">sb</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">StringBuilder</span>();<br>        sb.append(<span class="hljs-string">&quot;01&quot;</span>); <span class="hljs-comment">// 首位多加一个 0 作为哨兵</span><br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>, j = <span class="hljs-number">1</span>, cnt = <span class="hljs-number">0</span>; i &lt; N; j++) &#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">last</span> <span class="hljs-operator">=</span> sb.charAt(sb.length() - <span class="hljs-number">1</span>) - <span class="hljs-string">&#x27;0&#x27;</span>, t = sb.charAt(j) - <span class="hljs-string">&#x27;0&#x27;</span>;<br>            <span class="hljs-keyword">if</span> (last == <span class="hljs-number">1</span>) &#123;<br>                <span class="hljs-keyword">if</span> (t == <span class="hljs-number">1</span>) &#123;<br>                    <span class="hljs-comment">// 当原串当前字符是 1，而计数串当前字符为 1 </span><br>                    <span class="hljs-comment">// 往后构造形成的原串只能是 12，原串指针后移一位</span><br>                    sb.append(<span class="hljs-string">&quot;2&quot;</span>);<br>                    f[i] = ++cnt; i++;<br>                &#125; <span class="hljs-keyword">else</span> &#123;<br>                    <span class="hljs-comment">// 当原串当前字符是 1，而计数串当前字符为 2</span><br>                    <span class="hljs-comment">// 往后构造形成的原串只能是 112，此时同步更新 f[i + 1]，原串指针后移两位</span><br>                    sb.append(<span class="hljs-string">&quot;12&quot;</span>);<br>                    f[i] = ++cnt; f[i + <span class="hljs-number">1</span>] = ++cnt; i += <span class="hljs-number">2</span>;<br>                &#125;<br>            &#125; <span class="hljs-keyword">else</span> &#123;<br>                <span class="hljs-keyword">if</span> (t == <span class="hljs-number">1</span>) &#123;<br>                    <span class="hljs-comment">// 当原串当前字符是 2，而计数串当前字符为 1 </span><br>                    <span class="hljs-comment">// 往后构造形成的原串只能是 21，原串指针后移一位</span><br>                    sb.append(<span class="hljs-string">&quot;1&quot;</span>);<br>                    f[i] = cnt; i++;<br>                &#125; <span class="hljs-keyword">else</span> &#123;<br>                    <span class="hljs-comment">// 当原串当前字符是 2，而计数串当前字符为 2</span><br>                    <span class="hljs-comment">// 往后构造形成的原串只能是 221，原串指针后移两位</span><br>                    sb.append(<span class="hljs-string">&quot;21&quot;</span>);<br>                    f[i] = f[i + <span class="hljs-number">1</span>] = cnt; i += <span class="hljs-number">2</span>;<br>                &#125;<br>            &#125;<br>        &#125;<br>    &#125;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">magicalString</span><span class="hljs-params">(<span class="hljs-type">int</span> n)</span> &#123;<br>        <span class="hljs-keyword">return</span> f[n];<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure><br>TypeScript 代码：<br><figure class="highlight typescript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs TypeScript"><span class="hljs-keyword">function</span> <span class="hljs-title function_">magicalString</span>(<span class="hljs-params">n: <span class="hljs-built_in">number</span></span>): <span class="hljs-built_in">number</span> &#123;<br>    <span class="hljs-keyword">let</span> str = <span class="hljs-string">&#x27;01&#x27;</span> <span class="hljs-comment">// 首位多加一个 0 作为哨兵</span><br>    <span class="hljs-keyword">const</span> f = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Array</span>&lt;<span class="hljs-built_in">number</span>&gt;(n + <span class="hljs-number">10</span>).<span class="hljs-title function_">fill</span>(<span class="hljs-number">0</span>)<br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">1</span>, j = <span class="hljs-number">1</span>, cnt = <span class="hljs-number">0</span>; i &lt;= n; j++) &#123;<br>        <span class="hljs-keyword">const</span> last = str[str.<span class="hljs-property">length</span> - <span class="hljs-number">1</span>], t = str[j]<br>        <span class="hljs-keyword">if</span> (last == <span class="hljs-string">&#x27;1&#x27;</span>) &#123;<br>            <span class="hljs-keyword">if</span> (t == <span class="hljs-string">&#x27;1&#x27;</span>) &#123;<br>                <span class="hljs-comment">// 当原串当前字符是 1，而计数串当前字符为 1 </span><br>                <span class="hljs-comment">// 往后构造形成的原串只能是 12，原串指针后移一位</span><br>                str += <span class="hljs-string">&#x27;2&#x27;</span><br>                f[i] = ++cnt; i++<br>            &#125; <span class="hljs-keyword">else</span> &#123;<br>                <span class="hljs-comment">// 当原串当前字符是 1，而计数串当前字符为 2</span><br>                <span class="hljs-comment">// 往后构造形成的原串只能是 112，此时同步更新 f[i + 1]，原串指针后移两位</span><br>                str += <span class="hljs-string">&#x27;12&#x27;</span><br>                f[i] = ++cnt; f[i + <span class="hljs-number">1</span>] = ++cnt; i += <span class="hljs-number">2</span><br>            &#125;<br>        &#125; <span class="hljs-keyword">else</span> &#123;<br>            <span class="hljs-keyword">if</span> (t == <span class="hljs-string">&#x27;1&#x27;</span>) &#123;<br>                <span class="hljs-comment">// 当原串当前字符是 2，而计数串当前字符为 1 </span><br>                <span class="hljs-comment">// 往后构造形成的原串只能是 21，原串指针后移一位</span><br>                str += <span class="hljs-string">&#x27;1&#x27;</span><br>                f[i] = cnt; i++<br>            &#125; <span class="hljs-keyword">else</span> &#123;<br>                <span class="hljs-comment">// 当原串当前字符是 2，而计数串当前字符为 2</span><br>                <span class="hljs-comment">// 往后构造形成的原串只能是 221，原串指针后移两位</span><br>                str += <span class="hljs-string">&#x27;21&#x27;</span><br>                f[i] = f[i + <span class="hljs-number">1</span>] = cnt; i += <span class="hljs-number">2</span><br>            &#125;<br>        &#125;<br>    &#125;<br>    <span class="hljs-keyword">return</span> f[n]<br>&#125;<br></code></pre></div></td></tr></table></figure><br>Python 代码：<br><figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span>:<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">magicalString</span>(<span class="hljs-params">self, n: <span class="hljs-built_in">int</span></span>) -&gt; <span class="hljs-built_in">int</span>:<br>        ss = <span class="hljs-string">&#x27;01&#x27;</span> <span class="hljs-comment"># 首位多加一个 0 作为哨兵</span><br>        i, j, cnt = <span class="hljs-number">1</span>, <span class="hljs-number">1</span>, <span class="hljs-number">0</span><br>        f = [<span class="hljs-number">0</span>] * (n + <span class="hljs-number">10</span>)<br>        <span class="hljs-keyword">while</span> i &lt;= n:<br>            last, t = ss[i], ss[j]<br>            <span class="hljs-keyword">if</span> last == <span class="hljs-string">&#x27;1&#x27;</span>:<br>                <span class="hljs-keyword">if</span> t == <span class="hljs-string">&#x27;1&#x27;</span>:<br>                    <span class="hljs-comment"># 当原串当前字符是 1，而计数串当前字符为 1 </span><br>                    <span class="hljs-comment"># 往后构造形成的原串只能是 12，原串指针后移一位</span><br>                    ss += <span class="hljs-string">&#x27;2&#x27;</span><br>                    f[i], cnt, i = cnt + <span class="hljs-number">1</span>, cnt + <span class="hljs-number">1</span>, i + <span class="hljs-number">1</span><br>                <span class="hljs-keyword">else</span>:<br>                    <span class="hljs-comment"># 当原串当前字符是 1，而计数串当前字符为 2</span><br>                    <span class="hljs-comment"># 往后构造形成的原串只能是 112，此时同步更新 f[i + 1]，原串指针后移两位</span><br>                    ss += <span class="hljs-string">&#x27;12&#x27;</span><br>                    f[i], f[i + <span class="hljs-number">1</span>], cnt, i = cnt + <span class="hljs-number">1</span>, cnt + <span class="hljs-number">2</span>, cnt + <span class="hljs-number">2</span>, i + <span class="hljs-number">2</span><br>            <span class="hljs-keyword">else</span>:<br>                <span class="hljs-keyword">if</span> t == <span class="hljs-string">&#x27;1&#x27;</span>:<br>                    <span class="hljs-comment"># 当原串当前字符是 2，而计数串当前字符为 1 </span><br>                    <span class="hljs-comment"># 往后构造形成的原串只能是 21，原串指针后移一位</span><br>                    ss += <span class="hljs-string">&#x27;1&#x27;</span><br>                    f[i], i = cnt, i + <span class="hljs-number">1</span><br>                <span class="hljs-keyword">else</span>:<br>                    <span class="hljs-comment"># 当原串当前字符是 2，而计数串当前字符为 2</span><br>                    <span class="hljs-comment"># 往后构造形成的原串只能是 221，原串指针后移两位</span><br>                    ss += <span class="hljs-string">&#x27;21&#x27;</span><br>                    f[i], f[i + <span class="hljs-number">1</span>], i = cnt, cnt, i + <span class="hljs-number">2</span><br>            j += <span class="hljs-number">1</span><br>        <span class="hljs-keyword">return</span> f[n]<br></code></pre></div></td></tr></table></figure></p>
+<ul>
+<li>时间复杂度：$O(n)$，若将 <code>static</code> 打表逻辑放到本地进行，能够减少构造的计算量，但仍会有创建答案数组的 $O(n)$ 开销，因此为均摊 $O(1)$</li>
+<li>空间复杂度：$O(n)$</li>
+</ul>
+<hr>
+<h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>这是我们「刷穿 LeetCode」系列文章的第 <code>No.481</code> 篇，系列开始于 2021/01/01，截止于起始日 LeetCode 上共有 1916 道题目，部分是有锁题，我们将先把所有不带锁的题目刷完。</p>
+<p>在这个系列文章里面，除了讲解解题思路以外，还会尽可能给出最为简洁的代码。如果涉及通解还会相应的代码模板。</p>
+<p>为了方便各位同学能够电脑上进行调试和提交代码，我建立了相关的仓库：<a target="_blank" rel="noopener" href="https://github.com/SharingSource/LogicStack-LeetCode">https://github.com/SharingSource/LogicStack-LeetCode</a> 。</p>
+<p>在仓库地址里，你可以看到系列文章的题解链接、系列文章的相应代码、LeetCode 原题链接和其他优选题解。</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E6%A8%A1%E6%8B%9F/">模拟</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%8F%8C%E6%8C%87%E9%92%88/">双指针</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E6%9E%84%E9%80%A0/">构造</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E6%89%93%E8%A1%A8/">打表</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/10/30/784.%20%E5%AD%97%E6%AF%8D%E5%A4%A7%E5%B0%8F%E5%86%99%E5%85%A8%E6%8E%92%E5%88%97%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/">
+                        <span class="hidden-mobile">LC 784. 字母大小写全排列</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://cdn.staticfile.org/valine/1.4.18/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"IDifiViRkVDTgu27Nu50GQkE-gzGzoHsz","appKey":"gt98pupgyYjPKYQASrGmD9kM","path":"window.location.pathname","placeholder":"发一条友善的评论（为方便交流，记得填上方的昵称再留言哦 ~ 🍭","avatar":"","meta":["nick","mail"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":true},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          Fluid.plugins.initFancyBox('#valine .vcontent img:not(.vemoji)');
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+  <div class="col-lg-7 mx-auto nopadding-x-md">
+    <div class="container custom post-custom mx-auto">
+      <img src="/oimg/gzh-qrcode.webp" srcset="/img/loading.gif" lazyload class="rounded mx-auto d-block mt-5" style="width:80%">
+    </div>
+  </div>
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- LeanCloud 统计PV -->
+        <span id="leancloud-site-pv-container" style="display: none">
+            总访问量 
+            <span id="leancloud-site-pv"></span>
+             次
+          </span>
+      
+      
+        <!-- LeanCloud 统计UV -->
+        <span id="leancloud-site-uv-container" style="display: none">
+            总访客数 
+            <span id="leancloud-site-uv"></span>
+             人
+          </span>
+      
+
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.staticfile.org/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.staticfile.org/tocbot/4.18.2/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.staticfile.org/anchor-js/4.3.1/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.11/clipboard.min.js" ></script>
+  
+
+
+
+
+  <script defer src="/js/leancloud.js" ></script>
+
+
+
+  <script  src="https://cdn.bootcdn.net/ajax/libs/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        loader: {
+          
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.staticfile.org/mathjax/3.2.0/es5/tex-svg.js" ></script>
+
+  
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>
