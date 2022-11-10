@@ -1,0 +1,610 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/oimg/RoundCorner.png">
+  <link rel="icon" href="/oimg/RoundCorner.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="宫水三叶">
+  <meta name="keywords" content="算法, 数据结构, 题解">
+  
+    <meta name="description" content="题目描述这是 LeetCode 上的 864. 获取所有钥匙的最短路径 ，难度为 困难。 给定一个二维网格 grid ，其中：  &#39;.&#39; 代表一个空房间 &#39;#&#39; 代表一堵墙 &#39;@&#39; 是起点 小写字母代表钥匙 大写字母代表锁  我们从起点开始出发，一次移动是指向四个基本方向之一行走一个单位空间。我们不能在网格外面行走，也无法穿过一堵墙。如果途经一个钥匙">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LC 864. 获取所有钥匙的最短路径">
+<meta property="og:url" content="https://sharingsource.github.io/2022/11/10/864.%20%E8%8E%B7%E5%8F%96%E6%89%80%E6%9C%89%E9%92%A5%E5%8C%99%E7%9A%84%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/index.html">
+<meta property="og:site_name" content="宫水三叶的刷题日记">
+<meta property="og:description" content="题目描述这是 LeetCode 上的 864. 获取所有钥匙的最短路径 ，难度为 困难。 给定一个二维网格 grid ，其中：  &#39;.&#39; 代表一个空房间 &#39;#&#39; 代表一堵墙 &#39;@&#39; 是起点 小写字母代表钥匙 大写字母代表锁  我们从起点开始出发，一次移动是指向四个基本方向之一行走一个单位空间。我们不能在网格外面行走，也无法穿过一堵墙。如果途经一个钥匙">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://sharingsource.github.io/2022/11/10/864.%20%E8%8E%B7%E5%8F%96%E6%89%80%E6%9C%89%E9%92%A5%E5%8C%99%E7%9A%84%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/image_0.png">
+<meta property="og:image" content="https://sharingsource.github.io/2022/11/10/864.%20%E8%8E%B7%E5%8F%96%E6%89%80%E6%9C%89%E9%92%A5%E5%8C%99%E7%9A%84%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/image_1.png">
+<meta property="og:image" content="https://sharingsource.github.io/2022/11/10/864.%20%E8%8E%B7%E5%8F%96%E6%89%80%E6%9C%89%E9%92%A5%E5%8C%99%E7%9A%84%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/image_2.png">
+<meta property="article:published_time" content="2022-11-09T17:05:34.000Z">
+<meta property="article:modified_time" content="2022-11-10T02:36:33.430Z">
+<meta property="article:author" content="宫水三叶">
+<meta property="article:tag" content="BFS">
+<meta property="article:tag" content="状态压缩">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://sharingsource.github.io/2022/11/10/864.%20%E8%8E%B7%E5%8F%96%E6%89%80%E6%9C%89%E9%92%A5%E5%8C%99%E7%9A%84%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/image_0.png">
+  
+  
+  <title>LC 864. 获取所有钥匙的最短路径 - 宫水三叶的刷题日记</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/hint.css/2.7.0/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.7.2/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"sharingsource.github.io","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"|","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"IDifiViRkVDTgu27Nu50GQkE-gzGzoHsz","app_key":"gt98pupgyYjPKYQASrGmD9kM","server_url":"https://idifivir.lc-cn-n1-shared.com","path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.1.0"></head>
+
+
+<body>
+  <header style="height: 50vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>宫水三叶の刷题日记</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/image_133.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="LC 864. 获取所有钥匙的最短路径">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-author" aria-hidden="true"></i>
+      宫水三叶
+    </span>
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2022-11-10 01:05" pubdate>
+        2022年11月10日
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">LC 864. 获取所有钥匙的最短路径</h1>
+            
+            <div class="markdown-body">
+              <h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>这是 LeetCode 上的 <strong><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/shortest-path-to-get-all-keys/solution/by-ac_oier-5gxc/">864. 获取所有钥匙的最短路径</a></strong> ，难度为 <strong>困难</strong>。</p>
+<p>给定一个二维网格 grid ，其中：</p>
+<ul>
+<li><code>&#39;.&#39;</code> 代表一个空房间</li>
+<li><code>&#39;#&#39;</code> 代表一堵墙</li>
+<li><code>&#39;@&#39;</code> 是起点</li>
+<li>小写字母代表钥匙</li>
+<li>大写字母代表锁</li>
+</ul>
+<p>我们从起点开始出发，一次移动是指向四个基本方向之一行走一个单位空间。我们不能在网格外面行走，也无法穿过一堵墙。如果途经一个钥匙，我们就把它捡起来。除非我们手里有对应的钥匙，否则无法通过锁。</p>
+<p>假设 <code>k</code> 为 钥匙/锁 的个数，且满足 $1 &lt;= k &lt;= 6$，字母表中的前 <code>k</code> 个字母在网格中都有自己对应的一个小写和一个大写字母。换言之，每个锁有唯一对应的钥匙，每个钥匙也有唯一对应的锁。另外，代表钥匙和锁的字母互为大小写并按字母顺序排列。</p>
+<p>返回获取所有钥匙所需要的移动的最少次数。如果无法获取所有钥匙，返回 <code>-1</code> 。</p>
+<p>示例 1：<br><img src="/2022/11/10/864.%20%E8%8E%B7%E5%8F%96%E6%89%80%E6%9C%89%E9%92%A5%E5%8C%99%E7%9A%84%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/image_0.png" srcset="/img/loading.gif" lazyload alt><br><figure class="highlight maxima"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs maxima">输入：<span class="hljs-built_in">grid</span> = [<span class="hljs-string">&quot;@.a.#&quot;</span>,<span class="hljs-string">&quot;###.#&quot;</span>,<span class="hljs-string">&quot;b.A.B&quot;</span>]<br><br>输出：<span class="hljs-number">8</span><br><br>解释：目标是获得所有钥匙，而不是打开所有锁。<br></code></pre></div></td></tr></table></figure><br>示例 2：<br><img src="/2022/11/10/864.%20%E8%8E%B7%E5%8F%96%E6%89%80%E6%9C%89%E9%92%A5%E5%8C%99%E7%9A%84%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/image_1.png" srcset="/img/loading.gif" lazyload alt><br><figure class="highlight maxima"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs maxima">输入：<span class="hljs-built_in">grid</span> = [<span class="hljs-string">&quot;@..aA&quot;</span>,<span class="hljs-string">&quot;..B#.&quot;</span>,<span class="hljs-string">&quot;....b&quot;</span>]<br><br>输出：<span class="hljs-number">6</span><br></code></pre></div></td></tr></table></figure><br>示例 3:<br><img src="/2022/11/10/864.%20%E8%8E%B7%E5%8F%96%E6%89%80%E6%9C%89%E9%92%A5%E5%8C%99%E7%9A%84%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/image_2.png" srcset="/img/loading.gif" lazyload alt><br><figure class="highlight makefile"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs makefile"><span class="hljs-section">输入: grid = [&quot;@Aa&quot;]</span><br><br><span class="hljs-section">输出: -1</span><br></code></pre></div></td></tr></table></figure></p>
+<p>提示：</p>
+<ul>
+<li>$m == grid.length$</li>
+<li>$n == grid[i].length$</li>
+<li>$1 &lt;= m, n &lt;= 30$</li>
+<li><code>grid[i][j]</code> 只含有 <code>&#39;.&#39;</code>,<code>&#39;#&#39;</code>, <code>&#39;@&#39;</code>, <code>&#39;a&#39;-&#39;f&#39;</code> 以及 <code>&#39;A&#39;-&#39;F&#39;</code></li>
+<li>钥匙的数目范围是 $[1, 6]$</li>
+<li>每个钥匙都对应一个 不同 的字母</li>
+<li>每个钥匙正好打开一个对应的锁</li>
+</ul>
+<hr>
+<h3 id="BFS-状态压缩"><a href="#BFS-状态压缩" class="headerlink" title="BFS + 状态压缩"></a>BFS + 状态压缩</h3><p><strong>一道常规的 <code>BFS</code> 运用题，只不过需要在 <code>BFS</code> 过程中记录收集到的钥匙状态。</strong></p>
+<p>利用「钥匙数量不超过 $6$，并按字母顺序排列」，我们可以使用一个 <code>int</code> 类型二进制数 <code>state</code> 来代指当前收集到钥匙情况：</p>
+<ul>
+<li>若 <code>state</code> 的二进制中的第 $k$ 位为 <code>1</code>，代表当前种类编号为 $k$ 的钥匙 <strong>已被收集</strong>，后续移动若遇到对应的锁则 <strong>能通过</strong></li>
+<li>若 <code>state</code> 的二进制中的第 $k$ 位为 <code>0</code>，代表当前种类编号为 $k$ 的钥匙 <strong>未被收集</strong>，后续移动若遇到对应的锁则 <strong>无法通过</strong></li>
+</ul>
+<p>其中「钥匙种类编号」则按照小写字母先后顺序，从 $0$ 开始进行划分对应：即字符为 <code>a</code> 的钥匙编号为 <code>0</code>，字符为 <code>b</code> 的钥匙编号为 <code>1</code>，字符为 <code>c</code> 的钥匙编号为 <code>2</code> …</p>
+<p>当使用了这样的「状态压缩」技巧后，我们可以很方便通过「位运算」进行 <strong>钥匙检测</strong> 和 <strong>更新钥匙收集状态</strong>：</p>
+<ul>
+<li>钥匙检测：<code>(state &gt;&gt; k) &amp; 1</code>，若返回 <code>1</code> 说明第 $k$ 位为 <code>1</code>，当前持有种类编号为 <code>k</code> 的钥匙</li>
+<li>更新钥匙收集状态：<code>state |= 1 &lt;&lt; k</code>，将 <code>state</code> 的第 $k$ 位设置为 <code>1</code>，代表当前新收集到种类编号为 <code>k</code> 的钥匙</li>
+</ul>
+<p>搞明白如何记录当前收集到的钥匙状态后，剩下的则是常规 <code>BFS</code> 过程：</p>
+<ol>
+<li><p>起始遍历一次棋盘，找到起点位置，并将其进行入队，队列维护的是 $(x, y, state)$ 三元组状态（其中 $(x, y)$ 代表当前所在的棋盘位置，$state$ 代表当前的钥匙收集情况）<br> 同时统计整个棋盘所包含的钥匙数量 <code>cnt</code>，并使用 数组/哈希表 记录到达每个状态所需要消耗的最小步数 <code>step</code></p>
+</li>
+<li><p>进行四联通方向的 <code>BFS</code>，转移过程中需要注意「遇到锁时，必须有对应钥匙才能通过」&amp;「遇到钥匙时，需要更新对应的 <code>state</code> 再进行入队」</p>
+</li>
+<li><p>当 <code>BFS</code> 过程中遇到 <code>state = (1 &lt;&lt; cnt) - 1</code> 时，代表所有钥匙均被收集完成，可结束搜索</p>
+</li>
+</ol>
+<p>Java 代码：<br><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">static</span> <span class="hljs-type">int</span> <span class="hljs-variable">N</span> <span class="hljs-operator">=</span> <span class="hljs-number">35</span>, K = <span class="hljs-number">10</span>, INF = <span class="hljs-number">0x3f3f3f3f</span>;<br>    <span class="hljs-keyword">static</span> <span class="hljs-type">int</span>[][][] dist = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[N][N][<span class="hljs-number">1</span> &lt;&lt; K];<br>    <span class="hljs-keyword">static</span> <span class="hljs-type">int</span>[][] dirs = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[][]&#123;&#123;<span class="hljs-number">1</span>,<span class="hljs-number">0</span>&#125;,&#123;-<span class="hljs-number">1</span>,<span class="hljs-number">0</span>&#125;,&#123;<span class="hljs-number">0</span>,<span class="hljs-number">1</span>&#125;,&#123;<span class="hljs-number">0</span>,-<span class="hljs-number">1</span>&#125;&#125;;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">shortestPathAllKeys</span><span class="hljs-params">(String[] g)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> g.length, m = g[<span class="hljs-number">0</span>].length(), cnt = <span class="hljs-number">0</span>;<br>        Deque&lt;<span class="hljs-type">int</span>[]&gt; d = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayDeque</span>&lt;&gt;();<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; n; i++) &#123;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; j &lt; m; j++) &#123;<br>                Arrays.fill(dist[i][j], INF);<br>                <span class="hljs-type">char</span> <span class="hljs-variable">c</span> <span class="hljs-operator">=</span> g[i].charAt(j);<br>                <span class="hljs-keyword">if</span> (c == <span class="hljs-string">&#x27;@&#x27;</span>) &#123;<br>                    d.addLast(<span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[]&#123;i, j, <span class="hljs-number">0</span>&#125;);<br>                    dist[i][j][<span class="hljs-number">0</span>] = <span class="hljs-number">0</span>;<br>                &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (c &gt;= <span class="hljs-string">&#x27;a&#x27;</span> &amp;&amp; c &lt;= <span class="hljs-string">&#x27;z&#x27;</span>) cnt++;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">while</span> (!d.isEmpty()) &#123;<br>            <span class="hljs-type">int</span>[] info = d.pollFirst();<br>            <span class="hljs-type">int</span> <span class="hljs-variable">x</span> <span class="hljs-operator">=</span> info[<span class="hljs-number">0</span>], y = info[<span class="hljs-number">1</span>], cur = info[<span class="hljs-number">2</span>], step = dist[x][y][cur];<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span>[] di : dirs) &#123;<br>                <span class="hljs-type">int</span> <span class="hljs-variable">nx</span> <span class="hljs-operator">=</span> x + di[<span class="hljs-number">0</span>], ny = y + di[<span class="hljs-number">1</span>];<br>                <span class="hljs-keyword">if</span> (nx &lt; <span class="hljs-number">0</span> || nx &gt;= n || ny &lt; <span class="hljs-number">0</span> || ny &gt;= m) <span class="hljs-keyword">continue</span>;<br>                <span class="hljs-type">char</span> <span class="hljs-variable">c</span> <span class="hljs-operator">=</span> g[nx].charAt(ny);<br>                <span class="hljs-keyword">if</span> (c == <span class="hljs-string">&#x27;#&#x27;</span>) <span class="hljs-keyword">continue</span>;<br>                <span class="hljs-keyword">if</span> ((c &gt;= <span class="hljs-string">&#x27;A&#x27;</span> &amp;&amp; c &lt;= <span class="hljs-string">&#x27;Z&#x27;</span>) &amp;&amp; (cur &gt;&gt; (c - <span class="hljs-string">&#x27;A&#x27;</span>) &amp; <span class="hljs-number">1</span>) == <span class="hljs-number">0</span>) <span class="hljs-keyword">continue</span>;<br>                <span class="hljs-type">int</span> <span class="hljs-variable">ncur</span> <span class="hljs-operator">=</span> cur;<br>                <span class="hljs-keyword">if</span> (c &gt;= <span class="hljs-string">&#x27;a&#x27;</span> &amp;&amp; c &lt;= <span class="hljs-string">&#x27;z&#x27;</span>) ncur |= <span class="hljs-number">1</span> &lt;&lt; (c - <span class="hljs-string">&#x27;a&#x27;</span>);<br>                <span class="hljs-keyword">if</span> (ncur == (<span class="hljs-number">1</span> &lt;&lt; cnt) - <span class="hljs-number">1</span>) <span class="hljs-keyword">return</span> step + <span class="hljs-number">1</span>;<br>                <span class="hljs-keyword">if</span> (step + <span class="hljs-number">1</span> &gt;= dist[nx][ny][ncur]) <span class="hljs-keyword">continue</span>;<br>                dist[nx][ny][ncur] = step + <span class="hljs-number">1</span>;<br>                d.addLast(<span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[]&#123;nx, ny, ncur&#125;);<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> -<span class="hljs-number">1</span>;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure><br>TypeScript 代码：<br><figure class="highlight typescript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs TypeScript"><span class="hljs-keyword">function</span> <span class="hljs-title function_">shortestPathAllKeys</span>(<span class="hljs-params">g: <span class="hljs-built_in">string</span>[]</span>): <span class="hljs-built_in">number</span> &#123;<br>    <span class="hljs-keyword">const</span> dirs = [[<span class="hljs-number">1</span>,<span class="hljs-number">0</span>],[-<span class="hljs-number">1</span>,<span class="hljs-number">0</span>],[<span class="hljs-number">0</span>,<span class="hljs-number">1</span>],[<span class="hljs-number">0</span>,-<span class="hljs-number">1</span>]]<br>    <span class="hljs-keyword">let</span> n = g.<span class="hljs-property">length</span>, m = g[<span class="hljs-number">0</span>].<span class="hljs-property">length</span>, cnt = <span class="hljs-number">0</span><br>    <span class="hljs-keyword">const</span> dist = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Array</span>&lt;<span class="hljs-title class_">Array</span>&lt;<span class="hljs-title class_">Array</span>&lt;<span class="hljs-built_in">number</span>&gt;&gt;&gt;()<br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; n; i++) &#123;<br>        dist[i] = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Array</span>&lt;<span class="hljs-title class_">Array</span>&lt;<span class="hljs-built_in">number</span>&gt;&gt;(m)<br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> j = <span class="hljs-number">0</span>; j &lt; m; j++) &#123;<br>            dist[i][j] = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Array</span>&lt;<span class="hljs-built_in">number</span>&gt;(<span class="hljs-number">1</span> &lt;&lt; <span class="hljs-number">10</span>).<span class="hljs-title function_">fill</span>(<span class="hljs-number">0x3f3f3f3f</span>)<br>        &#125;<br>    &#125;<br>    <span class="hljs-keyword">const</span> d = []<br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; n; i++) &#123;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> j = <span class="hljs-number">0</span>; j &lt; m; j++) &#123;<br>            <span class="hljs-keyword">if</span> (g[i][j] == <span class="hljs-string">&#x27;@&#x27;</span>) &#123;<br>                d.<span class="hljs-title function_">push</span>([i, j, <span class="hljs-number">0</span>]); dist[i][j][<span class="hljs-number">0</span>] = <span class="hljs-number">0</span><br>            &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (g[i][j] &gt;= <span class="hljs-string">&#x27;a&#x27;</span> &amp;&amp; g[i][j] &lt;= <span class="hljs-string">&#x27;z&#x27;</span>) cnt++<br>        &#125;<br>    &#125;<br>    <span class="hljs-keyword">while</span> (d.<span class="hljs-property">length</span> &gt; <span class="hljs-number">0</span>) &#123;<br>        <span class="hljs-keyword">const</span> info = d.<span class="hljs-title function_">shift</span>()<br>        <span class="hljs-keyword">const</span> x = info[<span class="hljs-number">0</span>], y = info[<span class="hljs-number">1</span>], cur = info[<span class="hljs-number">2</span>], step = dist[x][y][cur]<br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">const</span> di <span class="hljs-keyword">of</span> dirs) &#123;<br>            <span class="hljs-keyword">const</span> nx = x + di[<span class="hljs-number">0</span>], ny = y + di[<span class="hljs-number">1</span>]<br>            <span class="hljs-keyword">if</span> (nx &lt; <span class="hljs-number">0</span> || nx &gt;= n || ny &lt; <span class="hljs-number">0</span> || ny &gt;= m) <span class="hljs-keyword">continue</span><br>            <span class="hljs-keyword">const</span> c = g[nx][ny]<br>            <span class="hljs-keyword">if</span> (c == <span class="hljs-string">&#x27;#&#x27;</span>) <span class="hljs-keyword">continue</span><br>            <span class="hljs-keyword">if</span> (<span class="hljs-string">&#x27;A&#x27;</span> &lt;= c &amp;&amp; c &lt;= <span class="hljs-string">&#x27;Z&#x27;</span> &amp;&amp; ((cur &gt;&gt; (c.<span class="hljs-title function_">charCodeAt</span>(<span class="hljs-number">0</span>) - <span class="hljs-string">&#x27;A&#x27;</span>.<span class="hljs-title function_">charCodeAt</span>(<span class="hljs-number">0</span>)) &amp; <span class="hljs-number">1</span>) == <span class="hljs-number">0</span>)) <span class="hljs-keyword">continue</span><br>            <span class="hljs-keyword">let</span> ncur = cur<br>            <span class="hljs-keyword">if</span> (<span class="hljs-string">&#x27;a&#x27;</span> &lt;= c &amp;&amp; c &lt;= <span class="hljs-string">&#x27;z&#x27;</span>) ncur |= <span class="hljs-number">1</span> &lt;&lt; (c.<span class="hljs-title function_">charCodeAt</span>(<span class="hljs-number">0</span>) - <span class="hljs-string">&#x27;a&#x27;</span>.<span class="hljs-title function_">charCodeAt</span>(<span class="hljs-number">0</span>))<br>            <span class="hljs-keyword">if</span> (ncur == (<span class="hljs-number">1</span> &lt;&lt; cnt) - <span class="hljs-number">1</span>) <span class="hljs-keyword">return</span> step + <span class="hljs-number">1</span><br>            <span class="hljs-keyword">if</span> (step + <span class="hljs-number">1</span> &gt;= dist[nx][ny][ncur]) <span class="hljs-keyword">continue</span><br>            d.<span class="hljs-title function_">push</span>([nx, ny, ncur])<br>            dist[nx][ny][ncur] = step + <span class="hljs-number">1</span><br>        &#125;<br>    &#125;<br>    <span class="hljs-keyword">return</span> -<span class="hljs-number">1</span><br>&#125;<br></code></pre></div></td></tr></table></figure><br>Python3 代码：<br><figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span>:<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">shortestPathAllKeys</span>(<span class="hljs-params">self, g: <span class="hljs-type">List</span>[<span class="hljs-built_in">str</span>]</span>) -&gt; <span class="hljs-built_in">int</span>:<br>        dirs = [[<span class="hljs-number">0</span>,<span class="hljs-number">1</span>], [<span class="hljs-number">0</span>,-<span class="hljs-number">1</span>], [<span class="hljs-number">1</span>,<span class="hljs-number">0</span>], [-<span class="hljs-number">1</span>,<span class="hljs-number">0</span>]]<br>        n, m, cnt = <span class="hljs-built_in">len</span>(g), <span class="hljs-built_in">len</span>(g[<span class="hljs-number">0</span>]), <span class="hljs-number">0</span><br>        dist = defaultdict(<span class="hljs-keyword">lambda</span> : <span class="hljs-number">0x3f3f3f3f</span>)<br>        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(n):<br>            <span class="hljs-keyword">for</span> j <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(m):<br>                c = g[i][j]<br>                <span class="hljs-keyword">if</span> c == <span class="hljs-string">&#x27;@&#x27;</span>:<br>                    d = deque([(i, j, <span class="hljs-number">0</span>)])<br>                    dist[(i, j, <span class="hljs-number">0</span>)] = <span class="hljs-number">0</span><br>                <span class="hljs-keyword">elif</span> <span class="hljs-string">&#x27;a&#x27;</span> &lt;= c &lt;= <span class="hljs-string">&#x27;z&#x27;</span>:<br>                    cnt += <span class="hljs-number">1</span><br>        <span class="hljs-keyword">while</span> d:<br>            x, y, cur = d.popleft()<br>            step = dist[(x, y, cur)]<br>            <span class="hljs-keyword">for</span> di <span class="hljs-keyword">in</span> dirs:<br>                nx, ny = x + di[<span class="hljs-number">0</span>], y + di[<span class="hljs-number">1</span>]<br>                <span class="hljs-keyword">if</span> nx &lt; <span class="hljs-number">0</span> <span class="hljs-keyword">or</span> nx &gt;= n <span class="hljs-keyword">or</span> ny &lt; <span class="hljs-number">0</span> <span class="hljs-keyword">or</span> ny &gt;= m:<br>                    <span class="hljs-keyword">continue</span><br>                c = g[nx][ny]<br>                <span class="hljs-keyword">if</span> c == <span class="hljs-string">&#x27;#&#x27;</span>:<br>                    <span class="hljs-keyword">continue</span><br>                <span class="hljs-keyword">if</span> <span class="hljs-string">&#x27;A&#x27;</span> &lt;= c &lt;= <span class="hljs-string">&#x27;Z&#x27;</span> <span class="hljs-keyword">and</span> (cur &gt;&gt; (<span class="hljs-built_in">ord</span>(c) - <span class="hljs-built_in">ord</span>(<span class="hljs-string">&#x27;A&#x27;</span>)) &amp; <span class="hljs-number">1</span>) == <span class="hljs-number">0</span>:<br>                    <span class="hljs-keyword">continue</span><br>                ncur = cur<br>                <span class="hljs-keyword">if</span> <span class="hljs-string">&#x27;a&#x27;</span> &lt;= c &lt;= <span class="hljs-string">&#x27;z&#x27;</span>:<br>                    ncur |= (<span class="hljs-number">1</span> &lt;&lt; (<span class="hljs-built_in">ord</span>(c) - <span class="hljs-built_in">ord</span>(<span class="hljs-string">&#x27;a&#x27;</span>)))<br>                <span class="hljs-keyword">if</span> ncur == (<span class="hljs-number">1</span> &lt;&lt; cnt) - <span class="hljs-number">1</span>:<br>                    <span class="hljs-keyword">return</span> step + <span class="hljs-number">1</span><br>                <span class="hljs-keyword">if</span> step + <span class="hljs-number">1</span> &gt;= dist[(nx, ny, ncur)]:<br>                    <span class="hljs-keyword">continue</span><br>                dist[(nx, ny, ncur)] = step + <span class="hljs-number">1</span><br>                d.append((nx, ny, ncur))<br>        <span class="hljs-keyword">return</span> -<span class="hljs-number">1</span><br></code></pre></div></td></tr></table></figure></p>
+<ul>
+<li>时间复杂度：$O(n \times m \times 2^k)$</li>
+<li>空间复杂度：$O(n \times m \times 2^k)$</li>
+</ul>
+<hr>
+<h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>这是我们「刷穿 LeetCode」系列文章的第 <code>No.864</code> 篇，系列开始于 2021/01/01，截止于起始日 LeetCode 上共有 1916 道题目，部分是有锁题，我们将先把所有不带锁的题目刷完。</p>
+<p>在这个系列文章里面，除了讲解解题思路以外，还会尽可能给出最为简洁的代码。如果涉及通解还会相应的代码模板。</p>
+<p>为了方便各位同学能够电脑上进行调试和提交代码，我建立了相关的仓库：<a target="_blank" rel="noopener" href="https://github.com/SharingSource/LogicStack-LeetCode">https://github.com/SharingSource/LogicStack-LeetCode</a> 。</p>
+<p>在仓库地址里，你可以看到系列文章的题解链接、系列文章的相应代码、LeetCode 原题链接和其他优选题解。</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/BFS/">BFS</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E7%8A%B6%E6%80%81%E5%8E%8B%E7%BC%A9/">状态压缩</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/11/09/764.%20%E6%9C%80%E5%A4%A7%E5%8A%A0%E5%8F%B7%E6%A0%87%E5%BF%97%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/">
+                        <span class="hidden-mobile">LC 764. 最大加号标志</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://cdn.staticfile.org/valine/1.4.18/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"IDifiViRkVDTgu27Nu50GQkE-gzGzoHsz","appKey":"gt98pupgyYjPKYQASrGmD9kM","path":"window.location.pathname","placeholder":"发一条友善的评论（为方便交流，记得填上方的昵称再留言哦 ~ 🍭","avatar":"","meta":["nick","mail"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":true},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          Fluid.plugins.initFancyBox('#valine .vcontent img:not(.vemoji)');
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+  <div class="col-lg-7 mx-auto nopadding-x-md">
+    <div class="container custom post-custom mx-auto">
+      <img src="/oimg/gzh-qrcode.webp" srcset="/img/loading.gif" lazyload class="rounded mx-auto d-block mt-5" style="width:80%">
+    </div>
+  </div>
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- LeanCloud 统计PV -->
+        <span id="leancloud-site-pv-container" style="display: none">
+            总访问量 
+            <span id="leancloud-site-pv"></span>
+             次
+          </span>
+      
+      
+        <!-- LeanCloud 统计UV -->
+        <span id="leancloud-site-uv-container" style="display: none">
+            总访客数 
+            <span id="leancloud-site-uv"></span>
+             人
+          </span>
+      
+
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.staticfile.org/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.staticfile.org/tocbot/4.18.2/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.staticfile.org/anchor-js/4.3.1/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.11/clipboard.min.js" ></script>
+  
+
+
+
+
+  <script defer src="/js/leancloud.js" ></script>
+
+
+
+  <script  src="https://cdn.bootcdn.net/ajax/libs/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        loader: {
+          
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.staticfile.org/mathjax/3.2.0/es5/tex-svg.js" ></script>
+
+  
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>
