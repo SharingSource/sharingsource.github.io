@@ -16,22 +16,23 @@
   <meta name="author" content="宫水三叶">
   <meta name="keywords" content="算法, 数据结构, 题解">
   
-    <meta name="description" content="题目描述这是 LeetCode 上的 516. 最长回文子序列 ，难度为 中等。 给你一个字符串 s ，找出其中最长的回文子序列，并返回该序列的长度。 子序列定义为：不改变剩余字符顺序的情况下，删除某些字符或者不删除任何字符形成的一个序列。 示例 1：12345输入：s &#x3D; &quot;bbbab&quot;输出：4解释：一个可能的最长回文子序列为 &quot;bbbb&quot; 。示例 2：1">
+    <meta name="description" content="题目描述这是 LeetCode 上的 1710. 卡车上的最大单元数 ，难度为 简单。 请你将一些箱子装在 一辆卡车 上。给你一个二维数组 boxTypes，其中 $boxTypes[i] &#x3D; [numberOfBoxes_i, numberOfUnitsPerBox_i]$ ：  $numberOfBoxes_i$ 是类型 i 的箱子的数量。 $numberOfUnitsPerBox_i$ 是类">
 <meta property="og:type" content="article">
-<meta property="og:title" content="LC 516. 最长回文子序列">
-<meta property="og:url" content="https://sharingsource.github.io/2021/08/12/516.%20%E6%9C%80%E9%95%BF%E5%9B%9E%E6%96%87%E5%AD%90%E5%BA%8F%E5%88%97%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/index.html">
+<meta property="og:title" content="LC 1710. 卡车上的最大单元数">
+<meta property="og:url" content="https://sharingsource.github.io/2022/11/15/1710.%20%E5%8D%A1%E8%BD%A6%E4%B8%8A%E7%9A%84%E6%9C%80%E5%A4%A7%E5%8D%95%E5%85%83%E6%95%B0%EF%BC%88%E7%AE%80%E5%8D%95%EF%BC%89/index.html">
 <meta property="og:site_name" content="宫水三叶的刷题日记">
-<meta property="og:description" content="题目描述这是 LeetCode 上的 516. 最长回文子序列 ，难度为 中等。 给你一个字符串 s ，找出其中最长的回文子序列，并返回该序列的长度。 子序列定义为：不改变剩余字符顺序的情况下，删除某些字符或者不删除任何字符形成的一个序列。 示例 1：12345输入：s &#x3D; &quot;bbbab&quot;输出：4解释：一个可能的最长回文子序列为 &quot;bbbb&quot; 。示例 2：1">
+<meta property="og:description" content="题目描述这是 LeetCode 上的 1710. 卡车上的最大单元数 ，难度为 简单。 请你将一些箱子装在 一辆卡车 上。给你一个二维数组 boxTypes，其中 $boxTypes[i] &#x3D; [numberOfBoxes_i, numberOfUnitsPerBox_i]$ ：  $numberOfBoxes_i$ 是类型 i 的箱子的数量。 $numberOfUnitsPerBox_i$ 是类">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2021-08-11T18:02:28.000Z">
-<meta property="article:modified_time" content="2022-11-15T02:26:23.757Z">
+<meta property="article:published_time" content="2022-11-14T17:33:58.000Z">
+<meta property="article:modified_time" content="2022-11-15T02:26:23.760Z">
 <meta property="article:author" content="宫水三叶">
-<meta property="article:tag" content="动态规划">
-<meta property="article:tag" content="区间 DP">
+<meta property="article:tag" content="模拟">
+<meta property="article:tag" content="贪心">
+<meta property="article:tag" content="排序">
 <meta name="twitter:card" content="summary_large_image">
   
   
-  <title>LC 516. 最长回文子序列 - 宫水三叶的刷题日记</title>
+  <title>LC 1710. 卡车上的最大单元数 - 宫水三叶的刷题日记</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -176,12 +177,12 @@
 </nav>
 
     <div class="banner" id="banner" parallax=true
-         style="background: url('/img/image_207.jpg') no-repeat center center;
+         style="background: url('/img/image_69.jpeg') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="LC 516. 最长回文子序列">
+            <span class="h2" id="subtitle" title="LC 1710. 卡车上的最大单元数">
               
             </span>
 
@@ -196,8 +197,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-08-12 02:02" pubdate>
-        2021年8月12日
+      <time datetime="2022-11-15 01:33" pubdate>
+        2022年11月15日
       </time>
     </span>
   
@@ -233,64 +234,35 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">LC 516. 最长回文子序列</h1>
+            <h1 style="display: none">LC 1710. 卡车上的最大单元数</h1>
             
             <div class="markdown-body">
-              <h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>这是 LeetCode 上的 <strong><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/longest-palindromic-subsequence/solution/gong-shui-san-xie-qu-jian-dp-qiu-jie-zui-h2ya/">516. 最长回文子序列</a></strong> ，难度为 <strong>中等</strong>。</p>
-<p>给你一个字符串 <code>s</code> ，找出其中最长的回文子序列，并返回该序列的长度。</p>
-<p>子序列定义为：不改变剩余字符顺序的情况下，删除某些字符或者不删除任何字符形成的一个序列。</p>
-<p>示例 1：<br><figure class="highlight abnf"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs abnf">输入：s <span class="hljs-operator">=</span> <span class="hljs-string">&quot;bbbab&quot;</span><br><br>输出：<span class="hljs-number">4</span><br><br>解释：一个可能的最长回文子序列为 <span class="hljs-string">&quot;bbbb&quot;</span> 。<br></code></pre></div></td></tr></table></figure><br>示例 2：<br><figure class="highlight abnf"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs abnf">输入：s <span class="hljs-operator">=</span> <span class="hljs-string">&quot;cbbd&quot;</span><br><br>输出：<span class="hljs-number">2</span><br><br>解释：一个可能的最长回文子序列为 <span class="hljs-string">&quot;bb&quot;</span> 。<br></code></pre></div></td></tr></table></figure></p>
+              <h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>这是 LeetCode 上的 <strong><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/maximum-units-on-a-truck/solution/by-ac_oier-5wlo/">1710. 卡车上的最大单元数</a></strong> ，难度为 <strong>简单</strong>。</p>
+<p>请你将一些箱子装在 一辆卡车 上。给你一个二维数组 <code>boxTypes</code>，其中 $boxTypes[i] = [numberOfBoxes_i, numberOfUnitsPerBox_i]$ ：</p>
+<ul>
+<li>$numberOfBoxes_i$ 是类型 <code>i</code> 的箱子的数量。</li>
+<li>$numberOfUnitsPerBox_i$ 是类型 <code>i</code> 每个箱子可以装载的单元数量。</li>
+</ul>
+<p>整数 <code>truckSize</code> 表示卡车上可以装载 箱子 的 最大数量 。只要箱子数量不超过 <code>truckSize</code>，你就可以选择任意箱子装到卡车上。</p>
+<p>返回卡车可以装载 单元 的 最大 总数。</p>
+<p>示例 1：<br><figure class="highlight tap"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs tap">输入：boxTypes = [[1,3],[2,2],[3,1]], truckSize = 4<br><br>输出：8<br><br>解释：箱子的情况如下：<br>-<span class="hljs-number"> 1 </span>个第一类的箱子，里面含<span class="hljs-number"> 3 </span>个单元。<br>-<span class="hljs-number"> 2 </span>个第二类的箱子，每个里面含<span class="hljs-number"> 2 </span>个单元。<br>-<span class="hljs-number"> 3 </span>个第三类的箱子，每个里面含<span class="hljs-number"> 1 </span>个单元。<br>可以选择第一类和第二类的所有箱子，以及第三类的一个箱子。<br>单元总数 = (1 * 3) + (2 * 2) + (1 * 1) = 8<br></code></pre></div></td></tr></table></figure><br>示例 2：<br><figure class="highlight inform7"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs inform7">输入：boxTypes = <span class="hljs-comment">[<span class="hljs-comment">[5,10]</span>,<span class="hljs-comment">[2,5]</span>,<span class="hljs-comment">[4,7]</span>,<span class="hljs-comment">[3,9]</span>]</span>, truckSize = 10<br><br>输出：91<br></code></pre></div></td></tr></table></figure></p>
 <p>提示：</p>
 <ul>
-<li>$1 &lt;= s.length &lt;= 1000$</li>
-<li><code>s</code> 仅由小写英文字母组成</li>
+<li>$1 &lt;= boxTypes.length &lt;= 1000$</li>
+<li>$1 &lt;= numberOfBoxes_i, numberOfUnitsPerBox_i &lt;= 1000$</li>
+<li>$1 &lt;= truckSize &lt;= 10^6$</li>
 </ul>
 <hr>
-<h3 id="动态规划"><a href="#动态规划" class="headerlink" title="动态规划"></a>动态规划</h3><p>这是一道经典的区间 DP 题。</p>
-<p><strong>之所以可以使用区间 DP 进行求解，是因为在给定一个回文串的基础上，如果在回文串的边缘分别添加两个新的字符，可以通过判断两字符是否相等来得知新串是否回文。</strong></p>
-<p>也就是说，使用小区间的回文状态可以推导出大区间的回文状态值。</p>
-<p><strong>从图论意义出发就是，任何一个长度为 $len$ 的回文串，必然由「长度为 $len - 1$」或「长度为 $len - 2$」的回文串转移而来。</strong></p>
-<p><strong>两个具有公共回文部分的回文串之间存在拓扑序（存在由「长度较小」回文串指向「长度较大」回文串的有向边）。</strong></p>
-<p>通常区间 DP 问题都是，常见的基本流程为：</p>
-<ol>
-<li>从小到大枚举区间大小 $len$</li>
-<li>枚举区间左端点 $l$，同时根据区间大小 $len$ 和左端点计算出区间右端点 $r = l + len - 1$</li>
-<li>通过状态转移方程求 $f[l][r]$ 的值</li>
-</ol>
-<p>因此，我们 <strong>定义 $f[l][r]$ 为考虑区间 $[l, r]$ 的最长回文子序列长度为多少。</strong></p>
-<p>不失一般性的考虑 $f[l][r]$ 该如何转移。</p>
-<p>由于我们的状态定义 <strong>没有限制</strong> 回文串中必须要选 $s[l]$ 或者 $s[r]$。</p>
-<p>我们对边界字符 $s[l]$ 和 $s[r]$ 分情况讨论，最终的 $f[l][r]$ 应该在如下几种方案中取 $max$ ：</p>
+<h3 id="贪心"><a href="#贪心" class="headerlink" title="贪心"></a>贪心</h3><p>为了方便，我们令 <code>boxTypes</code> 为 <code>bs</code>，令 <code>truckSize</code> 为 <code>k</code>。</p>
+<p>由于每个箱子成本相同（均占用一个箱子位置），因此在 <code>k</code> 给定的情况下，我们应当尽可能选择装载单元数量大的箱子。</p>
+<p>这引导我们可以将 <code>bs</code> 根据「装载单元数量」排倒序，然后从前往后 <code>pick</code> 箱子，直到没有空闲位置。</p>
+<p>Java 代码：<br><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">maximumUnits</span><span class="hljs-params">(<span class="hljs-type">int</span>[][] bs, <span class="hljs-type">int</span> k)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> bs.length, ans = <span class="hljs-number">0</span>;<br>        Arrays.sort(bs, (a,b)-&gt;b[<span class="hljs-number">1</span>]-a[<span class="hljs-number">1</span>]);<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>, cnt = <span class="hljs-number">0</span>; i &lt; n &amp;&amp; cnt &lt; k; i++) &#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">a</span> <span class="hljs-operator">=</span> bs[i][<span class="hljs-number">0</span>], b = bs[i][<span class="hljs-number">1</span>], c = Math.min(a, k - cnt);<br>            cnt += c; ans += c * b;<br>        &#125;<br>        <span class="hljs-keyword">return</span> ans;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure><br>TypeScript 代码：<br><figure class="highlight typescript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs TypeScript"><span class="hljs-keyword">function</span> <span class="hljs-title function_">maximumUnits</span>(<span class="hljs-params">bs: <span class="hljs-built_in">number</span>[][], k: <span class="hljs-built_in">number</span></span>): <span class="hljs-built_in">number</span> &#123;<br>    <span class="hljs-keyword">let</span> n = bs.<span class="hljs-property">length</span>, ans = <span class="hljs-number">0</span><br>    bs.<span class="hljs-title function_">sort</span>(<span class="hljs-function">(<span class="hljs-params">a,b</span>)=&gt;</span>b[<span class="hljs-number">1</span>]-a[<span class="hljs-number">1</span>])<br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>, cnt = <span class="hljs-number">0</span>; i &lt; n &amp;&amp; cnt &lt; k; i++) &#123;<br>        <span class="hljs-keyword">const</span> a = bs[i][<span class="hljs-number">0</span>], b = bs[i][<span class="hljs-number">1</span>], c = <span class="hljs-title class_">Math</span>.<span class="hljs-title function_">min</span>(a, k - cnt)<br>        cnt += c; ans += c * b<br>    &#125;<br>    <span class="hljs-keyword">return</span> ans<br>&#125;<br></code></pre></div></td></tr></table></figure><br>Python 代码：<br><figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span>:<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">maximumUnits</span>(<span class="hljs-params">self, bs: <span class="hljs-type">List</span>[<span class="hljs-type">List</span>[<span class="hljs-built_in">int</span>]], k: <span class="hljs-built_in">int</span></span>) -&gt; <span class="hljs-built_in">int</span>:<br>        bs.sort(key=<span class="hljs-keyword">lambda</span> x: -x[<span class="hljs-number">1</span>])<br>        n, ans = <span class="hljs-built_in">len</span>(bs), <span class="hljs-number">0</span><br>        idx, cnt = <span class="hljs-number">0</span>, <span class="hljs-number">0</span><br>        <span class="hljs-keyword">while</span> idx &lt; n <span class="hljs-keyword">and</span> cnt &lt; k:<br>            a, b, c = bs[idx][<span class="hljs-number">0</span>], bs[idx][<span class="hljs-number">1</span>], <span class="hljs-built_in">min</span>(bs[idx][<span class="hljs-number">0</span>], k - cnt)<br>            cnt, ans = cnt + c, ans + b * c<br>            idx += <span class="hljs-number">1</span><br>        <span class="hljs-keyword">return</span> ans<br></code></pre></div></td></tr></table></figure></p>
 <ul>
-<li><p>形成的回文串一定不包含 $s[l]$ 和 $s[r]$，即完全不考虑 $s[l]$ 和 $s[r]$：</p>
-<script type="math/tex; mode=display">
-f[l][r] = f[l + 1][r - 1]</script></li>
-<li><p>形成的回文串可能包含 $s[l]$，但一定不包含 $s[r]$：</p>
-</li>
-</ul>
-<script type="math/tex; mode=display">
-f[l][r] = f[l][r - 1]</script><ul>
-<li>形成的回文串可能包含 $s[r]$，但一定不包含 $s[l]$：</li>
-</ul>
-<script type="math/tex; mode=display">
-f[l][r] = f[l + 1][r]</script><ul>
-<li>形成的回文串可能包含 $s[l]$，也可能包含 $s[r]$，根据 $s[l]$ 和 $s[r]$ 是否相等：</li>
-</ul>
-<script type="math/tex; mode=display">
-f[l][r] = \begin{cases}
-f[l + 1][r - 1] + 2 & s[l] = s[r] \\
-f[l + 1][r - 1] & s[l] \neq s[r] \\
-\end{cases}</script><p>需要说明的是，上述几种情况可以确保我们做到「不漏」，但不能确保「不重」，对于求最值问题，我们只需要确保「不漏」即可，某些状态重复参与比较，不会影响结果的正确性。</p>
-<blockquote>
-<p>一些细节：我们需要特判掉长度为 $1$ 和 $2$ 的两种基本情况。当长度为 $1$ 时，必然回文，当长度为 $2$ 时，当且仅当两字符相等时回文。</p>
-</blockquote>
-<p>代码：<br><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">longestPalindromeSubseq</span><span class="hljs-params">(String s)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> s.length();<br>        <span class="hljs-type">char</span>[] cs = s.toCharArray();<br>        <span class="hljs-type">int</span>[][] f = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[n][n]; <br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">len</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>; len &lt;= n; len++) &#123;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">l</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; l + len - <span class="hljs-number">1</span> &lt; n; l++) &#123;<br>                <span class="hljs-type">int</span> <span class="hljs-variable">r</span> <span class="hljs-operator">=</span> l + len - <span class="hljs-number">1</span>;<br>                <span class="hljs-keyword">if</span> (len == <span class="hljs-number">1</span>) &#123;<br>                    f[l][r] = <span class="hljs-number">1</span>;<br>                &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (len == <span class="hljs-number">2</span>) &#123;<br>                    f[l][r] = cs[l] == cs[r] ? <span class="hljs-number">2</span> : <span class="hljs-number">1</span>;<br>                &#125; <span class="hljs-keyword">else</span> &#123;<br>                    f[l][r] = Math.max(f[l + <span class="hljs-number">1</span>][r], f[l][r - <span class="hljs-number">1</span>]);<br>                    f[l][r] = Math.max(f[l][r], f[l + <span class="hljs-number">1</span>][r - <span class="hljs-number">1</span>] + (cs[l] == cs[r] ? <span class="hljs-number">2</span> : <span class="hljs-number">0</span>));<br>                &#125;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> f[<span class="hljs-number">0</span>][n - <span class="hljs-number">1</span>];<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure></p>
-<ul>
-<li>时间复杂度：$O(n^2)$</li>
-<li>空间复杂度：$O(n^2)$</li>
+<li>时间复杂度：排序复杂度为 $O(n\log{n})$，同时答案复杂度为 $O(n)$。整体复杂度为 $O(n\log{n})$</li>
+<li>空间复杂度：$O(\log{n})$</li>
 </ul>
 <hr>
-<h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>这是我们「刷穿 LeetCode」系列文章的第 <code>No.516</code> 篇，系列开始于 2021/01/01，截止于起始日 LeetCode 上共有 1916 道题目，部分是有锁题，我们将先把所有不带锁的题目刷完。</p>
+<h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>这是我们「刷穿 LeetCode」系列文章的第 <code>No.1710</code> 篇，系列开始于 2021/01/01，截止于起始日 LeetCode 上共有 1916 道题目，部分是有锁题，我们将先把所有不带锁的题目刷完。</p>
 <p>在这个系列文章里面，除了讲解解题思路以外，还会尽可能给出最为简洁的代码。如果涉及通解还会相应的代码模板。</p>
 <p>为了方便各位同学能够电脑上进行调试和提交代码，我建立了相关的仓库：<a target="_blank" rel="noopener" href="https://github.com/SharingSource/LogicStack-LeetCode">https://github.com/SharingSource/LogicStack-LeetCode</a> 。</p>
 <p>在仓库地址里，你可以看到系列文章的题解链接、系列文章的相应代码、LeetCode 原题链接和其他优选题解。</p>
@@ -304,9 +276,11 @@ f[l + 1][r - 1] & s[l] \neq s[r] \\
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/">动态规划</a>
+                      <a class="hover-with-bg" href="/tags/%E6%A8%A1%E6%8B%9F/">模拟</a>
                     
-                      <a class="hover-with-bg" href="/tags/%E5%8C%BA%E9%97%B4-DP/">区间 DP</a>
+                      <a class="hover-with-bg" href="/tags/%E8%B4%AA%E5%BF%83/">贪心</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E6%8E%92%E5%BA%8F/">排序</a>
                     
                   </div>
                 
@@ -323,18 +297,12 @@ f[l + 1][r - 1] & s[l] \neq s[r] \\
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2021/08/13/233.%20%E6%95%B0%E5%AD%97%201%20%E7%9A%84%E4%B8%AA%E6%95%B0%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">LC 233. 数字 1 的个数</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/08/11/446.%20%E7%AD%89%E5%B7%AE%E6%95%B0%E5%88%97%E5%88%92%E5%88%86%20II%20-%20%E5%AD%90%E5%BA%8F%E5%88%97%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/">
-                        <span class="hidden-mobile">LC 446. 等差数列划分 II - 子序列</span>
+                      <a href="/2022/11/14/805.%20%E6%95%B0%E7%BB%84%E7%9A%84%E5%9D%87%E5%80%BC%E5%88%86%E5%89%B2%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/">
+                        <span class="hidden-mobile">LC 805. 数组的均值分割</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
