@@ -16,24 +16,22 @@
   <meta name="author" content="宫水三叶">
   <meta name="keywords" content="算法, 数据结构, 题解">
   
-    <meta name="description" content="题目描述这是 LeetCode 上的 1748. 唯一元素的和 ，难度为 简单。 给你一个整数数组 nums 。数组中唯一元素是那些只出现「恰好一次」的元素。 请你返回 nums 中唯一元素的和 。 示例 1：12345输入：nums &#x3D; [1,2,3,2]输出：4解释：唯一元素为 [1,3] ，和为 4 。示例 2：12345输入：nums &#x3D; [1,1,1,1,1]输出：0解释：没有唯一元素，">
+    <meta name="description" content="题目描述这是 LeetCode 上的 775. 全局倒置与局部倒置 ，难度为 中等。 给你一个长度为 n 的整数数组 nums，表示由范围 $[0, n - 1]$ 内所有整数组成的一个排列。 全局倒置 的数目等于满足下述条件不同下标对 (i, j) 的数目：  $0 &lt;&#x3D; i &lt; j &lt; n$ $nums[i] &gt; nums[j]$  局部倒置 的数目等于满足下述条件的下">
 <meta property="og:type" content="article">
-<meta property="og:title" content="LC 1748. 唯一元素的和">
-<meta property="og:url" content="https://sharingsource.github.io/2021/02/07/1748.%20%E5%94%AF%E4%B8%80%E5%85%83%E7%B4%A0%E7%9A%84%E5%92%8C%EF%BC%88%E7%AE%80%E5%8D%95%EF%BC%89/index.html">
+<meta property="og:title" content="LC 775. 全局倒置与局部倒置">
+<meta property="og:url" content="https://sharingsource.github.io/2022/11/16/775.%20%E5%85%A8%E5%B1%80%E5%80%92%E7%BD%AE%E4%B8%8E%E5%B1%80%E9%83%A8%E5%80%92%E7%BD%AE%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/index.html">
 <meta property="og:site_name" content="宫水三叶的刷题日记">
-<meta property="og:description" content="题目描述这是 LeetCode 上的 1748. 唯一元素的和 ，难度为 简单。 给你一个整数数组 nums 。数组中唯一元素是那些只出现「恰好一次」的元素。 请你返回 nums 中唯一元素的和 。 示例 1：12345输入：nums &#x3D; [1,2,3,2]输出：4解释：唯一元素为 [1,3] ，和为 4 。示例 2：12345输入：nums &#x3D; [1,1,1,1,1]输出：0解释：没有唯一元素，">
+<meta property="og:description" content="题目描述这是 LeetCode 上的 775. 全局倒置与局部倒置 ，难度为 中等。 给你一个长度为 n 的整数数组 nums，表示由范围 $[0, n - 1]$ 内所有整数组成的一个排列。 全局倒置 的数目等于满足下述条件不同下标对 (i, j) 的数目：  $0 &lt;&#x3D; i &lt; j &lt; n$ $nums[i] &gt; nums[j]$  局部倒置 的数目等于满足下述条件的下">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2021-02-07T07:30:53.000Z">
-<meta property="article:modified_time" content="2022-05-18T08:27:52.959Z">
+<meta property="article:published_time" content="2022-11-15T16:54:30.000Z">
+<meta property="article:modified_time" content="2022-11-16T02:46:09.043Z">
 <meta property="article:author" content="宫水三叶">
-<meta property="article:tag" content="哈希表">
-<meta property="article:tag" content="模拟">
-<meta property="article:tag" content="双指针">
-<meta property="article:tag" content="排序">
+<meta property="article:tag" content="数学">
+<meta property="article:tag" content="树状数组">
 <meta name="twitter:card" content="summary_large_image">
   
   
-  <title>LC 1748. 唯一元素的和 - 宫水三叶的刷题日记</title>
+  <title>LC 775. 全局倒置与局部倒置 - 宫水三叶的刷题日记</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -178,12 +176,12 @@
 </nav>
 
     <div class="banner" id="banner" parallax=true
-         style="background: url('/img/image_104.jpeg') no-repeat center center;
+         style="background: url('/img/image_114.jpeg') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="LC 1748. 唯一元素的和">
+            <span class="h2" id="subtitle" title="LC 775. 全局倒置与局部倒置">
               
             </span>
 
@@ -198,8 +196,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-02-07 15:30" pubdate>
-        2021年2月7日
+      <time datetime="2022-11-16 00:54" pubdate>
+        2022年11月16日
       </time>
     </span>
   
@@ -235,34 +233,59 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">LC 1748. 唯一元素的和</h1>
+            <h1 style="display: none">LC 775. 全局倒置与局部倒置</h1>
             
             <div class="markdown-body">
-              <h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>这是 LeetCode 上的 <strong><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/sum-of-unique-elements/solution/gong-shui-san-xie-yi-ti-shuang-jie-pai-x-atnd/">1748. 唯一元素的和</a></strong> ，难度为 <strong>简单</strong>。</p>
-<p>给你一个整数数组 nums 。数组中唯一元素是那些只出现「恰好一次」的元素。</p>
-<p>请你返回 nums 中唯一元素的和 。</p>
-<p>示例 1：<br><figure class="highlight inform7"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs inform7">输入：nums = <span class="hljs-comment">[1,2,3,2]</span><br><br>输出：4<br><br>解释：唯一元素为 <span class="hljs-comment">[1,3]</span> ，和为 4 。<br></code></pre></div></td></tr></table></figure><br>示例 2：<br><figure class="highlight accesslog"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs accesslog">输入：nums = <span class="hljs-string">[1,1,1,1,1]</span><br><br>输出：<span class="hljs-number">0</span><br><br>解释：没有唯一元素，和为 <span class="hljs-number">0</span> 。<br></code></pre></div></td></tr></table></figure><br>示例 3 ：<br><figure class="highlight accesslog"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs accesslog">输入：nums = <span class="hljs-string">[1,2,3,4,5]</span><br><br>输出：<span class="hljs-number">15</span><br><br>解释：唯一元素为 <span class="hljs-string">[1,2,3,4,5]</span> ，和为 <span class="hljs-number">15</span> 。<br></code></pre></div></td></tr></table></figure></p>
+              <h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>这是 LeetCode 上的 <strong><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/global-and-local-inversions/solution/by-ac_oier-jc7a/">775. 全局倒置与局部倒置</a></strong> ，难度为 <strong>中等</strong>。</p>
+<p>给你一个长度为 <code>n</code> 的整数数组 <code>nums</code>，表示由范围 $[0, n - 1]$ 内所有整数组成的一个排列。</p>
+<p>全局倒置 的数目等于满足下述条件不同下标对 (i, j) 的数目：</p>
+<ul>
+<li>$0 &lt;= i &lt; j &lt; n$</li>
+<li>$nums[i] &gt; nums[j]$</li>
+</ul>
+<p>局部倒置 的数目等于满足下述条件的下标 i 的数目：</p>
+<ul>
+<li>$0 &lt;= i &lt; n - 1$</li>
+<li>$nums[i] &gt; nums[i + 1]$</li>
+</ul>
+<p>当数组 <code>nums</code> 中 全局倒置 的数量等于 局部倒置 的数量时，返回 <code>true</code> ；否则，返回 <code>false</code> 。</p>
+<p>示例 1：<br><figure class="highlight tap"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs tap">输入：nums = [1,0,2]<br><br>输出：true<br><br>解释：有<span class="hljs-number"> 1 </span>个全局倒置，和<span class="hljs-number"> 1 </span>个局部倒置。<br></code></pre></div></td></tr></table></figure><br>示例 2：<br><figure class="highlight tap"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs tap">输入：nums = [1,2,0]<br><br>输出：false<br><br>解释：有<span class="hljs-number"> 2 </span>个全局倒置，和<span class="hljs-number"> 1 </span>个局部倒置。<br></code></pre></div></td></tr></table></figure></p>
 <p>提示：</p>
 <ul>
-<li>1 &lt;= nums.length &lt;= 100</li>
-<li>1 &lt;= nums[i] &lt;= 100</li>
+<li>$n == nums.length$</li>
+<li>$1 &lt;= n &lt;= 10^5$</li>
+<li>$0 &lt;= nums[i] &lt; n$</li>
+<li><code>nums</code> 中的所有整数 互不相同</li>
+<li><code>nums</code> 是范围 $[0, n - 1]$ 内所有数字组成的一个排列</li>
 </ul>
 <hr>
-<h3 id="排序-双指针"><a href="#排序-双指针" class="headerlink" title="排序 + 双指针"></a>排序 + 双指针</h3><p>根据题意，其中一个做法是先对 <code>nums</code> 进行排序，使用双指针找到值相同的连续段 $[i, j)$，若连续段长度为 $1$，则将该值累加到答案。</p>
-<p>代码：<br><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">sumOfUnique</span><span class="hljs-params">(<span class="hljs-type">int</span>[] nums)</span> &#123;<br>        Arrays.sort(nums);<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> nums.length, ans = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; n; ) &#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> i;<br>            <span class="hljs-keyword">while</span> (j &lt; n &amp;&amp; nums[j] == nums[i]) j++;<br>            <span class="hljs-keyword">if</span> (j - i == <span class="hljs-number">1</span>) ans += nums[i];<br>            i = j;<br>        &#125;<br>        <span class="hljs-keyword">return</span> ans;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure></p>
+<h3 id="树状数组"><a href="#树状数组" class="headerlink" title="树状数组"></a>树状数组</h3><p>根据题意，对于每个 $nums[i]$ 而言：</p>
 <ul>
-<li>时间复杂度：排序复杂度为 $O(n\log{n})$；统计答案复杂度为 $O(n)$。整体复杂度为 $O(n\log{n})$</li>
-<li>空间复杂度：$O(\log{n})$</li>
+<li><p>其左边比它大的 $nums[j]$ 的个数，是以 $nums[i]$ 为右端点的“全局倒置”数量，统计所有以 $nums[i]$ 为右端点的“全局倒置”数量即是总的“全局倒置”数量 <code>a</code></p>
+</li>
+<li><p>同时我们可以将每个 $nums[i]$ 与前一个值进行比较，从而统计总的“局部倒置”数量 <code>b</code>，其中 $i$ 的取值范围为 $[1, n - 1)$</p>
+</li>
 </ul>
-<hr>
-<h3 id="哈希表"><a href="#哈希表" class="headerlink" title="哈希表"></a>哈希表</h3><p>另外容易想到使用「哈希表」统计某个数的出现次数，又根据 $nums[i]$ 的范围为 $[1, 100]$，可直接使用数组充当哈希表。</p>
-<p>代码：<br><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-type">int</span>[] cnt = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[<span class="hljs-number">110</span>];<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">sumOfUnique</span><span class="hljs-params">(<span class="hljs-type">int</span>[] nums)</span> &#123;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i : nums) cnt[i]++;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">ans</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>; i &lt;= <span class="hljs-number">100</span>; i++) &#123;<br>            <span class="hljs-keyword">if</span> (cnt[i] == <span class="hljs-number">1</span>) ans += i;<br>        &#125;<br>        <span class="hljs-keyword">return</span> ans;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure></p>
+<p>一个容易想到的做法是利用「树状数组」，虽然该做法没有利用到核心条件「$nums$ 是一个 $[0, n - 1]$ 的排列」，但根据数据范围 $n$ 可知该复杂度为 $O(n\log{n})$ 的做法可过，且依赖的条件更少，适用范围更广。</p>
+<p>代码：<br><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-type">int</span> n;<br>    <span class="hljs-type">int</span>[] tr;<br>    <span class="hljs-type">int</span> <span class="hljs-title function_">lowbit</span><span class="hljs-params">(<span class="hljs-type">int</span> x)</span> &#123;<br>        <span class="hljs-keyword">return</span> x &amp; -x;<br>    &#125;<br>    <span class="hljs-keyword">void</span> <span class="hljs-title function_">add</span><span class="hljs-params">(<span class="hljs-type">int</span> x)</span> &#123;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> x; i &lt;= n; i += lowbit(i)) tr[i]++;<br>    &#125;<br>    <span class="hljs-type">int</span> <span class="hljs-title function_">query</span><span class="hljs-params">(<span class="hljs-type">int</span> x)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">ans</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> x; i &gt; <span class="hljs-number">0</span>; i -= lowbit(i)) ans += tr[i];<br>        <span class="hljs-keyword">return</span> ans;<br>    &#125;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">isIdealPermutation</span><span class="hljs-params">(<span class="hljs-type">int</span>[] nums)</span> &#123;<br>        n = nums.length;<br>        tr = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[n + <span class="hljs-number">10</span>];<br>        add(nums[<span class="hljs-number">0</span>] + <span class="hljs-number">1</span>);<br>        <span class="hljs-type">int</span> <span class="hljs-variable">a</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>, b = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>; i &lt; n; i++) &#123;<br>            a += query(n) - query(nums[i] + <span class="hljs-number">1</span>);<br>            b += nums[i] &lt; nums[i - <span class="hljs-number">1</span>] ? <span class="hljs-number">1</span> : <span class="hljs-number">0</span>;<br>            add(nums[i] + <span class="hljs-number">1</span>);<br>        &#125;<br>        <span class="hljs-type">return</span> <span class="hljs-variable">a</span> <span class="hljs-operator">=</span>= b;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure></p>
 <ul>
-<li>时间复杂度：令 $C$ 为 $nums[i]$ 的值域大小，本题固定为 $110$。整体复杂度为 $O(n + C)$</li>
-<li>空间复杂度：$O(C)$</li>
+<li>时间复杂度：$O(n\log{n})$</li>
+<li>空间复杂度：$O(n)$</li>
 </ul>
 <hr>
-<h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>这是我们「刷穿 LeetCode」系列文章的第 <code>No.1748</code> 篇，系列开始于 2021/01/01，截止于起始日 LeetCode 上共有 1916 道题目，部分是有锁题，我们将先把所有不带锁的题目刷完。</p>
+<h3 id="数学"><a href="#数学" class="headerlink" title="数学"></a>数学</h3><p>解法一中并没有利用到核心条件「$nums$ 是一个 $[0, n - 1]$ 的排列」，我们可以从该条件以及两类倒置的定义出发进行分析。</p>
+<h4 id="提示一：由“局部倒置”组成的集合为由“全局倒置”组成的集合的子集"><a href="#提示一：由“局部倒置”组成的集合为由“全局倒置”组成的集合的子集" class="headerlink" title="提示一：由“局部倒置”组成的集合为由“全局倒置”组成的集合的子集"></a>提示一：由“局部倒置”组成的集合为由“全局倒置”组成的集合的子集</h4><p>任意一个“局部倒置”均满足“全局倒置”的定义，因此要判定两者数量是否相同，可转换为统计是否存在「不满足“局部倒置”定义的“全局倒置”」。</p>
+<h4 id="提示二：何为不满足“局部倒置”定义的“全局倒置”"><a href="#提示二：何为不满足“局部倒置”定义的“全局倒置”" class="headerlink" title="提示二：何为不满足“局部倒置”定义的“全局倒置”"></a>提示二：何为不满足“局部倒置”定义的“全局倒置”</h4><p>结合题意，若存在坐标 $j$ 和 $i$，满足 $nums[j] &gt; nums[i]$ 且 $j + 1 &lt; i$，那么该倒置满足“全局倒置”定义，且不满足“局部倒置”定义。</p>
+<p>若存在这样的逆序对，不满足，则有两类倒置数量不同。</p>
+<h4 id="提示三：考虑「如何构造」或「如何避免构造」不满足“全局倒置”定义的“局部倒置”"><a href="#提示三：考虑「如何构造」或「如何避免构造」不满足“全局倒置”定义的“局部倒置”" class="headerlink" title="提示三：考虑「如何构造」或「如何避免构造」不满足“全局倒置”定义的“局部倒置”"></a>提示三：考虑「如何构造」或「如何避免构造」不满足“全局倒置”定义的“局部倒置”</h4><p>如果我们能够总结出「如何构造」或「如何避免构造」一个不满足“全局倒置”定义的“局部倒置” 所需的条件，问题可以转换为检查 <code>nums</code> 是否满足这样的条件，来得知 <code>nums</code> 是否存在不满足“全局倒置”定义的“局部倒置”。</p>
+<p>我们可以结合「$nums$ 是一个 $[0, n - 1]$ 的排列」来分析，若需要避免所有 $nums[j] &gt; nums[i]$ 的逆序对均不满足 $j + 1 &lt; i$，只能是所有逆序对均由相邻数值产生。</p>
+<p>代码：<br><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">isIdealPermutation</span><span class="hljs-params">(<span class="hljs-type">int</span>[] nums)</span> &#123;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; nums.length; i++) &#123;<br>            <span class="hljs-keyword">if</span> (Math.abs(nums[i] - i) &gt;= <span class="hljs-number">2</span>) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>        &#125;<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure></p>
+<ul>
+<li>时间复杂度：$O(n)$</li>
+<li>空间复杂度：$O(1)$</li>
+</ul>
+<hr>
+<h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>这是我们「刷穿 LeetCode」系列文章的第 <code>No.775</code> 篇，系列开始于 2021/01/01，截止于起始日 LeetCode 上共有 1916 道题目，部分是有锁题，我们将先把所有不带锁的题目刷完。</p>
 <p>在这个系列文章里面，除了讲解解题思路以外，还会尽可能给出最为简洁的代码。如果涉及通解还会相应的代码模板。</p>
 <p>为了方便各位同学能够电脑上进行调试和提交代码，我建立了相关的仓库：<a target="_blank" rel="noopener" href="https://github.com/SharingSource/LogicStack-LeetCode">https://github.com/SharingSource/LogicStack-LeetCode</a> 。</p>
 <p>在仓库地址里，你可以看到系列文章的题解链接、系列文章的相应代码、LeetCode 原题链接和其他优选题解。</p>
@@ -276,13 +299,9 @@
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/%E5%93%88%E5%B8%8C%E8%A1%A8/">哈希表</a>
+                      <a class="hover-with-bg" href="/tags/%E6%95%B0%E5%AD%A6/">数学</a>
                     
-                      <a class="hover-with-bg" href="/tags/%E6%A8%A1%E6%8B%9F/">模拟</a>
-                    
-                      <a class="hover-with-bg" href="/tags/%E5%8F%8C%E6%8C%87%E9%92%88/">双指针</a>
-                    
-                      <a class="hover-with-bg" href="/tags/%E6%8E%92%E5%BA%8F/">排序</a>
+                      <a class="hover-with-bg" href="/tags/%E6%A0%91%E7%8A%B6%E6%95%B0%E7%BB%84/">树状数组</a>
                     
                   </div>
                 
@@ -299,18 +318,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2021/02/07/1749.%20%E4%BB%BB%E6%84%8F%E5%AD%90%E6%95%B0%E7%BB%84%E5%92%8C%E7%9A%84%E7%BB%9D%E5%AF%B9%E5%80%BC%E7%9A%84%E6%9C%80%E5%A4%A7%E5%80%BC%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">LC 1749. 任意子数组和的绝对值的最大值</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/02/07/1751.%20%E6%9C%80%E5%A4%9A%E5%8F%AF%E4%BB%A5%E5%8F%82%E5%8A%A0%E7%9A%84%E4%BC%9A%E8%AE%AE%E6%95%B0%E7%9B%AE%20II%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/">
-                        <span class="hidden-mobile">LC 1751. 最多可以参加的会议数目 II</span>
+                      <a href="/2022/11/15/1710.%20%E5%8D%A1%E8%BD%A6%E4%B8%8A%E7%9A%84%E6%9C%80%E5%A4%A7%E5%8D%95%E5%85%83%E6%95%B0%EF%BC%88%E7%AE%80%E5%8D%95%EF%BC%89/">
+                        <span class="hidden-mobile">LC 1710. 卡车上的最大单元数</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
