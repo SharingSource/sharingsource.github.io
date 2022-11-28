@@ -24,7 +24,7 @@
 <meta property="og:description" content="题目描述这是 LeetCode 上的 809. 情感丰富的文字 ，难度为 中等。 有时候人们会用重复写一些字母来表示额外的感受，比如 &quot;hello&quot; -&gt; &quot;heeellooo&quot;, &quot;hi&quot; -&gt; &quot;hiii&quot;。我们将相邻字母都相同的一串字符定义为相同字母组，例如：&quot;h&quot;, &quot;">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-11-24T17:13:03.000Z">
-<meta property="article:modified_time" content="2022-11-25T02:36:01.599Z">
+<meta property="article:modified_time" content="2022-11-28T09:04:16.635Z">
 <meta property="article:author" content="宫水三叶">
 <meta property="article:tag" content="模拟">
 <meta property="article:tag" content="双指针">
@@ -256,7 +256,7 @@
 <li>当 <code>a</code> 和 <code>b</code> 长度相同，定义为可扩张；</li>
 <li>当 <code>a</code> 和 <code>b</code> 长度不同，根据「<code>a</code> 和 <code>b</code> 长度对比」以及「<code>a</code> 的长度大小」分情况讨论：<ul>
 <li>当 <code>b</code> 长度大于 <code>a</code>，不可扩张；</li>
-<li>当 <code>a</code> 长度大于 <code>b</code>，<strong>我们不一定要拿整一段的 <code>b</code> 进行扩张，可以拿 <code>b</code> 中的一个字符进行扩张。</strong> 因此只需要满足扩张后的长度（<code>a</code> 的长度）大于 $3$ 即可定义为可扩张。</li>
+<li>当 <code>a</code> 长度大于 <code>b</code>，<strong>我们不一定要拿整一段的 <code>b</code> 进行扩张，可以拿 <code>b</code> 中的一个字符进行扩张。</strong> 因此只需要满足扩张后的长度（<code>a</code> 的长度）大于等于 $3$ 即可定义为可扩张。</li>
 </ul>
 </li>
 </ul>
