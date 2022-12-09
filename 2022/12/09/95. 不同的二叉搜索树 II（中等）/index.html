@@ -19,13 +19,13 @@
     <meta name="description" content="题目描述这是 LeetCode 上的 95. 不同的二叉搜索树 II ，难度为 中等。 给你一个整数 n，请你生成并返回所有由 n 个节点组成且节点值从 1 到 n 互不相同的不同 二叉搜索树 。可以按 任意顺序 返回答案。 示例 1：123输入：n &#x3D; 3输出：[[1,null,2,null,3],[1,null,3,2],[2,1,3],[3,1,null,null,2],[3,2,null,">
 <meta property="og:type" content="article">
 <meta property="og:title" content="LC 95. 不同的二叉搜索树 II">
-<meta property="og:url" content="https://sharingsource.github.io/2021/08/20/95.%20%E4%B8%8D%E5%90%8C%E7%9A%84%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%20II%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/index.html">
+<meta property="og:url" content="https://sharingsource.github.io/2022/12/09/95.%20%E4%B8%8D%E5%90%8C%E7%9A%84%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%20II%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/index.html">
 <meta property="og:site_name" content="宫水三叶的刷题日记">
 <meta property="og:description" content="题目描述这是 LeetCode 上的 95. 不同的二叉搜索树 II ，难度为 中等。 给你一个整数 n，请你生成并返回所有由 n 个节点组成且节点值从 1 到 n 互不相同的不同 二叉搜索树 。可以按 任意顺序 返回答案。 示例 1：123输入：n &#x3D; 3输出：[[1,null,2,null,3],[1,null,3,2],[2,1,3],[3,1,null,null,2],[3,2,null,">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://sharingsource.github.io/2021/08/20/95.%20%E4%B8%8D%E5%90%8C%E7%9A%84%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%20II%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/image_0.png">
-<meta property="article:published_time" content="2021-08-19T16:00:00.000Z">
-<meta property="article:modified_time" content="2022-12-09T04:47:47.095Z">
+<meta property="og:image" content="https://sharingsource.github.io/2022/12/09/95.%20%E4%B8%8D%E5%90%8C%E7%9A%84%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%20II%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/image_0.png">
+<meta property="article:published_time" content="2022-12-09T05:36:14.000Z">
+<meta property="article:modified_time" content="2022-12-09T05:36:14.821Z">
 <meta property="article:author" content="宫水三叶">
 <meta property="article:tag" content="DFS">
 <meta property="article:tag" content="递归">
@@ -34,7 +34,7 @@
 <meta property="article:tag" content="爆搜">
 <meta property="article:tag" content="BST">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://sharingsource.github.io/2021/08/20/95.%20%E4%B8%8D%E5%90%8C%E7%9A%84%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%20II%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/image_0.png">
+<meta name="twitter:image" content="https://sharingsource.github.io/2022/12/09/95.%20%E4%B8%8D%E5%90%8C%E7%9A%84%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%20II%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/image_0.png">
   
   
   <title>LC 95. 不同的二叉搜索树 II - 宫水三叶的刷题日记</title>
@@ -202,8 +202,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-08-20 00:00" pubdate>
-        2021年8月20日
+      <time datetime="2022-12-09 13:36" pubdate>
+        2022年12月9日
       </time>
     </span>
   
@@ -244,7 +244,7 @@
             <div class="markdown-body">
               <h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>这是 LeetCode 上的 <strong><a href>95. 不同的二叉搜索树 II</a></strong> ，难度为 <strong>中等</strong>。</p>
 <p>给你一个整数 <code>n</code>，请你生成并返回所有由 <code>n</code> 个节点组成且节点值从 <code>1</code> 到 <code>n</code> 互不相同的不同 二叉搜索树 。可以按 任意顺序 返回答案。</p>
-<p>示例 1：<br><img src="/2021/08/20/95.%20%E4%B8%8D%E5%90%8C%E7%9A%84%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%20II%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/image_0.png" srcset="/img/loading.gif" lazyload alt><br><figure class="highlight nix"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs nix">输入：<span class="hljs-attr">n</span> = <span class="hljs-number">3</span><br><br>输出：[[<span class="hljs-number">1</span>,<span class="hljs-literal">null</span>,<span class="hljs-number">2</span>,<span class="hljs-literal">null</span>,<span class="hljs-number">3</span>],[<span class="hljs-number">1</span>,<span class="hljs-literal">null</span>,<span class="hljs-number">3</span>,<span class="hljs-number">2</span>],[<span class="hljs-number">2</span>,<span class="hljs-number">1</span>,<span class="hljs-number">3</span>],[<span class="hljs-number">3</span>,<span class="hljs-number">1</span>,<span class="hljs-literal">null</span>,<span class="hljs-literal">null</span>,<span class="hljs-number">2</span>],[<span class="hljs-number">3</span>,<span class="hljs-number">2</span>,<span class="hljs-literal">null</span>,<span class="hljs-number">1</span>]]<br></code></pre></div></td></tr></table></figure><br>示例 2：<br><figure class="highlight lua"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs lua">输入：n = <span class="hljs-number">1</span><br><br>输出：<span class="hljs-string">[[1]]</span><br></code></pre></div></td></tr></table></figure></p>
+<p>示例 1：<br><img src="/2022/12/09/95.%20%E4%B8%8D%E5%90%8C%E7%9A%84%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%20II%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/image_0.png" srcset="/img/loading.gif" lazyload alt><br><figure class="highlight nix"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs nix">输入：<span class="hljs-attr">n</span> = <span class="hljs-number">3</span><br><br>输出：[[<span class="hljs-number">1</span>,<span class="hljs-literal">null</span>,<span class="hljs-number">2</span>,<span class="hljs-literal">null</span>,<span class="hljs-number">3</span>],[<span class="hljs-number">1</span>,<span class="hljs-literal">null</span>,<span class="hljs-number">3</span>,<span class="hljs-number">2</span>],[<span class="hljs-number">2</span>,<span class="hljs-number">1</span>,<span class="hljs-number">3</span>],[<span class="hljs-number">3</span>,<span class="hljs-number">1</span>,<span class="hljs-literal">null</span>,<span class="hljs-literal">null</span>,<span class="hljs-number">2</span>],[<span class="hljs-number">3</span>,<span class="hljs-number">2</span>,<span class="hljs-literal">null</span>,<span class="hljs-number">1</span>]]<br></code></pre></div></td></tr></table></figure><br>示例 2：<br><figure class="highlight lua"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs lua">输入：n = <span class="hljs-number">1</span><br><br>输出：<span class="hljs-string">[[1]]</span><br></code></pre></div></td></tr></table></figure></p>
 <p>提示：</p>
 <ul>
 <li>$1 &lt;= n &lt;= 8$</li>
@@ -306,7 +306,7 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2021/08/20/93.%20%E5%A4%8D%E5%8E%9F%20IP%20%E5%9C%B0%E5%9D%80%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/">
+                      <a href="/2022/12/09/93.%20%E5%A4%8D%E5%8E%9F%20IP%20%E5%9C%B0%E5%9D%80%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/">
                         <i class="iconfont icon-arrowleft"></i>
                         <span class="hidden-mobile">LC 93. 复原 IP 地址</span>
                         <span class="visible-mobile">上一篇</span>
@@ -316,8 +316,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/08/19/345.%20%E5%8F%8D%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%AD%E7%9A%84%E5%85%83%E9%9F%B3%E5%AD%97%E6%AF%8D%EF%BC%88%E7%AE%80%E5%8D%95%EF%BC%89/">
-                        <span class="hidden-mobile">LC 345. 反转字符串中的元音字母</span>
+                      <a href="/2022/11/30/895.%20%E6%9C%80%E5%A4%A7%E9%A2%91%E7%8E%87%E6%A0%88%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/">
+                        <span class="hidden-mobile">LC 895. 最大频率栈</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
