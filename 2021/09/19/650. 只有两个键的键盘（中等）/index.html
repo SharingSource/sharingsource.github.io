@@ -16,18 +16,18 @@
   <meta name="author" content="宫水三叶">
   <meta name="keywords" content="算法, 数据结构, 题解">
   
-    <meta name="description" content="题目描述这是 LeetCode 上的 650. 只有两个键的键盘 ，难度为 中等。 最初记事本上只有一个字符 ‘A’ 。你每次可以对这个记事本进行两种操作：  Copy All（复制全部）：复制这个记事本中的所有字符（不允许仅复制部分字符）。 Paste（粘贴）：粘贴 上一次 复制的字符。  给你一个数字 n ，你需要使用最少的操作次数，在记事本上输出 恰好 n 个 ‘A’ 。返回能够打印出 n">
+    <meta name="description" content="题目描述这是 LeetCode 上的 650. 只有两个键的键盘 ，难度为 中等。 最初记事本上只有一个字符 &#39;A&#39; 。你每次可以对这个记事本进行两种操作：  Copy All（复制全部）：复制这个记事本中的所有字符（不允许仅复制部分字符）。 Paste（粘贴）：粘贴 上一次 复制的字符。  给你一个数字 n ，你需要使用最少的操作次数，在记事本上输出 恰好 n 个 &#39;A&amp;">
 <meta property="og:type" content="article">
 <meta property="og:title" content="LC 650. 只有两个键的键盘">
 <meta property="og:url" content="https://sharingsource.github.io/2021/09/19/650.%20%E5%8F%AA%E6%9C%89%E4%B8%A4%E4%B8%AA%E9%94%AE%E7%9A%84%E9%94%AE%E7%9B%98%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/index.html">
 <meta property="og:site_name" content="宫水三叶的刷题日记">
-<meta property="og:description" content="题目描述这是 LeetCode 上的 650. 只有两个键的键盘 ，难度为 中等。 最初记事本上只有一个字符 ‘A’ 。你每次可以对这个记事本进行两种操作：  Copy All（复制全部）：复制这个记事本中的所有字符（不允许仅复制部分字符）。 Paste（粘贴）：粘贴 上一次 复制的字符。  给你一个数字 n ，你需要使用最少的操作次数，在记事本上输出 恰好 n 个 ‘A’ 。返回能够打印出 n">
+<meta property="og:description" content="题目描述这是 LeetCode 上的 650. 只有两个键的键盘 ，难度为 中等。 最初记事本上只有一个字符 &#39;A&#39; 。你每次可以对这个记事本进行两种操作：  Copy All（复制全部）：复制这个记事本中的所有字符（不允许仅复制部分字符）。 Paste（粘贴）：粘贴 上一次 复制的字符。  给你一个数字 n ，你需要使用最少的操作次数，在记事本上输出 恰好 n 个 &#39;A&amp;">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://sharingsource.github.io/2021/09/19/650.%20%E5%8F%AA%E6%9C%89%E4%B8%A4%E4%B8%AA%E9%94%AE%E7%9A%84%E9%94%AE%E7%9B%98%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/image_0.png">
 <meta property="og:image" content="https://sharingsource.github.io/2021/09/19/650.%20%E5%8F%AA%E6%9C%89%E4%B8%A4%E4%B8%AA%E9%94%AE%E7%9A%84%E9%94%AE%E7%9B%98%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/image_1.png">
 <meta property="og:image" content="https://sharingsource.github.io/2021/09/19/650.%20%E5%8F%AA%E6%9C%89%E4%B8%A4%E4%B8%AA%E9%94%AE%E7%9A%84%E9%94%AE%E7%9B%98%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/image_2.png">
 <meta property="article:published_time" content="2021-09-18T17:24:28.000Z">
-<meta property="article:modified_time" content="2022-05-18T08:27:37.746Z">
+<meta property="article:modified_time" content="2022-12-05T07:20:10.433Z">
 <meta property="article:author" content="宫水三叶">
 <meta property="article:tag" content="动态规划">
 <meta property="article:tag" content="数学">
@@ -243,16 +243,16 @@
             
             <div class="markdown-body">
               <h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>这是 LeetCode 上的 <strong><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/2-keys-keyboard/solution/gong-shui-san-xie-yi-ti-san-jie-dong-tai-f035/">650. 只有两个键的键盘</a></strong> ，难度为 <strong>中等</strong>。</p>
-<p>最初记事本上只有一个字符 ‘A’ 。你每次可以对这个记事本进行两种操作：</p>
+<p>最初记事本上只有一个字符 <code>&#39;A&#39;</code> 。你每次可以对这个记事本进行两种操作：</p>
 <ul>
-<li>Copy All（复制全部）：复制这个记事本中的所有字符（不允许仅复制部分字符）。</li>
-<li>Paste（粘贴）：粘贴 上一次 复制的字符。</li>
+<li><code>Copy All（复制全部）</code>：复制这个记事本中的所有字符（不允许仅复制部分字符）。</li>
+<li><code>Paste（粘贴）</code>：粘贴 上一次 复制的字符。</li>
 </ul>
-<p>给你一个数字 n ，你需要使用最少的操作次数，在记事本上输出 恰好 n 个 ‘A’ 。返回能够打印出 n 个 ‘A’ 的最少操作次数。</p>
+<p>给你一个数字 <code>n</code> ，你需要使用最少的操作次数，在记事本上输出 恰好 <code>n</code> 个 <code>&#39;A&#39;</code> 。返回能够打印出 <code>n</code> 个 <code>&#39;A&#39;</code> 的最少操作次数。</p>
 <p>示例 1：<br><figure class="highlight sql"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs sql">输入：<span class="hljs-number">3</span><br><br>输出：<span class="hljs-number">3</span><br><br>解释：<br>最初, 只有一个字符 <span class="hljs-string">&#x27;A&#x27;</span>。<br>第 <span class="hljs-number">1</span> 步, 使用 <span class="hljs-keyword">Copy</span> <span class="hljs-keyword">All</span> 操作。<br>第 <span class="hljs-number">2</span> 步, 使用 Paste 操作来获得 <span class="hljs-string">&#x27;AA&#x27;</span>。<br>第 <span class="hljs-number">3</span> 步, 使用 Paste 操作来获得 <span class="hljs-string">&#x27;AAA&#x27;</span>。<br></code></pre></div></td></tr></table></figure><br>示例 2：<br><figure class="highlight abnf"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs abnf">输入：n <span class="hljs-operator">=</span> <span class="hljs-number">1</span><br><br>输出：<span class="hljs-number">0</span><br></code></pre></div></td></tr></table></figure></p>
 <p>提示：</p>
 <ul>
-<li>1 &lt;= n &lt;= 1000</li>
+<li>$1 &lt;= n &lt;= 1000$</li>
 </ul>
 <hr>
 <h3 id="动态规划"><a href="#动态规划" class="headerlink" title="动态规划"></a>动态规划</h3><p><strong>定义 $f[i][j]$ 为经过最后一次操作后，当前记事本上有 $i$ 个字符，粘贴板上有 $j$ 个字符的最小操作次数。</strong></p>
