@@ -16,22 +16,21 @@
   <meta name="author" content="宫水三叶">
   <meta name="keywords" content="算法, 数据结构, 题解">
   
-    <meta name="description" content="题目描述这是 LeetCode 上的 29. 两数相除 ，难度为 中等。 给定两个整数，被除数 dividend 和除数 divisor。 将两数相除，要求不使用乘法、除法和 mod 运算符。 返回被除数 dividend 除以除数 divisor 得到的商。 整数除法的结果应当截去（truncate）其小数部分，例如：truncate(8.345) &#x3D; 8 以及 truncate(-2.7335">
+    <meta name="description" content="题目描述这是 LeetCode 上的 1780. 判断一个数字是否可以表示成三的幂的和 ，难度为 中等。 给你一个整数 n，如果你可以将 n 表示成若干个不同的三的幂之和，请你返回 true，否则请返回 false。 对于一个整数 y，如果存在整数 x 满足 y &#x3D;&#x3D; 3x，我们称这个整数 y 是三的幂。 示例 1：12345输入：n &#x3D; 12输出：true解释：12 &#x3D; 31 + 32示例 2：">
 <meta property="og:type" content="article">
-<meta property="og:title" content="LC 29. 两数相除">
-<meta property="og:url" content="https://sharingsource.github.io/2021/01/25/29.%20%E4%B8%A4%E6%95%B0%E7%9B%B8%E9%99%A4%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/index.html">
+<meta property="og:title" content="LC 1780. 判断一个数字是否可以表示成三的幂的和">
+<meta property="og:url" content="https://sharingsource.github.io/2022/12/12/1780.%20%E5%88%A4%E6%96%AD%E4%B8%80%E4%B8%AA%E6%95%B0%E5%AD%97%E6%98%AF%E5%90%A6%E5%8F%AF%E4%BB%A5%E8%A1%A8%E7%A4%BA%E6%88%90%E4%B8%89%E7%9A%84%E5%B9%82%E7%9A%84%E5%92%8C%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/index.html">
 <meta property="og:site_name" content="宫水三叶的刷题日记">
-<meta property="og:description" content="题目描述这是 LeetCode 上的 29. 两数相除 ，难度为 中等。 给定两个整数，被除数 dividend 和除数 divisor。 将两数相除，要求不使用乘法、除法和 mod 运算符。 返回被除数 dividend 除以除数 divisor 得到的商。 整数除法的结果应当截去（truncate）其小数部分，例如：truncate(8.345) &#x3D; 8 以及 truncate(-2.7335">
+<meta property="og:description" content="题目描述这是 LeetCode 上的 1780. 判断一个数字是否可以表示成三的幂的和 ，难度为 中等。 给你一个整数 n，如果你可以将 n 表示成若干个不同的三的幂之和，请你返回 true，否则请返回 false。 对于一个整数 y，如果存在整数 x 满足 y &#x3D;&#x3D; 3x，我们称这个整数 y 是三的幂。 示例 1：12345输入：n &#x3D; 12输出：true解释：12 &#x3D; 31 + 32示例 2：">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2021-01-24T22:54:15.000Z">
-<meta property="article:modified_time" content="2022-05-18T08:28:41.601Z">
+<meta property="article:published_time" content="2022-12-12T03:49:25.000Z">
+<meta property="article:modified_time" content="2022-12-12T03:49:25.398Z">
 <meta property="article:author" content="宫水三叶">
-<meta property="article:tag" content="二分">
 <meta property="article:tag" content="数学">
 <meta name="twitter:card" content="summary_large_image">
   
   
-  <title>LC 29. 两数相除 - 宫水三叶的刷题日记</title>
+  <title>LC 1780. 判断一个数字是否可以表示成三的幂的和 - 宫水三叶的刷题日记</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -176,12 +175,12 @@
 </nav>
 
     <div class="banner" id="banner" parallax=true
-         style="background: url('/img/image_105.jpeg') no-repeat center center;
+         style="background: url('/img/image_189.jpg') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="LC 29. 两数相除">
+            <span class="h2" id="subtitle" title="LC 1780. 判断一个数字是否可以表示成三的幂的和">
               
             </span>
 
@@ -196,8 +195,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-01-25 06:54" pubdate>
-        2021年1月25日
+      <time datetime="2022-12-12 11:49" pubdate>
+        2022年12月12日
       </time>
     </span>
   
@@ -233,64 +232,28 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">LC 29. 两数相除</h1>
+            <h1 style="display: none">LC 1780. 判断一个数字是否可以表示成三的幂的和</h1>
             
             <div class="markdown-body">
-              <h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>这是 LeetCode 上的 <strong><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/divide-two-integers/solution/gong-shui-san-xie-dui-xian-zhi-tiao-jian-utb9/">29. 两数相除</a></strong> ，难度为 <strong>中等</strong>。</p>
-<p>给定两个整数，被除数 <code>dividend</code> 和除数 <code>divisor</code>。</p>
-<p>将两数相除，要求不使用乘法、除法和 <code>mod</code> 运算符。</p>
-<p>返回被除数 <code>dividend</code> 除以除数 <code>divisor</code> 得到的商。</p>
-<p>整数除法的结果应当截去（<code>truncate</code>）其小数部分，例如：<code>truncate(8.345) = 8</code> 以及 <code>truncate(-2.7335) = -2</code> </p>
-<p>示例 1:<br><figure class="highlight makefile"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs makefile"><span class="hljs-section">输入: dividend = 10, divisor = 3</span><br><br><span class="hljs-section">输出: 3</span><br><br><span class="hljs-section">解释: 10/3 = truncate(3.33333..) = truncate(3) = 3</span><br></code></pre></div></td></tr></table></figure><br>示例 2:<br><figure class="highlight subunit"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs subunit">输入: dividend = 7, divisor = <span class="hljs-string">-3</span><br><br>输出: <span class="hljs-string">-2</span><br><br>解释: 7/<span class="hljs-string">-3</span> = truncate(<span class="hljs-string">-2</span>.33333..) = <span class="hljs-string">-2</span><br></code></pre></div></td></tr></table></figure></p>
+              <h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>这是 LeetCode 上的 <strong><a target="_blank" rel="noopener" href="https://acoier.com/2022/12/12/1780.%20%E5%88%A4%E6%96%AD%E4%B8%80%E4%B8%AA%E6%95%B0%E5%AD%97%E6%98%AF%E5%90%A6%E5%8F%AF%E4%BB%A5%E8%A1%A8%E7%A4%BA%E6%88%90%E4%B8%89%E7%9A%84%E5%B9%82%E7%9A%84%E5%92%8C%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/">1780. 判断一个数字是否可以表示成三的幂的和</a></strong> ，难度为 <strong>中等</strong>。</p>
+<p>给你一个整数 <code>n</code>，如果你可以将 <code>n</code> 表示成若干个不同的三的幂之和，请你返回 <code>true</code>，否则请返回 <code>false</code>。</p>
+<p>对于一个整数 <code>y</code>，如果存在整数 <code>x</code> 满足 <code>y == 3x</code>，我们称这个整数 <code>y</code> 是三的幂。</p>
+<p>示例 1：<br><figure class="highlight nix"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs nix">输入：<span class="hljs-attr">n</span> = <span class="hljs-number">12</span><br><br>输出：<span class="hljs-literal">true</span><br><br>解释：<span class="hljs-number">12</span> = <span class="hljs-number">31</span> + <span class="hljs-number">32</span><br></code></pre></div></td></tr></table></figure><br>示例 2：<br><figure class="highlight tap"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs tap">输入：n = 91<br><br>输出：true<br><br>解释：91 =<span class="hljs-number"> 30 </span>+<span class="hljs-number"> 32 </span>+ 34<br></code></pre></div></td></tr></table></figure><br>示例 3：<br><figure class="highlight nix"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs nix">输入：<span class="hljs-attr">n</span> = <span class="hljs-number">21</span><br><br>输出：<span class="hljs-literal">false</span><br></code></pre></div></td></tr></table></figure></p>
 <p>提示：</p>
 <ul>
-<li>被除数和除数均为 $32$ 位有符号整数。</li>
-<li>除数不为 $0$。</li>
-<li>假设我们的环境只能存储 32 位有符号整数，其数值范围是 [−$2^{31}$,  $2^{31}$ − 1]。本题中，如果除法结果溢出，则返回 $2^{31}$ − 1。</li>
+<li>$1 &lt;= n &lt;= 10^7$</li>
 </ul>
 <hr>
-<h3 id="基本分析"><a href="#基本分析" class="headerlink" title="基本分析"></a>基本分析</h3><p>主要的歧义在于第三点限制「假设我们的环境只能存储 $32$ 位有符号整数，其数值范围是 $[−2^{31}, 2^{31} − 1]$。本题中，如果除法结果溢出，则返回 $2^{31} − 1$」的理解。</p>
-<p>该限制有两种理解方式：</p>
-<ol>
-<li>不限制算法使用 <code>long</code>，只是解释为什么在溢出时，返回 $2^{31} − 1$；</li>
-<li>限制算法使用 <code>long</code>。</li>
-</ol>
-<p>原始题解在 <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/divide-two-integers/solution/shua-chuan-lc-er-fen-bei-zeng-cheng-fa-j-m73b/">这里</a> 。</p>
-<hr>
-<h3 id="理解一（不限制-long）"><a href="#理解一（不限制-long）" class="headerlink" title="理解一（不限制 long）"></a>理解一（不限制 <code>long</code>）</h3><p>当不限制使用 <code>long</code> 时，基本思路为：</p>
+<h3 id="数学"><a href="#数学" class="headerlink" title="数学"></a>数学</h3><p>这是一道考察「进制转换」基本认识的题目。</p>
+<p>将 <code>n</code> 看作一个三进制数，例如对于 $(210)_{3}$ 而言，其代表的是 $2 \times 3^2 + 1 \times 3^1 + 0 \times 3^0$ 十进制数。</p>
+<p>由于题目规定组成和的三的幂需要满足「不同」的条件，因此 <code>n</code> 所代表的三进制表示中的系数只能是 $1$ 或 $0$，而不是能是 $2$。</p>
+<p>Java 代码：<br><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">checkPowersOfThree</span><span class="hljs-params">(<span class="hljs-type">int</span> n)</span> &#123;<br>        <span class="hljs-keyword">while</span> (n != <span class="hljs-number">0</span>) &#123;<br>            <span class="hljs-keyword">if</span> (n % <span class="hljs-number">3</span> == <span class="hljs-number">2</span>) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>            n /= <span class="hljs-number">3</span>;<br>        &#125;<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure><br>TypeScript  代码：<br><figure class="highlight typescript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs TypeScript"><span class="hljs-keyword">function</span> <span class="hljs-title function_">checkPowersOfThree</span>(<span class="hljs-params">n: <span class="hljs-built_in">number</span></span>): <span class="hljs-built_in">boolean</span> &#123;<br>    <span class="hljs-keyword">while</span> (n != <span class="hljs-number">0</span>) &#123;<br>        <span class="hljs-keyword">if</span> (n % <span class="hljs-number">3</span> == <span class="hljs-number">2</span>) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span><br>        n = <span class="hljs-title class_">Math</span>.<span class="hljs-title function_">floor</span>(n / <span class="hljs-number">3</span>)<br>    &#125;<br>    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span><br>&#125;<br></code></pre></div></td></tr></table></figure><br>Python 代码<br><figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span>:<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">checkPowersOfThree</span>(<span class="hljs-params">self, n: <span class="hljs-built_in">int</span></span>) -&gt; <span class="hljs-built_in">bool</span>:<br>        <span class="hljs-keyword">while</span> n != <span class="hljs-number">0</span>:<br>            <span class="hljs-keyword">if</span> n % <span class="hljs-number">3</span> == <span class="hljs-number">2</span>:<br>                <span class="hljs-keyword">return</span> <span class="hljs-literal">False</span><br>            n //= <span class="hljs-number">3</span><br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">True</span><br></code></pre></div></td></tr></table></figure></p>
 <ul>
-<li>首先，<code>dividend</code> 和 <code>divisor</code> 均有「正数」和「负数」两种可能，当且仅当其中一者为负数时，结果为负，为了方便，我们可以先记录最终结果的正负号，然后将 <code>dividend</code> 和 <code>divisor</code> 都当成正数来处理；</li>
-<li>现在两者都满足 $x &gt;= 0$，然后利用 <code>dividend</code> 和 <code>divisor</code> 均为 <code>int</code>，可以确定答案的绝对值落在 $[0, dividend]$ 范围内（当且仅当 <code>divisor</code> 是范围在 $[0, 1]$ 的浮点数时，答案会大于 <code>dividend</code>）；</li>
-<li>假设答案为 $x$，那么在以 $x$ 为分割点的整数数轴上，具有「二段性」，因此我们可以二分找到该分割点：<ul>
-<li>大于 $x$ 的数 $y$ 满足 $y * b &gt; a$；</li>
-<li>小于等于 $x$ 的数 $y$ 满足 $y * b &lt;= a$；</li>
-</ul>
-</li>
-<li>根据「二段性」分析，我们发现二分的 <code>check</code> 实现需要用到乘法，因此我们需要实现一个「不用乘法符号」的乘法实现（这可以使用倍增思想来实现 <code>mul</code> 操作）。</li>
-</ul>
-<p>代码：<br><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-type">int</span> <span class="hljs-variable">INF</span> <span class="hljs-operator">=</span> Integer.MAX_VALUE;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">divide</span><span class="hljs-params">(<span class="hljs-type">int</span> _a, <span class="hljs-type">int</span> _b)</span> &#123;<br>        <span class="hljs-type">long</span> <span class="hljs-variable">a</span> <span class="hljs-operator">=</span> _a, b = _b;<br>        <span class="hljs-type">boolean</span> <span class="hljs-variable">flag</span> <span class="hljs-operator">=</span> <span class="hljs-literal">false</span>;<br>        <span class="hljs-keyword">if</span> ((a &lt; <span class="hljs-number">0</span> &amp;&amp; b &gt; <span class="hljs-number">0</span>) || (a &gt; <span class="hljs-number">0</span> &amp;&amp; b &lt; <span class="hljs-number">0</span>)) flag = <span class="hljs-literal">true</span>;<br>        <span class="hljs-keyword">if</span> (a &lt; <span class="hljs-number">0</span>) a = -a;<br>        <span class="hljs-keyword">if</span> (b &lt; <span class="hljs-number">0</span>) b = -b;<br>        <span class="hljs-type">long</span> <span class="hljs-variable">l</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>, r = a;<br>        <span class="hljs-keyword">while</span> (l &lt; r) &#123;<br>            <span class="hljs-type">long</span> <span class="hljs-variable">mid</span> <span class="hljs-operator">=</span> l + r + <span class="hljs-number">1</span> &gt;&gt; <span class="hljs-number">1</span>;<br>            <span class="hljs-keyword">if</span> (mul(mid, b) &lt;= a) l = mid;<br>            <span class="hljs-keyword">else</span> r = mid - <span class="hljs-number">1</span>;<br>        &#125;<br>        r = flag ? -r : r;<br>        <span class="hljs-keyword">if</span> (r &gt; INF || r &lt; -INF - <span class="hljs-number">1</span>) <span class="hljs-keyword">return</span> INF;<br>        <span class="hljs-keyword">return</span> (<span class="hljs-type">int</span>)r;<br>    &#125;<br>    <span class="hljs-type">long</span> <span class="hljs-title function_">mul</span><span class="hljs-params">(<span class="hljs-type">long</span> a, <span class="hljs-type">long</span> k)</span> &#123;<br>        <span class="hljs-type">long</span> <span class="hljs-variable">ans</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">while</span> (k &gt; <span class="hljs-number">0</span>) &#123;<br>            <span class="hljs-keyword">if</span> ((k &amp; <span class="hljs-number">1</span>) == <span class="hljs-number">1</span>) ans += a;<br>            k &gt;&gt;= <span class="hljs-number">1</span>;<br>            a += a;<br>        &#125;<br>        <span class="hljs-keyword">return</span> ans;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure></p>
-<ul>
-<li>时间复杂度：在 $[0, a]$ 范围内二分操作，复杂度为$O(\log{a})$；倍增乘法的与操作数的二进制长度相关，复杂度为 $O(\log{b})$。整体复杂度为 $O(\log{a} \times \log{b})$</li>
+<li>时间复杂度：$O(\log{n})$</li>
 <li>空间复杂度：$O(1)$</li>
 </ul>
 <hr>
-<h3 id="理解二（限制-long）"><a href="#理解二（限制-long）" class="headerlink" title="理解二（限制 long）"></a>理解二（限制 <code>long</code>）</h3><p>对于全程不使用 <code>long</code> 的做法，我们需要将所有数映射到负数进行处理（以 $0$ 为分割点，负数所能表示的范围更大）。</p>
-<p>基本思路为：</p>
-<ul>
-<li>起始先对边界情况进行特判；</li>
-<li>记录最终结果的符号，并将两数都映射为负数；</li>
-<li>可以预处理出倍增数组，或采取逐步增大 <code>dividend</code> 来逼近 <code>divisor</code> 的方式。</li>
-</ul>
-<blockquote>
-<p>由于操作数都是负数，因此自倍增过程中，如果操作数小于 <code>INT_MIN</code> 的一半（<code>-1073741824</code>），则代表发生溢出。</p>
-</blockquote>
-<p>代码：<br><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-type">int</span> <span class="hljs-variable">MIN</span> <span class="hljs-operator">=</span> Integer.MIN_VALUE, MAX = Integer.MAX_VALUE;<br>    <span class="hljs-type">int</span> <span class="hljs-variable">LIMIT</span> <span class="hljs-operator">=</span> -<span class="hljs-number">1073741824</span>; <span class="hljs-comment">// MIN 的一半</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">divide</span><span class="hljs-params">(<span class="hljs-type">int</span> a, <span class="hljs-type">int</span> b)</span> &#123;<br>        <span class="hljs-keyword">if</span> (a == MIN &amp;&amp; b == -<span class="hljs-number">1</span>) <span class="hljs-keyword">return</span> MAX;<br>        <span class="hljs-type">boolean</span> <span class="hljs-variable">flag</span> <span class="hljs-operator">=</span> <span class="hljs-literal">false</span>;<br>        <span class="hljs-keyword">if</span> ((a &gt; <span class="hljs-number">0</span> &amp;&amp; b &lt; <span class="hljs-number">0</span>) || (a &lt; <span class="hljs-number">0</span> &amp;&amp; b &gt; <span class="hljs-number">0</span>)) flag = <span class="hljs-literal">true</span>;<br>        <span class="hljs-keyword">if</span> (a &gt; <span class="hljs-number">0</span>) a = -a;<br>        <span class="hljs-keyword">if</span> (b &gt; <span class="hljs-number">0</span>) b = -b;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">ans</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">while</span> (a &lt;= b)&#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">c</span> <span class="hljs-operator">=</span> b, d = -<span class="hljs-number">1</span>;<br>            <span class="hljs-keyword">while</span> (c &gt;= LIMIT &amp;&amp; d &gt;= LIMIT &amp;&amp; c &gt;= a - c)&#123;<br>                c += c; d += d;<br>            &#125;<br>            a -= c;<br>            ans += d;<br>        &#125;<br>        <span class="hljs-keyword">return</span> flag ? ans : -ans;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure></p>
-<ul>
-<li>时间复杂度：$O(\log{a} \times \log{b})$</li>
-<li>空间复杂度：$O(1)$</li>
-</ul>
-<hr>
-<h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>这是我们「刷穿 LeetCode」系列文章的第 <code>No.29</code> 篇，系列开始于 2021/01/01，截止于起始日 LeetCode 上共有 1916 道题目，部分是有锁题，我们将先把所有不带锁的题目刷完。</p>
+<h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>这是我们「刷穿 LeetCode」系列文章的第 <code>No.1780</code> 篇，系列开始于 2021/01/01，截止于起始日 LeetCode 上共有 1916 道题目，部分是有锁题，我们将先把所有不带锁的题目刷完。</p>
 <p>在这个系列文章里面，除了讲解解题思路以外，还会尽可能给出最为简洁的代码。如果涉及通解还会相应的代码模板。</p>
 <p>为了方便各位同学能够电脑上进行调试和提交代码，我建立了相关的仓库：<a target="_blank" rel="noopener" href="https://github.com/SharingSource/LogicStack-LeetCode">https://github.com/SharingSource/LogicStack-LeetCode</a> 。</p>
 <p>在仓库地址里，你可以看到系列文章的题解链接、系列文章的相应代码、LeetCode 原题链接和其他优选题解。</p>
@@ -303,8 +266,6 @@
                 
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
-                    
-                      <a class="hover-with-bg" href="/tags/%E4%BA%8C%E5%88%86/">二分</a>
                     
                       <a class="hover-with-bg" href="/tags/%E6%95%B0%E5%AD%A6/">数学</a>
                     
@@ -323,18 +284,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2021/01/26/33.%20%E6%90%9C%E7%B4%A2%E6%97%8B%E8%BD%AC%E6%8E%92%E5%BA%8F%E6%95%B0%E7%BB%84%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">LC 33. 搜索旋转排序数组</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/01/25/28.%20%E5%AE%9E%E7%8E%B0%20strStr()%EF%BC%88%E7%AE%80%E5%8D%95%EF%BC%89/">
-                        <span class="hidden-mobile">LC 28. 实现 strStr()</span>
+                      <a href="/2022/12/10/1691.%20%E5%A0%86%E5%8F%A0%E9%95%BF%E6%96%B9%E4%BD%93%E7%9A%84%E6%9C%80%E5%A4%A7%E9%AB%98%E5%BA%A6%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/">
+                        <span class="hidden-mobile">LC 1691. 堆叠长方体的最大高度</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
