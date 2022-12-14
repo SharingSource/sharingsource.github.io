@@ -1,0 +1,591 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/oimg/RoundCorner.png">
+  <link rel="icon" href="/oimg/RoundCorner.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="宫水三叶">
+  <meta name="keywords" content="算法, 数据结构, 题解">
+  
+    <meta name="description" content="题目描述这是 LeetCode 上的 1697. 检查边长度限制的路径是否存在 ，难度为 困难。 给你一个 n 个点组成的无向图边集 edgeList，其中 $edgeList[i] &#x3D; [u_i, v_i, dis_i]$ 表示点 $u_i$ 和点 $v_i$ 之间有一条长度为 $dis_i$ 的边。请注意，两个点之间可能有 超过一条边 。 给你一个查询数组 queries，其中 $querie">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LC 1697. 检查边长度限制的路径是否存在">
+<meta property="og:url" content="https://sharingsource.github.io/2022/12/14/1697.%20%E6%A3%80%E6%9F%A5%E8%BE%B9%E9%95%BF%E5%BA%A6%E9%99%90%E5%88%B6%E7%9A%84%E8%B7%AF%E5%BE%84%E6%98%AF%E5%90%A6%E5%AD%98%E5%9C%A8%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/index.html">
+<meta property="og:site_name" content="宫水三叶的刷题日记">
+<meta property="og:description" content="题目描述这是 LeetCode 上的 1697. 检查边长度限制的路径是否存在 ，难度为 困难。 给你一个 n 个点组成的无向图边集 edgeList，其中 $edgeList[i] &#x3D; [u_i, v_i, dis_i]$ 表示点 $u_i$ 和点 $v_i$ 之间有一条长度为 $dis_i$ 的边。请注意，两个点之间可能有 超过一条边 。 给你一个查询数组 queries，其中 $querie">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://sharingsource.github.io/2022/12/14/1697.%20%E6%A3%80%E6%9F%A5%E8%BE%B9%E9%95%BF%E5%BA%A6%E9%99%90%E5%88%B6%E7%9A%84%E8%B7%AF%E5%BE%84%E6%98%AF%E5%90%A6%E5%AD%98%E5%9C%A8%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/image_0.png">
+<meta property="og:image" content="https://sharingsource.github.io/2022/12/14/1697.%20%E6%A3%80%E6%9F%A5%E8%BE%B9%E9%95%BF%E5%BA%A6%E9%99%90%E5%88%B6%E7%9A%84%E8%B7%AF%E5%BE%84%E6%98%AF%E5%90%A6%E5%AD%98%E5%9C%A8%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/image_1.png">
+<meta property="article:published_time" content="2022-12-14T02:26:03.000Z">
+<meta property="article:modified_time" content="2022-12-14T02:26:04.434Z">
+<meta property="article:author" content="宫水三叶">
+<meta property="article:tag" content="双指针">
+<meta property="article:tag" content="并查集">
+<meta property="article:tag" content="排序">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://sharingsource.github.io/2022/12/14/1697.%20%E6%A3%80%E6%9F%A5%E8%BE%B9%E9%95%BF%E5%BA%A6%E9%99%90%E5%88%B6%E7%9A%84%E8%B7%AF%E5%BE%84%E6%98%AF%E5%90%A6%E5%AD%98%E5%9C%A8%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/image_0.png">
+  
+  
+  <title>LC 1697. 检查边长度限制的路径是否存在 - 宫水三叶的刷题日记</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/hint.css/2.7.0/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.7.2/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"sharingsource.github.io","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"|","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"IDifiViRkVDTgu27Nu50GQkE-gzGzoHsz","app_key":"gt98pupgyYjPKYQASrGmD9kM","server_url":"https://idifivir.lc-cn-n1-shared.com","path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.1.0"></head>
+
+
+<body>
+  <header style="height: 50vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>宫水三叶の刷题日记</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/image_15.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="LC 1697. 检查边长度限制的路径是否存在">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-author" aria-hidden="true"></i>
+      宫水三叶
+    </span>
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2022-12-14 10:26" pubdate>
+        2022年12月14日
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">LC 1697. 检查边长度限制的路径是否存在</h1>
+            
+            <div class="markdown-body">
+              <h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>这是 LeetCode 上的 <strong><a href>1697. 检查边长度限制的路径是否存在</a></strong> ，难度为 <strong>困难</strong>。</p>
+<p>给你一个 <code>n</code> 个点组成的无向图边集 <code>edgeList</code>，其中 $edgeList[i] = [u_i, v_i, dis_i]$ 表示点 $u_i$ 和点 $v_i$ 之间有一条长度为 $dis_i$ 的边。请注意，两个点之间可能有 超过一条边 。</p>
+<p>给你一个查询数组 <code>queries</code>，其中 $queries[j] = [p_j, q_j, limit_j]$ ，你的任务是对于每个查询 $queries[j]$ ，判断是否存在从 $p_j$ 到 $q_j$ 的路径，且这条路径上的每一条边都 严格小于 $limit_j$ 。</p>
+<p>请你返回一个 布尔数组 <code>answer</code>，其中 <code>answer.length == queries.length</code>，当 $queries[j]$ 的查询结果为 <code>true</code> 时， <code>answer</code> 第 <code>j</code> 个值为 <code>true</code> ，否则为 <code>false</code> 。</p>
+<p>示例 1：<br><img src="/2022/12/14/1697.%20%E6%A3%80%E6%9F%A5%E8%BE%B9%E9%95%BF%E5%BA%A6%E9%99%90%E5%88%B6%E7%9A%84%E8%B7%AF%E5%BE%84%E6%98%AF%E5%90%A6%E5%AD%98%E5%9C%A8%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/image_0.png" srcset="/img/loading.gif" lazyload alt><br><figure class="highlight lua"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs lua">输入：n = <span class="hljs-number">3</span>, edgeList = <span class="hljs-string">[[0,1,2],[1,2,4],[2,0,8],[1,0,16]]</span>, queries = <span class="hljs-string">[[0,1,2],[0,2,5]]</span><br><br>输出：[<span class="hljs-literal">false</span>,<span class="hljs-literal">true</span>]<br><br>解释：上图为给定的输入数据。注意到 <span class="hljs-number">0</span> 和 <span class="hljs-number">1</span> 之间有两条重边，分别为 <span class="hljs-number">2</span> 和 <span class="hljs-number">16</span> 。<br>对于第一个查询，<span class="hljs-number">0</span> 和 <span class="hljs-number">1</span> 之间没有小于 <span class="hljs-number">2</span> 的边，所以我们返回 <span class="hljs-literal">false</span> 。<br>对于第二个查询，有一条路径（<span class="hljs-number">0</span> -&gt; <span class="hljs-number">1</span> -&gt; <span class="hljs-number">2</span>）两条边都小于 <span class="hljs-number">5</span> ，所以这个查询我们返回 <span class="hljs-literal">true</span> 。<br></code></pre></div></td></tr></table></figure><br>示例 2：<br><img src="/2022/12/14/1697.%20%E6%A3%80%E6%9F%A5%E8%BE%B9%E9%95%BF%E5%BA%A6%E9%99%90%E5%88%B6%E7%9A%84%E8%B7%AF%E5%BE%84%E6%98%AF%E5%90%A6%E5%AD%98%E5%9C%A8%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/image_1.png" srcset="/img/loading.gif" lazyload alt><br><figure class="highlight lua"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs lua">输入：n = <span class="hljs-number">5</span>, edgeList = <span class="hljs-string">[[0,1,10],[1,2,5],[2,3,9],[3,4,13]]</span>, queries = <span class="hljs-string">[[0,4,14],[1,4,13]]</span><br><br>输出：[<span class="hljs-literal">true</span>,<span class="hljs-literal">false</span>]<br><br>解释：上图为给定数据。<br></code></pre></div></td></tr></table></figure></p>
+<p>提示：</p>
+<ul>
+<li>$2 &lt;= n &lt;= 10^5$</li>
+<li>$1 &lt;= edgeList.length, queries.length &lt;= 10^5$</li>
+<li>$edgeList[i].length == 3$</li>
+<li>$queries[j].length == 3$</li>
+<li>$0 &lt;= u_i, v_i, p_j, q_j &lt;= n - 1$</li>
+<li>$u_i != v_i$</li>
+<li>$p_j != q_j$</li>
+<li>$1 &lt;= dis_i, limit_j &lt;= 10^9$</li>
+<li>两个点之间可能有多条边。</li>
+</ul>
+<hr>
+<h3 id="排序-并查集-双指针"><a href="#排序-并查集-双指针" class="headerlink" title="排序 + 并查集 + 双指针"></a>排序 + 并查集 + 双指针</h3><p>为了方便，我们将点数记为 <code>n</code>，边数记为 <code>m</code>，询问数量记为 <code>k</code>，将 <code>edgeList</code> 简化为 <code>es</code>，将 <code>queries</code> 简化为 <code>qs</code>。</p>
+<p>对于点边数量都在 $10^5$，同时询问次数也在 $10^5$ 的问题，不可能对于每个询问执行最短路算法，尤其还需考虑边权限制。</p>
+<p><strong>对于一个询问 $(a, b, limit)$ 而言，等价于问我们使用所有边权小于 <code>limit</code> 的边，能否使得 <code>a</code> 和 <code>b</code> 两点联通。</strong></p>
+<p>关于回答连通性问题，容易想到并查集。同时我们可以通过「调整回答询问的顺序」来降低复杂度（避免重复重置并查集和添加某些边），即转换为离线问题来处理。</p>
+<p>具体的，我们可以对边集 <code>es</code> 和所有询问 <code>qs</code> 分别按照「边权」以及「限制」排升序。为了排序后，仍能知道当前询问的原编号，我们要将所有的 <code>qs[i]</code> 转换为四元组。</p>
+<p>随后从前往后处理每个询问 <code>qs[i] = (a, b, t, idx)</code>，同时使用变量 <code>j</code> 来记录当前处理到的边。在查询 <code>a</code> 和 <code>b</code> 是否连通前，先将边集 <code>es</code> 中所有所有边权小于 <code>t</code> 的边应用到并查集上，从而实现每次 <code>ans[idx] = query(a, b)</code> 查询到的是原图中所有边权小于限制值 <code>t</code> 的子图。</p>
+<p>Java 代码：<br><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">static</span> <span class="hljs-type">int</span> <span class="hljs-variable">N</span> <span class="hljs-operator">=</span> <span class="hljs-number">100010</span>;<br>    <span class="hljs-keyword">static</span> <span class="hljs-type">int</span>[] p = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[N];<br>    <span class="hljs-type">int</span> <span class="hljs-title function_">find</span><span class="hljs-params">(<span class="hljs-type">int</span> x)</span> &#123;<br>        <span class="hljs-keyword">if</span> (p[x] != x) p[x] = find(p[x]);<br>        <span class="hljs-keyword">return</span> p[x];<br>    &#125;<br>    <span class="hljs-keyword">void</span> <span class="hljs-title function_">union</span><span class="hljs-params">(<span class="hljs-type">int</span> a, <span class="hljs-type">int</span> b)</span> &#123;<br>        p[find(a)] = p[find(b)];<br>    &#125;<br>    <span class="hljs-type">boolean</span> <span class="hljs-title function_">query</span><span class="hljs-params">(<span class="hljs-type">int</span> a, <span class="hljs-type">int</span> b)</span> &#123;<br>        <span class="hljs-keyword">return</span> find(a) == find(b);<br>    &#125;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span>[] distanceLimitedPathsExist(<span class="hljs-type">int</span> n, <span class="hljs-type">int</span>[][] es, <span class="hljs-type">int</span>[][] _qs) &#123;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; n; i++) p[i] = i;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">m</span> <span class="hljs-operator">=</span> es.length, k = _qs.length;<br>        <span class="hljs-type">int</span>[][] qs = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[k][<span class="hljs-number">4</span>];<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; k; i++) qs[i] = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[]&#123;_qs[i][<span class="hljs-number">0</span>], _qs[i][<span class="hljs-number">1</span>], _qs[i][<span class="hljs-number">2</span>], i&#125;;<br>        Arrays.sort(qs, (a,b)-&gt;a[<span class="hljs-number">2</span>]-b[<span class="hljs-number">2</span>]);<br>        Arrays.sort(es, (a,b)-&gt;a[<span class="hljs-number">2</span>]-b[<span class="hljs-number">2</span>]);<br>        <span class="hljs-type">boolean</span>[] ans = <span class="hljs-keyword">new</span> <span class="hljs-title class_">boolean</span>[k];<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>, j = <span class="hljs-number">0</span>; i &lt; k; i++) &#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">a</span> <span class="hljs-operator">=</span> qs[i][<span class="hljs-number">0</span>], b = qs[i][<span class="hljs-number">1</span>], t = qs[i][<span class="hljs-number">2</span>], idx = qs[i][<span class="hljs-number">3</span>];<br>            <span class="hljs-keyword">while</span> (j &lt; m &amp;&amp; es[j][<span class="hljs-number">2</span>] &lt; t) &#123;<br>                union(es[j][<span class="hljs-number">0</span>], es[j][<span class="hljs-number">1</span>]);<br>                j++;<br>            &#125;<br>            ans[idx] = query(a, b);<br>        &#125;<br>        <span class="hljs-keyword">return</span> ans;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure><br>TypeScript 代码：<br><figure class="highlight typescript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs TypeScript"><span class="hljs-keyword">function</span> <span class="hljs-title function_">distanceLimitedPathsExist</span>(<span class="hljs-params">n: <span class="hljs-built_in">number</span>, es: <span class="hljs-built_in">number</span>[][], _qs: <span class="hljs-built_in">number</span>[][]</span>): <span class="hljs-built_in">boolean</span>[] &#123;<br>    <span class="hljs-keyword">const</span> p = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Array</span>&lt;<span class="hljs-built_in">number</span>&gt;(n).<span class="hljs-title function_">fill</span>(<span class="hljs-number">0</span>)<br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; n; i++) p[i] = i;<br>    <span class="hljs-keyword">function</span> <span class="hljs-title function_">find</span>(<span class="hljs-params">x: <span class="hljs-built_in">number</span></span>): <span class="hljs-built_in">number</span> &#123;<br>        <span class="hljs-keyword">if</span> (p[x] != x) p[x] = <span class="hljs-title function_">find</span>(p[x])<br>        <span class="hljs-keyword">return</span> p[x]<br>    &#125;<br>    <span class="hljs-keyword">function</span> <span class="hljs-title function_">union</span>(<span class="hljs-params">a: <span class="hljs-built_in">number</span>, b: <span class="hljs-built_in">number</span></span>): <span class="hljs-built_in">void</span> &#123;<br>        p[<span class="hljs-title function_">find</span>(a)] = p[<span class="hljs-title function_">find</span>(b)]<br>    &#125;<br>    <span class="hljs-keyword">function</span> <span class="hljs-title function_">query</span>(<span class="hljs-params">a: <span class="hljs-built_in">number</span>, b: <span class="hljs-built_in">number</span></span>): <span class="hljs-built_in">boolean</span> &#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-title function_">find</span>(a) == <span class="hljs-title function_">find</span>(b)<br>    &#125;<br>    <span class="hljs-keyword">const</span> m = es.<span class="hljs-property">length</span>, k = _qs.<span class="hljs-property">length</span><br>    <span class="hljs-keyword">const</span> qs = []<br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; k; i++) qs.<span class="hljs-title function_">push</span>([_qs[i][<span class="hljs-number">0</span>], _qs[i][<span class="hljs-number">1</span>], _qs[i][<span class="hljs-number">2</span>], i])<br>    qs.<span class="hljs-title function_">sort</span>(<span class="hljs-function">(<span class="hljs-params">a, b</span>)=&gt;</span>a[<span class="hljs-number">2</span>]-b[<span class="hljs-number">2</span>])<br>    es.<span class="hljs-title function_">sort</span>(<span class="hljs-function">(<span class="hljs-params">a, b</span>)=&gt;</span>a[<span class="hljs-number">2</span>]-b[<span class="hljs-number">2</span>])<br>    <span class="hljs-keyword">const</span> ans = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Array</span>&lt;<span class="hljs-built_in">boolean</span>&gt;(k).<span class="hljs-title function_">fill</span>(<span class="hljs-literal">false</span>)<br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>, j = <span class="hljs-number">0</span>; i &lt; k; i++) &#123;<br>        <span class="hljs-keyword">const</span> a = qs[i][<span class="hljs-number">0</span>], b = qs[i][<span class="hljs-number">1</span>], t = qs[i][<span class="hljs-number">2</span>], idx = qs[i][<span class="hljs-number">3</span>]<br>        <span class="hljs-keyword">while</span> (j &lt; m &amp;&amp; es[j][<span class="hljs-number">2</span>] &lt; t) &#123;<br>            <span class="hljs-title function_">union</span>(es[j][<span class="hljs-number">0</span>], es[j][<span class="hljs-number">1</span>])<br>            j++<br>        &#125;<br>        ans[idx] = <span class="hljs-title function_">query</span>(a, b)<br>    &#125;<br>    <span class="hljs-keyword">return</span> ans<br>&#125;<br></code></pre></div></td></tr></table></figure><br>Python 代码：<br><figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span>:<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">distanceLimitedPathsExist</span>(<span class="hljs-params">self, n: <span class="hljs-built_in">int</span>, es: <span class="hljs-type">List</span>[<span class="hljs-type">List</span>[<span class="hljs-built_in">int</span>]], _qs: <span class="hljs-type">List</span>[<span class="hljs-type">List</span>[<span class="hljs-built_in">int</span>]]</span>) -&gt; <span class="hljs-type">List</span>[<span class="hljs-built_in">bool</span>]:<br>        p = [i <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(n)]<br>        <span class="hljs-keyword">def</span> <span class="hljs-title function_">find</span>(<span class="hljs-params">x</span>):<br>            <span class="hljs-keyword">if</span> p[x] != x:<br>                p[x] = find(p[x])<br>            <span class="hljs-keyword">return</span> p[x]<br>        <span class="hljs-keyword">def</span> <span class="hljs-title function_">union</span>(<span class="hljs-params">a, b</span>):<br>            p[find(a)] = p[find(b)]<br>        <span class="hljs-keyword">def</span> <span class="hljs-title function_">query</span>(<span class="hljs-params">a, b</span>):<br>            <span class="hljs-keyword">return</span> find(a) == find(b)<br>        m, k = <span class="hljs-built_in">len</span>(es), <span class="hljs-built_in">len</span>(_qs)<br>        qs = [(a, b, c, i) <span class="hljs-keyword">for</span> i, (a, b, c) <span class="hljs-keyword">in</span> <span class="hljs-built_in">enumerate</span>(_qs)]<br>        es.sort(key=<span class="hljs-keyword">lambda</span> x: x[<span class="hljs-number">2</span>])<br>        qs.sort(key=<span class="hljs-keyword">lambda</span> x: x[<span class="hljs-number">2</span>])<br>        j = <span class="hljs-number">0</span><br>        ans = [<span class="hljs-literal">False</span>] * k<br>        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(k):<br>            a, b, t, idx = qs[i]<br>            <span class="hljs-keyword">while</span> j &lt; m <span class="hljs-keyword">and</span> es[j][<span class="hljs-number">2</span>] &lt; t:<br>                union(es[j][<span class="hljs-number">0</span>], es[j][<span class="hljs-number">1</span>])<br>                j += <span class="hljs-number">1</span><br>            ans[idx] = query(a, b)<br>        <span class="hljs-keyword">return</span> ans<br></code></pre></div></td></tr></table></figure></p>
+<ul>
+<li>时间复杂度：初始化并查集的复杂度为 $O(n)$；对所有边进行排序复杂度为 $O(m\log{m})$；对所有询问进行排序复杂度为 $O(k\log{k})$；统计答案时使用双指针的方式将所有边运用到并查集上，整体复杂度为 $O(k + m)$。整体复杂度为 $O(n + m\log{m} + k\log{k})$</li>
+<li>空间复杂度：$O(n)$</li>
+</ul>
+<hr>
+<h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>这是我们「刷穿 LeetCode」系列文章的第 <code>No.1697</code> 篇，系列开始于 2021/01/01，截止于起始日 LeetCode 上共有 1916 道题目，部分是有锁题，我们将先把所有不带锁的题目刷完。</p>
+<p>在这个系列文章里面，除了讲解解题思路以外，还会尽可能给出最为简洁的代码。如果涉及通解还会相应的代码模板。</p>
+<p>为了方便各位同学能够电脑上进行调试和提交代码，我建立了相关的仓库：<a target="_blank" rel="noopener" href="https://github.com/SharingSource/LogicStack-LeetCode">https://github.com/SharingSource/LogicStack-LeetCode</a> 。</p>
+<p>在仓库地址里，你可以看到系列文章的题解链接、系列文章的相应代码、LeetCode 原题链接和其他优选题解。</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%8F%8C%E6%8C%87%E9%92%88/">双指针</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%B9%B6%E6%9F%A5%E9%9B%86/">并查集</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E6%8E%92%E5%BA%8F/">排序</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/12/12/1780.%20%E5%88%A4%E6%96%AD%E4%B8%80%E4%B8%AA%E6%95%B0%E5%AD%97%E6%98%AF%E5%90%A6%E5%8F%AF%E4%BB%A5%E8%A1%A8%E7%A4%BA%E6%88%90%E4%B8%89%E7%9A%84%E5%B9%82%E7%9A%84%E5%92%8C%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/">
+                        <span class="hidden-mobile">LC 1780. 判断一个数字是否可以表示成三的幂的和</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://cdn.staticfile.org/valine/1.4.18/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"IDifiViRkVDTgu27Nu50GQkE-gzGzoHsz","appKey":"gt98pupgyYjPKYQASrGmD9kM","path":"window.location.pathname","placeholder":"发一条友善的评论（为方便交流，记得填上方的昵称再留言哦 ~ 🍭","avatar":"","meta":["nick","mail"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":true},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          Fluid.plugins.initFancyBox('#valine .vcontent img:not(.vemoji)');
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+  <div class="col-lg-7 mx-auto nopadding-x-md">
+    <div class="container custom post-custom mx-auto">
+      <img src="/oimg/gzh-qrcode.webp" srcset="/img/loading.gif" lazyload class="rounded mx-auto d-block mt-5" style="width:80%">
+    </div>
+  </div>
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- LeanCloud 统计PV -->
+        <span id="leancloud-site-pv-container" style="display: none">
+            总访问量 
+            <span id="leancloud-site-pv"></span>
+             次
+          </span>
+      
+      
+        <!-- LeanCloud 统计UV -->
+        <span id="leancloud-site-uv-container" style="display: none">
+            总访客数 
+            <span id="leancloud-site-uv"></span>
+             人
+          </span>
+      
+
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.staticfile.org/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.staticfile.org/tocbot/4.18.2/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.staticfile.org/anchor-js/4.3.1/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.11/clipboard.min.js" ></script>
+  
+
+
+
+
+  <script defer src="/js/leancloud.js" ></script>
+
+
+
+  <script  src="https://cdn.bootcdn.net/ajax/libs/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        loader: {
+          
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.staticfile.org/mathjax/3.2.0/es5/tex-svg.js" ></script>
+
+  
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>
