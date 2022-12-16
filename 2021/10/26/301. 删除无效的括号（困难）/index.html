@@ -16,23 +16,20 @@
   <meta name="author" content="宫水三叶">
   <meta name="keywords" content="算法, 数据结构, 题解">
   
-    <meta name="description" content="题目描述这是 LeetCode 上的 301. 删除无效的括号 ，难度为 困难。 给你一个由若干括号和字母组成的字符串 s ，删除最小数量的无效括号，使得输入的字符串有效。 返回所有可能的结果。答案可以按 任意顺序 返回。 示例 1:12输入: &quot;()())()&quot;输出: [&quot;()()()&quot;, &quot;(())()&quot;]示例 2:12输入: &amp;qu">
+    <meta name="description" content="题目描述这是 LeetCode 上的 301. 删除无效的括号 ，难度为 困难。 给你一个由若干括号和字母组成的字符串 s，删除最小数量的无效括号，使得输入的字符串有效。 返回所有可能的结果。答案可以按 任意顺序 返回。 示例 1:12输入: &quot;()())()&quot;输出: [&quot;()()()&quot;, &quot;(())()&quot;]示例 2:12输入: &amp;quo">
 <meta property="og:type" content="article">
 <meta property="og:title" content="LC 301. 删除无效的括号">
-<meta property="og:url" content="https://sharingsource.github.io/2021/02/25/301.%20%E5%88%A0%E9%99%A4%E6%97%A0%E6%95%88%E7%9A%84%E6%8B%AC%E5%8F%B7%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/index.html">
+<meta property="og:url" content="https://sharingsource.github.io/2021/10/26/301.%20%E5%88%A0%E9%99%A4%E6%97%A0%E6%95%88%E7%9A%84%E6%8B%AC%E5%8F%B7%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/index.html">
 <meta property="og:site_name" content="宫水三叶的刷题日记">
-<meta property="og:description" content="题目描述这是 LeetCode 上的 301. 删除无效的括号 ，难度为 困难。 给你一个由若干括号和字母组成的字符串 s ，删除最小数量的无效括号，使得输入的字符串有效。 返回所有可能的结果。答案可以按 任意顺序 返回。 示例 1:12输入: &quot;()())()&quot;输出: [&quot;()()()&quot;, &quot;(())()&quot;]示例 2:12输入: &amp;qu">
+<meta property="og:description" content="题目描述这是 LeetCode 上的 301. 删除无效的括号 ，难度为 困难。 给你一个由若干括号和字母组成的字符串 s，删除最小数量的无效括号，使得输入的字符串有效。 返回所有可能的结果。答案可以按 任意顺序 返回。 示例 1:12输入: &quot;()())()&quot;输出: [&quot;()()()&quot;, &quot;(())()&quot;]示例 2:12输入: &amp;quo">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://sharingsource.github.io/2021/02/25/301.%20%E5%88%A0%E9%99%A4%E6%97%A0%E6%95%88%E7%9A%84%E6%8B%AC%E5%8F%B7%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/image_0.png">
-<meta property="og:image" content="https://sharingsource.github.io/2021/02/25/301.%20%E5%88%A0%E9%99%A4%E6%97%A0%E6%95%88%E7%9A%84%E6%8B%AC%E5%8F%B7%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/image_1.png">
-<meta property="article:published_time" content="2021-02-24T19:06:45.000Z">
-<meta property="article:modified_time" content="2022-05-18T08:26:46.144Z">
+<meta property="article:published_time" content="2021-10-26T15:24:12.000Z">
+<meta property="article:modified_time" content="2022-12-16T05:37:30.760Z">
 <meta property="article:author" content="宫水三叶">
 <meta property="article:tag" content="DFS">
 <meta property="article:tag" content="回溯算法">
 <meta property="article:tag" content="括号问题">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://sharingsource.github.io/2021/02/25/301.%20%E5%88%A0%E9%99%A4%E6%97%A0%E6%95%88%E7%9A%84%E6%8B%AC%E5%8F%B7%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/image_0.png">
   
   
   <title>LC 301. 删除无效的括号 - 宫水三叶的刷题日记</title>
@@ -200,8 +197,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-02-25 03:06" pubdate>
-        2021年2月25日
+      <time datetime="2021-10-26 23:24" pubdate>
+        2021年10月26日
       </time>
     </span>
   
@@ -241,14 +238,14 @@
             
             <div class="markdown-body">
               <h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>这是 LeetCode 上的 <strong><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/remove-invalid-parentheses/solution/yi-fen-zhong-nei-kan-dong-jiang-gua-hao-aya6k/">301. 删除无效的括号</a></strong> ，难度为 <strong>困难</strong>。</p>
-<p>给你一个由若干括号和字母组成的字符串 s ，删除最小数量的无效括号，使得输入的字符串有效。</p>
+<p>给你一个由若干括号和字母组成的字符串 <code>s</code>，删除最小数量的无效括号，使得输入的字符串有效。</p>
 <p>返回所有可能的结果。答案可以按 任意顺序 返回。</p>
 <p>示例 1:<br><figure class="highlight prolog"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs prolog">输入: <span class="hljs-string">&quot;()())()&quot;</span><br>输出: [<span class="hljs-string">&quot;()()()&quot;</span>, <span class="hljs-string">&quot;(())()&quot;</span>]<br></code></pre></div></td></tr></table></figure><br>示例 2:<br><figure class="highlight prolog"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs prolog">输入: <span class="hljs-string">&quot;(a)())()&quot;</span><br>输出: [<span class="hljs-string">&quot;(a)()()&quot;</span>, <span class="hljs-string">&quot;(a())()&quot;</span>]<br></code></pre></div></td></tr></table></figure><br>示例 3:<br><figure class="highlight prolog"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs prolog">输入: <span class="hljs-string">&quot;)(&quot;</span><br>输出: [<span class="hljs-string">&quot;&quot;</span>]<br></code></pre></div></td></tr></table></figure></p>
 <p>提示：</p>
 <ul>
-<li>1 &lt;= s.length &lt;= 25</li>
-<li>s 由小写英文字母以及括号 ‘(‘ 和 ‘)’ 组成</li>
-<li>s 中至多含 20 个括号</li>
+<li>$1 &lt;= s.length &lt;= 25$</li>
+<li><code>s</code> 由小写英文字母以及括号 <code>&#39;(&#39;</code> 和 <code>&#39;)&#39;</code> 组成</li>
+<li><code>s</code> 中至多含 <code>20</code> 个括号</li>
 </ul>
 <hr>
 <h3 id="搜索-剪枝"><a href="#搜索-剪枝" class="headerlink" title="搜索 + 剪枝"></a>搜索 + 剪枝</h3><p>由于题目要求我们将所有（最长）合法方案输出，因此不可能有别的优化，只能进行「爆搜」。</p>
@@ -269,20 +266,18 @@
 <li>普通字符：直接添加。</li>
 </ul>
 <p>使用 <code>Set</code> 进行方案去重，$len$ 记录「爆搜」过程中的最大子串，然后只保留长度等于 $len$ 的子串。</p>
-<p><img src="/2021/02/25/301.%20%E5%88%A0%E9%99%A4%E6%97%A0%E6%95%88%E7%9A%84%E6%8B%AC%E5%8F%B7%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/image_0.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
 <p>代码：<br><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    Set&lt;String&gt; set = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashSet</span>&lt;&gt;();<br>    <span class="hljs-type">int</span> n, max, len;<br>    String s;<br>    <span class="hljs-keyword">public</span> List&lt;String&gt; <span class="hljs-title function_">removeInvalidParentheses</span><span class="hljs-params">(String _s)</span> &#123;<br>        s = _s;<br>        n = s.length();<br>        <span class="hljs-type">int</span> <span class="hljs-variable">l</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>, r = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">char</span> c : s.toCharArray()) &#123;<br>            <span class="hljs-keyword">if</span> (c == <span class="hljs-string">&#x27;(&#x27;</span>) l++;<br>            <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (c == <span class="hljs-string">&#x27;)&#x27;</span>) r++;<br>        &#125;<br>        max = Math.min(l, r);<br>        dfs(<span class="hljs-number">0</span>, <span class="hljs-string">&quot;&quot;</span>, <span class="hljs-number">0</span>);<br>        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;(set);<br>    &#125;<br>    <span class="hljs-keyword">void</span> <span class="hljs-title function_">dfs</span><span class="hljs-params">(<span class="hljs-type">int</span> u, String cur, <span class="hljs-type">int</span> score)</span> &#123;<br>        <span class="hljs-keyword">if</span> (score &lt; <span class="hljs-number">0</span> || score &gt; max) <span class="hljs-keyword">return</span> ;<br>        <span class="hljs-keyword">if</span> (u == n) &#123;<br>            <span class="hljs-keyword">if</span> (score == <span class="hljs-number">0</span> &amp;&amp; cur.length() &gt;= len) &#123;<br>                <span class="hljs-keyword">if</span> (cur.length() &gt; len) set.clear();<br>                len = cur.length();<br>                set.add(cur);<br>            &#125;<br>            <span class="hljs-keyword">return</span> ;<br>        &#125;<br>        <span class="hljs-type">char</span> <span class="hljs-variable">c</span> <span class="hljs-operator">=</span> s.charAt(u);<br>        <span class="hljs-keyword">if</span> (c == <span class="hljs-string">&#x27;(&#x27;</span>) &#123;<br>            dfs(u + <span class="hljs-number">1</span>, cur + String.valueOf(c), score + <span class="hljs-number">1</span>);<br>            dfs(u + <span class="hljs-number">1</span>, cur, score);<br>        &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (c == <span class="hljs-string">&#x27;)&#x27;</span>) &#123;<br>            dfs(u + <span class="hljs-number">1</span>, cur + String.valueOf(c), score - <span class="hljs-number">1</span>);<br>            dfs(u + <span class="hljs-number">1</span>, cur, score);<br>        &#125; <span class="hljs-keyword">else</span> &#123;<br>            dfs(u + <span class="hljs-number">1</span>, cur + String.valueOf(c), score);<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure></p>
 <ul>
-<li>时间复杂度：预处理 $max$ 的复杂度为 $O(n)$；不考虑 $score$ 带来的剪枝效果，最坏情况下，每个位置都有两种选择，搜索所有方案的复杂度为 $O(2^n)$；同时搜索过程中会产生的新字符串（最终递归树中叶子节点的字符串长度最大为 $n$，使用 <code>StringBuilder</code> 也是同理），复杂度为 $O(n)$。整体复杂度为 $O(n * 2^n)$</li>
+<li>时间复杂度：预处理 $max$ 的复杂度为 $O(n)$；不考虑 $score$ 带来的剪枝效果，最坏情况下，每个位置都有两种选择，搜索所有方案的复杂度为 $O(2^n)$；同时搜索过程中会产生的新字符串（最终递归树中叶子节点的字符串长度最大为 $n$，使用 <code>StringBuilder</code> 也是同理），复杂度为 $O(n)$。整体复杂度为 $O(n \times 2^n)$</li>
 <li>空间复杂度：最大合法方案数与字符串长度呈线性关系。复杂度为 $O(n)$</li>
 </ul>
 <hr>
 <h3 id="搜索-剪枝-1"><a href="#搜索-剪枝-1" class="headerlink" title="搜索 + 剪枝"></a>搜索 + 剪枝</h3><p>在解法一，我们是在搜索过程中去更新最后的 $len$。</p>
 <p>但事实上，我们可以通过预处理，得到最后的「应该删除的左括号数量」和「应该删掉的右括号数量」，来直接得到最终的 $len$。</p>
 <p>因此在此基础上，我们可以考虑多增加一层剪枝。</p>
-<p><img src="/2021/02/25/301.%20%E5%88%A0%E9%99%A4%E6%97%A0%E6%95%88%E7%9A%84%E6%8B%AC%E5%8F%B7%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/image_1.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
 <p>代码：<br><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    Set&lt;String&gt; set = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashSet</span>&lt;&gt;();<br>    <span class="hljs-type">int</span> n, max, len;<br>    String s;<br>    <span class="hljs-keyword">public</span> List&lt;String&gt; <span class="hljs-title function_">removeInvalidParentheses</span><span class="hljs-params">(String _s)</span> &#123;<br>        s = _s;<br>        n = s.length();<br><br>        <span class="hljs-type">int</span> <span class="hljs-variable">l</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>, r = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">char</span> c : s.toCharArray()) &#123;<br>            <span class="hljs-keyword">if</span> (c == <span class="hljs-string">&#x27;(&#x27;</span>) &#123;<br>                l++;<br>            &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (c == <span class="hljs-string">&#x27;)&#x27;</span>) &#123;<br>                <span class="hljs-keyword">if</span> (l != <span class="hljs-number">0</span>) l--;<br>                <span class="hljs-keyword">else</span> r++;<br>            &#125;<br>        &#125;<br>        len = n - l - r;<br>        <br>        <span class="hljs-type">int</span> <span class="hljs-variable">c1</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>, c2 = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">char</span> c : s.toCharArray()) &#123;<br>            <span class="hljs-keyword">if</span> (c == <span class="hljs-string">&#x27;(&#x27;</span>) c1++;<br>            <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (c == <span class="hljs-string">&#x27;)&#x27;</span>) c2++;<br>        &#125;<br>        max = Math.min(c1, c2);<br><br>        dfs(<span class="hljs-number">0</span>, <span class="hljs-string">&quot;&quot;</span>, l, r, <span class="hljs-number">0</span>);<br>        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;(set);<br>    &#125;<br>    <span class="hljs-keyword">void</span> <span class="hljs-title function_">dfs</span><span class="hljs-params">(<span class="hljs-type">int</span> u, String cur, <span class="hljs-type">int</span> l, <span class="hljs-type">int</span> r, <span class="hljs-type">int</span> score)</span> &#123;<br>        <span class="hljs-keyword">if</span> (l &lt; <span class="hljs-number">0</span> || r &lt; <span class="hljs-number">0</span> || score &lt; <span class="hljs-number">0</span> || score &gt; max) <span class="hljs-keyword">return</span> ;<br>        <span class="hljs-keyword">if</span> (l == <span class="hljs-number">0</span> &amp;&amp; r == <span class="hljs-number">0</span>) &#123;<br>            <span class="hljs-keyword">if</span> (cur.length() == len) set.add(cur);<br>        &#125;<br>        <span class="hljs-keyword">if</span> (u == n) <span class="hljs-keyword">return</span> ;<br>        <span class="hljs-type">char</span> <span class="hljs-variable">c</span> <span class="hljs-operator">=</span> s.charAt(u);<br>        <span class="hljs-keyword">if</span> (c == <span class="hljs-string">&#x27;(&#x27;</span>) &#123;<br>            dfs(u + <span class="hljs-number">1</span>, cur + String.valueOf(c), l, r, score + <span class="hljs-number">1</span>);<br>            dfs(u + <span class="hljs-number">1</span>, cur, l - <span class="hljs-number">1</span>, r, score);<br>        &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (c == <span class="hljs-string">&#x27;)&#x27;</span>) &#123;<br>            dfs(u + <span class="hljs-number">1</span>, cur + String.valueOf(c), l, r, score - <span class="hljs-number">1</span>);<br>            dfs(u + <span class="hljs-number">1</span>, cur, l, r - <span class="hljs-number">1</span>, score);<br>        &#125; <span class="hljs-keyword">else</span> &#123;<br>            dfs(u + <span class="hljs-number">1</span>, cur + String.valueOf(c), l, r, score);<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure></p>
 <ul>
-<li>时间复杂度：预处理 $max$ 和 $len$ 的复杂度为 $O(n)$；不考虑 $score$ 带来的剪枝效果，最坏情况下，每个位置都有两种选择，搜索所有方案的复杂度为 $O(2^n)$；同时搜索过程中会产生的新字符串（最终递归树中叶子节点的字符串长度最大为 $n$，使用 <code>StringBuilder</code> 也是同理），复杂度为 $O(n)$。整体复杂度为 $O(n * 2^n)$</li>
+<li>时间复杂度：预处理 $max$ 和 $len$ 的复杂度为 $O(n)$；不考虑 $score$ 带来的剪枝效果，最坏情况下，每个位置都有两种选择，搜索所有方案的复杂度为 $O(2^n)$；同时搜索过程中会产生的新字符串（最终递归树中叶子节点的字符串长度最大为 $n$，使用 <code>StringBuilder</code> 也是同理），复杂度为 $O(n)$。整体复杂度为 $O(n \times 2^n)$</li>
 <li>空间复杂度：最大合法方案数与字符串长度呈线性关系。复杂度为 $O(n)$</li>
 </ul>
 <hr>
@@ -321,9 +316,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2021/02/26/1178.%20%E7%8C%9C%E5%AD%97%E8%B0%9C%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/">
+                      <a href="/2021/10/27/869.%20%E9%87%8D%E6%96%B0%E6%8E%92%E5%BA%8F%E5%BE%97%E5%88%B0%202%20%E7%9A%84%E5%B9%82%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">LC 1178. 猜字谜</span>
+                        <span class="hidden-mobile">LC 869. 重新排序得到 2 的幂</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -331,8 +326,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/02/25/867.%20%E8%BD%AC%E7%BD%AE%E7%9F%A9%E9%98%B5%EF%BC%88%E7%AE%80%E5%8D%95%EF%BC%89/">
-                        <span class="hidden-mobile">LC 867. 转置矩阵</span>
+                      <a href="/2021/10/25/496.%20%E4%B8%8B%E4%B8%80%E4%B8%AA%E6%9B%B4%E5%A4%A7%E5%85%83%E7%B4%A0%20I%EF%BC%88%E7%AE%80%E5%8D%95%EF%BC%89/">
+                        <span class="hidden-mobile">LC 496. 下一个更大元素 I</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
