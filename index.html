@@ -196,15 +196,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2022/12/26/1759.%20%E7%BB%9F%E8%AE%A1%E5%90%8C%E6%9E%84%E5%AD%90%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E6%95%B0%E7%9B%AE%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/" target="_self">
-          LC 1759. 统计同构子字符串的数目
+        <a href="/2023/01/06/1802.%20%E6%9C%89%E7%95%8C%E6%95%B0%E7%BB%84%E4%B8%AD%E6%8C%87%E5%AE%9A%E4%B8%8B%E6%A0%87%E5%A4%84%E7%9A%84%E6%9C%80%E5%A4%A7%E5%80%BC%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/" target="_self">
+          LC 1802. 有界数组中指定下标处的最大值
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2022/12/26/1759.%20%E7%BB%9F%E8%AE%A1%E5%90%8C%E6%9E%84%E5%AD%90%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E6%95%B0%E7%9B%AE%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/" target="_self">
+        <a href="/2023/01/06/1802.%20%E6%9C%89%E7%95%8C%E6%95%B0%E7%BB%84%E4%B8%AD%E6%8C%87%E5%AE%9A%E4%B8%8B%E6%A0%87%E5%A4%84%E7%9A%84%E6%9C%80%E5%A4%A7%E5%80%BC%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/" target="_self">
           
-          题目描述这是 LeetCode 上的 1759. 统计同构子字符串的数目 ，难度为 中等。 给你一个字符串 s，返回 s 中 同构子字符串 的数目。由于答案可能很大，只需返回对 $10^9 + 7$ 取余 后的结果。 同构字符串 的定义为：如果一个字符串中的所有字符都相同，那么该字符串就是同构字符串。 子字符串 是字符串中的一个连续字符序列。 示例 1：12345678910111213输入：s
+          题目描述这是 LeetCode 上的 1802. 有界数组中指定下标处的最大值 ，难度为 中等。 给你三个正整数 n、index 和 maxSum。你需要构造一个同时满足下述所有条件的数组 nums（下标 从 0 开始 计数）：  nums.length &#x3D;&#x3D; n nums[i] 是 正整数 ，其中 0 &lt;&#x3D; i &lt; n abs(nums[i] - nums[i+1]) &lt;&#x3D; 1
         </a>
       </p>
 
@@ -212,8 +212,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2022-12-26 11:11" pubdate>
-              2022-12-26
+            <time datetime="2023-01-06 10:34" pubdate>
+              2023-01-06
             </time>
           </div>
         
@@ -222,9 +222,15 @@
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/%E5%8F%8C%E6%8C%87%E9%92%88/">双指针</a>
+              <a href="/tags/%E6%A8%A1%E6%8B%9F/">模拟</a>
+            
+              <a href="/tags/%E8%B4%AA%E5%BF%83/">贪心</a>
+            
+              <a href="/tags/%E4%BA%8C%E5%88%86/">二分</a>
             
               <a href="/tags/%E6%95%B0%E5%AD%A6/">数学</a>
+            
+              <a href="/tags/%E6%9E%84%E9%80%A0/">构造</a>
             
           </div>
         
@@ -265,6 +271,48 @@
             <i class="iconfont icon-tags"></i>
             
               <a href="/tags/%E4%BA%8C%E5%88%86/">二分</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2022/12/26/1759.%20%E7%BB%9F%E8%AE%A1%E5%90%8C%E6%9E%84%E5%AD%90%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E6%95%B0%E7%9B%AE%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/" target="_self">
+          LC 1759. 统计同构子字符串的数目
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2022/12/26/1759.%20%E7%BB%9F%E8%AE%A1%E5%90%8C%E6%9E%84%E5%AD%90%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E6%95%B0%E7%9B%AE%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/" target="_self">
+          
+          题目描述这是 LeetCode 上的 1759. 统计同构子字符串的数目 ，难度为 中等。 给你一个字符串 s，返回 s 中 同构子字符串 的数目。由于答案可能很大，只需返回对 $10^9 + 7$ 取余 后的结果。 同构字符串 的定义为：如果一个字符串中的所有字符都相同，那么该字符串就是同构字符串。 子字符串 是字符串中的一个连续字符序列。 示例 1：12345678910111213输入：s
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-12-26 11:11" pubdate>
+              2022-12-26
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E5%8F%8C%E6%8C%87%E9%92%88/">双指针</a>
+            
+              <a href="/tags/%E6%95%B0%E5%AD%A6/">数学</a>
             
           </div>
         
@@ -783,52 +831,6 @@
               <a href="/tags/%E6%95%B0%E5%AD%A6/">数学</a>
             
               <a href="/tags/%E5%BA%8F%E5%88%97-DP/">序列 DP</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2022/11/26/882.%20%E7%BB%86%E5%88%86%E5%9B%BE%E4%B8%AD%E7%9A%84%E5%8F%AF%E5%88%B0%E8%BE%BE%E8%8A%82%E7%82%B9%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/" target="_self">
-          LC 882. 细分图中的可到达节点
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2022/11/26/882.%20%E7%BB%86%E5%88%86%E5%9B%BE%E4%B8%AD%E7%9A%84%E5%8F%AF%E5%88%B0%E8%BE%BE%E8%8A%82%E7%82%B9%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/" target="_self">
-          
-          题目描述这是 LeetCode 上的 882. 细分图中的可到达节点 ，难度为 困难。 给你一个无向图（原始图），图中有 n 个节点，编号从 0 到 n - 1 。你决定将图中的每条边 细分 为一条节点链，每条边之间的新节点数各不相同。 图用由边组成的二维数组 edges 表示，其中 $edges[i] &#x3D; [u{i}, v{i}, cnt{i}]$ 表示原始图中节点 $u{i}$ 和 $v{i}
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2022-11-26 02:27" pubdate>
-              2022-11-26
-            </time>
-          </div>
-        
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/%E6%9C%80%E7%9F%AD%E8%B7%AF/">最短路</a>
-            
-              <a href="/tags/%E5%8D%95%E6%BA%90%E6%9C%80%E7%9F%AD%E8%B7%AF/">单源最短路</a>
-            
-              <a href="/tags/Dijkstra/">Dijkstra</a>
-            
-              <a href="/tags/SPFA/">SPFA</a>
             
           </div>
         
