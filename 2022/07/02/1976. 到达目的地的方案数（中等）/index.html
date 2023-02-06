@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://sharingsource.github.io/2022/07/02/1976.%20%E5%88%B0%E8%BE%BE%E7%9B%AE%E7%9A%84%E5%9C%B0%E7%9A%84%E6%96%B9%E6%A1%88%E6%95%B0%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/image_0.png">
 <meta property="article:published_time" content="2022-07-02T06:45:11.000Z">
-<meta property="article:modified_time" content="2022-07-03T03:44:38.762Z">
+<meta property="article:modified_time" content="2023-02-03T00:52:38.035Z">
 <meta property="article:author" content="宫水三叶">
 <meta property="article:tag" content="动态规划">
 <meta property="article:tag" content="最短路">
@@ -242,15 +242,15 @@
               <h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>这是 LeetCode 上的 <strong><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/number-of-ways-to-arrive-at-destination/solution/by-ac_oier-4ule/">1976. 到达目的地的方案数</a></strong> ，难度为 <strong>中等</strong>。</p>
 <p>你在一个城市里，城市由 $n$ 个路口组成，路口编号为 $0$ 到 $n - 1$ ，某些路口之间有 双向 道路。输入保证你可以从任意路口出发到达其他任意路口，且任意两个路口之间最多有一条路。</p>
 <p>给你一个整数 <code>n</code> 和二维整数数组 <code>roads</code>，其中 $roads[i] = [u_i, v_i, time_i]$ 表示在路口 $u_i$ 和 $v_i$ 之间有一条需要花费 $time_i$ 时间才能通过的道路。你想知道花费 最少时间 从路口 $0$ 出发到达路口 $n - 1$ 的方案数。</p>
-<p>请返回花费 最少时间 到达目的地的 路径数目 。由于答案可能很大，将结果对 109 + 7 取余 后返回。</p>
+<p>请返回花费 最少时间 到达目的地的 路径数目 。由于答案可能很大，将结果对 $10^9 + 7$ 取余 后返回。</p>
 <p>示例 1：<br><img src="/2022/07/02/1976.%20%E5%88%B0%E8%BE%BE%E7%9B%AE%E7%9A%84%E5%9C%B0%E7%9A%84%E6%96%B9%E6%A1%88%E6%95%B0%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/image_0.png" srcset="/img/loading.gif" lazyload alt><br><figure class="highlight tap"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs tap">输入：n = 7, roads = [[0,6,7],[0,1,2],[1,2,3],[1,3,3],[6,3,3],[3,5,1],[6,5,1],[2,5,1],[0,4,5],[4,6,2]]<br><br>输出：4<br><br>解释：从路口<span class="hljs-number"> 0 </span>出发到路口<span class="hljs-number"> 6 </span>花费的最少时间是<span class="hljs-number"> 7 </span>分钟。<br>四条花费<span class="hljs-number"> 7 </span>分钟的路径分别为：<br>-<span class="hljs-number"> 0 </span>➝ 6<br>-<span class="hljs-number"> 0 </span>➝<span class="hljs-number"> 4 </span>➝ 6<br>-<span class="hljs-number"> 0 </span>➝<span class="hljs-number"> 1 </span>➝<span class="hljs-number"> 2 </span>➝<span class="hljs-number"> 5 </span>➝ 6<br>-<span class="hljs-number"> 0 </span>➝<span class="hljs-number"> 1 </span>➝<span class="hljs-number"> 3 </span>➝<span class="hljs-number"> 5 </span>➝ 6<br></code></pre></div></td></tr></table></figure><br>示例 2：<br><figure class="highlight lua"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs lua">输入：n = <span class="hljs-number">2</span>, roads = <span class="hljs-string">[[1,0,10]]</span><br><br>输出：<span class="hljs-number">1</span><br><br>解释：只有一条从路口 <span class="hljs-number">0</span> 到路口 <span class="hljs-number">1</span> 的路，花费 <span class="hljs-number">10</span> 分钟。<br></code></pre></div></td></tr></table></figure></p>
 <p>提示：</p>
 <ul>
 <li>$1 &lt;= n &lt;= 200$</li>
-<li>$n - 1 &lt;= roads.length &lt;= n * (n - 1) / 2$</li>
+<li>$n - 1 &lt;= roads.length &lt;= \frac{n \times (n - 1)}{2}$</li>
 <li>$roads[i].length == 3$</li>
 <li>$0 &lt;= u_i, v_i &lt;= n - 1$</li>
-<li>$1 &lt;= time_i &lt;= 109$</li>
+<li>$1 &lt;= time_i &lt;= 10^9$</li>
 <li>$u_i != v_i$</li>
 <li>任意两个路口之间至多有一条路。</li>
 <li>从任意路口出发，你能够到达其他任意路口。</li>
