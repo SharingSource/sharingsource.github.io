@@ -16,16 +16,16 @@
   <meta name="author" content="宫水三叶">
   <meta name="keywords" content="算法, 数据结构, 题解">
   
-    <meta name="description" content="题目描述这是 LeetCode 上的 523. 连续的子数组和 ，难度为 中等。 给你一个整数数组 nums 和一个整数 k ，编写一个函数来判断该数组是否含有同时满足下述条件的连续子数组：  子数组大小 至少为 2 ，且 子数组元素总和为 k 的倍数。  如果存在，返回 true ；否则，返回 false 。 如果存在一个整数 n ，令整数 x 符合 x &#x3D; n * k ，则称 x 是 k 的一">
+    <meta name="description" content="题目描述这是 LeetCode 上的 523. 连续的子数组和 ，难度为 中等。 给你一个整数数组 nums 和一个整数 k ，编写一个函数来判断该数组是否含有同时满足下述条件的连续子数组：  子数组大小至少为 2 ，且 子数组元素总和为 k 的倍数。  如果存在，返回 true；否则，返回 false。 如果存在一个整数 n ，令整数 x 符合 x &#x3D; n * k ，则称 x 是 k 的一个倍数">
 <meta property="og:type" content="article">
 <meta property="og:title" content="LC 523. 连续的子数组和">
 <meta property="og:url" content="https://sharingsource.github.io/2021/06/02/523.%20%E8%BF%9E%E7%BB%AD%E7%9A%84%E5%AD%90%E6%95%B0%E7%BB%84%E5%92%8C%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/index.html">
 <meta property="og:site_name" content="宫水三叶的刷题日记">
-<meta property="og:description" content="题目描述这是 LeetCode 上的 523. 连续的子数组和 ，难度为 中等。 给你一个整数数组 nums 和一个整数 k ，编写一个函数来判断该数组是否含有同时满足下述条件的连续子数组：  子数组大小 至少为 2 ，且 子数组元素总和为 k 的倍数。  如果存在，返回 true ；否则，返回 false 。 如果存在一个整数 n ，令整数 x 符合 x &#x3D; n * k ，则称 x 是 k 的一">
+<meta property="og:description" content="题目描述这是 LeetCode 上的 523. 连续的子数组和 ，难度为 中等。 给你一个整数数组 nums 和一个整数 k ，编写一个函数来判断该数组是否含有同时满足下述条件的连续子数组：  子数组大小至少为 2 ，且 子数组元素总和为 k 的倍数。  如果存在，返回 true；否则，返回 false。 如果存在一个整数 n ，令整数 x 符合 x &#x3D; n * k ，则称 x 是 k 的一个倍数">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://sharingsource.github.io/2021/06/02/523.%20%E8%BF%9E%E7%BB%AD%E7%9A%84%E5%AD%90%E6%95%B0%E7%BB%84%E5%92%8C%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/image_0.png">
 <meta property="article:published_time" content="2021-06-01T18:14:59.000Z">
-<meta property="article:modified_time" content="2022-05-18T08:28:23.659Z">
+<meta property="article:modified_time" content="2023-07-18T04:00:29.822Z">
 <meta property="article:author" content="宫水三叶">
 <meta property="article:tag" content="前缀和">
 <meta name="twitter:card" content="summary_large_image">
@@ -238,23 +238,23 @@
             
             <div class="markdown-body">
               <h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>这是 LeetCode 上的 <strong><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/continuous-subarray-sum/solution/gong-shui-san-xie-tuo-zhan-wei-qiu-fang-1juse/">523. 连续的子数组和</a></strong> ，难度为 <strong>中等</strong>。</p>
-<p>给你一个整数数组 nums 和一个整数 k ，编写一个函数来判断该数组是否含有同时满足下述条件的连续子数组：</p>
+<p>给你一个整数数组 <code>nums</code> 和一个整数 <code>k</code> ，编写一个函数来判断该数组是否含有同时满足下述条件的连续子数组：</p>
 <ul>
-<li>子数组大小 至少为 2 ，且</li>
-<li>子数组元素总和为 k 的倍数。</li>
+<li>子数组大小至少为 <code>2</code> ，且</li>
+<li>子数组元素总和为 <code>k</code> 的倍数。</li>
 </ul>
-<p>如果存在，返回 true ；否则，返回 false 。</p>
-<p>如果存在一个整数 n ，令整数 x 符合 x = n * k ，则称 x 是 k 的一个倍数。</p>
-<p>示例 1：<br><figure class="highlight inform7"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs inform7">输入：nums = <span class="hljs-comment">[23,2,4,6,7]</span>, k = 6<br>输出：true<br>解释：<span class="hljs-comment">[2,4]</span> 是一个大小为 2 的子数组，并且和为 6 。<br></code></pre></div></td></tr></table></figure><br>示例 2：<br><figure class="highlight tap"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs tap">输入：nums = [23,2,6,4,7], k = 6<br>输出：true<br>解释：[23, 2, 6, 4, 7] 是大小为<span class="hljs-number"> 5 </span>的子数组，并且和为<span class="hljs-number"> 42 </span>。 <br>42 是<span class="hljs-number"> 6 </span>的倍数，因为<span class="hljs-number"> 42 </span>=<span class="hljs-number"> 7 </span>*<span class="hljs-number"> 6 </span>且<span class="hljs-number"> 7 </span>是一个整数。<br></code></pre></div></td></tr></table></figure><br>示例 3：<br><figure class="highlight nix"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs nix">输入：<span class="hljs-attr">nums</span> = [<span class="hljs-number">23</span>,<span class="hljs-number">2</span>,<span class="hljs-number">6</span>,<span class="hljs-number">4</span>,<span class="hljs-number">7</span>], <span class="hljs-attr">k</span> = <span class="hljs-number">13</span><br>输出：<span class="hljs-literal">false</span><br></code></pre></div></td></tr></table></figure></p>
+<p>如果存在，返回 <code>true</code>；否则，返回 <code>false</code>。</p>
+<p>如果存在一个整数 <code>n</code> ，令整数 <code>x</code> 符合 <code>x = n * k</code> ，则称 <code>x</code> 是 <code>k</code> 的一个倍数。</p>
+<p>示例 1：<br><figure class="highlight inform7"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs inform7">输入：nums = <span class="hljs-comment">[23,2,4,6,7]</span>, k = 6<br><br>输出：true<br><br>解释：<span class="hljs-comment">[2,4]</span> 是一个大小为 2 的子数组，并且和为 6 。<br></code></pre></div></td></tr></table></figure><br>示例 2：<br><figure class="highlight tap"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs tap">输入：nums = [23,2,6,4,7], k = 6<br><br>输出：true<br><br>解释：[23, 2, 6, 4, 7] 是大小为<span class="hljs-number"> 5 </span>的子数组，并且和为<span class="hljs-number"> 42 </span>。 <br>42 是<span class="hljs-number"> 6 </span>的倍数，因为<span class="hljs-number"> 42 </span>=<span class="hljs-number"> 7 </span>*<span class="hljs-number"> 6 </span>且<span class="hljs-number"> 7 </span>是一个整数。<br></code></pre></div></td></tr></table></figure><br>示例 3：<br><figure class="highlight nix"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs nix">输入：<span class="hljs-attr">nums</span> = [<span class="hljs-number">23</span>,<span class="hljs-number">2</span>,<span class="hljs-number">6</span>,<span class="hljs-number">4</span>,<span class="hljs-number">7</span>], <span class="hljs-attr">k</span> = <span class="hljs-number">13</span><br><br>输出：<span class="hljs-literal">false</span><br></code></pre></div></td></tr></table></figure></p>
 <p>提示：</p>
 <ul>
-<li>1 &lt;= nums.length &lt;= $10^5$</li>
-<li>0 &lt;= nums[i] &lt;= $10^9$</li>
-<li>0 &lt;= sum(nums[i]) &lt;= $2^{31}$ - 1</li>
-<li>1 &lt;= k &lt;= $2^{31}$ - 1</li>
+<li>$1 &lt;= nums.length &lt;= 10^5$</li>
+<li>$0 &lt;= nums[i] &lt;= 10^9$</li>
+<li>$0 &lt;= sum(nums[i]) &lt;= 2^{31} - 1$</li>
+<li>$1 &lt;= k &lt;= 2^{31} - 1$</li>
 </ul>
 <hr>
-<h3 id="基本分析"><a href="#基本分析" class="headerlink" title="基本分析"></a>基本分析</h3><p>这是一道很经典的前缀和题目，类似的原题也在蓝桥杯出现过，坐标在 <a target="_blank" rel="noopener" href="http://lx.lanqiao.cn/problem.page?gpid=T444">K 倍区间</a>。</p>
+<h3 id="基本分析"><a href="#基本分析" class="headerlink" title="基本分析"></a>基本分析</h3><p>这是一道很经典的前缀和题目，类似的原题也在蓝桥杯出现过，坐标在 <a target="_blank" rel="noopener" href="http://lx.lanqiao.cn/problem.page?gpid=T444">K 倍区间</a> <a target="_blank" rel="noopener" href="http://lx.lanqiao.cn/problem.page?gpid=T444。">http://lx.lanqiao.cn/problem.page?gpid=T444。</a></p>
 <p>本题与那道题不同在于：</p>
 <ul>
 <li>[K 倍区间] 需要求得所有符合条件的区间数量；本题需要判断是否存在。</li>
