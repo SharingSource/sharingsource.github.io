@@ -1,0 +1,635 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/oimg/RoundCorner.png">
+  <link rel="icon" href="/oimg/RoundCorner.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="宫水三叶">
+  <meta name="keywords" content="算法, 数据结构, 题解">
+  
+    <meta name="description" content="题目描述这是 LeetCode 上的 834. 树中距离之和 ，难度为 困难。 给定一个无向、连通的树。 树中有 n 个标记为 0...n-1 的节点以及 n-1 条边 。 给定整数 n 和数组 edges， $edges[i] &#x3D; [a{i}, b{i}]$表示树中的节点 $a{i}$ 和 $b{i}$ 之间有一条边。 返回长度为 n 的数组 answer，其中 answer[i] 是树中第 i">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LC 834. 树中距离之和">
+<meta property="og:url" content="https://sharingsource.github.io/2023/09/19/834.%20%E6%A0%91%E4%B8%AD%E8%B7%9D%E7%A6%BB%E4%B9%8B%E5%92%8C%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/index.html">
+<meta property="og:site_name" content="宫水三叶的刷题日记">
+<meta property="og:description" content="题目描述这是 LeetCode 上的 834. 树中距离之和 ，难度为 困难。 给定一个无向、连通的树。 树中有 n 个标记为 0...n-1 的节点以及 n-1 条边 。 给定整数 n 和数组 edges， $edges[i] &#x3D; [a{i}, b{i}]$表示树中的节点 $a{i}$ 和 $b{i}$ 之间有一条边。 返回长度为 n 的数组 answer，其中 answer[i] 是树中第 i">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://sharingsource.github.io/2023/09/19/834.%20%E6%A0%91%E4%B8%AD%E8%B7%9D%E7%A6%BB%E4%B9%8B%E5%92%8C%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/image_0.png">
+<meta property="og:image" content="https://sharingsource.github.io/2023/09/19/834.%20%E6%A0%91%E4%B8%AD%E8%B7%9D%E7%A6%BB%E4%B9%8B%E5%92%8C%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/image_1.png">
+<meta property="og:image" content="https://sharingsource.github.io/2023/09/19/834.%20%E6%A0%91%E4%B8%AD%E8%B7%9D%E7%A6%BB%E4%B9%8B%E5%92%8C%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/image_2.png">
+<meta property="og:image" content="https://sharingsource.github.io/2023/09/19/834.%20%E6%A0%91%E4%B8%AD%E8%B7%9D%E7%A6%BB%E4%B9%8B%E5%92%8C%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/image_3.png">
+<meta property="og:image" content="https://sharingsource.github.io/2023/09/19/834.%20%E6%A0%91%E4%B8%AD%E8%B7%9D%E7%A6%BB%E4%B9%8B%E5%92%8C%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/image_4.png">
+<meta property="og:image" content="https://sharingsource.github.io/2023/09/19/834.%20%E6%A0%91%E4%B8%AD%E8%B7%9D%E7%A6%BB%E4%B9%8B%E5%92%8C%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/image_5.png">
+<meta property="og:image" content="https://sharingsource.github.io/2023/09/19/834.%20%E6%A0%91%E4%B8%AD%E8%B7%9D%E7%A6%BB%E4%B9%8B%E5%92%8C%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/image_6.png">
+<meta property="article:published_time" content="2023-09-19T06:06:38.000Z">
+<meta property="article:modified_time" content="2023-11-03T03:08:29.387Z">
+<meta property="article:author" content="宫水三叶">
+<meta property="article:tag" content="动态规划">
+<meta property="article:tag" content="DFS">
+<meta property="article:tag" content="树形 DP">
+<meta property="article:tag" content="树">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://sharingsource.github.io/2023/09/19/834.%20%E6%A0%91%E4%B8%AD%E8%B7%9D%E7%A6%BB%E4%B9%8B%E5%92%8C%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/image_0.png">
+  
+  
+  <title>LC 834. 树中距离之和 - 宫水三叶的刷题日记</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/hint.css/2.7.0/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.7.2/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"sharingsource.github.io","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"|","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"IDifiViRkVDTgu27Nu50GQkE-gzGzoHsz","app_key":"gt98pupgyYjPKYQASrGmD9kM","server_url":"https://idifivir.lc-cn-n1-shared.com","path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.1.0"></head>
+
+
+<body>
+  <header style="height: 50vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>宫水三叶の刷题日记</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/image_208.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="LC 834. 树中距离之和">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-author" aria-hidden="true"></i>
+      宫水三叶
+    </span>
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2023-09-19 14:06" pubdate>
+        2023年9月19日
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">LC 834. 树中距离之和</h1>
+            
+            <div class="markdown-body">
+              <h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>这是 LeetCode 上的 <strong><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/sum-of-distances-in-tree/solutions/2449965/gong-shui-san-xie-shu-xing-dp-chang-gui-1v7ud/">834. 树中距离之和</a></strong> ，难度为 <strong>困难</strong>。</p>
+<p>给定一个无向、连通的树。</p>
+<p>树中有 <code>n</code> 个标记为 <code>0...n-1</code> 的节点以及 <code>n-1</code> 条边 。</p>
+<p>给定整数 <code>n</code> 和数组 <code>edges</code>， $edges[i] = [a<em>{i}, b</em>{i}]$表示树中的节点 $a<em>{i}$ 和 $b</em>{i}$ 之间有一条边。</p>
+<p>返回长度为 <code>n</code> 的数组 <code>answer</code>，其中 <code>answer[i]</code> 是树中第 <code>i</code> 个节点与所有其他节点之间的距离之和。</p>
+<p>示例 1:<br><img src="/2023/09/19/834.%20%E6%A0%91%E4%B8%AD%E8%B7%9D%E7%A6%BB%E4%B9%8B%E5%92%8C%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/image_0.png" srcset="/img/loading.gif" lazyload alt><br><figure class="highlight stylus"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs stylus">输入: n = <span class="hljs-number">6</span>, edges = <span class="hljs-selector-attr">[[0,1]</span>,<span class="hljs-selector-attr">[0,2]</span>,<span class="hljs-selector-attr">[2,3]</span>,<span class="hljs-selector-attr">[2,4]</span>,<span class="hljs-selector-attr">[2,5]</span>]<br><br>输出: <span class="hljs-selector-attr">[8,12,6,10,10,10]</span><br><br>解释: 树如图所示。<br>我们可以计算出 <span class="hljs-built_in">dist</span>(<span class="hljs-number">0</span>,<span class="hljs-number">1</span>) + <span class="hljs-built_in">dist</span>(<span class="hljs-number">0</span>,<span class="hljs-number">2</span>) + <span class="hljs-built_in">dist</span>(<span class="hljs-number">0</span>,<span class="hljs-number">3</span>) + <span class="hljs-built_in">dist</span>(<span class="hljs-number">0</span>,<span class="hljs-number">4</span>) + <span class="hljs-built_in">dist</span>(<span class="hljs-number">0</span>,<span class="hljs-number">5</span>) <br>也就是 <span class="hljs-number">1</span> + <span class="hljs-number">1</span> + <span class="hljs-number">2</span> + <span class="hljs-number">2</span> + <span class="hljs-number">2</span> = <span class="hljs-number">8</span>。 因此，answer<span class="hljs-selector-attr">[0]</span> = <span class="hljs-number">8</span>，以此类推。<br></code></pre></div></td></tr></table></figure><br>示例 2:<br><img src="/2023/09/19/834.%20%E6%A0%91%E4%B8%AD%E8%B7%9D%E7%A6%BB%E4%B9%8B%E5%92%8C%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/image_1.png" srcset="/img/loading.gif" lazyload alt><br><figure class="highlight inform7"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs inform7">输入: n = 1, edges = <span class="hljs-comment">[]</span><br><br>输出: <span class="hljs-comment">[0]</span><br></code></pre></div></td></tr></table></figure><br>示例 3:<br><img src="/2023/09/19/834.%20%E6%A0%91%E4%B8%AD%E8%B7%9D%E7%A6%BB%E4%B9%8B%E5%92%8C%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/image_2.png" srcset="/img/loading.gif" lazyload alt></p>
+<figure class="highlight lua"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs lua">输入: n = <span class="hljs-number">2</span>, edges = <span class="hljs-string">[[1,0]]</span><br><br>输出: [<span class="hljs-number">1</span>,<span class="hljs-number">1</span>]<br></code></pre></div></td></tr></table></figure>
+<p>提示:</p>
+<ul>
+<li>$1 &lt;= n &lt;= 3 \times 10^4$</li>
+<li>$edges.length = n - 1$</li>
+<li>$edges[i].length = 2$</li>
+<li>$0 &lt;= a<em>{i}, b</em>{i} &lt; n$</li>
+<li>$a<em>{i} != b</em>{i}$</li>
+<li>给定的输入保证为有效的树</li>
+</ul>
+<hr>
+<h3 id="树形-DP"><a href="#树形-DP" class="headerlink" title="树形 DP"></a>树形 DP</h3><p><strong>对于树形 DP，可以随便以某个节点为根，把整棵树“拎起来”进行分析，通常还会以“方向”作为切入点进行思考。</strong></p>
+<p>不妨以编号为 <code>0</code> 的节点作为根节点进行分析：假设当前处理到的节点为 <code>u</code>，当前节点 <code>u</code> 的父节点为 <code>fa</code>，同时 <code>u</code> 有若干子节点 <code>j</code>。</p>
+<p><img src="/2023/09/19/834.%20%E6%A0%91%E4%B8%AD%E8%B7%9D%E7%A6%BB%E4%B9%8B%E5%92%8C%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/image_3.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<p>对于任意节点 <code>u</code> 而言，其树中距离之和可根据「方向/位置」分为两大类（对应示例图的左右两部分）：</p>
+<ul>
+<li>所有从节点 <code>u</code> “往下”延伸所达的节点距离之和，即所有经过 <code>u -&gt; j</code> 边所能访问到的节点距离之和</li>
+<li>所有从节点 <code>u</code> “往上”延伸所达的节点距离之和，即经过 <code>u -&gt; fa</code> 边所能访问到的节点距离之和</li>
+</ul>
+<p><img src="/2023/09/19/834.%20%E6%A0%91%E4%B8%AD%E8%B7%9D%E7%A6%BB%E4%B9%8B%E5%92%8C%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/image_4.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<p>假设我们能够用 $f[u]$ 和 $g[u]$ 预处理出每个节点“往下”和“往上”的距离之和，那么就有 $ans[u] = f[u] + g[u]$。</p>
+<p>不失一般性分别考虑 $f[u]$ 和 $g[u]$ 该如何计算。</p>
+<p>为了方便，起始先用「链式前向星」对 <code>edges</code> 进行转存，同时在递归计算 $f[u]$ 时，将父节点 <code>fa</code> 也进行传递，从而避免遍历节点 <code>u</code> 的出边时，重新走回 <code>fa</code> 。</p>
+<h5 id="f-u-的推导"><a href="#f-u-的推导" class="headerlink" title="$f[u]$ 的推导"></a>$f[u]$ 的推导</h5><p>对于叶子节点（没有“往下”出边的节点），我们有 $f[u] = 0$ 的天然条件，计算好的叶子节点值可用于更新其父节点，因此<strong>求解 $f[u]$ 是一个「从下往上」的递推过程</strong>。</p>
+<p>假设当前处理到的节点是 <code>u</code>，往下节点有 $j<em>{1}$、$j</em>{2}$ 和 $j_{3}$ ，且所有 $f[j]$ 均已计算完成。</p>
+<p>由于 $f[u]$ 是由所有存在“往下”出边的节点 <code>j</code> 贡献而来。而单个子节点 <code>j</code> 来说，其对 $f[u]$ 的贡献应当是：<strong>在所有原有节点到节点 <code>j</code> 的距离路径中，额外增加一条当前出边（<code>u -&gt; j</code>），再加上 <code>1</code>（代表节点 <code>u</code> 到节点 <code>j</code> 的距离）</strong>。</p>
+<p>原路径距离之和恰好是 $f[j]$，额外需要增加的出边数量为原来参与计算 $f[j]$ 的点的数量（即挂载在节点 <code>j</code> 下的数量），因此我们还需要一个 <code>c</code> 数组，来记录某个节点下的子节点数量。</p>
+<p>最终的 $f[u]$ 为所有符合条件的节点的 <code>j</code> 的 $f[j] + c[j] + 1$ 的总和。</p>
+<h5 id="g-u-的推导"><a href="#g-u-的推导" class="headerlink" title="$g[u]$ 的推导"></a>$g[u]$ 的推导</h5><p>对于树形 DP 题目，“往下”的计算往往是容易的，而“往上”的计算则是稍稍麻烦。</p>
+<p>假设当前我们处理到节点为 <code>u</code>，将要遍历的节点为 <code>j</code>，考虑如何使用已经计算好的 $f[X]$ 来求解 $g[j]$。</p>
+<p>这里为什么是求解 $g[j]$，而不是 $g[u]$ 呢？</p>
+<p>因为我们求解的方向是“往上”的部分，必然是用父节点的计算结果，来推导子节点的结果，即<strong>求解 $g[u]$ 是一个「从上往下」的过程</strong>。</p>
+<p>对于树形 DP ，通常需要对“往上”进一步拆分：「往上再往上」和「往上再往下」：</p>
+<ul>
+<li><p>往上再往上：是指经过了 <code>j -&gt; u</code> 后，还必然经过 <code>u -&gt; fa</code> 这条边时，所能到达的节点距离之和：</p>
+<p>  <img src="/2023/09/19/834.%20%E6%A0%91%E4%B8%AD%E8%B7%9D%E7%A6%BB%E4%B9%8B%E5%92%8C%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/image_5.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<p>这部分对 $g[j]$ 的贡献为：在所有原有节点到节点 <code>u</code> 的距离路径中，额外增加一条当前出边（<code>u -&gt; j</code>），增加当前出边的数量与节点数量相同，点数量为 $n - 1 - c[u]$，含义为 总节点数量 减去 <code>u</code> 节点以及子节点数量。</p>
+<p>即此部分对 $g[j]$ 的贡献为 $g[u] + n - 1 - c[u]$。</p>
+</li>
+</ul>
+<ul>
+<li><p>往上再往下：是指经过了 <code>j -&gt; u</code> 后，还经过「除 <code>u -&gt; j</code> 以外」的其他“往下”边时，所能到达的节点距离之和：</p>
+<p>  <img src="/2023/09/19/834.%20%E6%A0%91%E4%B8%AD%E8%B7%9D%E7%A6%BB%E4%B9%8B%E5%92%8C%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/image_6.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<p>这部分的计算需要先在 $f[u]$ 中剔除 $f[j]$ 的贡献，然后再加上额外边（<code>u -&gt; j</code>）的累加数量，同样也是节点数量。</p>
+<p>从 $f[u]$ 中剔除 $f[j]$ 后为 $f[u] - f[j] - c[j]$，而点的数量为 $c[u] - 1 - c[j]$，含义为在以节点 <code>u</code> 为根的子树中剔除调用以节点 <code>j</code> 为根节点的部分。</p>
+<p>即此部分对 $g[j]$ 的贡献为 $f[u] - f[j] - c[j] + c[u] - 1 - c[j]$。</p>
+</li>
+</ul>
+<p>Java 代码：<br><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-type">int</span> <span class="hljs-variable">N</span> <span class="hljs-operator">=</span> <span class="hljs-number">30010</span>, M = <span class="hljs-number">60010</span>, idx = <span class="hljs-number">0</span>, n;<br>    <span class="hljs-type">int</span>[] he = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[N], e = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[M], ne = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[M];<br>    <span class="hljs-type">int</span>[] f = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[N], c = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[N], g = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[N];<br>    <span class="hljs-keyword">void</span> <span class="hljs-title function_">add</span><span class="hljs-params">(<span class="hljs-type">int</span> a, <span class="hljs-type">int</span> b)</span> &#123;<br>        e[idx] = b;<br>        ne[idx] = he[a];<br>        he[a] = idx++;<br>    &#125;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span>[] sumOfDistancesInTree(<span class="hljs-type">int</span> _n, <span class="hljs-type">int</span>[][] es) &#123;<br>        n = _n;<br>        Arrays.fill(he, -<span class="hljs-number">1</span>);<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span>[] e : es) &#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">a</span> <span class="hljs-operator">=</span> e[<span class="hljs-number">0</span>], b = e[<span class="hljs-number">1</span>];<br>            add(a, b); add(b, a);<br>        &#125;<br>        dfs1(<span class="hljs-number">0</span>, -<span class="hljs-number">1</span>);<br>        dfs2(<span class="hljs-number">0</span>, -<span class="hljs-number">1</span>);<br>        <span class="hljs-type">int</span>[] ans = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[n];<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; n; i++) ans[i] = f[i] + g[i];<br>        <span class="hljs-keyword">return</span> ans;<br>    &#125;<br>    <span class="hljs-type">int</span>[] dfs1(<span class="hljs-type">int</span> u, <span class="hljs-type">int</span> fa) &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">tot</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>, cnt = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> he[u]; i != -<span class="hljs-number">1</span>; i = ne[i]) &#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> e[i];<br>            <span class="hljs-keyword">if</span> (j == fa) <span class="hljs-keyword">continue</span>;<br>            <span class="hljs-type">int</span>[] next = dfs1(j, u);<br>            tot += next[<span class="hljs-number">0</span>] + next[<span class="hljs-number">1</span>] + <span class="hljs-number">1</span>; cnt += next[<span class="hljs-number">1</span>] + <span class="hljs-number">1</span>;<br>        &#125;<br>        f[u] = tot; c[u] = cnt;<br>        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[]&#123;tot, cnt&#125;;<br>    &#125;<br>    <span class="hljs-keyword">void</span> <span class="hljs-title function_">dfs2</span><span class="hljs-params">(<span class="hljs-type">int</span> u, <span class="hljs-type">int</span> fa)</span> &#123;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> he[u]; i != -<span class="hljs-number">1</span>; i = ne[i]) &#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> e[i];<br>            <span class="hljs-keyword">if</span> (j == fa) <span class="hljs-keyword">continue</span>;<br>            g[j] += g[u] + n - <span class="hljs-number">1</span> - c[u]; <span class="hljs-comment">// 往上再往上</span><br>            g[j] += f[u] - f[j] - c[j] + c[u] - <span class="hljs-number">1</span> - c[j];  <span class="hljs-comment">// 往上再往下</span><br>            dfs2(j, u);<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure></p>
+<ul>
+<li>时间复杂度：$O(n)$</li>
+<li>空间复杂度：$O(n)$</li>
+</ul>
+<hr>
+<h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>这是我们「刷穿 LeetCode」系列文章的第 <code>No.834</code> 篇，系列开始于 2021/01/01，截止于起始日 LeetCode 上共有 1916 道题目，部分是有锁题，我们将先把所有不带锁的题目刷完。</p>
+<p>在这个系列文章里面，除了讲解解题思路以外，还会尽可能给出最为简洁的代码。如果涉及通解还会相应的代码模板。</p>
+<p>为了方便各位同学能够电脑上进行调试和提交代码，我建立了相关的仓库：<a target="_blank" rel="noopener" href="https://github.com/SharingSource/LogicStack-LeetCode">https://github.com/SharingSource/LogicStack-LeetCode</a> 。</p>
+<p>在仓库地址里，你可以看到系列文章的题解链接、系列文章的相应代码、LeetCode 原题链接和其他优选题解。</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/">动态规划</a>
+                    
+                      <a class="hover-with-bg" href="/tags/DFS/">DFS</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E6%A0%91%E5%BD%A2-DP/">树形 DP</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E6%A0%91/">树</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/09/20/124.%20%E4%BA%8C%E5%8F%89%E6%A0%91%E4%B8%AD%E7%9A%84%E6%9C%80%E5%A4%A7%E8%B7%AF%E5%BE%84%E5%92%8C%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">LC 124. 二叉树中的最大路径和</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/09/12/96.%20%E4%B8%8D%E5%90%8C%E7%9A%84%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/">
+                        <span class="hidden-mobile">LC 96. 不同的二叉搜索树</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://cdn.staticfile.org/valine/1.4.18/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"IDifiViRkVDTgu27Nu50GQkE-gzGzoHsz","appKey":"gt98pupgyYjPKYQASrGmD9kM","path":"window.location.pathname","placeholder":"发一条友善的评论（为方便交流，记得填上方的昵称再留言哦 ~ 🍭","avatar":"","meta":["nick","mail"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":true},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          Fluid.plugins.initFancyBox('#valine .vcontent img:not(.vemoji)');
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+  <div class="col-lg-7 mx-auto nopadding-x-md">
+    <div class="container custom post-custom mx-auto">
+      <img src="/oimg/gzh-qrcode.webp" srcset="/img/loading.gif" lazyload class="rounded mx-auto d-block mt-5" style="width:80%">
+    </div>
+  </div>
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- LeanCloud 统计PV -->
+        <span id="leancloud-site-pv-container" style="display: none">
+            总访问量 
+            <span id="leancloud-site-pv"></span>
+             次
+          </span>
+      
+      
+        <!-- LeanCloud 统计UV -->
+        <span id="leancloud-site-uv-container" style="display: none">
+            总访客数 
+            <span id="leancloud-site-uv"></span>
+             人
+          </span>
+      
+
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.staticfile.org/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.staticfile.org/tocbot/4.18.2/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.staticfile.org/anchor-js/4.3.1/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.11/clipboard.min.js" ></script>
+  
+
+
+
+
+  <script defer src="/js/leancloud.js" ></script>
+
+
+
+  <script  src="https://cdn.bootcdn.net/ajax/libs/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        loader: {
+          
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.staticfile.org/mathjax/3.2.0/es5/tex-svg.js" ></script>
+
+  
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

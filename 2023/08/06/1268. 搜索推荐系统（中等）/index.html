@@ -1,0 +1,611 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/oimg/RoundCorner.png">
+  <link rel="icon" href="/oimg/RoundCorner.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="宫水三叶">
+  <meta name="keywords" content="算法, 数据结构, 题解">
+  
+    <meta name="description" content="题目描述这是 LeetCode 上的 1268. 搜索推荐系统 ，难度为 中等。 给你一个产品数组 products 和一个字符串 searchWord，products 数组中每个产品都是一个字符串。 请你设计一个推荐系统，在依次输入单词 searchWord 的每一个字母后，推荐 products 数组中前缀与 searchWord 相同的最多三个产品。如果前缀相同的可推荐产品超过三个，请按字">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LC 1268. 搜索推荐系统">
+<meta property="og:url" content="https://sharingsource.github.io/2023/08/06/1268.%20%E6%90%9C%E7%B4%A2%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/index.html">
+<meta property="og:site_name" content="宫水三叶的刷题日记">
+<meta property="og:description" content="题目描述这是 LeetCode 上的 1268. 搜索推荐系统 ，难度为 中等。 给你一个产品数组 products 和一个字符串 searchWord，products 数组中每个产品都是一个字符串。 请你设计一个推荐系统，在依次输入单词 searchWord 的每一个字母后，推荐 products 数组中前缀与 searchWord 相同的最多三个产品。如果前缀相同的可推荐产品超过三个，请按字">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-08-06T06:24:28.000Z">
+<meta property="article:modified_time" content="2023-11-03T03:08:41.775Z">
+<meta property="article:author" content="宫水三叶">
+<meta property="article:tag" content="哈希表">
+<meta property="article:tag" content="二分">
+<meta property="article:tag" content="字典树">
+<meta property="article:tag" content="排序">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  <title>LC 1268. 搜索推荐系统 - 宫水三叶的刷题日记</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/hint.css/2.7.0/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.7.2/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"sharingsource.github.io","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"|","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"IDifiViRkVDTgu27Nu50GQkE-gzGzoHsz","app_key":"gt98pupgyYjPKYQASrGmD9kM","server_url":"https://idifivir.lc-cn-n1-shared.com","path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.1.0"></head>
+
+
+<body>
+  <header style="height: 50vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>宫水三叶の刷题日记</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/image_192.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="LC 1268. 搜索推荐系统">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-author" aria-hidden="true"></i>
+      宫水三叶
+    </span>
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2023-08-06 14:24" pubdate>
+        2023年8月6日
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">LC 1268. 搜索推荐系统</h1>
+            
+            <div class="markdown-body">
+              <h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>这是 LeetCode 上的 <strong><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/search-suggestions-system/solution/gong-shui-san-xie-yi-ti-shuang-jie-pai-x-gnmu/">1268. 搜索推荐系统</a></strong> ，难度为 <strong>中等</strong>。</p>
+<p>给你一个产品数组 <code>products</code> 和一个字符串 <code>searchWord</code>，<code>products</code> 数组中每个产品都是一个字符串。</p>
+<p>请你设计一个推荐系统，在依次输入单词 <code>searchWord</code> 的每一个字母后，推荐 <code>products</code> 数组中前缀与 <code>searchWord</code> 相同的最多三个产品。如果前缀相同的可推荐产品超过三个，请按字典序返回最小的三个。</p>
+<p>请你以二维列表的形式，返回在输入 <code>searchWord</code> 每个字母后相应的推荐产品的列表。</p>
+<p>示例 1：<br><figure class="highlight prolog"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs prolog">输入：products = [<span class="hljs-string">&quot;mobile&quot;</span>,<span class="hljs-string">&quot;mouse&quot;</span>,<span class="hljs-string">&quot;moneypot&quot;</span>,<span class="hljs-string">&quot;monitor&quot;</span>,<span class="hljs-string">&quot;mousepad&quot;</span>], searchWord = <span class="hljs-string">&quot;mouse&quot;</span><br>输出：[<br>[<span class="hljs-string">&quot;mobile&quot;</span>,<span class="hljs-string">&quot;moneypot&quot;</span>,<span class="hljs-string">&quot;monitor&quot;</span>],<br>[<span class="hljs-string">&quot;mobile&quot;</span>,<span class="hljs-string">&quot;moneypot&quot;</span>,<span class="hljs-string">&quot;monitor&quot;</span>],<br>[<span class="hljs-string">&quot;mouse&quot;</span>,<span class="hljs-string">&quot;mousepad&quot;</span>],<br>[<span class="hljs-string">&quot;mouse&quot;</span>,<span class="hljs-string">&quot;mousepad&quot;</span>],<br>[<span class="hljs-string">&quot;mouse&quot;</span>,<span class="hljs-string">&quot;mousepad&quot;</span>]<br>]<br><br>解释：按字典序排序后的产品列表是 [<span class="hljs-string">&quot;mobile&quot;</span>,<span class="hljs-string">&quot;moneypot&quot;</span>,<span class="hljs-string">&quot;monitor&quot;</span>,<span class="hljs-string">&quot;mouse&quot;</span>,<span class="hljs-string">&quot;mousepad&quot;</span>]<br>输入 m 和 mo，由于所有产品的前缀都相同，所以系统返回字典序最小的三个产品 [<span class="hljs-string">&quot;mobile&quot;</span>,<span class="hljs-string">&quot;moneypot&quot;</span>,<span class="hljs-string">&quot;monitor&quot;</span>]<br>输入 mou， mous 和 mouse 后系统都返回 [<span class="hljs-string">&quot;mouse&quot;</span>,<span class="hljs-string">&quot;mousepad&quot;</span>]<br></code></pre></div></td></tr></table></figure><br>示例 2：<br><figure class="highlight prolog"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs prolog">输入：products = [<span class="hljs-string">&quot;havana&quot;</span>], searchWord = <span class="hljs-string">&quot;havana&quot;</span><br><br>输出：[[<span class="hljs-string">&quot;havana&quot;</span>],[<span class="hljs-string">&quot;havana&quot;</span>],[<span class="hljs-string">&quot;havana&quot;</span>],[<span class="hljs-string">&quot;havana&quot;</span>],[<span class="hljs-string">&quot;havana&quot;</span>],[<span class="hljs-string">&quot;havana&quot;</span>]]<br></code></pre></div></td></tr></table></figure><br>示例 3：<br><figure class="highlight prolog"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs prolog">输入：products = [<span class="hljs-string">&quot;bags&quot;</span>,<span class="hljs-string">&quot;baggage&quot;</span>,<span class="hljs-string">&quot;banner&quot;</span>,<span class="hljs-string">&quot;box&quot;</span>,<span class="hljs-string">&quot;cloths&quot;</span>], searchWord = <span class="hljs-string">&quot;bags&quot;</span><br><br>输出：[[<span class="hljs-string">&quot;baggage&quot;</span>,<span class="hljs-string">&quot;bags&quot;</span>,<span class="hljs-string">&quot;banner&quot;</span>],[<span class="hljs-string">&quot;baggage&quot;</span>,<span class="hljs-string">&quot;bags&quot;</span>,<span class="hljs-string">&quot;banner&quot;</span>],[<span class="hljs-string">&quot;baggage&quot;</span>,<span class="hljs-string">&quot;bags&quot;</span>],[<span class="hljs-string">&quot;bags&quot;</span>]]<br></code></pre></div></td></tr></table></figure><br>示例 4：<br><figure class="highlight prolog"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs prolog">输入：products = [<span class="hljs-string">&quot;havana&quot;</span>], searchWord = <span class="hljs-string">&quot;tatiana&quot;</span><br><br>输出：[[],[],[],[],[],[],[]]<br></code></pre></div></td></tr></table></figure></p>
+<p>提示：</p>
+<ul>
+<li>$1 &lt;= products.length &lt;= 1000$</li>
+<li>$1 &lt;= Σ products[i].length &lt;= 2 \times 10^4$</li>
+<li><code>products[i]</code> 中所有的字符都是小写英文字母。</li>
+<li>$1 &lt;= searchWord.length &lt;= 1000$</li>
+<li><code>searchWord</code> 中所有字符都是小写英文字母。</li>
+</ul>
+<hr>
+<h3 id="排序-字典树-哈希表"><a href="#排序-字典树-哈希表" class="headerlink" title="排序 + 字典树 + 哈希表"></a>排序 + 字典树 + 哈希表</h3><p>为了方便，将 <code>products</code> 记为 <code>ps</code>，将 <code>searchWord</code> 记为 <code>w</code>。</p>
+<p>这是一个 <code>&quot;Suggestion string&quot;</code> 问题，容易想到字典树进行求解，不了解字典树的同学，可看 <a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/DBTQyNYsEgmN0Vb5fbolUg">前置 🧀</a>。</p>
+<p>由于题目要求「若有超过三个的产品可推荐，返回字典序最小的三个」，我们不妨先对 <code>ps</code> 进行排序，使 <code>ps</code> 从前往后满足字典序从小到大。</p>
+<p><strong>将所有 <code>ps[i]</code> 按顺序添加到字典树 <code>tr</code> 中，添加过程中，使用两个哈希表 <code>minMap</code> 和 <code>maxMap</code> 分别记录经过某个 <code>tr[i][j]</code> 时的最小 <code>ps</code> 下标和最大 <code>ps</code> 下标</strong>。即哈希表的 <code>key</code> 为具体的 <code>tr[i][j]</code>，对应 <code>value</code> 为经过该节点的最小或最大下标。</p>
+<p>构建答案时，<strong>根据当前 <code>w</code> 子串到字典树 <code>tr</code> 中查询，定位到该子串对应的 <code>tr[i][j]</code> 为何值，再从哈希表中获取建议字符串在 <code>ps</code> 中的左右端点 <code>l</code> 和 <code>r</code></strong>，并根据在 <code>ps[l:r]</code> （可能为空集）中最多取三个的原则来构建答案。</p>
+<p>考虑实现字典树的两个关键方法，<strong>添加</strong> 和 <strong>查询</strong>：</p>
+<ul>
+<li><p>添加函数 <code>void add(String s, int num)</code> ：其中 <code>s</code> 为待添加到字典树的字符串，<code>num</code> 则是该字符串在 <code>ps</code> 中的下标编号。</p>
+<p>往字典树添加过程中，按照首次访问字典树节点 <code>tr[i][j]</code> 的下标存入 <code>minMap</code>，最后一次访问字典树节点 <code>tr[i][j]</code> 的下标存入 <code>maxMap</code> 的规则来更新哈希表。</p>
+</li>
+<li><p>查询函数 <code>int[] query(String s)</code>：其中 <code>s</code> 为某个 <code>w</code> 子串，通过查询该子串（最后字符）在字典树的节点值，来得知建议列表对应 <code>ps</code> 的左右端点下标为何值，从而构建答案。</p>
+</li>
+</ul>
+<p>Java 代码：<br><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-type">int</span>[][] tr = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[<span class="hljs-number">20010</span>][<span class="hljs-number">26</span>];<br>    <span class="hljs-type">int</span> <span class="hljs-variable">idx</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>    Map&lt;Integer, Integer&gt; min = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;(), max = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();<br>    <span class="hljs-keyword">void</span> <span class="hljs-title function_">add</span><span class="hljs-params">(String s, <span class="hljs-type">int</span> num)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">p</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; s.length(); i++) &#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">u</span> <span class="hljs-operator">=</span> s.charAt(i) - <span class="hljs-string">&#x27;a&#x27;</span>;<br>            <span class="hljs-keyword">if</span> (tr[p][u] == <span class="hljs-number">0</span>) &#123;<br>                tr[p][u] = ++idx;<br>                min.put(tr[p][u], num);<br>            &#125;<br>            max.put(tr[p][u], num);<br>            p = tr[p][u];<br>        &#125;<br>    &#125;<br>    <span class="hljs-type">int</span>[] query(String s) &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">a</span> <span class="hljs-operator">=</span> -<span class="hljs-number">1</span>, b = -<span class="hljs-number">1</span>, p = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; s.length(); i++) &#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">u</span> <span class="hljs-operator">=</span> s.charAt(i) - <span class="hljs-string">&#x27;a&#x27;</span>;<br>            <span class="hljs-keyword">if</span> (tr[p][u] == <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[]&#123;-<span class="hljs-number">1</span>, -<span class="hljs-number">1</span>&#125;;<br>            a = min.get(tr[p][u]); b = max.get(tr[p][u]);<br>            p = tr[p][u];<br>        &#125;<br>        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[]&#123;a, b&#125;;<br>    &#125;<br>    <span class="hljs-keyword">public</span> List&lt;List&lt;String&gt;&gt; <span class="hljs-title function_">suggestedProducts</span><span class="hljs-params">(String[] ps, String w)</span> &#123;<br>        Arrays.sort(ps);<br>        List&lt;List&lt;String&gt;&gt; ans = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; ps.length; i++) add(ps[i], i);<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; w.length(); i++) &#123;<br>            List&lt;String&gt; list = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();<br>            <span class="hljs-type">int</span>[] info = query(w.substring(<span class="hljs-number">0</span>, i + <span class="hljs-number">1</span>));<br>            <span class="hljs-type">int</span> <span class="hljs-variable">l</span> <span class="hljs-operator">=</span> info[<span class="hljs-number">0</span>], r = info[<span class="hljs-number">1</span>];<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> l; j &lt;= Math.min(l + <span class="hljs-number">2</span>, r) &amp;&amp; l != -<span class="hljs-number">1</span>; j++) list.add(ps[j]);<br>            ans.add(list);<br>        &#125;<br>        <span class="hljs-keyword">return</span> ans;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure><br>C++ 代码：<br><figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs C++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-type">int</span> tr[<span class="hljs-number">20010</span>][<span class="hljs-number">26</span>] = &#123;<span class="hljs-number">0</span>&#125;;<br>    <span class="hljs-type">int</span> idx = <span class="hljs-number">0</span>;<br>    unordered_map&lt;<span class="hljs-type">int</span>, <span class="hljs-type">int</span>&gt; minMap, maxMap;<br>    <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">add</span><span class="hljs-params">(string s, <span class="hljs-type">int</span> num)</span> </span>&#123;<br>        <span class="hljs-type">int</span> p = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">char</span> c : s) &#123;<br>            <span class="hljs-type">int</span> u = c - <span class="hljs-string">&#x27;a&#x27;</span>;<br>            <span class="hljs-keyword">if</span> (tr[p][u] == <span class="hljs-number">0</span>) &#123;<br>                tr[p][u] = ++idx;<br>                minMap[tr[p][u]] = num;<br>            &#125;<br>            maxMap[tr[p][u]] = num;<br>            p = tr[p][u];<br>        &#125;<br>    &#125;<br>    <span class="hljs-function">pair&lt;<span class="hljs-type">int</span>, <span class="hljs-type">int</span>&gt; <span class="hljs-title">query</span><span class="hljs-params">(string s)</span> </span>&#123;<br>        <span class="hljs-type">int</span> a = <span class="hljs-number">-1</span>, b = <span class="hljs-number">-1</span>, p = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">char</span> c : s) &#123;<br>            <span class="hljs-type">int</span> u = c - <span class="hljs-string">&#x27;a&#x27;</span>;<br>            <span class="hljs-keyword">if</span> (tr[p][u] == <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> &#123;<span class="hljs-number">-1</span>, <span class="hljs-number">-1</span>&#125;;<br>            a = minMap[tr[p][u]];<br>            b = maxMap[tr[p][u]];<br>            p = tr[p][u];<br>        &#125;<br>        <span class="hljs-keyword">return</span> &#123;a, b&#125;;<br>    &#125;<br>    vector&lt;vector&lt;string&gt;&gt; <span class="hljs-built_in">suggestedProducts</span>(vector&lt;string&gt;&amp; ps, string w) &#123;<br>        <span class="hljs-built_in">sort</span>(ps.<span class="hljs-built_in">begin</span>(), ps.<span class="hljs-built_in">end</span>());<br>        vector&lt;vector&lt;string&gt;&gt; ans;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; ps.<span class="hljs-built_in">size</span>(); i++) <span class="hljs-built_in">add</span>(ps[i], i);<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; w.<span class="hljs-built_in">length</span>(); i++) &#123;<br>            vector&lt;string&gt; list;<br>            pair&lt;<span class="hljs-type">int</span>, <span class="hljs-type">int</span>&gt; info = <span class="hljs-built_in">query</span>(w.<span class="hljs-built_in">substr</span>(<span class="hljs-number">0</span>, i + <span class="hljs-number">1</span>));<br>            <span class="hljs-type">int</span> l = info.first, r = info.second;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> j = l; j &lt;= <span class="hljs-built_in">min</span>(l + <span class="hljs-number">2</span>, r) &amp;&amp; l != <span class="hljs-number">-1</span>; j++) list.<span class="hljs-built_in">push_back</span>(ps[j]);<br>            ans.<span class="hljs-built_in">push_back</span>(list);<br>        &#125;<br>        <span class="hljs-keyword">return</span> ans;<br>    &#125;<br>&#125;;<br></code></pre></div></td></tr></table></figure><br>Python 代码：<br><figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span>:<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">suggestedProducts</span>(<span class="hljs-params">self, ps: <span class="hljs-type">List</span>[<span class="hljs-built_in">str</span>], w: <span class="hljs-built_in">str</span></span>) -&gt; <span class="hljs-type">List</span>[<span class="hljs-type">List</span>[<span class="hljs-built_in">str</span>]]:<br>        tr = defaultdict(<span class="hljs-keyword">lambda</span>: defaultdict(<span class="hljs-built_in">int</span>))<br>        idx = <span class="hljs-number">0</span><br>        minMap, maxMap = &#123;&#125;, &#123;&#125;<br>        <span class="hljs-keyword">def</span> <span class="hljs-title function_">add</span>(<span class="hljs-params">s, num</span>):<br>            <span class="hljs-keyword">nonlocal</span> idx<br>            p = <span class="hljs-number">0</span><br>            <span class="hljs-keyword">for</span> c <span class="hljs-keyword">in</span> s:<br>                u = <span class="hljs-built_in">ord</span>(c) - <span class="hljs-built_in">ord</span>(<span class="hljs-string">&#x27;a&#x27;</span>)<br>                <span class="hljs-keyword">if</span> tr[p][u] == <span class="hljs-number">0</span>:<br>                    idx += <span class="hljs-number">1</span><br>                    tr[p][u] = idx<br>                    minMap[tr[p][u]] = num<br>                maxMap[tr[p][u]] = num<br>                p = tr[p][u]<br>        <span class="hljs-keyword">def</span> <span class="hljs-title function_">query</span>(<span class="hljs-params">s</span>):<br>            a, b, p = -<span class="hljs-number">1</span>, -<span class="hljs-number">1</span>, <span class="hljs-number">0</span><br>            <span class="hljs-keyword">for</span> c <span class="hljs-keyword">in</span> s:<br>                u = <span class="hljs-built_in">ord</span>(c) - <span class="hljs-built_in">ord</span>(<span class="hljs-string">&#x27;a&#x27;</span>)<br>                <span class="hljs-keyword">if</span> tr[p][u] == <span class="hljs-number">0</span>:<br>                    <span class="hljs-keyword">return</span> (-<span class="hljs-number">1</span>, -<span class="hljs-number">1</span>)<br>                a = minMap[tr[p][u]]<br>                b = maxMap[tr[p][u]]<br>                p = tr[p][u]<br>            <span class="hljs-keyword">return</span> (a, b)<br>        ps.sort()<br>        ans = []<br>        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(ps)):<br>            add(ps[i], i)<br>        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(w)):<br>            l, r = query(w[:i + <span class="hljs-number">1</span>])<br>            lst = [ps[j] <span class="hljs-keyword">for</span> j <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(l, <span class="hljs-built_in">min</span>(l + <span class="hljs-number">3</span>, r + <span class="hljs-number">1</span>)) <span class="hljs-keyword">if</span> l != -<span class="hljs-number">1</span>]<br>            ans.append(lst)<br>        <span class="hljs-keyword">return</span> ans<br></code></pre></div></td></tr></table></figure><br>TypeScript 代码：<br><figure class="highlight typescript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs TypeScript"><span class="hljs-keyword">let</span> <span class="hljs-attr">tr</span>: <span class="hljs-built_in">number</span>[][];<br><span class="hljs-keyword">let</span> <span class="hljs-attr">idx</span>: <span class="hljs-built_in">number</span>;<br><span class="hljs-keyword">let</span> <span class="hljs-attr">minMap</span>: <span class="hljs-title class_">Map</span>&lt;<span class="hljs-built_in">number</span>, <span class="hljs-built_in">number</span>&gt;, <span class="hljs-attr">maxMap</span>: <span class="hljs-title class_">Map</span>&lt;<span class="hljs-built_in">number</span>, <span class="hljs-built_in">number</span>&gt;;<br><span class="hljs-keyword">function</span> <span class="hljs-title function_">add</span>(<span class="hljs-params">s: <span class="hljs-built_in">string</span>, num: <span class="hljs-built_in">number</span></span>): <span class="hljs-built_in">void</span> &#123;<br>    <span class="hljs-keyword">let</span> p = <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; s.<span class="hljs-property">length</span>; i++) &#123;<br>        <span class="hljs-keyword">const</span> u = s.<span class="hljs-title function_">charCodeAt</span>(i) - <span class="hljs-string">&#x27;a&#x27;</span>.<span class="hljs-title function_">charCodeAt</span>(<span class="hljs-number">0</span>);<br>        <span class="hljs-keyword">if</span> (tr[p][u] === <span class="hljs-number">0</span>) &#123;<br>            idx++;<br>            tr[p][u] = idx;<br>            minMap.<span class="hljs-title function_">set</span>(tr[p][u], num);<br>        &#125;<br>        maxMap.<span class="hljs-title function_">set</span>(tr[p][u], num);<br>        p = tr[p][u];<br>    &#125;<br>&#125;<br><span class="hljs-keyword">function</span> <span class="hljs-title function_">query</span>(<span class="hljs-params">s: <span class="hljs-built_in">string</span></span>): <span class="hljs-built_in">number</span>[] &#123;<br>    <span class="hljs-keyword">let</span> a = -<span class="hljs-number">1</span>, b = -<span class="hljs-number">1</span>, p = <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; s.<span class="hljs-property">length</span>; i++) &#123;<br>        <span class="hljs-keyword">const</span> u = s.<span class="hljs-title function_">charCodeAt</span>(i) - <span class="hljs-string">&#x27;a&#x27;</span>.<span class="hljs-title function_">charCodeAt</span>(<span class="hljs-number">0</span>);<br>        <span class="hljs-keyword">if</span> (tr[p][u] === <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> [-<span class="hljs-number">1</span>, -<span class="hljs-number">1</span>];<br>        a = minMap.<span class="hljs-title function_">get</span>(tr[p][u])!;<br>        b = maxMap.<span class="hljs-title function_">get</span>(tr[p][u])!;<br>        p = tr[p][u];<br>    &#125;<br>    <span class="hljs-keyword">return</span> [a, b];<br>&#125;<br><span class="hljs-keyword">function</span> <span class="hljs-title function_">suggestedProducts</span>(<span class="hljs-params">ps: <span class="hljs-built_in">string</span>[], w: <span class="hljs-built_in">string</span></span>): <span class="hljs-built_in">string</span>[][] &#123;<br>    tr = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Array</span>(<span class="hljs-number">20010</span>).<span class="hljs-title function_">fill</span>(<span class="hljs-number">0</span>).<span class="hljs-title function_">map</span>(<span class="hljs-function">() =&gt;</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Array</span>(<span class="hljs-number">26</span>).<span class="hljs-title function_">fill</span>(<span class="hljs-number">0</span>));<br>    idx = <span class="hljs-number">0</span>;<br>    minMap = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Map</span>(), maxMap = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Map</span>();<br>    ps.<span class="hljs-title function_">sort</span>();<br>    <span class="hljs-keyword">const</span> ans = [];<br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; ps.<span class="hljs-property">length</span>; i++) <span class="hljs-title function_">add</span>(ps[i], i);<br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; w.<span class="hljs-property">length</span>; i++) &#123;<br>        <span class="hljs-keyword">const</span> list = [];<br>        <span class="hljs-keyword">const</span> [l, r] = <span class="hljs-title function_">query</span>(w.<span class="hljs-title function_">substring</span>(<span class="hljs-number">0</span>, i + <span class="hljs-number">1</span>));<br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> j = l; j &lt;= <span class="hljs-title class_">Math</span>.<span class="hljs-title function_">min</span>(l + <span class="hljs-number">2</span>, r) &amp;&amp; l !== -<span class="hljs-number">1</span>; j++) list.<span class="hljs-title function_">push</span>(ps[j]);<br>        ans.<span class="hljs-title function_">push</span>(list);<br>    &#125;<br>    <span class="hljs-keyword">return</span> ans;<br>&#125;;<br></code></pre></div></td></tr></table></figure></p>
+<ul>
+<li>时间复杂度：将 <code>ps</code> 长度记为 <code>n</code>，<code>w</code> 长度记为 <code>m</code>。对 <code>ps</code> 进行排序复杂度为 $O(n\log{n})$；构建字典树复杂度为 $O(\sum<em>{i = 0}^{n - 1}ps[i].length)$；根据 <code>w</code> 构建答案复杂度为 $O(m^2)$；整体复杂度为 $O(\sum</em>{i = 0}^{n - 1}ps[i].length + m^2)$</li>
+<li>空间复杂度：$O(\sum_{i = 0}^{n - 1}ps[i].length \times C)$，其中 $C = 26$ 为字符集大小</li>
+</ul>
+<hr>
+<h3 id="排序-二分"><a href="#排序-二分" class="headerlink" title="排序 + 二分"></a>排序 + 二分</h3><p>由于每个 <code>w</code> 子串只会对应最多三个的建议字符串，同时又可以先通过排序来确保 <code>ps</code> 的有序性。</p>
+<p>因此对于每个 <code>w</code> 子串而言，可以 <strong>先找到满足要求的，字典序最小的建议字符串 <code>ps[i]</code>，接着往后逐个检查，组成最终的建议字符串列表（最多检查三个）</strong>。</p>
+<p>这个「在 <code>ps</code> 中找符合要求，字典序最小的建议字符串」操作，除了能够利用上述解法来做（省掉一个 <code>maxMap</code>）以外，还能利用字符串本身的有序性进行「二分」，因为该操作本质上，是在<strong>找第一个满足 <code>ps[i]</code> 大于等于当前子串的位置</strong>。</p>
+<p>Java 代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> List&lt;List&lt;String&gt;&gt; <span class="hljs-title function_">suggestedProducts</span><span class="hljs-params">(String[] ps, String w)</span> &#123;<br>        Arrays.sort(ps);<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> ps.length;<br>        List&lt;List&lt;String&gt;&gt; ans = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; w.length(); i++) &#123;<br>            <span class="hljs-type">String</span> <span class="hljs-variable">cur</span> <span class="hljs-operator">=</span> w.substring(<span class="hljs-number">0</span>, i + <span class="hljs-number">1</span>);<br>            <span class="hljs-type">int</span> <span class="hljs-variable">l</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>, r = n - <span class="hljs-number">1</span>;<br>            <span class="hljs-keyword">while</span> (l &lt; r) &#123;<br>                <span class="hljs-type">int</span> <span class="hljs-variable">mid</span> <span class="hljs-operator">=</span> l + r &gt;&gt; <span class="hljs-number">1</span>;<br>                <span class="hljs-keyword">if</span> (ps[mid].compareTo(cur) &gt;= <span class="hljs-number">0</span>) r = mid;<br>                <span class="hljs-keyword">else</span> l = mid + <span class="hljs-number">1</span>;<br>            &#125;<br>            List&lt;String&gt; list = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();<br>            <span class="hljs-keyword">if</span> (ps[r].compareTo(cur) &gt;= <span class="hljs-number">0</span>) &#123;<br>                <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> r; j &lt;= Math.min(n - <span class="hljs-number">1</span>, r + <span class="hljs-number">2</span>); j++) &#123;<br>                    <span class="hljs-keyword">if</span> (ps[j].length() &lt; cur.length()) <span class="hljs-keyword">break</span>;<br>                    <span class="hljs-keyword">if</span> (!ps[j].substring(<span class="hljs-number">0</span>, i + <span class="hljs-number">1</span>).equals(cur)) <span class="hljs-keyword">break</span>;<br>                    list.add(ps[j]);<br>                &#125;<br>            &#125;<br>            ans.add(list);<br>        &#125;<br>        <span class="hljs-keyword">return</span> ans;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<p>C++ 代码：<br><figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs C++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br><span class="hljs-keyword">public</span>:<br>    vector&lt;vector&lt;string&gt;&gt; <span class="hljs-built_in">suggestedProducts</span>(vector&lt;string&gt;&amp; ps, string w) &#123;<br>        <span class="hljs-built_in">sort</span>(ps.<span class="hljs-built_in">begin</span>(), ps.<span class="hljs-built_in">end</span>());<br>        <span class="hljs-type">int</span> n = ps.<span class="hljs-built_in">size</span>();<br>        vector&lt;vector&lt;string&gt;&gt; ans;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; w.<span class="hljs-built_in">length</span>(); i++) &#123;<br>            string cur = w.<span class="hljs-built_in">substr</span>(<span class="hljs-number">0</span>, i + <span class="hljs-number">1</span>);<br>            <span class="hljs-type">int</span> l = <span class="hljs-number">0</span>, r = n - <span class="hljs-number">1</span>;<br>            <span class="hljs-keyword">while</span> (l &lt; r) &#123;<br>                <span class="hljs-type">int</span> mid = (l + r) &gt;&gt; <span class="hljs-number">1</span>;<br>                <span class="hljs-keyword">if</span> (ps[mid].<span class="hljs-built_in">compare</span>(cur) &gt;= <span class="hljs-number">0</span>) r = mid;<br>                <span class="hljs-keyword">else</span> l = mid + <span class="hljs-number">1</span>;<br>            &#125;<br>            vector&lt;string&gt; list;<br>            <span class="hljs-keyword">if</span> (ps[r].<span class="hljs-built_in">compare</span>(cur) &gt;= <span class="hljs-number">0</span>) &#123;<br>                <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> j = r; j &lt;= <span class="hljs-built_in">min</span>(n - <span class="hljs-number">1</span>, r + <span class="hljs-number">2</span>); j++) &#123;<br>                    <span class="hljs-keyword">if</span> (ps[j].<span class="hljs-built_in">length</span>() &lt; cur.<span class="hljs-built_in">length</span>()) <span class="hljs-keyword">break</span>;<br>                    <span class="hljs-keyword">if</span> (ps[j].<span class="hljs-built_in">substr</span>(<span class="hljs-number">0</span>, i + <span class="hljs-number">1</span>) != cur) <span class="hljs-keyword">break</span>;<br>                    list.<span class="hljs-built_in">push_back</span>(ps[j]);<br>                &#125;<br>            &#125;<br>            ans.<span class="hljs-built_in">push_back</span>(list);<br>        &#125;<br>        <span class="hljs-keyword">return</span> ans;<br>    &#125;<br>&#125;;<br></code></pre></div></td></tr></table></figure><br>Python 代码：<br><figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span>:<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">suggestedProducts</span>(<span class="hljs-params">self, ps: <span class="hljs-type">List</span>[<span class="hljs-built_in">str</span>], w: <span class="hljs-built_in">str</span></span>) -&gt; <span class="hljs-type">List</span>[<span class="hljs-type">List</span>[<span class="hljs-built_in">str</span>]]:<br>        ps.sort()<br>        n = <span class="hljs-built_in">len</span>(ps)<br>        ans = []<br>        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(w)):<br>            cur = w[:i + <span class="hljs-number">1</span>]<br>            l, r = <span class="hljs-number">0</span>, n - <span class="hljs-number">1</span><br>            <span class="hljs-keyword">while</span> l &lt; r:<br>                mid = (l + r) // <span class="hljs-number">2</span><br>                <span class="hljs-keyword">if</span> ps[mid] &gt;= cur:<br>                    r = mid<br>                <span class="hljs-keyword">else</span>:<br>                    l = mid + <span class="hljs-number">1</span><br>            lst = []<br>            <span class="hljs-keyword">if</span> ps[r] &gt;= cur:<br>                <span class="hljs-keyword">for</span> j <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(r, <span class="hljs-built_in">min</span>(n - <span class="hljs-number">1</span>, r + <span class="hljs-number">2</span>) + <span class="hljs-number">1</span>):<br>                    <span class="hljs-keyword">if</span> <span class="hljs-built_in">len</span>(ps[j]) &lt; <span class="hljs-built_in">len</span>(cur) <span class="hljs-keyword">or</span> ps[j][:i + <span class="hljs-number">1</span>] != cur:<br>                        <span class="hljs-keyword">break</span><br>                    lst.append(ps[j])<br>            ans.append(lst)<br>        <span class="hljs-keyword">return</span> ans<br></code></pre></div></td></tr></table></figure><br>TypeScript 代码：<br><figure class="highlight typescript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs TypeScript"><span class="hljs-keyword">function</span> <span class="hljs-title function_">suggestedProducts</span>(<span class="hljs-params">ps: <span class="hljs-built_in">string</span>[], w: <span class="hljs-built_in">string</span></span>): <span class="hljs-built_in">string</span>[][] &#123;<br>    ps.<span class="hljs-title function_">sort</span>();<br>    <span class="hljs-keyword">const</span> n = ps.<span class="hljs-property">length</span>;<br>    <span class="hljs-keyword">const</span> ans = [];<br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; w.<span class="hljs-property">length</span>; i++) &#123;<br>        <span class="hljs-keyword">const</span> cur = w.<span class="hljs-title function_">substring</span>(<span class="hljs-number">0</span>, i + <span class="hljs-number">1</span>);<br>        <span class="hljs-keyword">let</span> l = <span class="hljs-number">0</span>, r = n - <span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">while</span> (l &lt; r) &#123;<br>            <span class="hljs-keyword">const</span> mid = (l + r) &gt;&gt; <span class="hljs-number">1</span>;<br>            <span class="hljs-keyword">if</span> (ps[mid].<span class="hljs-title function_">localeCompare</span>(cur) &gt;= <span class="hljs-number">0</span>) r = mid;    <br>            <span class="hljs-keyword">else</span> l = mid + <span class="hljs-number">1</span>;<br>        &#125;<br>        <span class="hljs-keyword">const</span> <span class="hljs-attr">list</span>: <span class="hljs-built_in">string</span>[] = [];<br>        <span class="hljs-keyword">if</span> (ps[r].<span class="hljs-title function_">localeCompare</span>(cur) &gt;= <span class="hljs-number">0</span>) &#123;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> j = r; j &lt;= <span class="hljs-title class_">Math</span>.<span class="hljs-title function_">min</span>(n - <span class="hljs-number">1</span>, r + <span class="hljs-number">2</span>); j++) &#123;<br>                <span class="hljs-keyword">if</span> (ps[j].<span class="hljs-property">length</span> &lt; cur.<span class="hljs-property">length</span> || !ps[j].<span class="hljs-title function_">startsWith</span>(cur)) <span class="hljs-keyword">break</span>;<br>                list.<span class="hljs-title function_">push</span>(ps[j]);<br>            &#125;<br>        &#125;<br>        ans.<span class="hljs-title function_">push</span>(list);<br>    &#125;<br>    <span class="hljs-keyword">return</span> ans;<br>&#125;;<br></code></pre></div></td></tr></table></figure></p>
+<ul>
+<li>时间复杂度：将 <code>ps</code> 长度记为 <code>n</code>，<code>w</code> 长度记为 <code>m</code>。对 <code>ps</code> 进行排序复杂度为 $O(n\log{n})$；每次二分需要进行字符串比较，复杂度为 $O(m\log{n})$；二分到左端点后需要往后检查最多三个字符串，复杂度为 $O(m)$。整体复杂度为 $O(n\log{n} + m\log{n})$</li>
+<li>空间复杂度：$O(\log{n})$</li>
+</ul>
+<hr>
+<h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>这是我们「刷穿 LeetCode」系列文章的第 <code>No.1268</code> 篇，系列开始于 2021/01/01，截止于起始日 LeetCode 上共有 1916 道题目，部分是有锁题，我们将先把所有不带锁的题目刷完。</p>
+<p>在这个系列文章里面，除了讲解解题思路以外，还会尽可能给出最为简洁的代码。如果涉及通解还会相应的代码模板。</p>
+<p>为了方便各位同学能够电脑上进行调试和提交代码，我建立了相关的仓库：<a target="_blank" rel="noopener" href="https://github.com/SharingSource/LogicStack-LeetCode">https://github.com/SharingSource/LogicStack-LeetCode</a> 。</p>
+<p>在仓库地址里，你可以看到系列文章的题解链接、系列文章的相应代码、LeetCode 原题链接和其他优选题解。</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%93%88%E5%B8%8C%E8%A1%A8/">哈希表</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E4%BA%8C%E5%88%86/">二分</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%AD%97%E5%85%B8%E6%A0%91/">字典树</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E6%8E%92%E5%BA%8F/">排序</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/08/07/1657.%20%E7%A1%AE%E5%AE%9A%E4%B8%A4%E4%B8%AA%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%98%AF%E5%90%A6%E6%8E%A5%E8%BF%91%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">LC 1657. 确定两个字符串是否接近</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/07/30/1503.%20%E6%89%80%E6%9C%89%E8%9A%82%E8%9A%81%E6%8E%89%E4%B8%8B%E6%9D%A5%E5%89%8D%E7%9A%84%E6%9C%80%E5%90%8E%E4%B8%80%E5%88%BB%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/">
+                        <span class="hidden-mobile">LC 1503. 所有蚂蚁掉下来前的最后一刻</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://cdn.staticfile.org/valine/1.4.18/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"IDifiViRkVDTgu27Nu50GQkE-gzGzoHsz","appKey":"gt98pupgyYjPKYQASrGmD9kM","path":"window.location.pathname","placeholder":"发一条友善的评论（为方便交流，记得填上方的昵称再留言哦 ~ 🍭","avatar":"","meta":["nick","mail"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":true},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          Fluid.plugins.initFancyBox('#valine .vcontent img:not(.vemoji)');
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+  <div class="col-lg-7 mx-auto nopadding-x-md">
+    <div class="container custom post-custom mx-auto">
+      <img src="/oimg/gzh-qrcode.webp" srcset="/img/loading.gif" lazyload class="rounded mx-auto d-block mt-5" style="width:80%">
+    </div>
+  </div>
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- LeanCloud 统计PV -->
+        <span id="leancloud-site-pv-container" style="display: none">
+            总访问量 
+            <span id="leancloud-site-pv"></span>
+             次
+          </span>
+      
+      
+        <!-- LeanCloud 统计UV -->
+        <span id="leancloud-site-uv-container" style="display: none">
+            总访客数 
+            <span id="leancloud-site-uv"></span>
+             人
+          </span>
+      
+
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.staticfile.org/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.staticfile.org/tocbot/4.18.2/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.staticfile.org/anchor-js/4.3.1/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.11/clipboard.min.js" ></script>
+  
+
+
+
+
+  <script defer src="/js/leancloud.js" ></script>
+
+
+
+  <script  src="https://cdn.bootcdn.net/ajax/libs/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        loader: {
+          
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.staticfile.org/mathjax/3.2.0/es5/tex-svg.js" ></script>
+
+  
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

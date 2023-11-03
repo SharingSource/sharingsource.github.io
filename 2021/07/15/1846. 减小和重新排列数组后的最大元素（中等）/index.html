@@ -16,17 +16,17 @@
   <meta name="author" content="宫水三叶">
   <meta name="keywords" content="算法, 数据结构, 题解">
   
-    <meta name="description" content="题目描述这是 LeetCode 上的 1846. 减小和重新排列数组后的最大元素 ，难度为 中等。 给你一个正整数数组 arr 。请你对 arr 执行一些操作（也可以不进行任何操作），使得数组满足以下条件：  arr 中 第一个 元素必须为 1 。 任意相邻两个元素的差的绝对值 小于等于 1 ，也就是说，对于任意的 1 &lt;&#x3D; i &lt; arr.length （数组下标从 0 开始），都满">
+    <meta name="description" content="题目描述这是 LeetCode 上的 1846. 减小和重新排列数组后的最大元素 ，难度为 中等。 给你一个正整数数组 arr。请你对 arr 执行一些操作（也可以不进行任何操作），使得数组满足以下条件：  arr 中 第一个 元素必须为 $1$ 。 任意相邻两个元素的差的绝对值 小于等于 $1$ ，也就是说，对于任意的 $1 &lt;&#x3D; i &lt; arr.length$ （数组下标从 $0$">
 <meta property="og:type" content="article">
 <meta property="og:title" content="LC 1846. 减小和重新排列数组后的最大元素">
 <meta property="og:url" content="https://sharingsource.github.io/2021/07/15/1846.%20%E5%87%8F%E5%B0%8F%E5%92%8C%E9%87%8D%E6%96%B0%E6%8E%92%E5%88%97%E6%95%B0%E7%BB%84%E5%90%8E%E7%9A%84%E6%9C%80%E5%A4%A7%E5%85%83%E7%B4%A0%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/index.html">
 <meta property="og:site_name" content="宫水三叶的刷题日记">
-<meta property="og:description" content="题目描述这是 LeetCode 上的 1846. 减小和重新排列数组后的最大元素 ，难度为 中等。 给你一个正整数数组 arr 。请你对 arr 执行一些操作（也可以不进行任何操作），使得数组满足以下条件：  arr 中 第一个 元素必须为 1 。 任意相邻两个元素的差的绝对值 小于等于 1 ，也就是说，对于任意的 1 &lt;&#x3D; i &lt; arr.length （数组下标从 0 开始），都满">
+<meta property="og:description" content="题目描述这是 LeetCode 上的 1846. 减小和重新排列数组后的最大元素 ，难度为 中等。 给你一个正整数数组 arr。请你对 arr 执行一些操作（也可以不进行任何操作），使得数组满足以下条件：  arr 中 第一个 元素必须为 $1$ 。 任意相邻两个元素的差的绝对值 小于等于 $1$ ，也就是说，对于任意的 $1 &lt;&#x3D; i &lt; arr.length$ （数组下标从 $0$">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://sharingsource.github.io/2021/07/15/1846.%20%E5%87%8F%E5%B0%8F%E5%92%8C%E9%87%8D%E6%96%B0%E6%8E%92%E5%88%97%E6%95%B0%E7%BB%84%E5%90%8E%E7%9A%84%E6%9C%80%E5%A4%A7%E5%85%83%E7%B4%A0%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/image_0.png">
 <meta property="og:image" content="https://sharingsource.github.io/2021/07/15/1846.%20%E5%87%8F%E5%B0%8F%E5%92%8C%E9%87%8D%E6%96%B0%E6%8E%92%E5%88%97%E6%95%B0%E7%BB%84%E5%90%8E%E7%9A%84%E6%9C%80%E5%A4%A7%E5%85%83%E7%B4%A0%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/image_1.png">
 <meta property="article:published_time" content="2021-07-14T18:41:17.000Z">
-<meta property="article:modified_time" content="2022-05-18T08:29:06.536Z">
+<meta property="article:modified_time" content="2023-11-03T03:09:29.398Z">
 <meta property="article:author" content="宫水三叶">
 <meta property="article:tag" content="贪心">
 <meta name="twitter:card" content="summary_large_image">
@@ -239,21 +239,22 @@
             
             <div class="markdown-body">
               <h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>这是 LeetCode 上的 <strong><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/maximum-element-after-decreasing-and-rearranging/solution/gong-shui-san-xie-noxiang-xin-ke-xue-xi-yh9qt/">1846. 减小和重新排列数组后的最大元素</a></strong> ，难度为 <strong>中等</strong>。</p>
-<p>给你一个正整数数组 arr 。请你对 arr 执行一些操作（也可以不进行任何操作），使得数组满足以下条件：</p>
+<p>给你一个正整数数组 <code>arr</code>。请你对 <code>arr</code> 执行一些操作（也可以不进行任何操作），使得数组满足以下条件：</p>
 <ul>
-<li>arr 中 第一个 元素必须为 1 。</li>
-<li>任意相邻两个元素的差的绝对值 小于等于 1 ，也就是说，对于任意的 1 &lt;= i &lt; arr.length （数组下标从 0 开始），都满足 abs(arr[i] - arr[i - 1]) &lt;= 1 。abs(x) 为 x 的绝对值。</li>
+<li><code>arr</code> 中 第一个 元素必须为 $1$ 。</li>
+<li>任意相邻两个元素的差的绝对值 小于等于 $1$ ，也就是说，对于任意的 $1 &lt;= i &lt; arr.length$ （数组下标从 $0$ 开始），都满足 <code>abs(arr[i] - arr[i - 1]) &lt;= 1</code>。<code>abs(x)</code> 为 <code>x</code> 的绝对值。</li>
 </ul>
-<p>你可以执行以下 2 种操作任意次：</p>
+<p>你可以执行以下 $2$ 种操作任意次：</p>
 <ul>
-<li>减小 arr 中任意元素的值，使其变为一个 更小的正整数 。</li>
-<li>重新排列 arr 中的元素，你可以以任意顺序重新排列。</li>
+<li>减小 <code>arr</code> 中任意元素的值，使其变为一个 更小的正整数 。</li>
+<li>重新排列 <code>arr</code> 中的元素，你可以以任意顺序重新排列。</li>
 </ul>
-<p>请你返回执行以上操作后，在满足前文所述的条件下，arr 中可能的 最大值 。</p>
+<p>请你返回执行以上操作后，在满足前文所述的条件下，<code>arr</code> 中可能的 最大值 。</p>
 <p>示例 1：<br><figure class="highlight accesslog"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs accesslog">输入：arr = <span class="hljs-string">[2,2,1,2,1]</span><br><br>输出：<span class="hljs-number">2</span><br><br>解释：<br>我们可以重新排列 arr 得到 <span class="hljs-string">[1,2,2,2,1]</span> ，该数组满足所有条件。<br>arr 中最大元素为 <span class="hljs-number">2</span> 。<br></code></pre></div></td></tr></table></figure><br>示例 2：<br><figure class="highlight markdown"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs markdown">输入：arr = [100,1,1000]<br><br>输出：3<br><br>解释：<br>一个可行的方案如下：<br><span class="hljs-bullet">1.</span> 重新排列 arr 得到 [1,100,1000] 。<br><span class="hljs-bullet">2.</span> 将第二个元素减小为 2 。<br><span class="hljs-bullet">3.</span> 将第三个元素减小为 3 。<br>现在 arr = [1,2,3] ，满足所有条件。<br>arr 中最大元素为 3 。<br></code></pre></div></td></tr></table></figure><br>示例 3：<br><figure class="highlight accesslog"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs accesslog">输入：arr = <span class="hljs-string">[1,2,3,4,5]</span><br><br>输出：<span class="hljs-number">5</span><br><br>解释：数组已经满足所有条件，最大元素为 <span class="hljs-number">5</span> 。<br></code></pre></div></td></tr></table></figure></p>
 <p>提示：</p>
 <ul>
-<li>1 &lt;= arr.length &lt;= $10^5$<br>1 &lt;= arr[i] &lt;= $10^9$</li>
+<li>$1 &lt;= arr.length &lt;= 10^5$</li>
+<li>$1 &lt;= arr[i] &lt;= 10^9$</li>
 </ul>
 <hr>
 <h3 id="基本分析-amp-证明"><a href="#基本分析-amp-证明" class="headerlink" title="基本分析 &amp; 证明"></a>基本分析 &amp; 证明</h3><p>根据题意，数组的第一位必须是 $1$，且每个数只能 <strong>减小</strong> 或 <strong>不变</strong>，数值位置可以任意调整。</p>

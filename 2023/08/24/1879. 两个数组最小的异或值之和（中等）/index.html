@@ -1,0 +1,618 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/oimg/RoundCorner.png">
+  <link rel="icon" href="/oimg/RoundCorner.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="宫水三叶">
+  <meta name="keywords" content="算法, 数据结构, 题解">
+  
+    <meta name="description" content="题目描述这是 LeetCode 上的 1879. 两个数组最小的异或值之和 ，难度为 困难。 给你两个整数数组 nums1 和 nums2，它们长度都为 n。 两个数组的 异或值之和 为 (nums1[0] XOR nums2[0]) + (nums1[1] XOR nums2[1]) + ... + (nums1[n - 1] XOR nums2[n - 1]) （下标从 0 开始）。 比方说，">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LC 1879. 两个数组最小的异或值之和">
+<meta property="og:url" content="https://sharingsource.github.io/2023/08/24/1879.%20%E4%B8%A4%E4%B8%AA%E6%95%B0%E7%BB%84%E6%9C%80%E5%B0%8F%E7%9A%84%E5%BC%82%E6%88%96%E5%80%BC%E4%B9%8B%E5%92%8C%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/index.html">
+<meta property="og:site_name" content="宫水三叶的刷题日记">
+<meta property="og:description" content="题目描述这是 LeetCode 上的 1879. 两个数组最小的异或值之和 ，难度为 困难。 给你两个整数数组 nums1 和 nums2，它们长度都为 n。 两个数组的 异或值之和 为 (nums1[0] XOR nums2[0]) + (nums1[1] XOR nums2[1]) + ... + (nums1[n - 1] XOR nums2[n - 1]) （下标从 0 开始）。 比方说，">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-08-23T17:18:31.000Z">
+<meta property="article:modified_time" content="2023-11-03T03:09:12.437Z">
+<meta property="article:author" content="宫水三叶">
+<meta property="article:tag" content="动态规划">
+<meta property="article:tag" content="启发式搜索">
+<meta property="article:tag" content="状压 DP">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  <title>LC 1879. 两个数组最小的异或值之和 - 宫水三叶的刷题日记</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/hint.css/2.7.0/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.7.2/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"sharingsource.github.io","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"|","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"IDifiViRkVDTgu27Nu50GQkE-gzGzoHsz","app_key":"gt98pupgyYjPKYQASrGmD9kM","server_url":"https://idifivir.lc-cn-n1-shared.com","path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.1.0"></head>
+
+
+<body>
+  <header style="height: 50vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>宫水三叶の刷题日记</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/image_132.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="LC 1879. 两个数组最小的异或值之和">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-author" aria-hidden="true"></i>
+      宫水三叶
+    </span>
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2023-08-24 01:18" pubdate>
+        2023年8月24日
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">LC 1879. 两个数组最小的异或值之和</h1>
+            
+            <div class="markdown-body">
+              <h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>这是 LeetCode 上的 <strong><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/minimum-xor-sum-of-two-arrays/solutions/2402125/gong-shui-san-xie-yi-ti-shuang-jie-zhuan-iusv/">1879. 两个数组最小的异或值之和</a></strong> ，难度为 <strong>困难</strong>。</p>
+<p>给你两个整数数组 <code>nums1</code> 和 <code>nums2</code>，它们长度都为 <code>n</code>。</p>
+<p>两个数组的 异或值之和 为 <code>(nums1[0] XOR nums2[0]) + (nums1[1] XOR nums2[1]) + ... + (nums1[n - 1] XOR nums2[n - 1])</code> （下标从 <code>0</code> 开始）。</p>
+<p>比方说，<code>[1,2,3]</code> 和 <code>[3,2,1]</code> 的 异或值之和 等于 <code>(1 XOR 3) + (2 XOR 2) + (3 XOR 1) = 2 + 0 + 2 = 4</code>。</p>
+<p>请你将 <code>nums2</code> 中的元素重新排列，使得异或值之和最小 。</p>
+<p>请你返回重新排列之后的 异或值之和 。</p>
+<p>示例 1：<br><figure class="highlight gcode"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs gcode">输入：<span class="hljs-symbol">nums1</span> = [<span class="hljs-number">1</span>,<span class="hljs-number">2</span>], <span class="hljs-symbol">nums2</span> = [<span class="hljs-number">2</span>,<span class="hljs-number">3</span>]<br><br>输出：<span class="hljs-number">2</span><br><br>解释：将 <span class="hljs-symbol">nums2</span> 重新排列得到 [<span class="hljs-number">3</span>,<span class="hljs-number">2</span>] 。<br>异或值之和为 <span class="hljs-comment">(1 XOR 3)</span> + <span class="hljs-comment">(2 XOR 2)</span> = <span class="hljs-number">2</span> + <span class="hljs-number">0</span> = <span class="hljs-number">2</span> 。<br></code></pre></div></td></tr></table></figure><br>示例 2：<br><figure class="highlight gcode"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs gcode">输入：<span class="hljs-symbol">nums1</span> = [<span class="hljs-number">1</span>,<span class="hljs-number">0</span>,<span class="hljs-number">3</span>], <span class="hljs-symbol">nums2</span> = [<span class="hljs-number">5</span>,<span class="hljs-number">3</span>,<span class="hljs-number">4</span>]<br><br>输出：<span class="hljs-number">8</span><br><br>解释：将 <span class="hljs-symbol">nums2</span> 重新排列得到 [<span class="hljs-number">5</span>,<span class="hljs-number">4</span>,<span class="hljs-number">3</span>] 。<br>异或值之和为 <span class="hljs-comment">(1 XOR 5)</span> + <span class="hljs-comment">(0 XOR 4)</span> + <span class="hljs-comment">(3 XOR 3)</span> = <span class="hljs-number">4</span> + <span class="hljs-number">4</span> + <span class="hljs-number">0</span> = <span class="hljs-number">8</span> 。<br></code></pre></div></td></tr></table></figure></p>
+<p>提示：</p>
+<ul>
+<li>$n = nums1.length$</li>
+<li>$n == nums2.length$</li>
+<li>$1 &lt;= n &lt;= 14$</li>
+<li>$0 &lt;= nums1[i], nums2[i] &lt;= 10^7$</li>
+</ul>
+<hr>
+<h3 id="状压-DP"><a href="#状压-DP" class="headerlink" title="状压 DP"></a>状压 DP</h3><p>这是一道「状压 DP」模板题。</p>
+<p>为了方便，我们令下标从 $1$ 开始。</p>
+<p><strong>定义 $f[i][s]$ 为考虑前 $i$ 个元素，且对 <code>nums2</code> 的使用情况为 $s$ 时的最小异或值</strong>。其中 $s$ 是一个长度为 $n$ 的二进制数：若 $s$ 中的第 $k$ 位为 $1$，说明 <code>nums2[k]</code> 已被使用；若 $s$ 中的第 $k$ 位为 $0$，说明 <code>nums2[k]</code> 未被使用。</p>
+<p>起始时，只有 $f[0][0] = 0$，其余均为无穷大 <code>INF</code>。$f[0][0]$ 含义为在不考虑任何数，对 <code>nums2</code> 没有任何占用情况时，最小异或值为 $0$。最终 $f[n][2^n - 1]$ 即为答案。</p>
+<p>不失一般性考虑 $f[i][s]$ 该如何转移，可以以 <code>nums1[i]</code> 是与哪个 <code>nums2[j]</code> 进行配对作为切入点：</p>
+<ul>
+<li><p>由于总共考虑了前 $i$ 个成员，因此 $s$ 中 $1$ 的数量必然为 $i$，否则 $f[i][s]$ 就不是一个合法状态，跳过转移</p>
+</li>
+<li><p>枚举 <code>nums1[i]</code> 是与哪一个 <code>nums2[j]</code> 进行配对的，且枚举的 $j$ 需满足在 $s$ 中的第 $j$ 位值为 $1$，若满足则有 </p>
+</li>
+</ul>
+<script type="math/tex; mode=display">
+f[i][s] = \min(f[i][s], f[i - 1][prev] + nums1[i] ⊕ nums2[j])</script><p>  其中 <code>prev</code> 为将 $s$ 中的第 $j$ 位进行置零后的二进制数，即 <code>prev = s ^ (1 &lt;&lt; j)</code>，符号 ⊕ 代表异或操作。</p>
+<p>Java 代码：<br><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">minimumXORSum</span><span class="hljs-params">(<span class="hljs-type">int</span>[] nums1, <span class="hljs-type">int</span>[] nums2)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> nums1.length, mask = <span class="hljs-number">1</span> &lt;&lt; n, INF = <span class="hljs-number">0x3f3f3f3f</span>;<br>        <span class="hljs-type">int</span>[][] f = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[n + <span class="hljs-number">10</span>][mask];<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt;= n; i++) Arrays.fill(f[i], INF);<br>        f[<span class="hljs-number">0</span>][<span class="hljs-number">0</span>] = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>; i &lt;= n; i++) &#123;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">s</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; s &lt; mask; s++) &#123;<br>                <span class="hljs-keyword">if</span> (getCnt(s, n) != i) <span class="hljs-keyword">continue</span>;<br>                <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>; j &lt;= n; j++) &#123;<br>                    <span class="hljs-keyword">if</span> (((s &gt;&gt; (j - <span class="hljs-number">1</span>)) &amp; <span class="hljs-number">1</span>) == <span class="hljs-number">0</span>) <span class="hljs-keyword">continue</span>;<br>                    f[i][s] = Math.min(f[i][s], f[i - <span class="hljs-number">1</span>][s ^ (<span class="hljs-number">1</span> &lt;&lt; (j - <span class="hljs-number">1</span>))] + (nums1[i - <span class="hljs-number">1</span>] ^ nums2[j - <span class="hljs-number">1</span>]));<br>                &#125;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> f[n][mask - <span class="hljs-number">1</span>];<br>    &#125;<br>    <span class="hljs-type">int</span> <span class="hljs-title function_">getCnt</span><span class="hljs-params">(<span class="hljs-type">int</span> s, <span class="hljs-type">int</span> n)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">ans</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; n; i++) ans += (s &gt;&gt; i) &amp; <span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">return</span> ans;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure><br>C++ 代码：<br><figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs C++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">minimumXORSum</span><span class="hljs-params">(vector&lt;<span class="hljs-type">int</span>&gt;&amp; nums1, vector&lt;<span class="hljs-type">int</span>&gt;&amp; nums2)</span> </span>&#123;<br>        <span class="hljs-type">int</span> n = nums1.<span class="hljs-built_in">size</span>(), mask = <span class="hljs-number">1</span> &lt;&lt; n, INF = <span class="hljs-number">0x3f3f3f3f</span>;<br>        vector&lt;vector&lt;<span class="hljs-type">int</span>&gt;&gt; <span class="hljs-built_in">f</span>(n + <span class="hljs-number">10</span>, <span class="hljs-built_in">vector</span>&lt;<span class="hljs-type">int</span>&gt;(mask, INF));<br>        f[<span class="hljs-number">0</span>][<span class="hljs-number">0</span>] = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">auto</span> getCnt = [&amp;](<span class="hljs-type">int</span> s, <span class="hljs-type">int</span> n) &#123;<br>            <span class="hljs-type">int</span> ans = <span class="hljs-number">0</span>;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; n; i++) ans += (s &gt;&gt; i) &amp; <span class="hljs-number">1</span>;<br>            <span class="hljs-keyword">return</span> ans;<br>        &#125;;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt;= n; i++) &#123;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> s = <span class="hljs-number">0</span>; s &lt; mask; s++) &#123;<br>                <span class="hljs-keyword">if</span> (<span class="hljs-built_in">getCnt</span>(s, n) != i) <span class="hljs-keyword">continue</span>;<br>                <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> j = <span class="hljs-number">1</span>; j &lt;= n; j++) &#123;<br>                    <span class="hljs-keyword">if</span> (((s &gt;&gt; (j - <span class="hljs-number">1</span>)) &amp; <span class="hljs-number">1</span>) == <span class="hljs-number">0</span>) <span class="hljs-keyword">continue</span>;<br>                    f[i][s] = <span class="hljs-built_in">min</span>(f[i][s], f[i - <span class="hljs-number">1</span>][s ^ (<span class="hljs-number">1</span> &lt;&lt; (j - <span class="hljs-number">1</span>))] + (nums1[i - <span class="hljs-number">1</span>] ^ nums2[j - <span class="hljs-number">1</span>]));<br>                &#125;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> f[n][mask - <span class="hljs-number">1</span>];<br>    &#125;<br>&#125;;<br></code></pre></div></td></tr></table></figure><br>Python 代码：<br><figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span>:<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">minimumXORSum</span>(<span class="hljs-params">self, nums1: <span class="hljs-type">List</span>[<span class="hljs-built_in">int</span>], nums2: <span class="hljs-type">List</span>[<span class="hljs-built_in">int</span>]</span>) -&gt; <span class="hljs-built_in">int</span>:<br>        n, mask, INF = <span class="hljs-built_in">len</span>(nums1), <span class="hljs-number">1</span> &lt;&lt; <span class="hljs-built_in">len</span>(nums1), <span class="hljs-number">0x3f3f3f3f</span><br>        f = [[INF] * mask <span class="hljs-keyword">for</span> _ <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(n + <span class="hljs-number">10</span>)]<br>        f[<span class="hljs-number">0</span>][<span class="hljs-number">0</span>] = <span class="hljs-number">0</span><br>        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">1</span>, n + <span class="hljs-number">1</span>):<br>            <span class="hljs-keyword">for</span> s <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(mask):<br>                <span class="hljs-keyword">if</span> <span class="hljs-built_in">sum</span>([<span class="hljs-number">1</span> <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(n) <span class="hljs-keyword">if</span> (s &gt;&gt; i) &amp; <span class="hljs-number">1</span>]) != i:<br>                    <span class="hljs-keyword">continue</span><br>                <span class="hljs-keyword">for</span> j <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">1</span>, n + <span class="hljs-number">1</span>):<br>                    <span class="hljs-keyword">if</span> ((s &gt;&gt; (j - <span class="hljs-number">1</span>)) &amp; <span class="hljs-number">1</span>) == <span class="hljs-number">0</span>:<br>                        <span class="hljs-keyword">continue</span><br>                    f[i][s] = <span class="hljs-built_in">min</span>(f[i][s], f[i - <span class="hljs-number">1</span>][s ^ (<span class="hljs-number">1</span> &lt;&lt; (j - <span class="hljs-number">1</span>))] + (nums1[i - <span class="hljs-number">1</span>] ^ nums2[j - <span class="hljs-number">1</span>]))<br>        <span class="hljs-keyword">return</span> f[n][mask - <span class="hljs-number">1</span>]<br></code></pre></div></td></tr></table></figure><br>TypeScript 代码：<br><figure class="highlight typescript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs TypeScript"><span class="hljs-keyword">function</span> <span class="hljs-title function_">minimumXORSum</span>(<span class="hljs-params">nums1: <span class="hljs-built_in">number</span>[], nums2: <span class="hljs-built_in">number</span>[]</span>): <span class="hljs-built_in">number</span> &#123;<br>    <span class="hljs-keyword">const</span> n = nums1.<span class="hljs-property">length</span>, mask = <span class="hljs-number">1</span> &lt;&lt; n, <span class="hljs-variable constant_">INF</span> = <span class="hljs-number">0x3f3f3f3f</span>;<br>    <span class="hljs-keyword">const</span> <span class="hljs-attr">f</span>: <span class="hljs-built_in">number</span>[][] = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Array</span>(n + <span class="hljs-number">10</span>).<span class="hljs-title function_">fill</span>([]).<span class="hljs-title function_">map</span>(<span class="hljs-function">() =&gt;</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Array</span>(mask).<span class="hljs-title function_">fill</span>(<span class="hljs-variable constant_">INF</span>));<br>    f[<span class="hljs-number">0</span>][<span class="hljs-number">0</span>] = <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">const</span> getCnt = (<span class="hljs-attr">s</span>: <span class="hljs-built_in">number</span>, <span class="hljs-attr">n</span>: <span class="hljs-built_in">number</span>): <span class="hljs-function"><span class="hljs-params">number</span> =&gt;</span> &#123;<br>        <span class="hljs-keyword">let</span> ans = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; n; i++) ans += (s &gt;&gt; i) &amp; <span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">return</span> ans;<br>    &#125;;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">1</span>; i &lt;= n; i++) &#123;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> s = <span class="hljs-number">0</span>; s &lt; mask; s++) &#123;<br>            <span class="hljs-keyword">if</span> (<span class="hljs-title function_">getCnt</span>(s, n) !== i) <span class="hljs-keyword">continue</span>;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> j = <span class="hljs-number">1</span>; j &lt;= n; j++) &#123;<br>                <span class="hljs-keyword">if</span> (((s &gt;&gt; (j - <span class="hljs-number">1</span>)) &amp; <span class="hljs-number">1</span>) === <span class="hljs-number">0</span>) <span class="hljs-keyword">continue</span>;<br>                f[i][s] = <span class="hljs-title class_">Math</span>.<span class="hljs-title function_">min</span>(f[i][s], f[i - <span class="hljs-number">1</span>][s ^ (<span class="hljs-number">1</span> &lt;&lt; (j - <span class="hljs-number">1</span>))] + (nums1[i - <span class="hljs-number">1</span>] ^ nums2[j - <span class="hljs-number">1</span>]));<br>            &#125;<br>        &#125;<br>    &#125;<br>    <span class="hljs-keyword">return</span> f[n][mask - <span class="hljs-number">1</span>];<br>&#125;;<br></code></pre></div></td></tr></table></figure></p>
+<ul>
+<li>时间复杂度：$O(n^2 \times 2^n)$</li>
+<li>空间复杂度：$O(n \times 2^n)$</li>
+</ul>
+<hr>
+<h3 id="模拟退火"><a href="#模拟退火" class="headerlink" title="模拟退火"></a>模拟退火</h3><p>事实上，这道题还能使用「模拟退火」进行求解。</p>
+<p>由于我们可以无限次对 <code>nums2</code> 进行打乱互换，先来思考如何衡量一个 <code>nums2</code> 排列的“好坏”。</p>
+<p>一个简单的方式：固定计算 <code>(nums1[0] XOR nums2[0]) + (nums1[1] XOR nums2[1]) + ... + (nums1[n - 1] XOR nums2[n - 1])</code> 作为衡量当前 <code>nums2</code> 的得分，得分越小，当前的 <code>nums2</code> 排列越好。</p>
+<p>迭代开始前先对 <code>nums2</code> 进行一次随机打乱，随后每个回合随机选择 <code>nums2</code> 的两个成员进行互换，并比较互换前后的得分情况，若互换后变好，那么保留该互换操作；若变差，则以一定概率进行重置（重新换回来）。</p>
+<p>重复迭代多次，使用一个全局变量 <code>ans</code> 保存下最小异或值之和。</p>
+<p>即「模拟退火」的单次迭代基本流程：</p>
+<ol>
+<li>随机选择两个下标，计算「交换下标元素前对应序列的得分」&amp;「交换下标元素后对应序列的得分」</li>
+<li>如果温度下降（交换后的序列更优），进入下一次迭代</li>
+<li>如果温度上升（交换前的序列更优），以「一定的概率」恢复现场（再交换回来）</li>
+</ol>
+<blockquote>
+<p>对于一个能够运用模拟退火求解的问题，最核心的是如何实现 <code>calc</code> 方法（即如何定义一个具体方案的得分），其余均为模板内容。</p>
+</blockquote>
+<p>Java 代码（2023/08/23 可过）：<br><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-type">int</span> <span class="hljs-variable">N</span> <span class="hljs-operator">=</span> <span class="hljs-number">400</span>;<br>    <span class="hljs-type">double</span> <span class="hljs-variable">hi</span> <span class="hljs-operator">=</span> <span class="hljs-number">1e5</span>, lo = <span class="hljs-number">1e-5</span>, fa = <span class="hljs-number">0.90</span>;<br>    <span class="hljs-type">Random</span> <span class="hljs-variable">random</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Random</span>(<span class="hljs-number">20230823</span>);<br>    <span class="hljs-keyword">void</span> <span class="hljs-title function_">swap</span><span class="hljs-params">(<span class="hljs-type">int</span>[] n, <span class="hljs-type">int</span> a, <span class="hljs-type">int</span> b)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">c</span> <span class="hljs-operator">=</span> n[a];<br>        n[a] = n[b];<br>        n[b] = c;<br>    &#125;<br>    <span class="hljs-type">int</span> <span class="hljs-title function_">calc</span><span class="hljs-params">()</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">res</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; n; i++) res += n1[i] ^ n2[i];<br>        ans = Math.min(ans, res);<br>        <span class="hljs-keyword">return</span> res;<br>    &#125;<br>    <span class="hljs-keyword">void</span> <span class="hljs-title function_">shuffle</span><span class="hljs-params">(<span class="hljs-type">int</span>[] nums)</span> &#123;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> n; i &gt; <span class="hljs-number">0</span>; i--) swap(nums, random.nextInt(i), i - <span class="hljs-number">1</span>);<br>    &#125;<br>    <span class="hljs-keyword">void</span> <span class="hljs-title function_">sa</span><span class="hljs-params">()</span> &#123;<br>        shuffle(n2);<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">double</span> <span class="hljs-variable">t</span> <span class="hljs-operator">=</span> hi; t &gt; lo; t *= fa) &#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">a</span> <span class="hljs-operator">=</span> random.nextInt(n), b = random.nextInt(n);<br>            <span class="hljs-type">int</span> <span class="hljs-variable">prev</span> <span class="hljs-operator">=</span> calc();<br>            swap(n2, a, b);<br>            <span class="hljs-type">int</span> <span class="hljs-variable">cur</span> <span class="hljs-operator">=</span> calc(); <br>            <span class="hljs-type">int</span> <span class="hljs-variable">diff</span> <span class="hljs-operator">=</span> cur - prev; <br>            <span class="hljs-keyword">if</span> (Math.log(diff / t) &gt;= random.nextDouble()) swap(n2, a, b);<br>        &#125;<br>    &#125;<br>    <span class="hljs-type">int</span>[] n1, n2;<br>    <span class="hljs-type">int</span> n;<br>    <span class="hljs-type">int</span> <span class="hljs-variable">ans</span> <span class="hljs-operator">=</span> Integer.MAX_VALUE;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">minimumXORSum</span><span class="hljs-params">(<span class="hljs-type">int</span>[] nums1, <span class="hljs-type">int</span>[] nums2)</span> &#123;<br>        n1 = nums1; n2 = nums2;<br>        n = n1.length;<br>        <span class="hljs-keyword">while</span> (N-- &gt; <span class="hljs-number">0</span>) sa();<br>        <span class="hljs-keyword">return</span> ans;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure></p>
+<ul>
+<li>时间复杂度：启发式搜索不讨论时空复杂度</li>
+<li>空间复杂度：启发式搜索不讨论时空复杂度</li>
+</ul>
+<hr>
+<h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>这是我们「刷穿 LeetCode」系列文章的第 <code>No.1879</code> 篇，系列开始于 2021/01/01，截止于起始日 LeetCode 上共有 1916 道题目，部分是有锁题，我们将先把所有不带锁的题目刷完。</p>
+<p>在这个系列文章里面，除了讲解解题思路以外，还会尽可能给出最为简洁的代码。如果涉及通解还会相应的代码模板。</p>
+<p>为了方便各位同学能够电脑上进行调试和提交代码，我建立了相关的仓库：<a target="_blank" rel="noopener" href="https://github.com/SharingSource/LogicStack-LeetCode">https://github.com/SharingSource/LogicStack-LeetCode</a> 。</p>
+<p>在仓库地址里，你可以看到系列文章的题解链接、系列文章的相应代码、LeetCode 原题链接和其他优选题解。</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/">动态规划</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%90%AF%E5%8F%91%E5%BC%8F%E6%90%9C%E7%B4%A2/">启发式搜索</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E7%8A%B6%E5%8E%8B-DP/">状压 DP</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/09/07/99.%20%E6%81%A2%E5%A4%8D%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">LC 99. 恢复二叉搜索树</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/08/24/235.%20%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E7%9A%84%E6%9C%80%E8%BF%91%E5%85%AC%E5%85%B1%E7%A5%96%E5%85%88%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/">
+                        <span class="hidden-mobile">LC 235. 二叉搜索树的最近公共祖先</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://cdn.staticfile.org/valine/1.4.18/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"IDifiViRkVDTgu27Nu50GQkE-gzGzoHsz","appKey":"gt98pupgyYjPKYQASrGmD9kM","path":"window.location.pathname","placeholder":"发一条友善的评论（为方便交流，记得填上方的昵称再留言哦 ~ 🍭","avatar":"","meta":["nick","mail"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":true},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          Fluid.plugins.initFancyBox('#valine .vcontent img:not(.vemoji)');
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+  <div class="col-lg-7 mx-auto nopadding-x-md">
+    <div class="container custom post-custom mx-auto">
+      <img src="/oimg/gzh-qrcode.webp" srcset="/img/loading.gif" lazyload class="rounded mx-auto d-block mt-5" style="width:80%">
+    </div>
+  </div>
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- LeanCloud 统计PV -->
+        <span id="leancloud-site-pv-container" style="display: none">
+            总访问量 
+            <span id="leancloud-site-pv"></span>
+             次
+          </span>
+      
+      
+        <!-- LeanCloud 统计UV -->
+        <span id="leancloud-site-uv-container" style="display: none">
+            总访客数 
+            <span id="leancloud-site-uv"></span>
+             人
+          </span>
+      
+
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.staticfile.org/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.staticfile.org/tocbot/4.18.2/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.staticfile.org/anchor-js/4.3.1/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.11/clipboard.min.js" ></script>
+  
+
+
+
+
+  <script defer src="/js/leancloud.js" ></script>
+
+
+
+  <script  src="https://cdn.bootcdn.net/ajax/libs/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        loader: {
+          
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.staticfile.org/mathjax/3.2.0/es5/tex-svg.js" ></script>
+
+  
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

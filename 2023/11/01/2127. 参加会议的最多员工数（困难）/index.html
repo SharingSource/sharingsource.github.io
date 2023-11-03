@@ -1,0 +1,600 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/oimg/RoundCorner.png">
+  <link rel="icon" href="/oimg/RoundCorner.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="宫水三叶">
+  <meta name="keywords" content="算法, 数据结构, 题解">
+  
+    <meta name="description" content="题目描述这是 LeetCode 上的 2127. 参加会议的最多员工数 ，难度为 困难。 一个公司准备组织一场会议，邀请名单上有 n 位员工。 公司准备了一张圆形的桌子，可以坐下任意数目的员工。 员工编号为 $0$ 到 $n - 1$。每位员工都有一位喜欢的员工，每位员工当且仅当他被安排在喜欢员工的旁边，他才会参加会议，每位员工喜欢的员工不会是他自己。 给你一个下标从 $0$ 开始的整数数组 fa">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LC 2127. 参加会议的最多员工数">
+<meta property="og:url" content="https://sharingsource.github.io/2023/11/01/2127.%20%E5%8F%82%E5%8A%A0%E4%BC%9A%E8%AE%AE%E7%9A%84%E6%9C%80%E5%A4%9A%E5%91%98%E5%B7%A5%E6%95%B0%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/index.html">
+<meta property="og:site_name" content="宫水三叶的刷题日记">
+<meta property="og:description" content="题目描述这是 LeetCode 上的 2127. 参加会议的最多员工数 ，难度为 困难。 一个公司准备组织一场会议，邀请名单上有 n 位员工。 公司准备了一张圆形的桌子，可以坐下任意数目的员工。 员工编号为 $0$ 到 $n - 1$。每位员工都有一位喜欢的员工，每位员工当且仅当他被安排在喜欢员工的旁边，他才会参加会议，每位员工喜欢的员工不会是他自己。 给你一个下标从 $0$ 开始的整数数组 fa">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://sharingsource.github.io/2023/11/01/2127.%20%E5%8F%82%E5%8A%A0%E4%BC%9A%E8%AE%AE%E7%9A%84%E6%9C%80%E5%A4%9A%E5%91%98%E5%B7%A5%E6%95%B0%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/image_0.png">
+<meta property="og:image" content="https://sharingsource.github.io/2023/11/01/2127.%20%E5%8F%82%E5%8A%A0%E4%BC%9A%E8%AE%AE%E7%9A%84%E6%9C%80%E5%A4%9A%E5%91%98%E5%B7%A5%E6%95%B0%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/image_1.png">
+<meta property="og:image" content="https://sharingsource.github.io/2023/11/01/2127.%20%E5%8F%82%E5%8A%A0%E4%BC%9A%E8%AE%AE%E7%9A%84%E6%9C%80%E5%A4%9A%E5%91%98%E5%B7%A5%E6%95%B0%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/image_2.png">
+<meta property="og:image" content="https://sharingsource.github.io/2023/11/01/2127.%20%E5%8F%82%E5%8A%A0%E4%BC%9A%E8%AE%AE%E7%9A%84%E6%9C%80%E5%A4%9A%E5%91%98%E5%B7%A5%E6%95%B0%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/image_3.png">
+<meta property="og:image" content="https://sharingsource.github.io/2023/11/01/2127.%20%E5%8F%82%E5%8A%A0%E4%BC%9A%E8%AE%AE%E7%9A%84%E6%9C%80%E5%A4%9A%E5%91%98%E5%B7%A5%E6%95%B0%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/image_4.png">
+<meta property="article:published_time" content="2023-10-31T18:46:02.000Z">
+<meta property="article:modified_time" content="2023-11-03T03:08:41.757Z">
+<meta property="article:author" content="宫水三叶">
+<meta property="article:tag" content="拓扑排序">
+<meta property="article:tag" content="图">
+<meta property="article:tag" content="内向基环树">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://sharingsource.github.io/2023/11/01/2127.%20%E5%8F%82%E5%8A%A0%E4%BC%9A%E8%AE%AE%E7%9A%84%E6%9C%80%E5%A4%9A%E5%91%98%E5%B7%A5%E6%95%B0%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/image_0.png">
+  
+  
+  <title>LC 2127. 参加会议的最多员工数 - 宫水三叶的刷题日记</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/hint.css/2.7.0/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.7.2/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"sharingsource.github.io","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"|","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"IDifiViRkVDTgu27Nu50GQkE-gzGzoHsz","app_key":"gt98pupgyYjPKYQASrGmD9kM","server_url":"https://idifivir.lc-cn-n1-shared.com","path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.1.0"></head>
+
+
+<body>
+  <header style="height: 50vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>宫水三叶の刷题日记</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/image_83.jpeg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="LC 2127. 参加会议的最多员工数">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-author" aria-hidden="true"></i>
+      宫水三叶
+    </span>
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2023-11-01 02:46" pubdate>
+        2023年11月1日
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">LC 2127. 参加会议的最多员工数</h1>
+            
+            <div class="markdown-body">
+              <h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>这是 LeetCode 上的 <strong><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/maximum-employees-to-be-invited-to-a-meeting/solutions/2507559/gong-shui-san-xie-sha-shi-nei-xiang-wai-4ig79/">2127. 参加会议的最多员工数</a></strong> ，难度为 <strong>困难</strong>。</p>
+<p>一个公司准备组织一场会议，邀请名单上有 <code>n</code> 位员工。</p>
+<p>公司准备了一张圆形的桌子，可以坐下任意数目的员工。</p>
+<p>员工编号为 $0$ 到 $n - 1$。每位员工都有一位喜欢的员工，每位员工当且仅当他被安排在喜欢员工的旁边，他才会参加会议，每位员工喜欢的员工不会是他自己。</p>
+<p>给你一个下标从 $0$ 开始的整数数组 <code>favorite</code>，其中 $favorite[i]$ 表示第 $i$ 位员工喜欢的员工。请你返回参加会议的最多员工数目。</p>
+<p>示例 1：<br><img src="/2023/11/01/2127.%20%E5%8F%82%E5%8A%A0%E4%BC%9A%E8%AE%AE%E7%9A%84%E6%9C%80%E5%A4%9A%E5%91%98%E5%B7%A5%E6%95%B0%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/image_0.png" srcset="/img/loading.gif" lazyload alt><br><figure class="highlight tap"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs tap">输入：favorite = [2,2,1,2]<br><br>输出：3<br><br>解释：<br>上图展示了公司邀请员工 0，1 和<span class="hljs-number"> 2 </span>参加会议以及他们在圆桌上的座位。<br>没办法邀请所有员工参与会议，因为员工<span class="hljs-number"> 2 </span>没办法同时坐在 0，1 和<span class="hljs-number"> 3 </span>员工的旁边。<br>注意，公司也可以邀请员工 1，2 和<span class="hljs-number"> 3 </span>参加会议。<br>所以最多参加会议的员工数目为<span class="hljs-number"> 3 </span>。<br></code></pre></div></td></tr></table></figure><br>示例 2：<br><figure class="highlight tap"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs tap">输入：favorite = [1,2,0]<br><br>输出：3<br><br>解释：<br>每个员工都至少是另一个员工喜欢的员工。所以公司邀请他们所有人参加会议的前提是所有人都参加了会议。<br>座位安排同图<span class="hljs-number"> 1 </span>所示：<br>- 员工<span class="hljs-number"> 0 </span>坐在员工<span class="hljs-number"> 2 </span>和<span class="hljs-number"> 1 </span>之间。<br>- 员工<span class="hljs-number"> 1 </span>坐在员工<span class="hljs-number"> 0 </span>和<span class="hljs-number"> 2 </span>之间。<br>- 员工<span class="hljs-number"> 2 </span>坐在员工<span class="hljs-number"> 1 </span>和<span class="hljs-number"> 0 </span>之间。<br>参与会议的最多员工数目为<span class="hljs-number"> 3 </span>。<br></code></pre></div></td></tr></table></figure><br>示例 3：<br><img src="/2023/11/01/2127.%20%E5%8F%82%E5%8A%A0%E4%BC%9A%E8%AE%AE%E7%9A%84%E6%9C%80%E5%A4%9A%E5%91%98%E5%B7%A5%E6%95%B0%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/image_1.png" srcset="/img/loading.gif" lazyload alt><br><figure class="highlight tap"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs tap">输入：favorite = [3,0,1,4,1]<br><br>输出：4<br><br>解释：<br>上图展示了公司可以邀请员工 0，1，3 和<span class="hljs-number"> 4 </span>参加会议以及他们在圆桌上的座位。<br>员工<span class="hljs-number"> 2 </span>无法参加，因为他喜欢的员工<span class="hljs-number"> 0 </span>旁边的座位已经被占领了。<br>所以公司只能不邀请员工<span class="hljs-number"> 2 </span>。<br>参加会议的最多员工数目为<span class="hljs-number"> 4 </span>。<br></code></pre></div></td></tr></table></figure></p>
+<p>提示：</p>
+<ul>
+<li>$n = favorite.length$</li>
+<li>$2 &lt;= n &lt;= 10^5$</li>
+<li>$0 &lt;= favorite[i] &lt;= n - 1$</li>
+<li>$favorite[i] != i$</li>
+</ul>
+<hr>
+<h3 id="内向基环树-拓扑排序"><a href="#内向基环树-拓扑排序" class="headerlink" title="内向基环树 + 拓扑排序"></a>内向基环树 + 拓扑排序</h3><p>根据题意，圆形桌上 $x$ 左右两边只要有一位是 $x$ 所喜欢即可。</p>
+<p>我们可从 $i$ 向 $favorite[i]$ 添加有向边，从而得到一张包含多个「内向基环树」的图。</p>
+<p>内向基环树，是指其满足基环树定义，且内向 <del>bushi</del>。</p>
+<p>基环树是指其具有 $n$ 个点 $n$ 条边的联通块，而「内向」是指树中任意节点有且只有一条出边，对应的「外向」是指树中任意节点有且只有一条入边。</p>
+<p>例如，左图内向，右图外向：</p>
+<p><img src="/2023/11/01/2127.%20%E5%8F%82%E5%8A%A0%E4%BC%9A%E8%AE%AE%E7%9A%84%E6%9C%80%E5%A4%9A%E5%91%98%E5%B7%A5%E6%95%B0%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/image_2.png" srcset="/img/loading.gif" lazyload alt></p>
+<p>根据题意，<strong>圆桌最多放置一个长度大于 $2$ 的环（内向环，只有一条出边，即只有一个喜欢的人，安插其他非环成员，会破坏留下参加会议的必要条件），但可放置多个长度为 $2$ 的环，且多个环可延伸出最长链（利用左右两侧只需有一个喜欢的人即满足）。</strong></p>
+<p>在「取长度大于 $2$ 的最大环」及「多个长度为 $2$ 的环及其最长链之和」两者中取最大长度即是答案。</p>
+<p><img src="/2023/11/01/2127.%20%E5%8F%82%E5%8A%A0%E4%BC%9A%E8%AE%AE%E7%9A%84%E6%9C%80%E5%A4%9A%E5%91%98%E5%B7%A5%E6%95%B0%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/image_3.png" srcset="/img/loading.gif" lazyload alt></p>
+<p><img src="/2023/11/01/2127.%20%E5%8F%82%E5%8A%A0%E4%BC%9A%E8%AE%AE%E7%9A%84%E6%9C%80%E5%A4%9A%E5%91%98%E5%B7%A5%E6%95%B0%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/image_4.png" srcset="/img/loading.gif" lazyload alt></p>
+<p>Java 代码：<br><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">maximumInvitations</span><span class="hljs-params">(<span class="hljs-type">int</span>[] favorite)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> favorite.length;<br>        <span class="hljs-comment">// in 统计每个节点的入度情况, max 统计节最长链</span><br>        <span class="hljs-type">int</span>[] in = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[n], max = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[n];<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> x : favorite) in[x]++;<br>        Deque&lt;Integer&gt; d = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayDeque</span>&lt;&gt;();<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; n; i++) &#123;<br>            <span class="hljs-keyword">if</span> (in[i] == <span class="hljs-number">0</span>) d.addLast(i);<br>        &#125;<br>        <span class="hljs-comment">// 拓扑排序: 求基环外的最长链</span><br>        <span class="hljs-keyword">while</span> (!d.isEmpty()) &#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">cur</span> <span class="hljs-operator">=</span> d.pollFirst(), ne = favorite[cur];<br>            max[ne] = Math.max(max[ne], max[cur] + <span class="hljs-number">1</span>);<br>            <span class="hljs-keyword">if</span> (--in[ne] == <span class="hljs-number">0</span>) d.addLast(ne);<br>        &#125;<br>        <span class="hljs-comment">// 圆桌最多放置一个大于 2 的环（ans1 统计最大值）</span><br>        <span class="hljs-comment">// 圆桌可放置多个等于 2 的环（ans2 累加该长度）</span><br>        <span class="hljs-type">int</span> <span class="hljs-variable">ans1</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>, ans2 = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; n; i++) &#123;<br>            <span class="hljs-keyword">if</span> (in[i] == <span class="hljs-number">0</span>) <span class="hljs-keyword">continue</span>;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> favorite[i], cur = <span class="hljs-number">1</span>;<br>            <span class="hljs-keyword">while</span> (j != i) &#123;<br>                <span class="hljs-comment">// 一个环只需被处理一次, 这里将环中其他节点入度置 0, 下次遍历到这些点就会被跳过</span><br>                in[j] = <span class="hljs-number">0</span>;<br>                j = favorite[j];<br>                cur++;<br>            &#125;<br>            <span class="hljs-keyword">if</span> (cur == <span class="hljs-number">2</span>) ans2 += <span class="hljs-number">2</span> + max[i] + max[favorite[i]];<br>            <span class="hljs-keyword">else</span> ans1 = Math.max(ans1, cur);<br>        &#125;<br>        <span class="hljs-keyword">return</span> Math.max(ans1, ans2);<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure><br>Python 代码：<br><figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span>:<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">maximumInvitations</span>(<span class="hljs-params">self, favorite: <span class="hljs-type">List</span>[<span class="hljs-built_in">int</span>]</span>) -&gt; <span class="hljs-built_in">int</span>:<br>        n = <span class="hljs-built_in">len</span>(favorite)<br>        <span class="hljs-comment"># in_degree 统计每个节点的入度情况, max_length 统计节最长链</span><br>        in_degree, max_length = [<span class="hljs-number">0</span>] * n, [<span class="hljs-number">0</span>] * n<br>        <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> favorite:<br>            in_degree[x] += <span class="hljs-number">1</span><br>        d = deque()<br>        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(n):<br>            <span class="hljs-keyword">if</span> in_degree[i] == <span class="hljs-number">0</span>:<br>                d.append(i)<br>       <span class="hljs-comment"># 拓扑排序: 求基环外的最长链</span><br>        <span class="hljs-keyword">while</span> d:<br>            cur = d.popleft()<br>            ne = favorite[cur]<br>            max_length[ne] = <span class="hljs-built_in">max</span>(max_length[ne], max_length[cur] + <span class="hljs-number">1</span>)<br>            in_degree[ne] -= <span class="hljs-number">1</span><br>            <span class="hljs-keyword">if</span> in_degree[ne] == <span class="hljs-number">0</span>:<br>                d.append(ne)<br>        <span class="hljs-comment"># 圆桌最多放置一个大于 2 的环（ans1 统计最大值）</span><br>        <span class="hljs-comment"># 圆桌可放置多个等于 2 的环（ans2 累加该长度）</span><br>        ans1, ans2 = <span class="hljs-number">0</span>, <span class="hljs-number">0</span><br>        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(n):<br>            <span class="hljs-keyword">if</span> in_degree[i] == <span class="hljs-number">0</span>:<br>                <span class="hljs-keyword">continue</span><br>            j, cur = favorite[i], <span class="hljs-number">1</span><br>            <span class="hljs-keyword">while</span> j != i:<br>                <span class="hljs-comment"># 一个环只需被处理一次, 这里将环中其他节点入度置 0, 下次遍历到这些点就会被跳过</span><br>                in_degree[j] = <span class="hljs-number">0</span><br>                j = favorite[j]<br>                cur += <span class="hljs-number">1</span><br>            <span class="hljs-keyword">if</span> cur == <span class="hljs-number">2</span>:<br>                ans2 += <span class="hljs-number">2</span> + max_length[i] + max_length[favorite[i]]<br>            <span class="hljs-keyword">else</span>:<br>                ans1 = <span class="hljs-built_in">max</span>(ans1, cur)<br>        <span class="hljs-keyword">return</span> <span class="hljs-built_in">max</span>(ans1, ans2)<br></code></pre></div></td></tr></table></figure><br>C++ 代码：<br><figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs C++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">maximumInvitations</span><span class="hljs-params">(vector&lt;<span class="hljs-type">int</span>&gt;&amp; favorite)</span> </span>&#123;<br>        <span class="hljs-type">int</span> n = favorite.<span class="hljs-built_in">size</span>();<br>        <span class="hljs-comment">// in 统计每个节点的入度情况, max_length 统计节最长链</span><br>        <span class="hljs-function">vector&lt;<span class="hljs-type">int</span>&gt; <span class="hljs-title">in</span><span class="hljs-params">(n, <span class="hljs-number">0</span>)</span></span>;<br>        <span class="hljs-function">vector&lt;<span class="hljs-type">int</span>&gt; <span class="hljs-title">max_length</span><span class="hljs-params">(n, <span class="hljs-number">0</span>)</span></span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> x : favorite) in[x]++;<br>        deque&lt;<span class="hljs-type">int</span>&gt; d;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; n; i++) &#123;<br>            <span class="hljs-keyword">if</span> (in[i] == <span class="hljs-number">0</span>) d.<span class="hljs-built_in">push_back</span>(i);<br>        &#125;<br>        <span class="hljs-comment">// 拓扑排序: 求基环外的最长链</span><br>        <span class="hljs-keyword">while</span> (!d.<span class="hljs-built_in">empty</span>()) &#123;<br>            <span class="hljs-type">int</span> cur = d.<span class="hljs-built_in">front</span>();<br>            d.<span class="hljs-built_in">pop_front</span>();<br>            <span class="hljs-type">int</span> ne = favorite[cur];<br>            max_length[ne] = <span class="hljs-built_in">max</span>(max_length[ne], max_length[cur] + <span class="hljs-number">1</span>);<br>            <span class="hljs-keyword">if</span> (--in[ne] == <span class="hljs-number">0</span>) d.<span class="hljs-built_in">push_back</span>(ne);<br>        &#125;<br>        <span class="hljs-comment">// 圆桌最多放置一个大于 2 的环（ans1 统计最大值）</span><br>        <span class="hljs-comment">// 圆桌可放置多个等于 2 的环（ans2 累加该长度）</span><br>        <span class="hljs-type">int</span> ans1 = <span class="hljs-number">0</span>, ans2 = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; n; i++) &#123;<br>            <span class="hljs-keyword">if</span> (in[i] == <span class="hljs-number">0</span>) <span class="hljs-keyword">continue</span>;<br>            <span class="hljs-type">int</span> j = favorite[i], cur = <span class="hljs-number">1</span>;<br>            <span class="hljs-keyword">while</span> (j != i) &#123;<br>                <span class="hljs-comment">// 一个环只需被处理一次, 这里将环中其他节点入度置 0, 下次遍历到这些点就会被跳过</span><br>                in[j] = <span class="hljs-number">0</span>;<br>                j = favorite[j];<br>                cur++;<br>            &#125;<br>            <span class="hljs-keyword">if</span> (cur == <span class="hljs-number">2</span>) ans2 += <span class="hljs-number">2</span> + max_length[i] + max_length[favorite[i]];    <br>            <span class="hljs-keyword">else</span> ans1 = <span class="hljs-built_in">max</span>(ans1, cur);<br>        &#125;<br>        <span class="hljs-keyword">return</span> <span class="hljs-built_in">max</span>(ans1, ans2);<br>    &#125;<br>&#125;;<br></code></pre></div></td></tr></table></figure><br>TypeScript 代码：<br><figure class="highlight typescript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs TypeScript"><span class="hljs-keyword">function</span> <span class="hljs-title function_">maximumInvitations</span>(<span class="hljs-params">favorite: <span class="hljs-built_in">number</span>[]</span>): <span class="hljs-built_in">number</span> &#123;<br>    <span class="hljs-keyword">const</span> n = favorite.<span class="hljs-property">length</span>;<br>    <span class="hljs-comment">// in_degree 统计每个节点的入度情况, max_length 统计节最长链</span><br>    <span class="hljs-keyword">const</span> in_degree = <span class="hljs-title class_">Array</span>(n).<span class="hljs-title function_">fill</span>(<span class="hljs-number">0</span>), max_length = <span class="hljs-title class_">Array</span>(n).<span class="hljs-title function_">fill</span>(<span class="hljs-number">0</span>);<br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">const</span> x <span class="hljs-keyword">of</span> favorite) in_degree[x]++;<br>    <span class="hljs-keyword">const</span> d = [];<br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; n; i++) &#123;<br>        <span class="hljs-keyword">if</span> (in_degree[i] === <span class="hljs-number">0</span>) d.<span class="hljs-title function_">push</span>(i);<br>    &#125;<br>    <span class="hljs-comment">// 拓扑排序: 求基环外的最长链</span><br>    <span class="hljs-keyword">while</span> (d.<span class="hljs-property">length</span> &gt; <span class="hljs-number">0</span>) &#123;<br>        <span class="hljs-keyword">const</span> cur = d.<span class="hljs-title function_">shift</span>() <span class="hljs-keyword">as</span> <span class="hljs-built_in">number</span>;<br>        <span class="hljs-keyword">const</span> ne = favorite[cur];<br>        max_length[ne] = <span class="hljs-title class_">Math</span>.<span class="hljs-title function_">max</span>(max_length[ne], max_length[cur] + <span class="hljs-number">1</span>);<br>        <span class="hljs-keyword">if</span> (--in_degree[ne] === <span class="hljs-number">0</span>) d.<span class="hljs-title function_">push</span>(ne);<br>    &#125;<br>    <span class="hljs-comment">// 圆桌最多放置一个大于 2 的环（ans1 统计最大值）</span><br>    <span class="hljs-comment">// 圆桌可放置多个等于 2 的环（ans2 累加该长度）</span><br>    <span class="hljs-keyword">let</span> ans1 = <span class="hljs-number">0</span>, ans2 = <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; n; i++) &#123;<br>        <span class="hljs-keyword">if</span> (in_degree[i] === <span class="hljs-number">0</span>) <span class="hljs-keyword">continue</span>;<br>        <span class="hljs-keyword">let</span> j = favorite[i], cur = <span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">while</span> (j !== i) &#123;<br>            <span class="hljs-comment">// 一个环只需被处理一次, 这里将环中其他节点入度置 0, 下次遍历到这些点就会被跳过</span><br>            in_degree[j] = <span class="hljs-number">0</span>;<br>            j = favorite[j];<br>            cur++;<br>        &#125;<br>        <span class="hljs-keyword">if</span> (cur == <span class="hljs-number">2</span>) ans2 += <span class="hljs-number">2</span> + max_length[i] + max_length[favorite[i]];    <br>        <span class="hljs-keyword">else</span> ans1 = <span class="hljs-title class_">Math</span>.<span class="hljs-title function_">max</span>(ans1, cur);<br>    &#125;<br>    <span class="hljs-keyword">return</span> <span class="hljs-title class_">Math</span>.<span class="hljs-title function_">max</span>(ans1, ans2);<br>&#125;;<br></code></pre></div></td></tr></table></figure></p>
+<ul>
+<li>时间复杂度：统计入度的复杂度为 $O(n)$；拓扑排序求最长链复杂度为 $O(n)$；计算答案过程中，每个点最多被访问两次（环内节点），复杂度为 $O(n)$。整体复杂度为 $O(n)$</li>
+<li>空间复杂度：$O(n)$</li>
+</ul>
+<hr>
+<h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>这是我们「刷穿 LeetCode」系列文章的第 <code>No.2217</code> 篇，系列开始于 2021/01/01，截止于起始日 LeetCode 上共有 1916 道题目，部分是有锁题，我们将先把所有不带锁的题目刷完。</p>
+<p>在这个系列文章里面，除了讲解解题思路以外，还会尽可能给出最为简洁的代码。如果涉及通解还会相应的代码模板。</p>
+<p>为了方便各位同学能够电脑上进行调试和提交代码，我建立了相关的仓库：<a target="_blank" rel="noopener" href="https://github.com/SharingSource/LogicStack-LeetCode">https://github.com/SharingSource/LogicStack-LeetCode</a> 。</p>
+<p>在仓库地址里，你可以看到系列文章的题解链接、系列文章的相应代码、LeetCode 原题链接和其他优选题解。</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E6%8B%93%E6%89%91%E6%8E%92%E5%BA%8F/">拓扑排序</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%9B%BE/">图</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%86%85%E5%90%91%E5%9F%BA%E7%8E%AF%E6%A0%91/">内向基环树</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/11/02/2103.%20%E7%8E%AF%E5%92%8C%E6%9D%86%EF%BC%88%E7%AE%80%E5%8D%95%EF%BC%89/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">LC 2103. 环和杆</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/10/30/2003.%20%E6%AF%8F%E6%A3%B5%E5%AD%90%E6%A0%91%E5%86%85%E7%BC%BA%E5%A4%B1%E7%9A%84%E6%9C%80%E5%B0%8F%E5%9F%BA%E5%9B%A0%E5%80%BC%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/">
+                        <span class="hidden-mobile">LC 2003. 每棵子树内缺失的最小基因值</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://cdn.staticfile.org/valine/1.4.18/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"IDifiViRkVDTgu27Nu50GQkE-gzGzoHsz","appKey":"gt98pupgyYjPKYQASrGmD9kM","path":"window.location.pathname","placeholder":"发一条友善的评论（为方便交流，记得填上方的昵称再留言哦 ~ 🍭","avatar":"","meta":["nick","mail"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":true},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          Fluid.plugins.initFancyBox('#valine .vcontent img:not(.vemoji)');
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+  <div class="col-lg-7 mx-auto nopadding-x-md">
+    <div class="container custom post-custom mx-auto">
+      <img src="/oimg/gzh-qrcode.webp" srcset="/img/loading.gif" lazyload class="rounded mx-auto d-block mt-5" style="width:80%">
+    </div>
+  </div>
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- LeanCloud 统计PV -->
+        <span id="leancloud-site-pv-container" style="display: none">
+            总访问量 
+            <span id="leancloud-site-pv"></span>
+             次
+          </span>
+      
+      
+        <!-- LeanCloud 统计UV -->
+        <span id="leancloud-site-uv-container" style="display: none">
+            总访客数 
+            <span id="leancloud-site-uv"></span>
+             人
+          </span>
+      
+
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.staticfile.org/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.staticfile.org/tocbot/4.18.2/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.staticfile.org/anchor-js/4.3.1/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.11/clipboard.min.js" ></script>
+  
+
+
+
+
+  <script defer src="/js/leancloud.js" ></script>
+
+
+
+  <script  src="https://cdn.bootcdn.net/ajax/libs/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        loader: {
+          
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.staticfile.org/mathjax/3.2.0/es5/tex-svg.js" ></script>
+
+  
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

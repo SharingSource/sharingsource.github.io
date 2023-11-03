@@ -24,8 +24,9 @@
 <meta property="og:description" content="题目描述这是 LeetCode 上的 209. 长度最小的子数组 ，难度为 中等。 给定一个含有 n 个正整数的数组和一个正整数 target。 找出该数组中满足其和 ≥ target 的长度最小的 连续子数组 $[numsl, nums{l+1}, …, nums_{r-1}, nums_r]$ ，并返回其长度。如果不存在符合条件的子数组，返回 $0$ 。 示例 1：12345输入：target">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-05-31T00:25:26.000Z">
-<meta property="article:modified_time" content="2022-05-31T09:16:20.727Z">
+<meta property="article:modified_time" content="2023-11-03T03:08:58.117Z">
 <meta property="article:author" content="宫水三叶">
+<meta property="article:tag" content="滑动窗口">
 <meta property="article:tag" content="二分">
 <meta property="article:tag" content="前缀和">
 <meta name="twitter:card" content="summary_large_image">
@@ -256,6 +257,16 @@
 <li>空间复杂度：$O(n)$</li>
 </ul>
 <hr>
+<h3 id="滑动窗口"><a href="#滑动窗口" class="headerlink" title="滑动窗口"></a>滑动窗口</h3><p>另外一个，复杂度比 $O(n\log{n})$ 更低的做法，是滑动窗口。</p>
+<p>在一次遍历过程中，使用 <code>j</code> 和 <code>i</code> 分别代表窗口的左右端点，变量 <code>c</code> 用于记录窗口内的数值总和。</p>
+<p>遍历过程其实就是右端点 <code>i</code> 不断右移的过程，每次将当前右端点 <code>i</code> 的值累加到 <code>c</code> 上，若累加后，左端点右移仍能满足「总和大于等于 <code>t</code>」的要求，那么我们则让左端点 <code>j</code> 右移。</p>
+<p>如此一来，我们便得到了每个右端点 <code>i</code> 固定时，下标最大的合法左端点 <code>j</code>（若有）。所有合法窗口长度的最小值即是答案。</p>
+<p>代码：<br><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">minSubArrayLen</span><span class="hljs-params">(<span class="hljs-type">int</span> t, <span class="hljs-type">int</span>[] nums)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> nums.length, ans = n + <span class="hljs-number">10</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>, j = <span class="hljs-number">0</span>, c = <span class="hljs-number">0</span>; i &lt; n; i++) &#123;<br>            c += nums[i];<br>            <span class="hljs-keyword">while</span> (j &lt; i &amp;&amp; c - nums[j] &gt;= t) c -= nums[j++];<br>            <span class="hljs-keyword">if</span> (c &gt;= t) ans = Math.min(ans, i - j + <span class="hljs-number">1</span>);<br>        &#125;<br>        <span class="hljs-keyword">return</span> ans &gt; n ? <span class="hljs-number">0</span> : ans;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure></p>
+<ul>
+<li>时间复杂度：$O(n)$</li>
+<li>空间复杂度：$O(1)$</li>
+</ul>
+<hr>
 <h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>这是我们「刷穿 LeetCode」系列文章的第 <code>No.209</code> 篇，系列开始于 2021/01/01，截止于起始日 LeetCode 上共有 1916 道题目，部分是有锁题，我们将先把所有不带锁的题目刷完。</p>
 <p>在这个系列文章里面，除了讲解解题思路以外，还会尽可能给出最为简洁的代码。如果涉及通解还会相应的代码模板。</p>
 <p>为了方便各位同学能够电脑上进行调试和提交代码，我建立了相关的仓库：<a target="_blank" rel="noopener" href="https://github.com/SharingSource/LogicStack-LeetCode">https://github.com/SharingSource/LogicStack-LeetCode</a> 。</p>
@@ -269,6 +280,8 @@
                 
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3/">滑动窗口</a>
                     
                       <a class="hover-with-bg" href="/tags/%E4%BA%8C%E5%88%86/">二分</a>
                     

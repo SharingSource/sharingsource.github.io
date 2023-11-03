@@ -1,0 +1,643 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/oimg/RoundCorner.png">
+  <link rel="icon" href="/oimg/RoundCorner.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="宫水三叶">
+  <meta name="keywords" content="算法, 数据结构, 题解">
+  
+    <meta name="description" content="题目描述这是 LeetCode 上的 99. 恢复二叉搜索树 ，难度为 中等。 给你二叉搜索树的根节点 root，该树中的 恰好 两个节点的值被错误地交换。请在不改变其结构的情况下，恢复这棵树 。 示例 1：12345输入：root &#x3D; [1,3,null,null,2]输出：[3,1,null,null,2]解释：3 不能是 1 的左孩子，因为 3 &gt; 1 。交换 1 和 3 使二叉搜索树">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LC 99. 恢复二叉搜索树">
+<meta property="og:url" content="https://sharingsource.github.io/2023/09/07/99.%20%E6%81%A2%E5%A4%8D%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/index.html">
+<meta property="og:site_name" content="宫水三叶的刷题日记">
+<meta property="og:description" content="题目描述这是 LeetCode 上的 99. 恢复二叉搜索树 ，难度为 中等。 给你二叉搜索树的根节点 root，该树中的 恰好 两个节点的值被错误地交换。请在不改变其结构的情况下，恢复这棵树 。 示例 1：12345输入：root &#x3D; [1,3,null,null,2]输出：[3,1,null,null,2]解释：3 不能是 1 的左孩子，因为 3 &gt; 1 。交换 1 和 3 使二叉搜索树">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://sharingsource.github.io/2023/09/07/99.%20%E6%81%A2%E5%A4%8D%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/image_0.png">
+<meta property="og:image" content="https://sharingsource.github.io/2023/09/07/99.%20%E6%81%A2%E5%A4%8D%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/image_1.png">
+<meta property="og:image" content="https://sharingsource.github.io/2023/09/07/99.%20%E6%81%A2%E5%A4%8D%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/image_2.png">
+<meta property="article:published_time" content="2023-09-07T07:18:12.000Z">
+<meta property="article:modified_time" content="2023-11-03T03:09:26.666Z">
+<meta property="article:author" content="宫水三叶">
+<meta property="article:tag" content="二叉树">
+<meta property="article:tag" content="树的搜索">
+<meta property="article:tag" content="中序遍历">
+<meta property="article:tag" content="递归">
+<meta property="article:tag" content="迭代">
+<meta property="article:tag" content="Morris 遍历">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://sharingsource.github.io/2023/09/07/99.%20%E6%81%A2%E5%A4%8D%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/image_0.png">
+  
+  
+  <title>LC 99. 恢复二叉搜索树 - 宫水三叶的刷题日记</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/hint.css/2.7.0/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.7.2/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"sharingsource.github.io","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"|","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"IDifiViRkVDTgu27Nu50GQkE-gzGzoHsz","app_key":"gt98pupgyYjPKYQASrGmD9kM","server_url":"https://idifivir.lc-cn-n1-shared.com","path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.1.0"></head>
+
+
+<body>
+  <header style="height: 50vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>宫水三叶の刷题日记</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/image_131.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="LC 99. 恢复二叉搜索树">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-author" aria-hidden="true"></i>
+      宫水三叶
+    </span>
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2023-09-07 15:18" pubdate>
+        2023年9月7日
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">LC 99. 恢复二叉搜索树</h1>
+            
+            <div class="markdown-body">
+              <h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>这是 LeetCode 上的 <strong><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/recover-binary-search-tree/solutions/2431878/gong-shui-san-xie-yi-ti-shuang-jie-di-gu-4po4/">99. 恢复二叉搜索树</a></strong> ，难度为 <strong>中等</strong>。</p>
+<p>给你二叉搜索树的根节点 <code>root</code>，该树中的 恰好 两个节点的值被错误地交换。请在不改变其结构的情况下，恢复这棵树 。</p>
+<p>示例 1：<br><img src="/2023/09/07/99.%20%E6%81%A2%E5%A4%8D%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/image_0.png" srcset="/img/loading.gif" lazyload alt><br><figure class="highlight tap"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs tap">输入：root = [1,3,null,null,2]<br><br>输出：[3,1,null,null,2]<br><br>解释：3 不能是<span class="hljs-number"> 1 </span>的左孩子，因为<span class="hljs-number"> 3 </span>&gt;<span class="hljs-number"> 1 </span>。交换<span class="hljs-number"> 1 </span>和<span class="hljs-number"> 3 </span>使二叉搜索树有效。<br></code></pre></div></td></tr></table></figure><br>示例 2：<br><img src="/2023/09/07/99.%20%E6%81%A2%E5%A4%8D%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/image_1.png" srcset="/img/loading.gif" lazyload alt><br><figure class="highlight tap"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs tap">输入：root = [3,1,4,null,null,2]<br><br>输出：[2,1,4,null,null,3]<br><br>解释：2 不能在<span class="hljs-number"> 3 </span>的右子树中，因为<span class="hljs-number"> 2 </span>&lt;<span class="hljs-number"> 3 </span>。交换<span class="hljs-number"> 2 </span>和<span class="hljs-number"> 3 </span>使二叉搜索树有效。<br></code></pre></div></td></tr></table></figure></p>
+<p>提示：</p>
+<ul>
+<li>树上节点的数目在范围 $[2, 1000]$ 内</li>
+<li>$-2^{31} &lt;= Node.val &lt;= 2^{31} - 1$</li>
+</ul>
+<p>进阶：使用 $O(n)$ 空间复杂度的解法很容易实现。你能想出一个只使用 $O(1)$ 空间的解决方案吗？</p>
+<hr>
+<h3 id="基本分析"><a href="#基本分析" class="headerlink" title="基本分析"></a>基本分析</h3><p>首先，别想复杂了。</p>
+<p>所谓的恢复二叉树（两节点互换），只需要将两节点的 <code>val</code> 进行互换即可，而不需要对节点本身进行互换。</p>
+<hr>
+<h3 id="中序遍历-递归-amp-迭代"><a href="#中序遍历-递归-amp-迭代" class="headerlink" title="中序遍历 - 递归 &amp; 迭代"></a>中序遍历 - 递归 &amp; 迭代</h3><p>二叉搜索树，其中序遍历是有序的。</p>
+<p>要找到哪两个节点被互换，可通过比对中序遍历序列来实现。</p>
+<p>但将整个中序遍历序列保存下来，再检测序列有序性的做法，复杂度是 $O(n)$ 的（不要说题目要求的 $O(1)$，连 $O(h)$ 都达不到）。</p>
+<p>所以第一步，<strong>这个「递归 &amp; 迭代」的次优解，我们先考虑如何做到 $O(h)$ 的空间复杂度，即在中序遍历过程中找到互换节点</strong>。</p>
+<p>其实也很简单，除了使用 <code>a</code> 和 <code>b</code> 来记录互换节点，额外使用变量 <code>last</code> 来记录当前遍历过程中的前一节点即可：</p>
+<p>若存在前一节点 <code>last</code> 存在，而且满足前一节点值大于当前节点（<code>last.val &gt; root.val</code>），违反“有序性”，根据是否为首次出现该情况分情况讨论：</p>
+<ul>
+<li><p>若是首次满足条件，即 <code>a == null</code>，此时上一节点 <code>last</code> 必然是两个互换节点之一，而当前 <code>root</code> 只能说是待定，因为有可能是 <code>last</code> 和 <code>root</code> 实现互换，也有可能是 <code>last</code> 和后续的某个节点实现互换。</p>
+<p>此时有 <code>a = last, b = root</code></p>
+</li>
+<li><p>若是非首次满足条件，即 <code>a != null</code>，此时当前节点 <code>root</code> 必然是两个互换节点中的另外一个。</p>
+<p>此时有 <code>b = root</code></p>
+</li>
+</ul>
+<p>综上：如果整个中序遍历的序列中“逆序对”为一对，那么互换节点为该“逆序对”的两个成员；若“逆序对”数量为两对，则互换节点为「第一对“逆序对”的首个节点」和「第二对“逆序对”的第二个节点」。</p>
+<p>Java 代码（递归）：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-type">TreeNode</span> <span class="hljs-variable">a</span> <span class="hljs-operator">=</span> <span class="hljs-literal">null</span>, b = <span class="hljs-literal">null</span>, last = <span class="hljs-literal">null</span>;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">recoverTree</span><span class="hljs-params">(TreeNode root)</span> &#123;<br>        dfs(root);<br>        <span class="hljs-type">int</span> <span class="hljs-variable">val</span> <span class="hljs-operator">=</span> a.val;<br>        a.val = b.val;<br>        b.val = val;<br>    &#125;<br>    <span class="hljs-keyword">void</span> <span class="hljs-title function_">dfs</span><span class="hljs-params">(TreeNode root)</span> &#123;<br>        <span class="hljs-keyword">if</span> (root == <span class="hljs-literal">null</span>) <span class="hljs-keyword">return</span> ;<br>        dfs(root.left);<br>        <span class="hljs-keyword">if</span> (last != <span class="hljs-literal">null</span> &amp;&amp; last.val &gt; root.val) &#123;<br>            <span class="hljs-keyword">if</span> (a == <span class="hljs-literal">null</span>) &#123;<br>                a = last; b = root;<br>            &#125; <span class="hljs-keyword">else</span> &#123;<br>                b = root;<br>            &#125;<br>        &#125;<br>        last = root;<br>        dfs(root.right);<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<p>Java 代码（迭代）：<br><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">recoverTree</span><span class="hljs-params">(TreeNode root)</span> &#123;<br>        Deque&lt;TreeNode&gt; d = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayDeque</span>&lt;&gt;();<br>        <span class="hljs-type">TreeNode</span> <span class="hljs-variable">a</span> <span class="hljs-operator">=</span> <span class="hljs-literal">null</span>, b = <span class="hljs-literal">null</span>, last = <span class="hljs-literal">null</span>;<br>        <span class="hljs-keyword">while</span> (root != <span class="hljs-literal">null</span> || !d.isEmpty()) &#123;<br>            <span class="hljs-keyword">while</span> (root != <span class="hljs-literal">null</span>) &#123;<br>                d.addLast(root);<br>                root = root.left;<br>            &#125;<br>            root = d.pollLast();<br>            <span class="hljs-keyword">if</span> (last != <span class="hljs-literal">null</span> &amp;&amp; last.val &gt; root.val) &#123;<br>                <span class="hljs-keyword">if</span> (a == <span class="hljs-literal">null</span>) &#123;<br>                    a = last; b = root;<br>                &#125; <span class="hljs-keyword">else</span> &#123;<br>                    b = root;<br>                &#125;<br>            &#125;<br>            last = root;<br>            root = root.right;<br>        &#125;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">val</span> <span class="hljs-operator">=</span> a.val;<br>        a.val = b.val;<br>        b.val = val;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure></p>
+<ul>
+<li>时间复杂度：$O(n)$</li>
+<li>空间复杂度：$O(h)$，其中 $h$ 为树高</li>
+</ul>
+<hr>
+<h3 id="中序遍历-Morris-遍历"><a href="#中序遍历-Morris-遍历" class="headerlink" title="中序遍历 - Morris 遍历"></a>中序遍历 - Morris 遍历</h3><p>Morris 遍历也就是经常说到的“神级遍历”，其本质是通过做大常数来降低空间复杂度。</p>
+<p>还是以二叉树的中序遍历为例，无论是递归或是迭代，为了在遍历完左节点（也可以是左子树）时，仍能回到父节点，我们需要使用数据结构栈，只不过在递归做法中是用函数调用充当栈，而在迭代做法则是显式栈。</p>
+<p><strong>这使得空间复杂度为 $O(h)$，而 Morris 遍历的核心则是利用“路径底部节点”中的空闲指针进行线索。</strong></p>
+<p>举个 🌰，对于一棵最简单的二叉树：</p>
+<p><img src="/2023/09/07/99.%20%E6%81%A2%E5%A4%8D%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/image_2.png" srcset="/img/loading.gif" lazyload alt="image-20230907221810420"></p>
+<p>在中序遍历过程中，如果选择递归或迭代方式，并且不使用栈的情况，当遍历完左子节点（或左子树的最后一个节点）后，将会面临无法返回根节点的问题。</p>
+<p>在 Morris 遍历中，从根节点开始，尚未真正遍历左子节点之前，就会先建立「左子节点（或左子树的最后一个节点）」与「当前根节点」之间的链接，从而避免使用栈。</p>
+<p>具体的，Morris 遍历的中序遍历遵循如下流程（喜欢的话可以背过）：</p>
+<ol>
+<li><p>令根节点为当前节点</p>
+</li>
+<li><p>只要当前节点不为空（<code>while (root != null)</code>），重复执行如下流程：</p>
+<ul>
+<li><p>若当前节点的左子节点为空（<code>root.left = null</code>），将当前节点更新为其右子节点（<code>root = root.right</code>)</p>
+</li>
+<li><p>若当前节点的左子节点不为空，利用临时变量 <code>t</code> 存储，找到当前节点的前驱节点（左子树中最后一个节点）：</p>
+<ul>
+<li>若前驱节点的右子节点为空（<code>t.right = null</code>），将前驱节点的右子节点链接到当前节点（<code>t.right = root</code>），并将当前节点更新为左子节点（<code>root = root.left</code>）</li>
+<li>若前驱节点的右子节点不为空，说明已链接到当前节点，此时将前驱节点的右子节点置空（删除链接 <code>t.right = null</code>），遍历当前节点，并将当前节点更新为右子节点（<code>root = root.right</code>）</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<p>Java 代码：<br><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">recoverTree</span><span class="hljs-params">(TreeNode root)</span> &#123;<br>        <span class="hljs-type">TreeNode</span> <span class="hljs-variable">a</span> <span class="hljs-operator">=</span> <span class="hljs-literal">null</span>, b = <span class="hljs-literal">null</span>, last = <span class="hljs-literal">null</span>;<br>        <span class="hljs-keyword">while</span> (root != <span class="hljs-literal">null</span>) &#123;<br>            <span class="hljs-keyword">if</span> (root.left == <span class="hljs-literal">null</span>) &#123;<br>                <span class="hljs-keyword">if</span> (last != <span class="hljs-literal">null</span> &amp;&amp; last.val &gt; root.val) &#123;<br>                    <span class="hljs-keyword">if</span> (a == <span class="hljs-literal">null</span>) &#123;<br>                        a = last; b = root;<br>                    &#125; <span class="hljs-keyword">else</span> &#123;<br>                        b = root;<br>                    &#125;<br>                &#125;<br>                last = root;<br>                root = root.right;<br>            &#125; <span class="hljs-keyword">else</span> &#123;<br>                <span class="hljs-type">TreeNode</span> <span class="hljs-variable">t</span> <span class="hljs-operator">=</span> root.left;<br>                <span class="hljs-keyword">while</span> (t.right != <span class="hljs-literal">null</span> &amp;&amp; t.right != root) t = t.right;<br>                <span class="hljs-keyword">if</span> (t.right == <span class="hljs-literal">null</span>) &#123; <span class="hljs-comment">// 若前驱节点右子树为空, 说明是真正遍历左子树前, 建立与当前根节点的链接, 然后开始真正遍历左子树</span><br>                    t.right = root;<br>                    root = root.left;<br>                &#125; <span class="hljs-keyword">else</span> &#123;  <span class="hljs-comment">// 若已存在链接, 说明是第二次访问根节点, 左子树（前驱节点）已遍历完, 此时应该解开链接, 遍历当前节点以及右子树</span><br>                    t.right = <span class="hljs-literal">null</span>;<br>                    <span class="hljs-keyword">if</span> (last != <span class="hljs-literal">null</span> &amp;&amp; last.val &gt; root.val) &#123;<br>                        <span class="hljs-keyword">if</span> (a == <span class="hljs-literal">null</span>) &#123;<br>                            a = last; b = root;<br>                        &#125; <span class="hljs-keyword">else</span> &#123;<br>                            b = root;<br>                        &#125;<br>                    &#125;<br>                    last = root;<br>                    root = root.right;<br>                &#125;<br>            &#125;<br>        &#125;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">val</span> <span class="hljs-operator">=</span> a.val;<br>        a.val = b.val;<br>        b.val = val;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure></p>
+<ul>
+<li>时间复杂度：$O(n)$</li>
+<li>空间复杂度：$O(1)$</li>
+</ul>
+<hr>
+<h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>这是我们「刷穿 LeetCode」系列文章的第 <code>No.99</code> 篇，系列开始于 2021/01/01，截止于起始日 LeetCode 上共有 1916 道题目，部分是有锁题，我们将先把所有不带锁的题目刷完。</p>
+<p>在这个系列文章里面，除了讲解解题思路以外，还会尽可能给出最为简洁的代码。如果涉及通解还会相应的代码模板。</p>
+<p>为了方便各位同学能够电脑上进行调试和提交代码，我建立了相关的仓库：<a target="_blank" rel="noopener" href="https://github.com/SharingSource/LogicStack-LeetCode">https://github.com/SharingSource/LogicStack-LeetCode</a> 。</p>
+<p>在仓库地址里，你可以看到系列文章的题解链接、系列文章的相应代码、LeetCode 原题链接和其他优选题解。</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/">二叉树</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E6%A0%91%E7%9A%84%E6%90%9C%E7%B4%A2/">树的搜索</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E4%B8%AD%E5%BA%8F%E9%81%8D%E5%8E%86/">中序遍历</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E9%80%92%E5%BD%92/">递归</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E8%BF%AD%E4%BB%A3/">迭代</a>
+                    
+                      <a class="hover-with-bg" href="/tags/Morris-%E9%81%8D%E5%8E%86/">Morris 遍历</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/09/11/108.%20%E5%B0%86%E6%9C%89%E5%BA%8F%E6%95%B0%E7%BB%84%E8%BD%AC%E6%8D%A2%E4%B8%BA%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%EF%BC%88%E7%AE%80%E5%8D%95%EF%BC%89/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">LC 108. 将有序数组转换为二叉搜索树</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/08/24/1879.%20%E4%B8%A4%E4%B8%AA%E6%95%B0%E7%BB%84%E6%9C%80%E5%B0%8F%E7%9A%84%E5%BC%82%E6%88%96%E5%80%BC%E4%B9%8B%E5%92%8C%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/">
+                        <span class="hidden-mobile">LC 1879. 两个数组最小的异或值之和</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://cdn.staticfile.org/valine/1.4.18/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"IDifiViRkVDTgu27Nu50GQkE-gzGzoHsz","appKey":"gt98pupgyYjPKYQASrGmD9kM","path":"window.location.pathname","placeholder":"发一条友善的评论（为方便交流，记得填上方的昵称再留言哦 ~ 🍭","avatar":"","meta":["nick","mail"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":true},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          Fluid.plugins.initFancyBox('#valine .vcontent img:not(.vemoji)');
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+  <div class="col-lg-7 mx-auto nopadding-x-md">
+    <div class="container custom post-custom mx-auto">
+      <img src="/oimg/gzh-qrcode.webp" srcset="/img/loading.gif" lazyload class="rounded mx-auto d-block mt-5" style="width:80%">
+    </div>
+  </div>
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- LeanCloud 统计PV -->
+        <span id="leancloud-site-pv-container" style="display: none">
+            总访问量 
+            <span id="leancloud-site-pv"></span>
+             次
+          </span>
+      
+      
+        <!-- LeanCloud 统计UV -->
+        <span id="leancloud-site-uv-container" style="display: none">
+            总访客数 
+            <span id="leancloud-site-uv"></span>
+             人
+          </span>
+      
+
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.staticfile.org/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.staticfile.org/tocbot/4.18.2/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.staticfile.org/anchor-js/4.3.1/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.11/clipboard.min.js" ></script>
+  
+
+
+
+
+  <script defer src="/js/leancloud.js" ></script>
+
+
+
+  <script  src="https://cdn.bootcdn.net/ajax/libs/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        loader: {
+          
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.staticfile.org/mathjax/3.2.0/es5/tex-svg.js" ></script>
+
+  
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

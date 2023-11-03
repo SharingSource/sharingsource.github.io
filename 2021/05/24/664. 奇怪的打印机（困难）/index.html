@@ -16,15 +16,15 @@
   <meta name="author" content="宫水三叶">
   <meta name="keywords" content="算法, 数据结构, 题解">
   
-    <meta name="description" content="题目描述这是 LeetCode 上的 664. 奇怪的打印机 ，难度为 困难。 有台奇怪的打印机有以下两个特殊要求：  打印机每次只能打印由 同一个字符 组成的序列。 每次可以在任意起始和结束位置打印新字符，并且会覆盖掉原来已有的字符。  给你一个字符串 s ，你的任务是计算这个打印机打印它需要的最少打印次数。 示例 1：12345输入：s &#x3D; &quot;aaabbb&quot;输出：2解释：首">
+    <meta name="description" content="题目描述这是 LeetCode 上的 664. 奇怪的打印机 ，难度为 困难。 有台奇怪的打印机有以下两个特殊要求：  打印机每次只能打印由 同一个字符 组成的序列。 每次可以在任意起始和结束位置打印新字符，并且会覆盖掉原来已有的字符。  给你一个字符串 s，你的任务是计算这个打印机打印它需要的最少打印次数。 示例 1：12345输入：s &#x3D; &quot;aaabbb&quot;输出：2解释：首先">
 <meta property="og:type" content="article">
 <meta property="og:title" content="LC 664. 奇怪的打印机">
 <meta property="og:url" content="https://sharingsource.github.io/2021/05/24/664.%20%E5%A5%87%E6%80%AA%E7%9A%84%E6%89%93%E5%8D%B0%E6%9C%BA%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/index.html">
 <meta property="og:site_name" content="宫水三叶的刷题日记">
-<meta property="og:description" content="题目描述这是 LeetCode 上的 664. 奇怪的打印机 ，难度为 困难。 有台奇怪的打印机有以下两个特殊要求：  打印机每次只能打印由 同一个字符 组成的序列。 每次可以在任意起始和结束位置打印新字符，并且会覆盖掉原来已有的字符。  给你一个字符串 s ，你的任务是计算这个打印机打印它需要的最少打印次数。 示例 1：12345输入：s &#x3D; &quot;aaabbb&quot;输出：2解释：首">
+<meta property="og:description" content="题目描述这是 LeetCode 上的 664. 奇怪的打印机 ，难度为 困难。 有台奇怪的打印机有以下两个特殊要求：  打印机每次只能打印由 同一个字符 组成的序列。 每次可以在任意起始和结束位置打印新字符，并且会覆盖掉原来已有的字符。  给你一个字符串 s，你的任务是计算这个打印机打印它需要的最少打印次数。 示例 1：12345输入：s &#x3D; &quot;aaabbb&quot;输出：2解释：首先">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-05-23T19:18:21.000Z">
-<meta property="article:modified_time" content="2022-05-18T08:27:08.271Z">
+<meta property="article:modified_time" content="2023-11-03T03:08:37.194Z">
 <meta property="article:author" content="宫水三叶">
 <meta property="article:tag" content="区间 DP">
 <meta name="twitter:card" content="summary_large_image">
@@ -241,12 +241,12 @@
 <li>打印机每次只能打印由 同一个字符 组成的序列。</li>
 <li>每次可以在任意起始和结束位置打印新字符，并且会覆盖掉原来已有的字符。</li>
 </ul>
-<p>给你一个字符串 s ，你的任务是计算这个打印机打印它需要的最少打印次数。</p>
+<p>给你一个字符串 <code>s</code>，你的任务是计算这个打印机打印它需要的最少打印次数。</p>
 <p>示例 1：<br><figure class="highlight abnf"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs abnf">输入：s <span class="hljs-operator">=</span> <span class="hljs-string">&quot;aaabbb&quot;</span><br><br>输出：<span class="hljs-number">2</span><br><br>解释：首先打印 <span class="hljs-string">&quot;aaa&quot;</span> 然后打印 <span class="hljs-string">&quot;bbb&quot;</span>。<br></code></pre></div></td></tr></table></figure><br>示例 2：<br><figure class="highlight 1c"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs 1c">输入：s = <span class="hljs-string">&quot;aba&quot;</span><br><br>输出：<span class="hljs-number">2</span><br><br>解释：首先打印 <span class="hljs-string">&quot;aaa&quot;</span> 然后在第二个位置打印 <span class="hljs-string">&quot;b&quot;</span> 覆盖掉原来的字符 &#x27;a&#x27;。<br></code></pre></div></td></tr></table></figure></p>
 <p>提示：</p>
 <ul>
-<li>1 &lt;= s.length &lt;= 100</li>
-<li>s 由小写英文字母组成</li>
+<li>$1 &lt;= s.length &lt;= 100$</li>
+<li><code>s</code> 由小写英文字母组成</li>
 </ul>
 <hr>
 <h3 id="基本分析"><a href="#基本分析" class="headerlink" title="基本分析"></a>基本分析</h3><p>首先，根据题意我们可以分析出一个重要推论：<strong>连续相同的一段字符，必然可以归到同一次打印中，而不会让打印次数变多。注意，这里说的是「归到一次」，而不是说「单独作为一次」。</strong></p>

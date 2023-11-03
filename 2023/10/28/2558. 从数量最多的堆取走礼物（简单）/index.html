@@ -1,0 +1,637 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/oimg/RoundCorner.png">
+  <link rel="icon" href="/oimg/RoundCorner.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="宫水三叶">
+  <meta name="keywords" content="算法, 数据结构, 题解">
+  
+    <meta name="description" content="题目描述这是 LeetCode 上的 2558. 从数量最多的堆取走礼物 ，难度为 简单。 给你一个整数数组 gifts，表示各堆礼物的数量。 每一秒，你需要执行以下操作：  选择礼物数量最多的那一堆。  如果不止一堆都符合礼物数量最多，从中选择任一堆即可。  选中的那一堆留下平方根数量的礼物（向下取整），取走其他的礼物。   返回在 k 秒后剩下的礼物数量。 示例 1：1234567891011">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LC 2558. 从数量最多的堆取走礼物">
+<meta property="og:url" content="https://sharingsource.github.io/2023/10/28/2558.%20%E4%BB%8E%E6%95%B0%E9%87%8F%E6%9C%80%E5%A4%9A%E7%9A%84%E5%A0%86%E5%8F%96%E8%B5%B0%E7%A4%BC%E7%89%A9%EF%BC%88%E7%AE%80%E5%8D%95%EF%BC%89/index.html">
+<meta property="og:site_name" content="宫水三叶的刷题日记">
+<meta property="og:description" content="题目描述这是 LeetCode 上的 2558. 从数量最多的堆取走礼物 ，难度为 简单。 给你一个整数数组 gifts，表示各堆礼物的数量。 每一秒，你需要执行以下操作：  选择礼物数量最多的那一堆。  如果不止一堆都符合礼物数量最多，从中选择任一堆即可。  选中的那一堆留下平方根数量的礼物（向下取整），取走其他的礼物。   返回在 k 秒后剩下的礼物数量。 示例 1：1234567891011">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://sharingsource.github.io/2023/10/28/2558.%20%E4%BB%8E%E6%95%B0%E9%87%8F%E6%9C%80%E5%A4%9A%E7%9A%84%E5%A0%86%E5%8F%96%E8%B5%B0%E7%A4%BC%E7%89%A9%EF%BC%88%E7%AE%80%E5%8D%95%EF%BC%89/image_0.png">
+<meta property="og:image" content="https://sharingsource.github.io/2023/10/28/2558.%20%E4%BB%8E%E6%95%B0%E9%87%8F%E6%9C%80%E5%A4%9A%E7%9A%84%E5%A0%86%E5%8F%96%E8%B5%B0%E7%A4%BC%E7%89%A9%EF%BC%88%E7%AE%80%E5%8D%95%EF%BC%89/image_1.png">
+<meta property="article:published_time" content="2023-10-27T18:58:09.000Z">
+<meta property="article:modified_time" content="2023-11-03T03:09:11.269Z">
+<meta property="article:author" content="宫水三叶">
+<meta property="article:tag" content="优先队列（堆）">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://sharingsource.github.io/2023/10/28/2558.%20%E4%BB%8E%E6%95%B0%E9%87%8F%E6%9C%80%E5%A4%9A%E7%9A%84%E5%A0%86%E5%8F%96%E8%B5%B0%E7%A4%BC%E7%89%A9%EF%BC%88%E7%AE%80%E5%8D%95%EF%BC%89/image_0.png">
+  
+  
+  <title>LC 2558. 从数量最多的堆取走礼物 - 宫水三叶的刷题日记</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/hint.css/2.7.0/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.7.2/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"sharingsource.github.io","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"|","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"IDifiViRkVDTgu27Nu50GQkE-gzGzoHsz","app_key":"gt98pupgyYjPKYQASrGmD9kM","server_url":"https://idifivir.lc-cn-n1-shared.com","path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.1.0"></head>
+
+
+<body>
+  <header style="height: 50vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>宫水三叶の刷题日记</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/image_208.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="LC 2558. 从数量最多的堆取走礼物">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-author" aria-hidden="true"></i>
+      宫水三叶
+    </span>
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2023-10-28 02:58" pubdate>
+        2023年10月28日
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">LC 2558. 从数量最多的堆取走礼物</h1>
+            
+            <div class="markdown-body">
+              <h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>这是 LeetCode 上的 <strong><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/take-gifts-from-the-richest-pile/solutions/2501825/gong-shui-san-xie-ke-shi-hua-shou-xie-du-pp3a/">2558. 从数量最多的堆取走礼物</a></strong> ，难度为 <strong>简单</strong>。</p>
+<p>给你一个整数数组 <code>gifts</code>，表示各堆礼物的数量。</p>
+<p>每一秒，你需要执行以下操作：</p>
+<ul>
+<li><p>选择礼物数量最多的那一堆。</p>
+</li>
+<li><p>如果不止一堆都符合礼物数量最多，从中选择任一堆即可。</p>
+</li>
+<li><p>选中的那一堆留下平方根数量的礼物（向下取整），取走其他的礼物。</p>
+</li>
+</ul>
+<p>返回在 <code>k</code> 秒后剩下的礼物数量。</p>
+<p>示例 1：<br><figure class="highlight tap"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs tap">输入：gifts = [25,64,9,4,100], k = 4<br><br>输出：29<br><br>解释： <br>按下述方式取走礼物：<br>- 在第一秒，选中最后一堆，剩下<span class="hljs-number"> 10 </span>个礼物。<br>- 接着第二秒选中第二堆礼物，剩下<span class="hljs-number"> 8 </span>个礼物。<br>- 然后选中第一堆礼物，剩下<span class="hljs-number"> 5 </span>个礼物。<br>- 最后，再次选中最后一堆礼物，剩下<span class="hljs-number"> 3 </span>个礼物。<br>最后剩下的礼物数量分别是 [5,8,9,4,3] ，所以，剩下礼物的总数量是<span class="hljs-number"> 29 </span>。<br></code></pre></div></td></tr></table></figure><br>示例 2：<br><figure class="highlight tap"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs tap">输入：gifts = [1,1,1,1], k = 4<br><br>输出：4<br><br>解释：<br>在本例中，不管选中哪一堆礼物，都必须剩下<span class="hljs-number"> 1 </span>个礼物。 <br>也就是说，你无法获取任一堆中的礼物。 <br>所以，剩下礼物的总数量是<span class="hljs-number"> 4 </span>。<br></code></pre></div></td></tr></table></figure></p>
+<p>提示：</p>
+<ul>
+<li>$1 &lt;= gifts.length &lt;= 10^3$</li>
+<li>$1 &lt;= gifts[i] &lt;= 10^9$</li>
+<li>$1 &lt;= k &lt;= 10^3$</li>
+</ul>
+<hr>
+<h3 id="基本思想"><a href="#基本思想" class="headerlink" title="基本思想"></a>基本思想</h3><p>为了方便，将 <code>gifts</code> 记为 <code>gs</code>。</p>
+<p>从题面看，数组大小和执行次数范围均为 $1e3$，那么暴力做法的复杂度为 $O(n^2)$，计算量为 $1e6$，是可以通过的。</p>
+<p>稍有数据结构基础的同学，容易进一步联想：存在一种数据结构，能够快速查得集合最值，使复杂度降低。</p>
+<p>该数据结构是「堆」，在某些 <code>STL</code>  里面又称为「优先队列」。</p>
+<hr>
+<h3 id="手写堆入门"><a href="#手写堆入门" class="headerlink" title="手写堆入门"></a>手写堆入门</h3><p>所有高级数据结构（例如之前讲过的 [字典树 Trie] 或 [并查集]，都可以使用数组进行模拟，堆自然也不例外。</p>
+<p><strong>堆本质是数据集合，只不过区别于简单数组而言，其具有 $O(1)$ 查找最值特性。</strong></p>
+<p>既然我们使用数组来实现堆，同时又需要实现 $O(1)$ 查找最值，一个自然而然的想法，是把集合最值放到数组的特定位置，例如数组起始位置。</p>
+<p>开始之前，先来了解一下，堆的基本操作：</p>
+<ul>
+<li><code>add</code>：往堆中增加元素</li>
+<li><code>peek</code>：快速查得最值</li>
+<li><code>pop</code>：将最值从堆中移除</li>
+</ul>
+<p>我们以小根堆为例，进行学习。</p>
+<blockquote>
+<p>PS. 大根堆亦是同理，如果已经有写好的小根堆模板，那么将数值进行符号翻转，即可实现大根堆；或是翻转模板中的数值比较逻辑，也可将小根堆轻松切换成大根堆。</p>
+</blockquote>
+<h4 id="1-堆长啥样？"><a href="#1-堆长啥样？" class="headerlink" title="1. 堆长啥样？"></a>1. 堆长啥样？</h4><p>堆是数组实现的，但其形态为「完全二叉树」（最多只有底下一层节点不满），目的是尽量让树平衡，降低树的高度，从而更高效的维护其性质。</p>
+<p>虽是「完全二叉树」，但其又和另外一种特殊二叉树，二叉搜索树（<code>BST</code>）不同。</p>
+<p>在 <code>BST</code>  的定义中：任意节点的左子树上的节点值均不大于该节点，任意节点的右子树上的节点值均不小于该节点。</p>
+<p>在小根堆对应的「完全二叉树」定义中：任意节点的节点值均不大于其左右子树中的节点值。</p>
+<p>因此将小根堆可视化后，也十分形象：小根堆的堆顶元素最小，然后从上往下，元素“依次”增大。</p>
+<p><img src="/2023/10/28/2558.%20%E4%BB%8E%E6%95%B0%E9%87%8F%E6%9C%80%E5%A4%9A%E7%9A%84%E5%A0%86%E5%8F%96%E8%B5%B0%E7%A4%BC%E7%89%A9%EF%BC%88%E7%AE%80%E5%8D%95%EF%BC%89/image_0.png" srcset="/img/loading.gif" lazyload alt="image.png">{:width=400}</p>
+<p>即对于小根堆而言，每个子树的根节点，都是该子树的最小值。</p>
+<h4 id="2-如何用数组进行「完全二叉树」的存储？"><a href="#2-如何用数组进行「完全二叉树」的存储？" class="headerlink" title="2. 如何用数组进行「完全二叉树」的存储？"></a>2. 如何用数组进行「完全二叉树」的存储？</h4><p>我们只需要将「二叉树的左右子节点关系」和「数组下标」实现某种关联即可。</p>
+<p>我们约定，对于某个节点，若其所在数组下标为 $idx$，那么该节点的左子节点的数组下标为 $2 \times idx$，该节点的右子节点的数组下标为 $2 \times idx + 1$。</p>
+<p>注意：基于此规则，我们需要调整数组下标从 $1$ 开始进行存储。</p>
+<p><img src="/2023/10/28/2558.%20%E4%BB%8E%E6%95%B0%E9%87%8F%E6%9C%80%E5%A4%9A%E7%9A%84%E5%A0%86%E5%8F%96%E8%B5%B0%E7%A4%BC%E7%89%A9%EF%BC%88%E7%AE%80%E5%8D%95%EF%BC%89/image_1.png" srcset="/img/loading.gif" lazyload alt="image.png">{:width=400}</p>
+<h4 id="3-基本操作如何实现？"><a href="#3-基本操作如何实现？" class="headerlink" title="3.基本操作如何实现？"></a>3.基本操作如何实现？</h4><p>所有操作的核心最终都归结到：如何通过有限的调整，重新恢复堆所对应的完全二叉树中的节点定义。</p>
+<p>因此可抽象出 <code>up</code> 操作和 <code>down</code> 操作，俩操作均通过递归实现：</p>
+<ul>
+<li><code>up</code> 操作是将当前节点 <code>u</code> 与父节点 <code>fa = u / 2</code> 进行比较，若发现父节点更大，则将两者进行互换，并递归处理父节点</li>
+<li><code>down</code> 操作是将当前节点 <code>cur</code> 和左右节点 <code>l = cur * 2</code> 和 <code>r = cur * 2 + 1</code> 进行比较，若当前节点并非三者最小，则进行互换，并递归处理子节点</li>
+</ul>
+<p>通过上述核心 <code>up</code> 和 <code>down</code> 操作，以及「完全二叉树」在数组的放置规则，我们可以容易拼凑出堆的基本操作。</p>
+<p>假定当前使用一维数组 <code>heap</code> 实现堆，使用变量 <code>sz</code> 记录当前堆的元素个数，同时该变量充当 <code>heap</code> 的结尾游标：</p>
+<ul>
+<li><code>add</code>：往堆中增加元素<br>该操作可转换为：往数组尾部增加元素（<code>heap[sz++] = x</code>），并从尾部开始重整堆（<code>up(sz)</code>）</li>
+<li><code>peek</code>：快速查得最小值<br>直接范围数组首位元素，注意下标从 $1$ 开始，<code>heap[1]</code></li>
+<li><code>pop</code>：将最值从堆中移除<br>先通过 <code>peek</code> 操作记录下待移除的最小值，然后将数组的结尾元素和首位元素互换，并更新数组长度减一（<code>heap[1] = heap[sz--]</code>），随后从头部开始重整堆（<code>down(1)</code>）</li>
+</ul>
+<p>Java 完整模板：<br><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java"><span class="hljs-type">int</span>[] heap = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[<span class="hljs-number">10010</span>];<br><span class="hljs-type">int</span> <span class="hljs-variable">sz</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br><span class="hljs-keyword">void</span> <span class="hljs-title function_">swap</span><span class="hljs-params">(<span class="hljs-type">int</span> a, <span class="hljs-type">int</span> b)</span> &#123;<br>    <span class="hljs-type">int</span> <span class="hljs-variable">c</span> <span class="hljs-operator">=</span> heap[a];<br>    heap[a] = heap[b];<br>    heap[b] = c;<br>&#125;<br><span class="hljs-keyword">void</span> <span class="hljs-title function_">up</span><span class="hljs-params">(<span class="hljs-type">int</span> u)</span> &#123;<br>    <span class="hljs-comment">// 将「当前节点 i」与「父节点 i / 2」进行比较, 若父节点值更大, 则进行交换</span><br>    <span class="hljs-type">int</span> <span class="hljs-variable">fa</span> <span class="hljs-operator">=</span> u / <span class="hljs-number">2</span>;<br>    <span class="hljs-keyword">if</span> (fa != <span class="hljs-number">0</span> &amp;&amp; heap[fa] &gt; heap[u]) &#123;<br>        swap(fa, u);<br>        up(fa);<br>    &#125;<br>&#125;<br><span class="hljs-keyword">void</span> <span class="hljs-title function_">down</span><span class="hljs-params">(<span class="hljs-type">int</span> u)</span> &#123;<br>    <span class="hljs-comment">// 将当「前节点 cur」与「左节点 l」及「右节点 r」进行比较, 找出最小值, 若当前节点不是最小值, 则进行交换</span><br>    <span class="hljs-type">int</span> <span class="hljs-variable">cur</span> <span class="hljs-operator">=</span> u;<br>    <span class="hljs-type">int</span> <span class="hljs-variable">l</span> <span class="hljs-operator">=</span> u * <span class="hljs-number">2</span>, r = u * <span class="hljs-number">2</span> + <span class="hljs-number">1</span>;<br>    <span class="hljs-keyword">if</span> (l &lt;= sz &amp;&amp; heap[l] &lt; heap[cur]) cur = l;<br>    <span class="hljs-keyword">if</span> (r &lt;= sz &amp;&amp; heap[r] &lt; heap[cur]) cur = r;<br>    <span class="hljs-keyword">if</span> (cur != u) &#123;<br>        swap(cur, u);<br>        down(cur);<br>    &#125;<br>&#125;<br><span class="hljs-keyword">void</span> <span class="hljs-title function_">add</span><span class="hljs-params">(<span class="hljs-type">int</span> x)</span> &#123;<br>    heap[++sz] = x;<br>    up(sz);<br>&#125;<br><span class="hljs-type">int</span> <span class="hljs-title function_">peek</span><span class="hljs-params">()</span> &#123;<br>    <span class="hljs-keyword">return</span> heap[<span class="hljs-number">1</span>];<br>&#125;<br><span class="hljs-type">int</span> <span class="hljs-title function_">pop</span><span class="hljs-params">()</span> &#123;<br>    <span class="hljs-type">int</span> <span class="hljs-variable">ans</span> <span class="hljs-operator">=</span> peek();<br>    heap[<span class="hljs-number">1</span>] = heap[sz--];<br>    down(<span class="hljs-number">1</span>);<br>    <span class="hljs-keyword">return</span> ans;<br>&#125;<br></code></pre></div></td></tr></table></figure><br>C++ 完整模板：<br><figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs C++"><span class="hljs-type">int</span> heap[<span class="hljs-number">1010</span>];<br><span class="hljs-type">int</span> sz = <span class="hljs-number">0</span>;<br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">up</span><span class="hljs-params">(<span class="hljs-type">int</span> u)</span> </span>&#123;<br>    <span class="hljs-type">int</span> fa = u / <span class="hljs-number">2</span>;<br>    <span class="hljs-keyword">if</span> (fa &amp;&amp; heap[fa] &gt;= heap[u]) &#123;<br>        <span class="hljs-built_in">swap</span>(heap[fa], heap[u]);<br>        <span class="hljs-built_in">up</span>(fa);<br>    &#125;<br>&#125;<br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">down</span><span class="hljs-params">(<span class="hljs-type">int</span> u)</span> </span>&#123;<br>    <span class="hljs-type">int</span> cur = u;<br>    <span class="hljs-type">int</span> l = cur * <span class="hljs-number">2</span>, r = cur * <span class="hljs-number">2</span> + <span class="hljs-number">1</span>;<br>    <span class="hljs-keyword">if</span> (l &lt;= sz &amp;&amp; heap[l] &lt; heap[cur]) cur = l;<br>    <span class="hljs-keyword">if</span> (r &lt;= sz &amp;&amp; heap[r] &lt; heap[cur]) cur = r;<br>    <span class="hljs-keyword">if</span> (cur != u) &#123;<br>        <span class="hljs-built_in">swap</span>(heap[cur], heap[u]);<br>        <span class="hljs-built_in">down</span>(cur);<br>    &#125;<br>&#125;<br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">add</span><span class="hljs-params">(<span class="hljs-type">int</span> x)</span> </span>&#123;<br>    heap[++sz] = x;<br>    <span class="hljs-built_in">up</span>(sz);<br>&#125;<br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">peek</span><span class="hljs-params">()</span> </span>&#123;<br>    <span class="hljs-keyword">return</span> heap[<span class="hljs-number">1</span>];<br>&#125;<br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">poll</span><span class="hljs-params">()</span> </span>&#123;<br>    <span class="hljs-type">int</span> ans = <span class="hljs-built_in">peek</span>();<br>    heap[<span class="hljs-number">1</span>] = heap[sz--];<br>    <span class="hljs-built_in">down</span>(<span class="hljs-number">1</span>);<br>    <span class="hljs-keyword">return</span> ans;<br>&#125;<br></code></pre></div></td></tr></table></figure></p>
+<hr>
+<h3 id="模板运用"><a href="#模板运用" class="headerlink" title="模板运用"></a>模板运用</h3><p>利用「上述模板」以及「小根堆如何当大根堆」使用，我们可以轻松解决本题。</p>
+<ol>
+<li>起始先将逐元素进行符号翻转并入堆</li>
+<li>执行 <code>k</code> 次取出并重放操作（注意符号转换）</li>
+<li>统计所有元素之和，由于此时不再需要查询最值，可通过直接扫描数组的方式（注意符号转换）</li>
+</ol>
+<p>Java 代码：<br><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-type">int</span>[] heap = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[<span class="hljs-number">10010</span>];<br>    <span class="hljs-type">int</span> <span class="hljs-variable">sz</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">long</span> <span class="hljs-title function_">pickGifts</span><span class="hljs-params">(<span class="hljs-type">int</span>[] gs, <span class="hljs-type">int</span> k)</span> &#123;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> x : gs) add(-x);<br>        <span class="hljs-keyword">while</span> (k-- &gt; <span class="hljs-number">0</span>) add(-(<span class="hljs-type">int</span>)Math.sqrt(-pop()));<br>        <span class="hljs-type">long</span> <span class="hljs-variable">ans</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">while</span> (sz != <span class="hljs-number">0</span>) ans += -heap[sz--];  <span class="hljs-comment">// 没必要再维持堆的有序, 直接读取累加</span><br>        <span class="hljs-keyword">return</span> ans;<br>    &#125;<br>    <span class="hljs-keyword">void</span> <span class="hljs-title function_">swap</span><span class="hljs-params">(<span class="hljs-type">int</span> a, <span class="hljs-type">int</span> b)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">c</span> <span class="hljs-operator">=</span> heap[a];<br>        heap[a] = heap[b];<br>        heap[b] = c;<br>    &#125;<br>    <span class="hljs-keyword">void</span> <span class="hljs-title function_">up</span><span class="hljs-params">(<span class="hljs-type">int</span> u)</span> &#123;<br>        <span class="hljs-comment">// 将「当前节点 i」与「父节点 i / 2」进行比较, 若父节点值更大, 则进行交换</span><br>        <span class="hljs-type">int</span> <span class="hljs-variable">fa</span> <span class="hljs-operator">=</span> u / <span class="hljs-number">2</span>;<br>        <span class="hljs-keyword">if</span> (fa != <span class="hljs-number">0</span> &amp;&amp; heap[fa] &gt; heap[u]) &#123;<br>            swap(fa, u);<br>            up(fa);<br>        &#125;<br>    &#125;<br>    <span class="hljs-keyword">void</span> <span class="hljs-title function_">down</span><span class="hljs-params">(<span class="hljs-type">int</span> u)</span> &#123;<br>        <span class="hljs-comment">// 将当「前节点 cur」与「左节点 l」及「右节点 r」进行比较, 找出最小值, 若当前节点不是最小值, 则进行交换</span><br>        <span class="hljs-type">int</span> <span class="hljs-variable">cur</span> <span class="hljs-operator">=</span> u;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">l</span> <span class="hljs-operator">=</span> u * <span class="hljs-number">2</span>, r = u * <span class="hljs-number">2</span> + <span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">if</span> (l &lt;= sz &amp;&amp; heap[l] &lt; heap[cur]) cur = l;<br>        <span class="hljs-keyword">if</span> (r &lt;= sz &amp;&amp; heap[r] &lt; heap[cur]) cur = r;<br>        <span class="hljs-keyword">if</span> (cur != u) &#123;<br>            swap(cur, u);<br>            down(cur);<br>        &#125;<br>    &#125;<br>    <span class="hljs-keyword">void</span> <span class="hljs-title function_">add</span><span class="hljs-params">(<span class="hljs-type">int</span> x)</span> &#123;<br>        heap[++sz] = x;<br>        up(sz);<br>    &#125;<br>    <span class="hljs-type">int</span> <span class="hljs-title function_">peek</span><span class="hljs-params">()</span> &#123;<br>        <span class="hljs-keyword">return</span> heap[<span class="hljs-number">1</span>];<br>    &#125;<br>    <span class="hljs-type">int</span> <span class="hljs-title function_">pop</span><span class="hljs-params">()</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">ans</span> <span class="hljs-operator">=</span> peek();<br>        heap[<span class="hljs-number">1</span>] = heap[sz--];<br>        down(<span class="hljs-number">1</span>);<br>        <span class="hljs-keyword">return</span> ans;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure><br>C++ 代码：<br><figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs C++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-type">int</span> heap[<span class="hljs-number">1010</span>];<br>    <span class="hljs-type">int</span> sz = <span class="hljs-number">0</span>;<br>    <span class="hljs-function"><span class="hljs-type">long</span> <span class="hljs-type">long</span> <span class="hljs-title">pickGifts</span><span class="hljs-params">(vector&lt;<span class="hljs-type">int</span>&gt;&amp; gs, <span class="hljs-type">int</span> k)</span> </span>&#123;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> x : gs) <span class="hljs-built_in">add</span>(-x);<br>        <span class="hljs-keyword">while</span> (k--) <span class="hljs-built_in">add</span>(-<span class="hljs-built_in">sqrt</span>(-<span class="hljs-built_in">poll</span>()));<br>        <span class="hljs-type">long</span> ans = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">while</span> (sz != <span class="hljs-number">0</span>) ans += -heap[sz--];<br>        <span class="hljs-keyword">return</span> ans;<br>    &#125;<br>    <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">up</span><span class="hljs-params">(<span class="hljs-type">int</span> u)</span> </span>&#123;<br>        <span class="hljs-type">int</span> fa = u / <span class="hljs-number">2</span>;<br>        <span class="hljs-keyword">if</span> (fa &amp;&amp; heap[fa] &gt;= heap[u]) &#123;<br>            <span class="hljs-built_in">swap</span>(heap[fa], heap[u]);<br>            <span class="hljs-built_in">up</span>(fa);<br>        &#125;<br>    &#125;<br>    <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">down</span><span class="hljs-params">(<span class="hljs-type">int</span> u)</span> </span>&#123;<br>        <span class="hljs-type">int</span> cur = u;<br>        <span class="hljs-type">int</span> l = cur * <span class="hljs-number">2</span>, r = cur * <span class="hljs-number">2</span> + <span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">if</span> (l &lt;= sz &amp;&amp; heap[l] &lt; heap[cur]) cur = l;<br>        <span class="hljs-keyword">if</span> (r &lt;= sz &amp;&amp; heap[r] &lt; heap[cur]) cur = r;<br>        <span class="hljs-keyword">if</span> (cur != u) &#123;<br>            <span class="hljs-built_in">swap</span>(heap[cur], heap[u]);<br>            <span class="hljs-built_in">down</span>(cur);<br>        &#125;<br>    &#125;<br>    <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">add</span><span class="hljs-params">(<span class="hljs-type">int</span> x)</span> </span>&#123;<br>        heap[++sz] = x;<br>        <span class="hljs-built_in">up</span>(sz);<br>    &#125;<br>    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">peek</span><span class="hljs-params">()</span> </span>&#123;<br>        <span class="hljs-keyword">return</span> heap[<span class="hljs-number">1</span>];<br>    &#125;<br>    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">poll</span><span class="hljs-params">()</span> </span>&#123;<br>        <span class="hljs-type">int</span> ans = <span class="hljs-built_in">peek</span>();<br>        heap[<span class="hljs-number">1</span>] = heap[sz--];<br>        <span class="hljs-built_in">down</span>(<span class="hljs-number">1</span>);<br>        <span class="hljs-keyword">return</span> ans;<br>    &#125;<br>&#125;;<br></code></pre></div></td></tr></table></figure></p>
+<ul>
+<li>时间复杂度：建堆复杂度为 $O(n\log{n})$；执行 <code>k</code> 次操作复杂度为 $O(k\log{n})$；构建答案复杂度为 $O(n)$。整体复杂度为 $O((n + k) \log{n})$</li>
+<li>空间复杂度：$O(n)$</li>
+</ul>
+<hr>
+<h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>这是我们「刷穿 LeetCode」系列文章的第 <code>No.2558</code> 篇，系列开始于 2021/01/01，截止于起始日 LeetCode 上共有 1916 道题目，部分是有锁题，我们将先把所有不带锁的题目刷完。</p>
+<p>在这个系列文章里面，除了讲解解题思路以外，还会尽可能给出最为简洁的代码。如果涉及通解还会相应的代码模板。</p>
+<p>为了方便各位同学能够电脑上进行调试和提交代码，我建立了相关的仓库：<a target="_blank" rel="noopener" href="https://github.com/SharingSource/LogicStack-LeetCode">https://github.com/SharingSource/LogicStack-LeetCode</a> 。</p>
+<p>在仓库地址里，你可以看到系列文章的题解链接、系列文章的相应代码、LeetCode 原题链接和其他优选题解。</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E4%BC%98%E5%85%88%E9%98%9F%E5%88%97%EF%BC%88%E5%A0%86%EF%BC%89/">优先队列（堆）</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/10/29/274.%20H%20%E6%8C%87%E6%95%B0%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">LC 274. H 指数</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/10/27/1465.%20%E5%88%87%E5%89%B2%E5%90%8E%E9%9D%A2%E7%A7%AF%E6%9C%80%E5%A4%A7%E7%9A%84%E8%9B%8B%E7%B3%95(%E4%B8%AD%E7%AD%89)/">
+                        <span class="hidden-mobile">LC 1465. 切割后面积最大的蛋糕(中等).m</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://cdn.staticfile.org/valine/1.4.18/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"IDifiViRkVDTgu27Nu50GQkE-gzGzoHsz","appKey":"gt98pupgyYjPKYQASrGmD9kM","path":"window.location.pathname","placeholder":"发一条友善的评论（为方便交流，记得填上方的昵称再留言哦 ~ 🍭","avatar":"","meta":["nick","mail"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":true},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          Fluid.plugins.initFancyBox('#valine .vcontent img:not(.vemoji)');
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+  <div class="col-lg-7 mx-auto nopadding-x-md">
+    <div class="container custom post-custom mx-auto">
+      <img src="/oimg/gzh-qrcode.webp" srcset="/img/loading.gif" lazyload class="rounded mx-auto d-block mt-5" style="width:80%">
+    </div>
+  </div>
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- LeanCloud 统计PV -->
+        <span id="leancloud-site-pv-container" style="display: none">
+            总访问量 
+            <span id="leancloud-site-pv"></span>
+             次
+          </span>
+      
+      
+        <!-- LeanCloud 统计UV -->
+        <span id="leancloud-site-uv-container" style="display: none">
+            总访客数 
+            <span id="leancloud-site-uv"></span>
+             人
+          </span>
+      
+
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.staticfile.org/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.staticfile.org/tocbot/4.18.2/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.staticfile.org/anchor-js/4.3.1/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.11/clipboard.min.js" ></script>
+  
+
+
+
+
+  <script defer src="/js/leancloud.js" ></script>
+
+
+
+  <script  src="https://cdn.bootcdn.net/ajax/libs/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        loader: {
+          
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.staticfile.org/mathjax/3.2.0/es5/tex-svg.js" ></script>
+
+  
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

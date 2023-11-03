@@ -1,0 +1,606 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/oimg/RoundCorner.png">
+  <link rel="icon" href="/oimg/RoundCorner.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="宫水三叶">
+  <meta name="keywords" content="算法, 数据结构, 题解">
+  
+    <meta name="description" content="题目描述这是 LeetCode 上的 109. 有序链表转换二叉搜索树 ，难度为 中等 给定一个单链表的头节点  head，其中的元素 按升序排序 ，将其转换为高度平衡的二叉搜索树。 本题中，一个高度平衡二叉树是指一个二叉树每个节点 的左右两个子树的高度差不超过 $1$。 示例 1: 12345输入: head &#x3D; [-10,-3,0,5,9]输出: [0,-3,9,-10,null,5]解释:">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LC 109. 有序链表转换二叉搜索树">
+<meta property="og:url" content="https://sharingsource.github.io/2023/09/11/109.%20%E6%9C%89%E5%BA%8F%E9%93%BE%E8%A1%A8%E8%BD%AC%E6%8D%A2%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/index.html">
+<meta property="og:site_name" content="宫水三叶的刷题日记">
+<meta property="og:description" content="题目描述这是 LeetCode 上的 109. 有序链表转换二叉搜索树 ，难度为 中等 给定一个单链表的头节点  head，其中的元素 按升序排序 ，将其转换为高度平衡的二叉搜索树。 本题中，一个高度平衡二叉树是指一个二叉树每个节点 的左右两个子树的高度差不超过 $1$。 示例 1: 12345输入: head &#x3D; [-10,-3,0,5,9]输出: [0,-3,9,-10,null,5]解释:">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://sharingsource.github.io/2023/09/11/109.%20%E6%9C%89%E5%BA%8F%E9%93%BE%E8%A1%A8%E8%BD%AC%E6%8D%A2%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/image_0.png">
+<meta property="article:published_time" content="2023-09-10T16:46:46.000Z">
+<meta property="article:modified_time" content="2023-11-03T03:08:59.296Z">
+<meta property="article:author" content="宫水三叶">
+<meta property="article:tag" content="二叉树">
+<meta property="article:tag" content="树的搜索">
+<meta property="article:tag" content="分治">
+<meta property="article:tag" content="中序遍历">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://sharingsource.github.io/2023/09/11/109.%20%E6%9C%89%E5%BA%8F%E9%93%BE%E8%A1%A8%E8%BD%AC%E6%8D%A2%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/image_0.png">
+  
+  
+  <title>LC 109. 有序链表转换二叉搜索树 - 宫水三叶的刷题日记</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/hint.css/2.7.0/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.7.2/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"sharingsource.github.io","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"|","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"IDifiViRkVDTgu27Nu50GQkE-gzGzoHsz","app_key":"gt98pupgyYjPKYQASrGmD9kM","server_url":"https://idifivir.lc-cn-n1-shared.com","path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.1.0"></head>
+
+
+<body>
+  <header style="height: 50vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>宫水三叶の刷题日记</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/image_104.jpeg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="LC 109. 有序链表转换二叉搜索树">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-author" aria-hidden="true"></i>
+      宫水三叶
+    </span>
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2023-09-11 00:46" pubdate>
+        2023年9月11日
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">LC 109. 有序链表转换二叉搜索树</h1>
+            
+            <div class="markdown-body">
+              <h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>这是 LeetCode 上的 <strong><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/convert-sorted-list-to-binary-search-tree/solutions/2436644/gong-shui-san-xie-jian-dan-di-gui-fen-zh-6t1x/">109. 有序链表转换二叉搜索树</a></strong> ，难度为 <strong>中等</strong></p>
+<p>给定一个单链表的头节点  <code>head</code>，其中的元素 按升序排序 ，将其转换为高度平衡的二叉搜索树。</p>
+<p>本题中，一个高度平衡二叉树是指一个二叉树每个节点 的左右两个子树的高度差不超过 $1$。</p>
+<p>示例 1:<br><img src="/2023/09/11/109.%20%E6%9C%89%E5%BA%8F%E9%93%BE%E8%A1%A8%E8%BD%AC%E6%8D%A2%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/image_0.png" srcset="/img/loading.gif" lazyload alt></p>
+<figure class="highlight subunit"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs subunit">输入: head = [<span class="hljs-string">-10</span>,<span class="hljs-string">-3</span>,0,5,9]<br><br>输出: [0,<span class="hljs-string">-3</span>,9,<span class="hljs-string">-10</span>,null,5]<br><br>解释: 一个可能的答案是[0，<span class="hljs-string">-3</span>,9，<span class="hljs-string">-10</span>,null,5]，它表示所示的高度平衡的二叉搜索树。<br></code></pre></div></td></tr></table></figure>
+<p>示例 2:<br><figure class="highlight inform7"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs inform7">输入: head = <span class="hljs-comment">[]</span><br><br>输出: <span class="hljs-comment">[]</span><br></code></pre></div></td></tr></table></figure></p>
+<p>提示:</p>
+<ul>
+<li><code>head</code> 中的节点数在 $[0, 2 \times 10^4]$ 范围内</li>
+<li>$-10^5 &lt;= Node.val &lt;= 10^5$</li>
+</ul>
+<hr>
+<h3 id="递归分治"><a href="#递归分治" class="headerlink" title="递归分治"></a>递归分治</h3><p>与上一题 <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/convert-sorted-array-to-binary-search-tree/solutions/2436639/gong-shui-san-xie-jian-dan-di-gui-fen-zh-nzqx/">108. 将有序数组转换为二叉搜索树</a> 类似，但链表相对于数组，无法 $O(1)$ 找到构建当前 <code>BST</code> 根节点的“中点”下标。</p>
+<p>一个仍可确保 $O(n)$ 时间复杂度（瓶颈在于需要创建 $n$ 个节点），但需要 $O(n)$ 空间复杂度的做法是：对链表进行一次遍历，转成数组后套用上一题的做法。</p>
+<p>一个不使用 $O(n)$ 空间复杂度的做法，需要每次遍历来找“中点”下标：起始我们先对 <code>head</code> 进行一次遍历，得到链表长度 $n$，随后仍然利用递归分治的思路进行构造，每次对入参的左右端点找“中点”，先通过直接结算的方式定位到偏移量 $t = l + \left \lfloor \frac{l + r}{2} \right \rfloor$，然后再通过从入参节点 <code>head</code> 出发往前走 $t$ 的做法找到“中点”节点。</p>
+<p>该做法每个节点的访问次数为在递归过程中被 $[l, r]$ 所覆盖的次数，我们知道一个节点数量为 $n$ 的平衡 <code>BST</code>  树高为 $\log{n}$，因此整体复杂度为 $O(n\log{n})$。</p>
+<p>Java 代码：<br><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> TreeNode <span class="hljs-title function_">sortedListToBST</span><span class="hljs-params">(ListNode head)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-type">ListNode</span> <span class="hljs-variable">cur</span> <span class="hljs-operator">=</span> head;<br>        <span class="hljs-keyword">while</span> (cur != <span class="hljs-literal">null</span> &amp;&amp; ++n &gt;= <span class="hljs-number">0</span>) cur = cur.next;<br>        <span class="hljs-keyword">return</span> build(head, <span class="hljs-number">0</span>, n - <span class="hljs-number">1</span>);<br>    &#125;<br>    TreeNode <span class="hljs-title function_">build</span><span class="hljs-params">(ListNode head, <span class="hljs-type">int</span> l, <span class="hljs-type">int</span> r)</span> &#123;<br>        <span class="hljs-keyword">if</span> (l &gt; r) <span class="hljs-keyword">return</span> <span class="hljs-literal">null</span>;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">mid</span> <span class="hljs-operator">=</span> l + r &gt;&gt; <span class="hljs-number">1</span>, t = mid - l;<br>        <span class="hljs-type">ListNode</span> <span class="hljs-variable">cur</span> <span class="hljs-operator">=</span> head;<br>        <span class="hljs-keyword">while</span> (t-- &gt; <span class="hljs-number">0</span>) cur = cur.next;<br>        <span class="hljs-type">TreeNode</span> <span class="hljs-variable">ans</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">TreeNode</span>(cur.val);<br>        ans.left = build(head, l, mid - <span class="hljs-number">1</span>);<br>        ans.right = build(cur.next, mid + <span class="hljs-number">1</span>, r);<br>        <span class="hljs-keyword">return</span> ans;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure><br>Python 代码：<br><figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span>:<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">sortedListToBST</span>(<span class="hljs-params">self, head: <span class="hljs-type">Optional</span>[ListNode]</span>) -&gt; <span class="hljs-type">Optional</span>[TreeNode]:<br>        n = <span class="hljs-number">0</span><br>        cur = head<br>        <span class="hljs-keyword">while</span> cur:<br>            n += <span class="hljs-number">1</span><br>            cur = cur.<span class="hljs-built_in">next</span><br>        <span class="hljs-keyword">return</span> self.build(head, <span class="hljs-number">0</span>, n - <span class="hljs-number">1</span>)<br>        <br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">build</span>(<span class="hljs-params">self, head: ListNode, l: <span class="hljs-built_in">int</span>, r: <span class="hljs-built_in">int</span></span>) -&gt; TreeNode:<br>        <span class="hljs-keyword">if</span> l &gt; r:<br>            <span class="hljs-keyword">return</span> <span class="hljs-literal">None</span><br>        mid = l + r &gt;&gt; <span class="hljs-number">1</span><br>        t = mid - l<br>        cur = head<br>        <span class="hljs-keyword">while</span> t &gt; <span class="hljs-number">0</span>:<br>            cur = cur.<span class="hljs-built_in">next</span><br>            t -= <span class="hljs-number">1</span><br>        ans = TreeNode(cur.val)<br>        ans.left = self.build(head, l, mid - <span class="hljs-number">1</span>)<br>        ans.right = self.build(cur.<span class="hljs-built_in">next</span>, mid + <span class="hljs-number">1</span>, r)<br>        <span class="hljs-keyword">return</span> ans<br></code></pre></div></td></tr></table></figure><br>C++ 代码：<br><figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs C++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function">TreeNode* <span class="hljs-title">sortedListToBST</span><span class="hljs-params">(ListNode* head)</span> </span>&#123;<br>        <span class="hljs-type">int</span> n = <span class="hljs-number">0</span>;<br>        ListNode* cur = head;<br>        <span class="hljs-keyword">while</span> (cur &amp;&amp; ++n &gt;= <span class="hljs-number">0</span>) cur = cur-&gt;next;<br>        <span class="hljs-keyword">return</span> <span class="hljs-built_in">build</span>(head, <span class="hljs-number">0</span>, n - <span class="hljs-number">1</span>);<br>    &#125;<br>    <span class="hljs-function">TreeNode* <span class="hljs-title">build</span><span class="hljs-params">(ListNode* head, <span class="hljs-type">int</span> l, <span class="hljs-type">int</span> r)</span> </span>&#123;<br>        <span class="hljs-keyword">if</span> (l &gt; r) <span class="hljs-keyword">return</span> <span class="hljs-literal">nullptr</span>;<br>        <span class="hljs-type">int</span> mid = l + r &gt;&gt; <span class="hljs-number">1</span>, t = mid - l;<br>        ListNode* cur = head;<br>        <span class="hljs-keyword">while</span> (t-- &gt; <span class="hljs-number">0</span>) cur = cur-&gt;next;<br>        TreeNode* ans = <span class="hljs-keyword">new</span> <span class="hljs-built_in">TreeNode</span>(cur-&gt;val);<br>        ans-&gt;left = <span class="hljs-built_in">build</span>(head, l, mid - <span class="hljs-number">1</span>);<br>        ans-&gt;right = <span class="hljs-built_in">build</span>(cur-&gt;next, mid + <span class="hljs-number">1</span>, r);<br>        <span class="hljs-keyword">return</span> ans;<br>    &#125;<br>&#125;;<br></code></pre></div></td></tr></table></figure><br>TypeScript 代码：<br><figure class="highlight typescript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs TypeScript"><span class="hljs-keyword">function</span> <span class="hljs-title function_">sortedListToBST</span>(<span class="hljs-params">head: ListNode | <span class="hljs-literal">null</span></span>): <span class="hljs-title class_">TreeNode</span> | <span class="hljs-literal">null</span> &#123;<br>    <span class="hljs-keyword">const</span> build = <span class="hljs-keyword">function</span> (<span class="hljs-params">head: ListNode | <span class="hljs-literal">null</span>, l: <span class="hljs-built_in">number</span>, r: <span class="hljs-built_in">number</span></span>): <span class="hljs-title class_">TreeNode</span> | <span class="hljs-literal">null</span> &#123;<br>        <span class="hljs-keyword">if</span> (l &gt; r) <span class="hljs-keyword">return</span> <span class="hljs-literal">null</span>;<br>        <span class="hljs-keyword">let</span> mid = l + r &gt;&gt; <span class="hljs-number">1</span>, t = mid - l;<br>        <span class="hljs-keyword">let</span> cur = head;<br>        <span class="hljs-keyword">while</span> (t-- &gt; <span class="hljs-number">0</span>) cur = cur.<span class="hljs-property">next</span>;<br>        <span class="hljs-keyword">const</span> ans = <span class="hljs-keyword">new</span> <span class="hljs-title class_">TreeNode</span>(cur!.<span class="hljs-property">val</span>);<br>        ans.<span class="hljs-property">left</span> = <span class="hljs-title function_">build</span>(head, l, mid - <span class="hljs-number">1</span>);<br>        ans.<span class="hljs-property">right</span> = <span class="hljs-title function_">build</span>(cur!.<span class="hljs-property">next</span>, mid + <span class="hljs-number">1</span>, r);<br>        <span class="hljs-keyword">return</span> ans;<br>    &#125;<br>    <span class="hljs-keyword">let</span> n = <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">let</span> cur = head;<br>    <span class="hljs-keyword">while</span> (cur != <span class="hljs-literal">null</span> &amp;&amp; ++n &gt;= <span class="hljs-number">0</span>) cur = cur.<span class="hljs-property">next</span>;       <br>    <span class="hljs-keyword">return</span> <span class="hljs-title function_">build</span>(head, <span class="hljs-number">0</span>, n - <span class="hljs-number">1</span>);<br>&#125;<br></code></pre></div></td></tr></table></figure></p>
+<ul>
+<li>时间复杂度：$O(n\log{n})$</li>
+<li>空间复杂度：$O(n)$</li>
+</ul>
+<hr>
+<h3 id="递归分治-中序遍历"><a href="#递归分治-中序遍历" class="headerlink" title="递归分治 - 中序遍历"></a>递归分治 - 中序遍历</h3><p>由于给定的 <code>nums</code> 本身严格有序，而 <code>BST</code>  的中序遍历亦是有序。因此我们可以一边遍历链表，一边对 <code>BST</code>  进行构造。</p>
+<p>具体的，我们仍然先对链表进行遍历，拿到链表长度 <code>n</code>。递归构造过程中传入左右端点 <code>l</code> 和 <code>r</code>，含义为使用链表中 $[l, r]$ 部分节点，但不再在每次递归中传入当前头结点，而是使用全局变量 <code>head</code> 来记录。</p>
+<p>递归构造过程中，计算“中点”位置 $mid  = \left \lfloor \frac{l + r}{2} \right \rfloor$，并根据如下流程进行构造：</p>
+<ol>
+<li>使用 $[l, mid - 1]$ 构建左子树，使用变量 <code>left</code> 保存当前左子树的根节点</li>
+<li>构建完左子树后，全局变量 <code>head</code> 必然来到了“中点”位置，用其构建根节点 <code>ans</code>，并将根节点与此前构造的 <code>left</code> 关联。同时让链表节点 <code>head</code> 后移</li>
+<li>使用 $[mid + 1, r]$ 构建右子树，并将其挂载到根节点 <code>ans</code> 中</li>
+</ol>
+<p>如此一来，即可确保「链表遍历」和「<code>BST</code>  构造」的同步性。</p>
+<p>Java 代码：<br><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    ListNode head;<br>    <span class="hljs-keyword">public</span> TreeNode <span class="hljs-title function_">sortedListToBST</span><span class="hljs-params">(ListNode _head)</span> &#123;<br>        head = _head;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-type">ListNode</span> <span class="hljs-variable">cur</span> <span class="hljs-operator">=</span> head;<br>        <span class="hljs-keyword">while</span> (cur != <span class="hljs-literal">null</span> &amp;&amp; ++n &gt;= <span class="hljs-number">0</span>) cur = cur.next;<br>        <span class="hljs-keyword">return</span> build(<span class="hljs-number">0</span>, n - <span class="hljs-number">1</span>);<br>    &#125;<br>    TreeNode <span class="hljs-title function_">build</span><span class="hljs-params">(<span class="hljs-type">int</span> l, <span class="hljs-type">int</span> r)</span> &#123;<br>        <span class="hljs-keyword">if</span> (l &gt; r) <span class="hljs-keyword">return</span> <span class="hljs-literal">null</span>;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">mid</span> <span class="hljs-operator">=</span> l + r &gt;&gt; <span class="hljs-number">1</span>;<br>        <span class="hljs-type">TreeNode</span> <span class="hljs-variable">left</span> <span class="hljs-operator">=</span> build(l, mid - <span class="hljs-number">1</span>); <br>        <span class="hljs-type">TreeNode</span> <span class="hljs-variable">ans</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">TreeNode</span>(head.val);<br>        head = head.next;<br>        ans.left = left;<br>        ans.right = build(mid + <span class="hljs-number">1</span>, r);<br>        <span class="hljs-keyword">return</span> ans;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure><br>Python 代码：<br><figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span>:<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">sortedListToBST</span>(<span class="hljs-params">self, head: <span class="hljs-type">Optional</span>[ListNode]</span>) -&gt; <span class="hljs-type">Optional</span>[TreeNode]:<br>        self.head = head<br>        n = <span class="hljs-number">0</span><br>        cur = self.head<br>        <span class="hljs-keyword">while</span> cur <span class="hljs-keyword">is</span> <span class="hljs-keyword">not</span> <span class="hljs-literal">None</span>:<br>            n += <span class="hljs-number">1</span><br>            cur = cur.<span class="hljs-built_in">next</span><br>        <span class="hljs-keyword">return</span> self.build(<span class="hljs-number">0</span>, n - <span class="hljs-number">1</span>)<br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">build</span>(<span class="hljs-params">self, l: <span class="hljs-built_in">int</span>, r: <span class="hljs-built_in">int</span></span>) -&gt; TreeNode:<br>        <span class="hljs-keyword">if</span> l &gt; r:<br>            <span class="hljs-keyword">return</span> <span class="hljs-literal">None</span><br>        mid = l + r &gt;&gt; <span class="hljs-number">1</span><br>        left = self.build(l, mid - <span class="hljs-number">1</span>)<br>        ans = TreeNode(self.head.val)<br>        ans.left = left<br>        self.head = self.head.<span class="hljs-built_in">next</span><br>        ans.right = self.build(mid + <span class="hljs-number">1</span>, r)<br>        <span class="hljs-keyword">return</span> ans<br></code></pre></div></td></tr></table></figure><br>C++ 代码：<br><figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs C++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br><span class="hljs-keyword">public</span>:<br>    ListNode* head;<br>    <span class="hljs-function">TreeNode* <span class="hljs-title">sortedListToBST</span><span class="hljs-params">(ListNode* _head)</span> </span>&#123;<br>        head = _head;<br>        <span class="hljs-type">int</span> n = <span class="hljs-number">0</span>;<br>        ListNode* cur = head;<br>        <span class="hljs-keyword">while</span> (cur &amp;&amp; n++ &gt;= <span class="hljs-number">0</span>) cur = cur-&gt;next;<br>        <span class="hljs-keyword">return</span> <span class="hljs-built_in">build</span>(<span class="hljs-number">0</span>, n - <span class="hljs-number">1</span>);<br>    &#125;<br>    <span class="hljs-function">TreeNode* <span class="hljs-title">build</span><span class="hljs-params">(<span class="hljs-type">int</span> l, <span class="hljs-type">int</span> r)</span> </span>&#123;<br>        <span class="hljs-keyword">if</span> (l &gt; r) <span class="hljs-keyword">return</span> <span class="hljs-literal">nullptr</span>;<br>        <span class="hljs-type">int</span> mid = l + r &gt;&gt; <span class="hljs-number">1</span>;<br>        TreeNode* left = <span class="hljs-built_in">build</span>(l, mid - <span class="hljs-number">1</span>);<br>        TreeNode* ans = <span class="hljs-keyword">new</span> <span class="hljs-built_in">TreeNode</span>(head-&gt;val);<br>        ans-&gt;left = left;<br>        head = head-&gt;next;<br>        ans-&gt;right = <span class="hljs-built_in">build</span>(mid + <span class="hljs-number">1</span>, r);<br>        <span class="hljs-keyword">return</span> ans;<br>    &#125;<br>&#125;;<br></code></pre></div></td></tr></table></figure><br>TypeScript 代码：<br><figure class="highlight typescript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs TypeScript"><span class="hljs-keyword">function</span> <span class="hljs-title function_">sortedListToBST</span>(<span class="hljs-params">_head: ListNode | <span class="hljs-literal">null</span></span>): <span class="hljs-title class_">TreeNode</span> | <span class="hljs-literal">null</span> &#123;<br>    <span class="hljs-keyword">const</span> build =<span class="hljs-keyword">function</span>(<span class="hljs-params">l: <span class="hljs-built_in">number</span>, r: <span class="hljs-built_in">number</span></span>): <span class="hljs-title class_">TreeNode</span> | <span class="hljs-literal">null</span> &#123;<br>        <span class="hljs-keyword">if</span> (l &gt; r) <span class="hljs-keyword">return</span> <span class="hljs-literal">null</span>;<br>        <span class="hljs-keyword">const</span> mid = l + r &gt;&gt; <span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">const</span> left = <span class="hljs-title function_">build</span>(l, mid - <span class="hljs-number">1</span>);<br>        <span class="hljs-keyword">const</span> ans = <span class="hljs-keyword">new</span> <span class="hljs-title class_">TreeNode</span>(head.<span class="hljs-property">val</span>);<br>        ans.<span class="hljs-property">left</span> = left;<br>        head = head.<span class="hljs-property">next</span>;<br>        ans.<span class="hljs-property">right</span> = <span class="hljs-title function_">build</span>(mid + <span class="hljs-number">1</span>, r);<br>        <span class="hljs-keyword">return</span> ans;<br>    &#125;<br>    <span class="hljs-keyword">let</span> head = _head;<br>    <span class="hljs-keyword">let</span> n = <span class="hljs-number">0</span>, cur = head;<br>    <span class="hljs-keyword">while</span> (cur &amp;&amp; n++ &gt;= <span class="hljs-number">0</span>) cur = cur.<span class="hljs-property">next</span>;<br>    <span class="hljs-keyword">return</span> <span class="hljs-title function_">build</span>(<span class="hljs-number">0</span>, n - <span class="hljs-number">1</span>);<br>&#125;<br></code></pre></div></td></tr></table></figure></p>
+<ul>
+<li>时间复杂度：$O(n)$</li>
+<li>空间复杂度：$O(\log{n})$</li>
+</ul>
+<hr>
+<h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>这是我们「刷穿 LeetCode」系列文章的第 <code>No.109</code> 篇，系列开始于 2021/01/01，截止于起始日 LeetCode 上共有 1916 道题目，部分是有锁题，我们将先把所有不带锁的题目刷完。</p>
+<p>在这个系列文章里面，除了讲解解题思路以外，还会尽可能给出最为简洁的代码。如果涉及通解还会相应的代码模板。</p>
+<p>为了方便各位同学能够电脑上进行调试和提交代码，我建立了相关的仓库：<a target="_blank" rel="noopener" href="https://github.com/SharingSource/LogicStack-LeetCode">https://github.com/SharingSource/LogicStack-LeetCode</a> 。</p>
+<p>在仓库地址里，你可以看到系列文章的题解链接、系列文章的相应代码、LeetCode 原题链接和其他优选题解。</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/">二叉树</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E6%A0%91%E7%9A%84%E6%90%9C%E7%B4%A2/">树的搜索</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%88%86%E6%B2%BB/">分治</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E4%B8%AD%E5%BA%8F%E9%81%8D%E5%8E%86/">中序遍历</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/09/12/96.%20%E4%B8%8D%E5%90%8C%E7%9A%84%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">LC 96. 不同的二叉搜索树</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/09/11/108.%20%E5%B0%86%E6%9C%89%E5%BA%8F%E6%95%B0%E7%BB%84%E8%BD%AC%E6%8D%A2%E4%B8%BA%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%EF%BC%88%E7%AE%80%E5%8D%95%EF%BC%89/">
+                        <span class="hidden-mobile">LC 108. 将有序数组转换为二叉搜索树</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://cdn.staticfile.org/valine/1.4.18/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"IDifiViRkVDTgu27Nu50GQkE-gzGzoHsz","appKey":"gt98pupgyYjPKYQASrGmD9kM","path":"window.location.pathname","placeholder":"发一条友善的评论（为方便交流，记得填上方的昵称再留言哦 ~ 🍭","avatar":"","meta":["nick","mail"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":true},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          Fluid.plugins.initFancyBox('#valine .vcontent img:not(.vemoji)');
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+  <div class="col-lg-7 mx-auto nopadding-x-md">
+    <div class="container custom post-custom mx-auto">
+      <img src="/oimg/gzh-qrcode.webp" srcset="/img/loading.gif" lazyload class="rounded mx-auto d-block mt-5" style="width:80%">
+    </div>
+  </div>
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- LeanCloud 统计PV -->
+        <span id="leancloud-site-pv-container" style="display: none">
+            总访问量 
+            <span id="leancloud-site-pv"></span>
+             次
+          </span>
+      
+      
+        <!-- LeanCloud 统计UV -->
+        <span id="leancloud-site-uv-container" style="display: none">
+            总访客数 
+            <span id="leancloud-site-uv"></span>
+             人
+          </span>
+      
+
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.staticfile.org/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.staticfile.org/tocbot/4.18.2/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.staticfile.org/anchor-js/4.3.1/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.11/clipboard.min.js" ></script>
+  
+
+
+
+
+  <script defer src="/js/leancloud.js" ></script>
+
+
+
+  <script  src="https://cdn.bootcdn.net/ajax/libs/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        loader: {
+          
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.staticfile.org/mathjax/3.2.0/es5/tex-svg.js" ></script>
+
+  
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

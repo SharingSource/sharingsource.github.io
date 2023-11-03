@@ -1,0 +1,637 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/oimg/RoundCorner.png">
+  <link rel="icon" href="/oimg/RoundCorner.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="宫水三叶">
+  <meta name="keywords" content="算法, 数据结构, 题解">
+  
+    <meta name="description" content="题目描述这是 LeetCode 上的 97. 交错字符串 ，难度为 中等。 给定三个字符串 s1、s2、s3，请你帮忙验证 s3 是否是由 s1 和 s2 交错 组成的。 两个字符串 s 和 t 交错 的定义与过程如下，其中每个字符串都会被分割成若干 非空 子字符串：  s &#x3D; s1 + s2 + ... + sn t &#x3D; t1 + t2 + ... + tm |n - m| &lt;&#x3D; 1  交">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LC 97. 交错字符串">
+<meta property="og:url" content="https://sharingsource.github.io/2023/07/25/97.%20%E4%BA%A4%E9%94%99%E5%AD%97%E7%AC%A6%E4%B8%B2%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/index.html">
+<meta property="og:site_name" content="宫水三叶的刷题日记">
+<meta property="og:description" content="题目描述这是 LeetCode 上的 97. 交错字符串 ，难度为 中等。 给定三个字符串 s1、s2、s3，请你帮忙验证 s3 是否是由 s1 和 s2 交错 组成的。 两个字符串 s 和 t 交错 的定义与过程如下，其中每个字符串都会被分割成若干 非空 子字符串：  s &#x3D; s1 + s2 + ... + sn t &#x3D; t1 + t2 + ... + tm |n - m| &lt;&#x3D; 1  交">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://sharingsource.github.io/2023/07/25/97.%20%E4%BA%A4%E9%94%99%E5%AD%97%E7%AC%A6%E4%B8%B2%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/image_0.png">
+<meta property="article:published_time" content="2023-07-25T00:38:12.000Z">
+<meta property="article:modified_time" content="2023-11-03T03:09:23.566Z">
+<meta property="article:author" content="宫水三叶">
+<meta property="article:tag" content="线性 DP">
+<meta property="article:tag" content="记忆化搜索">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://sharingsource.github.io/2023/07/25/97.%20%E4%BA%A4%E9%94%99%E5%AD%97%E7%AC%A6%E4%B8%B2%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/image_0.png">
+  
+  
+  <title>LC 97. 交错字符串 - 宫水三叶的刷题日记</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/hint.css/2.7.0/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.7.2/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"sharingsource.github.io","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"|","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"IDifiViRkVDTgu27Nu50GQkE-gzGzoHsz","app_key":"gt98pupgyYjPKYQASrGmD9kM","server_url":"https://idifivir.lc-cn-n1-shared.com","path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.1.0"></head>
+
+
+<body>
+  <header style="height: 50vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>宫水三叶の刷题日记</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/image_84.jpeg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="LC 97. 交错字符串">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-author" aria-hidden="true"></i>
+      宫水三叶
+    </span>
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2023-07-25 08:38" pubdate>
+        2023年7月25日
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">LC 97. 交错字符串</h1>
+            
+            <div class="markdown-body">
+              <h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>这是 LeetCode 上的 <strong><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/interleaving-string/solution/gong-shui-san-xie-yi-ti-shuang-jie-ji-yi-51da/">97. 交错字符串</a></strong> ，难度为 <strong>中等</strong>。</p>
+<p>给定三个字符串 <code>s1</code>、<code>s2</code>、<code>s3</code>，请你帮忙验证 <code>s3</code> 是否是由 <code>s1</code> 和 <code>s2</code> 交错 组成的。</p>
+<p>两个字符串 <code>s</code> 和 <code>t</code> <strong>交错</strong> 的定义与过程如下，其中每个字符串都会被分割成若干 <strong>非空</strong> 子字符串：</p>
+<ul>
+<li><code>s = s1 + s2 + ... + sn</code></li>
+<li><code>t = t1 + t2 + ... + tm</code></li>
+<li><code>|n - m| &lt;= 1</code></li>
+</ul>
+<p>交错是 <code>s1 + t1 + s2 + t2 + s3 + t3 + ...</code> 或者 <code>t1 + s1 + t2 + s2 + t3 + s3 + ...</code></p>
+<p>注意：<code>a + b</code> 意味着字符串 <code>a</code> 和 <code>b</code> 连接。</p>
+<p>示例 1：</p>
+<p><img src="/2023/07/25/97.%20%E4%BA%A4%E9%94%99%E5%AD%97%E7%AC%A6%E4%B8%B2%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/image_0.png" srcset="/img/loading.gif" lazyload alt></p>
+<figure class="highlight armasm"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs armasm">输入：<span class="hljs-built_in">s1</span> = <span class="hljs-string">&quot;aabcc&quot;</span>, <span class="hljs-built_in">s2</span> = <span class="hljs-string">&quot;dbbca&quot;</span>, <span class="hljs-built_in">s3</span> = <span class="hljs-string">&quot;aadbbcbcac&quot;</span><br><br>输出：true<br></code></pre></div></td></tr></table></figure>
+<p>示例 2：<br><figure class="highlight armasm"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs armasm">输入：<span class="hljs-built_in">s1</span> = <span class="hljs-string">&quot;aabcc&quot;</span>, <span class="hljs-built_in">s2</span> = <span class="hljs-string">&quot;dbbca&quot;</span>, <span class="hljs-built_in">s3</span> = <span class="hljs-string">&quot;aadbbbaccc&quot;</span><br><br>输出：false<br></code></pre></div></td></tr></table></figure><br>示例 3：<br><figure class="highlight armasm"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs armasm">输入：<span class="hljs-built_in">s1</span> = <span class="hljs-string">&quot;&quot;</span>, <span class="hljs-built_in">s2</span> = <span class="hljs-string">&quot;&quot;</span>, <span class="hljs-built_in">s3</span> = <span class="hljs-string">&quot;&quot;</span><br><br>输出：true<br></code></pre></div></td></tr></table></figure></p>
+<p>提示：</p>
+<ul>
+<li>$0 &lt;= s1.length, s2.length &lt;= 100$</li>
+<li>$0 &lt;= s3.length &lt;= 200$</li>
+<li><code>s1</code>、<code>s2</code>、和 <code>s3</code> 都由小写英文字母组成</li>
+</ul>
+<p>进阶：您能否仅使用 $O(s2.length)$ 额外的内存空间来解决它?</p>
+<hr>
+<h3 id="记忆化搜索"><a href="#记忆化搜索" class="headerlink" title="记忆化搜索"></a>记忆化搜索</h3><p>数据范围相比于「暴搜」而言有点大，但将「暴搜」解法作为前置思考，总能为我们带来灵感。</p>
+<p>将 <code>s1</code>、<code>s2</code> 和 <code>s3</code> 的长度分别记为 $n$、$m$ 和 $l$。</p>
+<p>一个显然的情况是若 $n + m$ 不为 $l$，必然不能用 <code>s1</code> 和 <code>s2</code> 来凑成 <code>s3</code>，返回 <code>false</code>。</p>
+<p>定义暴搜函数为 <code>boolean dfs(int i, int j)</code>，代表当前处理到 <code>s1</code> 的第 $i$ 个字符，<code>s2</code> 的第 $j$ 个字符，能否凑成 <code>s3</code> 的前 $i + j$ 个字符。</p>
+<p>最终答案为 <code>dfs(0, 0)</code>。</p>
+<p>根据 $s1[i]$、$s2[j]$ 和 $s3[i + j]$ 的关系分情况讨论：</p>
+<ul>
+<li>$s1[i] = s3[i + j]$，可使用 $s1[i]$ 充当 $s3[i + j]$ ，暴搜 $s1[i]$ 已被使用的情况，决策下一位 <code>dfs(i + 1, j)</code></li>
+<li>$s2[j] = s3[i + j]$，可使用 $s2[j]$ 充当 $s3[i + j]$ ，暴搜 $s2[j]$ 已被使用的情况，决策下一位<code>dfs(i, j + 1)</code></li>
+</ul>
+<p>当 $i + j = l$ 时，代表我们成功用 <code>s1</code> 和 <code>s2</code> 凑成了 <code>s3</code>，返回 <code>true</code>；而若在任一回合出现 $s1[i] \neq s3[i + j]$ 且 $s2[j] \neq s3[i + j]$，说明构造无法进行，返回 <code>false</code>。</p>
+<p><code>TLE</code> Java 代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-type">char</span>[] cs1, cs2, cs3;<br>    <span class="hljs-type">int</span> n, m, l;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">isInterleave</span><span class="hljs-params">(String s1, String s2, String s3)</span> &#123;<br>        cs1 = s1.toCharArray(); cs2 = s2.toCharArray(); cs3 = s3.toCharArray();<br>        n = s1.length(); m = s2.length(); l = s3.length();<br>        <span class="hljs-keyword">if</span> (n + m != l) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>        <span class="hljs-keyword">return</span> dfs(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>);<br>    &#125;<br>    <span class="hljs-type">boolean</span> <span class="hljs-title function_">dfs</span><span class="hljs-params">(<span class="hljs-type">int</span> i, <span class="hljs-type">int</span> j)</span> &#123;<br>        <span class="hljs-keyword">if</span> (i + j == l) <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>        <span class="hljs-type">boolean</span> <span class="hljs-variable">ans</span> <span class="hljs-operator">=</span> <span class="hljs-literal">false</span>;<br>        <span class="hljs-keyword">if</span> (i &lt; n &amp;&amp; cs1[i] == cs3[i + j]) ans |= dfs(i + <span class="hljs-number">1</span>, j);<br>        <span class="hljs-keyword">if</span> (j &lt; m &amp;&amp; cs2[j] == cs3[i + j]) ans |= dfs(i, j + <span class="hljs-number">1</span>);<br>        <span class="hljs-keyword">return</span> ans;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<p>可分析上述 <code>TLE</code>  做法的时间复杂度上界为交错序列个数。</p>
+<p>长度分别为 $n$ 和 $m$ 形成的交错序列数量为 $C(n+m, n) = \frac{(n+m)!}{n! \times m!}$ : 从 $n + m$ 个位置中选 $n$ 个位置按顺序放置 <code>s1</code>，剩下的 $m$ 个位置唯一确定的放置 <code>s2</code>。</p>
+<p>实际上，不同交错序列之间有着相同的前缀（例如 <code>s1 = aac</code> 和 <code>s2 = bbd</code>，具体交错方案中的 <code>aabbcd</code> 和 <code>aabbdc</code> 之间有着相同的前缀 <code>aabb__</code>），可通过「记忆化搜索」来进行减少这些重复的构造。</p>
+<p>直接根据 <code>dfs</code> 函数的入参构建缓存器 <code>cache</code>，起始 <code>cache[i][j] = 0</code>；若 <code>cache[i][j] = 1</code> 代表 <code>true</code>；<code>cache[i][j] = -1</code> 代表 <code>false</code>。</p>
+<p>如此简单的改动，即可将朴素的 <code>DFS</code>  改成记忆化搜索。</p>
+<p>Java 代码：<br><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-type">char</span>[] cs1, cs2, cs3;<br>    <span class="hljs-type">int</span> n, m, l;<br>    <span class="hljs-type">int</span>[][] cache;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">isInterleave</span><span class="hljs-params">(String s1, String s2, String s3)</span> &#123;<br>        cs1 = s1.toCharArray(); cs2 = s2.toCharArray(); cs3 = s3.toCharArray();<br>        n = s1.length(); m = s2.length(); l = s3.length();<br>        <span class="hljs-keyword">if</span> (n + m != l) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>        cache = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[n + <span class="hljs-number">10</span>][m + <span class="hljs-number">10</span>];<br>        <span class="hljs-keyword">return</span> dfs(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>);<br>    &#125;<br>    <span class="hljs-type">boolean</span> <span class="hljs-title function_">dfs</span><span class="hljs-params">(<span class="hljs-type">int</span> i, <span class="hljs-type">int</span> j)</span> &#123;<br>        <span class="hljs-keyword">if</span> (cache[i][j] != <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> cache[i][j] == <span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">if</span> (i + j == l) <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>        <span class="hljs-type">boolean</span> <span class="hljs-variable">ans</span> <span class="hljs-operator">=</span> <span class="hljs-literal">false</span>;<br>        <span class="hljs-keyword">if</span> (i &lt; n &amp;&amp; cs1[i] == cs3[i + j]) ans |= dfs(i + <span class="hljs-number">1</span>, j);<br>        <span class="hljs-keyword">if</span> (j &lt; m &amp;&amp; cs2[j] == cs3[i + j]) ans |= dfs(i, j + <span class="hljs-number">1</span>);<br>        cache[i][j] = ans ? <span class="hljs-number">1</span> : -<span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">return</span> ans;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure><br>C++ 代码：<br><figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs C++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">bool</span> <span class="hljs-title">isInterleave</span><span class="hljs-params">(string s1, string s2, string s3)</span> </span>&#123;<br>        <span class="hljs-type">int</span> n = s1.<span class="hljs-built_in">length</span>(), m = s2.<span class="hljs-built_in">length</span>(), l = s3.<span class="hljs-built_in">length</span>();<br>        <span class="hljs-keyword">if</span> (n + m != l) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>        vector&lt;vector&lt;<span class="hljs-type">int</span>&gt;&gt; <span class="hljs-built_in">cache</span>(n + <span class="hljs-number">10</span>, <span class="hljs-built_in">vector</span>&lt;<span class="hljs-type">int</span>&gt;(m + <span class="hljs-number">10</span>, <span class="hljs-number">0</span>));<br>        function&lt;<span class="hljs-type">bool</span>(<span class="hljs-type">int</span>, <span class="hljs-type">int</span>)&gt; dfs = [&amp;](<span class="hljs-type">int</span> i, <span class="hljs-type">int</span> j) &#123;<br>            <span class="hljs-keyword">if</span> (cache[i][j] != <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> cache[i][j] == <span class="hljs-number">1</span>;<br>            <span class="hljs-keyword">if</span> (i + j == l) <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>            <span class="hljs-type">bool</span> ans = <span class="hljs-literal">false</span>;<br>            <span class="hljs-keyword">if</span> (i &lt; n &amp;&amp; s1[i] == s3[i + j]) ans |= <span class="hljs-built_in">dfs</span>(i + <span class="hljs-number">1</span>, j);<br>            <span class="hljs-keyword">if</span> (j &lt; m &amp;&amp; s2[j] == s3[i + j]) ans |= <span class="hljs-built_in">dfs</span>(i, j + <span class="hljs-number">1</span>);<br>            cache[i][j] = ans ? <span class="hljs-number">1</span> : <span class="hljs-number">-1</span>;<br>            <span class="hljs-keyword">return</span> ans;<br>        &#125;;<br>        <span class="hljs-keyword">return</span> <span class="hljs-built_in">dfs</span>(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>);<br>    &#125;<br>&#125;;<br></code></pre></div></td></tr></table></figure><br>Python 代码：<br><figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span>:<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">isInterleave</span>(<span class="hljs-params">self, s1: <span class="hljs-built_in">str</span>, s2: <span class="hljs-built_in">str</span>, s3: <span class="hljs-built_in">str</span></span>) -&gt; <span class="hljs-built_in">bool</span>:<br>        n, m, l = <span class="hljs-built_in">len</span>(s1), <span class="hljs-built_in">len</span>(s2), <span class="hljs-built_in">len</span>(s3)<br>        <span class="hljs-keyword">if</span> n + m != l:<br>            <span class="hljs-keyword">return</span> <span class="hljs-literal">False</span><br><span class="hljs-meta">        @lru_cache</span><br>        <span class="hljs-keyword">def</span> <span class="hljs-title function_">dfs</span>(<span class="hljs-params">i, j</span>):<br>            <span class="hljs-keyword">if</span> i + j == l:<br>                <span class="hljs-keyword">return</span> <span class="hljs-literal">True</span><br>            ans = <span class="hljs-literal">False</span><br>            <span class="hljs-keyword">if</span> i &lt; n <span class="hljs-keyword">and</span> s1[i] == s3[i + j]:<br>                ans |= dfs(i + <span class="hljs-number">1</span>, j)<br>            <span class="hljs-keyword">if</span> j &lt; m <span class="hljs-keyword">and</span> s2[j] == s3[i + j]:<br>                ans |= dfs(i, j + <span class="hljs-number">1</span>)<br>            <span class="hljs-keyword">return</span> ans<br>        <span class="hljs-keyword">return</span> dfs(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>)<br></code></pre></div></td></tr></table></figure><br>TypeScript 代码：<br><figure class="highlight typescript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs TypeScript"><span class="hljs-keyword">function</span> <span class="hljs-title function_">isInterleave</span>(<span class="hljs-params">s1: <span class="hljs-built_in">string</span>, s2: <span class="hljs-built_in">string</span>, s3: <span class="hljs-built_in">string</span></span>): <span class="hljs-built_in">boolean</span> &#123;<br>    <span class="hljs-keyword">const</span> n = s1.<span class="hljs-property">length</span>, m = s2.<span class="hljs-property">length</span>, l = s3.<span class="hljs-property">length</span>;<br>    <span class="hljs-keyword">if</span> (n + m !== l) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>    <span class="hljs-keyword">const</span> cache = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Array</span>(n + <span class="hljs-number">10</span>).<span class="hljs-title function_">fill</span>(<span class="hljs-number">0</span>).<span class="hljs-title function_">map</span>(<span class="hljs-function">() =&gt;</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Array</span>(m + <span class="hljs-number">10</span>).<span class="hljs-title function_">fill</span>(<span class="hljs-number">0</span>));<br>    <span class="hljs-keyword">const</span> dfs = (<span class="hljs-attr">i</span>: <span class="hljs-built_in">number</span>, <span class="hljs-attr">j</span>: <span class="hljs-built_in">number</span>): <span class="hljs-function"><span class="hljs-params">boolean</span> =&gt;</span> &#123;<br>        <span class="hljs-keyword">if</span> (cache[i][j] !== <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> cache[i][j] === <span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">if</span> (i + j === l) <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>        <span class="hljs-keyword">let</span> ans = <span class="hljs-literal">false</span>;<br>        <span class="hljs-keyword">if</span> (i &lt; n &amp;&amp; s1[i] === s3[i + j]) ans ||= <span class="hljs-title function_">dfs</span>(i + <span class="hljs-number">1</span>, j);<br>        <span class="hljs-keyword">if</span> (j &lt; m &amp;&amp; s2[j] === s3[i + j]) ans ||= <span class="hljs-title function_">dfs</span>(i, j + <span class="hljs-number">1</span>);<br>        cache[i][j] = ans ? <span class="hljs-number">1</span> : -<span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">return</span> ans;<br>    &#125;;<br>    <span class="hljs-keyword">return</span> <span class="hljs-title function_">dfs</span>(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>);<br>&#125;;<br></code></pre></div></td></tr></table></figure></p>
+<ul>
+<li>时间复杂度：共有 $n \times m$ 个状态，复杂度为 $O(n \times m)$</li>
+<li>空间复杂度：$O(n \times m)$</li>
+</ul>
+<hr>
+<h3 id="线性-DP"><a href="#线性-DP" class="headerlink" title="线性 DP"></a>线性 DP</h3><p>直接将「记忆化搜索」中的缓存器修改为我们的动态规划状态定义。</p>
+<p><strong>定义 $f[i][j]$ 为使用 <code>s1</code> 的前 $i$ 个字符，使用 <code>s2</code> 的前 $j$ 个字符，能否凑出 <code>s3</code> 的前 $i + j$ 个字符</strong>。</p>
+<p>为了方便，我们令所有字符串的下标均从 $1$ 开始。</p>
+<p>不失一般性，考虑 $f[i][j]$ 如何转移，根据 $s1[i]$、$s2[j]$ 和 $s3[i+j]$ 是否相等进行分析，即<strong>根据当前 <code>s3</code> 的最后一个字符 $s3[i + j]$ 由 $s1[i]$ 和 $s2[j]$ 谁来提供进行讨论</strong>：</p>
+<ul>
+<li>$s1[i] = s3[i + j]$：说明当前 <code>s3</code> 的最后一个字符 $s3[i + j]$ 可由 $s1[i]$ 提供，而 <code>s3</code> 此前的 $i + j - 1$ 个字符，可由 <code>s1</code> 的前  $i - 1$ 字符和 <code>s2</code> 的前 $j$ 个字符共同提供。此时若 $f[i - 1][j]$ 为真，则有 $f[i][j]$ 为真。</li>
+<li>$s2[j] = s3[i+j]$：说明当前 <code>s3</code> 的最后一个字符串 $s3[i+j]$ 可由 $s2[j]$ 提供，而 <code>s3</code> 此前的 $i + j - 1$ 个字符，可由 <code>s1</code> 的前  $i$ 字符和 <code>s2</code> 的前 $j - 1$ 个字符共同提供。此时若 $f[i][j - 1]$ 为真，则有 $f[i][j]$ 为真。</li>
+</ul>
+<p>综上，只有上述条件任一成立，$f[i][j]$ 即为真。</p>
+<p>一些细节：为了在转移过程中减少边界处理，我们先预处理出 $f[0][X]$ 和 $f[X][0]$ 的状态值（即 <code>s1</code>、<code>s2</code> 和 <code>s3</code> 之间的公共前缀）。</p>
+<p>Java 代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">isInterleave</span><span class="hljs-params">(String s1, String s2, String s3)</span> &#123;<br>        <span class="hljs-type">char</span>[] cs1 = s1.toCharArray(), cs2 = s2.toCharArray(), cs3 = s3.toCharArray();<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> s1.length(), m = s2.length(), l = s3.length();<br>        <span class="hljs-keyword">if</span> (n + m != l) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>        <span class="hljs-type">boolean</span>[][] f = <span class="hljs-keyword">new</span> <span class="hljs-title class_">boolean</span>[n + <span class="hljs-number">10</span>][m + <span class="hljs-number">10</span>];<br>        f[<span class="hljs-number">0</span>][<span class="hljs-number">0</span>] = <span class="hljs-literal">true</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>; i &lt;= n &amp;&amp; f[i - <span class="hljs-number">1</span>][<span class="hljs-number">0</span>]; i++) f[i][<span class="hljs-number">0</span>] = cs1[i - <span class="hljs-number">1</span>] == cs3[i - <span class="hljs-number">1</span>];<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>; i &lt;= m &amp;&amp; f[<span class="hljs-number">0</span>][i - <span class="hljs-number">1</span>]; i++) f[<span class="hljs-number">0</span>][i] = cs2[i - <span class="hljs-number">1</span>] == cs3[i - <span class="hljs-number">1</span>];<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>; i &lt;= n; i++) &#123;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>; j &lt;= m; j++) &#123;<br>                <span class="hljs-keyword">if</span> (cs1[i - <span class="hljs-number">1</span>] == cs3[i + j - <span class="hljs-number">1</span>]) f[i][j] |= f[i - <span class="hljs-number">1</span>][j];<br>                <span class="hljs-keyword">if</span> (cs2[j - <span class="hljs-number">1</span>] == cs3[i + j - <span class="hljs-number">1</span>]) f[i][j] |= f[i][j - <span class="hljs-number">1</span>];<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> f[n][m];<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<p>Python 代码：<br><figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span>:<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">isInterleave</span>(<span class="hljs-params">self, s1: <span class="hljs-built_in">str</span>, s2: <span class="hljs-built_in">str</span>, s3: <span class="hljs-built_in">str</span></span>) -&gt; <span class="hljs-built_in">bool</span>:<br>        n, m, l = <span class="hljs-built_in">len</span>(s1), <span class="hljs-built_in">len</span>(s2), <span class="hljs-built_in">len</span>(s3)<br>        <span class="hljs-keyword">if</span> n + m != l:<br>            <span class="hljs-keyword">return</span> <span class="hljs-literal">False</span><br>        f = [[<span class="hljs-literal">False</span>] * (m + <span class="hljs-number">10</span>) <span class="hljs-keyword">for</span> _ <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(n + <span class="hljs-number">10</span>)]<br>        f[<span class="hljs-number">0</span>][<span class="hljs-number">0</span>] = <span class="hljs-literal">True</span><br>        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">1</span>, n + <span class="hljs-number">1</span>):<br>            f[i][<span class="hljs-number">0</span>] = f[i - <span class="hljs-number">1</span>][<span class="hljs-number">0</span>] <span class="hljs-keyword">and</span> s1[i - <span class="hljs-number">1</span>] == s3[i - <span class="hljs-number">1</span>]<br>        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">1</span>, m + <span class="hljs-number">1</span>):<br>            f[<span class="hljs-number">0</span>][i] = f[<span class="hljs-number">0</span>][i - <span class="hljs-number">1</span>] <span class="hljs-keyword">and</span> s2[i - <span class="hljs-number">1</span>] == s3[i - <span class="hljs-number">1</span>]<br>        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">1</span>, n + <span class="hljs-number">1</span>):<br>            <span class="hljs-keyword">for</span> j <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">1</span>, m + <span class="hljs-number">1</span>):<br>                <span class="hljs-keyword">if</span> s1[i - <span class="hljs-number">1</span>] == s3[i + j - <span class="hljs-number">1</span>]:<br>                    f[i][j] |= f[i - <span class="hljs-number">1</span>][j]<br>                <span class="hljs-keyword">if</span> s2[j - <span class="hljs-number">1</span>] == s3[i + j - <span class="hljs-number">1</span>]:<br>                    f[i][j] |= f[i][j - <span class="hljs-number">1</span>]<br>        <span class="hljs-keyword">return</span> f[n][m]<br></code></pre></div></td></tr></table></figure><br>C++ 代码：<br><figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs C++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">bool</span> <span class="hljs-title">isInterleave</span><span class="hljs-params">(string s1, string s2, string s3)</span> </span>&#123;<br>        <span class="hljs-type">int</span> n = s1.<span class="hljs-built_in">length</span>(), m = s2.<span class="hljs-built_in">length</span>(), l = s3.<span class="hljs-built_in">length</span>();<br>        <span class="hljs-keyword">if</span> (n + m != l) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>        vector&lt;vector&lt;<span class="hljs-type">bool</span>&gt;&gt; <span class="hljs-built_in">f</span>(n + <span class="hljs-number">10</span>, <span class="hljs-built_in">vector</span>&lt;<span class="hljs-type">bool</span>&gt;(m + <span class="hljs-number">10</span>, <span class="hljs-literal">false</span>));<br>        f[<span class="hljs-number">0</span>][<span class="hljs-number">0</span>] = <span class="hljs-literal">true</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt;= n &amp;&amp; f[i - <span class="hljs-number">1</span>][<span class="hljs-number">0</span>]; i++) f[i][<span class="hljs-number">0</span>] = (s1[i - <span class="hljs-number">1</span>] == s3[i - <span class="hljs-number">1</span>]);<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt;= m &amp;&amp; f[<span class="hljs-number">0</span>][i - <span class="hljs-number">1</span>]; i++) f[<span class="hljs-number">0</span>][i] = (s2[i - <span class="hljs-number">1</span>] == s3[i - <span class="hljs-number">1</span>]);<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt;= n; i++) &#123;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> j = <span class="hljs-number">1</span>; j &lt;= m; j++) &#123;<br>                <span class="hljs-keyword">if</span> (s1[i - <span class="hljs-number">1</span>] == s3[i + j - <span class="hljs-number">1</span>]) f[i][j] = f[i][j] | f[i - <span class="hljs-number">1</span>][j];<br>                <span class="hljs-keyword">if</span> (s2[j - <span class="hljs-number">1</span>] == s3[i + j - <span class="hljs-number">1</span>]) f[i][j] = f[i][j] | f[i][j - <span class="hljs-number">1</span>];<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> f[n][m];<br>    &#125;<br>&#125;;<br></code></pre></div></td></tr></table></figure><br>TypeScript 代码：<br><figure class="highlight typescript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs TypeScript"><span class="hljs-keyword">function</span> <span class="hljs-title function_">isInterleave</span>(<span class="hljs-params">s1: <span class="hljs-built_in">string</span>, s2: <span class="hljs-built_in">string</span>, s3: <span class="hljs-built_in">string</span></span>): <span class="hljs-built_in">boolean</span> &#123;<br>    <span class="hljs-keyword">const</span> n = s1.<span class="hljs-property">length</span>, m = s2.<span class="hljs-property">length</span>, l = s3.<span class="hljs-property">length</span>;<br>    <span class="hljs-keyword">if</span> (n + m !== l) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>    <span class="hljs-keyword">const</span> f = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Array</span>(n + <span class="hljs-number">10</span>).<span class="hljs-title function_">fill</span>(<span class="hljs-literal">false</span>).<span class="hljs-title function_">map</span>(<span class="hljs-function">() =&gt;</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Array</span>(m + <span class="hljs-number">10</span>).<span class="hljs-title function_">fill</span>(<span class="hljs-literal">false</span>));<br>    f[<span class="hljs-number">0</span>][<span class="hljs-number">0</span>] = <span class="hljs-literal">true</span>;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">1</span>; i &lt;= n &amp;&amp; f[i - <span class="hljs-number">1</span>][<span class="hljs-number">0</span>]; i++) f[i][<span class="hljs-number">0</span>] = s1[i - <span class="hljs-number">1</span>] === s3[i - <span class="hljs-number">1</span>];<br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">1</span>; i &lt;= m &amp;&amp; f[<span class="hljs-number">0</span>][i - <span class="hljs-number">1</span>]; i++) f[<span class="hljs-number">0</span>][i] = s2[i - <span class="hljs-number">1</span>] === s3[i - <span class="hljs-number">1</span>];<br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">1</span>; i &lt;= n; i++) &#123;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> j = <span class="hljs-number">1</span>; j &lt;= m; j++) &#123;<br>            <span class="hljs-keyword">if</span> (s1[i - <span class="hljs-number">1</span>] === s3[i + j - <span class="hljs-number">1</span>]) f[i][j] ||= f[i - <span class="hljs-number">1</span>][j];<br>            <span class="hljs-keyword">if</span> (s2[j - <span class="hljs-number">1</span>] === s3[i + j - <span class="hljs-number">1</span>]) f[i][j] ||= f[i][j - <span class="hljs-number">1</span>];<br>        &#125;<br>    &#125;<br>    <span class="hljs-keyword">return</span> f[n][m];<br>&#125;;<br></code></pre></div></td></tr></table></figure></p>
+<ul>
+<li>时间复杂度：$O(n \times m)$</li>
+<li>空间复杂度：$O(n \times m)$</li>
+</ul>
+<hr>
+<h3 id="进阶"><a href="#进阶" class="headerlink" title="进阶"></a>进阶</h3><p>根据状态转移方程可知 $f[i][j]$ 仅依赖于 $f[i - 1][j]$ 和 $f[i][j - 1]$，因此可通过「滚动数组」的方式进行优化。</p>
+<p>状态定义不变，将动规数组开成 $f[2][m + 10]$ 大小（另外一维的 <code>+10</code> 操作仅为个人习惯）。</p>
+<p>随后，当我们需要更新 <code>f[i][X]</code> 时，需要写成 <code>f[i &amp; 1][X]</code>；需要访问 <code>f[i - 1][X]</code> 时，则写成 <code>f[(i - 1) &amp; 1][X]</code> 即可。</p>
+<p>最后，同样是为了转移过程中减少边界处理，我们需要使用两个变量 <code>a</code> 和 <code>b</code> 记住 <code>s1</code> 和 <code>s2</code> 与 <code>s3</code> 的公共前缀，并特判掉 <code>s1</code> 或 <code>s2</code> 为空的情况。</p>
+<p>Java 代码：<br><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">isInterleave</span><span class="hljs-params">(String s1, String s2, String s3)</span> &#123;<br>        <span class="hljs-type">char</span>[] cs1 = s1.toCharArray(), cs2 = s2.toCharArray(), cs3 = s3.toCharArray();<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> s1.length(), m = s2.length(), l = s3.length();<br>        <span class="hljs-keyword">if</span> (n + m != l) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">a</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>, b = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">while</span> (a &lt; n &amp;&amp; cs1[a] == cs3[a]) a++;<br>        <span class="hljs-keyword">while</span> (b &lt; m &amp;&amp; cs2[b] == cs3[b]) b++;<br>        <span class="hljs-keyword">if</span> (m == <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> n &lt;= a;<br>        <span class="hljs-keyword">if</span> (n == <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> m &lt;= b;<br>        <span class="hljs-type">boolean</span>[][] f = <span class="hljs-keyword">new</span> <span class="hljs-title class_">boolean</span>[<span class="hljs-number">2</span>][m + <span class="hljs-number">10</span>];<br>        f[<span class="hljs-number">0</span>][<span class="hljs-number">0</span>] = <span class="hljs-literal">true</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>; i &lt;= n; i++) &#123;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>; j &lt;= m; j++) &#123;<br>                <span class="hljs-type">boolean</span> <span class="hljs-variable">cur</span> <span class="hljs-operator">=</span> <span class="hljs-literal">false</span>;<br>                <span class="hljs-keyword">if</span> (cs1[i - <span class="hljs-number">1</span>] == cs3[i + j - <span class="hljs-number">1</span>]) &#123;<br>                    <span class="hljs-keyword">if</span> (i == <span class="hljs-number">1</span>) cur |= j &lt;= b;<br>                    <span class="hljs-keyword">else</span> cur |= f[(i - <span class="hljs-number">1</span>) &amp; <span class="hljs-number">1</span>][j];<br>                &#125;<br>                <span class="hljs-keyword">if</span> (cs2[j - <span class="hljs-number">1</span>] == cs3[i + j - <span class="hljs-number">1</span>]) &#123;<br>                    <span class="hljs-keyword">if</span> (j == <span class="hljs-number">1</span>) cur |= i &lt;= a;<br>                    <span class="hljs-keyword">else</span> cur |= f[i &amp; <span class="hljs-number">1</span>][j - <span class="hljs-number">1</span>];<br>                &#125;<br>                f[i &amp; <span class="hljs-number">1</span>][j] = cur;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> f[n &amp; <span class="hljs-number">1</span>][m];<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure><br>C++ 代码：<br><figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs C++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">bool</span> <span class="hljs-title">isInterleave</span><span class="hljs-params">(string s1, string s2, string s3)</span> </span>&#123;<br>        <span class="hljs-type">int</span> n = s1.<span class="hljs-built_in">length</span>(), m = s2.<span class="hljs-built_in">length</span>(), l = s3.<span class="hljs-built_in">length</span>();<br>        <span class="hljs-keyword">if</span> (n + m != l) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>        <span class="hljs-type">int</span> a = <span class="hljs-number">0</span>, b = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">while</span> (a &lt; n &amp;&amp; s1[a] == s3[a]) a++;<br>        <span class="hljs-keyword">while</span> (b &lt; m &amp;&amp; s2[b] == s3[b]) b++;<br>        <span class="hljs-keyword">if</span> (n == <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> m &lt;= b;<br>        <span class="hljs-keyword">if</span> (m == <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> n &lt;= a;<br>        vector&lt;vector&lt;<span class="hljs-type">bool</span>&gt;&gt; <span class="hljs-built_in">f</span>(<span class="hljs-number">2</span>, <span class="hljs-built_in">vector</span>&lt;<span class="hljs-type">bool</span>&gt;(m + <span class="hljs-number">1</span>, <span class="hljs-literal">false</span>));<br>        f[<span class="hljs-number">0</span>][<span class="hljs-number">0</span>] = <span class="hljs-literal">true</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt;= n; i++) &#123;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> j = <span class="hljs-number">1</span>; j &lt;= m; j++) &#123;<br>                <span class="hljs-type">bool</span> cur = <span class="hljs-literal">false</span>;<br>                <span class="hljs-keyword">if</span> (s1[i - <span class="hljs-number">1</span>] == s3[i + j - <span class="hljs-number">1</span>]) &#123;<br>                    <span class="hljs-keyword">if</span> (i == <span class="hljs-number">1</span>) cur |= j &lt;= b;    <br>                    <span class="hljs-keyword">else</span> cur |= f[(i - <span class="hljs-number">1</span>) &amp; <span class="hljs-number">1</span>][j];<br>                &#125;<br>                <span class="hljs-keyword">if</span> (s2[j - <span class="hljs-number">1</span>] == s3[i + j - <span class="hljs-number">1</span>]) &#123;<br>                    <span class="hljs-keyword">if</span> (j == <span class="hljs-number">1</span>) cur |= i &lt;= a;<br>                    <span class="hljs-keyword">else</span> cur |= f[i &amp; <span class="hljs-number">1</span>][j - <span class="hljs-number">1</span>]; <br>                &#125;<br>                f[i &amp; <span class="hljs-number">1</span>][j] = cur;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> f[n &amp; <span class="hljs-number">1</span>][m];<br>    &#125;<br>&#125;;<br></code></pre></div></td></tr></table></figure><br>Python 代码：<br><figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span>:<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">isInterleave</span>(<span class="hljs-params">self, s1: <span class="hljs-built_in">str</span>, s2: <span class="hljs-built_in">str</span>, s3: <span class="hljs-built_in">str</span></span>) -&gt; <span class="hljs-built_in">bool</span>:<br>        n, m, l = <span class="hljs-built_in">len</span>(s1), <span class="hljs-built_in">len</span>(s2), <span class="hljs-built_in">len</span>(s3)<br>        <span class="hljs-keyword">if</span> n + m != l:<br>            <span class="hljs-keyword">return</span> <span class="hljs-literal">False</span><br>        a, b = <span class="hljs-number">0</span>, <span class="hljs-number">0</span><br>        <span class="hljs-keyword">while</span> a &lt; n <span class="hljs-keyword">and</span> s1[a] == s3[a]:<br>            a += <span class="hljs-number">1</span><br>        <span class="hljs-keyword">while</span> b &lt; m <span class="hljs-keyword">and</span> s2[b] == s3[b]:<br>            b += <span class="hljs-number">1</span><br>        <span class="hljs-keyword">if</span> m == <span class="hljs-number">0</span>:<br>            <span class="hljs-keyword">return</span> n &lt;= a<br>        <span class="hljs-keyword">if</span> n == <span class="hljs-number">0</span>:<br>            <span class="hljs-keyword">return</span> m &lt;= b<br>        f = [[<span class="hljs-literal">False</span> <span class="hljs-keyword">for</span> _ <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(m + <span class="hljs-number">1</span>)] <span class="hljs-keyword">for</span> _ <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">2</span>)]<br>        f[<span class="hljs-number">0</span>][<span class="hljs-number">0</span>] = <span class="hljs-literal">True</span><br>        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">1</span>, n+<span class="hljs-number">1</span>):<br>            <span class="hljs-keyword">for</span> j <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">1</span>, m+<span class="hljs-number">1</span>):<br>                cur = <span class="hljs-literal">False</span><br>                <span class="hljs-keyword">if</span> s1[i - <span class="hljs-number">1</span>] == s3[i + j - <span class="hljs-number">1</span>]:<br>                    <span class="hljs-keyword">if</span> i == <span class="hljs-number">1</span>:<br>                        cur |= j &lt;= b<br>                    <span class="hljs-keyword">else</span>:<br>                        cur |= f[(i - <span class="hljs-number">1</span>) &amp; <span class="hljs-number">1</span>][j]<br>                <span class="hljs-keyword">if</span> s2[j - <span class="hljs-number">1</span>] == s3[i + j - <span class="hljs-number">1</span>]:<br>                    <span class="hljs-keyword">if</span> j == <span class="hljs-number">1</span>:<br>                        cur |= i &lt;= a<br>                    <span class="hljs-keyword">else</span>:<br>                        cur |= f[i &amp; <span class="hljs-number">1</span>][j - <span class="hljs-number">1</span>]<br>                f[i &amp; <span class="hljs-number">1</span>][j] = cur<br>        <span class="hljs-keyword">return</span> f[n &amp; <span class="hljs-number">1</span>][m]<br></code></pre></div></td></tr></table></figure><br>TypeScript 代码：<br><figure class="highlight typescript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs TypeScript"><span class="hljs-keyword">function</span> <span class="hljs-title function_">isInterleave</span>(<span class="hljs-params">s1: <span class="hljs-built_in">string</span>, s2: <span class="hljs-built_in">string</span>, s3: <span class="hljs-built_in">string</span></span>): <span class="hljs-built_in">boolean</span> &#123;<br>    <span class="hljs-keyword">const</span> n = s1.<span class="hljs-property">length</span>, m = s2.<span class="hljs-property">length</span>, l = s3.<span class="hljs-property">length</span>;<br>    <span class="hljs-keyword">if</span> (n + m !== l) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>    <span class="hljs-keyword">let</span> a = <span class="hljs-number">0</span>, b = <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">while</span> (a &lt; n &amp;&amp; s1[a] === s3[a]) a++;<br>    <span class="hljs-keyword">while</span> (b &lt; m &amp;&amp; s2[b] === s3[b]) b++;<br>    <span class="hljs-keyword">if</span> (m == <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> n &lt;= a;<br>    <span class="hljs-keyword">if</span> (n == <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> m &lt;= b;<br>    <span class="hljs-keyword">const</span> f = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Array</span>(<span class="hljs-number">2</span>).<span class="hljs-title function_">fill</span>(<span class="hljs-literal">null</span>).<span class="hljs-title function_">map</span>(<span class="hljs-function">() =&gt;</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Array</span>(m + <span class="hljs-number">1</span>).<span class="hljs-title function_">fill</span>(<span class="hljs-literal">false</span>));<br>    f[<span class="hljs-number">0</span>][<span class="hljs-number">0</span>] = <span class="hljs-literal">true</span>;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">1</span>; i &lt;= n; i++) &#123;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> j = <span class="hljs-number">1</span>; j &lt;= m; j++) &#123;<br>            <span class="hljs-keyword">let</span> cur = <span class="hljs-literal">false</span>;<br>            <span class="hljs-keyword">if</span> (s1[i - <span class="hljs-number">1</span>] === s3[i + j - <span class="hljs-number">1</span>]) &#123;<br>                <span class="hljs-keyword">if</span> (i === <span class="hljs-number">1</span>) cur ||= j &lt;= b;    <br>                <span class="hljs-keyword">else</span> cur ||= f[(i - <span class="hljs-number">1</span>) &amp; <span class="hljs-number">1</span>][j];<br>            &#125;<br>            <span class="hljs-keyword">if</span> (s2[j - <span class="hljs-number">1</span>] === s3[i + j - <span class="hljs-number">1</span>]) &#123;<br>                <span class="hljs-keyword">if</span> (j === <span class="hljs-number">1</span>) cur ||= i &lt;= a;    <br>                <span class="hljs-keyword">else</span> cur ||= f[i &amp; <span class="hljs-number">1</span>][j - <span class="hljs-number">1</span>];<br>            &#125;<br>            f[i &amp; <span class="hljs-number">1</span>][j] = cur;<br>        &#125;<br>    &#125;<br>    <span class="hljs-keyword">return</span> f[n &amp; <span class="hljs-number">1</span>][m];<br>&#125;;<br></code></pre></div></td></tr></table></figure></p>
+<ul>
+<li>时间复杂度：$O(n \times m)$</li>
+<li>空间复杂度：$O(m)$</li>
+</ul>
+<hr>
+<h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>这是我们「刷穿 LeetCode」系列文章的第 <code>No.97</code> 篇，系列开始于 2021/01/01，截止于起始日 LeetCode 上共有 1916 道题目，部分是有锁题，我们将先把所有不带锁的题目刷完。</p>
+<p>在这个系列文章里面，除了讲解解题思路以外，还会尽可能给出最为简洁的代码。如果涉及通解还会相应的代码模板。</p>
+<p>为了方便各位同学能够电脑上进行调试和提交代码，我建立了相关的仓库：<a target="_blank" rel="noopener" href="https://github.com/SharingSource/LogicStack-LeetCode">https://github.com/SharingSource/LogicStack-LeetCode</a> 。</p>
+<p>在仓库地址里，你可以看到系列文章的题解链接、系列文章的相应代码、LeetCode 原题链接和其他优选题解。</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E7%BA%BF%E6%80%A7-DP/">线性 DP</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E8%AE%B0%E5%BF%86%E5%8C%96%E6%90%9C%E7%B4%A2/">记忆化搜索</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/07/30/1503.%20%E6%89%80%E6%9C%89%E8%9A%82%E8%9A%81%E6%8E%89%E4%B8%8B%E6%9D%A5%E5%89%8D%E7%9A%84%E6%9C%80%E5%90%8E%E4%B8%80%E5%88%BB%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">LC 1503. 所有蚂蚁掉下来前的最后一刻</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/07/18/1253.%20%E9%87%8D%E6%9E%84%202%20%E8%A1%8C%E4%BA%8C%E8%BF%9B%E5%88%B6%E7%9F%A9%E9%98%B5%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/">
+                        <span class="hidden-mobile">LC 1253. 重构 2 行二进制矩阵</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://cdn.staticfile.org/valine/1.4.18/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"IDifiViRkVDTgu27Nu50GQkE-gzGzoHsz","appKey":"gt98pupgyYjPKYQASrGmD9kM","path":"window.location.pathname","placeholder":"发一条友善的评论（为方便交流，记得填上方的昵称再留言哦 ~ 🍭","avatar":"","meta":["nick","mail"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":true},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          Fluid.plugins.initFancyBox('#valine .vcontent img:not(.vemoji)');
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+  <div class="col-lg-7 mx-auto nopadding-x-md">
+    <div class="container custom post-custom mx-auto">
+      <img src="/oimg/gzh-qrcode.webp" srcset="/img/loading.gif" lazyload class="rounded mx-auto d-block mt-5" style="width:80%">
+    </div>
+  </div>
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- LeanCloud 统计PV -->
+        <span id="leancloud-site-pv-container" style="display: none">
+            总访问量 
+            <span id="leancloud-site-pv"></span>
+             次
+          </span>
+      
+      
+        <!-- LeanCloud 统计UV -->
+        <span id="leancloud-site-uv-container" style="display: none">
+            总访客数 
+            <span id="leancloud-site-uv"></span>
+             人
+          </span>
+      
+
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.staticfile.org/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.staticfile.org/tocbot/4.18.2/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.staticfile.org/anchor-js/4.3.1/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.11/clipboard.min.js" ></script>
+  
+
+
+
+
+  <script defer src="/js/leancloud.js" ></script>
+
+
+
+  <script  src="https://cdn.bootcdn.net/ajax/libs/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        loader: {
+          
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.staticfile.org/mathjax/3.2.0/es5/tex-svg.js" ></script>
+
+  
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>
