@@ -1,0 +1,636 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/oimg/RoundCorner.png">
+  <link rel="icon" href="/oimg/RoundCorner.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="宫水三叶">
+  <meta name="keywords" content="算法, 数据结构, 题解">
+  
+    <meta name="description" content="题目描述这是 LeetCode 上的 2304. 网格中的最小路径代价 ，难度为 中等。 给你一个下标从 0 开始的整数矩阵 grid，矩阵大小为 m x n，由从 0 到 $m \times n - 1$ 的不同整数组成。 你可以在此矩阵中，从一个单元格移动到下一行的任何其他单元格。 如果你位于单元格 $(x, y)$ ，且满足 $x &lt; m - 1$，你可以移动到 $(x + 1, 0)">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LC 2304. 网格中的最小路径代价">
+<meta property="og:url" content="https://sharingsource.github.io/2023/11/22/2304.%20%E7%BD%91%E6%A0%BC%E4%B8%AD%E7%9A%84%E6%9C%80%E5%B0%8F%E8%B7%AF%E5%BE%84%E4%BB%A3%E4%BB%B7%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/index.html">
+<meta property="og:site_name" content="宫水三叶的刷题日记">
+<meta property="og:description" content="题目描述这是 LeetCode 上的 2304. 网格中的最小路径代价 ，难度为 中等。 给你一个下标从 0 开始的整数矩阵 grid，矩阵大小为 m x n，由从 0 到 $m \times n - 1$ 的不同整数组成。 你可以在此矩阵中，从一个单元格移动到下一行的任何其他单元格。 如果你位于单元格 $(x, y)$ ，且满足 $x &lt; m - 1$，你可以移动到 $(x + 1, 0)">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://sharingsource.github.io/2023/11/22/2304.%20%E7%BD%91%E6%A0%BC%E4%B8%AD%E7%9A%84%E6%9C%80%E5%B0%8F%E8%B7%AF%E5%BE%84%E4%BB%A3%E4%BB%B7%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/image_0.png">
+<meta property="article:published_time" content="2023-11-21T17:53:18.000Z">
+<meta property="article:modified_time" content="2023-11-22T02:21:30.947Z">
+<meta property="article:author" content="宫水三叶">
+<meta property="article:tag" content="动态规划">
+<meta property="article:tag" content="模拟">
+<meta property="article:tag" content="序列 DP">
+<meta property="article:tag" content="最短路">
+<meta property="article:tag" content="图">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://sharingsource.github.io/2023/11/22/2304.%20%E7%BD%91%E6%A0%BC%E4%B8%AD%E7%9A%84%E6%9C%80%E5%B0%8F%E8%B7%AF%E5%BE%84%E4%BB%A3%E4%BB%B7%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/image_0.png">
+  
+  
+  <title>LC 2304. 网格中的最小路径代价 - 宫水三叶的刷题日记</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/hint.css/2.7.0/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.7.2/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"sharingsource.github.io","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"|","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"IDifiViRkVDTgu27Nu50GQkE-gzGzoHsz","app_key":"gt98pupgyYjPKYQASrGmD9kM","server_url":"https://idifivir.lc-cn-n1-shared.com","path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.1.0"></head>
+
+
+<body>
+  <header style="height: 50vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>宫水三叶の刷题日记</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/image_v2_25.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="LC 2304. 网格中的最小路径代价">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-author" aria-hidden="true"></i>
+      宫水三叶
+    </span>
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2023-11-22 01:53" pubdate>
+        2023年11月22日
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">LC 2304. 网格中的最小路径代价</h1>
+            
+            <div class="markdown-body">
+              <h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>这是 LeetCode 上的 <strong><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/minimum-path-cost-in-a-grid/solutions/2536854/gong-shui-san-xie-cong-tu-lun-zui-duan-l-emxv/">2304. 网格中的最小路径代价</a></strong> ，难度为 <strong>中等</strong>。</p>
+<p>给你一个下标从 <code>0</code> 开始的整数矩阵 <code>grid</code>，矩阵大小为 <code>m x n</code>，由从 <code>0</code> 到 $m \times n - 1$ 的不同整数组成。</p>
+<p>你可以在此矩阵中，从一个单元格移动到下一行的任何其他单元格。</p>
+<p>如果你位于单元格 $(x, y)$ ，且满足 $x &lt; m - 1$，你可以移动到 $(x + 1, 0)$, $(x + 1, 1)$, …, $(x + 1, n - 1)$ 中的任何一个单元格。注意： 在最后一行中的单元格不能触发移动。</p>
+<p>每次可能的移动都需要付出对应的代价，代价用一个下标从 <code>0</code> 开始的二维数组 <code>moveCost</code> 表示，该数组大小为 $(m \times n) \times n$ ，其中 <code>moveCost[i][j]</code> 是从值为 <code>i</code> 的单元格移动到下一行第 <code>j</code> 列单元格的代价。从 <code>grid</code> 最后一行的单元格移动的代价可以忽略。</p>
+<p><code>grid</code> 一条路径的代价是：所有路径经过的单元格的值之和加上所有移动的代价之和 。从第一行任意单元格出发，返回到达最后一行任意单元格的最小路径代价。</p>
+<p>示例 1：<br><img src="/2023/11/22/2304.%20%E7%BD%91%E6%A0%BC%E4%B8%AD%E7%9A%84%E6%9C%80%E5%B0%8F%E8%B7%AF%E5%BE%84%E4%BB%A3%E4%BB%B7%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/image_0.png" srcset="/img/loading.gif" lazyload alt></p>
+<figure class="highlight tap"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs tap">输入：grid = [[5,3],[4,0],[2,1]], moveCost = [[9,8],[1,5],[10,12],[18,6],[2,4],[14,3]]<br><br>输出：17<br><br>解释：最小代价的路径是<span class="hljs-number"> 5 </span>-&gt;<span class="hljs-number"> 0 </span>-&gt;<span class="hljs-number"> 1 </span>。<br>- 路径途经单元格值之和<span class="hljs-number"> 5 </span>+<span class="hljs-number"> 0 </span>+<span class="hljs-number"> 1 </span>=<span class="hljs-number"> 6 </span>。<br>- 从<span class="hljs-number"> 5 </span>移动到<span class="hljs-number"> 0 </span>的代价为<span class="hljs-number"> 3 </span>。<br>- 从<span class="hljs-number"> 0 </span>移动到<span class="hljs-number"> 1 </span>的代价为<span class="hljs-number"> 8 </span>。<br>路径总代价为<span class="hljs-number"> 6 </span>+<span class="hljs-number"> 3 </span>+<span class="hljs-number"> 8 </span>=<span class="hljs-number"> 17 </span>。<br></code></pre></div></td></tr></table></figure>
+<p>示例 2：<br><figure class="highlight tap"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs tap">输入：grid = [[5,1,2],[4,0,3]], moveCost = [[12,10,15],[20,23,8],[21,7,1],[8,1,13],[9,10,25],[5,3,2]]<br><br>输出：6<br><br>解释：<br>最小代价的路径是<span class="hljs-number"> 2 </span>-&gt;<span class="hljs-number"> 3 </span>。 <br>- 路径途经单元格值之和<span class="hljs-number"> 2 </span>+<span class="hljs-number"> 3 </span>=<span class="hljs-number"> 5 </span>。 <br>- 从<span class="hljs-number"> 2 </span>移动到<span class="hljs-number"> 3 </span>的代价为<span class="hljs-number"> 1 </span>。 <br>路径总代价为<span class="hljs-number"> 5 </span>+<span class="hljs-number"> 1 </span>=<span class="hljs-number"> 6 </span>。<br></code></pre></div></td></tr></table></figure></p>
+<p>提示：</p>
+<ul>
+<li>$m = grid.length$</li>
+<li>$n = grid[i].length$</li>
+<li>$2 &lt;= m, n &lt;= 50$</li>
+<li><code>grid</code> 由从 <code>0</code> 到 <code>m * n - 1</code> 的不同整数组成</li>
+<li>$moveCost.length = m \times n$</li>
+<li>$moveCost[i].length = n$</li>
+<li>$1 &lt;= moveCost[i][j] &lt;= 100$</li>
+</ul>
+<hr>
+<h3 id="建新图-建虚拟点-堆优化-Dijkstra"><a href="#建新图-建虚拟点-堆优化-Dijkstra" class="headerlink" title="建新图 + 建虚拟点 + 堆优化 Dijkstra"></a>建新图 + 建虚拟点 + 堆优化 Dijkstra</h3><blockquote>
+<p>注意：可以直接使用解法二的方法，但先认真看完本做法，再去看解法二，会有相当丝滑的体验。</p>
+</blockquote>
+<p>每次移动，<strong>实际路径权值 = 经过边的权值 + 目的地的权值</strong>。</p>
+<p>利用原图，构建新图：<strong>每个单元格视为一个点，除最后一行外，每个点对下一行的所有点连一条有向边，边权 = 原图中该边的权值 + 原图中该目的地的权值</strong>。</p>
+<p>分析新图中的点边数量：</p>
+<ul>
+<li>点：共 $m \times n$ 个点，数量为 $2.5 \times 10^3$</li>
+<li>边：不算最后一行，共 $(m - 1) \times n$ 个点，这些点与下一行的每个点均有一条有向边，合计 $(m - 1) \times n^2$ 条边，数量为 $1.25 \times 10^5$</li>
+</ul>
+<p>原问题转换为：求点 $i$ 到 $j$ 的最短路，其中点 $i$ 所在位置为第 $0$ 行，点 $j$ 所在位置为第 $m - 1$ 行。</p>
+<p>这似乎是一个「多源汇最短路」问题？但求解多源汇最短路的 <code>Floyd</code> 算法是 $O(n^3)$ 的，会超时。</p>
+<p>实际上，我们也并不真的关心图中任意点之间的最短路，仅仅关心第一行到最后一行的最短路。</p>
+<p>因此，<strong>我们可通过建立“虚拟源点”和“虚拟汇点”的方式，来将“多源汇最短路”问题转换为“单源最短路”问题。</strong></p>
+<p>具体的，我们创建一个“虚拟源点”，该点向所有第一行的点连权值为 $grid[0][i]$ 的有向边；同时创建一个“虚拟汇点”，最后一行的所有点向该点连权值为 $0$ 的有向边。</p>
+<p>问题进一步转化为：求“虚拟源点”到“虚拟汇点”的最短路。</p>
+<p>至此，我们通过 <strong>建新图 -&gt; 创建虚拟源汇点（转换为单源最短路）-&gt; 套用单源最短路算法</strong> 解决本题。</p>
+<p>将新图中点的数量记为 $n$，边数记为 $m$，朴素 <code>Dijkstra</code> 复杂度为 $O(n^2)$，堆优化的 <code>Dijkstra</code> 的复杂度为 $O(m\log{n})$，当 $m &lt; n^2$ （相对稀疏）时，优先使用堆优化 <code>Dijkstra</code>。</p>
+<p>Java 代码：<br><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-type">int</span> <span class="hljs-variable">N</span> <span class="hljs-operator">=</span> <span class="hljs-number">50</span> * <span class="hljs-number">50</span> + <span class="hljs-number">2</span>, M = <span class="hljs-number">50</span> * <span class="hljs-number">50</span> * <span class="hljs-number">50</span>, idx = <span class="hljs-number">0</span>, n;<br>    <span class="hljs-type">int</span>[] he = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[N], e = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[M], ne = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[M], w = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[M];<br>    <span class="hljs-keyword">void</span> <span class="hljs-title function_">add</span><span class="hljs-params">(<span class="hljs-type">int</span> a, <span class="hljs-type">int</span> b, <span class="hljs-type">int</span> c)</span> &#123;<br>        e[idx] = b;<br>        ne[idx] = he[a];<br>        w[idx] = c;<br>        he[a] = idx++;<br>    &#125;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">minPathCost</span><span class="hljs-params">(<span class="hljs-type">int</span>[][] grid, <span class="hljs-type">int</span>[][] moveCost)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">N</span> <span class="hljs-operator">=</span> grid.length, M = grid[<span class="hljs-number">0</span>].length;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">S</span> <span class="hljs-operator">=</span> N * M, T = S + <span class="hljs-number">1</span>;<br>        n = N * M + <span class="hljs-number">2</span>;<br>        Arrays.fill(he, -<span class="hljs-number">1</span>);<br>        <span class="hljs-comment">//「虚拟源点」向「第一行」进行连边</span><br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; M; i++) add(S, grid[<span class="hljs-number">0</span>][i], grid[<span class="hljs-number">0</span>][i]);<br>        <span class="hljs-comment">// 转换原图</span><br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; N - <span class="hljs-number">1</span>; i++) &#123;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; j &lt; M; j++) &#123;<br>                <span class="hljs-type">int</span> <span class="hljs-variable">a</span> <span class="hljs-operator">=</span> grid[i][j];<br>                <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">k</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; k &lt; M; k++) &#123;<br>                    <span class="hljs-type">int</span> <span class="hljs-variable">b</span> <span class="hljs-operator">=</span> grid[i + <span class="hljs-number">1</span>][k];<br>                    add(a, b, moveCost[a][k] + b);<br>                &#125;<br>            &#125;<br>        &#125;<br>        <span class="hljs-comment">//「最后一行」向「虚拟汇点」进行连边</span><br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; M; i++) add(grid[N - <span class="hljs-number">1</span>][i], T, <span class="hljs-number">0</span>);<br>        <span class="hljs-comment">// 最短路</span><br>        <span class="hljs-type">int</span>[] dist = dijkstra(S);<br>        <span class="hljs-keyword">return</span> dist[T];<br>    &#125;<br>    <span class="hljs-type">int</span>[] dijkstra(<span class="hljs-type">int</span> x) &#123;<br>        <span class="hljs-comment">// 起始先将所有的点标记为「未更新」和「距离为正无穷」</span><br>        <span class="hljs-type">int</span>[] dist = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[n];<br>        Arrays.fill(dist, <span class="hljs-number">0x3f3f3f3f</span>);<br>        <span class="hljs-type">boolean</span>[] vis = <span class="hljs-keyword">new</span> <span class="hljs-title class_">boolean</span>[n];<br>        dist[x] = <span class="hljs-number">0</span>;<br>        <span class="hljs-comment">// 使用「优先队列」存储所有可用于更新的点</span><br>        <span class="hljs-comment">// 以 (点编号, 到起点的距离) 进行存储，优先弹出「最短距离」较小的点</span><br>        PriorityQueue&lt;<span class="hljs-type">int</span>[]&gt; q = <span class="hljs-keyword">new</span> <span class="hljs-title class_">PriorityQueue</span>&lt;&gt;((a,b)-&gt;a[<span class="hljs-number">1</span>]-b[<span class="hljs-number">1</span>]);<br>        q.add(<span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[]&#123;x, <span class="hljs-number">0</span>&#125;);<br>        <span class="hljs-keyword">while</span> (!q.isEmpty()) &#123;<br>            <span class="hljs-comment">// 每次从「优先队列」中弹出</span><br>            <span class="hljs-type">int</span>[] poll = q.poll();<br>            <span class="hljs-type">int</span> <span class="hljs-variable">u</span> <span class="hljs-operator">=</span> poll[<span class="hljs-number">0</span>], step = poll[<span class="hljs-number">1</span>];<br>            <span class="hljs-comment">// 如果弹出的点被标记「已更新」，则跳过</span><br>            <span class="hljs-keyword">if</span> (vis[u]) <span class="hljs-keyword">continue</span>;<br>            <span class="hljs-comment">// 标记该点「已更新」，并使用该点更新其他点的「最短距离」</span><br>            vis[u] = <span class="hljs-literal">true</span>;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> he[u]; i != -<span class="hljs-number">1</span>; i = ne[i]) &#123;<br>                <span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> e[i];<br>                <span class="hljs-keyword">if</span> (dist[j] &lt;= dist[u] + w[i]) <span class="hljs-keyword">continue</span>;<br>                dist[j] = dist[u] + w[i];<br>                q.add(<span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[]&#123;j, dist[j]&#125;);<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> dist;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure><br>C++ 代码：<br><figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs C++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-type">static</span> <span class="hljs-type">const</span> <span class="hljs-type">int</span> N = <span class="hljs-number">50</span> * <span class="hljs-number">50</span> + <span class="hljs-number">2</span>, M = <span class="hljs-number">50</span> * <span class="hljs-number">50</span> * <span class="hljs-number">50</span>;<br>    <span class="hljs-type">int</span> he[N], e[M], ne[M], w[M], idx, n, INF = <span class="hljs-number">0x3f3f3f3f</span>;<br>    <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">add</span><span class="hljs-params">(<span class="hljs-type">int</span> a, <span class="hljs-type">int</span> b, <span class="hljs-type">int</span> c)</span> </span>&#123;<br>        e[idx] = b;<br>        ne[idx] = he[a];<br>        w[idx] = c;<br>        he[a] = idx++;<br>    &#125;<br>    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">minPathCost</span><span class="hljs-params">(vector&lt;vector&lt;<span class="hljs-type">int</span>&gt;&gt;&amp; grid, vector&lt;vector&lt;<span class="hljs-type">int</span>&gt;&gt;&amp; moveCost)</span> </span>&#123;<br>        <span class="hljs-type">int</span> N = grid.<span class="hljs-built_in">size</span>(), M = grid[<span class="hljs-number">0</span>].<span class="hljs-built_in">size</span>();<br>        <span class="hljs-type">int</span> S = N * M, T = S + <span class="hljs-number">1</span>;<br>        n = N * M + <span class="hljs-number">2</span>;<br>        <span class="hljs-built_in">fill</span>(he, he + n, <span class="hljs-number">-1</span>);<br>        <span class="hljs-comment">//「虚拟源点」向「第一行」进行连边</span><br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; M; i++) <span class="hljs-built_in">add</span>(S, grid[<span class="hljs-number">0</span>][i], grid[<span class="hljs-number">0</span>][i]);<br>        <span class="hljs-comment">// 转换原图</span><br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; N - <span class="hljs-number">1</span>; i++) &#123;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> j = <span class="hljs-number">0</span>; j &lt; M; j++) &#123;<br>                <span class="hljs-type">int</span> a = grid[i][j];<br>                <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> k = <span class="hljs-number">0</span>; k &lt; M; k++) &#123;<br>                    <span class="hljs-type">int</span> b = grid[i + <span class="hljs-number">1</span>][k];<br>                    <span class="hljs-built_in">add</span>(a, b, moveCost[a][k] + b);<br>                &#125;<br>            &#125;<br>        &#125;<br>        <span class="hljs-comment">//「最后一行」向「虚拟汇点」进行连边</span><br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; M; i++) <span class="hljs-built_in">add</span>(grid[N - <span class="hljs-number">1</span>][i], T, <span class="hljs-number">0</span>);<br>        <span class="hljs-comment">// 最短路</span><br>        vector&lt;<span class="hljs-type">int</span>&gt; dist = <span class="hljs-built_in">dijkstra</span>(S);<br>        <span class="hljs-keyword">return</span> dist[T];<br>    &#125;<br>    <span class="hljs-function">vector&lt;<span class="hljs-type">int</span>&gt; <span class="hljs-title">dijkstra</span><span class="hljs-params">(<span class="hljs-type">int</span> x)</span> </span>&#123;<br>        <span class="hljs-function">vector&lt;<span class="hljs-type">int</span>&gt; <span class="hljs-title">dist</span><span class="hljs-params">(n, <span class="hljs-number">0x3f3f3f3f</span>)</span></span>;<br>        <span class="hljs-function">vector&lt;<span class="hljs-type">bool</span>&gt; <span class="hljs-title">vis</span><span class="hljs-params">(n, <span class="hljs-literal">false</span>)</span></span>;<br>        dist[x] = <span class="hljs-number">0</span>;<br>        <span class="hljs-comment">// 使用「优先队列」存储所有可用于更新的点</span><br>        <span class="hljs-comment">// 以 (到起点的距离, 点编号) 进行存储，优先弹出「最短距离」较小的点</span><br>        priority_queue&lt;pair&lt;<span class="hljs-type">int</span>, <span class="hljs-type">int</span>&gt;, vector&lt;pair&lt;<span class="hljs-type">int</span>, <span class="hljs-type">int</span>&gt;&gt;, greater&lt;pair&lt;<span class="hljs-type">int</span>, <span class="hljs-type">int</span>&gt;&gt;&gt; q;<br>        q.<span class="hljs-built_in">push</span>(&#123;<span class="hljs-number">0</span>, x&#125;);<br>        <span class="hljs-keyword">while</span> (!q.<span class="hljs-built_in">empty</span>()) &#123;<br>            <span class="hljs-comment">// 每次从「优先队列」中弹出</span><br>            <span class="hljs-keyword">auto</span> [step, u] = q.<span class="hljs-built_in">top</span>();<br>            q.<span class="hljs-built_in">pop</span>();<br>            <span class="hljs-comment">// 如果弹出的点被标记「已更新」，则跳过</span><br>            <span class="hljs-keyword">if</span> (vis[u]) <span class="hljs-keyword">continue</span>;<br>            <span class="hljs-comment">// 标记该点「已更新」，并使用该点更新其他点的「最短距离」</span><br>            vis[u] = <span class="hljs-literal">true</span>;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = he[u]; i != <span class="hljs-number">-1</span>; i = ne[i]) &#123;<br>                <span class="hljs-type">int</span> j = e[i];<br>                <span class="hljs-keyword">if</span> (dist[j] &lt;= dist[u] + w[i]) <span class="hljs-keyword">continue</span>;<br>                dist[j] = dist[u] + w[i];<br>                q.<span class="hljs-built_in">push</span>(&#123;dist[j], j&#125;);<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> dist;<br>    &#125;<br>&#125;;<br></code></pre></div></td></tr></table></figure><br>Python 代码：<br><figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> heapq<br><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span>:<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">minPathCost</span>(<span class="hljs-params">self, grid, moveCost</span>):<br>        N, M = <span class="hljs-built_in">len</span>(grid), <span class="hljs-built_in">len</span>(grid[<span class="hljs-number">0</span>])<br>        S, T = N * M, N * M + <span class="hljs-number">1</span><br>        n = N * M + <span class="hljs-number">2</span><br>        he = [-<span class="hljs-number">1</span>] * n<br>        e, ne, w = [-<span class="hljs-number">1</span>] * (<span class="hljs-number">50</span> * <span class="hljs-number">50</span> * <span class="hljs-number">50</span>), [-<span class="hljs-number">1</span>] * (<span class="hljs-number">50</span> * <span class="hljs-number">50</span> * <span class="hljs-number">50</span>), [-<span class="hljs-number">1</span>] * (<span class="hljs-number">50</span> * <span class="hljs-number">50</span> * <span class="hljs-number">50</span>)<br>        idx = <span class="hljs-number">0</span><br><br>        <span class="hljs-keyword">def</span> <span class="hljs-title function_">add</span>(<span class="hljs-params">a, b, c</span>):<br>            <span class="hljs-keyword">nonlocal</span> idx<br>            e[idx] = b<br>            ne[idx] = he[a]<br>            w[idx] = c<br>            he[a] = idx<br>            idx += <span class="hljs-number">1</span><br><br>        <span class="hljs-keyword">def</span> <span class="hljs-title function_">dijkstra</span>(<span class="hljs-params">x</span>):<br>            dist = [<span class="hljs-built_in">float</span>(<span class="hljs-string">&#x27;inf&#x27;</span>)] * n<br>            vis = [<span class="hljs-literal">False</span>] * n<br>            dist[x] = <span class="hljs-number">0</span><br>            <span class="hljs-comment"># 使用「优先队列」存储所有可用于更新的点</span><br>            <span class="hljs-comment"># 以 (到起点的距离, 点编号) 进行存储，优先弹出「最短距离」较小的点</span><br>            q = [(<span class="hljs-number">0</span>, x)]<br>            heapq.heapify(q)<br>            <span class="hljs-keyword">while</span> q:<br>                <span class="hljs-comment"># 每次从「优先队列」中弹出</span><br>                step, u = heapq.heappop(q)<br>                <span class="hljs-comment"># 如果弹出的点被标记「已更新」，则跳过</span><br>                <span class="hljs-keyword">if</span> vis[u]: <span class="hljs-keyword">continue</span><br>                <span class="hljs-comment"># 标记该点「已更新」，并使用该点更新其他点的「最短距离」</span><br>                vis[u] = <span class="hljs-literal">True</span><br>                i = he[u]<br>                <span class="hljs-keyword">while</span> i != -<span class="hljs-number">1</span>:<br>                    j, c = e[i], w[i]<br>                    i = ne[i]<br>                    <span class="hljs-keyword">if</span> dist[j] &lt;= dist[u] + c: <span class="hljs-keyword">continue</span><br>                    dist[j] = dist[u] + c<br>                    heapq.heappush(q, (dist[j], j))<br>            <span class="hljs-keyword">return</span> dist<br><br>        <span class="hljs-comment">#「虚拟源点」向「第一行」进行连边</span><br>        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(M):<br>            add(S, grid[<span class="hljs-number">0</span>][i], grid[<span class="hljs-number">0</span>][i])<br>        <span class="hljs-comment"># 转换原图</span><br>        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(N - <span class="hljs-number">1</span>):<br>            <span class="hljs-keyword">for</span> j <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(M):<br>                a = grid[i][j]<br>                <span class="hljs-keyword">for</span> k <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(M):<br>                    b = grid[i + <span class="hljs-number">1</span>][k]<br>                    add(a, b, moveCost[a][k] + b)<br>        <span class="hljs-comment">#「最后一行」向「虚拟汇点」进行连边</span><br>        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(M):<br>            add(grid[N - <span class="hljs-number">1</span>][i], T, <span class="hljs-number">0</span>)<br>        <span class="hljs-comment"># 最短路</span><br>        dist = dijkstra(S)<br>        <span class="hljs-keyword">return</span> dist[T]<br></code></pre></div></td></tr></table></figure></p>
+<ul>
+<li>时间复杂度：$O(m\log{n})$，其中 $n$ 为新图中的点数 $N \times M = 2.5 \times 10^3$，$m$ 为新图中的边数 $(M - 1) \times N^2 = 1.25 \times 10^5$</li>
+<li>空间复杂度：$O(n + m)$</li>
+</ul>
+<hr>
+<h3 id="堆优化-Dijkstra"><a href="#堆优化-Dijkstra" class="headerlink" title="堆优化 Dijkstra"></a>堆优化 Dijkstra</h3><p>什么？你说你实在不想建新图，也不想搞什么虚拟点，就想用你心爱的 <code>BFS</code> 来做？！</p>
+<p>我懂你意思，但那不叫 <code>BFS</code>。</p>
+<p>只是将「建新图」和「建虚拟点」的过程省掉，仍需要使用优先队列（堆）来每次取出当前“路径代价最小”的点来进行扩充，执行过程仍为堆优化 <code>Dijkstra</code> 的核心操作。</p>
+<p>尤其所谓“省掉” 建新图 和 建虚拟点，真就字面上的“省掉”，并非不存在，因为两种做法思路是完全一致的。可简单列举「本解法」与「解法一」的对应关系：</p>
+<ul>
+<li>起始往队列放入首行元素，对应了解法一的“建立虚拟源点”过程；</li>
+<li>从队列中取元素出来扩充时，若当前元素所在行是最后一行时，用当前路径代价来更新答案，对应了解法一的“建立虚拟汇点”过程；</li>
+<li>扩充时直接遍历列（即下一行的所有点），对应的解法一的“用原图边建新图”的过程。</li>
+</ul>
+<p>Java 代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">minPathCost</span><span class="hljs-params">(<span class="hljs-type">int</span>[][] grid, <span class="hljs-type">int</span>[][] moveCost)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">m</span> <span class="hljs-operator">=</span> grid.length, n = grid[<span class="hljs-number">0</span>].length, INF = <span class="hljs-number">0x3f3f3f3f</span>, ans = INF;<br>        <span class="hljs-type">int</span>[][] dist = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[m][n];<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; m; i++) &#123;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; j &lt; n; j++) dist[i][j] = INF;<br>        &#125;<br>        PriorityQueue&lt;<span class="hljs-type">int</span>[]&gt; d = <span class="hljs-keyword">new</span> <span class="hljs-title class_">PriorityQueue</span>&lt;&gt;((a,b)-&gt;a[<span class="hljs-number">2</span>]-b[<span class="hljs-number">2</span>]);<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; n; i++) &#123;<br>            d.add(<span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[]&#123;<span class="hljs-number">0</span>, i, grid[<span class="hljs-number">0</span>][i]&#125;);<br>            dist[<span class="hljs-number">0</span>][i] = grid[<span class="hljs-number">0</span>][i];<br>        &#125;<br>        <span class="hljs-keyword">while</span> (!d.isEmpty()) &#123;<br>            <span class="hljs-type">int</span>[] info = d.poll();<br>            <span class="hljs-type">int</span> <span class="hljs-variable">x</span> <span class="hljs-operator">=</span> info[<span class="hljs-number">0</span>], y = info[<span class="hljs-number">1</span>], cur = info[<span class="hljs-number">2</span>];<br>            <span class="hljs-keyword">if</span> (x == m - <span class="hljs-number">1</span>) &#123;<br>                ans = Math.min(ans, cur);<br>                <span class="hljs-keyword">continue</span>;<br>            &#125;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; n; i++) &#123;<br>                <span class="hljs-type">int</span> <span class="hljs-variable">step</span> <span class="hljs-operator">=</span> moveCost[grid[x][y]][i], ne = grid[x + <span class="hljs-number">1</span>][i];<br>                <span class="hljs-type">int</span> <span class="hljs-variable">tot</span> <span class="hljs-operator">=</span> cur + step + ne;<br>                <span class="hljs-keyword">if</span> (tot &gt;= ans || dist[x + <span class="hljs-number">1</span>][i] &lt;= tot) <span class="hljs-keyword">continue</span>;<br>                dist[x + <span class="hljs-number">1</span>][i] = tot;<br>                d.add(<span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[]&#123;x + <span class="hljs-number">1</span>, i, tot&#125;);<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> ans;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<p>C++ 代码：<br><figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs C++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">minPathCost</span><span class="hljs-params">(vector&lt;vector&lt;<span class="hljs-type">int</span>&gt;&gt;&amp; grid, vector&lt;vector&lt;<span class="hljs-type">int</span>&gt;&gt;&amp; moveCost)</span> </span>&#123;<br>        <span class="hljs-type">int</span> m = grid.<span class="hljs-built_in">size</span>(), n = grid[<span class="hljs-number">0</span>].<span class="hljs-built_in">size</span>(), INF = <span class="hljs-number">0x3f3f3f3f</span>, ans = INF;<br>        vector&lt;vector&lt;<span class="hljs-type">int</span>&gt;&gt; <span class="hljs-built_in">dist</span>(m, <span class="hljs-built_in">vector</span>&lt;<span class="hljs-type">int</span>&gt;(n, INF));<br>        priority_queue&lt;vector&lt;<span class="hljs-type">int</span>&gt;, vector&lt;vector&lt;<span class="hljs-type">int</span>&gt;&gt;, greater&lt;vector&lt;<span class="hljs-type">int</span>&gt;&gt;&gt; pq;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; n; i++) &#123;<br>            pq.<span class="hljs-built_in">push</span>(&#123;<span class="hljs-number">0</span>, i, grid[<span class="hljs-number">0</span>][i]&#125;);<br>            dist[<span class="hljs-number">0</span>][i] = grid[<span class="hljs-number">0</span>][i];<br>        &#125;<br>        <span class="hljs-keyword">while</span> (!pq.<span class="hljs-built_in">empty</span>()) &#123;<br>            vector&lt;<span class="hljs-type">int</span>&gt; info = pq.<span class="hljs-built_in">top</span>();<br>            pq.<span class="hljs-built_in">pop</span>();<br>            <span class="hljs-type">int</span> x = info[<span class="hljs-number">0</span>], y = info[<span class="hljs-number">1</span>], cur = info[<span class="hljs-number">2</span>];<br>            <span class="hljs-keyword">if</span> (x == m - <span class="hljs-number">1</span>) &#123;<br>                ans = <span class="hljs-built_in">min</span>(ans, cur);<br>                <span class="hljs-keyword">continue</span>;<br>            &#125;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; n; i++) &#123;<br>                <span class="hljs-type">int</span> step = moveCost[grid[x][y]][i], ne = grid[x + <span class="hljs-number">1</span>][i];<br>                <span class="hljs-type">int</span> tot = cur + step + ne;<br>                <span class="hljs-keyword">if</span> (tot &gt;= ans || dist[x + <span class="hljs-number">1</span>][i] &lt;= tot) <span class="hljs-keyword">continue</span>;<br>                dist[x + <span class="hljs-number">1</span>][i] = tot;<br>                pq.<span class="hljs-built_in">push</span>(&#123;x + <span class="hljs-number">1</span>, i, tot&#125;);<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> ans;<br>    &#125;<br>&#125;;<br></code></pre></div></td></tr></table></figure><br>Python 代码：<br><figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span>:<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">minPathCost</span>(<span class="hljs-params">self, grid, moveCost</span>):<br>        m, n, INF = <span class="hljs-built_in">len</span>(grid), <span class="hljs-built_in">len</span>(grid[<span class="hljs-number">0</span>]), <span class="hljs-built_in">float</span>(<span class="hljs-string">&#x27;inf&#x27;</span>)<br>        ans = INF<br>        dist = [[INF] * n <span class="hljs-keyword">for</span> _ <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(m)]<br>        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(n):<br>            dist[<span class="hljs-number">0</span>][i] = grid[<span class="hljs-number">0</span>][i]<br>        pq = [(<span class="hljs-number">0</span>, i, grid[<span class="hljs-number">0</span>][i]) <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(n)]<br>        <span class="hljs-keyword">while</span> pq:<br>            x, y, cur = heapq.heappop(pq)<br>            <span class="hljs-keyword">if</span> x == m - <span class="hljs-number">1</span>:<br>                ans = <span class="hljs-built_in">min</span>(ans, cur)<br>                <span class="hljs-keyword">continue</span><br>            <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(n):<br>                step, ne = moveCost[grid[x][y]][i], grid[x + <span class="hljs-number">1</span>][i]<br>                tot = cur + step + ne<br>                <span class="hljs-keyword">if</span> tot &gt;= ans <span class="hljs-keyword">or</span> dist[x + <span class="hljs-number">1</span>][i] &lt;= tot: <span class="hljs-keyword">continue</span><br>                dist[x + <span class="hljs-number">1</span>][i] = tot<br>                heapq.heappush(pq, (x + <span class="hljs-number">1</span>, i, tot))<br>        <span class="hljs-keyword">return</span> ans<br></code></pre></div></td></tr></table></figure></p>
+<ul>
+<li>时间复杂度：$O(m\log{n})$，其中 $n$ 为新图中的点数 $N \times M = 2.5 \times 10^3$，$m$ 为新图中的边数 $(M - 1) \times N^2 = 1.25 \times 10^5$</li>
+<li>空间复杂度：$O(n + m)$</li>
+</ul>
+<hr>
+<h3 id="原地模拟"><a href="#原地模拟" class="headerlink" title="原地模拟"></a>原地模拟</h3><p>什么？你说你连图论的方法都不想用，想就着题意做一遍？</p>
+<p>可以。甚至当你调整更新方向，还能利用已有的 <code>grid</code>，实现原地模拟。</p>
+<p>具体的，我们将“从上往下走”调整为“从下往上走”，这样可以确保当我们使用底下一行 $grid[i + 1][j]$ 来更新当前行 $grid[i][j]$ 时，所用到的 $grid[i + 1][j]$ 不会被覆盖。</p>
+<p>Java 代码：<br><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">minPathCost</span><span class="hljs-params">(<span class="hljs-type">int</span>[][] grid, <span class="hljs-type">int</span>[][] moveCost)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">m</span> <span class="hljs-operator">=</span> grid.length, n = grid[<span class="hljs-number">0</span>].length, INF = <span class="hljs-number">0x3f3f3f3f</span>, ans = INF;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> m - <span class="hljs-number">2</span>; i &gt;= <span class="hljs-number">0</span>; i--) &#123;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; j &lt; n; j++) &#123;<br>                <span class="hljs-type">int</span> <span class="hljs-variable">cur</span> <span class="hljs-operator">=</span> INF;<br>                <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">k</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; k &lt; n; k++) cur = Math.min(cur, grid[i + <span class="hljs-number">1</span>][k] + moveCost[grid[i][j]][k]);<br>                grid[i][j] += cur;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; n; i++) ans = Math.min(ans, grid[<span class="hljs-number">0</span>][i]);<br>        <span class="hljs-keyword">return</span> ans;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure><br>C++ 代码：<br><figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs C++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">minPathCost</span><span class="hljs-params">(vector&lt;vector&lt;<span class="hljs-type">int</span>&gt;&gt;&amp; grid, vector&lt;vector&lt;<span class="hljs-type">int</span>&gt;&gt;&amp; moveCost)</span> </span>&#123;<br>        <span class="hljs-type">int</span> m = grid.<span class="hljs-built_in">size</span>(), n = grid[<span class="hljs-number">0</span>].<span class="hljs-built_in">size</span>(), INF = INT_MAX, ans = INF;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = m - <span class="hljs-number">2</span>; i &gt;= <span class="hljs-number">0</span>; i--) &#123;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> j = <span class="hljs-number">0</span>; j &lt; n; j++) &#123;<br>                <span class="hljs-type">int</span> cur = INF;<br>                <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> k = <span class="hljs-number">0</span>; k &lt; n; k++) cur = <span class="hljs-built_in">min</span>(cur, grid[i + <span class="hljs-number">1</span>][k] + moveCost[grid[i][j]][k]);<br>                grid[i][j] += cur;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; n; i++) ans = <span class="hljs-built_in">min</span>(ans, grid[<span class="hljs-number">0</span>][i]);<br>        <span class="hljs-keyword">return</span> ans;<br>    &#125;<br>&#125;;<br></code></pre></div></td></tr></table></figure><br>Python 代码：<br><figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span>:<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">minPathCost</span>(<span class="hljs-params">self, grid, moveCost</span>):<br>        m, n = <span class="hljs-built_in">len</span>(grid), <span class="hljs-built_in">len</span>(grid[<span class="hljs-number">0</span>])<br>        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(m - <span class="hljs-number">2</span>, -<span class="hljs-number">1</span>, -<span class="hljs-number">1</span>):<br>            <span class="hljs-keyword">for</span> j <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(n):<br>                grid[i][j] += <span class="hljs-built_in">min</span>([grid[i + <span class="hljs-number">1</span>][k] + moveCost[grid[i][j]][k] <span class="hljs-keyword">for</span> k <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(n)])<br>        <span class="hljs-keyword">return</span> <span class="hljs-built_in">min</span>([grid[<span class="hljs-number">0</span>][i] <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(n)])<br></code></pre></div></td></tr></table></figure><br>TypeScript 代码：<br><figure class="highlight typescript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs TypeScript"><span class="hljs-keyword">function</span> <span class="hljs-title function_">minPathCost</span>(<span class="hljs-params">grid: <span class="hljs-built_in">number</span>[][], moveCost: <span class="hljs-built_in">number</span>[][]</span>): <span class="hljs-built_in">number</span> &#123;<br>    <span class="hljs-keyword">let</span> m = grid.<span class="hljs-property">length</span>, n = grid[<span class="hljs-number">0</span>].<span class="hljs-property">length</span>, <span class="hljs-variable constant_">INF</span> = <span class="hljs-number">0x3f3f3f3f</span>, ans = <span class="hljs-variable constant_">INF</span>;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = m - <span class="hljs-number">2</span>; i &gt;= <span class="hljs-number">0</span>; i--) &#123;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> j = <span class="hljs-number">0</span>; j &lt; n; j++) &#123;<br>            <span class="hljs-keyword">let</span> cur = <span class="hljs-variable constant_">INF</span>;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> k = <span class="hljs-number">0</span>; k &lt; n; k++) cur = <span class="hljs-title class_">Math</span>.<span class="hljs-title function_">min</span>(cur, grid[i + <span class="hljs-number">1</span>][k] + moveCost[grid[i][j]][k]);<br>            grid[i][j] += cur;<br>        &#125;<br>    &#125;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; n; i++) ans = <span class="hljs-title class_">Math</span>.<span class="hljs-title function_">min</span>(ans, grid[<span class="hljs-number">0</span>][i]);<br>    <span class="hljs-keyword">return</span> ans;<br>&#125;;<br></code></pre></div></td></tr></table></figure></p>
+<ul>
+<li>时间复杂度：$O(m \times n^2)$，其中 $m$ 和 $n$ 分别代表给定 <code>grid</code> 的长宽</li>
+<li>空间复杂度：$O(1)$</li>
+</ul>
+<hr>
+<h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>这是我们「刷穿 LeetCode」系列文章的第 <code>No.2304</code> 篇，系列开始于 2021/01/01，截止于起始日 LeetCode 上共有 1916 道题目，部分是有锁题，我们将先把所有不带锁的题目刷完。</p>
+<p>在这个系列文章里面，除了讲解解题思路以外，还会尽可能给出最为简洁的代码。如果涉及通解还会相应的代码模板。</p>
+<p>为了方便各位同学能够电脑上进行调试和提交代码，我建立了相关的仓库：<a target="_blank" rel="noopener" href="https://github.com/SharingSource/LogicStack-LeetCode">https://github.com/SharingSource/LogicStack-LeetCode</a> 。</p>
+<p>在仓库地址里，你可以看到系列文章的题解链接、系列文章的相应代码、LeetCode 原题链接和其他优选题解。</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/">动态规划</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E6%A8%A1%E6%8B%9F/">模拟</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%BA%8F%E5%88%97-DP/">序列 DP</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E6%9C%80%E7%9F%AD%E8%B7%AF/">最短路</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%9B%BE/">图</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/11/21/2216.%20%E7%BE%8E%E5%8C%96%E6%95%B0%E7%BB%84%E7%9A%84%E6%9C%80%E5%B0%91%E5%88%A0%E9%99%A4%E6%95%B0%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/">
+                        <span class="hidden-mobile">LC 2216. 美化数组的最少删除数</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://cdn.staticfile.org/valine/1.4.18/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"IDifiViRkVDTgu27Nu50GQkE-gzGzoHsz","appKey":"gt98pupgyYjPKYQASrGmD9kM","path":"window.location.pathname","placeholder":"发一条友善的评论（为方便交流，记得填上方的昵称再留言哦 ~ 🍭","avatar":"","meta":["nick","mail"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":true},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          Fluid.plugins.initFancyBox('#valine .vcontent img:not(.vemoji)');
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+  <div class="col-lg-7 mx-auto nopadding-x-md">
+    <div class="container custom post-custom mx-auto">
+      <img src="/oimg/gzh-qrcode.webp" srcset="/img/loading.gif" lazyload class="rounded mx-auto d-block mt-5" style="width:80%">
+    </div>
+  </div>
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- LeanCloud 统计PV -->
+        <span id="leancloud-site-pv-container" style="display: none">
+            总访问量 
+            <span id="leancloud-site-pv"></span>
+             次
+          </span>
+      
+      
+        <!-- LeanCloud 统计UV -->
+        <span id="leancloud-site-uv-container" style="display: none">
+            总访客数 
+            <span id="leancloud-site-uv"></span>
+             人
+          </span>
+      
+
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.staticfile.org/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.staticfile.org/tocbot/4.18.2/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.staticfile.org/anchor-js/4.3.1/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.11/clipboard.min.js" ></script>
+  
+
+
+
+
+  <script defer src="/js/leancloud.js" ></script>
+
+
+
+  <script  src="https://cdn.bootcdn.net/ajax/libs/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        loader: {
+          
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.staticfile.org/mathjax/3.2.0/es5/tex-svg.js" ></script>
+
+  
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>
