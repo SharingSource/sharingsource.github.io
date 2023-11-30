@@ -1,0 +1,631 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/oimg/RoundCorner.png">
+  <link rel="icon" href="/oimg/RoundCorner.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="宫水三叶">
+  <meta name="keywords" content="算法, 数据结构, 题解">
+  
+    <meta name="description" content="题目描述这是 LeetCode 上的 1670. 设计前中后队列 ，难度为 中等。 请你设计一个队列，支持在前，中，后三个位置的 push 和 pop 操作。 请你完成 FrontMiddleBack 类：  FrontMiddleBack() 初始化队列。 void pushFront(int val) 将 val 添加到队列的 最前面 。 void pushMiddle(int val) 将">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LC 1670. 设计前中后队列">
+<meta property="og:url" content="https://sharingsource.github.io/2023/11/28/1670.%20%E8%AE%BE%E8%AE%A1%E5%89%8D%E4%B8%AD%E5%90%8E%E9%98%9F%E5%88%97%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/index.html">
+<meta property="og:site_name" content="宫水三叶的刷题日记">
+<meta property="og:description" content="题目描述这是 LeetCode 上的 1670. 设计前中后队列 ，难度为 中等。 请你设计一个队列，支持在前，中，后三个位置的 push 和 pop 操作。 请你完成 FrontMiddleBack 类：  FrontMiddleBack() 初始化队列。 void pushFront(int val) 将 val 添加到队列的 最前面 。 void pushMiddle(int val) 将">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://sharingsource.github.io/2023/11/28/1670.%20%E8%AE%BE%E8%AE%A1%E5%89%8D%E4%B8%AD%E5%90%8E%E9%98%9F%E5%88%97%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/image_0.png">
+<meta property="article:published_time" content="2023-11-27T16:40:44.000Z">
+<meta property="article:modified_time" content="2023-11-30T01:18:13.295Z">
+<meta property="article:author" content="宫水三叶">
+<meta property="article:tag" content="队列">
+<meta property="article:tag" content="链表">
+<meta property="article:tag" content="双端队列">
+<meta property="article:tag" content="数据结构">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://sharingsource.github.io/2023/11/28/1670.%20%E8%AE%BE%E8%AE%A1%E5%89%8D%E4%B8%AD%E5%90%8E%E9%98%9F%E5%88%97%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/image_0.png">
+  
+  
+  <title>LC 1670. 设计前中后队列 - 宫水三叶的刷题日记</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/hint.css/2.7.0/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.7.2/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"sharingsource.github.io","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"|","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"IDifiViRkVDTgu27Nu50GQkE-gzGzoHsz","app_key":"gt98pupgyYjPKYQASrGmD9kM","server_url":"https://idifivir.lc-cn-n1-shared.com","path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.1.0"></head>
+
+
+<body>
+  <header style="height: 50vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>宫水三叶の刷题日记</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/image_74.jpeg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="LC 1670. 设计前中后队列">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-author" aria-hidden="true"></i>
+      宫水三叶
+    </span>
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2023-11-28 00:40" pubdate>
+        2023年11月28日
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">LC 1670. 设计前中后队列</h1>
+            
+            <div class="markdown-body">
+              <h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>这是 LeetCode 上的 <strong><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/design-front-middle-back-queue/solutions/2544779/gong-shui-san-xie-qing-xi-gao-xiao-de-qu-o0eq/">1670. 设计前中后队列</a></strong> ，难度为 <strong>中等</strong>。</p>
+<p>请你设计一个队列，支持在前，中，后三个位置的 <code>push</code> 和 <code>pop</code> 操作。</p>
+<p>请你完成 <code>FrontMiddleBack</code> 类：</p>
+<ul>
+<li><code>FrontMiddleBack()</code> 初始化队列。</li>
+<li><code>void pushFront(int val)</code> 将 <code>val</code> 添加到队列的 最前面 。</li>
+<li><code>void pushMiddle(int val)</code> 将 <code>val</code> 添加到队列的 正中间 。</li>
+<li><code>void pushBack(int val)</code> 将 <code>val</code> 添加到队里的 最后面 。</li>
+<li><code>int popFront()</code> 将最前面的元素从队列中删除并返回值，如果删除之前队列为空，那么返回 <code>-1</code>。</li>
+<li><code>int popMiddle()</code> 将正中间的元素从队列中删除并返回值，如果删除之前队列为空，那么返回 <code>-1</code>。</li>
+<li><code>int popBack()</code> 将 最后面 的元素从队列中删除并返回值，如果删除之前队列为空，那么返回 <code>-1</code>。</li>
+</ul>
+<p>请注意当有 两个 中间位置的时候，选择靠前面的位置进行操作。比方说：</p>
+<ul>
+<li>将 <code>6</code> 添加到 <code>[1, 2, 3, 4, 5]</code> 的中间位置，结果数组为 <code>[1, 2, 6, 3, 4, 5]</code>。</li>
+<li>从 <code>[1, 2, 3, 4, 5, 6]</code> 的中间位置弹出元素，返回 <code>3</code>，数组变为 <code>[1, 2, 4, 5, 6]</code>。</li>
+</ul>
+<p>示例 1：<br><figure class="highlight prolog"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs prolog">输入：<br>[<span class="hljs-string">&quot;FrontMiddleBackQueue&quot;</span>, <span class="hljs-string">&quot;pushFront&quot;</span>, <span class="hljs-string">&quot;pushBack&quot;</span>, <span class="hljs-string">&quot;pushMiddle&quot;</span>, <span class="hljs-string">&quot;pushMiddle&quot;</span>, <span class="hljs-string">&quot;popFront&quot;</span>, <span class="hljs-string">&quot;popMiddle&quot;</span>, <span class="hljs-string">&quot;popMiddle&quot;</span>, <span class="hljs-string">&quot;popBack&quot;</span>, <span class="hljs-string">&quot;popFront&quot;</span>]<br>[[], [<span class="hljs-number">1</span>], [<span class="hljs-number">2</span>], [<span class="hljs-number">3</span>], [<span class="hljs-number">4</span>], [], [], [], [], []]<br><br>输出：<br>[null, null, null, null, null, <span class="hljs-number">1</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">2</span>, <span class="hljs-number">-1</span>]<br><br>解释：<br><span class="hljs-symbol">FrontMiddleBackQueue</span> q = new <span class="hljs-symbol">FrontMiddleBackQueue</span>();<br>q.pushFront(<span class="hljs-number">1</span>);   // [<span class="hljs-number">1</span>]<br>q.pushBack(<span class="hljs-number">2</span>);    // [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>]<br>q.pushMiddle(<span class="hljs-number">3</span>);  // [<span class="hljs-number">1</span>, <span class="hljs-number">3</span>, <span class="hljs-number">2</span>]<br>q.pushMiddle(<span class="hljs-number">4</span>);  // [<span class="hljs-number">1</span>, <span class="hljs-number">4</span>, <span class="hljs-number">3</span>, <span class="hljs-number">2</span>]<br>q.popFront();     // 返回 <span class="hljs-number">1</span> -&gt; [<span class="hljs-number">4</span>, <span class="hljs-number">3</span>, <span class="hljs-number">2</span>]<br>q.popMiddle();    // 返回 <span class="hljs-number">3</span> -&gt; [<span class="hljs-number">4</span>, <span class="hljs-number">2</span>]<br>q.popMiddle();    // 返回 <span class="hljs-number">4</span> -&gt; [<span class="hljs-number">2</span>]<br>q.popBack();      // 返回 <span class="hljs-number">2</span> -&gt; []<br>q.popFront();     // 返回 <span class="hljs-number">-1</span> -&gt; [] （队列为空）<br></code></pre></div></td></tr></table></figure></p>
+<p>提示：</p>
+<ul>
+<li>$1 &lt;= val &lt;= 10^9$</li>
+<li>最多调用 $1000$ 次 <code>pushFront</code>， <code>pushMiddle</code>， <code>pushBack</code>， <code>popFront</code>， <code>popMiddle</code> 和 <code>popBack</code>。</li>
+</ul>
+<hr>
+<h3 id="双端队列"><a href="#双端队列" class="headerlink" title="双端队列"></a>双端队列</h3><p>只要求在头部或尾部高效插入/弹出元素的话，容易联想到双端队列。</p>
+<p>还需要考虑往中间插入/弹出元素的话，会想到使用两个双端队列。</p>
+<p>将两个双端队列分别称为 <code>l</code> 和 <code>r</code>，把 <code>l</code> 和 <code>r</code> 拼接起来就是完整元素列表：</p>
+<p><img src="/2023/11/28/1670.%20%E8%AE%BE%E8%AE%A1%E5%89%8D%E4%B8%AD%E5%90%8E%E9%98%9F%E5%88%97%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/image_0.png" srcset="/img/loading.gif" lazyload alt></p>
+<p>由于双端队列本身支持 $O(1)$ 首尾操作，问题的关键在于如何确保涉及 <code>Middle</code> 操作的高效性。</p>
+<p>我们可以设计一个 <code>update</code> 方法，用于确保两队列的相对平衡：</p>
+<ul>
+<li>当元素总个数为偶数时，确保两队列元素相等</li>
+<li>当元素总个数为奇数时，确保 <code>r</code> 队列比 <code>l</code> 队列元素多一个</li>
+</ul>
+<p>如此一来，当我们需要往 <code>Middle</code> 插入元素时，始终往 <code>l</code> 的尾部插入即可；而当需要读取 <code>Middle</code> 位置元素时，根据两队列的元素个数关系决定是从 <code>l</code> 的尾部还是从 <code>r</code> 的头部取元素。</p>
+<p>以下是对上述代码中几个操作的简短实现说明：</p>
+<ul>
+<li><code>pushFront</code>：将元素添加到 <code>l</code> 队列的头部，调用 <code>update</code> 保持队列平衡</li>
+<li><code>pushMiddle</code>：将元素添加到 <code>l</code> 队列的尾部，调用 <code>update</code> 保持队列平衡</li>
+<li><code>pushBack</code>：将元素添加到 <code>r</code> 队列的尾部，调用 <code>update</code> 保持队列平衡</li>
+<li><code>popFront</code>：若 <code>l</code> 队列不为空，从 <code>l</code> 队列的头部弹出一个元素；否则，从 <code>r</code> 队列的头部弹出一个元素（当且仅当元素个数为 $1$ 时，队列 <code>l</code> 为空，唯一元素在队列 <code>r</code> 中），调用 <code>update</code> 保持队列平衡</li>
+<li><code>popMiddle</code>：若 <code>l</code> 队列和 <code>r</code> 队列的大小相等，则从 <code>l</code> 队列的尾部弹出一个元素；否则，从 <code>r</code> 队列的头部弹出一个元素。调用 <code>update</code> 保持队列平衡</li>
+<li><code>popBack</code>：从 <code>r</code> 队列的尾部弹出一个元素，调用 <code>update</code> 保持队列平衡</li>
+</ul>
+<p>双端队列的实现，可通过「数组 + 首尾坐标指针」来实现。为方便大家理清脉络，先使用语言自带的 <code>Deque</code> 实现一版。</p>
+<p>Java 代码（<code>Deque</code> 版）：<br><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">FrontMiddleBackQueue</span> &#123;<br>    Deque&lt;Integer&gt; l = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayDeque</span>&lt;&gt;(<span class="hljs-number">1010</span>), r = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayDeque</span>&lt;&gt;(<span class="hljs-number">1010</span>);<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">pushFront</span><span class="hljs-params">(<span class="hljs-type">int</span> val)</span> &#123;<br>        l.addFirst(val);<br>        update();<br>    &#125;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">pushMiddle</span><span class="hljs-params">(<span class="hljs-type">int</span> val)</span> &#123;<br>        l.addLast(val);<br>        update();<br>    &#125;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">pushBack</span><span class="hljs-params">(<span class="hljs-type">int</span> val)</span> &#123;<br>        r.addLast(val);<br>        update();<br>    &#125;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">popFront</span><span class="hljs-params">()</span> &#123;<br>        <span class="hljs-keyword">if</span> (l.size() + r.size() == <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> -<span class="hljs-number">1</span>;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">ans</span> <span class="hljs-operator">=</span> l.size() != <span class="hljs-number">0</span> ? l.pollFirst() : r.pollFirst();<br>        update();<br>        <span class="hljs-keyword">return</span> ans;<br>    &#125;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">popMiddle</span><span class="hljs-params">()</span> &#123;<br>        <span class="hljs-keyword">if</span> (l.size() + r.size() == <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> -<span class="hljs-number">1</span>;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">ans</span> <span class="hljs-operator">=</span> l.size() == r.size() ? l.pollLast() : r.pollFirst();<br>        update();<br>        <span class="hljs-keyword">return</span> ans;<br>    &#125;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">popBack</span><span class="hljs-params">()</span> &#123;<br>        <span class="hljs-keyword">if</span> (l.size() + r.size() == <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> -<span class="hljs-number">1</span>;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">ans</span> <span class="hljs-operator">=</span> r.pollLast();<br>        update();<br>        <span class="hljs-keyword">return</span> ans;<br>    &#125;<br>    <span class="hljs-keyword">void</span> <span class="hljs-title function_">update</span><span class="hljs-params">()</span> &#123;<br>        <span class="hljs-keyword">while</span> (l.size() &gt; r.size()) r.addFirst(l.pollLast());<br>        <span class="hljs-keyword">while</span> (r.size() - l.size() &gt; <span class="hljs-number">1</span>) l.addLast(r.pollFirst());<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure></p>
+<p>看过 <code>Deque</code> 实现版本，考虑如何使用数组实现。</p>
+<p>各类操作的总调用次数最多为 $1000$ 次，我们可创建大小为 $2010$ 的数组，并从下标  $1010$（接近中间位置）开始进行存储，这样无论是从前还是往后存数都不会越界。</p>
+<p>使用 <code>lhe</code> 和 <code>lta</code> 代表队列 <code>l</code> 的头部和尾部坐标，使用 <code>rhe</code> 和 <code>rta</code> 代表队列 <code>r</code> 的头部和尾部坐标，所有坐标初始值均为 $1100$。</p>
+<p>需要注意的是，<code>ta</code>（无论是 <code>lta</code> 还是 <code>rta</code>）是严格指向尾部，因此如果要往尾部插数的话，需要先对指针自增（移到下一个空闲位置），再赋值；而 <code>he</code>（无论是 <code>lhe</code> 还是 <code>rhe</code>）是指向实际队列头部的前一位置，需要先赋值再前移。当 <code>he = ta</code> 代表队列为空。</p>
+<p>Java 代码（纯数组版）：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">FrontMiddleBackQueue</span> &#123;<br>    <span class="hljs-type">int</span>[] l = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[<span class="hljs-number">2010</span>], r = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[<span class="hljs-number">2010</span>];<br>    <span class="hljs-type">int</span> <span class="hljs-variable">lhe</span> <span class="hljs-operator">=</span> <span class="hljs-number">1010</span>, lta = <span class="hljs-number">1010</span>, rhe = <span class="hljs-number">1010</span>, rta = <span class="hljs-number">1010</span>;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">pushFront</span><span class="hljs-params">(<span class="hljs-type">int</span> val)</span> &#123;<br>        l[lhe--] = val;<br>        update();<br>    &#125;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">pushMiddle</span><span class="hljs-params">(<span class="hljs-type">int</span> val)</span> &#123;<br>        l[++lta] = val;<br>        update();<br>    &#125;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">pushBack</span><span class="hljs-params">(<span class="hljs-type">int</span> val)</span> &#123;<br>        r[++rta] = val;<br>        update();<br>    &#125;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">popFront</span><span class="hljs-params">()</span> &#123;<br>        <span class="hljs-keyword">if</span> (getSize(lhe, lta) == <span class="hljs-number">0</span> &amp;&amp; getSize(rhe, rta) == <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> -<span class="hljs-number">1</span>;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">ans</span> <span class="hljs-operator">=</span> getSize(lhe, lta) != <span class="hljs-number">0</span> ? l[++lhe] : r[++rhe];<br>        update();<br>        <span class="hljs-keyword">return</span> ans;<br>    &#125;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">popMiddle</span><span class="hljs-params">()</span> &#123;<br>        <span class="hljs-keyword">if</span> (getSize(lhe, lta) + getSize(rhe, rta) == <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> -<span class="hljs-number">1</span>;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">ans</span> <span class="hljs-operator">=</span> getSize(lhe, lta) == getSize(rhe, rta) ? l[lta--] : r[++rhe];<br>        update();<br>        <span class="hljs-keyword">return</span> ans;<br>    &#125;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">popBack</span><span class="hljs-params">()</span> &#123;<br>        <span class="hljs-keyword">if</span> (getSize(lhe, lta) == <span class="hljs-number">0</span> &amp;&amp; getSize(rhe, rta) == <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> -<span class="hljs-number">1</span>;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">ans</span> <span class="hljs-operator">=</span> r[rta--];<br>        update();<br>        <span class="hljs-keyword">return</span> ans;<br>    &#125;<br>    <span class="hljs-type">int</span> <span class="hljs-title function_">getSize</span><span class="hljs-params">(<span class="hljs-type">int</span> he, <span class="hljs-type">int</span> ta)</span> &#123;<br>        <span class="hljs-keyword">return</span> ta - he;<br>    &#125;<br>    <span class="hljs-keyword">void</span> <span class="hljs-title function_">update</span><span class="hljs-params">()</span> &#123;<br>        <span class="hljs-keyword">while</span> (getSize(lhe, lta) &gt; getSize(rhe, rta)) r[rhe--] = l[lta--];<br>        <span class="hljs-keyword">while</span> (getSize(rhe, rta) - getSize(lhe, lta) &gt; <span class="hljs-number">1</span>) l[++lta] = r[++rhe];<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<p>C++ 代码：<br><figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs C++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">FrontMiddleBackQueue</span> &#123;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-type">int</span> l[<span class="hljs-number">2010</span>], r[<span class="hljs-number">2010</span>], lhe = <span class="hljs-number">1010</span>, lta = <span class="hljs-number">1010</span>, rhe = <span class="hljs-number">1010</span>, rta = <span class="hljs-number">1010</span>;<br>    <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">pushFront</span><span class="hljs-params">(<span class="hljs-type">int</span> val)</span> </span>&#123;<br>        l[lhe--] = val;<br>        <span class="hljs-built_in">update</span>();<br>    &#125;<br>    <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">pushMiddle</span><span class="hljs-params">(<span class="hljs-type">int</span> val)</span> </span>&#123;<br>        l[++lta] = val;<br>        <span class="hljs-built_in">update</span>();<br>    &#125;<br>    <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">pushBack</span><span class="hljs-params">(<span class="hljs-type">int</span> val)</span> </span>&#123;<br>        r[++rta] = val;<br>        <span class="hljs-built_in">update</span>();<br>    &#125;<br>    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">popFront</span><span class="hljs-params">()</span> </span>&#123;<br>        <span class="hljs-keyword">if</span> (<span class="hljs-built_in">getSize</span>(lhe, lta) == <span class="hljs-number">0</span> &amp;&amp; <span class="hljs-built_in">getSize</span>(rhe, rta) == <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> <span class="hljs-number">-1</span>;<br>        <span class="hljs-type">int</span> ans = <span class="hljs-built_in">getSize</span>(lhe, lta) != <span class="hljs-number">0</span> ? l[++lhe] : r[++rhe];<br>        <span class="hljs-built_in">update</span>();<br>        <span class="hljs-keyword">return</span> ans;<br>    &#125;<br>    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">popMiddle</span><span class="hljs-params">()</span> </span>&#123;<br>        <span class="hljs-keyword">if</span> (<span class="hljs-built_in">getSize</span>(lhe, lta) == <span class="hljs-number">0</span> &amp;&amp; <span class="hljs-built_in">getSize</span>(rhe, rta) == <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> <span class="hljs-number">-1</span>;<br>        <span class="hljs-type">int</span> ans = <span class="hljs-built_in">getSize</span>(lhe, lta) == <span class="hljs-built_in">getSize</span>(rhe, rta) ? l[lta--] : r[++rhe];<br>        <span class="hljs-built_in">update</span>();<br>        <span class="hljs-keyword">return</span> ans;<br>    &#125;<br>    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">popBack</span><span class="hljs-params">()</span> </span>&#123;<br>        <span class="hljs-keyword">if</span> (<span class="hljs-built_in">getSize</span>(lhe, lta) == <span class="hljs-number">0</span> &amp;&amp; <span class="hljs-built_in">getSize</span>(rhe, rta) == <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> <span class="hljs-number">-1</span>;<br>        <span class="hljs-type">int</span> ans = r[rta--];<br>        <span class="hljs-built_in">update</span>();<br>        <span class="hljs-keyword">return</span> ans;<br>    &#125;<br>    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">getSize</span><span class="hljs-params">(<span class="hljs-type">int</span> he, <span class="hljs-type">int</span> ta)</span> </span>&#123;<br>        <span class="hljs-keyword">return</span> ta - he;<br>    &#125;<br>    <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">update</span><span class="hljs-params">()</span> </span>&#123;<br>        <span class="hljs-keyword">while</span> (<span class="hljs-built_in">getSize</span>(lhe, lta) &gt; <span class="hljs-built_in">getSize</span>(rhe, rta)) r[rhe--] = l[lta--];<br>        <span class="hljs-keyword">while</span> (<span class="hljs-built_in">getSize</span>(rhe, rta) - <span class="hljs-built_in">getSize</span>(lhe, lta) &gt; <span class="hljs-number">1</span>) l[++lta] = r[++rhe];<br>    &#125;<br>&#125;;<br></code></pre></div></td></tr></table></figure><br>Python 代码：<br><figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">FrontMiddleBackQueue</span>:<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self</span>):<br>        self.l, self.r = [<span class="hljs-number">0</span>] * <span class="hljs-number">2010</span>, [<span class="hljs-number">0</span>] * <span class="hljs-number">2010</span><br>        self.r = [<span class="hljs-number">0</span>] * <span class="hljs-number">2010</span><br>        self.lhe, self.lta, self.rhe, self.rta = <span class="hljs-number">1010</span>, <span class="hljs-number">1010</span>, <span class="hljs-number">1010</span>, <span class="hljs-number">1010</span><br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">pushFront</span>(<span class="hljs-params">self, val: <span class="hljs-built_in">int</span></span>) -&gt; <span class="hljs-literal">None</span>:<br>        self.l[self.lhe] = val<br>        self.lhe -= <span class="hljs-number">1</span><br>        self.update()<br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">pushMiddle</span>(<span class="hljs-params">self, val: <span class="hljs-built_in">int</span></span>) -&gt; <span class="hljs-literal">None</span>:<br>        self.lta += <span class="hljs-number">1</span><br>        self.l[self.lta] = val<br>        self.update()<br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">pushBack</span>(<span class="hljs-params">self, val: <span class="hljs-built_in">int</span></span>) -&gt; <span class="hljs-literal">None</span>:<br>        self.rta += <span class="hljs-number">1</span><br>        self.r[self.rta] = val<br>        self.update()<br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">popFront</span>(<span class="hljs-params">self</span>) -&gt; <span class="hljs-built_in">int</span>:<br>        <span class="hljs-keyword">if</span> self.getSize(self.lhe, self.lta) + self.getSize(self.rhe, self.rta) == <span class="hljs-number">0</span>:<br>            <span class="hljs-keyword">return</span> -<span class="hljs-number">1</span><br>        <span class="hljs-keyword">if</span> self.getSize(self.lhe, self.lta) != <span class="hljs-number">0</span>:<br>            self.lhe += <span class="hljs-number">1</span><br>            ans = self.l[self.lhe]<br>        <span class="hljs-keyword">else</span>:<br>            self.rhe += <span class="hljs-number">1</span><br>            ans = self.r[self.rhe]<br>        self.update()<br>        <span class="hljs-keyword">return</span> ans<br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">popMiddle</span>(<span class="hljs-params">self</span>) -&gt; <span class="hljs-built_in">int</span>:<br>        <span class="hljs-keyword">if</span> self.getSize(self.lhe, self.lta) + self.getSize(self.rhe, self.rta) == <span class="hljs-number">0</span>:<br>            <span class="hljs-keyword">return</span> -<span class="hljs-number">1</span><br>        <span class="hljs-keyword">if</span> self.getSize(self.lhe, self.lta) == self.getSize(self.rhe, self.rta):<br>            ans = self.l[self.lta]<br>            self.lta -= <span class="hljs-number">1</span><br>        <span class="hljs-keyword">else</span>:<br>            self.rhe += <span class="hljs-number">1</span><br>            ans = self.r[self.rhe]<br>        self.update()<br>        <span class="hljs-keyword">return</span> ans<br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">popBack</span>(<span class="hljs-params">self</span>) -&gt; <span class="hljs-built_in">int</span>:<br>        <span class="hljs-keyword">if</span> self.getSize(self.lhe, self.lta) + self.getSize(self.rhe, self.rta) == <span class="hljs-number">0</span>:<br>            <span class="hljs-keyword">return</span> -<span class="hljs-number">1</span><br>        ans = self.r[self.rta]<br>        self.rta -= <span class="hljs-number">1</span><br>        self.update()<br>        <span class="hljs-keyword">return</span> ans<br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">getSize</span>(<span class="hljs-params">self, he: <span class="hljs-built_in">int</span>, ta: <span class="hljs-built_in">int</span></span>) -&gt; <span class="hljs-built_in">int</span>:<br>        <span class="hljs-keyword">return</span> ta - he<br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">update</span>(<span class="hljs-params">self</span>) -&gt; <span class="hljs-literal">None</span>:<br>        <span class="hljs-keyword">while</span> self.getSize(self.lhe, self.lta) &gt; self.getSize(self.rhe, self.rta):<br>            self.r[self.rhe] = self.l[self.lta]<br>            self.rhe -= <span class="hljs-number">1</span><br>            self.lta -= <span class="hljs-number">1</span><br>        <span class="hljs-keyword">while</span> self.getSize(self.rhe, self.rta) - self.getSize(self.lhe, self.lta) &gt; <span class="hljs-number">1</span>:<br>            self.lta += <span class="hljs-number">1</span><br>            self.rhe += <span class="hljs-number">1</span><br>            self.l[self.lta] = self.r[self.rhe]<br></code></pre></div></td></tr></table></figure><br>TypeScript 代码：<br><figure class="highlight typescript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs TypeScript"><span class="hljs-keyword">class</span> <span class="hljs-title class_">FrontMiddleBackQueue</span> &#123;<br>    <span class="hljs-keyword">private</span> <span class="hljs-attr">l</span>: <span class="hljs-built_in">number</span>[];<br>    <span class="hljs-keyword">private</span> <span class="hljs-attr">r</span>: <span class="hljs-built_in">number</span>[];<br>    <span class="hljs-keyword">private</span> <span class="hljs-attr">lhe</span>: <span class="hljs-built_in">number</span>;<br>    <span class="hljs-keyword">private</span> <span class="hljs-attr">lta</span>: <span class="hljs-built_in">number</span>;<br>    <span class="hljs-keyword">private</span> <span class="hljs-attr">rhe</span>: <span class="hljs-built_in">number</span>;<br>    <span class="hljs-keyword">private</span> <span class="hljs-attr">rta</span>: <span class="hljs-built_in">number</span>;<br>    <span class="hljs-title function_">constructor</span>(<span class="hljs-params"></span>) &#123;<br>        <span class="hljs-variable language_">this</span>.<span class="hljs-property">l</span> = <span class="hljs-title class_">Array</span>(<span class="hljs-number">2010</span>).<span class="hljs-title function_">fill</span>(<span class="hljs-number">0</span>), <span class="hljs-variable language_">this</span>.<span class="hljs-property">r</span> = <span class="hljs-title class_">Array</span>(<span class="hljs-number">2010</span>).<span class="hljs-title function_">fill</span>(<span class="hljs-number">0</span>);<br>        <span class="hljs-variable language_">this</span>.<span class="hljs-property">lhe</span> = <span class="hljs-number">1010</span>, <span class="hljs-variable language_">this</span>.<span class="hljs-property">lta</span> = <span class="hljs-number">1010</span>, <span class="hljs-variable language_">this</span>.<span class="hljs-property">rhe</span> = <span class="hljs-number">1010</span>, <span class="hljs-variable language_">this</span>.<span class="hljs-property">rta</span> = <span class="hljs-number">1010</span>;<br>    &#125;<br>    <span class="hljs-title function_">pushFront</span>(<span class="hljs-attr">val</span>: <span class="hljs-built_in">number</span>): <span class="hljs-built_in">void</span> &#123;<br>        <span class="hljs-variable language_">this</span>.<span class="hljs-property">l</span>[<span class="hljs-variable language_">this</span>.<span class="hljs-property">lhe</span>--] = val;<br>        <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">update</span>();<br>    &#125;<br>    <span class="hljs-title function_">pushMiddle</span>(<span class="hljs-attr">val</span>: <span class="hljs-built_in">number</span>): <span class="hljs-built_in">void</span> &#123;<br>        <span class="hljs-variable language_">this</span>.<span class="hljs-property">l</span>[++<span class="hljs-variable language_">this</span>.<span class="hljs-property">lta</span>] = val;<br>        <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">update</span>();<br>    &#125;<br>    <span class="hljs-title function_">pushBack</span>(<span class="hljs-attr">val</span>: <span class="hljs-built_in">number</span>): <span class="hljs-built_in">void</span> &#123;<br>        <span class="hljs-variable language_">this</span>.<span class="hljs-property">r</span>[++<span class="hljs-variable language_">this</span>.<span class="hljs-property">rta</span>] = val;<br>        <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">update</span>();<br>    &#125;<br>    <span class="hljs-title function_">popFront</span>(): <span class="hljs-built_in">number</span> &#123;<br>        <span class="hljs-keyword">if</span> (<span class="hljs-variable language_">this</span>.<span class="hljs-title function_">getSize</span>(<span class="hljs-variable language_">this</span>.<span class="hljs-property">lhe</span>, <span class="hljs-variable language_">this</span>.<span class="hljs-property">lta</span>) + <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">getSize</span>(<span class="hljs-variable language_">this</span>.<span class="hljs-property">rhe</span>, <span class="hljs-variable language_">this</span>.<span class="hljs-property">rta</span>) == <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> -<span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">const</span> ans = <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">getSize</span>(<span class="hljs-variable language_">this</span>.<span class="hljs-property">lhe</span>, <span class="hljs-variable language_">this</span>.<span class="hljs-property">lta</span>) != <span class="hljs-number">0</span> ? <span class="hljs-variable language_">this</span>.<span class="hljs-property">l</span>[++<span class="hljs-variable language_">this</span>.<span class="hljs-property">lhe</span>] : <span class="hljs-variable language_">this</span>.<span class="hljs-property">r</span>[++<span class="hljs-variable language_">this</span>.<span class="hljs-property">rhe</span>];<br>        <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">update</span>();<br>        <span class="hljs-keyword">return</span> ans;<br>    &#125;<br>    <span class="hljs-title function_">popMiddle</span>(): <span class="hljs-built_in">number</span> &#123;<br>        <span class="hljs-keyword">if</span> (<span class="hljs-variable language_">this</span>.<span class="hljs-title function_">getSize</span>(<span class="hljs-variable language_">this</span>.<span class="hljs-property">lhe</span>, <span class="hljs-variable language_">this</span>.<span class="hljs-property">lta</span>) + <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">getSize</span>(<span class="hljs-variable language_">this</span>.<span class="hljs-property">rhe</span>, <span class="hljs-variable language_">this</span>.<span class="hljs-property">rta</span>) == <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> -<span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">const</span> ans = <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">getSize</span>(<span class="hljs-variable language_">this</span>.<span class="hljs-property">lhe</span>, <span class="hljs-variable language_">this</span>.<span class="hljs-property">lta</span>) == <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">getSize</span>(<span class="hljs-variable language_">this</span>.<span class="hljs-property">rhe</span>, <span class="hljs-variable language_">this</span>.<span class="hljs-property">rta</span>) ? <span class="hljs-variable language_">this</span>.<span class="hljs-property">l</span>[<span class="hljs-variable language_">this</span>.<span class="hljs-property">lta</span>--] : <span class="hljs-variable language_">this</span>.<span class="hljs-property">r</span>[++<span class="hljs-variable language_">this</span>.<span class="hljs-property">rhe</span>];<br>        <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">update</span>();<br>        <span class="hljs-keyword">return</span> ans;<br>    &#125;<br>    <span class="hljs-title function_">popBack</span>(): <span class="hljs-built_in">number</span> &#123;<br>        <span class="hljs-keyword">if</span> (<span class="hljs-variable language_">this</span>.<span class="hljs-title function_">getSize</span>(<span class="hljs-variable language_">this</span>.<span class="hljs-property">lhe</span>, <span class="hljs-variable language_">this</span>.<span class="hljs-property">lta</span>) + <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">getSize</span>(<span class="hljs-variable language_">this</span>.<span class="hljs-property">rhe</span>, <span class="hljs-variable language_">this</span>.<span class="hljs-property">rta</span>) == <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> -<span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">const</span> ans = <span class="hljs-variable language_">this</span>.<span class="hljs-property">r</span>[<span class="hljs-variable language_">this</span>.<span class="hljs-property">rta</span>--];<br>        <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">update</span>();<br>        <span class="hljs-keyword">return</span> ans;<br>    &#125;<br>    <span class="hljs-keyword">private</span> <span class="hljs-title function_">getSize</span>(<span class="hljs-attr">he</span>: <span class="hljs-built_in">number</span>, <span class="hljs-attr">ta</span>: <span class="hljs-built_in">number</span>): <span class="hljs-built_in">number</span> &#123;<br>        <span class="hljs-keyword">return</span> ta - he;<br>    &#125;<br>    <span class="hljs-keyword">private</span> <span class="hljs-title function_">update</span>(): <span class="hljs-built_in">void</span> &#123;<br>        <span class="hljs-keyword">while</span> (<span class="hljs-variable language_">this</span>.<span class="hljs-title function_">getSize</span>(<span class="hljs-variable language_">this</span>.<span class="hljs-property">lhe</span>, <span class="hljs-variable language_">this</span>.<span class="hljs-property">lta</span>) &gt; <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">getSize</span>(<span class="hljs-variable language_">this</span>.<span class="hljs-property">rhe</span>, <span class="hljs-variable language_">this</span>.<span class="hljs-property">rta</span>)) <span class="hljs-variable language_">this</span>.<span class="hljs-property">r</span>[<span class="hljs-variable language_">this</span>.<span class="hljs-property">rhe</span>--] = <span class="hljs-variable language_">this</span>.<span class="hljs-property">l</span>[<span class="hljs-variable language_">this</span>.<span class="hljs-property">lta</span>--];<br>        <span class="hljs-keyword">while</span> (<span class="hljs-variable language_">this</span>.<span class="hljs-title function_">getSize</span>(<span class="hljs-variable language_">this</span>.<span class="hljs-property">rhe</span>, <span class="hljs-variable language_">this</span>.<span class="hljs-property">rta</span>) - <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">getSize</span>(<span class="hljs-variable language_">this</span>.<span class="hljs-property">lhe</span>, <span class="hljs-variable language_">this</span>.<span class="hljs-property">lta</span>) &gt; <span class="hljs-number">1</span>) <span class="hljs-variable language_">this</span>.<span class="hljs-property">l</span>[++<span class="hljs-variable language_">this</span>.<span class="hljs-property">lta</span>] = <span class="hljs-variable language_">this</span>.<span class="hljs-property">r</span>[++<span class="hljs-variable language_">this</span>.<span class="hljs-property">rhe</span>];<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure></p>
+<ul>
+<li>时间复杂度：所有操作复杂度均为 $O(1)$</li>
+<li>空间复杂度：$O(n)$</li>
+</ul>
+<hr>
+<h3 id="进阶"><a href="#进阶" class="headerlink" title="进阶"></a>进阶</h3><p>更进一步，使用双向链表并与实现 <code>update</code> 类似效果，维护 <code>Middle</code> 位置的元素节点，同样可实现 $O(1)$ 各项操作，你能完成吗？</p>
+<p>与纯数组版相比，使用链表好处在于可严格按需创建。</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Node</span> &#123;<br>    Node prev, next;<br>    <span class="hljs-type">int</span> val;<br>    Node (<span class="hljs-type">int</span> _val) &#123;<br>        val = _val;<br>    &#125;<br>&#125;<br><span class="hljs-keyword">class</span> <span class="hljs-title class_">FrontMiddleBackQueue</span> &#123;<br>    Node he, ta, mid;<br>    <span class="hljs-type">int</span> lsz, rsz;<br>    <span class="hljs-keyword">public</span> <span class="hljs-title function_">FrontMiddleBackQueue</span><span class="hljs-params">()</span> &#123;<br>        he = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Node</span>(-<span class="hljs-number">1</span>); ta = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Node</span>(-<span class="hljs-number">1</span>);<br>        he.next = ta; ta.prev = he;<br>        mid = ta;<br>        lsz = rsz = <span class="hljs-number">0</span>;<br>    &#125;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">pushFront</span><span class="hljs-params">(<span class="hljs-type">int</span> val)</span> &#123;<br>        <span class="hljs-type">Node</span> <span class="hljs-variable">cur</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Node</span>(val);<br>        cur.next = he.next;<br>        cur.prev = he;<br>        he.next.prev = cur;<br>        he.next = cur;<br>        lsz++;<br>        update();<br>    &#125;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">pushMiddle</span><span class="hljs-params">(<span class="hljs-type">int</span> val)</span> &#123;<br>        <span class="hljs-type">Node</span> <span class="hljs-variable">cur</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Node</span>(val);<br>        cur.next = mid;<br>        cur.prev = mid.prev;<br>        mid.prev.next = cur;<br>        mid.prev = cur;<br>        lsz++;<br>        update();<br>    &#125;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">pushBack</span><span class="hljs-params">(<span class="hljs-type">int</span> val)</span> &#123;<br>        <span class="hljs-type">Node</span> <span class="hljs-variable">cur</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Node</span>(val);<br>        cur.next = ta;<br>        cur.prev = ta.prev;<br>        ta.prev.next = cur;<br>        ta.prev = cur;<br>        rsz++;<br>        update();<br>    &#125;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">popFront</span><span class="hljs-params">()</span> &#123;<br>        <span class="hljs-keyword">if</span> (lsz + rsz == <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> -<span class="hljs-number">1</span>;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">ans</span> <span class="hljs-operator">=</span> he.next.val;<br>        he.next.next.prev = he;<br>        he.next = he.next.next;<br>        lsz--;<br>        update();<br>        <span class="hljs-keyword">return</span> ans;<br>    &#125;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">popMiddle</span><span class="hljs-params">()</span> &#123;<br>        <span class="hljs-keyword">if</span> (lsz + rsz == <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> -<span class="hljs-number">1</span>;<br>        <span class="hljs-type">Node</span> <span class="hljs-variable">realMid</span> <span class="hljs-operator">=</span> <span class="hljs-literal">null</span>;<br>        <span class="hljs-keyword">if</span> (lsz == rsz) &#123;<br>            realMid = mid.prev;<br>            lsz--;<br>        &#125; <span class="hljs-keyword">else</span> &#123;<br>            realMid = mid;<br>            mid = mid.next;<br>            rsz--;<br>        &#125;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">ans</span> <span class="hljs-operator">=</span> realMid.val;<br>        realMid.prev.next = realMid.next;<br>        realMid.next.prev = realMid.prev;<br>        realMid = realMid.next;<br>        update();<br>        <span class="hljs-keyword">return</span> ans;<br>    &#125;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">popBack</span><span class="hljs-params">()</span> &#123;<br>        <span class="hljs-keyword">if</span> (lsz + rsz == <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> -<span class="hljs-number">1</span>;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">ans</span> <span class="hljs-operator">=</span> ta.prev.val;<br>        ta.prev.prev.next = ta;<br>        ta.prev = ta.prev.prev;<br>        rsz--;<br>        update();<br>        <span class="hljs-keyword">return</span> ans;<br>    &#125;<br>    <span class="hljs-keyword">void</span> <span class="hljs-title function_">update</span><span class="hljs-params">()</span> &#123;<br>        <span class="hljs-keyword">while</span> (lsz &gt; rsz) &#123;<br>            mid = mid.prev;<br>            lsz--; rsz++;<br>        &#125;<br>        <span class="hljs-keyword">while</span> (rsz - lsz &gt; <span class="hljs-number">1</span>) &#123;<br>            mid = mid.next;<br>            lsz++; rsz--;<br>        &#125;<br>        <span class="hljs-keyword">if</span> (lsz + rsz == <span class="hljs-number">1</span>) mid = ta.prev;<br>        <span class="hljs-keyword">if</span> (lsz + rsz == <span class="hljs-number">0</span>) mid = ta;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<hr>
+<h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>这是我们「刷穿 LeetCode」系列文章的第 <code>No.1670</code> 篇，系列开始于 2021/01/01，截止于起始日 LeetCode 上共有 1916 道题目，部分是有锁题，我们将先把所有不带锁的题目刷完。</p>
+<p>在这个系列文章里面，除了讲解解题思路以外，还会尽可能给出最为简洁的代码。如果涉及通解还会相应的代码模板。</p>
+<p>为了方便各位同学能够电脑上进行调试和提交代码，我建立了相关的仓库：<a target="_blank" rel="noopener" href="https://github.com/SharingSource/LogicStack-LeetCode">https://github.com/SharingSource/LogicStack-LeetCode</a> 。</p>
+<p>在仓库地址里，你可以看到系列文章的题解链接、系列文章的相应代码、LeetCode 原题链接和其他优选题解。</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E9%98%9F%E5%88%97/">队列</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E9%93%BE%E8%A1%A8/">链表</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%8F%8C%E7%AB%AF%E9%98%9F%E5%88%97/">双端队列</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/11/29/2336.%20%E6%97%A0%E9%99%90%E9%9B%86%E4%B8%AD%E7%9A%84%E6%9C%80%E5%B0%8F%E6%95%B0%E5%AD%97%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">LC 2336. 无限集中的最小数字</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/11/25/1457.%20%E4%BA%8C%E5%8F%89%E6%A0%91%E4%B8%AD%E7%9A%84%E4%BC%AA%E5%9B%9E%E6%96%87%E8%B7%AF%E5%BE%84%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/">
+                        <span class="hidden-mobile">LC 1457. 二叉树中的伪回文路径</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://cdn.staticfile.org/valine/1.4.18/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"IDifiViRkVDTgu27Nu50GQkE-gzGzoHsz","appKey":"gt98pupgyYjPKYQASrGmD9kM","path":"window.location.pathname","placeholder":"发一条友善的评论（为方便交流，记得填上方的昵称再留言哦 ~ 🍭","avatar":"","meta":["nick","mail"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":true},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          Fluid.plugins.initFancyBox('#valine .vcontent img:not(.vemoji)');
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+  <div class="col-lg-7 mx-auto nopadding-x-md">
+    <div class="container custom post-custom mx-auto">
+      <img src="/oimg/gzh-qrcode.webp" srcset="/img/loading.gif" lazyload class="rounded mx-auto d-block mt-5" style="width:80%">
+    </div>
+  </div>
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- LeanCloud 统计PV -->
+        <span id="leancloud-site-pv-container" style="display: none">
+            总访问量 
+            <span id="leancloud-site-pv"></span>
+             次
+          </span>
+      
+      
+        <!-- LeanCloud 统计UV -->
+        <span id="leancloud-site-uv-container" style="display: none">
+            总访客数 
+            <span id="leancloud-site-uv"></span>
+             人
+          </span>
+      
+
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.staticfile.org/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.staticfile.org/tocbot/4.18.2/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.staticfile.org/anchor-js/4.3.1/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.11/clipboard.min.js" ></script>
+  
+
+
+
+
+  <script defer src="/js/leancloud.js" ></script>
+
+
+
+  <script  src="https://cdn.bootcdn.net/ajax/libs/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        loader: {
+          
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.staticfile.org/mathjax/3.2.0/es5/tex-svg.js" ></script>
+
+  
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>
