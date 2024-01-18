@@ -1,0 +1,594 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/oimg/RoundCorner.png">
+  <link rel="icon" href="/oimg/RoundCorner.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="宫水三叶">
+  <meta name="keywords" content="算法, 数据结构, 题解">
+  
+    <meta name="description" content="题目描述这是 LeetCode 上的 2646. 最小化旅行的价格总和 ，难度为 困难。 现有一棵无向、无根的树，树中有 n 个节点，按从 0 到 n - 1 编号。 给你一个整数 n 和一个长度为 n - 1 的二维整数数组 edges，其中 $edges[i] &#x3D; [a{i}, b{i}]$ 表示树中节点 $a{i}$ 和 $b{i}$ 之间存在一条边。 每个节点都关联一个价格。给你一个整数数">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LC 2646. 最小化旅行的价格总和">
+<meta property="og:url" content="https://sharingsource.github.io/2024/01/18/2646.%20%E6%9C%80%E5%B0%8F%E5%8C%96%E6%97%85%E8%A1%8C%E7%9A%84%E4%BB%B7%E6%A0%BC%E6%80%BB%E5%92%8C%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/index.html">
+<meta property="og:site_name" content="宫水三叶的刷题日记">
+<meta property="og:description" content="题目描述这是 LeetCode 上的 2646. 最小化旅行的价格总和 ，难度为 困难。 现有一棵无向、无根的树，树中有 n 个节点，按从 0 到 n - 1 编号。 给你一个整数 n 和一个长度为 n - 1 的二维整数数组 edges，其中 $edges[i] &#x3D; [a{i}, b{i}]$ 表示树中节点 $a{i}$ 和 $b{i}$ 之间存在一条边。 每个节点都关联一个价格。给你一个整数数">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://sharingsource.github.io/2024/01/18/2646.%20%E6%9C%80%E5%B0%8F%E5%8C%96%E6%97%85%E8%A1%8C%E7%9A%84%E4%BB%B7%E6%A0%BC%E6%80%BB%E5%92%8C%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/image_0.png">
+<meta property="og:image" content="https://sharingsource.github.io/2024/01/18/2646.%20%E6%9C%80%E5%B0%8F%E5%8C%96%E6%97%85%E8%A1%8C%E7%9A%84%E4%BB%B7%E6%A0%BC%E6%80%BB%E5%92%8C%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/image_1.png">
+<meta property="article:published_time" content="2024-01-18T11:57:36.000Z">
+<meta property="article:modified_time" content="2024-01-18T11:57:38.233Z">
+<meta property="article:author" content="宫水三叶">
+<meta property="article:tag" content="DFS">
+<meta property="article:tag" content="图">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://sharingsource.github.io/2024/01/18/2646.%20%E6%9C%80%E5%B0%8F%E5%8C%96%E6%97%85%E8%A1%8C%E7%9A%84%E4%BB%B7%E6%A0%BC%E6%80%BB%E5%92%8C%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/image_0.png">
+  
+  
+  <title>LC 2646. 最小化旅行的价格总和 - 宫水三叶的刷题日记</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/hint.css/2.7.0/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.7.2/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"sharingsource.github.io","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"|","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"IDifiViRkVDTgu27Nu50GQkE-gzGzoHsz","app_key":"gt98pupgyYjPKYQASrGmD9kM","server_url":"https://idifivir.lc-cn-n1-shared.com","path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.1.0"></head>
+
+
+<body>
+  <header style="height: 50vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>宫水三叶の刷题日记</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/image_203.jpeg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="LC 2646. 最小化旅行的价格总和">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-author" aria-hidden="true"></i>
+      宫水三叶
+    </span>
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2024-01-18 19:57" pubdate>
+        2024年1月18日
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">LC 2646. 最小化旅行的价格总和</h1>
+            
+            <div class="markdown-body">
+              <h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>这是 LeetCode 上的 <strong><a href>2646. 最小化旅行的价格总和</a></strong> ，难度为 <strong>困难</strong>。</p>
+<p>现有一棵无向、无根的树，树中有 <code>n</code> 个节点，按从 <code>0</code> 到 <code>n - 1</code> 编号。</p>
+<p>给你一个整数 <code>n</code> 和一个长度为 <code>n - 1</code> 的二维整数数组 <code>edges</code>，其中 $edges[i] = [a<em>{i}, b</em>{i}]$ 表示树中节点 $a<em>{i}$ 和 $b</em>{i}$ 之间存在一条边。</p>
+<p>每个节点都关联一个价格。给你一个整数数组 <code>price</code>，其中 <code>price[i]</code> 是第 <code>i</code> 个节点的价格。</p>
+<p>给定路径的价格总和是该路径上所有节点的价格之和。</p>
+<p>另给你一个二维整数数组 <code>trips</code>，其中 $trips[i] = [start<em>{i}, end</em>{i}]$ 表示您从节点 $start<em>{i}$ 开始第 $i$ 次旅行，并通过任何你喜欢的路径前往节点 $end</em>{i}$。</p>
+<p>在执行第一次旅行之前，你可以选择一些非相邻节点并将价格减半。</p>
+<p>返回执行所有旅行的最小价格总和。</p>
+<p>示例 1：<br><img src="/2024/01/18/2646.%20%E6%9C%80%E5%B0%8F%E5%8C%96%E6%97%85%E8%A1%8C%E7%9A%84%E4%BB%B7%E6%A0%BC%E6%80%BB%E5%92%8C%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/image_0.png" srcset="/img/loading.gif" lazyload alt><br><figure class="highlight tap"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs tap">输入：n = 4, edges = [[0,1],[1,2],[1,3]], price = [2,2,10,6], trips = [[0,3],[2,1],[2,3]]<br><br>输出：23<br><br>解释：<br>上图表示将节点<span class="hljs-number"> 2 </span>视为根之后的树结构。第一个图表示初始树，第二个图表示选择节点<span class="hljs-number"> 0 </span>、2 和<span class="hljs-number"> 3 </span>并使其价格减半后的树。<br>第<span class="hljs-number"> 1 </span>次旅行，选择路径 [0,1,3] 。路径的价格总和为<span class="hljs-number"> 1 </span>+<span class="hljs-number"> 2 </span>+<span class="hljs-number"> 3 </span>=<span class="hljs-number"> 6 </span>。<br>第<span class="hljs-number"> 2 </span>次旅行，选择路径 [2,1] 。路径的价格总和为<span class="hljs-number"> 2 </span>+<span class="hljs-number"> 5 </span>=<span class="hljs-number"> 7 </span>。<br>第<span class="hljs-number"> 3 </span>次旅行，选择路径 [2,1,3] 。路径的价格总和为<span class="hljs-number"> 5 </span>+<span class="hljs-number"> 2 </span>+<span class="hljs-number"> 3 </span>=<span class="hljs-number"> 10 </span>。<br>所有旅行的价格总和为<span class="hljs-number"> 6 </span>+<span class="hljs-number"> 7 </span>+<span class="hljs-number"> 10 </span>=<span class="hljs-number"> 23 </span>。可以证明，23 是可以实现的最小答案。<br></code></pre></div></td></tr></table></figure><br>示例 2：<br><img src="/2024/01/18/2646.%20%E6%9C%80%E5%B0%8F%E5%8C%96%E6%97%85%E8%A1%8C%E7%9A%84%E4%BB%B7%E6%A0%BC%E6%80%BB%E5%92%8C%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/image_1.png" srcset="/img/loading.gif" lazyload alt><br><figure class="highlight lua"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs lua">输入：n = <span class="hljs-number">2</span>, edges = <span class="hljs-string">[[0,1]]</span>, price = [<span class="hljs-number">2</span>,<span class="hljs-number">2</span>], trips = <span class="hljs-string">[[0,0]]</span><br><br>输出：<span class="hljs-number">1</span><br><br>解释：<br>上图表示将节点 <span class="hljs-number">0</span> 视为根之后的树结构。第一个图表示初始树，第二个图表示选择节点 <span class="hljs-number">0</span> 并使其价格减半后的树。 <br>第 <span class="hljs-number">1</span> 次旅行，选择路径 [<span class="hljs-number">0</span>] 。路径的价格总和为 <span class="hljs-number">1</span> 。 <br>所有旅行的价格总和为 <span class="hljs-number">1</span> 。可以证明，<span class="hljs-number">1</span> 是可以实现的最小答案。<br></code></pre></div></td></tr></table></figure></p>
+<p>提示：</p>
+<ul>
+<li>$1 &lt;= n &lt;= 50$</li>
+<li>$edges.length = n - 1$</li>
+<li>$0 &lt;= a<em>{i}, b</em>{i} &lt;= n - 1$</li>
+<li><code>edges</code> 表示一棵有效的树</li>
+<li>$price.length = n$</li>
+<li>$price[i]$ 是一个偶数</li>
+<li>$1 &lt;= price[i] &lt;= 1000$</li>
+<li>$1 &lt;= trips.length &lt;= 100$</li>
+<li>$0 &lt;= start<em>{i}, end</em>{i} &lt;= n - 1$</li>
+</ul>
+<hr>
+<h3 id="DFS"><a href="#DFS" class="headerlink" title="DFS"></a>DFS</h3><p>Java 代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-type">int</span> <span class="hljs-variable">N</span> <span class="hljs-operator">=</span> <span class="hljs-number">55</span>, M = N * <span class="hljs-number">2</span>, idx = <span class="hljs-number">0</span>;<br>    <span class="hljs-type">int</span>[] he = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[N], e = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[M], ne = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[M];<br>    <span class="hljs-keyword">void</span> <span class="hljs-title function_">add</span><span class="hljs-params">(<span class="hljs-type">int</span> a, <span class="hljs-type">int</span> b)</span> &#123;<br>        e[idx] = b;<br>        ne[idx] = he[a];<br>        he[a] = idx++;<br>    &#125;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">minimumTotalPrice</span><span class="hljs-params">(<span class="hljs-type">int</span> n, <span class="hljs-type">int</span>[][] edges, <span class="hljs-type">int</span>[] price, <span class="hljs-type">int</span>[][] trips)</span> &#123;<br>        Arrays.fill(he, -<span class="hljs-number">1</span>);<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span>[] info : edges) &#123;<br>            add(info[<span class="hljs-number">0</span>], info[<span class="hljs-number">1</span>]); add(info[<span class="hljs-number">1</span>], info[<span class="hljs-number">0</span>]);<br>        &#125;<br>        <span class="hljs-type">int</span>[] cnt = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[n];<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span>[] trip : trips) dfs1(trip[<span class="hljs-number">0</span>], -<span class="hljs-number">1</span>, trip[<span class="hljs-number">1</span>], cnt);<br>        <span class="hljs-type">int</span>[] ans = dfs2(<span class="hljs-number">0</span>, -<span class="hljs-number">1</span>, price, cnt);<br>        <span class="hljs-keyword">return</span> Math.min(ans[<span class="hljs-number">0</span>], ans[<span class="hljs-number">1</span>]);<br>    &#125;<br>    <span class="hljs-type">int</span>[] dfs2(<span class="hljs-type">int</span> u, <span class="hljs-type">int</span> fa, <span class="hljs-type">int</span>[] price, <span class="hljs-type">int</span>[] cnt) &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">a</span> <span class="hljs-operator">=</span> price[u] / <span class="hljs-number">2</span> * cnt[u], b = price[u] * cnt[u];<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> he[u]; i != -<span class="hljs-number">1</span>; i = ne[i]) &#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> e[i];<br>            <span class="hljs-keyword">if</span> (j == fa) <span class="hljs-keyword">continue</span>;<br>            <span class="hljs-type">int</span>[] info = dfs2(j, u, price, cnt);<br>            <span class="hljs-type">int</span> <span class="hljs-variable">c</span> <span class="hljs-operator">=</span> info[<span class="hljs-number">0</span>], d = info[<span class="hljs-number">1</span>];<br>            a += d; b += Math.min(c, d);<br>        &#125;<br>        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[]&#123;a, b&#125;;<br>    &#125;<br>    <span class="hljs-type">boolean</span> <span class="hljs-title function_">dfs1</span><span class="hljs-params">(<span class="hljs-type">int</span> u, <span class="hljs-type">int</span> fa, <span class="hljs-type">int</span> end, <span class="hljs-type">int</span>[] cnt)</span> &#123;<br>        <span class="hljs-keyword">if</span> (u == end) &#123;<br>            cnt[u]++;<br>            <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>        &#125;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> he[u]; i != -<span class="hljs-number">1</span>; i = ne[i]) &#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> e[i];<br>            <span class="hljs-keyword">if</span> (j == fa) <span class="hljs-keyword">continue</span>;<br>            <span class="hljs-keyword">if</span> (dfs1(j, u, end, cnt)) &#123;<br>                cnt[u]++;<br>                <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<p>C++ 代码：<br><figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs C++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-type">int</span> he[<span class="hljs-number">55</span>], e[<span class="hljs-number">55</span> * <span class="hljs-number">2</span>], ne[<span class="hljs-number">55</span> * <span class="hljs-number">2</span>], idx = <span class="hljs-number">0</span>;<br>    <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">add</span><span class="hljs-params">(<span class="hljs-type">int</span> a, <span class="hljs-type">int</span> b)</span> </span>&#123;<br>        e[idx] = b;<br>        ne[idx] = he[a];<br>        he[a] = idx++;<br>    &#125;<br>    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">minimumTotalPrice</span><span class="hljs-params">(<span class="hljs-type">int</span> n, vector&lt;vector&lt;<span class="hljs-type">int</span>&gt;&gt;&amp; edges, vector&lt;<span class="hljs-type">int</span>&gt;&amp; price, vector&lt;vector&lt;<span class="hljs-type">int</span>&gt;&gt;&amp; trips)</span> </span>&#123;<br>        <span class="hljs-built_in">memset</span>(he, <span class="hljs-number">-1</span>, <span class="hljs-built_in">sizeof</span>(he));<br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">auto</span>&amp; info : edges) &#123;<br>            <span class="hljs-built_in">add</span>(info[<span class="hljs-number">0</span>], info[<span class="hljs-number">1</span>]); <span class="hljs-built_in">add</span>(info[<span class="hljs-number">1</span>], info[<span class="hljs-number">0</span>]);<br>        &#125;<br>        <span class="hljs-function">vector&lt;<span class="hljs-type">int</span>&gt; <span class="hljs-title">cnt</span><span class="hljs-params">(n, <span class="hljs-number">0</span>)</span></span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">auto</span>&amp; trip : trips) <span class="hljs-built_in">dfs1</span>(trip[<span class="hljs-number">0</span>], <span class="hljs-number">-1</span>, trip[<span class="hljs-number">1</span>], cnt);<br>        vector&lt;<span class="hljs-type">int</span>&gt; ans = <span class="hljs-built_in">dfs2</span>(<span class="hljs-number">0</span>, <span class="hljs-number">-1</span>, price, cnt);<br>        <span class="hljs-keyword">return</span> <span class="hljs-built_in">min</span>(ans[<span class="hljs-number">0</span>], ans[<span class="hljs-number">1</span>]);<br>    &#125;<br>    <span class="hljs-function">vector&lt;<span class="hljs-type">int</span>&gt; <span class="hljs-title">dfs2</span><span class="hljs-params">(<span class="hljs-type">int</span> u, <span class="hljs-type">int</span> fa, vector&lt;<span class="hljs-type">int</span>&gt;&amp; price, vector&lt;<span class="hljs-type">int</span>&gt;&amp; cnt)</span> </span>&#123;<br>        <span class="hljs-type">int</span> a = price[u] / <span class="hljs-number">2</span> * cnt[u], b = price[u] * cnt[u];<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = he[u]; i != <span class="hljs-number">-1</span>; i = ne[i]) &#123;<br>            <span class="hljs-type">int</span> j = e[i];<br>            <span class="hljs-keyword">if</span> (j == fa) <span class="hljs-keyword">continue</span>;<br>            vector&lt;<span class="hljs-type">int</span>&gt; info = <span class="hljs-built_in">dfs2</span>(j, u, price, cnt);<br>            <span class="hljs-type">int</span> c = info[<span class="hljs-number">0</span>], d = info[<span class="hljs-number">1</span>];<br>            a += d; b += <span class="hljs-built_in">min</span>(c, d);<br>        &#125;<br>        <span class="hljs-keyword">return</span> &#123;a, b&#125;;<br>    &#125;<br>    <span class="hljs-function"><span class="hljs-type">bool</span> <span class="hljs-title">dfs1</span><span class="hljs-params">(<span class="hljs-type">int</span> u, <span class="hljs-type">int</span> fa, <span class="hljs-type">int</span> end, vector&lt;<span class="hljs-type">int</span>&gt;&amp; cnt)</span> </span>&#123;<br>        <span class="hljs-keyword">if</span> (u == end) &#123;<br>            cnt[u]++;<br>            <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>        &#125;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = he[u]; i != <span class="hljs-number">-1</span>; i = ne[i]) &#123;<br>            <span class="hljs-type">int</span> j = e[i];<br>            <span class="hljs-keyword">if</span> (j == fa) <span class="hljs-keyword">continue</span>;<br>            <span class="hljs-keyword">if</span> (<span class="hljs-built_in">dfs1</span>(j, u, end, cnt)) &#123;<br>                cnt[u]++;<br>                <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>    &#125;<br>&#125;;<br></code></pre></div></td></tr></table></figure><br>Python 代码：<br><figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span>:    <br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">minimumTotalPrice</span>(<span class="hljs-params">self, n: <span class="hljs-built_in">int</span>, edges: <span class="hljs-type">List</span>[<span class="hljs-type">List</span>[<span class="hljs-built_in">int</span>]], price: <span class="hljs-type">List</span>[<span class="hljs-built_in">int</span>], trips: <span class="hljs-type">List</span>[<span class="hljs-type">List</span>[<span class="hljs-built_in">int</span>]]</span>) -&gt; <span class="hljs-built_in">int</span>:<br>        idx = <span class="hljs-number">0</span><br>        he, e, ne = [-<span class="hljs-number">1</span>] * n, [<span class="hljs-number">0</span>] * n * <span class="hljs-number">2</span>, [<span class="hljs-number">0</span>] * n * <span class="hljs-number">2</span><br><br>        <span class="hljs-keyword">def</span> <span class="hljs-title function_">add</span>(<span class="hljs-params">a, b</span>):<br>            <span class="hljs-keyword">nonlocal</span> idx<br>            e[idx], ne[idx], he[a] = b, he[a], idx<br>            idx += <span class="hljs-number">1</span><br>    <br>        <span class="hljs-keyword">def</span> <span class="hljs-title function_">dfs1</span>(<span class="hljs-params">u, fa, end</span>):<br>            <span class="hljs-keyword">if</span> u == end:<br>                cnt[u] += <span class="hljs-number">1</span><br>                <span class="hljs-keyword">return</span> <span class="hljs-literal">True</span><br>            i = he[u]<br>            <span class="hljs-keyword">while</span> i != -<span class="hljs-number">1</span>:<br>                j, i = e[i], ne[i]<br>                <span class="hljs-keyword">if</span> j == fa: <span class="hljs-keyword">continue</span><br>                <span class="hljs-keyword">if</span> dfs1(j, u, end):<br>                    cnt[u] += <span class="hljs-number">1</span><br>                    <span class="hljs-keyword">return</span> <span class="hljs-literal">True</span><br>            <span class="hljs-keyword">return</span> <span class="hljs-literal">False</span><br>        <br>        <span class="hljs-keyword">def</span> <span class="hljs-title function_">dfs2</span>(<span class="hljs-params">u, fa</span>):<br>            a, b = price[u] // <span class="hljs-number">2</span> * cnt[u], price[u] * cnt[u]<br>            i = he[u]<br>            <span class="hljs-keyword">while</span> i != -<span class="hljs-number">1</span>:<br>                j, i = e[i], ne[i]<br>                <span class="hljs-keyword">if</span> j == fa: <span class="hljs-keyword">continue</span><br>                c, d = dfs2(j, u)<br>                a += d<br>                b += <span class="hljs-built_in">min</span>(c, d)<br>            <span class="hljs-keyword">return</span> [a, b]<br><br>        <span class="hljs-keyword">for</span> info <span class="hljs-keyword">in</span> edges:<br>            add(info[<span class="hljs-number">0</span>], info[<span class="hljs-number">1</span>])<br>            add(info[<span class="hljs-number">1</span>], info[<span class="hljs-number">0</span>])<br>        cnt = [<span class="hljs-number">0</span>] * n<br>        <span class="hljs-keyword">for</span> trip <span class="hljs-keyword">in</span> trips:<br>            dfs1(trip[<span class="hljs-number">0</span>], -<span class="hljs-number">1</span>, trip[<span class="hljs-number">1</span>])<br>        ans = dfs2(<span class="hljs-number">0</span>, -<span class="hljs-number">1</span>)<br>        <span class="hljs-keyword">return</span> <span class="hljs-built_in">min</span>(ans[<span class="hljs-number">0</span>], ans[<span class="hljs-number">1</span>])<br></code></pre></div></td></tr></table></figure><br>TypeScript 代码：<br><figure class="highlight typescript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs TypeScript"><span class="hljs-keyword">function</span> <span class="hljs-title function_">minimumTotalPrice</span>(<span class="hljs-params">n: <span class="hljs-built_in">number</span>, edges: <span class="hljs-built_in">number</span>[][], price: <span class="hljs-built_in">number</span>[], trips: <span class="hljs-built_in">number</span>[][]</span>): <span class="hljs-built_in">number</span> &#123;<br>    <span class="hljs-keyword">let</span> N = n + <span class="hljs-number">10</span>, M = N * <span class="hljs-number">2</span>, idx = <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">const</span> he = <span class="hljs-title class_">Array</span>(N).<span class="hljs-title function_">fill</span>(-<span class="hljs-number">1</span>), e = <span class="hljs-title class_">Array</span>(N).<span class="hljs-title function_">fill</span>(<span class="hljs-number">0</span>), ne = <span class="hljs-title class_">Array</span>(N).<span class="hljs-title function_">fill</span>(<span class="hljs-number">0</span>);<br>    <span class="hljs-keyword">const</span> add = <span class="hljs-keyword">function</span>(<span class="hljs-params">a: <span class="hljs-built_in">number</span>, b: <span class="hljs-built_in">number</span></span>): <span class="hljs-built_in">void</span> &#123;<br>        e[idx] = b;<br>        ne[idx] = he[a];<br>        he[a] = idx++;<br>    &#125;;<br>    <span class="hljs-keyword">const</span> dfs1 = <span class="hljs-keyword">function</span>(<span class="hljs-params">u: <span class="hljs-built_in">number</span>, fa: <span class="hljs-built_in">number</span>, end: <span class="hljs-built_in">number</span></span>): <span class="hljs-built_in">boolean</span> &#123;<br>        <span class="hljs-keyword">if</span> (u == end) &#123;<br>            cnt[u]++;<br>            <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>        &#125;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = he[u]; i != -<span class="hljs-number">1</span>; i = ne[i]) &#123;<br>            <span class="hljs-keyword">const</span> j = e[i];<br>            <span class="hljs-keyword">if</span> (j == fa) <span class="hljs-keyword">continue</span>;<br>            <span class="hljs-keyword">if</span> (<span class="hljs-title function_">dfs1</span>(j, u, end)) &#123;<br>                cnt[u]++;<br>                <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>    &#125;;<br>    <span class="hljs-keyword">const</span> dfs2 = <span class="hljs-keyword">function</span>(<span class="hljs-params">u: <span class="hljs-built_in">number</span>, fa: <span class="hljs-built_in">number</span></span>): <span class="hljs-built_in">number</span>[] &#123;<br>        <span class="hljs-keyword">let</span> a = price[u] / <span class="hljs-number">2</span> * cnt[u], b = price[u] * cnt[u];<br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = he[u]; i != -<span class="hljs-number">1</span>; i = ne[i]) &#123;<br>            <span class="hljs-keyword">const</span> j = e[i];<br>            <span class="hljs-keyword">if</span> (j == fa) <span class="hljs-keyword">continue</span>;<br>            <span class="hljs-keyword">const</span> [c, d] = <span class="hljs-title function_">dfs2</span>(j, u);<br>            a += d; b += <span class="hljs-title class_">Math</span>.<span class="hljs-title function_">min</span>(c, d);<br>        &#125;<br>        <span class="hljs-keyword">return</span> [a, b];<br>    &#125;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">const</span> [a, b] <span class="hljs-keyword">of</span> edges) &#123;<br>        <span class="hljs-title function_">add</span>(a, b); <span class="hljs-title function_">add</span>(b, a);<br>    &#125;<br>    <span class="hljs-keyword">const</span> cnt = <span class="hljs-title class_">Array</span>(N).<span class="hljs-title function_">fill</span>(<span class="hljs-number">0</span>)<br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">const</span> [a, b] <span class="hljs-keyword">of</span> trips) <span class="hljs-title function_">dfs1</span>(a, -<span class="hljs-number">1</span>, b);<br>    <span class="hljs-keyword">const</span> [a, b] = <span class="hljs-title function_">dfs2</span>(<span class="hljs-number">0</span>, -<span class="hljs-number">1</span>);<br>    <span class="hljs-keyword">return</span> <span class="hljs-title class_">Math</span>.<span class="hljs-title function_">min</span>(a, b);<br>&#125;;<br></code></pre></div></td></tr></table></figure></p>
+<ul>
+<li>时间复杂度：令 <code>m</code> 为 <code>trips</code> 的大小，建图复杂度为 $O(n)$；统计完成 <code>trips</code> 时，每个点的经过次数 <code>cnt</code> 的复杂度为 $O(m \times n)$；最后统计答案复杂度为 $O(n)$。整体复杂度为 $O(m \times n)$</li>
+<li>空间复杂度：$O(n)$</li>
+</ul>
+<hr>
+<h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>这是我们「刷穿 LeetCode」系列文章的第 <code>No.2646</code> 篇，系列开始于 2021/01/01，截止于起始日 LeetCode 上共有 1916 道题目，部分是有锁题，我们将先把所有不带锁的题目刷完。</p>
+<p>在这个系列文章里面，除了讲解解题思路以外，还会尽可能给出最为简洁的代码。如果涉及通解还会相应的代码模板。</p>
+<p>为了方便各位同学能够电脑上进行调试和提交代码，我建立了相关的仓库：<a target="_blank" rel="noopener" href="https://github.com/SharingSource/LogicStack-LeetCode">https://github.com/SharingSource/LogicStack-LeetCode</a> 。</p>
+<p>在仓库地址里，你可以看到系列文章的题解链接、系列文章的相应代码、LeetCode 原题链接和其他优选题解。</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/DFS/">DFS</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%9B%BE/">图</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2024/01/18/1466.%20%E9%87%8D%E6%96%B0%E8%A7%84%E5%88%92%E8%B7%AF%E7%BA%BF%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">LC 1466. 重新规划路线</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2024/01/17/1798.%20%E4%BD%A0%E8%83%BD%E6%9E%84%E9%80%A0%E5%87%BA%E8%BF%9E%E7%BB%AD%E5%80%BC%E7%9A%84%E6%9C%80%E5%A4%A7%E6%95%B0%E7%9B%AE%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/">
+                        <span class="hidden-mobile">LC 1798. 你能构造出连续值的最大数目</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://cdn.staticfile.org/valine/1.4.18/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"IDifiViRkVDTgu27Nu50GQkE-gzGzoHsz","appKey":"gt98pupgyYjPKYQASrGmD9kM","path":"window.location.pathname","placeholder":"发一条友善的评论（为方便交流，记得填上方的昵称再留言哦 ~ 🍭","avatar":"","meta":["nick","mail"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":true},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          Fluid.plugins.initFancyBox('#valine .vcontent img:not(.vemoji)');
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+  <div class="col-lg-7 mx-auto nopadding-x-md">
+    <div class="container custom post-custom mx-auto">
+      <img src="/oimg/gzh-qrcode.webp" srcset="/img/loading.gif" lazyload class="rounded mx-auto d-block mt-5" style="width:80%">
+    </div>
+  </div>
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- LeanCloud 统计PV -->
+        <span id="leancloud-site-pv-container" style="display: none">
+            总访问量 
+            <span id="leancloud-site-pv"></span>
+             次
+          </span>
+      
+      
+        <!-- LeanCloud 统计UV -->
+        <span id="leancloud-site-uv-container" style="display: none">
+            总访客数 
+            <span id="leancloud-site-uv"></span>
+             人
+          </span>
+      
+
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.staticfile.org/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.staticfile.org/tocbot/4.18.2/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.staticfile.org/anchor-js/4.3.1/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.11/clipboard.min.js" ></script>
+  
+
+
+
+
+  <script defer src="/js/leancloud.js" ></script>
+
+
+
+  <script  src="https://cdn.bootcdn.net/ajax/libs/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        loader: {
+          
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.staticfile.org/mathjax/3.2.0/es5/tex-svg.js" ></script>
+
+  
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>
