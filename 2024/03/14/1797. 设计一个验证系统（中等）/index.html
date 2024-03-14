@@ -1,0 +1,616 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/oimg/RoundCorner.png">
+  <link rel="icon" href="/oimg/RoundCorner.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="宫水三叶">
+  <meta name="keywords" content="算法, 数据结构, 题解">
+  
+    <meta name="description" content="题目描述这是 LeetCode 上的 1797. 设计一个验证系统 ，难度为 中等。 你需要设计一个包含验证码的验证系统。 每一次验证中，用户会收到一个新的验证码，这个验证码在 ct 时刻之后 timeToLive 秒过期。 如果验证码被更新了，那么它会在 ct （可能与之前的 ct 不同）时刻延长 timeToLive 秒。 请你实现 AuthenticationManager 类：  Auth">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LC 1797. 设计一个验证系统">
+<meta property="og:url" content="https://sharingsource.github.io/2024/03/14/1797.%20%E8%AE%BE%E8%AE%A1%E4%B8%80%E4%B8%AA%E9%AA%8C%E8%AF%81%E7%B3%BB%E7%BB%9F%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/index.html">
+<meta property="og:site_name" content="宫水三叶的刷题日记">
+<meta property="og:description" content="题目描述这是 LeetCode 上的 1797. 设计一个验证系统 ，难度为 中等。 你需要设计一个包含验证码的验证系统。 每一次验证中，用户会收到一个新的验证码，这个验证码在 ct 时刻之后 timeToLive 秒过期。 如果验证码被更新了，那么它会在 ct （可能与之前的 ct 不同）时刻延长 timeToLive 秒。 请你实现 AuthenticationManager 类：  Auth">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://sharingsource.github.io/2024/03/14/1797.%20%E8%AE%BE%E8%AE%A1%E4%B8%80%E4%B8%AA%E9%AA%8C%E8%AF%81%E7%B3%BB%E7%BB%9F%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/image_0.png">
+<meta property="article:published_time" content="2024-03-14T10:36:57.000Z">
+<meta property="article:modified_time" content="2024-03-14T10:36:57.870Z">
+<meta property="article:author" content="宫水三叶">
+<meta property="article:tag" content="哈希表">
+<meta property="article:tag" content="链表">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://sharingsource.github.io/2024/03/14/1797.%20%E8%AE%BE%E8%AE%A1%E4%B8%80%E4%B8%AA%E9%AA%8C%E8%AF%81%E7%B3%BB%E7%BB%9F%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/image_0.png">
+  
+  
+  <title>LC 1797. 设计一个验证系统 - 宫水三叶的刷题日记</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/hint.css/2.7.0/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.7.2/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"sharingsource.github.io","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"|","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"IDifiViRkVDTgu27Nu50GQkE-gzGzoHsz","app_key":"gt98pupgyYjPKYQASrGmD9kM","server_url":"https://idifivir.lc-cn-n1-shared.com","path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.1.0"></head>
+
+
+<body>
+  <header style="height: 50vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>宫水三叶の刷题日记</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/image_v2_13.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="LC 1797. 设计一个验证系统">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-author" aria-hidden="true"></i>
+      宫水三叶
+    </span>
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2024-03-14 18:36" pubdate>
+        2024年3月14日
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">LC 1797. 设计一个验证系统</h1>
+            
+            <div class="markdown-body">
+              <h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>这是 LeetCode 上的 <strong><a href>1797. 设计一个验证系统</a></strong> ，难度为 <strong>中等</strong>。</p>
+<p>你需要设计一个包含验证码的验证系统。</p>
+<p>每一次验证中，用户会收到一个新的验证码，这个验证码在 <code>ct</code> 时刻之后 <code>timeToLive</code> 秒过期。</p>
+<p>如果验证码被更新了，那么它会在 <code>ct</code> （可能与之前的 <code>ct</code> 不同）时刻延长 <code>timeToLive</code> 秒。</p>
+<p>请你实现 <code>AuthenticationManager</code> 类：</p>
+<ul>
+<li><p><code>AuthenticationManager(int timeToLive)</code> 构造 <code>AuthenticationManager</code> 并设置 <code>timeToLive</code> 参数。</p>
+</li>
+<li><p><code>generate(string id, int ct)</code> 给定 <code>id</code>，在当前时间 <code>ct</code> 生成一个新的验证码。</p>
+</li>
+<li><p><code>renew(string id, int ct)</code> 将给定 <code>id</code> 且未过期的验证码在 <code>ct</code> 时刻更新。</p>
+<p>如果给定 <code>id</code> 对应的验证码不存在或已过期，请你忽略该操作，不会有任何更新操作发生。</p>
+</li>
+<li><p><code>countUnexpiredTokens(int ct)</code> 请返回在给定 <code>ct</code> 时刻，未过期的验证码数目。</p>
+</li>
+</ul>
+<p>如果一个验证码在时刻 <code>t</code> 过期，且另一个操作恰好在时刻 <code>t</code> 发生（<code>renew</code> 或者 <code>countUnexpiredTokens</code> 操作），过期事件优先于其他操作。</p>
+<p>示例 1：<br><img src="/2024/03/14/1797.%20%E8%AE%BE%E8%AE%A1%E4%B8%80%E4%B8%AA%E9%AA%8C%E8%AF%81%E7%B3%BB%E7%BB%9F%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/image_0.png" srcset="/img/loading.gif" lazyload alt><br><figure class="highlight awk"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs awk">输入：<br>[<span class="hljs-string">&quot;AuthenticationManager&quot;</span>, <span class="hljs-string">&quot;renew&quot;</span>, <span class="hljs-string">&quot;generate&quot;</span>, <span class="hljs-string">&quot;countUnexpiredTokens&quot;</span>, <span class="hljs-string">&quot;generate&quot;</span>, <span class="hljs-string">&quot;renew&quot;</span>, <span class="hljs-string">&quot;renew&quot;</span>, <span class="hljs-string">&quot;countUnexpiredTokens&quot;</span>]<br>[[<span class="hljs-number">5</span>], [<span class="hljs-string">&quot;aaa&quot;</span>, <span class="hljs-number">1</span>], [<span class="hljs-string">&quot;aaa&quot;</span>, <span class="hljs-number">2</span>], [<span class="hljs-number">6</span>], [<span class="hljs-string">&quot;bbb&quot;</span>, <span class="hljs-number">7</span>], [<span class="hljs-string">&quot;aaa&quot;</span>, <span class="hljs-number">8</span>], [<span class="hljs-string">&quot;bbb&quot;</span>, <span class="hljs-number">10</span>], [<span class="hljs-number">15</span>]]<br><br>输出：<br>[null, null, null, <span class="hljs-number">1</span>, null, null, null, <span class="hljs-number">0</span>]<br><br>解释：<br>AuthenticationManager authenticationManager = new AuthenticationManager(<span class="hljs-number">5</span>); <span class="hljs-regexp">//</span> 构造 AuthenticationManager ，设置 timeToLive = <span class="hljs-number">5</span> 秒。<br>authenticationManager.renew(<span class="hljs-string">&quot;aaa&quot;</span>, <span class="hljs-number">1</span>); <span class="hljs-regexp">//</span> 时刻 <span class="hljs-number">1</span> 时，没有验证码的 tokenId 为 <span class="hljs-string">&quot;aaa&quot;</span> ，没有验证码被更新。<br>authenticationManager.generate(<span class="hljs-string">&quot;aaa&quot;</span>, <span class="hljs-number">2</span>); <span class="hljs-regexp">//</span> 时刻 <span class="hljs-number">2</span> 时，生成一个 tokenId 为 <span class="hljs-string">&quot;aaa&quot;</span> 的新验证码。<br>authenticationManager.countUnexpiredTokens(<span class="hljs-number">6</span>); <span class="hljs-regexp">//</span> 时刻 <span class="hljs-number">6</span> 时，只有 tokenId 为 <span class="hljs-string">&quot;aaa&quot;</span> 的验证码未过期，所以返回 <span class="hljs-number">1</span> 。<br>authenticationManager.generate(<span class="hljs-string">&quot;bbb&quot;</span>, <span class="hljs-number">7</span>); <span class="hljs-regexp">//</span> 时刻 <span class="hljs-number">7</span> 时，生成一个 tokenId 为 <span class="hljs-string">&quot;bbb&quot;</span> 的新验证码。<br>authenticationManager.renew(<span class="hljs-string">&quot;aaa&quot;</span>, <span class="hljs-number">8</span>); <span class="hljs-regexp">//</span> tokenId 为 <span class="hljs-string">&quot;aaa&quot;</span> 的验证码在时刻 <span class="hljs-number">7</span> 过期，且 <span class="hljs-number">8</span> &gt;= <span class="hljs-number">7</span> ，所以时刻 <span class="hljs-number">8</span> 的renew 操作被忽略，没有验证码被更新。<br>authenticationManager.renew(<span class="hljs-string">&quot;bbb&quot;</span>, <span class="hljs-number">10</span>); <span class="hljs-regexp">//</span> tokenId 为 <span class="hljs-string">&quot;bbb&quot;</span> 的验证码在时刻 <span class="hljs-number">10</span> 没有过期，所以 renew 操作会执行，该 token 将在时刻 <span class="hljs-number">15</span> 过期。<br>authenticationManager.countUnexpiredTokens(<span class="hljs-number">15</span>); <span class="hljs-regexp">//</span> tokenId 为 <span class="hljs-string">&quot;bbb&quot;</span> 的验证码在时刻 <span class="hljs-number">15</span> 过期，tokenId 为 <span class="hljs-string">&quot;aaa&quot;</span> 的验证码在时刻 <span class="hljs-number">7</span> 过期，所有验证码均已过期，所以返回 <span class="hljs-number">0</span> 。<br></code></pre></div></td></tr></table></figure></p>
+<p>提示：</p>
+<ul>
+<li>$1 &lt;= timeToLive &lt;= 10^8$</li>
+<li>$1 &lt;= currentTime &lt;= 10^8$</li>
+<li>$1 &lt;= tokenId.length &lt;= 5$</li>
+<li><code>id</code> 只包含小写英文字母。</li>
+<li>所有 <code>generate</code> 函数的调用都会包含独一无二的 <code>id</code> 值。</li>
+<li>所有函数调用中，<code>ct</code> 的值严格递增。</li>
+<li>所有函数的调用次数总共不超过 <code>2000</code> 次。</li>
+</ul>
+<hr>
+<h3 id="哈希表"><a href="#哈希表" class="headerlink" title="哈希表"></a>哈希表</h3><p>数据范围只有 <code>20</code>，我们使用哈希表记录每个 <code>id</code> 的过期时间 <code>ct</code>，在每次查询时遍历整个哈希表来统计未过期的验证码数量。</p>
+<p>Java 代码：<br><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">AuthenticationManager</span> &#123;<br>    <span class="hljs-type">int</span> d;<br>    Map&lt;String, Integer&gt; map = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();<br>    <span class="hljs-keyword">public</span> <span class="hljs-title function_">AuthenticationManager</span><span class="hljs-params">(<span class="hljs-type">int</span> timeToLive)</span> &#123;<br>        d = timeToLive;<br>    &#125;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">generate</span><span class="hljs-params">(String id, <span class="hljs-type">int</span> ct)</span> &#123;<br>        map.put(id, ct + d);<br>    &#125;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">renew</span><span class="hljs-params">(String id, <span class="hljs-type">int</span> ct)</span> &#123;<br>        <span class="hljs-keyword">if</span> (!map.containsKey(id) || map.get(id) &lt;= ct) <span class="hljs-keyword">return</span> ;<br>        map.put(id, ct + d);<br>    &#125;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">countUnexpiredTokens</span><span class="hljs-params">(<span class="hljs-type">int</span> ct)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">ans</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (String id : map.keySet()) &#123;<br>            <span class="hljs-keyword">if</span> (map.get(id) &gt; ct) ans++;<br>        &#125;<br>        <span class="hljs-keyword">return</span> ans;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure><br>C++ 代码：<br><figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs C++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">AuthenticationManager</span> &#123;<br>    <span class="hljs-type">int</span> d;<br>    unordered_map&lt;string, <span class="hljs-type">int</span>&gt; map;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-built_in">AuthenticationManager</span>(<span class="hljs-type">int</span> timeToLive) : <span class="hljs-built_in">d</span>(timeToLive)&#123;&#125;<br>    <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">generate</span><span class="hljs-params">(string id, <span class="hljs-type">int</span> ct)</span> </span>&#123;<br>        map[id] = ct + d;<br>    &#125;<br>    <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">renew</span><span class="hljs-params">(string id, <span class="hljs-type">int</span> ct)</span> </span>&#123;<br>        <span class="hljs-keyword">if</span> (!map.<span class="hljs-built_in">count</span>(id) || map[id] &lt;= ct) <span class="hljs-keyword">return</span>;<br>        map[id] = ct + d;<br>    &#125;<br>    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">countUnexpiredTokens</span><span class="hljs-params">(<span class="hljs-type">int</span> ct)</span> </span>&#123;<br>        <span class="hljs-type">int</span> ans = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">auto</span> it = map.<span class="hljs-built_in">begin</span>(); it != map.<span class="hljs-built_in">end</span>(); ++it) &#123;<br>            <span class="hljs-keyword">if</span> (it-&gt;second &gt; ct) ans++;<br>        &#125;<br>        <span class="hljs-keyword">return</span> ans;<br>    &#125;<br>&#125;;<br></code></pre></div></td></tr></table></figure><br>Python 代码：<br><figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">AuthenticationManager</span>:<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self, timeToLive</span>):<br>        self.d = timeToLive<br>        self.<span class="hljs-built_in">map</span> = &#123;&#125;<br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">generate</span>(<span class="hljs-params">self, <span class="hljs-built_in">id</span>: <span class="hljs-built_in">str</span>, ct: <span class="hljs-built_in">int</span></span>) -&gt; <span class="hljs-literal">None</span>:<br>        self.<span class="hljs-built_in">map</span>[<span class="hljs-built_in">id</span>] = ct + self.d<br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">renew</span>(<span class="hljs-params">self, <span class="hljs-built_in">id</span>: <span class="hljs-built_in">str</span>, ct: <span class="hljs-built_in">int</span></span>) -&gt; <span class="hljs-literal">None</span>:<br>        <span class="hljs-keyword">if</span> <span class="hljs-built_in">id</span> <span class="hljs-keyword">not</span> <span class="hljs-keyword">in</span> self.<span class="hljs-built_in">map</span> <span class="hljs-keyword">or</span> self.<span class="hljs-built_in">map</span>[<span class="hljs-built_in">id</span>] &lt;= ct:<br>            <span class="hljs-keyword">return</span><br>        self.<span class="hljs-built_in">map</span>[<span class="hljs-built_in">id</span>] = ct + self.d<br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">countUnexpiredTokens</span>(<span class="hljs-params">self, ct: <span class="hljs-built_in">int</span></span>) -&gt; <span class="hljs-built_in">int</span>:<br>        ans = <span class="hljs-number">0</span><br>        <span class="hljs-keyword">for</span> <span class="hljs-built_in">id</span> <span class="hljs-keyword">in</span> self.<span class="hljs-built_in">map</span>:<br>            <span class="hljs-keyword">if</span> self.<span class="hljs-built_in">map</span>[<span class="hljs-built_in">id</span>] &gt; ct:<br>                ans += <span class="hljs-number">1</span><br>        <span class="hljs-keyword">return</span> ans<br></code></pre></div></td></tr></table></figure><br>TypeScript 代码：<br><figure class="highlight typescript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs TypeScript"><span class="hljs-keyword">class</span> <span class="hljs-title class_">AuthenticationManager</span> &#123;<br>    <span class="hljs-attr">d</span>: <span class="hljs-built_in">number</span>;<br>    <span class="hljs-attr">map</span>: &#123; [<span class="hljs-attr">id</span>: <span class="hljs-built_in">string</span>]: <span class="hljs-built_in">number</span> &#125; = &#123;&#125;;<br><br>    <span class="hljs-title function_">constructor</span>(<span class="hljs-params">timeToLive: <span class="hljs-built_in">number</span></span>) &#123;<br>        <span class="hljs-variable language_">this</span>.<span class="hljs-property">d</span> = timeToLive;<br>    &#125;<br><br>    <span class="hljs-title function_">generate</span>(<span class="hljs-attr">id</span>: <span class="hljs-built_in">string</span>, <span class="hljs-attr">ct</span>: <span class="hljs-built_in">number</span>): <span class="hljs-built_in">void</span> &#123;<br>        <span class="hljs-variable language_">this</span>.<span class="hljs-property">map</span>[id] = ct + <span class="hljs-variable language_">this</span>.<span class="hljs-property">d</span>;<br>    &#125;<br><br>    <span class="hljs-title function_">renew</span>(<span class="hljs-attr">id</span>: <span class="hljs-built_in">string</span>, <span class="hljs-attr">ct</span>: <span class="hljs-built_in">number</span>): <span class="hljs-built_in">void</span> &#123;<br>        <span class="hljs-keyword">if</span> (!<span class="hljs-variable language_">this</span>.<span class="hljs-property">map</span>.<span class="hljs-title function_">hasOwnProperty</span>(id) || <span class="hljs-variable language_">this</span>.<span class="hljs-property">map</span>[id] &lt;= ct) &#123;<br>            <span class="hljs-keyword">return</span>;<br>        &#125;<br>        <span class="hljs-variable language_">this</span>.<span class="hljs-property">map</span>[id] = ct + <span class="hljs-variable language_">this</span>.<span class="hljs-property">d</span>;<br>    &#125;<br><br>    <span class="hljs-title function_">countUnexpiredTokens</span>(<span class="hljs-attr">ct</span>: <span class="hljs-built_in">number</span>): <span class="hljs-built_in">number</span> &#123;<br>        <span class="hljs-keyword">let</span> ans = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">const</span> id <span class="hljs-keyword">in</span> <span class="hljs-variable language_">this</span>.<span class="hljs-property">map</span>) &#123;<br>            <span class="hljs-keyword">if</span> (<span class="hljs-variable language_">this</span>.<span class="hljs-property">map</span>[id] &gt; ct) &#123;<br>                ans++;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> ans;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure></p>
+<ul>
+<li>时间复杂度：<code>generate</code> 操作和 <code>renew</code> 操作的复杂度为 $O(1)$；<code>countUnexpiredTokens</code> 操作的复杂度为 $O(n)$</li>
+<li>空间复杂度：$O(n)$</li>
+</ul>
+<hr>
+<h3 id="双向链表"><a href="#双向链表" class="headerlink" title="双向链表"></a>双向链表</h3><p>在所有函数的调用过程中，<code>timeToLive</code> 都在单调递增。</p>
+<p>在哈希表的做法里，我们没有清理旧验证码的操作，同时每次执行 <code>countUnexpiredTokens</code> 时，需要对整个哈希表进行遍历。</p>
+<p>实际上，如果我们引入 <strong>双向链表</strong>，并将哈希表的键值对定义从 <code>&#123;验证码:过期时间值&#125;</code> 调整为 <code>&#123;验证码:链表节点&#125;</code> 时（链表节点属性仅包含验证码字符串 <code>id</code> 及其过期时间 <code>t</code>），我们便能实现如下优化：</p>
+<ul>
+<li><p><strong>减少统计未过期验证码时的无效遍历</strong>：由于构建的双向链表严格按照 <code>timeToLive</code> 递增，因此可以从尾部出发，从后往前利用链表节点的 <code>prev</code> 指针进行遍历统计。</p>
+<p>如此一来，有多少未过期的验证码，我们就会遍历多少个链表节点，其余已过期的节点对象并不会被访问；</p>
+</li>
+<li><p><strong>引入清理时机</strong>：由于上述的统计过程，我们会找到最靠前的一个未过期节点。可以将其作为新的双向链表新头结点，从而将整段的过期节点从双向链表中删除</p>
+</li>
+</ul>
+<p>最后，我们像对其他链表题目一样，为了方便，引入 <code>he</code> 和 <code>ta</code> 的头尾链表哨兵节点以减少边界处理。</p>
+<p>Java 代码：<br><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">AuthenticationManager</span> &#123;<br>    <span class="hljs-keyword">class</span> <span class="hljs-title class_">Node</span> &#123;<br>        String id;<br>        <span class="hljs-type">int</span> t;<br>        Node prev, next;<br>        Node (String _id, <span class="hljs-type">int</span> _t) &#123;<br>            id = _id; t = _t;<br>        &#125;<br>    &#125;<br>    <span class="hljs-type">int</span> d;<br>    Node he, ta;<br>    Map&lt;String, Node&gt; map = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();<br>    <span class="hljs-keyword">public</span> <span class="hljs-title function_">AuthenticationManager</span><span class="hljs-params">(<span class="hljs-type">int</span> timeToLive)</span> &#123;<br>        he = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Node</span>(<span class="hljs-string">&quot;&quot;</span>, -<span class="hljs-number">1</span>); ta = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Node</span>(<span class="hljs-string">&quot;&quot;</span>, (<span class="hljs-type">int</span>)<span class="hljs-number">1e9</span>);<br>        he.next = ta; ta.prev = he;<br>        d = timeToLive;<br>    &#125;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">generate</span><span class="hljs-params">(String id, <span class="hljs-type">int</span> ct)</span> &#123;<br>        <span class="hljs-type">Node</span> <span class="hljs-variable">node</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Node</span>(id, ct + d);<br>        node.prev = ta.prev;<br>        node.next = ta;<br>        ta.prev.next = node;<br>        ta.prev = node;<br>        map.put(id, node);<br>    &#125;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">renew</span><span class="hljs-params">(String id, <span class="hljs-type">int</span> ct)</span> &#123;<br>        <span class="hljs-keyword">if</span> (!map.containsKey(id) || map.get(id).t &lt;= ct) <span class="hljs-keyword">return</span> ;<br>        <span class="hljs-type">Node</span> <span class="hljs-variable">node</span> <span class="hljs-operator">=</span> map.get(id);<br>        node.prev.next = node.next;<br>        node.next.prev = node.prev;<br>        generate(id, ct);<br>    &#125;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">countUnexpiredTokens</span><span class="hljs-params">(<span class="hljs-type">int</span> ct)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">ans</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-type">Node</span> <span class="hljs-variable">cur</span> <span class="hljs-operator">=</span> ta.prev;<br>        <span class="hljs-keyword">while</span> (cur.t &gt; ct &amp;&amp; ++ans &gt;= <span class="hljs-number">0</span>) cur = cur.prev;<br>        he.next = cur.next;<br>        cur.next.prev = he;<br>        <span class="hljs-keyword">return</span> ans;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure><br>C++ 代码：<br><figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs C++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">AuthenticationManager</span> &#123;<br>    <span class="hljs-keyword">struct</span> <span class="hljs-title class_">Node</span> &#123;<br>        string id;<br>        <span class="hljs-type">int</span> t;<br>        Node *prev, *next;<br>        <span class="hljs-built_in">Node</span> (string _id, <span class="hljs-type">int</span> <span class="hljs-type">_t</span>) : <span class="hljs-built_in">id</span>(_id), <span class="hljs-built_in">t</span>(<span class="hljs-type">_t</span>), <span class="hljs-built_in">prev</span>(<span class="hljs-literal">nullptr</span>), <span class="hljs-built_in">next</span>(<span class="hljs-literal">nullptr</span>) &#123;&#125;<br>    &#125;;<br>    <span class="hljs-type">int</span> d;<br>    Node *he, *ta;<br>    unordered_map&lt;string, Node*&gt; map;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-built_in">AuthenticationManager</span>(<span class="hljs-type">int</span> timeToLive) : <span class="hljs-built_in">d</span>(timeToLive) &#123;<br>        he = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Node</span>(<span class="hljs-string">&quot;&quot;</span>, <span class="hljs-number">-1</span>); <br>        ta = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Node</span>(<span class="hljs-string">&quot;&quot;</span>, (<span class="hljs-type">int</span>)<span class="hljs-number">1e9</span>);<br>        he-&gt;next = ta; <br>        ta-&gt;prev = he;<br>    &#125;<br>    <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">generate</span><span class="hljs-params">(string id, <span class="hljs-type">int</span> ct)</span> </span>&#123;<br>        Node* node = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Node</span>(id, ct + d);<br>        node-&gt;prev = ta-&gt;prev;<br>        node-&gt;next = ta;<br>        ta-&gt;prev-&gt;next = node;<br>        ta-&gt;prev = node;<br>        map[id] = node;<br>    &#125;<br>    <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">renew</span><span class="hljs-params">(string id, <span class="hljs-type">int</span> ct)</span> </span>&#123;<br>        <span class="hljs-keyword">if</span> (!map.<span class="hljs-built_in">count</span>(id) || map[id]-&gt;t &lt;= ct) <span class="hljs-keyword">return</span>;<br>        Node* node = map[id];<br>        node-&gt;prev-&gt;next = node-&gt;next;<br>        node-&gt;next-&gt;prev = node-&gt;prev;<br>        <span class="hljs-built_in">generate</span>(id, ct);<br>    &#125;<br>    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">countUnexpiredTokens</span><span class="hljs-params">(<span class="hljs-type">int</span> ct)</span> </span>&#123;<br>        <span class="hljs-type">int</span> ans = <span class="hljs-number">0</span>;<br>        Node* cur = ta-&gt;prev;<br>        <span class="hljs-keyword">while</span> (cur-&gt;t &gt; ct &amp;&amp; ++ans &gt;= <span class="hljs-number">0</span>) cur = cur-&gt;prev;<br>        he-&gt;next = cur-&gt;next;<br>        cur-&gt;next-&gt;prev = he;<br>        <span class="hljs-keyword">return</span> ans;<br>    &#125;<br>&#125;;<br></code></pre></div></td></tr></table></figure><br>TypeScript 代码：<br><figure class="highlight typescript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs TypeScript"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Node</span> &#123;<br>    <span class="hljs-attr">id</span>: <span class="hljs-built_in">string</span>;<br>    <span class="hljs-attr">t</span>: <span class="hljs-built_in">number</span>;<br>    <span class="hljs-attr">prev</span>: <span class="hljs-title class_">Node</span> | <span class="hljs-literal">null</span>;<br>    <span class="hljs-attr">next</span>: <span class="hljs-title class_">Node</span> | <span class="hljs-literal">null</span>;<br>    <span class="hljs-title function_">constructor</span>(<span class="hljs-params">_id: <span class="hljs-built_in">string</span>, _t: <span class="hljs-built_in">number</span></span>) &#123;<br>        <span class="hljs-variable language_">this</span>.<span class="hljs-property">id</span> = _id;<br>        <span class="hljs-variable language_">this</span>.<span class="hljs-property">t</span> = _t;<br>        <span class="hljs-variable language_">this</span>.<span class="hljs-property">prev</span> = <span class="hljs-literal">null</span><br>        <span class="hljs-variable language_">this</span>.<span class="hljs-property">next</span> = <span class="hljs-literal">null</span><br>    &#125;<br>&#125;<br><span class="hljs-keyword">class</span> <span class="hljs-title class_">AuthenticationManager</span> &#123;<br>    <span class="hljs-attr">d</span>: <span class="hljs-built_in">number</span>;<br>    <span class="hljs-attr">he</span>: <span class="hljs-title class_">Node</span>;<br>    <span class="hljs-attr">ta</span>: <span class="hljs-title class_">Node</span>;<br>    <span class="hljs-attr">map</span>: &#123;[<span class="hljs-attr">id</span>: <span class="hljs-built_in">string</span>]: <span class="hljs-title class_">Node</span>&#125;;<br>    <span class="hljs-title function_">constructor</span>(<span class="hljs-params">timeToLive: <span class="hljs-built_in">number</span></span>) &#123;<br>        <span class="hljs-variable language_">this</span>.<span class="hljs-property">d</span> = timeToLive;<br>        <span class="hljs-variable language_">this</span>.<span class="hljs-property">he</span> = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Node</span>(<span class="hljs-string">&quot;&quot;</span>, -<span class="hljs-number">1</span>)<br>        <span class="hljs-variable language_">this</span>.<span class="hljs-property">ta</span> = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Node</span>(<span class="hljs-string">&quot;&quot;</span>, <span class="hljs-number">1e9</span>)<br>        <span class="hljs-variable language_">this</span>.<span class="hljs-property">he</span>.<span class="hljs-property">next</span> = <span class="hljs-variable language_">this</span>.<span class="hljs-property">ta</span><br>        <span class="hljs-variable language_">this</span>.<span class="hljs-property">ta</span>.<span class="hljs-property">prev</span> = <span class="hljs-variable language_">this</span>.<span class="hljs-property">he</span><br>        <span class="hljs-variable language_">this</span>.<span class="hljs-property">map</span> = &#123;&#125;;<br>    &#125;<br><br>    <span class="hljs-title function_">generate</span>(<span class="hljs-params">id: <span class="hljs-built_in">string</span>, ct: <span class="hljs-built_in">number</span></span>) &#123;<br>        <span class="hljs-keyword">let</span> node : <span class="hljs-title class_">Node</span> = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Node</span>(id, ct + <span class="hljs-variable language_">this</span>.<span class="hljs-property">d</span>) ;<br>        node.<span class="hljs-property">prev</span> = <span class="hljs-variable language_">this</span>.<span class="hljs-property">ta</span>.<span class="hljs-property">prev</span>;<br>        node.<span class="hljs-property">next</span> = <span class="hljs-variable language_">this</span>.<span class="hljs-property">ta</span>;<br>        <span class="hljs-variable language_">this</span>.<span class="hljs-property">ta</span>.<span class="hljs-property">prev</span>!.<span class="hljs-property">next</span> = node;<br>        <span class="hljs-variable language_">this</span>.<span class="hljs-property">ta</span>.<span class="hljs-property">prev</span> = node;<br>        <span class="hljs-variable language_">this</span>.<span class="hljs-property">map</span>[id] = node;<br>    &#125;<br><br>    <span class="hljs-title function_">renew</span>(<span class="hljs-params">id: <span class="hljs-built_in">string</span>, ct: <span class="hljs-built_in">number</span></span>) &#123;<br>        <span class="hljs-keyword">if</span> (!<span class="hljs-variable language_">this</span>.<span class="hljs-property">map</span>.<span class="hljs-title function_">hasOwnProperty</span>(id) || <span class="hljs-variable language_">this</span>.<span class="hljs-property">map</span>[id].<span class="hljs-property">t</span> &lt;= ct) &#123;<br>            <span class="hljs-keyword">return</span>;<br>        &#125;<br>        <span class="hljs-keyword">var</span> node : <span class="hljs-title class_">Node</span> = <span class="hljs-variable language_">this</span>.<span class="hljs-property">map</span>[id];<br>        node.<span class="hljs-property">prev</span>!.<span class="hljs-property">next</span> = node.<span class="hljs-property">next</span>;<br>        node.<span class="hljs-property">next</span>!.<span class="hljs-property">prev</span> = node.<span class="hljs-property">prev</span>;<br>        <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">generate</span>(id, ct);<br>    &#125;<br><br>    <span class="hljs-title function_">countUnexpiredTokens</span>(<span class="hljs-params">ct: <span class="hljs-built_in">number</span></span>) &#123;<br>        <span class="hljs-keyword">let</span> ans = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">let</span> cur : <span class="hljs-title class_">Node</span> = <span class="hljs-variable language_">this</span>.<span class="hljs-property">ta</span>.<span class="hljs-property">prev</span>!;<br>        <span class="hljs-keyword">while</span> (cur.<span class="hljs-property">t</span> &gt; ct &amp;&amp; ++ans &gt;= <span class="hljs-number">0</span>) <br>            cur = cur.<span class="hljs-property">prev</span>!;<br>        <span class="hljs-variable language_">this</span>.<span class="hljs-property">he</span>.<span class="hljs-property">next</span> = cur.<span class="hljs-property">next</span>;<br>        cur.<span class="hljs-property">next</span>!.<span class="hljs-property">prev</span> = <span class="hljs-variable language_">this</span>.<span class="hljs-property">he</span>;<br>        <span class="hljs-keyword">return</span> ans;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure></p>
+<ul>
+<li>时间复杂度：<code>generate</code> 操作和 <code>renew</code> 操作的复杂度为 $O(1)$；<code>countUnexpiredTokens</code> 操作的复杂度为 $O(n)$</li>
+<li>空间复杂度：$O(n)$</li>
+</ul>
+<hr>
+<h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>这是我们「刷穿 LeetCode」系列文章的第 <code>No.1797</code> 篇，系列开始于 2021/01/01，截止于起始日 LeetCode 上共有 1916 道题目，部分是有锁题，我们将先把所有不带锁的题目刷完。</p>
+<p>在这个系列文章里面，除了讲解解题思路以外，还会尽可能给出最为简洁的代码。如果涉及通解还会相应的代码模板。</p>
+<p>为了方便各位同学能够电脑上进行调试和提交代码，我建立了相关的仓库：<a target="_blank" rel="noopener" href="https://github.com/SharingSource/LogicStack-LeetCode">https://github.com/SharingSource/LogicStack-LeetCode</a> 。</p>
+<p>在仓库地址里，你可以看到系列文章的题解链接、系列文章的相应代码、LeetCode 原题链接和其他优选题解。</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%93%88%E5%B8%8C%E8%A1%A8/">哈希表</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E9%93%BE%E8%A1%A8/">链表</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2024/03/14/1253.%20%E9%87%8D%E6%9E%84%202%20%E8%A1%8C%E4%BA%8C%E8%BF%9B%E5%88%B6%E7%9F%A9%E9%98%B5%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">LC 1253. 重构 2 行二进制矩阵</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2024/01/18/1466.%20%E9%87%8D%E6%96%B0%E8%A7%84%E5%88%92%E8%B7%AF%E7%BA%BF%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/">
+                        <span class="hidden-mobile">LC 1466. 重新规划路线</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://cdn.staticfile.org/valine/1.4.18/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"IDifiViRkVDTgu27Nu50GQkE-gzGzoHsz","appKey":"gt98pupgyYjPKYQASrGmD9kM","path":"window.location.pathname","placeholder":"发一条友善的评论（为方便交流，记得填上方的昵称再留言哦 ~ 🍭","avatar":"","meta":["nick","mail"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":true},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          Fluid.plugins.initFancyBox('#valine .vcontent img:not(.vemoji)');
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+  <div class="col-lg-7 mx-auto nopadding-x-md">
+    <div class="container custom post-custom mx-auto">
+      <img src="/oimg/gzh-qrcode.webp" srcset="/img/loading.gif" lazyload class="rounded mx-auto d-block mt-5" style="width:80%">
+    </div>
+  </div>
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- LeanCloud 统计PV -->
+        <span id="leancloud-site-pv-container" style="display: none">
+            总访问量 
+            <span id="leancloud-site-pv"></span>
+             次
+          </span>
+      
+      
+        <!-- LeanCloud 统计UV -->
+        <span id="leancloud-site-uv-container" style="display: none">
+            总访客数 
+            <span id="leancloud-site-uv"></span>
+             人
+          </span>
+      
+
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.staticfile.org/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.staticfile.org/tocbot/4.18.2/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.staticfile.org/anchor-js/4.3.1/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.11/clipboard.min.js" ></script>
+  
+
+
+
+
+  <script defer src="/js/leancloud.js" ></script>
+
+
+
+  <script  src="https://cdn.bootcdn.net/ajax/libs/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        loader: {
+          
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.staticfile.org/mathjax/3.2.0/es5/tex-svg.js" ></script>
+
+  
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>
