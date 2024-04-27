@@ -1,0 +1,594 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/oimg/RoundCorner.png">
+  <link rel="icon" href="/oimg/RoundCorner.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="宫水三叶">
+  <meta name="keywords" content="算法, 数据结构, 题解">
+  
+    <meta name="description" content="题目描述这是 LeetCode 上的 1210. 穿过迷宫的最少移动次数 ，难度为 困难。 你还记得那条风靡全球的贪吃蛇吗？ 我们在一个 n*n 的网格上构建了新的迷宫地图，蛇的长度为 2，也就是说它会占去两个单元格。蛇会从左上角（(0, 0) 和 (0, 1)）开始移动。我们用 0 表示空单元格，用 1 表示障碍物。 蛇需要移动到迷宫的右下角（(n-1, n-2) 和 (n-1, n-1)）。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LC 1210. 穿过迷宫的最少移动次数">
+<meta property="og:url" content="https://sharingsource.github.io/2024/04/27/1210.%20%E7%A9%BF%E8%BF%87%E8%BF%B7%E5%AE%AB%E7%9A%84%E6%9C%80%E5%B0%91%E7%A7%BB%E5%8A%A8%E6%AC%A1%E6%95%B0%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/index.html">
+<meta property="og:site_name" content="宫水三叶的刷题日记">
+<meta property="og:description" content="题目描述这是 LeetCode 上的 1210. 穿过迷宫的最少移动次数 ，难度为 困难。 你还记得那条风靡全球的贪吃蛇吗？ 我们在一个 n*n 的网格上构建了新的迷宫地图，蛇的长度为 2，也就是说它会占去两个单元格。蛇会从左上角（(0, 0) 和 (0, 1)）开始移动。我们用 0 表示空单元格，用 1 表示障碍物。 蛇需要移动到迷宫的右下角（(n-1, n-2) 和 (n-1, n-1)）。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://sharingsource.github.io/2024/04/27/1210.%20%E7%A9%BF%E8%BF%87%E8%BF%B7%E5%AE%AB%E7%9A%84%E6%9C%80%E5%B0%91%E7%A7%BB%E5%8A%A8%E6%AC%A1%E6%95%B0%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/image_0.png">
+<meta property="og:image" content="https://sharingsource.github.io/2024/04/27/1210.%20%E7%A9%BF%E8%BF%87%E8%BF%B7%E5%AE%AB%E7%9A%84%E6%9C%80%E5%B0%91%E7%A7%BB%E5%8A%A8%E6%AC%A1%E6%95%B0%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/image_1.png">
+<meta property="og:image" content="https://sharingsource.github.io/2024/04/27/1210.%20%E7%A9%BF%E8%BF%87%E8%BF%B7%E5%AE%AB%E7%9A%84%E6%9C%80%E5%B0%91%E7%A7%BB%E5%8A%A8%E6%AC%A1%E6%95%B0%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/image_2.png">
+<meta property="article:published_time" content="2024-04-27T01:57:55.000Z">
+<meta property="article:modified_time" content="2024-04-27T01:57:55.442Z">
+<meta property="article:author" content="宫水三叶">
+<meta property="article:tag" content="BFS">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://sharingsource.github.io/2024/04/27/1210.%20%E7%A9%BF%E8%BF%87%E8%BF%B7%E5%AE%AB%E7%9A%84%E6%9C%80%E5%B0%91%E7%A7%BB%E5%8A%A8%E6%AC%A1%E6%95%B0%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/image_0.png">
+  
+  
+  <title>LC 1210. 穿过迷宫的最少移动次数 - 宫水三叶的刷题日记</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/hint.css/2.7.0/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.7.2/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"sharingsource.github.io","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"|","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"IDifiViRkVDTgu27Nu50GQkE-gzGzoHsz","app_key":"gt98pupgyYjPKYQASrGmD9kM","server_url":"https://idifivir.lc-cn-n1-shared.com","path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.1.0"></head>
+
+
+<body>
+  <header style="height: 50vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>宫水三叶の刷题日记</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/image_185.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="LC 1210. 穿过迷宫的最少移动次数">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-author" aria-hidden="true"></i>
+      宫水三叶
+    </span>
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2024-04-27 09:57" pubdate>
+        2024年4月27日
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">LC 1210. 穿过迷宫的最少移动次数</h1>
+            
+            <div class="markdown-body">
+              <h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>这是 LeetCode 上的 <strong><a href>1210. 穿过迷宫的最少移动次数</a></strong> ，难度为 <strong>困难</strong>。</p>
+<p>你还记得那条风靡全球的贪吃蛇吗？</p>
+<p>我们在一个 <code>n*n</code> 的网格上构建了新的迷宫地图，蛇的长度为 <code>2</code>，也就是说它会占去两个单元格。蛇会从左上角（<code>(0, 0)</code> 和 <code>(0, 1)</code>）开始移动。我们用 <code>0</code> 表示空单元格，用 <code>1</code> 表示障碍物。</p>
+<p>蛇需要移动到迷宫的右下角（<code>(n-1, n-2)</code> 和 <code>(n-1, n-1)</code>）。</p>
+<p>每次移动，蛇可以这样走：</p>
+<ul>
+<li>如果没有障碍，则向右移动一个单元格。并仍然保持身体的水平／竖直状态。</li>
+<li>如果没有障碍，则向下移动一个单元格。并仍然保持身体的水平／竖直状态。</li>
+<li>如果它处于水平状态并且其下面的两个单元都是空的，就顺时针旋转 <code>90</code> 度。蛇从（<code>(r, c)</code>、<code>(r, c+1)</code>）移动到 （<code>(r, c)</code>、<code>(r+1, c)</code>）。<br>  <img src="/2024/04/27/1210.%20%E7%A9%BF%E8%BF%87%E8%BF%B7%E5%AE%AB%E7%9A%84%E6%9C%80%E5%B0%91%E7%A7%BB%E5%8A%A8%E6%AC%A1%E6%95%B0%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/image_0.png" srcset="/img/loading.gif" lazyload alt></li>
+<li>如果它处于竖直状态并且其右面的两个单元都是空的，就逆时针旋转 <code>90</code> 度。蛇从（<code>(r, c)</code>、<code>(r+1, c)</code>）移动到（<code>(r, c)</code>、<code>(r, c+1)</code>）。<br>  <img src="/2024/04/27/1210.%20%E7%A9%BF%E8%BF%87%E8%BF%B7%E5%AE%AB%E7%9A%84%E6%9C%80%E5%B0%91%E7%A7%BB%E5%8A%A8%E6%AC%A1%E6%95%B0%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/image_1.png" srcset="/img/loading.gif" lazyload alt></li>
+</ul>
+<p>返回蛇抵达目的地所需的最少移动次数。</p>
+<p>如果无法到达目的地，请返回 <code>-1</code>。</p>
+<p>示例 1：<br><img src="/2024/04/27/1210.%20%E7%A9%BF%E8%BF%87%E8%BF%B7%E5%AE%AB%E7%9A%84%E6%9C%80%E5%B0%91%E7%A7%BB%E5%8A%A8%E6%AC%A1%E6%95%B0%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/image_2.png" srcset="/img/loading.gif" lazyload alt><br><figure class="highlight inform7"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs inform7">输入：grid = <span class="hljs-comment">[<span class="hljs-comment">[0,0,0,0,0,1]</span>,</span><br><span class="hljs-comment">               <span class="hljs-comment">[1,1,0,0,1,0]</span>,</span><br><span class="hljs-comment">               <span class="hljs-comment">[0,0,0,0,1,1]</span>,</span><br><span class="hljs-comment">               <span class="hljs-comment">[0,0,1,0,1,0]</span>,</span><br><span class="hljs-comment">               <span class="hljs-comment">[0,1,1,0,0,0]</span>,</span><br><span class="hljs-comment">               <span class="hljs-comment">[0,1,1,0,0,0]</span>]</span><br><br>输出：11<br><br>解释：<br>一种可能的解决方案是 <span class="hljs-comment">[右, 右, 顺时针旋转, 右, 下, 下, 下, 下, 逆时针旋转, 右, 下]</span>。<br></code></pre></div></td></tr></table></figure><br>示例 2：<br><figure class="highlight inform7"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs inform7">输入：grid = <span class="hljs-comment">[<span class="hljs-comment">[0,0,1,1,1,1]</span>,</span><br><span class="hljs-comment">               <span class="hljs-comment">[0,0,0,0,1,1]</span>,</span><br><span class="hljs-comment">               <span class="hljs-comment">[1,1,0,0,0,1]</span>,</span><br><span class="hljs-comment">               <span class="hljs-comment">[1,1,1,0,0,1]</span>,</span><br><span class="hljs-comment">               <span class="hljs-comment">[1,1,1,0,0,1]</span>,</span><br><span class="hljs-comment">               <span class="hljs-comment">[1,1,1,0,0,0]</span>]</span><br><br>输出：9<br></code></pre></div></td></tr></table></figure></p>
+<p>提示：</p>
+<ul>
+<li>$2 &lt;= n &lt;= 100$</li>
+<li>$0 &lt;= grid[i][j] &lt;= 1$</li>
+<li>蛇保证从空单元格开始出发。</li>
+</ul>
+<hr>
+<h3 id="BFS"><a href="#BFS" class="headerlink" title="BFS"></a>BFS</h3><p>题目要我们求从特定起点到特定终点的最少步数，由于我们蛇的长度固定为 $2$，因此我们可用三元组 $(x, y, cd)$ 来代表蛇的实际位置。其中 $(x, y)$ 代表蛇尾位置，$cd$ 代表当前蛇的方向状态，$0$ 代表水平状态，$1$ 代表竖直状态。</p>
+<p>蛇尾加上方向状态可确定其蛇头位置 ：<code>tx = cd == 0 ? nx : nx + 1</code>、<code>ty = cd == 0 ? ny + 1 : ny</code>。</p>
+<p>对四种移动规则所导致三元组变化进行分情况讨论：</p>
+<ol>
+<li>往右移动：对于蛇尾而言，只有维度 $y$ 进行加一，其余维度不变。三元组变化总结为 $(0, 1, 0)$</li>
+<li>往下移动：对于蛇尾而言，只有维度 $x$ 进行加一，其余维度不变。三元组变化总结为 $(1, 0, 0)$</li>
+<li>旋转：对于蛇尾，只有 $cd$ 维度对进行翻转，其余维度不变。三元组变化总结定为 $(0, 0, 1)$</li>
+</ol>
+<p>综上，所有移动规则可总结为 <code>int[][] dirs = new int[][]&#123;&#123;1,0,0&#125;,&#123;0,1,0&#125;,&#123;0,0,1&#125;&#125;</code>。</p>
+<p>在进行 <code>BFS</code> 时，通过遍历 <code>dirs</code> 来得到新的三元组：原位置 <code>(x, y, cd)</code> 转换到新位置 <code>(x + dir[0], y + dir[1], cd ^ dir[2])</code>。</p>
+<p>在得到新蛇尾位置 $(nx, ny)$ 之后，计算新蛇头的位置 $(tx, ty)$。需要确保整条蛇没有越界，没有碰到障碍物，并且旋转转移时，额外检查 $(x + 1, y + 1)$ 位置是否合法。</p>
+<p>Java 代码：<br><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-type">int</span>[][] dirs = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[][]&#123;&#123;<span class="hljs-number">1</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>&#125;,&#123;<span class="hljs-number">0</span>,<span class="hljs-number">1</span>,<span class="hljs-number">0</span>&#125;,&#123;<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,<span class="hljs-number">1</span>&#125;&#125;;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">minimumMoves</span><span class="hljs-params">(<span class="hljs-type">int</span>[][] g)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> g.length;<br>        Deque&lt;<span class="hljs-type">int</span>[]&gt; d = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayDeque</span>&lt;&gt;();<br>        d.addLast(<span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[]&#123;<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>&#125;);<br>        <span class="hljs-type">boolean</span>[][][] vis = <span class="hljs-keyword">new</span> <span class="hljs-title class_">boolean</span>[n][n][<span class="hljs-number">2</span>];<br>        vis[<span class="hljs-number">0</span>][<span class="hljs-number">0</span>][<span class="hljs-number">0</span>] = <span class="hljs-literal">true</span>;<br>        <span class="hljs-keyword">while</span> (!d.isEmpty()) &#123;<br>            <span class="hljs-type">int</span>[] info = d.pollFirst();<br>            <span class="hljs-type">int</span> <span class="hljs-variable">x</span> <span class="hljs-operator">=</span> info[<span class="hljs-number">0</span>], y = info[<span class="hljs-number">1</span>], cd = info[<span class="hljs-number">2</span>], step = info[<span class="hljs-number">3</span>];<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span>[] dir : dirs) &#123;<br>                <span class="hljs-type">int</span> <span class="hljs-variable">nx</span> <span class="hljs-operator">=</span> x + dir[<span class="hljs-number">0</span>], ny = y + dir[<span class="hljs-number">1</span>], nd = cd ^ dir[<span class="hljs-number">2</span>]; <span class="hljs-comment">// 新蛇尾位置和方向</span><br>                <span class="hljs-type">int</span> <span class="hljs-variable">tx</span> <span class="hljs-operator">=</span> nd == <span class="hljs-number">0</span> ? nx : nx + <span class="hljs-number">1</span>, ty = nd == <span class="hljs-number">0</span> ? ny + <span class="hljs-number">1</span> : ny; <span class="hljs-comment">// 新蛇头</span><br>                <span class="hljs-keyword">if</span> (nx &gt;= n || ny &gt;= n || tx &gt;= n || ty &gt;= n) <span class="hljs-keyword">continue</span>; <span class="hljs-comment">// 整条蛇不越界</span><br>                <span class="hljs-keyword">if</span> (g[nx][ny] == <span class="hljs-number">1</span> || g[tx][ty] == <span class="hljs-number">1</span>) <span class="hljs-keyword">continue</span>; <span class="hljs-comment">// 没有触及障碍物</span><br>                <span class="hljs-keyword">if</span> (vis[nx][ny][nd]) <span class="hljs-keyword">continue</span>;<br>                <span class="hljs-keyword">if</span> (cd != nd &amp;&amp; g[x + <span class="hljs-number">1</span>][y + <span class="hljs-number">1</span>] == <span class="hljs-number">1</span>) <span class="hljs-keyword">continue</span>; <span class="hljs-comment">// 旋转时，额外检查多一个位置</span><br>                <span class="hljs-keyword">if</span> (nx == n - <span class="hljs-number">1</span> &amp;&amp; ny == n - <span class="hljs-number">2</span> &amp;&amp; nd == <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> step + <span class="hljs-number">1</span>;<br>                d.addLast(<span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[]&#123;nx, ny, nd, step + <span class="hljs-number">1</span>&#125;);<br>                vis[nx][ny][nd] = <span class="hljs-literal">true</span>;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> -<span class="hljs-number">1</span>;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure><br>C++ 代码：<br><figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs C++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">minimumMoves</span><span class="hljs-params">(vector&lt;vector&lt;<span class="hljs-type">int</span>&gt;&gt;&amp; g)</span> </span>&#123;<br>        vector&lt;vector&lt;<span class="hljs-type">int</span>&gt;&gt; dirs = &#123;&#123;<span class="hljs-number">1</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>&#125;, &#123;<span class="hljs-number">0</span>,<span class="hljs-number">1</span>,<span class="hljs-number">0</span>&#125;, &#123;<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,<span class="hljs-number">1</span>&#125;&#125;;<br>        <span class="hljs-type">int</span> n = g.<span class="hljs-built_in">size</span>();<br>        queue&lt;vector&lt;<span class="hljs-type">int</span>&gt;&gt; d;<br>        d.<span class="hljs-built_in">push</span>(&#123;<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>&#125;);<br>        vector&lt;vector&lt;vector&lt;<span class="hljs-type">bool</span>&gt;&gt;&gt; <span class="hljs-built_in">vis</span>(n, vector&lt;vector&lt;<span class="hljs-type">bool</span>&gt;&gt;(n, <span class="hljs-built_in">vector</span>&lt;<span class="hljs-type">bool</span>&gt;(<span class="hljs-number">2</span>, <span class="hljs-literal">false</span>)));<br>        vis[<span class="hljs-number">0</span>][<span class="hljs-number">0</span>][<span class="hljs-number">0</span>] = <span class="hljs-literal">true</span>;<br>        <span class="hljs-keyword">while</span> (!d.<span class="hljs-built_in">empty</span>()) &#123;<br>            vector&lt;<span class="hljs-type">int</span>&gt; info = d.<span class="hljs-built_in">front</span>();<br>            d.<span class="hljs-built_in">pop</span>();<br>            <span class="hljs-type">int</span> x = info[<span class="hljs-number">0</span>], y = info[<span class="hljs-number">1</span>], cd = info[<span class="hljs-number">2</span>], step = info[<span class="hljs-number">3</span>];<br>            <span class="hljs-keyword">for</span> (vector&lt;<span class="hljs-type">int</span>&gt;&amp; dir : dirs) &#123;<br>                <span class="hljs-type">int</span> nx = x + dir[<span class="hljs-number">0</span>], ny = y + dir[<span class="hljs-number">1</span>], nd = cd ^ dir[<span class="hljs-number">2</span>]; <br>                <span class="hljs-type">int</span> tx = nd == <span class="hljs-number">0</span> ? nx : nx + <span class="hljs-number">1</span>, ty = nd == <span class="hljs-number">0</span> ? ny + <span class="hljs-number">1</span> : ny; <br>                <span class="hljs-keyword">if</span> (nx &gt;= n || ny &gt;= n || tx &gt;= n || ty &gt;= n) <span class="hljs-keyword">continue</span>;<br>                <span class="hljs-keyword">if</span> (g[nx][ny] == <span class="hljs-number">1</span> || g[tx][ty] == <span class="hljs-number">1</span>) <span class="hljs-keyword">continue</span>;   <br>                <span class="hljs-keyword">if</span> (vis[nx][ny][nd]) <span class="hljs-keyword">continue</span>;<br>                <span class="hljs-keyword">if</span> (cd != nd &amp;&amp; g[x + <span class="hljs-number">1</span>][y + <span class="hljs-number">1</span>] == <span class="hljs-number">1</span>) <span class="hljs-keyword">continue</span>; <br>                <span class="hljs-keyword">if</span> (nx == n - <span class="hljs-number">1</span> &amp;&amp; ny == n - <span class="hljs-number">2</span> &amp;&amp; nd == <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> step + <span class="hljs-number">1</span>;<br>                d.<span class="hljs-built_in">push</span>(&#123;nx, ny, nd, step + <span class="hljs-number">1</span>&#125;);<br>                vis[nx][ny][nd] = <span class="hljs-literal">true</span>;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> <span class="hljs-number">-1</span>;<br>    &#125;<br>&#125;;<br></code></pre></div></td></tr></table></figure><br>Python 代码：<br><figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span>:<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">minimumMoves</span>(<span class="hljs-params">self, g: <span class="hljs-type">List</span>[<span class="hljs-type">List</span>[<span class="hljs-built_in">int</span>]]</span>) -&gt; <span class="hljs-built_in">int</span>:<br>        dirs = [(<span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>), (<span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">0</span>), (<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>)]<br>        n = <span class="hljs-built_in">len</span>(g)<br>        d = deque([(<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>)])<br>        vis = [[[<span class="hljs-number">0</span>]*<span class="hljs-number">2</span> <span class="hljs-keyword">for</span> _ <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(n)] <span class="hljs-keyword">for</span> _ <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(n)]<br>        vis[<span class="hljs-number">0</span>][<span class="hljs-number">0</span>][<span class="hljs-number">0</span>] = <span class="hljs-number">1</span><br>        <span class="hljs-keyword">while</span> d:<br>            x, y, cd, step = d.popleft()<br>            <span class="hljs-keyword">for</span> <span class="hljs-built_in">dir</span> <span class="hljs-keyword">in</span> dirs:<br>                nx, ny, nd = x + <span class="hljs-built_in">dir</span>[<span class="hljs-number">0</span>], y + <span class="hljs-built_in">dir</span>[<span class="hljs-number">1</span>], cd ^ <span class="hljs-built_in">dir</span>[<span class="hljs-number">2</span>]<br>                tx, ty = nx + (nd == <span class="hljs-number">1</span>), ny + (nd == <span class="hljs-number">0</span>)<br>                <span class="hljs-keyword">if</span> nx &gt;= n <span class="hljs-keyword">or</span> ny &gt;= n <span class="hljs-keyword">or</span> tx &gt;= n <span class="hljs-keyword">or</span> ty &gt;= n: <span class="hljs-keyword">continue</span><br>                <span class="hljs-keyword">if</span> g[nx][ny] == <span class="hljs-number">1</span> <span class="hljs-keyword">or</span> g[tx][ty] == <span class="hljs-number">1</span>: <span class="hljs-keyword">continue</span><br>                <span class="hljs-keyword">if</span> vis[nx][ny][nd]: <span class="hljs-keyword">continue</span><br>                <span class="hljs-keyword">if</span> cd != nd <span class="hljs-keyword">and</span> g[x + <span class="hljs-number">1</span>][y + <span class="hljs-number">1</span>] == <span class="hljs-number">1</span>: <span class="hljs-keyword">continue</span><br>                <span class="hljs-keyword">if</span> nx == n - <span class="hljs-number">1</span> <span class="hljs-keyword">and</span> ny == n - <span class="hljs-number">2</span> <span class="hljs-keyword">and</span> nd == <span class="hljs-number">0</span>: <span class="hljs-keyword">return</span> step + <span class="hljs-number">1</span><br>                d.append((nx, ny, nd, step + <span class="hljs-number">1</span>))<br>                vis[nx][ny][nd] = <span class="hljs-number">1</span><br>        <span class="hljs-keyword">return</span> -<span class="hljs-number">1</span><br></code></pre></div></td></tr></table></figure><br>TypeScript 代码：<br><figure class="highlight typescript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs TypeScript"><span class="hljs-keyword">function</span> <span class="hljs-title function_">minimumMoves</span>(<span class="hljs-params">g: <span class="hljs-built_in">number</span>[][]</span>): <span class="hljs-built_in">number</span> &#123;<br>    <span class="hljs-keyword">const</span> n = g.<span class="hljs-property">length</span>;<br>    <span class="hljs-keyword">const</span> <span class="hljs-attr">d</span>: [<span class="hljs-built_in">number</span>, <span class="hljs-built_in">number</span>, <span class="hljs-built_in">number</span>, <span class="hljs-built_in">number</span>][] = [[<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>]];<br>    <span class="hljs-keyword">const</span> <span class="hljs-attr">vis</span>: <span class="hljs-built_in">boolean</span>[][][] = <span class="hljs-title class_">Array</span>.<span class="hljs-title function_">from</span>(&#123; <span class="hljs-attr">length</span>: n &#125;, <span class="hljs-function">() =&gt;</span> <span class="hljs-title class_">Array</span>.<span class="hljs-title function_">from</span>(&#123; <span class="hljs-attr">length</span>: n &#125;, <span class="hljs-function">() =&gt;</span> [<span class="hljs-literal">false</span>, <span class="hljs-literal">false</span>]));<br>    vis[<span class="hljs-number">0</span>][<span class="hljs-number">0</span>][<span class="hljs-number">0</span>] = <span class="hljs-literal">true</span>;<br>    <span class="hljs-keyword">const</span> <span class="hljs-attr">dirs</span>: [<span class="hljs-built_in">number</span>, <span class="hljs-built_in">number</span>, <span class="hljs-built_in">number</span>][] = [[<span class="hljs-number">1</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>], [<span class="hljs-number">0</span>,<span class="hljs-number">1</span>,<span class="hljs-number">0</span>], [<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,<span class="hljs-number">1</span>]];<br>    <span class="hljs-keyword">while</span> (d.<span class="hljs-property">length</span> &gt; <span class="hljs-number">0</span>) &#123;<br>        <span class="hljs-keyword">const</span> [x, y, cd, step] = d.<span class="hljs-title function_">shift</span>()!;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">const</span> dir <span class="hljs-keyword">of</span> dirs) &#123;<br>            <span class="hljs-keyword">const</span> nx = x + dir[<span class="hljs-number">0</span>], ny = y + dir[<span class="hljs-number">1</span>], nd = cd ^ dir[<span class="hljs-number">2</span>];<br>            <span class="hljs-keyword">const</span> tx = nd === <span class="hljs-number">0</span> ? nx : nx + <span class="hljs-number">1</span>, ty = nd === <span class="hljs-number">0</span> ? ny + <span class="hljs-number">1</span> : ny;<br>            <span class="hljs-keyword">if</span> (nx &gt;= n || ny &gt;= n || tx &gt;= n || ty &gt;= n) <span class="hljs-keyword">continue</span>;<br>            <span class="hljs-keyword">if</span> (g[nx][ny] === <span class="hljs-number">1</span> || g[tx][ty] === <span class="hljs-number">1</span>) <span class="hljs-keyword">continue</span><br>            <span class="hljs-keyword">if</span> (vis[nx][ny][nd]) <span class="hljs-keyword">continue</span>;<br>            <span class="hljs-keyword">if</span> (cd !== nd &amp;&amp; g[x + <span class="hljs-number">1</span>][y + <span class="hljs-number">1</span>] === <span class="hljs-number">1</span>) <span class="hljs-keyword">continue</span>;<br>            <span class="hljs-keyword">if</span> (nx === n - <span class="hljs-number">1</span> &amp;&amp; ny === n - <span class="hljs-number">2</span> &amp;&amp; nd === <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> step + <span class="hljs-number">1</span>;<br>            d.<span class="hljs-title function_">push</span>([nx, ny, nd, step + <span class="hljs-number">1</span>]);<br>            vis[nx][ny][nd] = <span class="hljs-literal">true</span>;<br>        &#125;<br>    &#125;<br>    <span class="hljs-keyword">return</span> -<span class="hljs-number">1</span>;<br>&#125;;<br></code></pre></div></td></tr></table></figure></p>
+<ul>
+<li>时间复杂度：$O(n^2)$</li>
+<li>空间复杂度：$O(n^2 \times C)$，其中 $C = 2$ 代表蛇可变状态方向</li>
+</ul>
+<hr>
+<h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>这是我们「刷穿 LeetCode」系列文章的第 <code>No.1210</code> 篇，系列开始于 2021/01/01，截止于起始日 LeetCode 上共有 1916 道题目，部分是有锁题，我们将先把所有不带锁的题目刷完。</p>
+<p>在这个系列文章里面，除了讲解解题思路以外，还会尽可能给出最为简洁的代码。如果涉及通解还会相应的代码模板。</p>
+<p>为了方便各位同学能够电脑上进行调试和提交代码，我建立了相关的仓库：<a target="_blank" rel="noopener" href="https://github.com/SharingSource/LogicStack-LeetCode">https://github.com/SharingSource/LogicStack-LeetCode</a> 。</p>
+<p>在仓库地址里，你可以看到系列文章的题解链接、系列文章的相应代码、LeetCode 原题链接和其他优选题解。</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/BFS/">BFS</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2024/04/27/1781.%20%E6%89%80%E6%9C%89%E5%AD%90%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%BE%8E%E4%B8%BD%E5%80%BC%E4%B9%8B%E5%92%8C%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/">
+                        <span class="hidden-mobile">LC 1781. 所有子字符串美丽值之和</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://cdn.staticfile.org/valine/1.4.18/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"IDifiViRkVDTgu27Nu50GQkE-gzGzoHsz","appKey":"gt98pupgyYjPKYQASrGmD9kM","path":"window.location.pathname","placeholder":"发一条友善的评论（为方便交流，记得填上方的昵称再留言哦 ~ 🍭","avatar":"","meta":["nick","mail"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":true},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          Fluid.plugins.initFancyBox('#valine .vcontent img:not(.vemoji)');
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+  <div class="col-lg-7 mx-auto nopadding-x-md">
+    <div class="container custom post-custom mx-auto">
+      <img src="/oimg/gzh-qrcode.webp" srcset="/img/loading.gif" lazyload class="rounded mx-auto d-block mt-5" style="width:80%">
+    </div>
+  </div>
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- LeanCloud 统计PV -->
+        <span id="leancloud-site-pv-container" style="display: none">
+            总访问量 
+            <span id="leancloud-site-pv"></span>
+             次
+          </span>
+      
+      
+        <!-- LeanCloud 统计UV -->
+        <span id="leancloud-site-uv-container" style="display: none">
+            总访客数 
+            <span id="leancloud-site-uv"></span>
+             人
+          </span>
+      
+
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.staticfile.org/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.staticfile.org/tocbot/4.18.2/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.staticfile.org/anchor-js/4.3.1/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.11/clipboard.min.js" ></script>
+  
+
+
+
+
+  <script defer src="/js/leancloud.js" ></script>
+
+
+
+  <script  src="https://cdn.bootcdn.net/ajax/libs/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        loader: {
+          
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.staticfile.org/mathjax/3.2.0/es5/tex-svg.js" ></script>
+
+  
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://sharingsource.github.io/2023/08/24/235.%20%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E7%9A%84%E6%9C%80%E8%BF%91%E5%85%AC%E5%85%B1%E7%A5%96%E5%85%88%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/image_0.png">
 <meta property="article:published_time" content="2023-08-23T17:13:23.000Z">
-<meta property="article:modified_time" content="2023-11-03T03:09:12.853Z">
+<meta property="article:modified_time" content="2024-04-27T01:57:55.068Z">
 <meta property="article:author" content="宫水三叶">
 <meta property="article:tag" content="DFS">
 <meta property="article:tag" content="二叉树">
@@ -179,7 +179,7 @@
 </nav>
 
     <div class="banner" id="banner" parallax=true
-         style="background: url('/img/image_35.jpeg') no-repeat center center;
+         style="background: url('/img/image_212.jpg') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
@@ -253,7 +253,7 @@
 <li><code>p</code>、<code>q</code> 为不同节点且均存在于给定的二叉搜索树中。</li>
 </ul>
 <hr>
-<h3 id="DFS"><a href="#DFS" class="headerlink" title="DFS"></a>DFS</h3><p>也是常见的 <code>LCA</code> 问题，但相比 <a href>236. 二叉树的最近公共祖先</a>，本题搜索对象为二叉搜索树，利用此特性，我们可以将搜索复杂度从 $O(n)$ 优化至 $O(h)$。</p>
+<h3 id="DFS"><a href="#DFS" class="headerlink" title="DFS"></a>DFS</h3><p>也是常见的 <code>LCA</code> 问题，但相比 <a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzU4NDE3MTEyMA==&amp;mid=2247500218&amp;idx=1&amp;sn=a6d790dcecfee353be5f3b53c312c3d4&amp;chksm=fd9f6aa5cae8e3b36d85448674b189ed2d35fdce18381ac7676ec90a33d62da05718f85e3103#rd">236. 二叉树的最近公共祖先</a>，本题搜索对象为二叉搜索树，利用此特性，我们可以将搜索复杂度从 $O(n)$ 优化至 $O(h)$。</p>
 <p>利用原函数作为递归函数，复用 <code>root</code> 作为搜索过程中的当前节点，根据 <code>root</code> 和两节点关系进行分情况讨论：</p>
 <ul>
 <li>若 <code>root</code> 为 <code>p</code> 和 <code>q</code> 中的任一节点：由于搜索过程是从上往下，因此 <code>root</code> 必然是距离两者垂直距离最远的最近公共祖先，返回 <code>root</code>；</li>
