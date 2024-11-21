@@ -24,7 +24,7 @@
 <meta property="og:description" content="题目描述这是 LeetCode 上的 566. 重塑矩阵 ，难度为 简单。 在 MATLAB 中，有一个非常有用的函数 reshape，它可以将一个矩阵重塑为另一个大小不同的新矩阵，但保留其原始数据。 给出一个由二维数组表示的矩阵，以及两个正整数 r 和 c，分别表示想要的重构的矩阵的行数和列数。 重构后的矩阵需要将原始矩阵的所有元素以相同的行遍历顺序填充。 如果具有给定参数的 reshape 操">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-02-16T17:55:35.000Z">
-<meta property="article:modified_time" content="2022-05-18T08:26:59.501Z">
+<meta property="article:modified_time" content="2024-11-21T02:13:25.042Z">
 <meta property="article:author" content="宫水三叶">
 <meta property="article:tag" content="模拟">
 <meta name="twitter:card" content="summary_large_image">
@@ -175,7 +175,7 @@
 </nav>
 
     <div class="banner" id="banner" parallax=true
-         style="background: url('/img/image_83.jpeg') no-repeat center center;
+         style="background: url('/img/image_211.jpg') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
@@ -239,7 +239,7 @@
 <p>在 MATLAB 中，有一个非常有用的函数 <code>reshape</code>，它可以将一个矩阵重塑为另一个大小不同的新矩阵，但保留其原始数据。</p>
 <p>给出一个由二维数组表示的矩阵，以及两个正整数 <code>r</code> 和 <code>c</code>，分别表示想要的重构的矩阵的行数和列数。</p>
 <p>重构后的矩阵需要将原始矩阵的所有元素以相同的行遍历顺序填充。</p>
-<p>如果具有给定参数的 <code>reshape</code> 操作是可行且合理的，则输出新的重塑矩阵；否则，输出原始矩阵。</p>
+<p>如果具有给定参数的 <code>reshape</code> 操作是可行且合理的，则输出新的重塑矩阵，否则，输出原始矩阵。</p>
 <p>示例 1:<br><figure class="highlight lua"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs lua">输入: <br>nums = <br><span class="hljs-string">[[1,2],</span><br><span class="hljs-string"> [3,4]]</span><br>r = <span class="hljs-number">1</span>, c = <span class="hljs-number">4</span><br><br>输出: <br><span class="hljs-string">[[1,2,3,4]]</span><br><br>解释:<br>行遍历nums的结果是 [<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">4</span>]。新的矩阵是 <span class="hljs-number">1</span> * <span class="hljs-number">4</span> 矩阵, 用之前的元素值一行一行填充新矩阵。<br></code></pre></div></td></tr></table></figure><br>示例 2:<br><figure class="highlight lua"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs lua">输入: <br>nums = <br><span class="hljs-string">[[1,2],</span><br><span class="hljs-string"> [3,4]]</span><br>r = <span class="hljs-number">2</span>, c = <span class="hljs-number">4</span><br><br>输出: <br><span class="hljs-string">[[1,2],</span><br><span class="hljs-string"> [3,4]]</span><br><br>解释:<br>没有办法将 <span class="hljs-number">2</span> * <span class="hljs-number">2</span> 矩阵转化为 <span class="hljs-number">2</span> * <span class="hljs-number">4</span> 矩阵。 所以输出原矩阵。<br></code></pre></div></td></tr></table></figure><br>注意：</p>
 <ul>
 <li>给定矩阵的宽和高范围在 $[1, 100]$。</li>
@@ -250,7 +250,7 @@
 <p>使用 $idx$ 记录新矩阵当前分配到的位置（一维），利用通用的一维转二维方式对应回行列坐标即可。</p>
 <p>代码：<br><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span>[][] matrixReshape(<span class="hljs-type">int</span>[][] nums, <span class="hljs-type">int</span> r, <span class="hljs-type">int</span> c) &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">or</span> <span class="hljs-operator">=</span> nums.length, oc = nums[<span class="hljs-number">0</span>].length;<br>        <span class="hljs-keyword">if</span> (or * oc != r * c) <span class="hljs-keyword">return</span> nums;<br>        <span class="hljs-type">int</span>[][] ans = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[r][c];<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>, idx = <span class="hljs-number">0</span>; i &lt; or; i++) &#123;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; j &lt; oc; j++, idx++) &#123;<br>                ans[idx / c][idx % c] = nums[i][j];<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> ans;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure></p>
 <ul>
-<li>时间复杂度：$O(r * c)$</li>
+<li>时间复杂度：$O(r \times c)$</li>
 <li>空间复杂度：$O(1)$</li>
 </ul>
 <hr>

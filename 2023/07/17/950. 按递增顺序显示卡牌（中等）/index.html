@@ -16,15 +16,15 @@
   <meta name="author" content="宫水三叶">
   <meta name="keywords" content="算法, 数据结构, 题解">
   
-    <meta name="description" content="题目描述这是 LeetCode 上的 950. 按递增顺序显示卡牌 ，难度为 中等。 牌组中的每张卡牌都对应有一个唯一的整数。你可以按你想要的顺序对这套卡片进行排序。 最初，这些卡牌在牌组里是正面朝下的（即，未显示状态）。 现在，重复执行以下步骤，直到显示所有卡牌为止：  从牌组顶部抽一张牌，显示它，然后将其从牌组中移出。 如果牌组中仍有牌，则将下一张处于牌组顶部的牌放在牌组的底部。 如果仍有未显">
+    <meta name="description" content="题目描述这是 LeetCode 上的 950. 按递增顺序显示卡牌 ，难度为 中等。 牌组中的每张卡牌都对应有一个唯一的整数，你可以按你想要的顺序对这套卡片进行排序。 最初，这些卡牌在牌组里是正面朝下的（即未显示状态）。 现在，重复执行以下步骤，直到显示所有卡牌为止：  从牌组顶部抽一张牌，显示它，然后将其从牌组中移出。 如果牌组中仍有牌，则将下一张处于牌组顶部的牌放在牌组的底部。 如果仍有未显示">
 <meta property="og:type" content="article">
 <meta property="og:title" content="LC 950. 按递增顺序显示卡牌">
 <meta property="og:url" content="https://sharingsource.github.io/2023/07/17/950.%20%E6%8C%89%E9%80%92%E5%A2%9E%E9%A1%BA%E5%BA%8F%E6%98%BE%E7%A4%BA%E5%8D%A1%E7%89%8C%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/index.html">
 <meta property="og:site_name" content="宫水三叶的刷题日记">
-<meta property="og:description" content="题目描述这是 LeetCode 上的 950. 按递增顺序显示卡牌 ，难度为 中等。 牌组中的每张卡牌都对应有一个唯一的整数。你可以按你想要的顺序对这套卡片进行排序。 最初，这些卡牌在牌组里是正面朝下的（即，未显示状态）。 现在，重复执行以下步骤，直到显示所有卡牌为止：  从牌组顶部抽一张牌，显示它，然后将其从牌组中移出。 如果牌组中仍有牌，则将下一张处于牌组顶部的牌放在牌组的底部。 如果仍有未显">
+<meta property="og:description" content="题目描述这是 LeetCode 上的 950. 按递增顺序显示卡牌 ，难度为 中等。 牌组中的每张卡牌都对应有一个唯一的整数，你可以按你想要的顺序对这套卡片进行排序。 最初，这些卡牌在牌组里是正面朝下的（即未显示状态）。 现在，重复执行以下步骤，直到显示所有卡牌为止：  从牌组顶部抽一张牌，显示它，然后将其从牌组中移出。 如果牌组中仍有牌，则将下一张处于牌组顶部的牌放在牌组的底部。 如果仍有未显示">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-07-16T23:25:39.000Z">
-<meta property="article:modified_time" content="2023-07-18T04:00:28.698Z">
+<meta property="article:modified_time" content="2024-11-21T02:13:04.384Z">
 <meta property="article:author" content="宫水三叶">
 <meta property="article:tag" content="模拟">
 <meta property="article:tag" content="队列">
@@ -178,7 +178,7 @@
 </nav>
 
     <div class="banner" id="banner" parallax=true
-         style="background: url('/img/image_198.png') no-repeat center center;
+         style="background: url('/img/image_v2_10.png') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
@@ -239,8 +239,8 @@
             
             <div class="markdown-body">
               <h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>这是 LeetCode 上的 <strong><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/reveal-cards-in-increasing-order/solution/gong-shui-san-xie-jian-dan-mo-ni-ti-by-a-nu48/">950. 按递增顺序显示卡牌</a></strong> ，难度为 <strong>中等</strong>。</p>
-<p>牌组中的每张卡牌都对应有一个唯一的整数。你可以按你想要的顺序对这套卡片进行排序。</p>
-<p>最初，这些卡牌在牌组里是正面朝下的（即，未显示状态）。</p>
+<p>牌组中的每张卡牌都对应有一个唯一的整数，你可以按你想要的顺序对这套卡片进行排序。</p>
+<p>最初，这些卡牌在牌组里是正面朝下的（即未显示状态）。</p>
 <p>现在，重复执行以下步骤，直到显示所有卡牌为止：</p>
 <ol>
 <li>从牌组顶部抽一张牌，显示它，然后将其从牌组中移出。</li>

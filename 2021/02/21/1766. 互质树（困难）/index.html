@@ -26,7 +26,7 @@
 <meta property="og:image" content="https://sharingsource.github.io/2021/02/21/1766.%20%E4%BA%92%E8%B4%A8%E6%A0%91%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/image_0.png">
 <meta property="og:image" content="https://sharingsource.github.io/2021/02/21/1766.%20%E4%BA%92%E8%B4%A8%E6%A0%91%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/image_1.png">
 <meta property="article:published_time" content="2021-02-21T06:01:53.000Z">
-<meta property="article:modified_time" content="2024-04-27T01:57:53.702Z">
+<meta property="article:modified_time" content="2024-11-21T02:13:58.282Z">
 <meta property="article:author" content="宫水三叶">
 <meta property="article:tag" content="DFS">
 <meta name="twitter:card" content="summary_large_image">
@@ -245,9 +245,12 @@
 <p>当 <code>gcd(x, y) == 1</code>，我们称两个数 <code>x</code> 和 <code>y</code> 是 互质的 ，其中 <code>gcd(x, y)</code> 是 <code>x</code> 和 <code>y</code> 的最大公约数。</p>
 <p>从节点 <code>i</code> 到根最短路径上的点都是节点 <code>i</code> 的祖先节点，一个节点不是它自己的祖先节点。</p>
 <p>请你返回一个大小为 <code>n</code> 的数组 <code>ans</code>，其中 <code>ans[i]</code> 是离节点 <code>i</code> 最近的祖先节点且满足 <code>nums[i]</code> 和 <code>nums[ans[i]]</code> 是互质的，如果不存在这样的祖先节点，<code>ans[i]</code> 为 <code>-1</code>。</p>
-<p>示例 1：<br><img src="/2021/02/21/1766.%20%E4%BA%92%E8%B4%A8%E6%A0%91%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/image_0.png" srcset="/img/loading.gif" lazyload alt></p>
+<p>示例 1：</p>
+<p><img src="/2021/02/21/1766.%20%E4%BA%92%E8%B4%A8%E6%A0%91%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/image_0.png" srcset="/img/loading.gif" lazyload alt></p>
 <figure class="highlight tap"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs tap">输入：nums = [2,3,3,2], edges = [[0,1],[1,2],[1,3]]<br><br>输出：[-1,0,0,1]<br><br>解释：上图中，每个节点的值在括号中表示。<br>- 节点<span class="hljs-number"> 0 </span>没有互质祖先。<br>- 节点<span class="hljs-number"> 1 </span>只有一个祖先节点<span class="hljs-number"> 0 </span>。它们的值是互质的（gcd(2,3) == 1）。<br>- 节点<span class="hljs-number"> 2 </span>有两个祖先节点，分别是节点<span class="hljs-number"> 1 </span>和节点<span class="hljs-number"> 0 </span>。节点<span class="hljs-number"> 1 </span>的值与它的值不是互质的（gcd(3,3) == 3）但节点<span class="hljs-number"> 0 </span>的值是互质的(gcd(2,3) == 1)，所以节点<span class="hljs-number"> 0 </span>是最近的符合要求的祖先节点。<br>- 节点<span class="hljs-number"> 3 </span>有两个祖先节点，分别是节点<span class="hljs-number"> 1 </span>和节点<span class="hljs-number"> 0 </span>。它与节点<span class="hljs-number"> 1 </span>互质（gcd(3,2) == 1），所以节点<span class="hljs-number"> 1 </span>是离它最近的符合要求的祖先节点。<br></code></pre></div></td></tr></table></figure>
-<p>示例 2：<br><img src="/2021/02/21/1766.%20%E4%BA%92%E8%B4%A8%E6%A0%91%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/image_1.png" srcset="/img/loading.gif" lazyload alt><br><figure class="highlight inform7"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs inform7">输入：nums = <span class="hljs-comment">[5,6,10,2,3,6,15]</span>, edges = <span class="hljs-comment">[<span class="hljs-comment">[0,1]</span>,<span class="hljs-comment">[0,2]</span>,<span class="hljs-comment">[1,3]</span>,<span class="hljs-comment">[1,4]</span>,<span class="hljs-comment">[2,5]</span>,<span class="hljs-comment">[2,6]</span>]</span><br><br>输出：<span class="hljs-comment">[-1,0,-1,0,0,0,-1]</span><br></code></pre></div></td></tr></table></figure></p>
+<p>示例 2：</p>
+<p><img src="/2021/02/21/1766.%20%E4%BA%92%E8%B4%A8%E6%A0%91%EF%BC%88%E5%9B%B0%E9%9A%BE%EF%BC%89/image_1.png" srcset="/img/loading.gif" lazyload alt></p>
+<figure class="highlight inform7"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs inform7">输入：nums = <span class="hljs-comment">[5,6,10,2,3,6,15]</span>, edges = <span class="hljs-comment">[<span class="hljs-comment">[0,1]</span>,<span class="hljs-comment">[0,2]</span>,<span class="hljs-comment">[1,3]</span>,<span class="hljs-comment">[1,4]</span>,<span class="hljs-comment">[2,5]</span>,<span class="hljs-comment">[2,6]</span>]</span><br><br>输出：<span class="hljs-comment">[-1,0,-1,0,0,0,-1]</span><br></code></pre></div></td></tr></table></figure>
 <p>提示：</p>
 <ul>
 <li>$nums.length = n$</li>
@@ -313,8 +316,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/02/21/1763.%20%E6%9C%80%E9%95%BF%E7%9A%84%E7%BE%8E%E5%A5%BD%E5%AD%90%E5%AD%97%E7%AC%A6%E4%B8%B2%EF%BC%88%E7%AE%80%E5%8D%95%EF%BC%89/">
-                        <span class="hidden-mobile">LC 1763. 最长的美好子字符串</span>
+                      <a href="/2021/02/21/1764.%20%E9%80%9A%E8%BF%87%E8%BF%9E%E6%8E%A5%E5%8F%A6%E4%B8%80%E4%B8%AA%E6%95%B0%E7%BB%84%E7%9A%84%E5%AD%90%E6%95%B0%E7%BB%84%E5%BE%97%E5%88%B0%E4%B8%80%E4%B8%AA%E6%95%B0%E7%BB%84%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/">
+                        <span class="hidden-mobile">LC 1764. 通过连接另一个数组的子数组得到一个数组</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

@@ -16,15 +16,15 @@
   <meta name="author" content="宫水三叶">
   <meta name="keywords" content="算法, 数据结构, 题解">
   
-    <meta name="description" content="题目描述这是 LeetCode 上的 1662. 检查两个字符串数组是否相等 ，难度为 简单。 给你两个字符串数组 word1 和 word2。如果两个数组表示的字符串相同，返回 true ；否则，返回 false 。 数组表示的字符串 是由数组中的所有元素 按顺序 连接形成的字符串。 示例 1：12345678输入：word1 &#x3D; [&quot;ab&quot;, &quot;c&quot;],">
+    <meta name="description" content="题目描述这是 LeetCode 上的 1662. 检查两个字符串数组是否相等 ，难度为 简单。 给你两个字符串数组 word1 和 word2。 如果两个数组表示的字符串相同，返回 true ；否则，返回 false 。 数组表示的字符串是由数组中的所有元素按顺序连接形成的字符串。 示例 1：12345678输入：word1 &#x3D; [&quot;ab&quot;, &quot;c&quot;], w">
 <meta property="og:type" content="article">
 <meta property="og:title" content="LC 1662. 检查两个字符串数组是否相等">
 <meta property="og:url" content="https://sharingsource.github.io/2022/11/01/1662.%20%E6%A3%80%E6%9F%A5%E4%B8%A4%E4%B8%AA%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%95%B0%E7%BB%84%E6%98%AF%E5%90%A6%E7%9B%B8%E7%AD%89%EF%BC%88%E7%AE%80%E5%8D%95%EF%BC%89/index.html">
 <meta property="og:site_name" content="宫水三叶的刷题日记">
-<meta property="og:description" content="题目描述这是 LeetCode 上的 1662. 检查两个字符串数组是否相等 ，难度为 简单。 给你两个字符串数组 word1 和 word2。如果两个数组表示的字符串相同，返回 true ；否则，返回 false 。 数组表示的字符串 是由数组中的所有元素 按顺序 连接形成的字符串。 示例 1：12345678输入：word1 &#x3D; [&quot;ab&quot;, &quot;c&quot;],">
+<meta property="og:description" content="题目描述这是 LeetCode 上的 1662. 检查两个字符串数组是否相等 ，难度为 简单。 给你两个字符串数组 word1 和 word2。 如果两个数组表示的字符串相同，返回 true ；否则，返回 false 。 数组表示的字符串是由数组中的所有元素按顺序连接形成的字符串。 示例 1：12345678输入：word1 &#x3D; [&quot;ab&quot;, &quot;c&quot;], w">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-10-31T19:04:12.000Z">
-<meta property="article:modified_time" content="2022-11-01T08:39:23.400Z">
+<meta property="article:modified_time" content="2024-11-21T02:13:10.734Z">
 <meta property="article:author" content="宫水三叶">
 <meta property="article:tag" content="模拟">
 <meta property="article:tag" content="双指针">
@@ -176,7 +176,7 @@
 </nav>
 
     <div class="banner" id="banner" parallax=true
-         style="background: url('/img/image_50.jpeg') no-repeat center center;
+         style="background: url('/img/image_46.jpeg') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
@@ -237,8 +237,9 @@
             
             <div class="markdown-body">
               <h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>这是 LeetCode 上的 <strong><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/check-if-two-string-arrays-are-equivalent/solution/by-ac_oier-h0l6/">1662. 检查两个字符串数组是否相等</a></strong> ，难度为 <strong>简单</strong>。</p>
-<p>给你两个字符串数组 <code>word1</code> 和 <code>word2</code>。如果两个数组表示的字符串相同，返回 <code>true</code> ；否则，返回 <code>false</code> 。</p>
-<p>数组表示的字符串 是由数组中的所有元素 按顺序 连接形成的字符串。</p>
+<p>给你两个字符串数组 <code>word1</code> 和 <code>word2</code>。</p>
+<p>如果两个数组表示的字符串相同，返回 <code>true</code> ；否则，返回 <code>false</code> 。</p>
+<p>数组表示的字符串是由数组中的所有元素按顺序连接形成的字符串。</p>
 <p>示例 1：<br><figure class="highlight livescript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs livescript">输入：word1 = [<span class="hljs-string">&quot;ab&quot;</span>, <span class="hljs-string">&quot;c&quot;</span>], word2 = [<span class="hljs-string">&quot;a&quot;</span>, <span class="hljs-string">&quot;bc&quot;</span>]<br><br>输出：<span class="hljs-literal">true</span><br><br>解释：<br>word1 表示的字符串为 <span class="hljs-string">&quot;ab&quot;</span> + <span class="hljs-string">&quot;c&quot;</span> -&gt; <span class="hljs-string">&quot;abc&quot;</span><br>word2 表示的字符串为 <span class="hljs-string">&quot;a&quot;</span> + <span class="hljs-string">&quot;bc&quot;</span> -&gt; <span class="hljs-string">&quot;abc&quot;</span><br>两个字符串相同，返回 <span class="hljs-literal">true</span><br></code></pre></div></td></tr></table></figure><br>示例 2：<br><figure class="highlight prolog"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs prolog">输入：word1 = [<span class="hljs-string">&quot;a&quot;</span>, <span class="hljs-string">&quot;cb&quot;</span>], word2 = [<span class="hljs-string">&quot;ab&quot;</span>, <span class="hljs-string">&quot;c&quot;</span>]<br><br>输出：false<br></code></pre></div></td></tr></table></figure><br>示例 3：<br><figure class="highlight prolog"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs prolog">输入：word1  = [<span class="hljs-string">&quot;abc&quot;</span>, <span class="hljs-string">&quot;d&quot;</span>, <span class="hljs-string">&quot;defg&quot;</span>], word2 = [<span class="hljs-string">&quot;abcddefg&quot;</span>]<br><br>输出：true<br></code></pre></div></td></tr></table></figure></p>
 <p>提示：</p>
 <ul>

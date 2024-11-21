@@ -1,0 +1,640 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/oimg/RoundCorner.png">
+  <link rel="icon" href="/oimg/RoundCorner.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="宫水三叶">
+  <meta name="keywords" content="算法, 数据结构, 题解">
+  
+    <meta name="description" content="题目描述这是 LeetCode 上的 576. 出界的路径数 ，难度为 中等。 给你一个大小为 m x n 的网格和一个球。球的起始坐标为 [startRow, startColumn]。 你可以将球移到在四个方向上相邻的单元格内（可以穿过网格边界到达网格之外）。 你最多可以移动 maxMove 次球。 给你五个整数 m、n、maxMove、startRow 以及 startColumn，找出并返">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LC 576. 出界的路径数">
+<meta property="og:url" content="https://sharingsource.github.io/2021/08/15/576.%20%E5%87%BA%E7%95%8C%E7%9A%84%E8%B7%AF%E5%BE%84%E6%95%B0%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/index.html">
+<meta property="og:site_name" content="宫水三叶的刷题日记">
+<meta property="og:description" content="题目描述这是 LeetCode 上的 576. 出界的路径数 ，难度为 中等。 给你一个大小为 m x n 的网格和一个球。球的起始坐标为 [startRow, startColumn]。 你可以将球移到在四个方向上相邻的单元格内（可以穿过网格边界到达网格之外）。 你最多可以移动 maxMove 次球。 给你五个整数 m、n、maxMove、startRow 以及 startColumn，找出并返">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://sharingsource.github.io/2021/08/15/576.%20%E5%87%BA%E7%95%8C%E7%9A%84%E8%B7%AF%E5%BE%84%E6%95%B0%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/image_0.png">
+<meta property="og:image" content="https://sharingsource.github.io/2021/08/15/576.%20%E5%87%BA%E7%95%8C%E7%9A%84%E8%B7%AF%E5%BE%84%E6%95%B0%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/image_1.png">
+<meta property="og:image" content="https://sharingsource.github.io/2021/08/15/576.%20%E5%87%BA%E7%95%8C%E7%9A%84%E8%B7%AF%E5%BE%84%E6%95%B0%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/image_2.png">
+<meta property="article:published_time" content="2021-08-14T18:51:04.000Z">
+<meta property="article:modified_time" content="2024-11-21T02:14:57.117Z">
+<meta property="article:author" content="宫水三叶">
+<meta property="article:tag" content="动态规划">
+<meta property="article:tag" content="记忆化搜索">
+<meta property="article:tag" content="路径 DP">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://sharingsource.github.io/2021/08/15/576.%20%E5%87%BA%E7%95%8C%E7%9A%84%E8%B7%AF%E5%BE%84%E6%95%B0%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/image_0.png">
+  
+  
+  <title>LC 576. 出界的路径数 - 宫水三叶的刷题日记</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/hint.css/2.7.0/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.7.2/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"sharingsource.github.io","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"|","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"IDifiViRkVDTgu27Nu50GQkE-gzGzoHsz","app_key":"gt98pupgyYjPKYQASrGmD9kM","server_url":"https://idifivir.lc-cn-n1-shared.com","path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.1.0"></head>
+
+
+<body>
+  <header style="height: 50vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>宫水三叶の刷题日记</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/image_125.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="LC 576. 出界的路径数">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-author" aria-hidden="true"></i>
+      宫水三叶
+    </span>
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-08-15 02:51" pubdate>
+        2021年8月15日
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">LC 576. 出界的路径数</h1>
+            
+            <div class="markdown-body">
+              <h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>这是 LeetCode 上的 <strong><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/out-of-boundary-paths/solution/gong-shui-san-xie-yi-ti-shuang-jie-ji-yi-asrz/">576. 出界的路径数</a></strong> ，难度为 <strong>中等</strong>。</p>
+<p>给你一个大小为 <code>m x n</code> 的网格和一个球。球的起始坐标为 <code>[startRow, startColumn]</code>。</p>
+<p>你可以将球移到在四个方向上相邻的单元格内（可以穿过网格边界到达网格之外）。</p>
+<p>你<strong>最多</strong>可以移动 <code>maxMove</code> 次球。</p>
+<p>给你五个整数 <code>m</code>、<code>n</code>、<code>maxMove</code>、<code>startRow</code> 以及 <code>startColumn</code>，找出并返回可以将球移出边界的路径数量。</p>
+<p>因为答案可能非常大，返回对 $10^9 + 7$​ 取余 后的结果。</p>
+<p>示例 1：</p>
+<p><img src="/2021/08/15/576.%20%E5%87%BA%E7%95%8C%E7%9A%84%E8%B7%AF%E5%BE%84%E6%95%B0%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/image_0.png" srcset="/img/loading.gif" lazyload alt></p>
+<figure class="highlight excel"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs excel">输入：m = <span class="hljs-number">2</span>, <span class="hljs-built_in">n</span> = <span class="hljs-number">2</span>, maxMove = <span class="hljs-number">2</span>, startRow = <span class="hljs-number">0</span>, startColumn = <span class="hljs-number">0</span><br><br>输出：<span class="hljs-number">6</span><br></code></pre></div></td></tr></table></figure>
+<p>示例 2：</p>
+<p><img src="/2021/08/15/576.%20%E5%87%BA%E7%95%8C%E7%9A%84%E8%B7%AF%E5%BE%84%E6%95%B0%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/image_1.png" srcset="/img/loading.gif" lazyload alt></p>
+<figure class="highlight excel"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs excel">输入：m = <span class="hljs-number">1</span>, <span class="hljs-built_in">n</span> = <span class="hljs-number">3</span>, maxMove = <span class="hljs-number">3</span>, startRow = <span class="hljs-number">0</span>, startColumn = <span class="hljs-number">1</span><br><br>输出：<span class="hljs-number">12</span><br></code></pre></div></td></tr></table></figure>
+<p>提示：</p>
+<ul>
+<li>$1 &lt;= m, n &lt;= 50$</li>
+<li>$0 &lt;= maxMove &lt;= 50$</li>
+<li>$0 &lt;= startRow &lt; m$</li>
+<li>$0 &lt;= startColumn &lt; n$</li>
+</ul>
+<hr>
+<h3 id="基本分析"><a href="#基本分析" class="headerlink" title="基本分析"></a>基本分析</h3><p>通常来说，朴素的路径 DP 问题之所以能够使用常规 DP 方式进行求解，是因为只能往某一个方向（一维棋盘的路径问题）或者只能往某两个方向（二维棋盘的路径问题）移动。</p>
+<p>这样的移动规则意味着，我们不会重复进入同一个格子。</p>
+<p><strong>从图论的意义出发：将每个格子视为点的话，如果能够根据移动规则从 <code>a</code> 位置一步到达 <code>b</code> 位置，则说明存在一条由 <code>a</code> 指向 <code>b</code> 的有向边。</strong></p>
+<p><strong>也就是说，在朴素的路径 DP 问题中，“单向”的移动规则注定了我们的图不存在环，是一个存在拓扑序的有向无环图，因此我们能够使用常规 DP 手段来求解。</strong></p>
+<p>回到本题，移动规则是四联通，并不是“单向”的，在某条出界的路径中，我们是有可能重复进入某个格子，即存在环。</p>
+<p>因此我们需要换一种 DP 思路进行求解。</p>
+<hr>
+<h3 id="记忆化搜索"><a href="#记忆化搜索" class="headerlink" title="记忆化搜索"></a>记忆化搜索</h3><p>通常在直接 DP 不好入手的情况下，我们可以先尝试写一个「记忆化搜索」的版本。</p>
+<p>那么如果是让你设计一个 DFS 函数来解决本题，你会如何设计？</p>
+<p>我大概会这样设计：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java"><span class="hljs-type">int</span> <span class="hljs-title function_">dfs</span><span class="hljs-params">(<span class="hljs-type">int</span> x, <span class="hljs-type">int</span> y, <span class="hljs-type">int</span> k)</span> &#123;&#125;<br></code></pre></div></td></tr></table></figure>
+<p>重点放在几个「可变参数」与「返回值」上：$(x,y)$ 代表当前所在的位置，$k$ 代表最多使用多少步，返回值代表路径数量。</p>
+<p>根据 <a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzU4NDE3MTEyMA==&amp;mid=2247485297&amp;idx=1&amp;sn=5ee4ce31c42d368af0653f60aa263c82&amp;chksm=fd9cac6ecaeb25787e6da90423c5467e1679da0a8aaf1a3445475199a8f148d8629e851fea57&amp;scene=178&amp;cur_album_id=1773144264147812354#rd">DP-动态规划 第八讲</a> 的学习中，我们可以确定递归出口为：</p>
+<ol>
+<li>当前到达了棋盘外的位置，说明找到了一条出界路径，返回 $1$；</li>
+<li>在条件 $1$ 不满足的前提下，当剩余步数为 $0$（不能再走下一步），说明没有找到一条合法的出界路径，返回 $0$。</li>
+</ol>
+<p>主逻辑则是根据四联通规则进行移动即可，最终答案为 <code>dfs(startRow, startColumn, maxMove)</code>。</p>
+<p>Java 代码：<br><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-type">int</span> <span class="hljs-variable">MOD</span> <span class="hljs-operator">=</span> (<span class="hljs-type">int</span>)<span class="hljs-number">1e9</span>+<span class="hljs-number">7</span>;<br>    <span class="hljs-type">int</span> m, n, max;<br>    <span class="hljs-type">int</span>[][] dirs = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[][]&#123;&#123;<span class="hljs-number">1</span>,<span class="hljs-number">0</span>&#125;,&#123;-<span class="hljs-number">1</span>,<span class="hljs-number">0</span>&#125;,&#123;<span class="hljs-number">0</span>,<span class="hljs-number">1</span>&#125;,&#123;<span class="hljs-number">0</span>,-<span class="hljs-number">1</span>&#125;&#125;;<br>    <span class="hljs-type">int</span>[][][] cache;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">findPaths</span><span class="hljs-params">(<span class="hljs-type">int</span> _m, <span class="hljs-type">int</span> _n, <span class="hljs-type">int</span> _max, <span class="hljs-type">int</span> r, <span class="hljs-type">int</span> c)</span> &#123;<br>        m = _m; n = _n; max = _max;<br>        cache = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[m][n][max + <span class="hljs-number">1</span>];<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; m; i++) &#123;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; j &lt; n; j++) &#123;<br>                <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">k</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; k &lt;= max; k++) &#123;<br>                    cache[i][j][k] = -<span class="hljs-number">1</span>;<br>                &#125;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> dfs(r, c, max);<br>    &#125;<br>    <span class="hljs-type">int</span> <span class="hljs-title function_">dfs</span><span class="hljs-params">(<span class="hljs-type">int</span> x, <span class="hljs-type">int</span> y, <span class="hljs-type">int</span> k)</span> &#123;<br>        <span class="hljs-keyword">if</span> (x &lt; <span class="hljs-number">0</span> || x &gt;= m || y &lt; <span class="hljs-number">0</span> || y &gt;= n) <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">if</span> (k == <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">if</span> (cache[x][y][k] != -<span class="hljs-number">1</span>) <span class="hljs-keyword">return</span> cache[x][y][k];<br>        <span class="hljs-type">int</span> <span class="hljs-variable">ans</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span>[] d : dirs) &#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">nx</span> <span class="hljs-operator">=</span> x + d[<span class="hljs-number">0</span>], ny = y + d[<span class="hljs-number">1</span>];<br>            ans += dfs(nx, ny, k - <span class="hljs-number">1</span>);<br>            ans %= MOD;<br>        &#125;<br>        cache[x][y][k] = ans;<br>        <span class="hljs-keyword">return</span> ans;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure><br>C++ 代码：<br><figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs C++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-type">int</span> MOD = <span class="hljs-number">1e9</span> + <span class="hljs-number">7</span>;<br>    <span class="hljs-type">int</span> m, n, max;<br>    vector&lt;vector&lt;vector&lt;<span class="hljs-type">int</span>&gt;&gt;&gt; cache;<br>    vector&lt;vector&lt;<span class="hljs-type">int</span>&gt;&gt; dirs = &#123;&#123;<span class="hljs-number">1</span>, <span class="hljs-number">0</span>&#125;, &#123;<span class="hljs-number">-1</span>, <span class="hljs-number">0</span>&#125;, &#123;<span class="hljs-number">0</span>, <span class="hljs-number">1</span>&#125;, &#123;<span class="hljs-number">0</span>, <span class="hljs-number">-1</span>&#125;&#125;;<br>    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">findPaths</span><span class="hljs-params">(<span class="hljs-type">int</span> _m, <span class="hljs-type">int</span> _n, <span class="hljs-type">int</span> _max, <span class="hljs-type">int</span> r, <span class="hljs-type">int</span> c)</span> </span>&#123;<br>        m = _m; n = _n; max = _max;<br>        cache = vector&lt;vector&lt;vector&lt;<span class="hljs-type">int</span>&gt;&gt;&gt;(m, vector&lt;vector&lt;<span class="hljs-type">int</span>&gt;&gt;(n, <span class="hljs-built_in">vector</span>&lt;<span class="hljs-type">int</span>&gt;(max + <span class="hljs-number">1</span>, <span class="hljs-number">-1</span>)));<br>        <span class="hljs-keyword">return</span> <span class="hljs-built_in">dfs</span>(r, c, max);<br>    &#125;<br>    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">dfs</span><span class="hljs-params">(<span class="hljs-type">int</span> x, <span class="hljs-type">int</span> y, <span class="hljs-type">int</span> k)</span> </span>&#123;<br>        <span class="hljs-keyword">if</span> (x &lt; <span class="hljs-number">0</span> || x &gt;= m || y &lt; <span class="hljs-number">0</span> || y &gt;= n) <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">if</span> (k == <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">if</span> (cache[x][y][k] != <span class="hljs-number">-1</span>) <span class="hljs-keyword">return</span> cache[x][y][k];<br>        <span class="hljs-type">int</span> ans = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">auto</span>&amp; d : dirs) &#123;<br>            <span class="hljs-type">int</span> nx = x + d[<span class="hljs-number">0</span>], ny = y + d[<span class="hljs-number">1</span>];<br>            ans += <span class="hljs-built_in">dfs</span>(nx, ny, k - <span class="hljs-number">1</span>);<br>            ans %= MOD;<br>        &#125;<br>        cache[x][y][k] = ans;<br>        <span class="hljs-keyword">return</span> ans;<br>    &#125;<br>&#125;;<br></code></pre></div></td></tr></table></figure></p>
+<hr>
+<h3 id="动态规划"><a href="#动态规划" class="headerlink" title="动态规划"></a>动态规划</h3><p>根据我们的「记忆化搜索」，我们可以设计一个二维数组 $f[][]$ 作为我们的 dp 数组：</p>
+<ul>
+<li><strong>第一维代表 DFS 可变参数中的 $(x,y)$ 所对应 $index$。取值范围为 $[0, m*n)$</strong></li>
+<li><strong>第二维代表 DFS 可变参数中的 $k$。取值范围为 $[0,max]$</strong></li>
+</ul>
+<p><strong>dp 数组中存储的就是我们 <code>DFS</code> 的返回值：路径数量。</strong></p>
+<p>根据 dp 数组中的维度设计和存储目标值，我们可以得知「状态定义」为：</p>
+<p><strong>$f[i][j]$ 代表从位置 $i$ 出发，可用步数不超过 $j$ 时的路径数量。</strong></p>
+<p>至此，我们只是根据「记忆化搜索」中的 <code>DFS</code> 函数的签名，就已经得出我们的「状态定义」了，接下来需要考虑「转移方程」。</p>
+<p>当有了「状态定义」之后，我们需要从「最后一步」来推导出「转移方程」：</p>
+<p>由于题目允许往四个方向进行移动，因此我们的最后一步也要统计四个相邻的方向。</p>
+<p>由此可得我们的状态转移方程：</p>
+<script type="math/tex; mode=display">
+f[(x,y)][step] = f[(x-1,y)][step-1]+f[(x+1,y)][step-1]+f[(x,y-1)][step-1]+f[(x,y+1)][step-1]</script><p>注意，转移方程中 dp 数组的第一维存储的是 $(x,y)$ 对应的 $idx$。</p>
+<p>从转移方程中我们发现，更新 $f[i][j]$ 依赖于 $f[x][j-1]$，因此我们转移过程中需要将最大移动步数进行「从小到大」枚举。</p>
+<p>至此，我们已经完成求解「路径规划」问题的两大步骤：「状态定义」&amp;「转移方程」。</p>
+<p>但这还不是所有，我们还需要一些 <strong>有效值</strong> 来滚动下去。</p>
+<p><strong>其实就是需要一些「有效值」作为初始化状态。</strong></p>
+<p>观察我们的「转移方程」可以发现，整个转移过程是一个累加过程，如果没有一些有效的状态（非零值）进行初始化的话，整个递推过程并没有意义。</p>
+<p>那么哪些值可以作为成为初始化状态呢？</p>
+<p>显然，当我们已经位于矩阵边缘的时候，我们可以一步跨出矩阵，这算作一条路径。</p>
+<p>同时，由于我们能够往四个方向进行移动，因此不同的边缘格子会有不同数量的路径。</p>
+<p><img src="/2021/08/15/576.%20%E5%87%BA%E7%95%8C%E7%9A%84%E8%B7%AF%E5%BE%84%E6%95%B0%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/image_2.png" srcset="/img/loading.gif" lazyload alt></p>
+<p>换句话说，我们需要先对边缘格子进行初始化操作，预处理每个边缘格子直接走出矩阵的路径数量。</p>
+<p>目的是为了我们整个 DP 过程可以有效的递推下去。</p>
+<p><strong>可以发现，动态规划的实现，本质是将问题进行反向：原问题是让我们求从棋盘的特定位置出发，出界的路径数量。实现时，我们则是从边缘在状态出发，逐步推导回起点的出界路径数量为多少。</strong></p>
+<p>Java 代码：<br><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-type">int</span> <span class="hljs-variable">MOD</span> <span class="hljs-operator">=</span> (<span class="hljs-type">int</span>)<span class="hljs-number">1e9</span>+<span class="hljs-number">7</span>;<br>    <span class="hljs-type">int</span> m, n, max;<br>    <span class="hljs-type">int</span>[][] dirs = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[][]&#123;&#123;<span class="hljs-number">1</span>,<span class="hljs-number">0</span>&#125;,&#123;-<span class="hljs-number">1</span>,<span class="hljs-number">0</span>&#125;,&#123;<span class="hljs-number">0</span>,<span class="hljs-number">1</span>&#125;,&#123;<span class="hljs-number">0</span>,-<span class="hljs-number">1</span>&#125;&#125;;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">findPaths</span><span class="hljs-params">(<span class="hljs-type">int</span> _m, <span class="hljs-type">int</span> _n, <span class="hljs-type">int</span> _max, <span class="hljs-type">int</span> r, <span class="hljs-type">int</span> c)</span> &#123;<br>        m = _m; n = _n; max = _max;<br>        <span class="hljs-type">int</span>[][] f = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[m * n][max + <span class="hljs-number">1</span>];<br>        <span class="hljs-comment">// 初始化边缘格子的路径数量</span><br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; m; i++) &#123;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; j &lt; n; j++) &#123;<br>                <span class="hljs-keyword">if</span> (i == <span class="hljs-number">0</span>) add(i, j, f);<br>                <span class="hljs-keyword">if</span> (j == <span class="hljs-number">0</span>) add(i, j, f);<br>                <span class="hljs-keyword">if</span> (i == m - <span class="hljs-number">1</span>) add(i, j, f);<br>                <span class="hljs-keyword">if</span> (j == n - <span class="hljs-number">1</span>) add(i, j, f);<br>            &#125;<br>        &#125;<br>        <span class="hljs-comment">// 从小到大枚举「可移动步数」</span><br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">k</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>; k &lt;= max; k++) &#123;<br>            <span class="hljs-comment">// 枚举所有的「位置」</span><br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">idx</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; idx &lt; m * n; idx++) &#123;<br>                <span class="hljs-type">int</span>[] info = parseIdx(idx);<br>                <span class="hljs-type">int</span> <span class="hljs-variable">x</span> <span class="hljs-operator">=</span> info[<span class="hljs-number">0</span>], y = info[<span class="hljs-number">1</span>];<br>                <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span>[] d : dirs) &#123;<br>                    <span class="hljs-type">int</span> <span class="hljs-variable">nx</span> <span class="hljs-operator">=</span> x + d[<span class="hljs-number">0</span>], ny = y + d[<span class="hljs-number">1</span>];<br>                    <span class="hljs-keyword">if</span> (nx &lt; <span class="hljs-number">0</span> || nx &gt;= m || ny &lt; <span class="hljs-number">0</span> || ny &gt;= n) <span class="hljs-keyword">continue</span>;<br>                    <span class="hljs-type">int</span> <span class="hljs-variable">nidx</span> <span class="hljs-operator">=</span> getIdx(nx, ny);<br>                    f[idx][k] += f[nidx][k - <span class="hljs-number">1</span>];<br>                    f[idx][k] %= MOD;<br>                &#125;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> f[getIdx(r, c)][max];       <br>    &#125;<br>    <span class="hljs-keyword">void</span> <span class="hljs-title function_">add</span><span class="hljs-params">(<span class="hljs-type">int</span> x, <span class="hljs-type">int</span> y, <span class="hljs-type">int</span>[][] f)</span> &#123;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">k</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>; k &lt;= max; k++) &#123;<br>            f[getIdx(x, y)][k]++;<br>        &#125;<br>    &#125;<br>    <span class="hljs-type">int</span> <span class="hljs-title function_">getIdx</span><span class="hljs-params">(<span class="hljs-type">int</span> x, <span class="hljs-type">int</span> y)</span> &#123;<br>        <span class="hljs-keyword">return</span> x * n + y;<br>    &#125;<br>    <span class="hljs-type">int</span>[] parseIdx(<span class="hljs-type">int</span> idx) &#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[]&#123;idx / n, idx % n&#125;;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure><br>C++ 代码：<br><figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs C++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-type">int</span> MOD = <span class="hljs-number">1e9</span> + <span class="hljs-number">7</span>;<br>    <span class="hljs-type">int</span> m, n, max;<br>    vector&lt;vector&lt;<span class="hljs-type">int</span>&gt;&gt; dirs = &#123;&#123;<span class="hljs-number">1</span>, <span class="hljs-number">0</span>&#125;, &#123;<span class="hljs-number">-1</span>, <span class="hljs-number">0</span>&#125;, &#123;<span class="hljs-number">0</span>, <span class="hljs-number">1</span>&#125;, &#123;<span class="hljs-number">0</span>, <span class="hljs-number">-1</span>&#125;&#125;;<br>    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">findPaths</span><span class="hljs-params">(<span class="hljs-type">int</span> _m, <span class="hljs-type">int</span> _n, <span class="hljs-type">int</span> _max, <span class="hljs-type">int</span> r, <span class="hljs-type">int</span> c)</span> </span>&#123;<br>        m = _m; n = _n; max = _max;<br>        vector&lt;vector&lt;<span class="hljs-type">int</span>&gt;&gt; <span class="hljs-built_in">f</span>(m * n, <span class="hljs-built_in">vector</span>&lt;<span class="hljs-type">int</span>&gt;(max + <span class="hljs-number">1</span>, <span class="hljs-number">0</span>));<br>        <span class="hljs-comment">// 初始化边缘格子的路径数量</span><br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; m; i++) &#123;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> j = <span class="hljs-number">0</span>; j &lt; n; j++) &#123;<br>                <span class="hljs-keyword">if</span> (i == <span class="hljs-number">0</span>) <span class="hljs-built_in">add</span>(i, j, f);<br>                <span class="hljs-keyword">if</span> (j == <span class="hljs-number">0</span>) <span class="hljs-built_in">add</span>(i, j, f);<br>                <span class="hljs-keyword">if</span> (i == m - <span class="hljs-number">1</span>) <span class="hljs-built_in">add</span>(i, j, f);<br>                <span class="hljs-keyword">if</span> (j == n - <span class="hljs-number">1</span>) <span class="hljs-built_in">add</span>(i, j, f);<br>            &#125;<br>        &#125;<br>        <span class="hljs-comment">// 从小到大枚举「可移动步数」</span><br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> k = <span class="hljs-number">1</span>; k &lt;= max; k++) &#123;<br>            <span class="hljs-comment">// 枚举所有的「位置」</span><br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> idx = <span class="hljs-number">0</span>; idx &lt; m * n; idx++) &#123;<br>                pair&lt;<span class="hljs-type">int</span>, <span class="hljs-type">int</span>&gt; info = <span class="hljs-built_in">parseIdx</span>(idx);<br>                <span class="hljs-type">int</span> x = info.first, y = info.second;<br>                <span class="hljs-keyword">for</span> (<span class="hljs-keyword">auto</span>&amp; d : dirs) &#123;<br>                    <span class="hljs-type">int</span> nx = x + d[<span class="hljs-number">0</span>], ny = y + d[<span class="hljs-number">1</span>];<br>                    <span class="hljs-keyword">if</span> (nx &gt;= <span class="hljs-number">0</span> &amp;&amp; nx &lt; m &amp;&amp; ny &gt;= <span class="hljs-number">0</span> &amp;&amp; ny &lt; n) &#123;<br>                        <span class="hljs-type">int</span> nidx = <span class="hljs-built_in">getIdx</span>(nx, ny);<br>                        f[idx][k] += f[nidx][k - <span class="hljs-number">1</span>];<br>                        f[idx][k] %= MOD;<br>                    &#125;<br>                &#125;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> f[<span class="hljs-built_in">getIdx</span>(r, c)][max];<br>    &#125;<br>    <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">add</span><span class="hljs-params">(<span class="hljs-type">int</span> x, <span class="hljs-type">int</span> y, vector&lt;vector&lt;<span class="hljs-type">int</span>&gt;&gt;&amp; f)</span> </span>&#123;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> k = <span class="hljs-number">1</span>; k &lt;= max; k++) &#123;<br>            f[<span class="hljs-built_in">getIdx</span>(x, y)][k]++;<br>        &#125;<br>    &#125;<br>    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">getIdx</span><span class="hljs-params">(<span class="hljs-type">int</span> x, <span class="hljs-type">int</span> y)</span> </span>&#123;<br>        <span class="hljs-keyword">return</span> x * n + y;<br>    &#125;<br>    <span class="hljs-function">pair&lt;<span class="hljs-type">int</span>, <span class="hljs-type">int</span>&gt; <span class="hljs-title">parseIdx</span><span class="hljs-params">(<span class="hljs-type">int</span> idx)</span> </span>&#123;<br>        <span class="hljs-keyword">return</span> &#123;idx / n, idx % n&#125;;<br>    &#125;<br>&#125;;<br></code></pre></div></td></tr></table></figure></p>
+<ul>
+<li>时间复杂度：共有 $m \times n \times max$ 个状态需要转移，复杂度为 $O(m \times n \times max)$ </li>
+<li>空间复杂度：$O(m \times n \times max)$</li>
+</ul>
+<hr>
+<h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>这是我们「刷穿 LeetCode」系列文章的第 <code>No.576</code> 篇，系列开始于 2021/01/01，截止于起始日 LeetCode 上共有 1916 道题目，部分是有锁题，我们将先把所有不带锁的题目刷完。</p>
+<p>在这个系列文章里面，除了讲解解题思路以外，还会尽可能给出最为简洁的代码。如果涉及通解还会相应的代码模板。</p>
+<p>为了方便各位同学能够电脑上进行调试和提交代码，我建立了相关的仓库：<a target="_blank" rel="noopener" href="https://github.com/SharingSource/LogicStack-LeetCode">https://github.com/SharingSource/LogicStack-LeetCode</a> 。</p>
+<p>在仓库地址里，你可以看到系列文章的题解链接、系列文章的相应代码、LeetCode 原题链接和其他优选题解。</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/">动态规划</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E8%AE%B0%E5%BF%86%E5%8C%96%E6%90%9C%E7%B4%A2/">记忆化搜索</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E8%B7%AF%E5%BE%84-DP/">路径 DP</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/08/16/526.%20%E4%BC%98%E7%BE%8E%E7%9A%84%E6%8E%92%E5%88%97%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">LC 526. 优美的排列</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/08/14/1583.%20%E7%BB%9F%E8%AE%A1%E4%B8%8D%E5%BC%80%E5%BF%83%E7%9A%84%E6%9C%8B%E5%8F%8B%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/">
+                        <span class="hidden-mobile">LC 1583. 统计不开心的朋友</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://cdn.staticfile.org/valine/1.4.18/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"IDifiViRkVDTgu27Nu50GQkE-gzGzoHsz","appKey":"gt98pupgyYjPKYQASrGmD9kM","path":"window.location.pathname","placeholder":"发一条友善的评论（为方便交流，记得填上方的昵称再留言哦 ~ 🍭","avatar":"","meta":["nick","mail"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":true},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          Fluid.plugins.initFancyBox('#valine .vcontent img:not(.vemoji)');
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+  <div class="col-lg-7 mx-auto nopadding-x-md">
+    <div class="container custom post-custom mx-auto">
+      <img src="/oimg/gzh-qrcode.webp" srcset="/img/loading.gif" lazyload class="rounded mx-auto d-block mt-5" style="width:80%">
+    </div>
+  </div>
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- LeanCloud 统计PV -->
+        <span id="leancloud-site-pv-container" style="display: none">
+            总访问量 
+            <span id="leancloud-site-pv"></span>
+             次
+          </span>
+      
+      
+        <!-- LeanCloud 统计UV -->
+        <span id="leancloud-site-uv-container" style="display: none">
+            总访客数 
+            <span id="leancloud-site-uv"></span>
+             人
+          </span>
+      
+
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.staticfile.org/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.staticfile.org/tocbot/4.18.2/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.staticfile.org/anchor-js/4.3.1/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.11/clipboard.min.js" ></script>
+  
+
+
+
+
+  <script defer src="/js/leancloud.js" ></script>
+
+
+
+  <script  src="https://cdn.bootcdn.net/ajax/libs/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        loader: {
+          
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.staticfile.org/mathjax/3.2.0/es5/tex-svg.js" ></script>
+
+  
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

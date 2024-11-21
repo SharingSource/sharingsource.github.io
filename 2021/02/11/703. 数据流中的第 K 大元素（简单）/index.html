@@ -16,15 +16,15 @@
   <meta name="author" content="宫水三叶">
   <meta name="keywords" content="算法, 数据结构, 题解">
   
-    <meta name="description" content="题目描述这是 LeetCode 上的 703. 数据流中的第 K 大元素 ，难度为 简单。 设计一个找到数据流中第 k 大元素的类（class）。注意是排序后的第 k 大元素，不是第 k 个不同的元素。 请实现 KthLargest 类：  KthLargest(int k, int[] nums) 使用整数 k 和整数流 nums 初始化对象。 int add(int val) 将 val 插入">
+    <meta name="description" content="题目描述这是 LeetCode 上的 703. 数据流中的第 K 大元素 ，难度为 简单。 设计一个找到数据流中第 k 大元素的类（class）。 注意是排序后的第 k 大元素，不是第 k 个不同的元素。 请实现 KthLargest 类：  KthLargest(int k, int[] nums) 使用整数 k 和整数流 nums 初始化对象。 int add(int val) 将 val 插">
 <meta property="og:type" content="article">
 <meta property="og:title" content="LC 703. 数据流中的第 K 大元素">
 <meta property="og:url" content="https://sharingsource.github.io/2021/02/11/703.%20%E6%95%B0%E6%8D%AE%E6%B5%81%E4%B8%AD%E7%9A%84%E7%AC%AC%20K%20%E5%A4%A7%E5%85%83%E7%B4%A0%EF%BC%88%E7%AE%80%E5%8D%95%EF%BC%89/index.html">
 <meta property="og:site_name" content="宫水三叶的刷题日记">
-<meta property="og:description" content="题目描述这是 LeetCode 上的 703. 数据流中的第 K 大元素 ，难度为 简单。 设计一个找到数据流中第 k 大元素的类（class）。注意是排序后的第 k 大元素，不是第 k 个不同的元素。 请实现 KthLargest 类：  KthLargest(int k, int[] nums) 使用整数 k 和整数流 nums 初始化对象。 int add(int val) 将 val 插入">
+<meta property="og:description" content="题目描述这是 LeetCode 上的 703. 数据流中的第 K 大元素 ，难度为 简单。 设计一个找到数据流中第 k 大元素的类（class）。 注意是排序后的第 k 大元素，不是第 k 个不同的元素。 请实现 KthLargest 类：  KthLargest(int k, int[] nums) 使用整数 k 和整数流 nums 初始化对象。 int add(int val) 将 val 插">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-02-10T22:34:53.000Z">
-<meta property="article:modified_time" content="2022-07-02T01:34:41.934Z">
+<meta property="article:modified_time" content="2024-11-21T02:13:10.715Z">
 <meta property="article:author" content="宫水三叶">
 <meta property="article:tag" content="优先队列（堆）">
 <meta property="article:tag" content="排序">
@@ -177,7 +177,7 @@
 </nav>
 
     <div class="banner" id="banner" parallax=true
-         style="background: url('/img/image_81.png') no-repeat center center;
+         style="background: url('/img/image_193.jpg') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
@@ -238,13 +238,14 @@
             
             <div class="markdown-body">
               <h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>这是 LeetCode 上的 <strong><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/kth-largest-element-in-a-stream/solution/jian-da-ti-de-duo-chong-jie-fa-mou-pao-p-d1qi/">703. 数据流中的第 K 大元素</a></strong> ，难度为 <strong>简单</strong>。</p>
-<p>设计一个找到数据流中第 <code>k</code> 大元素的类（class）。注意是排序后的第 <code>k</code> 大元素，不是第 <code>k</code> 个不同的元素。</p>
+<p>设计一个找到数据流中第 <code>k</code> 大元素的类（class）。</p>
+<p>注意是排序后的第 <code>k</code> 大元素，不是第 <code>k</code> 个不同的元素。</p>
 <p>请实现 <code>KthLargest</code> 类：</p>
 <ul>
 <li><code>KthLargest(int k, int[] nums)</code> 使用整数 <code>k</code> 和整数流 <code>nums</code> 初始化对象。</li>
 <li><code>int add(int val)</code> 将 <code>val</code> 插入数据流 <code>nums</code> 后，返回当前数据流中第 <code>k</code> 大的元素。</li>
 </ul>
-<p>示例：<br><figure class="highlight csharp"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs csharp">输入：<br>[<span class="hljs-string">&quot;KthLargest&quot;</span>, <span class="hljs-string">&quot;add&quot;</span>, <span class="hljs-string">&quot;add&quot;</span>, <span class="hljs-string">&quot;add&quot;</span>, <span class="hljs-string">&quot;add&quot;</span>, <span class="hljs-string">&quot;add&quot;</span>]<br>[[<span class="hljs-number">3</span>, [<span class="hljs-number">4</span>, <span class="hljs-number">5</span>, <span class="hljs-number">8</span>, <span class="hljs-number">2</span>]], [<span class="hljs-number">3</span>], [<span class="hljs-number">5</span>], [<span class="hljs-number">10</span>], [<span class="hljs-number">9</span>], [<span class="hljs-number">4</span>]]<br>输出：<br>[<span class="hljs-meta">null, 4, 5, 5, 8, 8</span>]<br><br>解释：<br>KthLargest kthLargest = <span class="hljs-keyword">new</span> KthLargest(<span class="hljs-number">3</span>, [<span class="hljs-number">4</span>, <span class="hljs-number">5</span>, <span class="hljs-number">8</span>, <span class="hljs-number">2</span>]);<br>kthLargest.<span class="hljs-keyword">add</span>(<span class="hljs-number">3</span>);   <span class="hljs-comment">// return 4</span><br>kthLargest.<span class="hljs-keyword">add</span>(<span class="hljs-number">5</span>);   <span class="hljs-comment">// return 5</span><br>kthLargest.<span class="hljs-keyword">add</span>(<span class="hljs-number">10</span>);  <span class="hljs-comment">// return 5</span><br>kthLargest.<span class="hljs-keyword">add</span>(<span class="hljs-number">9</span>);   <span class="hljs-comment">// return 8</span><br>kthLargest.<span class="hljs-keyword">add</span>(<span class="hljs-number">4</span>);   <span class="hljs-comment">// return 8</span><br></code></pre></div></td></tr></table></figure></p>
+<p>示例：<br><figure class="highlight csharp"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs csharp">输入：<br>[<span class="hljs-string">&quot;KthLargest&quot;</span>, <span class="hljs-string">&quot;add&quot;</span>, <span class="hljs-string">&quot;add&quot;</span>, <span class="hljs-string">&quot;add&quot;</span>, <span class="hljs-string">&quot;add&quot;</span>, <span class="hljs-string">&quot;add&quot;</span>]<br>[[<span class="hljs-number">3</span>, [<span class="hljs-number">4</span>, <span class="hljs-number">5</span>, <span class="hljs-number">8</span>, <span class="hljs-number">2</span>]], [<span class="hljs-number">3</span>], [<span class="hljs-number">5</span>], [<span class="hljs-number">10</span>], [<span class="hljs-number">9</span>], [<span class="hljs-number">4</span>]]<br><br>输出：<br>[<span class="hljs-meta">null, 4, 5, 5, 8, 8</span>]<br><br>解释：<br>KthLargest kthLargest = <span class="hljs-keyword">new</span> KthLargest(<span class="hljs-number">3</span>, [<span class="hljs-number">4</span>, <span class="hljs-number">5</span>, <span class="hljs-number">8</span>, <span class="hljs-number">2</span>]);<br>kthLargest.<span class="hljs-keyword">add</span>(<span class="hljs-number">3</span>);   <span class="hljs-comment">// return 4</span><br>kthLargest.<span class="hljs-keyword">add</span>(<span class="hljs-number">5</span>);   <span class="hljs-comment">// return 5</span><br>kthLargest.<span class="hljs-keyword">add</span>(<span class="hljs-number">10</span>);  <span class="hljs-comment">// return 5</span><br>kthLargest.<span class="hljs-keyword">add</span>(<span class="hljs-number">9</span>);   <span class="hljs-comment">// return 8</span><br>kthLargest.<span class="hljs-keyword">add</span>(<span class="hljs-number">4</span>);   <span class="hljs-comment">// return 8</span><br></code></pre></div></td></tr></table></figure></p>
 <p>提示：</p>
 <ul>
 <li>$1 &lt;= k &lt;= 10^4$</li>
@@ -335,7 +336,7 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/02/09/567.%20%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E6%8E%92%E5%88%97%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/">
+                      <a href="/2021/02/10/567.%20%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E6%8E%92%E5%88%97%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/">
                         <span class="hidden-mobile">LC 567. 字符串的排列</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>

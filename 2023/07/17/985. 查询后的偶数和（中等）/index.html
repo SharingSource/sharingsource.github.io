@@ -16,15 +16,15 @@
   <meta name="author" content="宫水三叶">
   <meta name="keywords" content="算法, 数据结构, 题解">
   
-    <meta name="description" content="题目描述这是 LeetCode 上的 985. 查询后的偶数和 ，难度为 中等。 给出一个整数数组 A 和一个查询数组 queries。 对于第 i 次查询，有 val &#x3D; queries[i][0], index &#x3D; queries[i][1]，我们会把 val 加到 A[index] 上。然后，第 i 次查询的答案是 A 中偶数值的和。 （此处给定的 index &#x3D; queries[i][1]">
+    <meta name="description" content="题目描述这是 LeetCode 上的 985. 查询后的偶数和 ，难度为 中等。 给出一个整数数组 A 和一个查询数组 queries。 对于第 i 次查询，有 val &#x3D; queries[i][0], index &#x3D; queries[i][1]，我们会把 val 加到 A[index] 上。然后，第 i 次查询的答案是 A 中偶数值的和。 此处给定的 index &#x3D; queries[i][1]">
 <meta property="og:type" content="article">
 <meta property="og:title" content="LC 985. 查询后的偶数和">
 <meta property="og:url" content="https://sharingsource.github.io/2023/07/17/985.%20%E6%9F%A5%E8%AF%A2%E5%90%8E%E7%9A%84%E5%81%B6%E6%95%B0%E5%92%8C%EF%BC%88%E4%B8%AD%E7%AD%89%EF%BC%89/index.html">
 <meta property="og:site_name" content="宫水三叶的刷题日记">
-<meta property="og:description" content="题目描述这是 LeetCode 上的 985. 查询后的偶数和 ，难度为 中等。 给出一个整数数组 A 和一个查询数组 queries。 对于第 i 次查询，有 val &#x3D; queries[i][0], index &#x3D; queries[i][1]，我们会把 val 加到 A[index] 上。然后，第 i 次查询的答案是 A 中偶数值的和。 （此处给定的 index &#x3D; queries[i][1]">
+<meta property="og:description" content="题目描述这是 LeetCode 上的 985. 查询后的偶数和 ，难度为 中等。 给出一个整数数组 A 和一个查询数组 queries。 对于第 i 次查询，有 val &#x3D; queries[i][0], index &#x3D; queries[i][1]，我们会把 val 加到 A[index] 上。然后，第 i 次查询的答案是 A 中偶数值的和。 此处给定的 index &#x3D; queries[i][1]">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-07-17T00:02:47.000Z">
-<meta property="article:modified_time" content="2023-07-18T04:00:29.210Z">
+<meta property="article:modified_time" content="2024-11-21T02:13:59.110Z">
 <meta property="article:author" content="宫水三叶">
 <meta property="article:tag" content="模拟">
 <meta name="twitter:card" content="summary_large_image">
@@ -175,7 +175,7 @@
 </nav>
 
     <div class="banner" id="banner" parallax=true
-         style="background: url('/img/image_21.jpg') no-repeat center center;
+         style="background: url('/img/image_115.jpeg') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
@@ -238,8 +238,8 @@
               <h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>这是 LeetCode 上的 <strong><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/sum-of-even-numbers-after-queries/solution/gong-shui-san-xie-jian-dan-mo-ni-ti-by-a-lwfq/">985. 查询后的偶数和</a></strong> ，难度为 <strong>中等</strong>。</p>
 <p>给出一个整数数组 <code>A</code> 和一个查询数组 <code>queries</code>。</p>
 <p>对于第 <code>i</code> 次查询，有 <code>val = queries[i][0]</code>, <code>index = queries[i][1]</code>，我们会把 <code>val</code> 加到 <code>A[index]</code> 上。然后，第 <code>i</code> 次查询的答案是 <code>A</code> 中偶数值的和。</p>
-<p>（此处给定的 <code>index = queries[i][1]</code> 是从 <code>0</code> 开始的索引，每次查询都会永久修改数组 <code>A</code>。）</p>
-<p>返回所有查询的答案。你的答案应当以数组 <code>answer</code> 给出，<code>answer[i]</code> 为第 <code>i</code> 次查询的答案。</p>
+<p>此处给定的 <code>index = queries[i][1]</code> 是从 <code>0</code> 开始的索引，每次查询都会永久修改数组 <code>A</code>。</p>
+<p>返回所有查询的答案，你的答案应当以数组 <code>answer</code> 给出，<code>answer[i]</code> 为第 <code>i</code> 次查询的答案。</p>
 <p>示例：<br><figure class="highlight inform7"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs inform7">输入：A = <span class="hljs-comment">[1,2,3,4]</span>, queries = <span class="hljs-comment">[<span class="hljs-comment">[1,0]</span>,<span class="hljs-comment">[-3,1]</span>,<span class="hljs-comment">[-4,0]</span>,<span class="hljs-comment">[2,3]</span>]</span><br><br>输出：<span class="hljs-comment">[8,6,2,4]</span><br><br>解释：<br>开始时，数组为 <span class="hljs-comment">[1,2,3,4]</span>。<br>将 1 加到 A<span class="hljs-comment">[0]</span> 上之后，数组为 <span class="hljs-comment">[2,2,3,4]</span>，偶数值之和为 2 + 2 + 4 = 8。<br>将 -3 加到 A<span class="hljs-comment">[1]</span> 上之后，数组为 <span class="hljs-comment">[2,-1,3,4]</span>，偶数值之和为 2 + 4 = 6。<br>将 -4 加到 A<span class="hljs-comment">[0]</span> 上之后，数组为 <span class="hljs-comment">[-2,-1,3,4]</span>，偶数值之和为 -2 + 4 = 2。<br>将 2 加到 A<span class="hljs-comment">[3]</span> 上之后，数组为 <span class="hljs-comment">[-2,-1,3,6]</span>，偶数值之和为 -2 + 6 = 4。<br></code></pre></div></td></tr></table></figure></p>
 <p>提示：</p>
 <ul>

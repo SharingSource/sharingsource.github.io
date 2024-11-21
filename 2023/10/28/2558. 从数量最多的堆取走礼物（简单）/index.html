@@ -26,7 +26,7 @@
 <meta property="og:image" content="https://sharingsource.github.io/2023/10/28/2558.%20%E4%BB%8E%E6%95%B0%E9%87%8F%E6%9C%80%E5%A4%9A%E7%9A%84%E5%A0%86%E5%8F%96%E8%B5%B0%E7%A4%BC%E7%89%A9%EF%BC%88%E7%AE%80%E5%8D%95%EF%BC%89/image_0.png">
 <meta property="og:image" content="https://sharingsource.github.io/2023/10/28/2558.%20%E4%BB%8E%E6%95%B0%E9%87%8F%E6%9C%80%E5%A4%9A%E7%9A%84%E5%A0%86%E5%8F%96%E8%B5%B0%E7%A4%BC%E7%89%A9%EF%BC%88%E7%AE%80%E5%8D%95%EF%BC%89/image_1.png">
 <meta property="article:published_time" content="2023-10-27T18:58:09.000Z">
-<meta property="article:modified_time" content="2023-11-03T03:09:11.269Z">
+<meta property="article:modified_time" content="2024-11-21T02:14:17.652Z">
 <meta property="article:author" content="宫水三叶">
 <meta property="article:tag" content="优先队列（堆）">
 <meta name="twitter:card" content="summary_large_image">
@@ -178,7 +178,7 @@
 </nav>
 
     <div class="banner" id="banner" parallax=true
-         style="background: url('/img/image_208.jpg') no-repeat center center;
+         style="background: url('/img/image_20.jpg') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
@@ -281,12 +281,12 @@
 <p>在 <code>BST</code>  的定义中：任意节点的左子树上的节点值均不大于该节点，任意节点的右子树上的节点值均不小于该节点。</p>
 <p>在小根堆对应的「完全二叉树」定义中：任意节点的节点值均不大于其左右子树中的节点值。</p>
 <p>因此将小根堆可视化后，也十分形象：小根堆的堆顶元素最小，然后从上往下，元素“依次”增大。</p>
-<p><img src="/2023/10/28/2558.%20%E4%BB%8E%E6%95%B0%E9%87%8F%E6%9C%80%E5%A4%9A%E7%9A%84%E5%A0%86%E5%8F%96%E8%B5%B0%E7%A4%BC%E7%89%A9%EF%BC%88%E7%AE%80%E5%8D%95%EF%BC%89/image_0.png" srcset="/img/loading.gif" lazyload alt="image.png">{:width=400}</p>
+<p><img src="/2023/10/28/2558.%20%E4%BB%8E%E6%95%B0%E9%87%8F%E6%9C%80%E5%A4%9A%E7%9A%84%E5%A0%86%E5%8F%96%E8%B5%B0%E7%A4%BC%E7%89%A9%EF%BC%88%E7%AE%80%E5%8D%95%EF%BC%89/image_0.png" srcset="/img/loading.gif" lazyload alt></p>
 <p>即对于小根堆而言，每个子树的根节点，都是该子树的最小值。</p>
 <h4 id="2-如何用数组进行「完全二叉树」的存储？"><a href="#2-如何用数组进行「完全二叉树」的存储？" class="headerlink" title="2. 如何用数组进行「完全二叉树」的存储？"></a>2. 如何用数组进行「完全二叉树」的存储？</h4><p>我们只需要将「二叉树的左右子节点关系」和「数组下标」实现某种关联即可。</p>
 <p>我们约定，对于某个节点，若其所在数组下标为 $idx$，那么该节点的左子节点的数组下标为 $2 \times idx$，该节点的右子节点的数组下标为 $2 \times idx + 1$。</p>
 <p>注意：基于此规则，我们需要调整数组下标从 $1$ 开始进行存储。</p>
-<p><img src="/2023/10/28/2558.%20%E4%BB%8E%E6%95%B0%E9%87%8F%E6%9C%80%E5%A4%9A%E7%9A%84%E5%A0%86%E5%8F%96%E8%B5%B0%E7%A4%BC%E7%89%A9%EF%BC%88%E7%AE%80%E5%8D%95%EF%BC%89/image_1.png" srcset="/img/loading.gif" lazyload alt="image.png">{:width=400}</p>
+<p><img src="/2023/10/28/2558.%20%E4%BB%8E%E6%95%B0%E9%87%8F%E6%9C%80%E5%A4%9A%E7%9A%84%E5%A0%86%E5%8F%96%E8%B5%B0%E7%A4%BC%E7%89%A9%EF%BC%88%E7%AE%80%E5%8D%95%EF%BC%89/image_1.png" srcset="/img/loading.gif" lazyload alt></p>
 <h4 id="3-基本操作如何实现？"><a href="#3-基本操作如何实现？" class="headerlink" title="3.基本操作如何实现？"></a>3.基本操作如何实现？</h4><p>所有操作的核心最终都归结到：如何通过有限的调整，重新恢复堆所对应的完全二叉树中的节点定义。</p>
 <p>因此可抽象出 <code>up</code> 操作和 <code>down</code> 操作，俩操作均通过递归实现：</p>
 <ul>
